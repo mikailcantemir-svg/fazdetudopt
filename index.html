@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faz de Tudo PT | Professional Handyman Services</title>
+    <meta name="description" content="Painting, plumbing, electrical, carpentry and much more. Professional service with quality guarantee in Lisbon, Portugal.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="fazdetudo.pt" class="logo-img">
+                <span class="logo-text">fazdetudo<em>.pt</em></span>
+            </a>
+            <nav class="nav" id="nav">
+                <a href="#hero" class="nav-link" data-i18n="nav_home">Início</a>
+                <a href="#services" class="nav-link" data-i18n="nav_services">Serviços</a>
+                <a href="#advantages" class="nav-link" data-i18n="nav_about">Sobre nós</a>
+                <a href="#contact" class="nav-link" data-i18n="nav_contact">Contacto</a>
+            </nav>
+            <div class="header-actions">
+                <div class="lang-switcher" id="lang-switcher">
+                    <button class="lang-toggle" id="lang-toggle" aria-expanded="false">
+                        <img src="https://flagcdn.com/w20/pt.png" alt="" class="lang-flag" id="lang-flag">
+                        <span id="lang-label">Português</span>
+                        <i class="fa-solid fa-chevron-down lang-chevron"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <button class="lang-option active" data-lang="pt"><img src="https://flagcdn.com/w20/pt.png" alt="">Português</button>
+                        <button class="lang-option" data-lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="">English</button>
+                        <button class="lang-option" data-lang="es"><img src="https://flagcdn.com/w20/es.png" alt="">Español</button>
+                        <button class="lang-option" data-lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="">Français</button>
+                        <button class="lang-option" data-lang="de"><img src="https://flagcdn.com/w20/de.png" alt="">Deutsch</button>
+                        <button class="lang-option" data-lang="nl"><img src="https://flagcdn.com/w20/nl.png" alt="">Nederlands</button>
+                        <button class="lang-option" data-lang="it"><img src="https://flagcdn.com/w20/it.png" alt="">Italiano</button>
+                        <button class="lang-option" data-lang="ru"><img src="https://flagcdn.com/w20/ru.png" alt="">Русский</button>
+                    </div>
+                </div>
+                <a href="#" class="btn-phone" id="header-phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>932 504 112</span>
+                </a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-bg-item" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80')"></div>
+            <div class="hero-bg-item" style="background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80')"></div>
+            <div class="hero-bg-item" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80')"></div>
+            <div class="hero-bg-item" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80')"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title" data-i18n="hero_title">O seu faz tudo de confiança em Portugal</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Pinturas, canalizações, electricidade, carpintaria e muito mais. Serviço profissional com garantia de qualidade.</p>
+            <div class="hero-actions">
+                <a href="#" class="btn btn-primary btn-lg" id="btn-quote">
+                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#" class="btn btn-outline btn-lg" id="btn-call">
+                    <i class="fa-solid fa-phone"></i>
+                    <span data-i18n="hero_btn_call">Ligue agora</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-light" id="services">
+        <div class="container">
+            <div class="section-header">
+                <img src="logo.png" alt="fazdetudo.pt" class="section-logo">
+                <h2 class="section-title" data-i18n="services_title">Os nossos serviços</h2>
+                <p class="section-subtitle" data-i18n="services_subtitle">Soluções completas para a sua casa ou escritório</p>
+            </div>
+            <div class="services-grid" id="services-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="section" id="advantages">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="advantages_title">Porquê escolher-nos?</h2>
+            </div>
+            <div class="advantages-grid" id="advantages-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section section-light" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="testimonials_title">O que dizem os nossos clientes</h2>
+            </div>
+            <div class="testimonials-grid" id="testimonials-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="faq_title">Perguntas Frequentes</h2>
+            </div>
+            <div class="faq-list" id="faq-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section-cta" id="contact">
+        <div class="container cta-content">
+            <h2 class="cta-title" data-i18n="contact_title">Contacte-nos</h2>
+            <p class="cta-subtitle" data-i18n="contact_subtitle">Estamos prontos para ajudar. Peça o seu orçamento grátis.</p>
+            <div class="cta-actions">
+                <a href="#" class="btn btn-white btn-lg" id="cta-quote">
+                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#" class="btn btn-outline-white btn-lg" id="cta-phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span id="cta-phone-text">932 504 112</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="fazdetudo.pt" class="footer-logo-img">
+                        <span class="logo-text">fazdetudo<em>.pt</em></span>
+                    </div>
+                    <p class="footer-tagline" data-i18n="hero_title">O seu faz tudo de confiança em Portugal</p>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer_links">Links</h3>
+                    <ul>
+                        <li><a href="#hero" data-i18n="nav_home">Início</a></li>
+                        <li><a href="#services" data-i18n="nav_services">Serviços</a></li>
+                        <li><a href="#advantages" data-i18n="nav_about">Sobre nós</a></li>
+                        <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" id="footer-services">
+                    <h3 data-i18n="nav_services">Serviços</h3>
+                    <ul id="footer-services-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="nav_contact">Contacto</h3>
+                    <ul>
+                        <li>
+                            <a href="#" id="footer-phone">
+                                <i class="fa-solid fa-phone"></i>
+                                <span id="footer-phone-text">932 504 112</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="footer-email">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span id="footer-email-text">fazdetudopt@gmail.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span id="footer-address-text">Lisboa, Portugal</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year">2026</span> <span data-i18n="footer_rights">Faz de Tudo PT. Todos os direitos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="#" class="whatsapp-float" id="whatsapp-float" target="_blank" rel="noopener" aria-label="Contact via WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
