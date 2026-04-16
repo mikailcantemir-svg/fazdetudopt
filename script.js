@@ -106,7 +106,9 @@
             contact_title: 'Contacte-nos',
             contact_subtitle: 'Estamos prontos para ajudar. Peça o seu orçamento grátis.',
             footer_rights: 'Faz de Tudo PT. Todos os direitos reservados.',
-            wa_message: 'Olá! Gostaria de pedir um orçamento.'
+            wa_message: 'Olá! Gostaria de pedir um orçamento.',
+            wa_greeting: 'Como posso ajudar?',
+            wa_placeholder: 'Escreva uma mensagem...'
         },
         en: {
             nav_home: 'Home', nav_services: 'Services', nav_about: 'About us', nav_contact: 'Contact',
@@ -160,7 +162,9 @@
             contact_title: 'Contact us',
             contact_subtitle: 'We are ready to help. Request your free quote.',
             footer_rights: 'Faz de Tudo PT. All rights reserved.',
-            wa_message: 'Hello! I would like to request a quote.'
+            wa_message: 'Hello! I would like to request a quote.',
+            wa_greeting: 'How can I help you?',
+            wa_placeholder: 'Type a message...'
         },
         es: {
             nav_home: 'Inicio', nav_services: 'Servicios', nav_about: 'Sobre nosotros', nav_contact: 'Contacto',
@@ -214,7 +218,9 @@
             contact_title: 'Contáctenos',
             contact_subtitle: 'Estamos listos para ayudar. Solicite su presupuesto gratis.',
             footer_rights: 'Faz de Tudo PT. Todos los derechos reservados.',
-            wa_message: '¡Hola! Me gustaría pedir un presupuesto.'
+            wa_message: '¡Hola! Me gustaría pedir un presupuesto.',
+            wa_greeting: '¿Cómo puedo ayudarle?',
+            wa_placeholder: 'Escriba un mensaje...'
         },
         fr: {
             nav_home: 'Accueil', nav_services: 'Services', nav_about: 'À propos', nav_contact: 'Contact',
@@ -268,7 +274,9 @@
             contact_title: 'Contactez-nous',
             contact_subtitle: 'Nous sommes prêts à vous aider. Demandez votre devis gratuit.',
             footer_rights: 'Faz de Tudo PT. Tous droits réservés.',
-            wa_message: 'Bonjour ! Je souhaiterais demander un devis.'
+            wa_message: 'Bonjour ! Je souhaiterais demander un devis.',
+            wa_greeting: 'Comment puis-je vous aider ?',
+            wa_placeholder: 'Écrivez un message...'
         },
         de: {
             nav_home: 'Startseite', nav_services: 'Dienstleistungen', nav_about: 'Über uns', nav_contact: 'Kontakt',
@@ -322,7 +330,9 @@
             contact_title: 'Kontaktieren Sie uns',
             contact_subtitle: 'Wir sind bereit zu helfen. Fordern Sie Ihr kostenloses Angebot an.',
             footer_rights: 'Faz de Tudo PT. Alle Rechte vorbehalten.',
-            wa_message: 'Hallo! Ich möchte ein Angebot anfordern.'
+            wa_message: 'Hallo! Ich möchte ein Angebot anfordern.',
+            wa_greeting: 'Wie kann ich Ihnen helfen?',
+            wa_placeholder: 'Schreiben Sie eine Nachricht...'
         },
         nl: {
             nav_home: 'Home', nav_services: 'Diensten', nav_about: 'Over ons', nav_contact: 'Contact',
@@ -376,7 +386,9 @@
             contact_title: 'Neem contact op',
             contact_subtitle: 'We staan klaar om te helpen. Vraag uw gratis offerte aan.',
             footer_rights: 'Faz de Tudo PT. Alle rechten voorbehouden.',
-            wa_message: 'Hallo! Ik zou graag een offerte aanvragen.'
+            wa_message: 'Hallo! Ik zou graag een offerte aanvragen.',
+            wa_greeting: 'Hoe kan ik u helpen?',
+            wa_placeholder: 'Schrijf een bericht...'
         },
         it: {
             nav_home: 'Home', nav_services: 'Servizi', nav_about: 'Chi siamo', nav_contact: 'Contatto',
@@ -430,7 +442,9 @@
             contact_title: 'Contattateci',
             contact_subtitle: 'Siamo pronti ad aiutarvi. Richiedete il vostro preventivo gratuito.',
             footer_rights: 'Faz de Tudo PT. Tutti i diritti riservati.',
-            wa_message: 'Ciao! Vorrei richiedere un preventivo.'
+            wa_message: 'Ciao! Vorrei richiedere un preventivo.',
+            wa_greeting: 'Come posso aiutarla?',
+            wa_placeholder: 'Scrivi un messaggio...'
         },
         ru: {
             nav_home: 'Главная', nav_services: 'Услуги', nav_about: 'О нас', nav_contact: 'Контакт',
@@ -484,7 +498,9 @@
             contact_title: 'Свяжитесь с нами',
             contact_subtitle: 'Мы готовы помочь. Запросите бесплатную смету.',
             footer_rights: 'Faz de Tudo PT. Все права защищены.',
-            wa_message: 'Здравствуйте! Хотел бы запросить смету.'
+            wa_message: 'Здравствуйте! Хотел бы запросить смету.',
+            wa_greeting: 'Чем могу помочь?',
+            wa_placeholder: 'Напишите сообщение...'
         }
     };
 
@@ -600,9 +616,6 @@
             if (el) el.href = `tel:${CONFIG.phone}`;
         });
 
-        const waLink = document.getElementById('whatsapp-float');
-        if (waLink) waLink.href = `https://wa.me/${waNum}?text=${waMsg}`;
-
         ['btn-quote', 'cta-quote'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.href = `https://wa.me/${waNum}?text=${waMsg}`;
@@ -610,6 +623,80 @@
 
         const emailEl = document.getElementById('footer-email');
         if (emailEl) emailEl.href = `mailto:${CONFIG.email}`;
+
+        const greeting = document.getElementById('wa-greeting');
+        if (greeting) greeting.textContent = t('wa_greeting');
+        const input = document.getElementById('wa-chat-input');
+        if (input) input.placeholder = t('wa_placeholder');
+    }
+
+    function setupWhatsAppChat() {
+        const widget = document.getElementById('wa-widget');
+        const chat = document.getElementById('wa-chat');
+        const btn = document.getElementById('whatsapp-float');
+        const closeBtn = document.getElementById('wa-chat-close');
+        const input = document.getElementById('wa-chat-input');
+        const sendBtn = document.getElementById('wa-chat-send');
+        const timeEl = document.getElementById('wa-chat-time');
+        if (!widget || !btn) return;
+
+        function updateTime() {
+            if (timeEl) {
+                const now = new Date();
+                timeEl.textContent = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            }
+        }
+
+        function toggleChat() {
+            const isOpen = widget.classList.toggle('open');
+            if (isOpen) {
+                updateTime();
+                setTimeout(() => input && input.focus(), 300);
+            }
+        }
+
+        function sendMessage() {
+            const msg = (input && input.value.trim()) || t('wa_message');
+            const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank', 'noopener');
+            if (input) input.value = '';
+            widget.classList.remove('open');
+        }
+
+        btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggleChat(); });
+        if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleChat(); });
+        if (sendBtn) sendBtn.addEventListener('click', sendMessage);
+        if (input) input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+        document.addEventListener('click', (e) => {
+            if (widget.classList.contains('open') && !widget.contains(e.target)) {
+                widget.classList.remove('open');
+            }
+        });
+    }
+
+    function renderFAQSchema() {
+        const faqs = T[currentLang].faqs;
+        if (!faqs) return;
+        let script = document.getElementById('faq-schema');
+        if (!script) {
+            script = document.createElement('script');
+            script.id = 'faq-schema';
+            script.type = 'application/ld+json';
+            document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            'mainEntity': faqs.map(f => ({
+                '@type': 'Question',
+                'name': f.question,
+                'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': f.answer
+                }
+            }))
+        });
     }
 
     function applyLanguage(lang) {
@@ -621,6 +708,7 @@
         renderAdvantages();
         renderTestimonials();
         renderFAQ();
+        renderFAQSchema();
         setupLinks();
         requestAnimationFrame(() => setupScrollAnimations());
     }
@@ -690,6 +778,7 @@
         setupFAQListeners();
         setupHeader();
         setupLangSwitcher();
+        setupWhatsAppChat();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }
