@@ -10,7 +10,7 @@
         email: 'geral@fazdetudo.pt',
         address: 'Lisboa, Portugal',
         googleReviews: {
-            url: 'https://www.google.com/search?q=Faz+de+tudo+-+O+seu+faz+tudo+de+confian%C3%A7a.+Cr%C3%ADticas',
+            url: 'https://www.google.com/search?sca_esv=9fc0643cb5b0db60&rlz=1C1GCEA_pt-PTPT1212PT1212&cs=1&output=search&q=Faz+de+tudo+-HANDYMAN&ludocid=8942884991647057370&lsig=AB86z5U1euJVZrgCPLuiW7ENF_mg&sa=X&ved=2ahUKEwi2xMTDgMmUAxV_fKQEHdpLNPsQj9IGegQIEhAJ&biw=1707&bih=932&dpr=1.5',
             rating: 5,
             count: 2,
             reviews: [
