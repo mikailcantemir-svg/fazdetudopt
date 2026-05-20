@@ -88,11 +88,29 @@ body {
     object-fit: contain;
 }
 
+.logo-brand {
+    display: inline-block;
+    line-height: 1.15;
+}
+
 .logo-text {
+    display: block;
     font-size: 1.12rem;
     font-weight: 700;
     color: var(--dark);
     letter-spacing: 0.5px;
+}
+
+.logo-tagline {
+    display: block;
+    width: 0;
+    min-width: 100%;
+    text-align: center;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-light);
 }
 
 .logo-text em {
@@ -1080,6 +1098,10 @@ body {
 
     .logo-text {
         font-size: 0.85rem;
+    }
+
+    .logo-tagline {
+        font-size: 0.48rem;
     }
 
     .header-inner {
