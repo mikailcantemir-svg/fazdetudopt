@@ -8,7 +8,35 @@
         phone_display: '932 504 112',
         whatsapp: '351932504112',
         email: 'geral@fazdetudo.pt',
-        address: 'Lisboa, Portugal'
+        address: 'Lisboa, Portugal',
+        googleReviews: {
+            url: 'https://www.google.com/search?q=Faz+de+tudo+-+O+seu+faz+tudo+de+confian%C3%A7a.+Cr%C3%ADticas',
+            rating: 5,
+            count: 2,
+            reviews: [
+                {
+                    name: 'Ana Cwb',
+                    avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
+                    rating: 5,
+                    dateKey: '2d',
+                    text: '',
+                    isNew: true
+                },
+                {
+                    name: 'Isabel Gutierrez',
+                    avatar: null,
+                    rating: 5,
+                    dateKey: '6d',
+                    text: 'Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯',
+                    isNew: true
+                }
+            ]
+        }
+    };
+
+    const REVIEW_DATES = {
+        '2d': { pt: 'há 2 dias', en: '2 days ago', es: 'hace 2 días', fr: 'il y a 2 jours', de: 'vor 2 Tagen', nl: '2 dagen geleden', it: '2 giorni fa', ru: '2 дня назад' },
+        '6d': { pt: 'há 6 dias', en: '6 days ago', es: 'hace 6 días', fr: 'il y a 6 jours', de: 'vor 6 Tagen', nl: '6 dagen geleden', it: '6 giorni fa', ru: '6 дней назад' }
     };
 
     const SERVICE_ICONS = [
@@ -88,12 +116,11 @@
                 { name: 'Resposta rápida', description: 'Orçamentos em 24h. Disponibilidade para urgências.' },
                 { name: 'Preços justos', description: 'Orçamentos transparentes sem surpresas. Melhor relação qualidade-preço.' }
             ],
-            testimonials_title: 'O que dizem os nossos clientes',
-            testimonials: [
-                { text: 'Excelente serviço! Pintaram toda a minha casa em tempo recorde e com uma qualidade impecável. Recomendo vivamente.', name: 'Maria Santos', location: 'Lisboa' },
-                { text: 'Muito profissionais e de confiança. Resolveram vários problemas de canalização numa só visita. Óptima comunicação.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Trabalho impecável na instalação elétrica do meu apartamento. Preços justos e muito profissionais.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Críticas',
+            google_review_source: 'Crítica de Google',
+            google_new: 'NOVA',
+            reviews_count: '2 críticas',
+            view_google_reviews: 'Ver críticas no Google',
             faq_title: 'Perguntas Frequentes',
             faqs: [
                 { question: 'Que serviços de faz tudo oferecem?', answer: 'Oferecemos uma vasta gama de serviços incluindo pinturas, canalizações, electricidade, carpintaria, reparações gerais, manutenção, limpezas, jardinagem, mudanças, informática, serralharia, climatização, remodelações, estores e persianas, decoração de interiores e piscinas.' },
@@ -144,12 +171,11 @@
                 { name: 'Fast response', description: 'Quotes within 24h. Available for emergencies.' },
                 { name: 'Fair prices', description: 'Transparent quotes with no surprises. Best value for money.' }
             ],
-            testimonials_title: 'What our clients say',
-            testimonials: [
-                { text: 'Excellent service! They painted my entire house in record time and with impeccable quality. Highly recommend.', name: 'Maria Santos', location: 'Lisbon' },
-                { text: 'Very professional and reliable. Fixed multiple plumbing issues in one visit. Great communication.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Impeccable work on the electrical installation of my apartment. Fair prices and very professional.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Reviews',
+            google_review_source: 'Google review',
+            google_new: 'NEW',
+            reviews_count: '2 reviews',
+            view_google_reviews: 'View reviews on Google',
             faq_title: 'Frequently Asked Questions',
             faqs: [
                 { question: 'What handyman services do you offer?', answer: 'We offer a wide range of services including painting, plumbing, electrical, carpentry, general repairs, maintenance, cleaning, gardening, moving, IT, locksmithing, air conditioning, renovations, blinds and shutters, interior design and swimming pools.' },
@@ -200,12 +226,11 @@
                 { name: 'Respuesta rápida', description: 'Presupuestos en 24h. Disponibilidad para urgencias.' },
                 { name: 'Precios justos', description: 'Presupuestos transparentes sin sorpresas. Mejor relación calidad-precio.' }
             ],
-            testimonials_title: 'Lo que dicen nuestros clientes',
-            testimonials: [
-                { text: '¡Excelente servicio! Pintaron toda mi casa en tiempo récord y con una calidad impecable. Lo recomiendo encarecidamente.', name: 'Maria Santos', location: 'Lisboa' },
-                { text: 'Muy profesionales y de confianza. Resolvieron varios problemas de fontanería en una sola visita. Excelente comunicación.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Trabajo impecable en la instalación eléctrica de mi apartamento. Precios justos y muy profesionales.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Reseñas',
+            google_review_source: 'Reseña de Google',
+            google_new: 'NUEVA',
+            reviews_count: '2 reseñas',
+            view_google_reviews: 'Ver reseñas en Google',
             faq_title: 'Preguntas Frecuentes',
             faqs: [
                 { question: '¿Qué servicios ofrecen?', answer: 'Ofrecemos una amplia gama de servicios que incluyen pinturas, fontanería, electricidad, carpintería, reparaciones generales, mantenimiento, limpieza, jardinería, mudanzas, informática, cerrajería, climatización, reformas, persianas y estores, decoración de interiores y piscinas.' },
@@ -256,12 +281,11 @@
                 { name: 'Réponse rapide', description: 'Devis en 24h. Disponibilité pour les urgences.' },
                 { name: 'Prix justes', description: 'Devis transparents sans surprises. Meilleur rapport qualité-prix.' }
             ],
-            testimonials_title: 'Ce que disent nos clients',
-            testimonials: [
-                { text: 'Excellent service ! Ils ont peint toute ma maison en un temps record et avec une qualité impeccable. Je recommande vivement.', name: 'Maria Santos', location: 'Lisbonne' },
-                { text: 'Très professionnels et fiables. Ont résolu plusieurs problèmes de plomberie en une seule visite. Excellente communication.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Travail impeccable sur l\'installation électrique de mon appartement. Prix justes et très professionnels.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Avis',
+            google_review_source: 'Avis Google',
+            google_new: 'NOUVEAU',
+            reviews_count: '2 avis',
+            view_google_reviews: 'Voir les avis sur Google',
             faq_title: 'Questions Fréquentes',
             faqs: [
                 { question: 'Quels services proposez-vous ?', answer: 'Nous proposons une large gamme de services incluant peinture, plomberie, électricité, menuiserie, réparations générales, entretien, nettoyage, jardinage, déménagements, informatique, serrurerie, climatisation, rénovations, stores et volets, décoration d\'intérieur et piscines.' },
@@ -312,12 +336,11 @@
                 { name: 'Schnelle Antwort', description: 'Angebote innerhalb von 24h. Verfügbarkeit für Notfälle.' },
                 { name: 'Faire Preise', description: 'Transparente Angebote ohne Überraschungen. Bestes Preis-Leistungs-Verhältnis.' }
             ],
-            testimonials_title: 'Was unsere Kunden sagen',
-            testimonials: [
-                { text: 'Hervorragender Service! Sie haben mein ganzes Haus in Rekordzeit und mit tadelloser Qualität gestrichen. Sehr empfehlenswert.', name: 'Maria Santos', location: 'Lissabon' },
-                { text: 'Sehr professionell und zuverlässig. Haben mehrere Sanitärprobleme in einem Besuch gelöst. Hervorragende Kommunikation.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Tadellose Arbeit bei der Elektroinstallation meiner Wohnung. Faire Preise und sehr professionell.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Bewertungen',
+            google_review_source: 'Google-Bewertung',
+            google_new: 'NEU',
+            reviews_count: '2 Bewertungen',
+            view_google_reviews: 'Bewertungen auf Google ansehen',
             faq_title: 'Häufig gestellte Fragen',
             faqs: [
                 { question: 'Welche Handwerker-Dienste bieten Sie an?', answer: 'Wir bieten ein breites Spektrum an Dienstleistungen an: Malerarbeiten, Sanitär, Elektrik, Schreinerei, allgemeine Reparaturen, Wartung, Reinigung, Gartenarbeit, Umzüge, IT, Schlosserei, Klimaanlagen, Renovierungen, Rollläden und Jalousien, Inneneinrichtung und Schwimmbäder.' },
@@ -368,12 +391,11 @@
                 { name: 'Snelle reactie', description: 'Offertes binnen 24 uur. Beschikbaar voor noodgevallen.' },
                 { name: 'Eerlijke prijzen', description: 'Transparante offertes zonder verrassingen. Beste prijs-kwaliteitverhouding.' }
             ],
-            testimonials_title: 'Wat onze klanten zeggen',
-            testimonials: [
-                { text: 'Uitstekende service! Ze hebben mijn hele huis in recordtijd en met onberispelijke kwaliteit geschilderd. Sterk aanbevolen.', name: 'Maria Santos', location: 'Lissabon' },
-                { text: 'Zeer professioneel en betrouwbaar. Hebben meerdere loodgietersproblemen in één bezoek opgelost. Uitstekende communicatie.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Onberispelijk werk aan de elektrische installatie van mijn appartement. Eerlijke prijzen en zeer professioneel.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Beoordelingen',
+            google_review_source: 'Google-beoordeling',
+            google_new: 'NIEUW',
+            reviews_count: '2 beoordelingen',
+            view_google_reviews: 'Beoordelingen op Google bekijken',
             faq_title: 'Veelgestelde Vragen',
             faqs: [
                 { question: 'Welke klusjesdiensten bieden jullie aan?', answer: 'Wij bieden een breed scala aan diensten aan, waaronder schilderwerk, loodgieterij, elektriciteit, timmerwerk, algemene reparaties, onderhoud, schoonmaak, tuinieren, verhuizingen, IT, slotenmakerij, airconditioning, renovaties, rolluiken en zonwering, interieurontwerp en zwembaden.' },
@@ -424,12 +446,11 @@
                 { name: 'Risposta rapida', description: 'Preventivi entro 24h. Disponibilità per le urgenze.' },
                 { name: 'Prezzi giusti', description: 'Preventivi trasparenti senza sorprese. Miglior rapporto qualità-prezzo.' }
             ],
-            testimonials_title: 'Cosa dicono i nostri clienti',
-            testimonials: [
-                { text: 'Servizio eccellente! Hanno dipinto tutta la mia casa in tempi record e con qualità impeccabile. Lo consiglio vivamente.', name: 'Maria Santos', location: 'Lisbona' },
-                { text: 'Molto professionali e affidabili. Hanno risolto diversi problemi idraulici in una sola visita. Ottima comunicazione.', name: 'João Silva', location: 'Sintra' },
-                { text: 'Lavoro impeccabile sull\'impianto elettrico del mio appartamento. Prezzi giusti e molto professionali.', name: 'António Ferreira', location: 'Cascais' }
-            ],
+            testimonials_title: 'Recensioni',
+            google_review_source: 'Recensione Google',
+            google_new: 'NUOVA',
+            reviews_count: '2 recensioni',
+            view_google_reviews: 'Vedi recensioni su Google',
             faq_title: 'Domande Frequenti',
             faqs: [
                 { question: 'Quali servizi di tuttofare offrite?', answer: 'Offriamo un\'ampia gamma di servizi tra cui pittura, idraulica, elettricità, falegnameria, riparazioni generali, manutenzione, pulizia, giardinaggio, traslochi, informatica, fabbro, climatizzazione, ristrutturazioni, tapparelle e persiane, design d\'interni e piscine.' },
@@ -480,12 +501,11 @@
                 { name: 'Быстрый ответ', description: 'Сметы в течение 24ч. Доступность для экстренных случаев.' },
                 { name: 'Справедливые цены', description: 'Прозрачные сметы без сюрпризов. Лучшее соотношение цены и качества.' }
             ],
-            testimonials_title: 'Что говорят наши клиенты',
-            testimonials: [
-                { text: 'Отличный сервис! Покрасили весь мой дом в рекордные сроки и с безупречным качеством. Настоятельно рекомендую.', name: 'Maria Santos', location: 'Лиссабон' },
-                { text: 'Очень профессиональные и надёжные. Решили несколько проблем с сантехникой за один визит. Отличная коммуникация.', name: 'João Silva', location: 'Синтра' },
-                { text: 'Безупречная работа по электромонтажу в моей квартире. Справедливые цены и очень профессионально.', name: 'António Ferreira', location: 'Кашкайш' }
-            ],
+            testimonials_title: 'Отзывы',
+            google_review_source: 'Отзыв Google',
+            google_new: 'НОВЫЙ',
+            reviews_count: '2 отзыва',
+            view_google_reviews: 'Смотреть отзывы в Google',
             faq_title: 'Часто задаваемые вопросы',
             faqs: [
                 { question: 'Какие услуги мастера вы предлагаете?', answer: 'Мы предлагаем широкий спектр услуг: покраска, сантехника, электрика, столярные работы, общий ремонт, техобслуживание, уборка, садоводство, переезды, IT, слесарные работы, кондиционирование, ремонт помещений, жалюзи и ставни, дизайн интерьера и бассейны.' },
@@ -535,24 +555,75 @@
         `).join('');
     }
 
+    function renderStars(rating) {
+        return Array.from({ length: 5 }, (_, i) =>
+            `<i class="fa-solid fa-star${i < rating ? '' : ' google-star-empty'}" aria-hidden="true"></i>`
+        ).join('');
+    }
+
+    function renderReviewAvatar(review) {
+        if (review.avatar) {
+            return `<img src="${review.avatar}" alt="${review.name}" class="google-review-avatar" width="40" height="40" loading="lazy" referrerpolicy="no-referrer">`;
+        }
+        const initial = review.name.trim().charAt(0).toUpperCase();
+        return `<div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">${initial}</div>`;
+    }
+
     function renderTestimonials() {
         const grid = document.getElementById('testimonials-grid');
+        const summary = document.getElementById('testimonials-summary');
+        const link = document.getElementById('google-reviews-link');
         if (!grid) return;
-        grid.innerHTML = T[currentLang].testimonials.map(tm => {
-            const initials = tm.name.split(' ').map(w => w[0]).join('').slice(0, 2);
-            return `
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">${tm.text}</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">${initials}</div>
-                        <div class="testimonial-info">
-                            <strong>${tm.name}</strong>
-                            <span>${tm.location}</span>
-                        </div>
-                    </div>
+
+        const lang = T[currentLang];
+        const { googleReviews } = CONFIG;
+
+        if (summary) {
+            summary.innerHTML = `
+                <div class="reviews-aggregate fade-in">
+                    <span class="reviews-score">${googleReviews.rating.toFixed(1)}</span>
+                    <div class="reviews-stars" aria-label="${googleReviews.rating} / 5">${renderStars(googleReviews.rating)}</div>
+                    <span class="reviews-count">${lang.reviews_count}</span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
                 </div>
             `;
+        }
+
+        grid.innerHTML = googleReviews.reviews.map(review => {
+            const date = REVIEW_DATES[review.dateKey][currentLang] || REVIEW_DATES[review.dateKey].pt;
+            const textBlock = review.text
+                ? `<p class="google-review-text">${review.text}</p>`
+                : '';
+            const newBadge = review.isNew
+                ? `<span class="google-review-new">${lang.google_new}</span>`
+                : '';
+
+            return `
+                <article class="google-review-card fade-in">
+                    <div class="google-review-top">
+                        ${renderReviewAvatar(review)}
+                        <div class="google-review-meta">
+                            <strong class="google-review-name">${review.name}</strong>
+                            <span class="google-review-source">
+                                <i class="fab fa-google" aria-hidden="true"></i>
+                                ${lang.google_review_source}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="google-review-rating-row">
+                        <span class="google-review-stars" aria-label="${review.rating} / 5">${renderStars(review.rating)}</span>
+                        <span class="google-review-date">${date}</span>
+                        ${newBadge}
+                    </div>
+                    ${textBlock}
+                </article>
+            `;
         }).join('');
+
+        if (link) {
+            link.href = googleReviews.url;
+            link.textContent = lang.view_google_reviews;
+        }
     }
 
     function renderFAQ() {
