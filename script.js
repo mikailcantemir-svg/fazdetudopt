@@ -18,7 +18,6 @@
                     name: 'Ana Cwb',
                     avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
                     rating: 5,
-                    dateKey: '2d',
                     text: '',
                     isNew: true
                 },
@@ -26,17 +25,11 @@
                     name: 'Isabel Gutierrez',
                     avatar: null,
                     rating: 5,
-                    dateKey: '6d',
                     text: 'Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯',
                     isNew: true
                 }
             ]
         }
-    };
-
-    const REVIEW_DATES = {
-        '2d': { pt: 'há 2 dias', en: '2 days ago', es: 'hace 2 días', fr: 'il y a 2 jours', de: 'vor 2 Tagen', nl: '2 dagen geleden', it: '2 giorni fa', ru: '2 дня назад' },
-        '6d': { pt: 'há 6 dias', en: '6 days ago', es: 'hace 6 días', fr: 'il y a 6 jours', de: 'vor 6 Tagen', nl: '6 dagen geleden', it: '6 giorni fa', ru: '6 дней назад' }
     };
 
     const SERVICE_ICONS = [
@@ -590,7 +583,6 @@
         }
 
         grid.innerHTML = googleReviews.reviews.map(review => {
-            const date = REVIEW_DATES[review.dateKey][currentLang] || REVIEW_DATES[review.dateKey].pt;
             const textBlock = review.text
                 ? `<p class="google-review-text">${review.text}</p>`
                 : '';
@@ -612,7 +604,6 @@
                     </div>
                     <div class="google-review-rating-row">
                         <span class="google-review-stars" aria-label="${review.rating} / 5">${renderStars(review.rating)}</span>
-                        <span class="google-review-date">${date}</span>
                         ${newBadge}
                     </div>
                     ${textBlock}
