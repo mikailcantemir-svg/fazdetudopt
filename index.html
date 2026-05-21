@@ -47,6 +47,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,8 +163,19 @@
             <div class="testimonials-summary" id="testimonials-summary">
                 <!-- Populated by JS -->
             </div>
-            <div class="testimonials-grid" id="testimonials-grid">
-                <!-- Populated by JS -->
+            <div class="reviews-swiper-wrap">
+                <div class="swiper reviews-swiper" id="reviews-swiper">
+                    <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <button type="button" class="reviews-swiper-prev" aria-label="Crítica anterior">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="reviews-swiper-next" aria-label="Crítica seguinte">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
                 <a href="#" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
@@ -299,6 +311,7 @@
         </button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

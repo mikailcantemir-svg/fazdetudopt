@@ -2,6 +2,7 @@
     'use strict';
 
     let currentLang = 'pt';
+    let reviewsSwiper = null;
 
     const CONFIG = {
         phone: '+351 932504112',
@@ -12,8 +13,57 @@
         googleReviews: {
             url: 'https://www.google.com/search?sca_esv=9fc0643cb5b0db60&rlz=1C1GCEA_pt-PTPT1212PT1212&cs=1&output=search&q=Faz+de+tudo+-HANDYMAN&ludocid=8942884991647057370&lsig=AB86z5U1euJVZrgCPLuiW7ENF_mg&sa=X&ved=2ahUKEwi2xMTDgMmUAxV_fKQEHdpLNPsQj9IGegQIEhAJ&biw=1707&bih=932&dpr=1.5',
             rating: 5,
-            count: 2,
+            count: 9,
             reviews: [
+                {
+                    name: 'Mamadu Sauane',
+                    avatar: null,
+                    rating: 5,
+                    text: 'Recomendo! Muito bom.',
+                    isNew: true
+                },
+                {
+                    name: 'Leandro Conceição',
+                    avatar: null,
+                    rating: 5,
+                    text: '',
+                    isNew: true
+                },
+                {
+                    name: 'Djadja Djassi',
+                    avatar: null,
+                    rating: 5,
+                    text: 'Ajudou a montar os moveis, preço acessíveis.',
+                    isNew: true
+                },
+                {
+                    name: 'Carla Magalhaes',
+                    avatar: null,
+                    rating: 5,
+                    text: 'Recomendo! Muito bom profissional.',
+                    isNew: true
+                },
+                {
+                    name: 'Rita Pereira',
+                    avatar: null,
+                    rating: 5,
+                    text: 'Ótimo trabalho recomendável.',
+                    isNew: true
+                },
+                {
+                    name: 'Valenty Balde',
+                    avatar: null,
+                    rating: 5,
+                    text: 'Ótimo empresa! ✌️ 💯',
+                    isNew: true
+                },
+                {
+                    name: 'Sambis Nbk',
+                    avatar: null,
+                    rating: 5,
+                    text: 'Excelente profissional e um trabalho top . RECOMENDO !',
+                    isNew: true
+                },
                 {
                     name: 'Ana Cwb',
                     avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
@@ -112,7 +162,7 @@
             testimonials_title: 'Críticas',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
-            reviews_count: '2 críticas',
+            reviews_count: '9 críticas',
             view_google_reviews: 'Ver críticas no Google',
             faq_title: 'Perguntas Frequentes',
             faqs: [
@@ -167,7 +217,7 @@
             testimonials_title: 'Reviews',
             google_review_source: 'Google review',
             google_new: 'NEW',
-            reviews_count: '2 reviews',
+            reviews_count: '9 reviews',
             view_google_reviews: 'View reviews on Google',
             faq_title: 'Frequently Asked Questions',
             faqs: [
@@ -222,7 +272,7 @@
             testimonials_title: 'Reseñas',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
-            reviews_count: '2 reseñas',
+            reviews_count: '9 reseñas',
             view_google_reviews: 'Ver reseñas en Google',
             faq_title: 'Preguntas Frecuentes',
             faqs: [
@@ -277,7 +327,7 @@
             testimonials_title: 'Avis',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
-            reviews_count: '2 avis',
+            reviews_count: '9 avis',
             view_google_reviews: 'Voir les avis sur Google',
             faq_title: 'Questions Fréquentes',
             faqs: [
@@ -332,7 +382,7 @@
             testimonials_title: 'Bewertungen',
             google_review_source: 'Google-Bewertung',
             google_new: 'NEU',
-            reviews_count: '2 Bewertungen',
+            reviews_count: '9 Bewertungen',
             view_google_reviews: 'Bewertungen auf Google ansehen',
             faq_title: 'Häufig gestellte Fragen',
             faqs: [
@@ -387,7 +437,7 @@
             testimonials_title: 'Beoordelingen',
             google_review_source: 'Google-beoordeling',
             google_new: 'NIEUW',
-            reviews_count: '2 beoordelingen',
+            reviews_count: '9 beoordelingen',
             view_google_reviews: 'Beoordelingen op Google bekijken',
             faq_title: 'Veelgestelde Vragen',
             faqs: [
@@ -442,7 +492,7 @@
             testimonials_title: 'Recensioni',
             google_review_source: 'Recensione Google',
             google_new: 'NUOVA',
-            reviews_count: '2 recensioni',
+            reviews_count: '9 recensioni',
             view_google_reviews: 'Vedi recensioni su Google',
             faq_title: 'Domande Frequenti',
             faqs: [
@@ -497,7 +547,7 @@
             testimonials_title: 'Отзывы',
             google_review_source: 'Отзыв Google',
             google_new: 'НОВЫЙ',
-            reviews_count: '2 отзыва',
+            reviews_count: '9 отзыва',
             view_google_reviews: 'Смотреть отзывы в Google',
             faq_title: 'Часто задаваемые вопросы',
             faqs: [
@@ -562,11 +612,43 @@
         return `<div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">${initial}</div>`;
     }
 
+    function initReviewsSwiper() {
+        if (typeof Swiper === 'undefined') return;
+
+        if (reviewsSwiper) {
+            reviewsSwiper.destroy(true, true);
+            reviewsSwiper = null;
+        }
+
+        const el = document.getElementById('reviews-swiper');
+        if (!el) return;
+
+        reviewsSwiper = new Swiper(el, {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            navigation: {
+                nextEl: '.reviews-swiper-next',
+                prevEl: '.reviews-swiper-prev'
+            },
+            pagination: {
+                el: '.reviews-swiper-pagination',
+                clickable: true
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                }
+            }
+        });
+    }
+
     function renderTestimonials() {
-        const grid = document.getElementById('testimonials-grid');
+        const wrapper = document.getElementById('testimonials-swiper-wrapper');
         const summary = document.getElementById('testimonials-summary');
         const link = document.getElementById('google-reviews-link');
-        if (!grid) return;
+        if (!wrapper) return;
 
         const lang = T[currentLang];
         const { googleReviews } = CONFIG;
@@ -582,7 +664,7 @@
             `;
         }
 
-        grid.innerHTML = googleReviews.reviews.map(review => {
+        wrapper.innerHTML = googleReviews.reviews.map(review => {
             const textBlock = review.text
                 ? `<p class="google-review-text">${review.text}</p>`
                 : '';
@@ -591,23 +673,25 @@
                 : '';
 
             return `
-                <article class="google-review-card fade-in">
-                    <div class="google-review-top">
-                        ${renderReviewAvatar(review)}
-                        <div class="google-review-meta">
-                            <strong class="google-review-name">${review.name}</strong>
-                            <span class="google-review-source">
-                                <i class="fab fa-google" aria-hidden="true"></i>
-                                ${lang.google_review_source}
-                            </span>
+                <div class="swiper-slide">
+                    <article class="google-review-card">
+                        <div class="google-review-top">
+                            ${renderReviewAvatar(review)}
+                            <div class="google-review-meta">
+                                <strong class="google-review-name">${review.name}</strong>
+                                <span class="google-review-source">
+                                    <i class="fab fa-google" aria-hidden="true"></i>
+                                    ${lang.google_review_source}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="google-review-rating-row">
-                        <span class="google-review-stars" aria-label="${review.rating} / 5">${renderStars(review.rating)}</span>
-                        ${newBadge}
-                    </div>
-                    ${textBlock}
-                </article>
+                        <div class="google-review-rating-row">
+                            <span class="google-review-stars" aria-label="${review.rating} / 5">${renderStars(review.rating)}</span>
+                            ${newBadge}
+                        </div>
+                        ${textBlock}
+                    </article>
+                </div>
             `;
         }).join('');
 
@@ -615,6 +699,8 @@
             link.href = googleReviews.url;
             link.textContent = lang.view_google_reviews;
         }
+
+        requestAnimationFrame(() => initReviewsSwiper());
     }
 
     function renderFAQ() {
