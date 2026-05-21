@@ -1496,34 +1496,47 @@ body.modal-open {
     }
 
     .nav {
+        display: none;
         position: fixed;
-        top: 72px;
+        top: 70px;
         left: 0;
-        right: 0;
         width: 100%;
-        max-width: 100vw;
+        height: calc(100vh - 70px);
+        height: calc(100dvh - 70px);
+        background: #1A2B49;
         z-index: 999999;
-        background: #ffffff;
         flex-direction: column;
         padding: 24px;
         padding-bottom: max(24px, env(safe-area-inset-bottom));
         gap: 20px;
-        border-bottom: 1px solid var(--border);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
         pointer-events: none;
-        transition: transform var(--transition), opacity var(--transition), visibility var(--transition);
-        box-shadow: var(--shadow-lg);
-        -webkit-transform: translateY(-100%);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav.active {
-        transform: translateY(0);
-        -webkit-transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+        display: flex !important;
         pointer-events: auto;
+    }
+
+    .nav.active .nav-link {
+        color: #ffffff;
+        font-size: 1.1rem;
+    }
+
+    .nav.active .nav-link:hover,
+    .nav.active .nav-link.active {
+        color: var(--primary-color);
+    }
+
+    .nav.active .nav-link.active::after {
+        background: var(--primary-color);
     }
 
     .menu-toggle {
@@ -1537,19 +1550,20 @@ body.modal-open {
     }
 
     .lang-dropdown {
-        position: fixed;
-        top: 72px;
-        right: max(16px, env(safe-area-inset-right));
-        left: auto;
-        margin-top: 0;
-        min-width: 170px;
-        z-index: 999999;
         display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        right: auto;
+        margin-top: 6px;
+        min-width: 170px;
+        transform: translateX(-50%);
+        z-index: 999999;
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         opacity: 1;
         visibility: visible;
-        transform: none;
         pointer-events: auto;
-        -webkit-transform: none;
     }
 
     .lang-dropdown.open {

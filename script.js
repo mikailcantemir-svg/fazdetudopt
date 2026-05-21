@@ -816,43 +816,47 @@
     }
 
     function setupLangSwitcher() {
+        const switcher = document.getElementById('lang-switcher');
         const toggle = document.getElementById('lang-toggle');
         const dropdown = document.getElementById('lang-dropdown');
         const flag = document.getElementById('lang-flag');
         const label = document.getElementById('lang-label');
-        if (!toggle || !dropdown) return;
+        if (!switcher || !toggle || !dropdown) return;
+
+        function setLangOpen(open) {
+            dropdown.classList.toggle('open', open);
+            toggle.classList.toggle('open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+        }
 
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = dropdown.classList.contains('open');
-            dropdown.classList.toggle('open', !isOpen);
-            toggle.classList.toggle('open', !isOpen);
-            toggle.setAttribute('aria-expanded', !isOpen);
+            setLangOpen(!dropdown.classList.contains('open'));
         });
 
         dropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
             const btn = e.target.closest('.lang-option');
             if (!btn) return;
             const lang = btn.dataset.lang;
             if (lang === currentLang) {
-                dropdown.classList.remove('open');
-                toggle.classList.remove('open');
+                setLangOpen(false);
                 return;
             }
             dropdown.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
             btn.classList.add('active');
             const info = LANGS[lang];
-            if (info) { flag.src = info.flag; label.textContent = info.label; }
-            dropdown.classList.remove('open');
-            toggle.classList.remove('open');
-            toggle.setAttribute('aria-expanded', 'false');
+            if (info) {
+                flag.src = info.flag;
+                label.textContent = info.label;
+            }
+            setLangOpen(false);
             applyLanguage(lang);
         });
 
-        document.addEventListener('click', () => {
-            dropdown.classList.remove('open');
-            toggle.classList.remove('open');
-            toggle.setAttribute('aria-expanded', 'false');
+        document.addEventListener('click', (e) => {
+            if (switcher.contains(e.target)) return;
+            setLangOpen(false);
         });
     }
 
@@ -860,10 +864,28 @@
         const header = document.getElementById('header');
         const toggle = document.getElementById('menu-toggle');
         const nav = document.getElementById('nav');
+        if (!header || !toggle || !nav) return;
+
         window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20));
-        toggle.addEventListener('click', () => { toggle.classList.toggle('active'); nav.classList.toggle('active'); });
-        nav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => { toggle.classList.remove('active'); nav.classList.remove('active'); });
+
+        function setNavOpen(open) {
+            toggle.classList.toggle('active', open);
+            nav.classList.toggle('active', open);
+        }
+
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setNavOpen(!nav.classList.contains('active'));
+        });
+
+        nav.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (e.target.closest('.nav-link')) setNavOpen(false);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (toggle.contains(e.target) || nav.contains(e.target)) return;
+            setNavOpen(false);
         });
     }
 
