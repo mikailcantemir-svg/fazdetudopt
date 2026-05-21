@@ -651,8 +651,6 @@ body.modal-open {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--bg-light);
-    text-decoration: none;
-    color: inherit;
     cursor: pointer;
     box-shadow: var(--shadow);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -664,13 +662,56 @@ body.modal-open {
     border-color: rgba(240, 78, 35, 0.25);
 }
 
-.service-modal-item:visited {
-    color: inherit;
+.service-modal-item.show-contacts {
+    border-color: rgba(240, 78, 35, 0.35);
 }
 
 .service-modal-item:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
+}
+
+.service-modal-item-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-options {
+    display: none;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.service-modal-item.show-contacts .contact-options {
+    display: flex;
+}
+
+.btn-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-contact.wa {
+    background: #25D366;
+}
+
+.btn-contact.call {
+    background: var(--primary);
+}
+
+.btn-contact:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    color: #fff;
 }
 
 .service-modal-item-icon {

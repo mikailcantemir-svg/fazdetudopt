@@ -398,7 +398,7 @@
     function t(key) { return T[currentLang][key] || T.pt[key] || ''; }
 
     function getServiceWhatsAppUrl(serviceName) {
-        const text = `Olá, estou no vosso site e gostava de pedir um orçamento para o serviço de ${serviceName}.`;
+        const text = `Olá, quero um orçamento para ${serviceName}`;
         return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
     }
 
@@ -414,15 +414,23 @@
                 if (!s) return '';
                 const waUrl = getServiceWhatsAppUrl(s.name);
                 return `
-                    <a href="${waUrl}" class="service-modal-item" target="_blank" rel="noopener noreferrer" aria-label="Pedir orçamento para ${s.name} via WhatsApp">
+                    <div class="service-modal-item" role="button" tabindex="0" aria-expanded="false">
                         <div class="service-modal-item-icon">
                             <i class="${ICON_MAP[SERVICE_ICONS[i]] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
                         </div>
                         <div class="service-modal-item-body">
                             <h4>${s.name}</h4>
                             <p>${s.description}</p>
+                            <div class="contact-options">
+                                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn-contact wa">
+                                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
+                                </a>
+                                <a href="tel:+${CONFIG.whatsapp}" class="btn-contact call">
+                                    <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar
+                                </a>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 `;
             }).join('');
         });
@@ -460,7 +468,16 @@
             modal.setAttribute('hidden', '');
             modal.setAttribute('aria-hidden', 'true');
         });
+        document.querySelectorAll('.service-modal-item.show-contacts').forEach(card => {
+            card.classList.remove('show-contacts');
+            card.setAttribute('aria-expanded', 'false');
+        });
         document.body.classList.remove('modal-open');
+    }
+
+    function toggleServiceCardContacts(card) {
+        const isOpen = card.classList.toggle('show-contacts');
+        card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
 
     function setupServiceModals() {
@@ -484,6 +501,23 @@
             const dialog = modal.querySelector('.service-modal-dialog');
             if (dialog) {
                 dialog.addEventListener('click', e => e.stopPropagation());
+            }
+
+            const list = modal.querySelector('.service-modal-list');
+            if (list && !list.dataset.contactsBound) {
+                list.dataset.contactsBound = 'true';
+                list.addEventListener('click', e => {
+                    if (e.target.closest('.btn-contact')) return;
+                    const card = e.target.closest('.service-modal-item');
+                    if (card) toggleServiceCardContacts(card);
+                });
+                list.addEventListener('keydown', e => {
+                    if (e.key !== 'Enter' && e.key !== ' ') return;
+                    const card = e.target.closest('.service-modal-item');
+                    if (!card || e.target.closest('.btn-contact')) return;
+                    e.preventDefault();
+                    toggleServiceCardContacts(card);
+                });
             }
         });
 
