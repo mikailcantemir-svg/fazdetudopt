@@ -946,11 +946,36 @@ body {
     line-height: 1.6;
 }
 
+.social-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    margin-bottom: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.4;
+}
+
+.social-cta .fa-arrow-down {
+    font-size: 0.8rem;
+    animation: social-cta-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes social-cta-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(4px);
+    }
+}
+
 .footer-socials {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-top: 16px;
 }
 
 .footer-social {
@@ -963,7 +988,7 @@ body {
 }
 
 .footer-social i {
-    font-size: 24px;
+    font-size: 31px;
     line-height: 1;
 }
 
