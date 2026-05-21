@@ -708,6 +708,14 @@ body.modal-open {
     background: var(--primary);
 }
 
+.btn-contact.call .show-mobile {
+    display: none;
+}
+
+.btn-contact.call .show-desktop {
+    display: inline;
+}
+
 .btn-contact:hover {
     opacity: 0.92;
     transform: translateY(-1px);
@@ -1466,6 +1474,14 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
+    .btn-contact.call .show-mobile {
+        display: inline;
+    }
+
+    .btn-contact.call .show-desktop {
+        display: none;
+    }
+
     .nav {
         position: fixed;
         top: 72px;

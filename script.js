@@ -426,7 +426,9 @@
                                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
                                 </a>
                                 <a href="tel:+${CONFIG.whatsapp}" class="btn-contact call">
-                                    <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar
+                                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                    <span class="show-mobile">Ligar</span>
+                                    <span class="show-desktop">${CONFIG.phone_display}</span>
                                 </a>
                             </div>
                         </div>
