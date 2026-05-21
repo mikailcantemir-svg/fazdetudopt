@@ -11,17 +11,22 @@ img {
 }
 
 :root {
-    --primary: #F04E23;
-    --primary-dark: #D94420;
-    --primary-light: #FF6B42;
-    --dark: #1a1a1a;
-    --text: #333333;
-    --text-light: #666666;
+    --primary-color: #E65F2B;
+    --secondary-color: #1A2B49;
+    --bg-light: #F8F9FA;
+
+    --primary: var(--primary-color);
+    --primary-dark: #C95124;
+    --primary-light: #EF7A52;
+    --primary-rgb: 230, 95, 43;
+    --secondary-rgb: 26, 43, 73;
+    --dark: var(--secondary-color);
+    --text: #2E3D52;
+    --text-light: #5A6B7F;
     --bg: #ffffff;
-    --bg-light: #f7f7f7;
-    --border: #e5e5e5;
-    --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --border: #DDE2E8;
+    --shadow: 0 2px 12px rgba(26, 43, 73, 0.08);
+    --shadow-lg: 0 8px 30px rgba(26, 43, 73, 0.12);
     --radius: 12px;
     --radius-sm: 8px;
     --transition: 0.3s ease;
@@ -55,6 +60,12 @@ h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-style: normal;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--secondary-color);
 }
 
 body {
@@ -120,7 +131,7 @@ body {
     display: block;
     font-size: 1.12rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--secondary-color);
     letter-spacing: 0.5px;
 }
 
@@ -138,7 +149,7 @@ body {
 
 .logo-text em {
     font-style: normal;
-    color: var(--primary);
+    color: var(--primary-color);
 }
 
 .nav {
@@ -157,7 +168,7 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--primary);
+    color: var(--primary-color);
 }
 
 .nav-link.active::after {
@@ -167,7 +178,7 @@ body {
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--primary);
+    background: var(--primary-color);
     border-radius: 1px;
 }
 
@@ -206,7 +217,7 @@ body {
 
 .lang-toggle.open {
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(240, 78, 35, 0.15);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.15);
 }
 
 .lang-flag {
@@ -348,7 +359,6 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 4px;
-    opacity: 0.25;
 }
 
 .hero-bg-item {
@@ -356,31 +366,43 @@ body {
     background-position: center;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.4) 100%);
-    z-index: 1;
-}
-
 .hero-content {
     position: relative;
     z-index: 2;
     max-width: 700px;
     padding: 60px 24px;
+    isolation: isolate;
+}
+
+.hero-content::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    right: -16px;
+    bottom: -24px;
+    left: -16px;
+    background:
+        radial-gradient(ellipse 100% 100% at 0% 50%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.25) 50%, transparent 85%),
+        rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-title,
+.hero-subtitle {
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .hero-title {
     font-size: clamp(2.2rem, 5vw, 3.5rem);
-    color: var(--dark);
     line-height: 1.15;
     margin-bottom: 20px;
 }
 
 .hero-subtitle {
     font-size: 1.15rem;
-    color: var(--text-light);
     margin-bottom: 36px;
     max-width: 520px;
 }
@@ -408,14 +430,14 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary);
-    color: white;
+    background: var(--primary-color);
+    color: #ffffff;
 }
 
 .btn-primary:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(240, 78, 35, 0.35);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.35);
 }
 
 .btn-outline {
@@ -425,13 +447,13 @@ body {
 }
 
 .btn-outline:hover {
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .btn-white {
     background: white;
-    color: var(--primary);
+    color: var(--primary-color);
 }
 
 .btn-white:hover {
@@ -479,7 +501,7 @@ body {
 
 .section-title {
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-    color: var(--dark);
+    color: var(--secondary-color);
     margin-bottom: 12px;
 }
 
@@ -520,15 +542,15 @@ body {
 .category-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-lg);
-    border-color: rgba(240, 78, 35, 0.35);
+    border-color: rgba(var(--primary-rgb), 0.35);
 }
 
 .category-card-icon {
     width: 64px;
     height: 64px;
     border-radius: 16px;
-    background: rgba(240, 78, 35, 0.12);
-    color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.12);
+    color: var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -538,7 +560,7 @@ body {
 
 .category-card h3 {
     font-size: 1.25rem;
-    color: var(--dark);
+    color: var(--secondary-color);
     margin-bottom: 10px;
 }
 
@@ -556,7 +578,7 @@ body {
     gap: 8px;
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--primary-color);
 }
 
 /* ===== SERVICE MODALS ===== */
@@ -617,7 +639,7 @@ body.modal-open {
     border: none;
     border-radius: 50%;
     background: var(--bg-light);
-    color: var(--dark);
+    color: var(--secondary-color);
     font-size: 1.2rem;
     cursor: pointer;
     display: flex;
@@ -633,7 +655,7 @@ body.modal-open {
 
 .service-modal-title {
     font-size: 1.5rem;
-    color: var(--dark);
+    color: var(--secondary-color);
     margin-bottom: 24px;
     padding-right: 48px;
 }
@@ -659,11 +681,11 @@ body.modal-open {
 .service-modal-item:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
-    border-color: rgba(240, 78, 35, 0.25);
+    border-color: rgba(var(--primary-rgb), 0.25);
 }
 
 .service-modal-item.show-contacts {
-    border-color: rgba(240, 78, 35, 0.35);
+    border-color: rgba(var(--primary-rgb), 0.35);
 }
 
 .service-modal-item:focus-visible {
@@ -719,7 +741,7 @@ body.modal-open {
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: rgba(240, 78, 35, 0.1);
+    background: rgba(var(--primary-rgb), 0.1);
     color: var(--primary);
     display: flex;
     align-items: center;
@@ -730,7 +752,7 @@ body.modal-open {
 .service-modal-item-body h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--secondary-color);
     margin-bottom: 6px;
 }
 
@@ -770,7 +792,7 @@ body.modal-open {
 .advantage-card h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--secondary-color);
     margin-bottom: 10px;
 }
 
@@ -796,7 +818,7 @@ body.modal-open {
 .reviews-score {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--secondary-color);
     line-height: 1;
 }
 
@@ -859,7 +881,7 @@ body.modal-open {
     border: 1px solid var(--border);
     border-radius: 50%;
     background: var(--bg);
-    color: var(--dark);
+    color: var(--secondary-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -880,7 +902,7 @@ body.modal-open {
 .reviews-swiper-next:hover {
     border-color: var(--primary);
     color: var(--primary);
-    box-shadow: 0 4px 16px rgba(240, 78, 35, 0.2);
+    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.2);
 }
 
 .reviews-swiper-pagination {
@@ -931,7 +953,7 @@ body.modal-open {
 .google-review-name {
     display: block;
     font-size: 0.95rem;
-    color: var(--dark);
+    color: var(--secondary-color);
     font-weight: 600;
 }
 
@@ -987,7 +1009,7 @@ body.modal-open {
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: var(--bg);
-    color: var(--dark);
+    color: var(--secondary-color);
     font-weight: 600;
     font-size: 0.95rem;
     text-decoration: none;
@@ -1027,7 +1049,7 @@ body.modal-open {
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--secondary-color);
     text-align: left;
     font-family: inherit;
     transition: color var(--transition);
@@ -1069,7 +1091,7 @@ body.modal-open {
 /* ===== CTA ===== */
 
 .section-cta {
-    background: var(--primary);
+    background: var(--primary-color);
     padding: 80px 0;
     position: relative;
     overflow: hidden;
@@ -1112,7 +1134,7 @@ body.modal-open {
 /* ===== FOOTER ===== */
 
 .footer {
-    background: var(--dark);
+    background: var(--secondary-color);
     color: rgba(255, 255, 255, 0.7);
     padding: 60px 0 0;
 }
@@ -1262,7 +1284,7 @@ body.modal-open {
     justify-content: center;
     color: white;
     font-size: 1.8rem;
-    box-shadow: 0 4px 16px rgba(240, 78, 35, 0.4);
+    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.4);
     transition: transform var(--transition), box-shadow var(--transition);
     cursor: pointer;
     position: relative;
@@ -1270,7 +1292,7 @@ body.modal-open {
 
 .whatsapp-float:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 24px rgba(240, 78, 35, 0.5);
+    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.5);
 }
 
 .whatsapp-float .wa-icon-close {
