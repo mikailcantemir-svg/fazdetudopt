@@ -1686,7 +1686,13 @@ body.modal-open {
     }
 
     .hero {
-        min-height: 80vh;
+        min-height: 120vh;
+        align-items: flex-start;
+        padding-bottom: 60px;
+    }
+
+    .hero-content {
+        padding-bottom: 32px;
     }
 
     .hero-title {
@@ -1699,6 +1705,13 @@ body.modal-open {
 
     .hero-actions .btn {
         justify-content: center;
+    }
+
+    .hero-reviews {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #ffffff;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
 
     .services-categories {
