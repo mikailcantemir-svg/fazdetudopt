@@ -85,20 +85,56 @@ body {
 /* ===== HEADER ===== */
 
 .header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
     z-index: 99999;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    transition: box-shadow var(--transition);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.12) 65%, transparent 100%);
+    border-bottom: none;
+    backdrop-filter: none;
+    transition: background var(--transition), box-shadow var(--transition), border-color var(--transition);
     overflow: visible;
 }
 
 .header.scrolled {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow);
+}
+
+.header:not(.scrolled) .logo-text {
+    color: #ffffff;
+}
+
+.header:not(.scrolled) .logo-tagline {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.header:not(.scrolled) .nav-link {
+    color: #ffffff;
+}
+
+.header:not(.scrolled) .nav-link:hover,
+.header:not(.scrolled) .nav-link.active {
+    color: var(--primary-light);
+}
+
+.header:not(.scrolled) .lang-toggle {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+
+.header:not(.scrolled) .lang-chevron {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.header:not(.scrolled) .menu-toggle span {
+    background: #ffffff;
 }
 
 .header-inner {
@@ -351,13 +387,15 @@ body {
     min-height: 90vh;
     display: flex;
     align-items: center;
-    padding-top: 72px;
+    margin-top: 0;
+    padding-top: 0;
     overflow: hidden;
 }
 
 .hero-bg {
     position: absolute;
     inset: 0;
+    z-index: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -373,7 +411,8 @@ body {
     position: relative;
     z-index: 2;
     max-width: 700px;
-    padding: 60px 24px;
+    width: 100%;
+    padding: calc(88px + 48px) 24px 60px;
     isolation: isolate;
 }
 
@@ -414,6 +453,26 @@ body {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+}
+
+.hero-reviews {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    line-height: 1.4;
+}
+
+.hero-actions .btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-actions .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+    color: #ffffff;
 }
 
 /* ===== BUTTONS ===== */
