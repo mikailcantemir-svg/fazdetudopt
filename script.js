@@ -426,7 +426,7 @@
         const grid = document.getElementById('services-categories');
         if (!grid) return;
         grid.innerHTML = SERVICE_CATEGORIES.map(cat => `
-            <button type="button" class="category-card fade-in" data-category="${cat.id}" aria-haspopup="dialog">
+            <button type="button" class="category-card" data-category="${cat.id}" aria-haspopup="dialog">
                 <div class="category-card-icon">
                     <i class="${ICON_MAP[cat.icon] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
                 </div>
@@ -441,18 +441,17 @@
     function openServiceModal(categoryId) {
         const modal = document.getElementById(`modal-${categoryId}`);
         if (!modal) return;
-        document.querySelectorAll('.service-modal.is-open').forEach(m => {
-            m.classList.remove('is-open');
-            m.setAttribute('aria-hidden', 'true');
-        });
-        modal.classList.add('is-open');
+        closeServiceModals();
+        modal.classList.add('active');
+        modal.removeAttribute('hidden');
         modal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open');
     }
 
     function closeServiceModals() {
         document.querySelectorAll('.service-modal').forEach(modal => {
-            modal.classList.remove('is-open');
+            modal.classList.remove('active');
+            modal.setAttribute('hidden', '');
             modal.setAttribute('aria-hidden', 'true');
         });
         document.body.classList.remove('modal-open');
@@ -467,11 +466,30 @@
                 if (card) openServiceModal(card.dataset.category);
             });
         }
+
+        document.querySelectorAll('.service-modal').forEach(modal => {
+            if (modal.dataset.bound) return;
+            modal.dataset.bound = 'true';
+
+            modal.addEventListener('click', e => {
+                if (e.target === modal) closeServiceModals();
+            });
+
+            const dialog = modal.querySelector('.service-modal-dialog');
+            if (dialog) {
+                dialog.addEventListener('click', e => e.stopPropagation());
+            }
+        });
+
         document.querySelectorAll('[data-close-modal]').forEach(el => {
             if (el.dataset.bound) return;
             el.dataset.bound = 'true';
-            el.addEventListener('click', closeServiceModals);
+            el.addEventListener('click', e => {
+                e.stopPropagation();
+                closeServiceModals();
+            });
         });
+
         if (!document.body.dataset.modalEscape) {
             document.body.dataset.modalEscape = 'true';
             document.addEventListener('keydown', e => {
