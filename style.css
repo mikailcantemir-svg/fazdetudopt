@@ -651,6 +651,26 @@ body.modal-open {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--bg-light);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-modal-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(240, 78, 35, 0.25);
+}
+
+.service-modal-item:visited {
+    color: inherit;
+}
+
+.service-modal-item:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .service-modal-item-icon {

@@ -397,6 +397,11 @@
 
     function t(key) { return T[currentLang][key] || T.pt[key] || ''; }
 
+    function getServiceWhatsAppUrl(serviceName) {
+        const text = `Olá, estou no vosso site e gostava de pedir um orçamento para o serviço de ${serviceName}.`;
+        return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+    }
+
     function populateServiceModals() {
         const services = T[currentLang].services;
         SERVICE_CATEGORIES.forEach(cat => {
@@ -407,8 +412,9 @@
             list.innerHTML = cat.serviceIndices.map(i => {
                 const s = services[i];
                 if (!s) return '';
+                const waUrl = getServiceWhatsAppUrl(s.name);
                 return `
-                    <article class="service-modal-item">
+                    <a href="${waUrl}" class="service-modal-item" target="_blank" rel="noopener noreferrer" aria-label="Pedir orçamento para ${s.name} via WhatsApp">
                         <div class="service-modal-item-icon">
                             <i class="${ICON_MAP[SERVICE_ICONS[i]] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
                         </div>
@@ -416,7 +422,7 @@
                             <h4>${s.name}</h4>
                             <p>${s.description}</p>
                         </div>
-                    </article>
+                    </a>
                 `;
             }).join('');
         });
