@@ -1570,23 +1570,27 @@ body.modal-open {
         overflow: visible;
     }
 
+    .header-actions {
+        position: relative;
+    }
+
     .nav {
         display: none;
         position: absolute;
         top: 100%;
-        right: 10px;
+        right: 15px;
         left: auto;
-        width: 200px;
+        width: 220px;
         height: auto;
         margin-top: 6px;
         padding: 15px;
-        background: #ffffff;
+        background-color: #1A2B49;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         z-index: 999999;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        align-items: stretch;
+        gap: 0;
         border: none;
         transform: none;
         opacity: 1;
@@ -1600,18 +1604,22 @@ body.modal-open {
         pointer-events: auto;
     }
 
+    .header:not(.scrolled) .nav .nav-link,
+    .nav.active .nav-link,
     .nav .nav-link {
-        color: var(--secondary-color);
+        display: block;
+        color: #ffffff;
         font-size: 1rem;
         font-weight: 600;
         width: 100%;
         text-align: left;
-        padding: 4px 0;
+        padding: 10px 5px;
+        text-decoration: none;
     }
 
     .nav .nav-link:hover,
     .nav .nav-link.active {
-        color: var(--primary-color);
+        color: var(--primary-light);
     }
 
     .nav .nav-link.active::after {
