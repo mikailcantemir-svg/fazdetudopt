@@ -83,12 +83,19 @@
     };
 
     const SERVICE_ICONS = [
-        'paint-roller', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
+        'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
         'gear', 'broom', 'leaf', 'truck', 'laptop', 'lock', 'temperature-half',
         'house-chimney', 'blinds', 'couch', 'water-ladder'
     ];
 
     const ADVANTAGE_ICONS = ['award', 'shield-halved', 'clock', 'euro-sign'];
+
+    const SERVICE_CATEGORIES = [
+        { id: 'obras', icon: 'house-chimney', titleKey: 'cat_obras', descKey: 'cat_obras_desc', serviceIndices: [0, 1, 13, 4] },
+        { id: 'instalacoes', icon: 'screwdriver-wrench', titleKey: 'cat_instalacoes', descKey: 'cat_instalacoes_desc', serviceIndices: [2, 3, 12, 10] },
+        { id: 'manutencao', icon: 'gear', titleKey: 'cat_manutencao', descKey: 'cat_manutencao_desc', serviceIndices: [5, 6, 11, 14] },
+        { id: 'casa', icon: 'leaf', titleKey: 'cat_casa', descKey: 'cat_casa_desc', serviceIndices: [7, 8, 9, 15, 16] }
+    ];
 
     const LANGS = {
         pt: { label: 'Português', flag: 'https://flagcdn.com/w20/pt.png' },
@@ -99,6 +106,7 @@
 
     const ICON_MAP = {
         'paint-roller': 'fa-solid fa-paint-roller',
+        'building': 'fa-solid fa-building',
         'faucet-drip': 'fa-solid fa-faucet-drip',
         'bolt': 'fa-solid fa-bolt',
         'hammer': 'fa-solid fa-hammer',
@@ -130,8 +138,18 @@
             hero_btn_call: 'Ligue agora',
             services_title: 'Os nossos serviços',
             services_subtitle: 'Soluções completas para a sua casa ou escritório',
+            cat_obras: 'Obras & Remodelações',
+            cat_obras_desc: 'Pinturas, fachadas, remodelações e carpintaria para renovar o seu espaço.',
+            cat_instalacoes: 'Instalações Técnicas',
+            cat_instalacoes_desc: 'Canalização, electricidade, climatização e soluções informáticas.',
+            cat_manutencao: 'Manutenção & Reparações',
+            cat_manutencao_desc: 'Reparações, manutenção, serralharia e estores no dia a dia.',
+            cat_casa: 'Casa & Exterior',
+            cat_casa_desc: 'Limpeza, jardim, mudanças, decoração e manutenção de piscinas.',
+            cat_view_services: 'Ver serviços',
             services: [
                 { name: 'Pinturas', description: 'Interior e exterior. Preparação de superfícies, primários e acabamentos de qualidade.' },
+                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
                 { name: 'Canalizações', description: 'Reparação de fugas, instalação de torneiras, sanitas e sistemas de água.' },
                 { name: 'Electricidade', description: 'Instalações eléctricas, tomadas, iluminação e quadros eléctricos.' },
                 { name: 'Carpintaria', description: 'Montagem de móveis, reparação de portas, janelas e trabalhos em madeira.' },
@@ -186,8 +204,18 @@
             hero_btn_call: 'Call now',
             services_title: 'Our services',
             services_subtitle: 'Complete solutions for your home or office',
+            cat_obras: 'Works & Renovations',
+            cat_obras_desc: 'Painting, facades, renovations and carpentry to transform your space.',
+            cat_instalacoes: 'Technical Installations',
+            cat_instalacoes_desc: 'Plumbing, electrical, HVAC and IT solutions.',
+            cat_manutencao: 'Maintenance & Repairs',
+            cat_manutencao_desc: 'Repairs, maintenance, locksmithing and blinds for everyday needs.',
+            cat_casa: 'Home & Outdoor',
+            cat_casa_desc: 'Cleaning, gardening, moving, décor and pool maintenance.',
+            cat_view_services: 'View services',
             services: [
                 { name: 'Painting', description: 'Interior and exterior. Surface preparation, primers and quality finishes.' },
+                { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
                 { name: 'Plumbing', description: 'Leak repair, tap, toilet and water system installation.' },
                 { name: 'Electrical', description: 'Electrical installations, sockets, lighting and electrical panels.' },
                 { name: 'Carpentry', description: 'Furniture assembly, door and window repair, woodwork.' },
@@ -242,8 +270,18 @@
             hero_btn_call: 'Llame ahora',
             services_title: 'Nuestros servicios',
             services_subtitle: 'Soluciones completas para su hogar u oficina',
+            cat_obras: 'Obras y Reformas',
+            cat_obras_desc: 'Pinturas, fachadas, reformas y carpintería para renovar su espacio.',
+            cat_instalacoes: 'Instalaciones Técnicas',
+            cat_instalacoes_desc: 'Fontanería, electricidad, climatización e informática.',
+            cat_manutencao: 'Mantenimiento y Reparaciones',
+            cat_manutencao_desc: 'Reparaciones, mantenimiento, cerrajería y persianas.',
+            cat_casa: 'Hogar y Exterior',
+            cat_casa_desc: 'Limpieza, jardinería, mudanzas, decoración y piscinas.',
+            cat_view_services: 'Ver servicios',
             services: [
                 { name: 'Pinturas', description: 'Interior y exterior. Preparación de superficies, imprimaciones y acabados de calidad.' },
+                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
                 { name: 'Fontanería', description: 'Reparación de fugas, instalación de grifos, sanitarios y sistemas de agua.' },
                 { name: 'Electricidad', description: 'Instalaciones eléctricas, enchufes, iluminación y cuadros eléctricos.' },
                 { name: 'Carpintería', description: 'Montaje de muebles, reparación de puertas, ventanas y trabajos en madera.' },
@@ -298,8 +336,18 @@
             hero_btn_call: 'Appelez maintenant',
             services_title: 'Nos services',
             services_subtitle: 'Solutions complètes pour votre maison ou bureau',
+            cat_obras: 'Travaux & Rénovations',
+            cat_obras_desc: 'Peinture, façades, rénovations et menuiserie pour transformer votre espace.',
+            cat_instalacoes: 'Installations Techniques',
+            cat_instalacoes_desc: 'Plomberie, électricité, climatisation et informatique.',
+            cat_manutencao: 'Entretien & Réparations',
+            cat_manutencao_desc: 'Réparations, entretien, serrurerie et stores.',
+            cat_casa: 'Maison & Extérieur',
+            cat_casa_desc: 'Nettoyage, jardin, déménagement, déco et piscines.',
+            cat_view_services: 'Voir les services',
             services: [
                 { name: 'Peinture', description: 'Intérieur et extérieur. Préparation des surfaces, apprêts et finitions de qualité.' },
+                { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
                 { name: 'Plomberie', description: 'Réparation de fuites, installation de robinets, toilettes et systèmes d\'eau.' },
                 { name: 'Électricité', description: 'Installations électriques, prises, éclairage et tableaux électriques.' },
                 { name: 'Menuiserie', description: 'Montage de meubles, réparation de portes, fenêtres et travaux en bois.' },
@@ -349,19 +397,87 @@
 
     function t(key) { return T[currentLang][key] || T.pt[key] || ''; }
 
-    function renderServices() {
-        const grid = document.getElementById('services-grid');
-        if (!grid) return;
+    function populateServiceModals() {
         const services = T[currentLang].services;
-        grid.innerHTML = services.map((s, i) => `
-            <div class="service-card fade-in">
-                <div class="service-icon">
-                    <i class="${ICON_MAP[SERVICE_ICONS[i]] || 'fa-solid fa-wrench'}"></i>
+        SERVICE_CATEGORIES.forEach(cat => {
+            const list = document.getElementById(`modal-${cat.id}-list`);
+            const title = document.getElementById(`modal-${cat.id}-title`);
+            if (title) title.textContent = t(cat.titleKey);
+            if (!list) return;
+            list.innerHTML = cat.serviceIndices.map(i => {
+                const s = services[i];
+                if (!s) return '';
+                return `
+                    <article class="service-modal-item">
+                        <div class="service-modal-item-icon">
+                            <i class="${ICON_MAP[SERVICE_ICONS[i]] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
+                        </div>
+                        <div class="service-modal-item-body">
+                            <h4>${s.name}</h4>
+                            <p>${s.description}</p>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        });
+    }
+
+    function renderServiceCategories() {
+        const grid = document.getElementById('services-categories');
+        if (!grid) return;
+        grid.innerHTML = SERVICE_CATEGORIES.map(cat => `
+            <button type="button" class="category-card fade-in" data-category="${cat.id}" aria-haspopup="dialog">
+                <div class="category-card-icon">
+                    <i class="${ICON_MAP[cat.icon] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
                 </div>
-                <h3>${s.name}</h3>
-                <p>${s.description}</p>
-            </div>
+                <h3>${t(cat.titleKey)}</h3>
+                <p>${t(cat.descKey)}</p>
+                <span class="category-card-cta">${t('cat_view_services')} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+            </button>
         `).join('');
+        populateServiceModals();
+    }
+
+    function openServiceModal(categoryId) {
+        const modal = document.getElementById(`modal-${categoryId}`);
+        if (!modal) return;
+        document.querySelectorAll('.service-modal.is-open').forEach(m => {
+            m.classList.remove('is-open');
+            m.setAttribute('aria-hidden', 'true');
+        });
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeServiceModals() {
+        document.querySelectorAll('.service-modal').forEach(modal => {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+        });
+        document.body.classList.remove('modal-open');
+    }
+
+    function setupServiceModals() {
+        const categories = document.getElementById('services-categories');
+        if (categories && !categories.dataset.bound) {
+            categories.dataset.bound = 'true';
+            categories.addEventListener('click', e => {
+                const card = e.target.closest('[data-category]');
+                if (card) openServiceModal(card.dataset.category);
+            });
+        }
+        document.querySelectorAll('[data-close-modal]').forEach(el => {
+            if (el.dataset.bound) return;
+            el.dataset.bound = 'true';
+            el.addEventListener('click', closeServiceModals);
+        });
+        if (!document.body.dataset.modalEscape) {
+            document.body.dataset.modalEscape = 'true';
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') closeServiceModals();
+            });
+        }
     }
 
     function renderAdvantages() {
@@ -631,7 +747,7 @@
         currentLang = lang;
         document.documentElement.lang = lang;
         applyTexts();
-        renderServices();
+        renderServiceCategories();
         renderFooterServices();
         renderAdvantages();
         renderTestimonials();
@@ -707,6 +823,7 @@
         setupHeader();
         setupLangSwitcher();
         setupWhatsAppChat();
+        setupServiceModals();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }

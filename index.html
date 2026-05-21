@@ -34,6 +34,7 @@
         "Canalização e Pichelaria",
         "Eletricidade",
         "Pintura e Pladur",
+        "Pintura de Fachadas e Prédios em Alpinismo",
         "Carpintaria",
         "Telhados e Impermeabilizações",
         "Jardinagem"
@@ -132,11 +133,53 @@
                 <h2 class="section-title" data-i18n="services_title">Os nossos serviços</h2>
                 <p class="section-subtitle" data-i18n="services_subtitle">Soluções completas para a sua casa ou escritório</p>
             </div>
-            <div class="services-grid" id="services-grid">
+            <div class="services-categories" id="services-categories">
                 <!-- Populated by JS -->
             </div>
         </div>
     </section>
+
+    <!-- Service category modals -->
+    <div class="service-modal" id="modal-obras" aria-hidden="true">
+        <div class="service-modal-overlay" data-close-modal></div>
+        <div class="service-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-obras-title">
+            <button type="button" class="service-modal-close" data-close-modal aria-label="Fechar">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h3 class="service-modal-title" id="modal-obras-title"></h3>
+            <div class="service-modal-list" id="modal-obras-list"></div>
+        </div>
+    </div>
+    <div class="service-modal" id="modal-instalacoes" aria-hidden="true">
+        <div class="service-modal-overlay" data-close-modal></div>
+        <div class="service-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-instalacoes-title">
+            <button type="button" class="service-modal-close" data-close-modal aria-label="Fechar">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h3 class="service-modal-title" id="modal-instalacoes-title"></h3>
+            <div class="service-modal-list" id="modal-instalacoes-list"></div>
+        </div>
+    </div>
+    <div class="service-modal" id="modal-manutencao" aria-hidden="true">
+        <div class="service-modal-overlay" data-close-modal></div>
+        <div class="service-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-manutencao-title">
+            <button type="button" class="service-modal-close" data-close-modal aria-label="Fechar">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h3 class="service-modal-title" id="modal-manutencao-title"></h3>
+            <div class="service-modal-list" id="modal-manutencao-list"></div>
+        </div>
+    </div>
+    <div class="service-modal" id="modal-casa" aria-hidden="true">
+        <div class="service-modal-overlay" data-close-modal></div>
+        <div class="service-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-casa-title">
+            <button type="button" class="service-modal-close" data-close-modal aria-label="Fechar">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h3 class="service-modal-title" id="modal-casa-title"></h3>
+            <div class="service-modal-list" id="modal-casa-list"></div>
+        </div>
+    </div>
 
     <!-- Advantages -->
     <section class="section" id="advantages">
