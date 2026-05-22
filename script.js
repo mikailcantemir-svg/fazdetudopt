@@ -90,12 +90,36 @@
 
     const ADVANTAGE_ICONS = ['award', 'shield-halved', 'clock', 'euro-sign'];
 
-    const SERVICE_CATEGORIES = [
-        { id: 'obras', icon: 'house-chimney', titleKey: 'cat_obras', descKey: 'cat_obras_desc', serviceIndices: [0, 1, 13, 4] },
-        { id: 'instalacoes', icon: 'screwdriver-wrench', titleKey: 'cat_instalacoes', descKey: 'cat_instalacoes_desc', serviceIndices: [2, 3, 12, 10] },
-        { id: 'manutencao', icon: 'gear', titleKey: 'cat_manutencao', descKey: 'cat_manutencao_desc', serviceIndices: [5, 6, 11, 14] },
-        { id: 'casa', icon: 'leaf', titleKey: 'cat_casa', descKey: 'cat_casa_desc', serviceIndices: [7, 8, 9, 15, 16] }
+    const SERVICE_LANDING_SLUGS = [
+        'servico-pinturas.html',
+        'servico-pintura-fachadas-alpinismo.html',
+        'servico-canalizacoes.html',
+        'servico-electricidade.html',
+        'servico-carpintaria.html',
+        'servico-reparacoes-gerais.html',
+        'servico-manutencao.html',
+        'servico-limpezas.html',
+        'servico-jardinagem.html',
+        'servico-mudancas.html',
+        'servico-informatica.html',
+        'servico-serralharia.html',
+        'servico-climatizacao.html',
+        'servico-remodelacoes.html',
+        'servico-estores-persianas.html',
+        'servico-decoracao-interiores.html',
+        'servico-piscinas.html'
     ];
+
+    const SERVICE_CATEGORIES = [
+        { id: 'obras', icon: 'house-chimney', titleKey: 'cat_obras', descKey: 'cat_obras_desc', serviceIndices: [0, 1, 13, 4], page: 'servico-pintura-fachadas-alpinismo.html' },
+        { id: 'instalacoes', icon: 'screwdriver-wrench', titleKey: 'cat_instalacoes', descKey: 'cat_instalacoes_desc', serviceIndices: [2, 3, 12, 10], page: 'servico-canalizacoes.html' },
+        { id: 'manutencao', icon: 'gear', titleKey: 'cat_manutencao', descKey: 'cat_manutencao_desc', serviceIndices: [5, 6, 11, 14], page: 'servico-estores-persianas.html' },
+        { id: 'casa', icon: 'leaf', titleKey: 'cat_casa', descKey: 'cat_casa_desc', serviceIndices: [7, 8, 9, 15, 16], page: 'servico-piscinas.html' }
+    ];
+
+    function serviceLandingUrl(serviceIndex) {
+        return SERVICE_LANDING_SLUGS[serviceIndex] || 'index.html#services';
+    }
 
     const LANGS = {
         pt: { label: 'Português', flag: 'https://flagcdn.com/w20/pt.png' },
@@ -406,142 +430,19 @@
         return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
     }
 
-    function populateServiceModals() {
-        const services = T[currentLang].services;
-        SERVICE_CATEGORIES.forEach(cat => {
-            const list = document.getElementById(`modal-${cat.id}-list`);
-            const title = document.getElementById(`modal-${cat.id}-title`);
-            if (title) title.textContent = t(cat.titleKey);
-            if (!list) return;
-            list.innerHTML = cat.serviceIndices.map(i => {
-                const s = services[i];
-                if (!s) return '';
-                const waUrl = getServiceWhatsAppUrl(s.name);
-                return `
-                    <div class="service-modal-item" role="button" tabindex="0" aria-expanded="false">
-                        <div class="service-modal-item-icon">
-                            <i class="${ICON_MAP[SERVICE_ICONS[i]] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
-                        </div>
-                        <div class="service-modal-item-body">
-                            <h4>${s.name}</h4>
-                            <p>${s.description}</p>
-                            <div class="contact-options">
-                                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn-contact wa">
-                                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
-                                </a>
-                                <a href="tel:+${CONFIG.whatsapp}" class="btn-contact call">
-                                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                                    <span class="show-mobile">Ligar</span>
-                                    <span class="show-desktop">${CONFIG.phone_display}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        });
-    }
-
     function renderServiceCategories() {
         const grid = document.getElementById('services-categories');
         if (!grid) return;
         grid.innerHTML = SERVICE_CATEGORIES.map(cat => `
-            <button type="button" class="category-card" data-category="${cat.id}" aria-haspopup="dialog">
+            <a href="${cat.page}" class="category-card">
                 <div class="category-card-icon">
                     <i class="${ICON_MAP[cat.icon] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
                 </div>
                 <h3>${t(cat.titleKey)}</h3>
                 <p>${t(cat.descKey)}</p>
                 <span class="category-card-cta">${t('cat_view_services')} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
-            </button>
+            </a>
         `).join('');
-        populateServiceModals();
-    }
-
-    function openServiceModal(categoryId) {
-        const modal = document.getElementById(`modal-${categoryId}`);
-        if (!modal) return;
-        closeServiceModals();
-        modal.classList.add('active');
-        modal.removeAttribute('hidden');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-    }
-
-    function closeServiceModals() {
-        document.querySelectorAll('.service-modal').forEach(modal => {
-            modal.classList.remove('active');
-            modal.setAttribute('hidden', '');
-            modal.setAttribute('aria-hidden', 'true');
-        });
-        document.querySelectorAll('.service-modal-item.show-contacts').forEach(card => {
-            card.classList.remove('show-contacts');
-            card.setAttribute('aria-expanded', 'false');
-        });
-        document.body.classList.remove('modal-open');
-    }
-
-    function toggleServiceCardContacts(card) {
-        const isOpen = card.classList.toggle('show-contacts');
-        card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    }
-
-    function setupServiceModals() {
-        const categories = document.getElementById('services-categories');
-        if (categories && !categories.dataset.bound) {
-            categories.dataset.bound = 'true';
-            categories.addEventListener('click', e => {
-                const card = e.target.closest('[data-category]');
-                if (card) openServiceModal(card.dataset.category);
-            });
-        }
-
-        document.querySelectorAll('.service-modal').forEach(modal => {
-            if (modal.dataset.bound) return;
-            modal.dataset.bound = 'true';
-
-            modal.addEventListener('click', e => {
-                if (e.target === modal) closeServiceModals();
-            });
-
-            const dialog = modal.querySelector('.service-modal-dialog');
-            if (dialog) {
-                dialog.addEventListener('click', e => e.stopPropagation());
-            }
-
-            const list = modal.querySelector('.service-modal-list');
-            if (list && !list.dataset.contactsBound) {
-                list.dataset.contactsBound = 'true';
-                list.addEventListener('click', e => {
-                    if (e.target.closest('.btn-contact')) return;
-                    const card = e.target.closest('.service-modal-item');
-                    if (card) toggleServiceCardContacts(card);
-                });
-                list.addEventListener('keydown', e => {
-                    if (e.key !== 'Enter' && e.key !== ' ') return;
-                    const card = e.target.closest('.service-modal-item');
-                    if (!card || e.target.closest('.btn-contact')) return;
-                    e.preventDefault();
-                    toggleServiceCardContacts(card);
-                });
-            }
-        });
-
-        document.querySelectorAll('[data-close-modal]').forEach(el => {
-            if (el.dataset.bound) return;
-            el.dataset.bound = 'true';
-            el.addEventListener('click', e => {
-                e.stopPropagation();
-                closeServiceModals();
-            });
-        });
-
-        if (!document.body.dataset.modalEscape) {
-            document.body.dataset.modalEscape = 'true';
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape') closeServiceModals();
-            });
-        }
     }
 
     function renderAdvantages() {
@@ -710,8 +611,8 @@
         const list = document.getElementById('footer-services-list');
         if (!list) return;
         const services = T[currentLang].services || T.pt.services;
-        list.innerHTML = services.map(s =>
-            `<li><a href="#services">${s.name}</a></li>`
+        list.innerHTML = services.map((s, i) =>
+            `<li><a href="${serviceLandingUrl(i)}">${s.name}</a></li>`
         ).join('');
     }
 
@@ -909,7 +810,6 @@
         setupHeader();
         setupLangSwitcher();
         setupWhatsAppChat();
-        setupServiceModals();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }
