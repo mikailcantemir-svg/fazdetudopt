@@ -422,8 +422,18 @@ def render_page(service: dict) -> str:
 
 
 def main():
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).parent))
+    try:
+        from service_rich_content import SERVICE_BODIES
+    except ImportError:
+        SERVICE_BODIES = {}
+
     slugs = []
     for service in SERVICES:
+        if service["slug"] in SERVICE_BODIES:
+            service = {**service, "body": SERVICE_BODIES[service["slug"]]}
         path = ROOT / service["slug"]
         path.write_text(render_page(service), encoding="utf-8")
         slugs.append(service["slug"])
