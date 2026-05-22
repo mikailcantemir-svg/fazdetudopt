@@ -725,8 +725,22 @@ body {
 
 .handyman-detailed-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1100px) {
+    .handyman-detailed-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .handyman-detailed-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 }
 
 .handyman-detail-box {
