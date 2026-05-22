@@ -110,13 +110,6 @@
         'servico-piscinas.html'
     ];
 
-    const SERVICE_CATEGORIES = [
-        { id: 'obras', icon: 'house-chimney', titleKey: 'cat_obras', descKey: 'cat_obras_desc', serviceIndices: [0, 1, 13, 4], page: 'servico-pintura-fachadas-alpinismo.html' },
-        { id: 'instalacoes', icon: 'screwdriver-wrench', titleKey: 'cat_instalacoes', descKey: 'cat_instalacoes_desc', serviceIndices: [2, 3, 12, 10], page: 'servico-canalizacoes.html' },
-        { id: 'manutencao', icon: 'gear', titleKey: 'cat_manutencao', descKey: 'cat_manutencao_desc', serviceIndices: [5, 6, 11, 14], page: 'servico-estores-persianas.html' },
-        { id: 'casa', icon: 'leaf', titleKey: 'cat_casa', descKey: 'cat_casa_desc', serviceIndices: [7, 8, 9, 15, 16], page: 'servico-piscinas.html' }
-    ];
-
     function serviceLandingUrl(serviceIndex) {
         return SERVICE_LANDING_SLUGS[serviceIndex] || 'index.html#services';
     }
@@ -161,8 +154,8 @@
             hero_btn_quote: 'Pedir orçamento grátis',
             hero_btn_call: 'Ligue agora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google',
-            services_title: 'Os nossos serviços',
-            services_subtitle: 'Soluções completas para a sua casa ou escritório',
+            services_title: 'Os Nossos Serviços Profissionais',
+            services_subtitle: 'Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa.',
             cat_obras: 'Obras & Remodelações',
             cat_obras_desc: 'Pinturas, fachadas, remodelações e carpintaria para renovar o seu espaço.',
             cat_instalacoes: 'Instalações Técnicas',
@@ -228,8 +221,8 @@
             hero_btn_quote: 'Get a free quote',
             hero_btn_call: 'Call now',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google',
-            services_title: 'Our services',
-            services_subtitle: 'Complete solutions for your home or office',
+            services_title: 'Our Professional Services',
+            services_subtitle: 'Reliable, specialist solutions for maintenance, repairs and renovations at your home or business.',
             cat_obras: 'Works & Renovations',
             cat_obras_desc: 'Painting, facades, renovations and carpentry to transform your space.',
             cat_instalacoes: 'Technical Installations',
@@ -295,8 +288,8 @@
             hero_btn_quote: 'Pedir presupuesto gratis',
             hero_btn_call: 'Llame ahora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google',
-            services_title: 'Nuestros servicios',
-            services_subtitle: 'Soluciones completas para su hogar u oficina',
+            services_title: 'Nuestros Servicios Profesionales',
+            services_subtitle: 'Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa.',
             cat_obras: 'Obras y Reformas',
             cat_obras_desc: 'Pinturas, fachadas, reformas y carpintería para renovar su espacio.',
             cat_instalacoes: 'Instalaciones Técnicas',
@@ -362,8 +355,8 @@
             hero_btn_quote: 'Devis gratuit',
             hero_btn_call: 'Appelez maintenant',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google',
-            services_title: 'Nos services',
-            services_subtitle: 'Solutions complètes pour votre maison ou bureau',
+            services_title: 'Nos Services Professionnels',
+            services_subtitle: 'Solutions fiables et spécialisées pour l\'entretien, la réparation et la rénovation de votre maison ou entreprise.',
             cat_obras: 'Travaux & Rénovations',
             cat_obras_desc: 'Peinture, façades, rénovations et menuiserie pour transformer votre espace.',
             cat_instalacoes: 'Installations Techniques',
@@ -424,26 +417,6 @@
     };
 
     function t(key) { return T[currentLang][key] || T.pt[key] || ''; }
-
-    function getServiceWhatsAppUrl(serviceName) {
-        const text = `Olá, quero um orçamento para ${serviceName}`;
-        return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-    }
-
-    function renderServiceCategories() {
-        const grid = document.getElementById('services-categories');
-        if (!grid) return;
-        grid.innerHTML = SERVICE_CATEGORIES.map(cat => `
-            <a href="${cat.page}" class="category-card">
-                <div class="category-card-icon">
-                    <i class="${ICON_MAP[cat.icon] || 'fa-solid fa-wrench'}" aria-hidden="true"></i>
-                </div>
-                <h3>${t(cat.titleKey)}</h3>
-                <p>${t(cat.descKey)}</p>
-                <span class="category-card-cta">${t('cat_view_services')} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
-            </a>
-        `).join('');
-    }
 
     function renderAdvantages() {
         const grid = document.getElementById('advantages-grid');
@@ -712,7 +685,6 @@
         currentLang = lang;
         document.documentElement.lang = lang;
         applyTexts();
-        renderServiceCategories();
         renderFooterServices();
         renderAdvantages();
         renderTestimonials();
