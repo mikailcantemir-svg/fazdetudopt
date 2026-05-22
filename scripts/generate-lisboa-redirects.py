@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Replace *-lisboa.html with 301-style redirects to servico-*.html (static meta + JS)."""
+"""
+Gera ficheiros *-lisboa.html com redirect client-side (meta refresh + JavaScript).
+
+NOTA: Isto NÃO é um HTTP 301 real. Os redirects permanentes no servidor estão
+definidos em .htaccess na raiz do projeto (Redirect 301 Apache).
+Mantenha REDIRECTS sincronizado com .htaccess.
+"""
 
 from pathlib import Path
 

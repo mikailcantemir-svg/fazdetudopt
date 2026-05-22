@@ -82,15 +82,17 @@
         }
     };
 
+    /* SYNC: Ordem = cartões em index.html → #services .services-modern-grid (17 entradas) */
     const SERVICE_ICONS = [
-        'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
-        'gear', 'broom', 'leaf', 'truck', 'laptop', 'lock', 'temperature-half',
-        'house-chimney', 'blinds', 'couch', 'water-ladder'
+        'house-chimney', 'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
+        'trowel-bricks', 'broom', 'seedling', 'truck-fast', 'laptop-medical', 'key', 'wind',
+        'window-maximize', 'couch', 'water-ladder'
     ];
 
     const ADVANTAGE_ICONS = ['award', 'shield-halved', 'clock', 'euro-sign'];
 
     const SERVICE_LANDING_SLUGS = [
+        'servico-remodelacoes.html',
         'servico-pinturas.html',
         'servico-pintura-fachadas-alpinismo.html',
         'servico-canalizacoes.html',
@@ -104,7 +106,6 @@
         'servico-informatica.html',
         'servico-serralharia.html',
         'servico-climatizacao.html',
-        'servico-remodelacoes.html',
         'servico-estores-persianas.html',
         'servico-decoracao-interiores.html',
         'servico-piscinas.html'
@@ -128,15 +129,15 @@
         'bolt': 'fa-solid fa-bolt',
         'hammer': 'fa-solid fa-hammer',
         'screwdriver-wrench': 'fa-solid fa-screwdriver-wrench',
-        'gear': 'fa-solid fa-gear',
+        'trowel-bricks': 'fa-solid fa-trowel-bricks',
         'broom': 'fa-solid fa-broom',
-        'leaf': 'fa-solid fa-leaf',
-        'truck': 'fa-solid fa-truck',
-        'laptop': 'fa-solid fa-laptop',
-        'lock': 'fa-solid fa-lock',
-        'temperature-half': 'fa-solid fa-temperature-half',
+        'seedling': 'fa-solid fa-seedling',
+        'truck-fast': 'fa-solid fa-truck-fast',
+        'laptop-medical': 'fa-solid fa-laptop-medical',
+        'key': 'fa-solid fa-key',
+        'wind': 'fa-solid fa-wind',
+        'window-maximize': 'fa-solid fa-window-maximize',
         'house-chimney': 'fa-solid fa-house-chimney',
-        'blinds': 'fa-solid fa-bars',
         'shield-halved': 'fa-solid fa-shield-halved',
         'couch': 'fa-solid fa-couch',
         'water-ladder': 'fa-solid fa-water-ladder',
@@ -144,6 +145,16 @@
         'clock': 'fa-solid fa-clock',
         'euro-sign': 'fa-solid fa-euro-sign'
     };
+
+    function getGoogleReviewsCount() {
+        return CONFIG.googleReviews.reviews.length;
+    }
+
+    function getReviewsCountLabel(lang) {
+        const n = getGoogleReviewsCount();
+        const suffix = T[lang].reviews_count_suffix || T.pt.reviews_count_suffix;
+        return `${n} ${suffix}`;
+    }
 
     const T = {
         pt: {
@@ -165,7 +176,9 @@
             cat_casa: 'Casa & Exterior',
             cat_casa_desc: 'Limpeza, jardim, mudanças, decoração e manutenção de piscinas.',
             cat_view_services: 'Ver serviços',
+            /* SYNC: Ordem = index.html → #services .services-modern-grid */
             services: [
+                { name: 'Remodelações', description: 'Remodelação de cozinhas, casas de banho, pavimentos e obras gerais.' },
                 { name: 'Pinturas', description: 'Interior e exterior. Preparação de superfícies, primários e acabamentos de qualidade.' },
                 { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
                 { name: 'Canalizações', description: 'Reparação de fugas, desentupimentos, reparação de autoclismos, instalação de torneiras, sanitas e sistemas de água.' },
@@ -179,7 +192,6 @@
                 { name: 'Informática', description: 'Reparação de computadores, redes Wi-Fi e smart home.' },
                 { name: 'Serralharia', description: 'Substituição e reparação de fechaduras, abertura de portas urgente, portões, grades e alumínios.' },
                 { name: 'Climatização', description: 'Instalação, manutenção e reparação de ar condicionado e aquecimento.' },
-                { name: 'Remodelações', description: 'Remodelação de cozinhas, casas de banho, pavimentos e obras gerais.' },
                 { name: 'Estores e Persianas', description: 'Reparação e instalação de estores, persianas, mosquiteiras e toldos.' },
                 { name: 'Decoração de Interiores', description: 'Cortinas, papel de parede, iluminação decorativa, molduras e home staging.' },
                 { name: 'Piscinas', description: 'Limpeza, manutenção e reparação de piscinas. Tratamento de água, filtros, bombas e revestimentos.' }
@@ -194,7 +206,7 @@
             testimonials_title: 'Críticas',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
-            reviews_count: '9 críticas',
+            reviews_count_suffix: 'críticas',
             view_google_reviews: 'Ver críticas no Google',
             faq_title: 'Perguntas Frequentes',
             faqs: [
@@ -233,6 +245,7 @@
             cat_casa_desc: 'Cleaning, gardening, moving, décor and pool maintenance.',
             cat_view_services: 'View services',
             services: [
+                { name: 'Renovations', description: 'Kitchen, bathroom, flooring renovations and general works.' },
                 { name: 'Painting', description: 'Interior and exterior. Surface preparation, primers and quality finishes.' },
                 { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
                 { name: 'Plumbing', description: 'Leak repair, tap, toilet and water system installation.' },
@@ -246,7 +259,6 @@
                 { name: 'IT Services', description: 'Computer repair, Wi-Fi networks and smart home.' },
                 { name: 'Locksmithing', description: 'Locks, gates, grilles, aluminium and emergency door opening.' },
                 { name: 'Air Conditioning', description: 'Installation, maintenance and repair of air conditioning and heating.' },
-                { name: 'Renovations', description: 'Kitchen, bathroom, flooring renovations and general works.' },
                 { name: 'Blinds & Shutters', description: 'Repair and installation of blinds, shutters, mosquito nets and awnings.' },
                 { name: 'Interior Design', description: 'Curtains, wallpaper, decorative lighting, frames and home staging.' },
                 { name: 'Swimming Pools', description: 'Cleaning, maintenance and repair of pools. Water treatment, filters, pumps and linings.' }
@@ -261,7 +273,7 @@
             testimonials_title: 'Reviews',
             google_review_source: 'Google review',
             google_new: 'NEW',
-            reviews_count: '9 reviews',
+            reviews_count_suffix: 'reviews',
             view_google_reviews: 'View reviews on Google',
             faq_title: 'Frequently Asked Questions',
             faqs: [
@@ -300,6 +312,7 @@
             cat_casa_desc: 'Limpieza, jardinería, mudanzas, decoración y piscinas.',
             cat_view_services: 'Ver servicios',
             services: [
+                { name: 'Reformas', description: 'Reformas de cocinas, baños, suelos y obras generales.' },
                 { name: 'Pinturas', description: 'Interior y exterior. Preparación de superficies, imprimaciones y acabados de calidad.' },
                 { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
                 { name: 'Fontanería', description: 'Reparación de fugas, instalación de grifos, sanitarios y sistemas de agua.' },
@@ -313,7 +326,6 @@
                 { name: 'Informática', description: 'Reparación de ordenadores, redes Wi-Fi y smart home.' },
                 { name: 'Cerrajería', description: 'Cerraduras, portones, rejas, aluminio y apertura urgente de puertas.' },
                 { name: 'Climatización', description: 'Instalación, mantenimiento y reparación de aire acondicionado y calefacción.' },
-                { name: 'Reformas', description: 'Reformas de cocinas, baños, suelos y obras generales.' },
                 { name: 'Persianas y estores', description: 'Reparación e instalación de estores, persianas, mosquiteras y toldos.' },
                 { name: 'Decoración de interiores', description: 'Cortinas, papel pintado, iluminación decorativa, molduras y home staging.' },
                 { name: 'Piscinas', description: 'Limpieza, mantenimiento y reparación de piscinas. Tratamiento de agua, filtros, bombas y revestimientos.' }
@@ -328,7 +340,7 @@
             testimonials_title: 'Reseñas',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
-            reviews_count: '9 reseñas',
+            reviews_count_suffix: 'reseñas',
             view_google_reviews: 'Ver reseñas en Google',
             faq_title: 'Preguntas Frecuentes',
             faqs: [
@@ -367,6 +379,7 @@
             cat_casa_desc: 'Nettoyage, jardin, déménagement, déco et piscines.',
             cat_view_services: 'Voir les services',
             services: [
+                { name: 'Rénovations', description: 'Rénovation de cuisines, salles de bains, sols et travaux généraux.' },
                 { name: 'Peinture', description: 'Intérieur et extérieur. Préparation des surfaces, apprêts et finitions de qualité.' },
                 { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
                 { name: 'Plomberie', description: 'Réparation de fuites, installation de robinets, toilettes et systèmes d\'eau.' },
@@ -380,7 +393,6 @@
                 { name: 'Informatique', description: 'Réparation d\'ordinateurs, réseaux Wi-Fi et maison intelligente.' },
                 { name: 'Serrurerie', description: 'Serrures, portails, grilles, aluminium et ouverture de portes urgente.' },
                 { name: 'Climatisation', description: 'Installation, entretien et réparation de climatisation et chauffage.' },
-                { name: 'Rénovations', description: 'Rénovation de cuisines, salles de bains, sols et travaux généraux.' },
                 { name: 'Stores et volets', description: 'Réparation et installation de stores, volets, moustiquaires et auvents.' },
                 { name: 'Décoration d\'intérieur', description: 'Rideaux, papier peint, éclairage décoratif, moulures et home staging.' },
                 { name: 'Piscines', description: 'Nettoyage, entretien et réparation de piscines. Traitement de l\'eau, filtres, pompes et revêtements.' }
@@ -395,7 +407,7 @@
             testimonials_title: 'Avis',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
-            reviews_count: '9 avis',
+            reviews_count_suffix: 'avis',
             view_google_reviews: 'Voir les avis sur Google',
             faq_title: 'Questions Fréquentes',
             faqs: [
@@ -492,7 +504,7 @@
                 <div class="reviews-aggregate fade-in">
                     <span class="reviews-score">${googleReviews.rating.toFixed(1)}</span>
                     <div class="reviews-stars" aria-label="${googleReviews.rating} / 5">${renderStars(googleReviews.rating)}</div>
-                    <span class="reviews-count">${lang.reviews_count}</span>
+                    <span class="reviews-count">${getReviewsCountLabel(currentLang)}</span>
                     <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
                 </div>
             `;
