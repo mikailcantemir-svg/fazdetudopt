@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Unique service-rich-text bodies for all servico-*.html pages."""
+# servico-recuperar-casa.html: HTML principal mantido manualmente; entrada abaixo para apply-rich-text futuro.
 
 ZONES_LI = """
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
@@ -203,6 +204,21 @@ SERVICE_BODIES = {
                     <li>Pequenas e médias obras com cronograma e preço fechado acordado.</li>
                     <li>Coordenação de canalização, electricidade e pintura na mesma obra.</li>
                     <li>Preparação de imóveis para venda ou arrendamento (remodelação leve).</li>
+                </ul>""" + ZONES_BLOCK,
+
+    "servico-recuperar-casa.html": """
+                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. A Faz de Tudo PT recupera o imóvel de ponta a ponta — estrutura, instalações e acabamentos — na Grande Lisboa e Margem Sul, com um único interlocutor e prazo fechado.</p>
+                <h2>O que fazemos nesta área:</h2>
+                <ul>
+                    <li>Avaliação do estado geral do imóvel: estrutura, coberturas, humidades e instalações.</li>
+                    <li>Recuperação de casas herdadas, devolutas ou há muito desabitadas.</li>
+                    <li>Tratamento de humidades, infiltrações e patologias das paredes.</li>
+                    <li>Substituição ou recuperação de instalações elétricas e de canalização antigas.</li>
+                    <li>Reabilitação de coberturas, telhados, tetos e pavimentos degradados.</li>
+                    <li>Renovação completa de cozinhas e casas de banho não funcionais.</li>
+                    <li>Recuperação de caixilharias, portas e janelas antigas ou apodrecidas.</li>
+                    <li>Pintura, acabamentos e limpeza final para entrega da casa pronta a habitar.</li>
+                    <li>Coordenação de todas as especialidades com um único interlocutor e prazo fechado.</li>
                 </ul>""" + ZONES_BLOCK,
 
     "servico-estores-persianas.html": """

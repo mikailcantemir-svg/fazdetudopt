@@ -12,6 +12,7 @@ URLS = [
     ("/", "weekly", "1.0"),
     ("/index.html", "weekly", "1.0"),
     ("/servico-remodelacoes.html", "weekly", "0.8"),
+    ("/servico-recuperar-casa.html", "weekly", "0.8"),
     ("/servico-pinturas.html", "weekly", "0.8"),
     ("/servico-pintura-fachadas-alpinismo.html", "weekly", "0.8"),
     ("/servico-canalizacoes.html", "weekly", "0.8"),
