@@ -95,7 +95,7 @@ def build_testimonials_summary(lang: str) -> str:
                     <span class="reviews-score">{rating:.1f}</span>
                     <div class="reviews-stars" aria-label="{rating:.1f} / 5">{stars}</div>
                     <span class="reviews-count">{html.escape(ui["reviews_google_label"])}</span>
-                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google" aria-hidden="true"></i></span>
                 </div>"""
 
 

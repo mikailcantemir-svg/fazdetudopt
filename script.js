@@ -513,7 +513,7 @@
                     <span class="reviews-score">${googleReviews.rating.toFixed(1)}</span>
                     <div class="reviews-stars" aria-label="${googleReviews.rating} / 5">${renderStars(googleReviews.rating)}</div>
                     <span class="reviews-count">${lang.reviews_google_label || getReviewsCountLabel(currentLang)}</span>
-                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google" aria-hidden="true"></i></span>
                 </div>
             `;
         }
