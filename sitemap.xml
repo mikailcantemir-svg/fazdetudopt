@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Atualizar lastmod em cada deploy: python scripts/generate-sitemap.py -->
+<!-- Atualizar lastmod: python scripts/generate-sitemap.py -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>

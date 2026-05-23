@@ -28,24 +28,11 @@ def fix_content(text: str) -> tuple[str, int]:
 
 
 def iter_targets() -> list[Path]:
-    paths: list[Path] = []
-    for pattern in ("**/*.html", "template-servico.html"):
-        paths.extend(ROOT.glob(pattern))
-    paths.extend(ROOT.glob("scripts/*.py"))
-    paths.append(ROOT / "scripts" / "index.template.html")
-    unique: list[Path] = []
-    seen: set[Path] = set()
-    for path in paths:
-        if not path.is_file():
-            continue
-        if ".git" in path.parts:
-            continue
-        resolved = path.resolve()
-        if resolved in seen:
-            continue
-        seen.add(resolved)
-        unique.append(path)
-    return sorted(unique)
+    return sorted(
+        p
+        for p in ROOT.rglob("*.html")
+        if p.is_file() and ".git" not in p.parts and "__pycache__" not in p.parts
+    )
 
 
 def main() -> None:

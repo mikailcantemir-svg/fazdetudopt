@@ -5,10 +5,12 @@
     let reviewsSwiper = null;
 
     const CONFIG = {
-        phone: '+351 932504112',
+        /* E.164 sem espaços — alinhado com scripts/site_config.py tel_href() */
+        phone: '+351932504112',
         phone_display: '932 504 112',
         whatsapp: '351932504112',
         email: 'geral@fazdetudo.pt',
+        email_obfuscated: 'geral&#64;fazdetudo.pt',
         address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
             url: 'https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa',
@@ -81,13 +83,6 @@
             ]
         }
     };
-
-    /* SYNC: Ordem = cartões em index.html → #services .services-modern-grid (18 entradas) */
-    const SERVICE_ICONS = [
-        'house-chimney', 'house-circle-check', 'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
-        'trowel-bricks', 'broom', 'seedling', 'truck-fast', 'laptop-medical', 'key', 'wind',
-        'window-maximize', 'couch', 'water-ladder'
-    ];
 
     const ADVANTAGE_ICONS = ['award', 'shield-halved', 'clock', 'euro-sign'];
 
@@ -193,15 +188,6 @@
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google',
             services_title: 'Os Nossos Serviços Profissionais',
             services_subtitle: 'Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.',
-            cat_obras: 'Obras & Remodelações',
-            cat_obras_desc: 'Pinturas, fachadas, remodelações e carpintaria para renovar o seu espaço.',
-            cat_instalacoes: 'Instalações Técnicas',
-            cat_instalacoes_desc: 'Canalização, electricidade, climatização e soluções informáticas.',
-            cat_manutencao: 'Manutenção & Reparações',
-            cat_manutencao_desc: 'Reparações, manutenção, serralharia e estores no dia a dia.',
-            cat_casa: 'Casa & Exterior',
-            cat_casa_desc: 'Limpeza, jardim, mudanças, decoração e manutenção de piscinas.',
-            cat_view_services: 'Ver serviços',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
             services: [
                 { name: 'Remodelações e Obras', description: 'Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.' },
@@ -262,15 +248,6 @@
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google',
             services_title: 'Our Professional Services',
             services_subtitle: 'Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.',
-            cat_obras: 'Works & Renovations',
-            cat_obras_desc: 'Painting, facades, renovations and carpentry to transform your space.',
-            cat_instalacoes: 'Technical Installations',
-            cat_instalacoes_desc: 'Plumbing, electrical, HVAC and IT solutions.',
-            cat_manutencao: 'Maintenance & Repairs',
-            cat_manutencao_desc: 'Repairs, maintenance, locksmithing and blinds for everyday needs.',
-            cat_casa: 'Home & Outdoor',
-            cat_casa_desc: 'Cleaning, gardening, moving, décor and pool maintenance.',
-            cat_view_services: 'View services',
             services: [
                 { name: 'Renovations & Construction', description: 'Kitchen and bathroom renovations, building new rooms, extensions and structural works. From design to handover.' },
                 { name: 'Home Restoration', description: 'Complete restoration of vacant, inherited or run-down houses. From structure to finishes, we bring your property back to life.' },
@@ -330,15 +307,6 @@
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google',
             services_title: 'Nuestros Servicios Profesionales',
             services_subtitle: 'Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.',
-            cat_obras: 'Obras y Reformas',
-            cat_obras_desc: 'Pinturas, fachadas, reformas y carpintería para renovar su espacio.',
-            cat_instalacoes: 'Instalaciones Técnicas',
-            cat_instalacoes_desc: 'Fontanería, electricidad, climatización e informática.',
-            cat_manutencao: 'Mantenimiento y Reparaciones',
-            cat_manutencao_desc: 'Reparaciones, mantenimiento, cerrajería y persianas.',
-            cat_casa: 'Hogar y Exterior',
-            cat_casa_desc: 'Limpieza, jardinería, mudanzas, decoración y piscinas.',
-            cat_view_services: 'Ver servicios',
             services: [
                 { name: 'Reformas y Obras', description: 'Reforma de cocinas y baños, construcción de nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.' },
                 { name: 'Recuperar Casa', description: 'Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos vida y habitabilidad a su inmueble.' },
@@ -398,15 +366,6 @@
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google',
             services_title: 'Nos Services Professionnels',
             services_subtitle: 'Solutions fiables et spécialisées pour l\'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.',
-            cat_obras: 'Travaux & Rénovations',
-            cat_obras_desc: 'Peinture, façades, rénovations et menuiserie pour transformer votre espace.',
-            cat_instalacoes: 'Installations Techniques',
-            cat_instalacoes_desc: 'Plomberie, électricité, climatisation et informatique.',
-            cat_manutencao: 'Entretien & Réparations',
-            cat_manutencao_desc: 'Réparations, entretien, serrurerie et stores.',
-            cat_casa: 'Maison & Extérieur',
-            cat_casa_desc: 'Nettoyage, jardin, déménagement, déco et piscines.',
-            cat_view_services: 'Voir les services',
             services: [
                 { name: 'Rénovations et Travaux', description: 'Rénovation de cuisines et salles de bains, construction de nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.' },
                 { name: 'Rénover une Maison', description: 'Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions, nous redonnons vie à votre bien.' },
@@ -617,7 +576,7 @@
         const phoneText = document.getElementById('footer-phone-text');
         if (phoneText) phoneText.textContent = CONFIG.phone_display;
         const emailText = document.getElementById('footer-email-text');
-        if (emailText) emailText.textContent = CONFIG.email;
+        if (emailText) emailText.innerHTML = CONFIG.email_obfuscated;
         const addressText = document.getElementById('footer-address-text');
         if (addressText) addressText.textContent = CONFIG.address;
     }
@@ -634,19 +593,27 @@
     function setupLinks() {
         const waNum = CONFIG.whatsapp;
         const waMsg = encodeURIComponent(t('wa_message'));
+        const telHref = `tel:${CONFIG.phone}`;
 
         ['header-phone', 'btn-call', 'cta-phone', 'footer-phone'].forEach(id => {
             const el = document.getElementById(id);
-            if (el) el.href = `tel:${CONFIG.phone}`;
+            if (!el || el.tagName !== 'A') return;
+            const current = el.getAttribute('href') || '';
+            if (current.startsWith('tel:') && current.replace(/\s/g, '') === telHref) return;
+            el.href = telHref;
         });
 
         ['btn-quote', 'cta-quote'].forEach(id => {
             const el = document.getElementById(id);
-            if (el) el.href = `https://wa.me/${waNum}?text=${waMsg}`;
+            if (!el || el.tagName !== 'A') return;
+            el.href = `https://wa.me/${waNum}?text=${waMsg}`;
         });
 
         const emailEl = document.getElementById('footer-email');
-        if (emailEl) emailEl.href = `mailto:${CONFIG.email}`;
+        if (emailEl && emailEl.tagName === 'A') {
+            const mailto = `mailto:${CONFIG.email}`;
+            if (emailEl.getAttribute('href') !== mailto) emailEl.href = mailto;
+        }
 
         const greeting = document.getElementById('wa-greeting');
         if (greeting) greeting.textContent = t('wa_greeting');
@@ -687,7 +654,7 @@
             widget.classList.remove('open');
         }
 
-        btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggleChat(); });
+        btn.addEventListener('click', (e) => { e.stopPropagation(); toggleChat(); });
         if (closeBtn) closeBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleChat(); });
         if (sendBtn) sendBtn.addEventListener('click', sendMessage);
         if (input) input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
@@ -757,27 +724,9 @@
 
         dropdown.addEventListener('click', (e) => {
             e.stopPropagation();
-            const link = e.target.closest('a.lang-option--nav');
-            if (link) {
+            if (e.target.closest('a.lang-option--nav')) {
                 setLangOpen(false);
-                return;
             }
-            const btn = e.target.closest('button.lang-option');
-            if (!btn) return;
-            const lang = btn.dataset.lang;
-            if (lang === currentLang) {
-                setLangOpen(false);
-                return;
-            }
-            dropdown.querySelectorAll('.lang-option').forEach(o => o.classList.remove('active'));
-            btn.classList.add('active');
-            const info = LANGS[lang];
-            if (info) {
-                flag.src = info.flag;
-                label.textContent = info.label;
-            }
-            setLangOpen(false);
-            applyLanguage(lang);
         });
 
         document.addEventListener('click', (e) => {

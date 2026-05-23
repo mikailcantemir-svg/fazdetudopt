@@ -3,12 +3,16 @@
 
 from datetime import date
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://www.fazdetudo.pt"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from site_config import BASE_URL
+from slug_registry import SERVICE_SLUGS
+
 TODAY = date.today().isoformat()
 
-# Home pages (PT + localized)
 URLS = [
     ("/", "weekly", "1.0"),
     ("/index.html", "weekly", "1.0"),
@@ -18,28 +22,6 @@ URLS = [
     ("/es/index.html", "weekly", "1.0"),
     ("/fr/", "weekly", "1.0"),
     ("/fr/index.html", "weekly", "1.0"),
-]
-
-# SYNC: slug order = script.js SERVICE_LANDING_SLUGS
-SERVICE_SLUGS = [
-    "servico-remodelacoes.html",
-    "servico-recuperar-casa.html",
-    "servico-pinturas.html",
-    "servico-pintura-fachadas-alpinismo.html",
-    "servico-canalizacoes.html",
-    "servico-electricidade.html",
-    "servico-carpintaria.html",
-    "servico-reparacoes-gerais.html",
-    "servico-manutencao.html",
-    "servico-limpezas.html",
-    "servico-jardinagem.html",
-    "servico-mudancas.html",
-    "servico-informatica.html",
-    "servico-serralharia.html",
-    "servico-climatizacao.html",
-    "servico-estores-persianas.html",
-    "servico-decoracao-interiores.html",
-    "servico-piscinas.html",
 ]
 
 LANG_PREFIXES = ("", "/en", "/es", "/fr")
@@ -55,7 +37,7 @@ def main():
             entries.append(url_entry(f"{prefix}/{slug}", "weekly", "0.8"))
 
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<!-- Atualizar lastmod em cada deploy: python scripts/generate-sitemap.py -->
+<!-- Atualizar lastmod: python scripts/generate-sitemap.py -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {chr(10).join(entries)}
 </urlset>
@@ -67,7 +49,7 @@ def main():
 
 def url_entry(path: str, freq: str, priority: str) -> str:
     return f"""    <url>
-        <loc>{BASE}{path}</loc>
+        <loc>{BASE_URL}{path}</loc>
         <lastmod>{TODAY}</lastmod>
         <changefreq>{freq}</changefreq>
         <priority>{priority}</priority>

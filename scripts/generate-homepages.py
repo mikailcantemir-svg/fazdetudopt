@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate index.html for PT (root) and en/es/fr from scripts/index.template.html.
+Generate index.html for PT (root) and en/es/fr from scripts/templates/home.html.
 
 Hero copy and UI strings come from scripts/home_page_i18n.py (HOME_UI).
 Normally invoked via scripts/generate-servico-pages.py — run that for a full site rebuild.
@@ -14,9 +14,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TEMPLATE_PATH = ROOT / "scripts" / "index.template.html"
+SCRIPTS = Path(__file__).resolve().parent
 
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(SCRIPTS))
 
 from home_page_i18n import (  # noqa: E402
     HANDYMAN,
@@ -28,9 +28,23 @@ from home_page_i18n import (  # noqa: E402
     render_home_hreflang,
     render_lang_switcher,
 )
-from html_partials import render_wa_widget  # noqa: E402
-from service_page_i18n import LANG_HTML, asset_prefix  # noqa: E402
-from site_config import GOOGLE_REVIEWS_URL, mailto_href, tel_href, wa_href  # noqa: E402
+from html_partials import (  # noqa: E402
+    render_footer_home,
+    render_head,
+    render_header_home,
+    render_wa_widget,
+)
+from slug_registry import LANG_HTML, asset_prefix  # noqa: E402
+from site_config import (  # noqa: E402
+    GOOGLE_REVIEWS_URL,
+    LOGO_PATH,
+    PHONE_DISPLAY,
+    mailto_href,
+    schema_telephone,
+    tel_href,
+    wa_href,
+)
+from template_engine import render_template  # noqa: E402
 
 OG_LOCALE = {
     "pt": "pt_PT",
@@ -50,7 +64,7 @@ def json_ld(lang: str) -> str:
         "logo": "https://www.fazdetudo.pt/logo.webp",
         "image": "https://www.fazdetudo.pt/logo.webp",
         "description": meta["json_desc"],
-        "telephone": "+351932504112",
+        "telephone": schema_telephone(),
         "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",
@@ -173,10 +187,30 @@ def apply_meta_strings(html: str, lang: str) -> str:
     return html
 
 
-def render_homepage(lang: str, template: str) -> str:
+def render_homepage(lang: str) -> str:
     meta = HOME_META[lang]
     ui = HOME_UI[lang]
     prefix = asset_prefix(lang)
+    canonical = home_url(lang).rstrip("/")
+
+    head = render_head(
+        page_title=meta["title"],
+        meta_description=meta["description"],
+        canonical_url=canonical,
+        hreflang_block=render_home_hreflang(),
+        og_title=meta["og_title"],
+        og_description=meta["description"],
+        og_locale=OG_LOCALE[lang],
+        json_ld=json_ld(lang),
+        asset_prefix=prefix,
+        include_swiper_css=True,
+    )
+    header = render_header_home(
+        asset_prefix=prefix,
+        logo_href=home_url(lang),
+        lang_switcher=render_lang_switcher(lang),
+    )
+    footer = render_footer_home(asset_prefix=prefix, email_href=mailto_href())
     wa_widget = render_wa_widget(
         asset_prefix=prefix,
         wa_online=ui["wa_online"],
@@ -186,27 +220,25 @@ def render_homepage(lang: str, template: str) -> str:
         wa_send=meta["wa_send"],
         wa_float_label=meta["wa_float"],
     )
-    html = (
-        template.replace("{{HTML_LANG}}", LANG_HTML[lang])
-        .replace("{{PAGE_LANG}}", lang)
-        .replace("{{PAGE_TITLE}}", meta["title"])
-        .replace("{{META_DESCRIPTION}}", meta["description"])
-        .replace("{{OG_TITLE}}", meta["og_title"])
-        .replace("{{OG_DESCRIPTION}}", meta["description"])
-        .replace("{{CANONICAL_URL}}", home_url(lang).rstrip("/"))
-        .replace("{{OG_LOCALE}}", OG_LOCALE[lang])
-        .replace("{{HREFLANG_BLOCK}}", render_home_hreflang())
-        .replace("{{JSON_LD}}", json_ld(lang))
-        .replace("{{ASSET_PREFIX}}", prefix)
-        .replace("{{LANG_SWITCHER}}", render_lang_switcher(lang))
-        .replace("{{SERVICE_CARDS}}", build_service_cards(lang))
-        .replace("{{HANDYMAN_SECTION}}", build_handyman_section(lang))
-        .replace("{{LOGO_HREF}}", home_url(lang))
-        .replace("{{TEL_HREF}}", tel_href())
-        .replace("{{EMAIL_HREF}}", mailto_href())
-        .replace("{{WA_HREF}}", wa_href(lang))
-        .replace("{{GOOGLE_REVIEWS_URL}}", GOOGLE_REVIEWS_URL)
-        .replace("{{WA_WIDGET}}", wa_widget)
+
+    html = render_template(
+        "home.html",
+        {
+            "HTML_LANG": LANG_HTML[lang],
+            "PAGE_LANG": lang,
+            "HEAD": head,
+            "HEADER_HOME": header,
+            "FOOTER": footer,
+            "WA_WIDGET": wa_widget,
+            "ASSET_PREFIX": prefix,
+            "LOGO_PATH": LOGO_PATH,
+            "SERVICE_CARDS": build_service_cards(lang),
+            "HANDYMAN_SECTION": build_handyman_section(lang),
+            "WA_HREF": wa_href(lang),
+            "TEL_HREF": tel_href(),
+            "PHONE_DISPLAY": PHONE_DISPLAY,
+            "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
+        },
     )
     html = apply_i18n_attributes(html, lang)
     html = apply_meta_strings(html, lang)
@@ -220,23 +252,11 @@ def output_path(lang: str) -> Path:
 
 
 def main() -> None:
-    if not TEMPLATE_PATH.exists():
-        import importlib.util
-
-        spec = importlib.util.spec_from_file_location(
-            "build_index_template",
-            ROOT / "scripts" / "build_index_template.py",
-        )
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        mod.main()
-
-    template = TEMPLATE_PATH.read_text(encoding="utf-8")
     written = []
     for lang in LANGS:
         path = output_path(lang)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render_homepage(lang, template), encoding="utf-8")
+        path.write_text(render_homepage(lang), encoding="utf-8")
         written.append(path.relative_to(ROOT).as_posix())
         print(f"wrote {written[-1]}")
 
