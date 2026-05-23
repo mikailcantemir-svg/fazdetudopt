@@ -241,7 +241,7 @@
         en: {
             nav_home: 'Home', nav_services: 'Services', nav_about: 'About us', nav_contact: 'Contact',
             footer_links: 'Links',
-            hero_title: 'Your Trusted Faz-Tudo in Greater Lisbon and South Bank',
+            hero_title: 'Your Trusted Handyman in Greater Lisbon and South Bank',
             hero_subtitle: 'Need to hang a curtain rod, touch up paint, fix a tap or finally tackle that endless list of small jobs? We also offer specialist services, but above all we are the ideal partner to care for your space quickly, efficiently and cleanly. Forget the hassle: one contact fixes everything.',
             hero_btn_quote: 'Get a free quote',
             hero_btn_call: 'Call now',
@@ -300,7 +300,7 @@
         es: {
             nav_home: 'Inicio', nav_services: 'Servicios', nav_about: 'Sobre nosotros', nav_contact: 'Contacto',
             footer_links: 'Enlaces',
-            hero_title: 'Su Faz-Tudo de Confianza en la Gran Lisboa y Margen Sur',
+            hero_title: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
             hero_subtitle: '¿Necesita colgar una barra, retocar una pintura, reparar un grifo o resolver esa lista interminable de pequeños arreglos? También ofrecemos servicios especializados, pero somos, sobre todo, el socio ideal para cuidar de su espacio con rapidez, eficacia y limpieza. Olvídese las complicaciones: un solo contacto lo resuelve todo.',
             hero_btn_quote: 'Pedir presupuesto gratis',
             hero_btn_call: 'Llame ahora',
@@ -359,7 +359,7 @@
         fr: {
             nav_home: 'Accueil', nav_services: 'Services', nav_about: 'À propos', nav_contact: 'Contact',
             footer_links: 'Liens',
-            hero_title: 'Votre Faz-Tudo de Confiance dans le Grand Lisbonne et la Rive Sud',
+            hero_title: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
             hero_subtitle: 'Besoin d\'accrocher une tringle, de retoucher une peinture, de réparer un robinet ou de vous attaquer enfin à cette liste interminable de petits travaux ? Nous proposons aussi des services spécialisés, mais nous sommes avant tout le partenaire idéal pour entretenir votre espace avec rapidité, efficacité et propreté. Oubliez les complications : un seul contact règle tout.',
             hero_btn_quote: 'Devis gratuit',
             hero_btn_call: 'Appelez maintenant',
