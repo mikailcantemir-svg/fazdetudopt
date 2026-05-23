@@ -2066,7 +2066,7 @@ body.modal-open {
 }
 
 .service-article {
-    max-width: 850px;
+    max-width: 1140px;
 }
 
 .service-article-header {
@@ -2104,7 +2104,7 @@ body.modal-open {
     margin-bottom: 16px;
 }
 
-.service-rich-text ul:not(.service-zones-grid) {
+.service-rich-text ul:not(.service-zones-grid):not(.service-feature-list) {
     margin: 0 0 24px 20px;
 }
 
@@ -2132,6 +2132,69 @@ body.modal-open {
     color: var(--primary-color);
     flex-shrink: 0;
     margin-top: 4px;
+}
+
+.service-hero {
+    background: var(--secondary-color);
+    border-radius: var(--radius);
+    padding: 44px 40px;
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.service-hero .service-article-title {
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.service-hero .service-article-lead {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.service-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.service-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.service-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+}
+
+.service-feature-list li {
+    position: relative;
+    padding-left: 38px;
+    margin-bottom: 12px;
+}
+
+.service-feature-list li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(230, 95, 43, 0.12);
+    color: var(--primary-color);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+}
+
+.service-sidebar .service-cta-box {
+    margin: 0;
 }
 
 .service-cta-box {
@@ -2173,6 +2236,20 @@ body.modal-open {
 
 .service-page-footer--brand p {
     color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 900px) {
+    .service-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .service-sidebar {
+        position: static;
+    }
+
+    .service-hero {
+        padding: 32px 24px;
+    }
 }
 
 @media (max-width: 768px) {
