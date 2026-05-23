@@ -299,7 +299,8 @@ body {
     transform: translateY(0);
 }
 
-.lang-option {
+.lang-option,
+a.lang-option {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -313,6 +314,8 @@ body {
     color: var(--text);
     text-align: left;
     transition: background var(--transition);
+    text-decoration: none;
+    box-sizing: border-box;
 }
 
 .lang-option:hover {

@@ -8,10 +8,16 @@ ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://www.fazdetudo.pt"
 TODAY = date.today().isoformat()
 
-# Home pages
+# Home pages (PT + localized)
 URLS = [
     ("/", "weekly", "1.0"),
     ("/index.html", "weekly", "1.0"),
+    ("/en/", "weekly", "1.0"),
+    ("/en/index.html", "weekly", "1.0"),
+    ("/es/", "weekly", "1.0"),
+    ("/es/index.html", "weekly", "1.0"),
+    ("/fr/", "weekly", "1.0"),
+    ("/fr/index.html", "weekly", "1.0"),
 ]
 
 # SYNC: slug order = script.js SERVICE_LANDING_SLUGS

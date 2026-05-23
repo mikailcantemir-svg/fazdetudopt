@@ -112,8 +112,32 @@
         'servico-piscinas.html'
     ];
 
+    function detectPageLang() {
+        const fromAttr = document.documentElement.getAttribute('data-page-lang');
+        if (fromAttr && LANGS[fromAttr]) return fromAttr;
+        const path = window.location.pathname.replace(/\\/g, '/');
+        const match = path.match(/^\/(en|es|fr)(\/|$)/);
+        if (match) return match[1];
+        return 'pt';
+    }
+
+    /** Relative prefix for service landing links (empty when already inside /en/, /es/, /fr/). */
+    function getServiceBasePath() {
+        const path = window.location.pathname.replace(/\\/g, '/');
+        if (/^\/(en|es|fr)(\/|$)/.test(path)) return '';
+        const lang = detectPageLang();
+        return lang === 'pt' ? '' : `${lang}/`;
+    }
+
     function serviceLandingUrl(serviceIndex) {
-        return SERVICE_LANDING_SLUGS[serviceIndex] || 'index.html#services';
+        const slug = SERVICE_LANDING_SLUGS[serviceIndex];
+        const base = getServiceBasePath();
+        if (!slug) {
+            if (base) return `${base}index.html#services`;
+            const inLangFolder = /^\/(en|es|fr)\//.test(window.location.pathname.replace(/\\/g, '/'));
+            return inLangFolder ? '../index.html#services' : 'index.html#services';
+        }
+        return `${base}${slug}`;
     }
 
     const LANGS = {
@@ -733,7 +757,12 @@
 
         dropdown.addEventListener('click', (e) => {
             e.stopPropagation();
-            const btn = e.target.closest('.lang-option');
+            const link = e.target.closest('a.lang-option--nav');
+            if (link) {
+                setLangOpen(false);
+                return;
+            }
+            const btn = e.target.closest('button.lang-option');
             if (!btn) return;
             const lang = btn.dataset.lang;
             if (lang === currentLang) {
@@ -795,7 +824,7 @@
     }
 
     function init() {
-        applyLanguage('pt');
+        applyLanguage(detectPageLang());
         setupFAQListeners();
         setupHeader();
         setupLangSwitcher();

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate servico-*.html in PT (root) and en/es/fr subfolders with hreflang."""
+"""Generate servico-*.html and index.html in PT (root) and en/es/fr with hreflang."""
 
 from __future__ import annotations
 
@@ -84,6 +84,7 @@ def render_page(slug: str, lang: str) -> str:
 
     return (
         TEMPLATE.replace("{{HTML_LANG}}", LANG_HTML[lang])
+        .replace("{{PAGE_LANG}}", lang)
         .replace("{{PAGE_TITLE}}", meta["page_title"])
         .replace("{{META_DESCRIPTION}}", meta["meta_description"])
         .replace("{{CANONICAL_URL}}", canonical)
@@ -122,6 +123,10 @@ def output_path(slug: str, lang: str) -> Path:
 
 
 def main() -> None:
+    from generate_homepages import main as generate_homepages
+
+    generate_homepages()
+
     written = []
     for slug in SERVICE_COPY:
         for lang in LANGS:
