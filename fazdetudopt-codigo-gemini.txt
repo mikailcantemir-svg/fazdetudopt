@@ -1,6 +1,6 @@
 FAZDETUDO.PT — CÓDIGO COMPLETO PARA REVISÃO
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
-Ficheiros incluídos: 49
+Ficheiros incluídos: 50
 ================================================================================
 
 
@@ -260,9 +260,17 @@ FILE: index.html
                 <div class="service-window-card service-window-featured">
                     <span class="window-badge">Premium</span>
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
-                    <h3>Remodelações</h3>
-                    <p>Obras gerais, renovação de cozinhas e casas de banho. Um único interlocutor do orçamento à entrega da chave.</p>
+                    <h3>Remodelações e Obras</h3>
+                    <p>Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.</p>
                     <a href="servico-remodelacoes.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+
+                <div class="service-window-card service-window-featured">
+                    <span class="window-badge">Especialidade</span>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Recuperar Casa</h3>
+                    <p>Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.</p>
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -630,6 +638,10 @@ FILE: index.html
         </button>
     </div>
 
+    <a href="tel:+351932504112" class="float-btn float-btn--tel float-btn--home" aria-label="Ligar agora">
+        <i class="fa-solid fa-phone"></i>
+    </a>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
@@ -954,9 +966,9 @@ FILE: script.js
         }
     };
 
-    /* SYNC: Ordem = cartões em index.html → #services .services-modern-grid (17 entradas) */
+    /* SYNC: Ordem = cartões em index.html → #services .services-modern-grid (18 entradas) */
     const SERVICE_ICONS = [
-        'house-chimney', 'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
+        'house-chimney', 'house-circle-check', 'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
         'trowel-bricks', 'broom', 'seedling', 'truck-fast', 'laptop-medical', 'key', 'wind',
         'window-maximize', 'couch', 'water-ladder'
     ];
@@ -965,6 +977,7 @@ FILE: script.js
 
     const SERVICE_LANDING_SLUGS = [
         'servico-remodelacoes.html',
+        'servico-recuperar-casa.html',
         'servico-pinturas.html',
         'servico-pintura-fachadas-alpinismo.html',
         'servico-canalizacoes.html',
@@ -1010,6 +1023,7 @@ FILE: script.js
         'wind': 'fa-solid fa-wind',
         'window-maximize': 'fa-solid fa-window-maximize',
         'house-chimney': 'fa-solid fa-house-chimney',
+        'house-circle-check': 'fa-solid fa-house-circle-check',
         'shield-halved': 'fa-solid fa-shield-halved',
         'couch': 'fa-solid fa-couch',
         'water-ladder': 'fa-solid fa-water-ladder',
@@ -1050,7 +1064,8 @@ FILE: script.js
             cat_view_services: 'Ver serviços',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
             services: [
-                { name: 'Remodelações', description: 'Remodelação de cozinhas, casas de banho, pavimentos e obras gerais.' },
+                { name: 'Remodelações e Obras', description: 'Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.' },
+                { name: 'Recuperar Casa', description: 'Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.' },
                 { name: 'Pinturas', description: 'Interior e exterior. Preparação de superfícies, primários e acabamentos de qualidade.' },
                 { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
                 { name: 'Canalizações', description: 'Reparação de fugas, desentupimentos, reparação de autoclismos, instalação de torneiras, sanitas e sistemas de água.' },
@@ -1117,7 +1132,8 @@ FILE: script.js
             cat_casa_desc: 'Cleaning, gardening, moving, décor and pool maintenance.',
             cat_view_services: 'View services',
             services: [
-                { name: 'Renovations', description: 'Kitchen, bathroom, flooring renovations and general works.' },
+                { name: 'Renovations & Construction', description: 'Kitchen and bathroom renovations, building new rooms, extensions and structural works. From design to handover.' },
+                { name: 'Home Restoration', description: 'Complete restoration of vacant, inherited or run-down houses. From structure to finishes, we bring your property back to life.' },
                 { name: 'Painting', description: 'Interior and exterior. Surface preparation, primers and quality finishes.' },
                 { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
                 { name: 'Plumbing', description: 'Leak repair, tap, toilet and water system installation.' },
@@ -1184,7 +1200,8 @@ FILE: script.js
             cat_casa_desc: 'Limpieza, jardinería, mudanzas, decoración y piscinas.',
             cat_view_services: 'Ver servicios',
             services: [
-                { name: 'Reformas', description: 'Reformas de cocinas, baños, suelos y obras generales.' },
+                { name: 'Reformas y Obras', description: 'Reforma de cocinas y baños, construcción de nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.' },
+                { name: 'Recuperar Casa', description: 'Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos vida y habitabilidad a su inmueble.' },
                 { name: 'Pinturas', description: 'Interior y exterior. Preparación de superficies, imprimaciones y acabados de calidad.' },
                 { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
                 { name: 'Fontanería', description: 'Reparación de fugas, instalación de grifos, sanitarios y sistemas de agua.' },
@@ -1251,7 +1268,8 @@ FILE: script.js
             cat_casa_desc: 'Nettoyage, jardin, déménagement, déco et piscines.',
             cat_view_services: 'Voir les services',
             services: [
-                { name: 'Rénovations', description: 'Rénovation de cuisines, salles de bains, sols et travaux généraux.' },
+                { name: 'Rénovations et Travaux', description: 'Rénovation de cuisines et salles de bains, construction de nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.' },
+                { name: 'Rénover une Maison', description: 'Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions, nous redonnons vie à votre bien.' },
                 { name: 'Peinture', description: 'Intérieur et extérieur. Préparation des surfaces, apprêts et finitions de qualité.' },
                 { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
                 { name: 'Plomberie', description: 'Réparation de fuites, installation de robinets, toilettes et systèmes d\'eau.' },
@@ -1919,6 +1937,7 @@ FILE: scripts/generate-service-pages.py
 
 #!/usr/bin/env python3
 """Generate SEO service landing pages from the Faz de Tudo PT template."""
+# NOTA: servico-recuperar-casa.html foi adicionado manualmente; não regenerar com este script antigo (*-lisboa.html).
 
 from pathlib import Path
 from urllib.parse import quote
@@ -2525,15 +2544,38 @@ SERVICES = [
     },
     {
         "slug": "servico-remodelacoes.html",
-        "service_name": "Remodelações",
+        "service_name": "Remodelações e Obras",
         "page_title": "Remodelações e Obras em Lisboa e Margem Sul | Faz de Tudo PT",
         "meta_description": "Remodelações em Lisboa e Setúbal: cozinhas, casas de banho e pavimentos. Equipa completa. Orçamento grátis.",
-        "h1": "Remodelações de Cozinhas, Casas de Banho e Obras",
+        "h1": "Remodelações, Obras e Construção em Lisboa e Margem Sul",
         "wa_message": "Olá! Gostaria de pedir um orçamento para remodelações.",
         "body": """
                 <p><strong>Remodelações em Lisboa</strong>, <strong>Cascais</strong> e <strong>Setúbal</strong> com coordenação de canalização, electricidade e acabamentos. Um interlocutor único do orçamento à entrega.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <p>Renovação de cozinhas e casas de banho, substituição de pavimentos, pequenas e médias obras com cronograma e preço fechado sempre que possível.</p>
+                <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
+                <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
+                <ul class="service-zones-grid">
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
+                </ul>""",
+    },
+    {
+        "slug": "servico-recuperar-casa.html",
+        "service_name": "Recuperar Casa",
+        "page_title": "Recuperação de Casas Antigas e Devolutas em Lisboa | Faz de Tudo PT",
+        "meta_description": "Recupera casas antigas, devolutas ou herdadas na Grande Lisboa e Margem Sul. Da estrutura aos acabamentos, com orçamento e prazos fechados.",
+        "h1": "Recuperação de Casas Antigas, Devolutas e Degradadas",
+        "wa_message": "Olá! Gostaria de pedir um orçamento para recuperação de casa.",
+        "body": """
+                <p>Recuperação de <strong>casas devolutas, herdadas ou degradadas</strong> na Grande Lisboa e Margem Sul com um único interlocutor e prazo fechado.</p>
+                <h2>O que fazemos nesta área:</h2>
+                <p>Avaliação do imóvel, tratamento de humidades, reabilitação de coberturas e instalações, renovação de cozinhas e casas de banho e entrega pronta a habitar.</p>
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
@@ -2704,6 +2746,7 @@ URLS = [
     ("/", "weekly", "1.0"),
     ("/index.html", "weekly", "1.0"),
     ("/servico-remodelacoes.html", "weekly", "0.8"),
+    ("/servico-recuperar-casa.html", "weekly", "0.8"),
     ("/servico-pinturas.html", "weekly", "0.8"),
     ("/servico-pintura-fachadas-alpinismo.html", "weekly", "0.8"),
     ("/servico-canalizacoes.html", "weekly", "0.8"),
@@ -2785,6 +2828,7 @@ FILE: scripts/service_rich_content.py
 
 # -*- coding: utf-8 -*-
 """Unique service-rich-text bodies for all servico-*.html pages."""
+# servico-recuperar-casa.html: HTML principal mantido manualmente; entrada abaixo para apply-rich-text futuro.
 
 ZONES_LI = """
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
@@ -2990,6 +3034,21 @@ SERVICE_BODIES = {
                     <li>Preparação de imóveis para venda ou arrendamento (remodelação leve).</li>
                 </ul>""" + ZONES_BLOCK,
 
+    "servico-recuperar-casa.html": """
+                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. A Faz de Tudo PT recupera o imóvel de ponta a ponta — estrutura, instalações e acabamentos — na Grande Lisboa e Margem Sul, com um único interlocutor e prazo fechado.</p>
+                <h2>O que fazemos nesta área:</h2>
+                <ul>
+                    <li>Avaliação do estado geral do imóvel: estrutura, coberturas, humidades e instalações.</li>
+                    <li>Recuperação de casas herdadas, devolutas ou há muito desabitadas.</li>
+                    <li>Tratamento de humidades, infiltrações e patologias das paredes.</li>
+                    <li>Substituição ou recuperação de instalações elétricas e de canalização antigas.</li>
+                    <li>Reabilitação de coberturas, telhados, tetos e pavimentos degradados.</li>
+                    <li>Renovação completa de cozinhas e casas de banho não funcionais.</li>
+                    <li>Recuperação de caixilharias, portas e janelas antigas ou apodrecidas.</li>
+                    <li>Pintura, acabamentos e limpeza final para entrega da casa pronta a habitar.</li>
+                    <li>Coordenação de todas as especialidades com um único interlocutor e prazo fechado.</li>
+                </ul>""" + ZONES_BLOCK,
+
     "servico-estores-persianas.html": """
                 <p>Estores presos, fitas partidas ou motores silenciosos são problemas frequentes em apartamentos da linha de Cascais e em Lisboa. A Faz de Tudo PT repara e instala <strong>estores, persianas e mosquiteiras na Grande Lisboa e Margem Sul</strong> com peças adequadas e garantia de funcionamento.</p>
                 <h2>O que fazemos nesta área:</h2>
@@ -3150,15 +3209,17 @@ FILE: servico-canalizacoes.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Canalizador e Serviços de Canalização Urgente</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Quando surge uma fuga ou entupimento, precisa de um <strong>canalizador de confiança na Grande Lisboa e Margem Sul</strong>. A Faz de Tudo PT responde com diagnóstico rigoroso, peças adequadas e reparação duradoura em Lisboa, Cascais, Almada, Seixal e Setúbal — particulares, condomínios e comércio.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Deteção e reparação de fugas visíveis e ocultas em tubagens, juntas e ligações.</li>
                     <li>Desentupimentos mecânicos e químicos controlados em sanitas, lavatórios, ralos e colunas.</li>
                     <li>Substituição de torneiras, monocomandos, sifões e flexíveis danificados.</li>
@@ -3178,9 +3239,10 @@ FILE: servico-canalizacoes.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Canalizações.</p>
                 <div class="service-cta-box-actions">
@@ -3191,6 +3253,8 @@ FILE: servico-canalizacoes.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -3201,6 +3265,50 @@ FILE: servico-canalizacoes.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -3304,15 +3412,17 @@ FILE: servico-carpintaria.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Carpintaria e Montagem de Móveis ao Domicílio</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Da montagem de um roupeiro à afinação de uma porta que não fecha, a <strong>carpintaria em Lisboa e Margem Sul</strong> exige precisão e experiência. A Faz de Tudo PT executa trabalhos em madeira e derivados com acabamento cuidado em Cascais, Sintra, Oeiras, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Montagem profissional de móveis IKEA, MDF e mobiliário por medida.</li>
                     <li>Afinação de portas interiores que raspam, batem ou não fecham corretamente.</li>
                     <li>Colocação e substituição de rodapés, guarnições e molduras decorativas.</li>
@@ -3332,9 +3442,10 @@ FILE: servico-carpintaria.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Carpintaria.</p>
                 <div class="service-cta-box-actions">
@@ -3345,6 +3456,8 @@ FILE: servico-carpintaria.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -3355,6 +3468,50 @@ FILE: servico-carpintaria.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -3458,15 +3615,17 @@ FILE: servico-climatizacao.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Instalação e Reparação de Ar Condicionado (AVAC)</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>O conforto térmico no verão e no inverno passa por um sistema AVAC bem instalado e mantido. A Faz de Tudo PT é especialista em <strong>climatização e ar condicionado na Grande Lisboa e Margem Sul</strong> — splits, multisplit e manutenção em Lisboa, Cascais, Sintra, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Instalação de ar condicionado split e multisplit com linhas frigoríficas discretas.</li>
                     <li>Carga e verificação de gás refrigerante conforme especificações do fabricante.</li>
                     <li>Limpeza profunda de filtros, serpentinas e unidades interiores e exteriores.</li>
@@ -3486,9 +3645,10 @@ FILE: servico-climatizacao.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Climatização.</p>
                 <div class="service-cta-box-actions">
@@ -3499,6 +3659,8 @@ FILE: servico-climatizacao.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -3509,6 +3671,50 @@ FILE: servico-climatizacao.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -3612,15 +3818,17 @@ FILE: servico-decoracao-interiores.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Decoração de Interiores e Home Staging</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Detalhes bem executados mudam a perceção de qualquer espaço. A Faz de Tudo PT oferece <strong>decoração de interiores na Grande Lisboa e Margem Sul</strong> — cortinados, iluminação, revestimentos e home staging para habitar ou vender em Lisboa, Cascais, Sintra e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Instalação de cortinados, estores decorativos e varões duplos.</li>
                     <li>Aplicação profissional de papel de parede e painéis decorativos.</li>
                     <li>Instalação de molduras, rodatetos e elementos de acabamento.</li>
@@ -3640,9 +3848,10 @@ FILE: servico-decoracao-interiores.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Decoração de Interiores.</p>
                 <div class="service-cta-box-actions">
@@ -3653,6 +3862,8 @@ FILE: servico-decoracao-interiores.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -3663,6 +3874,50 @@ FILE: servico-decoracao-interiores.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -3766,15 +4021,17 @@ FILE: servico-electricidade.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Eletricista Certificado para Casa e Negócio</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>A segurança elétrica da sua casa ou negócio não pode esperar. Somos especialistas em <strong>electricidade em Lisboa, Margem Sul e Cascais</strong>, com intervenções certificadas, diagnóstico de quadros e modernização de instalações antigas — sempre com orçamento claro antes de iniciar trabalhos.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Reparação de avarias: curtos-circuitos, tomadas sem corrente e disjuntores a disparar.</li>
                     <li>Instalação e substituição de tomadas, interruptores e candeeiros interiores e exteriores.</li>
                     <li>Modernização de quadros eléctricos com disjuntores diferenciais e proteção adequada.</li>
@@ -3794,9 +4051,10 @@ FILE: servico-electricidade.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Electricidade.</p>
                 <div class="service-cta-box-actions">
@@ -3807,6 +4065,8 @@ FILE: servico-electricidade.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -3817,6 +4077,50 @@ FILE: servico-electricidade.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -3920,15 +4224,17 @@ FILE: servico-estores-persianas.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Reparação e Instalação de Estores e Persianas</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Estores presos, fitas partidas ou motores silenciosos são problemas frequentes em apartamentos da linha de Cascais e em Lisboa. A Faz de Tudo PT repara e instala <strong>estores, persianas e mosquiteiras na Grande Lisboa e Margem Sul</strong> com peças adequadas e garantia de funcionamento.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Substituição de fitas, lâminas e mecanismos de estores manuais.</li>
                     <li>Reparação e substituição de motores de estores eléctricos e comandos.</li>
                     <li>Desencravamento e afinação de estores que não sobem ou descem corretamente.</li>
@@ -3948,9 +4254,10 @@ FILE: servico-estores-persianas.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Estores e Persianas.</p>
                 <div class="service-cta-box-actions">
@@ -3961,6 +4268,8 @@ FILE: servico-estores-persianas.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -3971,6 +4280,50 @@ FILE: servico-estores-persianas.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4074,15 +4427,17 @@ FILE: servico-informatica.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Assistência Informática e Redes Wi-Fi</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Computadores lentos, Wi-Fi instável ou impressoras offline prejudicam o seu dia. A Faz de Tudo PT presta <strong>assistência informática ao domicílio na Grande Lisboa e Margem Sul</strong> — diagnóstico claro, soluções práticas e linguagem acessível em Lisboa, Cascais, Oeiras e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Remoção de vírus, malware e otimização de computadores lentos (Windows e Mac).</li>
                     <li>Configuração e reforço de redes Wi-Fi domésticas e de pequenos escritórios.</li>
                     <li>Instalação de impressoras, scanners e partilha em rede local.</li>
@@ -4102,9 +4457,10 @@ FILE: servico-informatica.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Informática.</p>
                 <div class="service-cta-box-actions">
@@ -4115,6 +4471,8 @@ FILE: servico-informatica.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -4125,6 +4483,50 @@ FILE: servico-informatica.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4228,15 +4630,17 @@ FILE: servico-jardinagem.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Jardinagem e Manutenção de Jardins</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Jardins bem tratados valorizam o imóvel e melhoram a qualidade de vida. A Faz de Tudo PT oferece <strong>jardinagem e manutenção de exteriores na Grande Lisboa e Margem Sul</strong> — desde o corte de relva em Cascais até à poda em Sintra, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Corte e tratamento de relvados com equipamento profissional.</li>
                     <li>Poda de árvores, arbustos e sebes com segurança e recolha de resíduos verdes.</li>
                     <li>Limpeza e desbaste de terrenos, quintais e espaços abandonados.</li>
@@ -4256,9 +4660,10 @@ FILE: servico-jardinagem.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Jardinagem.</p>
                 <div class="service-cta-box-actions">
@@ -4269,6 +4674,8 @@ FILE: servico-jardinagem.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -4279,6 +4686,50 @@ FILE: servico-jardinagem.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4382,15 +4833,17 @@ FILE: servico-limpezas.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Limpezas Domésticas e Pós-Obra Profissionais</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Ambientes limpos transmitem confiança e bem-estar. Prestamos <strong>serviços de limpeza profissional na Grande Lisboa e Margem Sul</strong> para casas, escritórios, lojas e condomínios em Lisboa, Cascais, Oeiras, Almada e Setúbal — com produtos adequados a cada superfície.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Limpeza profunda de apartamentos e moradias (cozinhas, casas de banho, divisões).</li>
                     <li>Limpeza pós-obra com remoção de pó de construção, rejunte e resíduos.</li>
                     <li>Limpeza de escritórios, lojas e espaços comerciais fora de horário se necessário.</li>
@@ -4410,9 +4863,10 @@ FILE: servico-limpezas.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Limpezas.</p>
                 <div class="service-cta-box-actions">
@@ -4423,6 +4877,8 @@ FILE: servico-limpezas.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -4433,6 +4889,50 @@ FILE: servico-limpezas.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4536,15 +5036,17 @@ FILE: servico-manutencao.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Manutenção Preventiva e Reparações para Condomínios</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Evite obras caras com <strong>manutenção preventiva na Grande Lisboa e Margem Sul</strong>. A Faz de Tudo PT elabora planos periódicos para condomínios, moradias e comércio em Lisboa, Cascais, Sintra, Almada e Setúbal — com relatório do que foi verificado e corrigido.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Inspeção periódica de telhados, calhas, caleiras e ralos exteriores.</li>
                     <li>Lavagem de alta pressão em pátios, terraços, muros e entradas de garagem.</li>
                     <li>Verificação de estanquidade em juntas, silicone e pequenas infiltrações.</li>
@@ -4564,9 +5066,10 @@ FILE: servico-manutencao.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Manutenção.</p>
                 <div class="service-cta-box-actions">
@@ -4577,6 +5080,8 @@ FILE: servico-manutencao.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -4587,6 +5092,50 @@ FILE: servico-manutencao.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4690,15 +5239,17 @@ FILE: servico-mudancas.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Mudanças Residenciais e Comerciais com Embalagem</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Uma mudança bem planead reduz stress e danos. A Faz de Tudo PT realiza <strong>mudanças residenciais e comerciais na Grande Lisboa e Margem Sul</strong> com embalagem cuidada, transporte seguro e montagem no destino — Lisboa, Cascais, Sintra, Almada, Seixal e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Mudanças completas T2, T3, moradias e escritórios com equipa dedicada.</li>
                     <li>Embalagem de frágeis, louças, espelhos e equipamento eletrónico.</li>
                     <li>Desmontagem e remontagem de camas, roupeiros, mesas e estantes.</li>
@@ -4718,9 +5269,10 @@ FILE: servico-mudancas.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Mudanças.</p>
                 <div class="service-cta-box-actions">
@@ -4731,6 +5283,8 @@ FILE: servico-mudancas.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -4741,6 +5295,50 @@ FILE: servico-mudancas.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4844,15 +5442,17 @@ FILE: servico-pintura-fachadas-alpinismo.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Pintura de Fachadas e Prédios em Alpinismo Industrial</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Reabilitamos fachadas de edifícios em <strong>Lisboa, Cascais, Estoril e Margem Sul</strong> com <strong>alpinismo industrial (trabalho em cordas)</strong>. A Faz de Tudo PT elimina a necessidade de andaimes caros, reduz o tempo de obra e garante acesso seguro a todos os pontos da fachada — ideal para condomínios, moradias e imóveis expostos à maresia.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Lavagem de alta pressão e descontaminação de fachadas antes da pintura.</li>
                     <li>Tratamento de fissuras, rebocos degradados e zonas com infiltrações visíveis.</li>
                     <li>Aplicação de primários, impermeabilizantes e tintas elásticas para exteriores.</li>
@@ -4872,9 +5472,10 @@ FILE: servico-pintura-fachadas-alpinismo.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Pintura de Fachadas em Alpinismo.</p>
                 <div class="service-cta-box-actions">
@@ -4885,6 +5486,8 @@ FILE: servico-pintura-fachadas-alpinismo.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -4895,6 +5498,50 @@ FILE: servico-pintura-fachadas-alpinismo.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -4998,15 +5645,17 @@ FILE: servico-pinturas.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Pinturas Interiores e Exteriores Profissionais</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>A <strong>Faz de Tudo PT</strong> é referência em <strong>pintura residencial e comercial na Grande Lisboa e Margem Sul</strong>. Trabalhamos com tintas de qualidade, proteção integral do espaço e acabamentos uniformes em Lisboa, Cascais, Sintra, Almada e Setúbal — com orçamento gratuito e prazos acordados por escrito.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Preparação profissional de superfícies: lixagem, massa corrida, primários anti-humidade e correção de imperfeições.</li>
                     <li>Pintura de interiores: paredes, tetos, portas, rodapés e divisórias com demãos controladas.</li>
                     <li>Pintura de exteriores: fachadas baixas, muros, varandas e gradeamentos com tintas resistentes ao sol e à chuva.</li>
@@ -5026,9 +5675,10 @@ FILE: servico-pinturas.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Pinturas.</p>
                 <div class="service-cta-box-actions">
@@ -5039,6 +5689,8 @@ FILE: servico-pinturas.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -5049,6 +5701,50 @@ FILE: servico-pinturas.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -5152,15 +5848,17 @@ FILE: servico-piscinas.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Manutenção e Limpeza de Piscinas Profissional</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A Faz de Tudo PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Tratamento e equilíbrio químico da água (pH, cloro e alcalinidade).</li>
                     <li>Aspiração de fundo, limpeza de paredes e remoção de folhas e detritos.</li>
                     <li>Limpeza e manutenção de filtros, bombas e skimmers.</li>
@@ -5180,9 +5878,10 @@ FILE: servico-piscinas.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Piscinas.</p>
                 <div class="service-cta-box-actions">
@@ -5193,6 +5892,8 @@ FILE: servico-piscinas.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -5203,6 +5904,255 @@ FILE: servico-piscinas.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+================================================================================
+FILE: servico-recuperar-casa.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperação de Casas Antigas e Devolutas em Lisboa | Faz de Tudo PT</title>
+    <meta name="description" content="Recupera casas antigas, devolutas ou herdadas na Grande Lisboa e Margem Sul. Da estrutura aos acabamentos, com orçamento e prazos fechados. Peça já o seu orçamento grátis!">
+    <link rel="canonical" href="https://www.fazdetudo.pt/servico-recuperar-casa.html">
+
+    <meta property="og:title" content="Recuperar Casa | Faz de Tudo PT">
+    <meta property="og:description" content="Recupera casas antigas, devolutas ou herdadas na Grande Lisboa e Margem Sul. Da estrutura aos acabamentos, com orçamento e prazos fechados. Peça já o seu orçamento grátis!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.fazdetudo.pt/servico-recuperar-casa.html">
+    <meta property="og:image" content="https://www.fazdetudo.pt/logo.png">
+
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Recuperação de Casas",
+  "description": "Recupera casas antigas, devolutas ou herdadas na Grande Lisboa e Margem Sul. Da estrutura aos acabamentos, com orçamento e prazos fechados.",
+  "provider": {
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Faz de Tudo PT",
+    "image": "https://www.fazdetudo.pt/logo.png",
+    "telephone": "+351932504112",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lisboa",
+      "addressCountry": "PT"
+    }
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Lisboa"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Cascais"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Estoril"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Sintra"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Almada"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Setúbal"
+    }
+  ]
+}
+    </script>
+</head>
+<body class="service-page">
+
+    <header class="header scrolled" id="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Faz de Tudo PT" class="logo-img">
+                <span class="logo-brand">
+                    <span class="logo-text">fazdetudo<em>.pt</em></span>
+                    <span class="logo-tagline">HANDYMAN</span>
+                </span>
+            </a>
+            <div class="header-actions">
+                <a href="index.html" class="service-page-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span>Voltar ao Início</span></a>
+                <a href="tel:+351932504112" class="btn-phone" id="header-phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>932 504 112</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="service-page-main service-page-main--article">
+        <article class="container service-article">
+            <header class="service-hero">
+                <h1 class="service-article-title">Recuperação de Casas Antigas, Devolutas e Degradadas</h1>
+                <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
+            </header>
+
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
+                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. A Faz de Tudo PT recupera o imóvel de ponta a ponta — estrutura, instalações e acabamentos — na Grande Lisboa e Margem Sul, com um único interlocutor e prazo fechado.</p>
+                <h2>O que fazemos nesta área:</h2>
+                <ul class="service-feature-list">
+                    <li>Avaliação do estado geral do imóvel: estrutura, coberturas, humidades e instalações.</li>
+                    <li>Recuperação de casas herdadas, devolutas ou há muito desabitadas.</li>
+                    <li>Tratamento de humidades, infiltrações e patologias das paredes.</li>
+                    <li>Substituição ou recuperação de instalações elétricas e de canalização antigas.</li>
+                    <li>Reabilitação de coberturas, telhados, tetos e pavimentos degradados.</li>
+                    <li>Renovação completa de cozinhas e casas de banho não funcionais.</li>
+                    <li>Recuperação de caixilharias, portas e janelas antigas ou apodrecidas.</li>
+                    <li>Pintura, acabamentos e limpeza final para entrega da casa pronta a habitar.</li>
+                    <li>Coordenação de todas as especialidades com um único interlocutor e prazo fechado.</li>
+                </ul>
+                <h2>Zonas de Atendimento Rápido</h2>
+                <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
+                <ul class="service-zones-grid">
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
+                </ul>
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
+                <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
+                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Recuperação de Casa.</p>
+                <div class="service-cta-box-actions">
+                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20recupera%C3%A7%C3%A3o%20de%20casa." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp"></i> Orçamento por WhatsApp
+                    </a>
+                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
+                    </a>
+                </div>
+                    </div>
+                </aside>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer service-page-footer service-page-footer--brand">
+        <div class="container">
+            <p>&copy; 2026 Faz de Tudo PT. Todos os direitos reservados. Especialistas em Reparações ao Domicílio.</p>
+        </div>
+    </footer>
+
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -5306,15 +6256,17 @@ FILE: servico-remodelacoes.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
-                <h1 class="service-article-title">Remodelações de Cozinhas, Casas de Banho e Obras</h1>
+            <header class="service-hero">
+                <h1 class="service-article-title">Remodelações, Obras e Construção em Lisboa e Margem Sul</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
-                <p>Renovar a cozinha ou a casa de banho transforma o dia a dia. A Faz de Tudo PT coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave — em Lisboa, Cascais, Oeiras, Almada e Setúbal.</p>
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
+                <p>Renovar a cozinha ou a casa de banho transforma o dia a dia. A Faz de Tudo PT coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave — em Lisboa, Cascais, Oeiras, Almada e Setúbal. Além de remodelações, executamos obra nova, ampliações e trabalhos estruturais com licenciamento e coordenação completa.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Remodelação completa de cozinhas: layout, móveis, bancadas e ligações.</li>
                     <li>Renovação de casas de banho: revestimentos, louças, duche e impermeabilização.</li>
                     <li>Substituição de pavimentos: cerâmica, vinílico, madeira ou laminado.</li>
@@ -5322,6 +6274,9 @@ FILE: servico-remodelacoes.html
                     <li>Pequenas e médias obras com cronograma e preço fechado acordado.</li>
                     <li>Coordenação de canalização, electricidade e pintura na mesma obra.</li>
                     <li>Preparação de imóveis para venda ou arrendamento (remodelação leve).</li>
+                    <li>Construção de novas divisões, ampliações e alteração de espaços interiores.</li>
+                    <li>Levantamento e demolição de paredes, com avaliação estrutural prévia.</li>
+                    <li>Execução de obra do início ao fim, com coordenação de todas as especialidades.</li>
                 </ul>
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
@@ -5334,11 +6289,12 @@ FILE: servico-remodelacoes.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Remodelações.</p>
+                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Remodelações e Obras.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20remodela%C3%A7%C3%B5es." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp"></i> Orçamento por WhatsApp
@@ -5347,6 +6303,8 @@ FILE: servico-remodelacoes.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -5357,6 +6315,50 @@ FILE: servico-remodelacoes.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -5460,15 +6462,17 @@ FILE: servico-reparacoes-gerais.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Reparações Gerais e Faz-Tudo ao Domicílio</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>O seu <strong>handyman de confiança na Grande Lisboa e Margem Sul</strong> para resolver a lista de tarefas que adia há meses. A Faz de Tudo PT combina rapidez, ferramentas adequadas e soluções definitivas em Lisboa, Cascais, Almada e Setúbal — uma visita, vários arranjos resolvidos.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Fixação de suportes de TV, estantes, espelhos e quadros em qualquer tipo de parede.</li>
                     <li>Instalação de varões, calhas de cortinados e persianas interiores.</li>
                     <li>Montagem de móveis, camas, roupeiros e equipamento de escritório.</li>
@@ -5488,9 +6492,10 @@ FILE: servico-reparacoes-gerais.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Reparações Gerais.</p>
                 <div class="service-cta-box-actions">
@@ -5501,6 +6506,8 @@ FILE: servico-reparacoes-gerais.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -5511,6 +6518,50 @@ FILE: servico-reparacoes-gerais.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -5614,15 +6665,17 @@ FILE: servico-serralharia.html
 
     <main class="service-page-main service-page-main--article">
         <article class="container service-article">
-            <header class="service-article-header">
+            <header class="service-hero">
                 <h1 class="service-article-title">Serralharia e Abertura de Portas Urgente</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
-            <div class="service-rich-text">
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
                 <p>Porta trancada, fechadura avariada ou portão encravado exigem resposta imediata. Somos especialistas em <strong>serralharia e segurança na Grande Lisboa e Margem Sul</strong> — abertura de portas, substituição de cilindros e reparação de portões em Lisboa, Cascais, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
-                <ul>
+                <ul class="service-feature-list">
                     <li>Abertura de portas trancadas com técnicas não destrutivas sempre que possível.</li>
                     <li>Substituição de cilindros, canhões e fechaduras de alta segurança.</li>
                     <li>Instalação de fechaduras multiponto e reforço de portas de entrada.</li>
@@ -5642,9 +6695,10 @@ FILE: servico-serralharia.html
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
-            </div>
-
-            <div class="service-cta-box">
+                    </div>
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Serralharia.</p>
                 <div class="service-cta-box-actions">
@@ -5655,6 +6709,8 @@ FILE: servico-serralharia.html
                         <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
                     </a>
                 </div>
+                    </div>
+                </aside>
             </div>
         </article>
     </main>
@@ -5665,6 +6721,50 @@ FILE: servico-serralharia.html
         </div>
     </footer>
 
+
+    <div class="floating-contact">
+        <a href="https://wa.me/351932504112" class="float-btn float-btn--wa" target="_blank" rel="noopener noreferrer" aria-label="Contactar via WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+351932504112" class="float-btn float-btn--tel" aria-label="Ligar agora">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
+
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="logo.png" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
@@ -5690,6 +6790,12 @@ FILE: sitemap.xml
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
+        <lastmod>2026-05-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
         <lastmod>2026-05-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -7354,6 +8460,65 @@ body.modal-open {
     background: var(--primary-dark);
 }
 
+.whatsapp-float {
+    background: #25D366 !important;
+}
+
+.wa-widget.open .whatsapp-float {
+    background: #1da851 !important;
+}
+
+.floating-contact {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.float-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.float-btn:hover {
+    transform: scale(1.1);
+}
+
+.float-btn--wa {
+    background: #25D366;
+}
+
+.float-btn--wa:hover {
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+}
+
+.float-btn--tel {
+    background: var(--primary-color);
+}
+
+.float-btn--tel:hover {
+    box-shadow: 0 6px 24px rgba(230, 95, 43, 0.5);
+}
+
+.float-btn--home {
+    position: fixed;
+    right: 28px;
+    bottom: 96px;
+    z-index: 999;
+}
+
 .wa-chat {
     position: absolute;
     bottom: 72px;
@@ -7865,7 +9030,7 @@ body.modal-open {
 }
 
 .service-article {
-    max-width: 850px;
+    max-width: 1140px;
 }
 
 .service-article-header {
@@ -7903,7 +9068,7 @@ body.modal-open {
     margin-bottom: 16px;
 }
 
-.service-rich-text ul:not(.service-zones-grid) {
+.service-rich-text ul:not(.service-zones-grid):not(.service-feature-list) {
     margin: 0 0 24px 20px;
 }
 
@@ -7931,6 +9096,69 @@ body.modal-open {
     color: var(--primary-color);
     flex-shrink: 0;
     margin-top: 4px;
+}
+
+.service-hero {
+    background: var(--secondary-color);
+    border-radius: var(--radius);
+    padding: 44px 40px;
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.service-hero .service-article-title {
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.service-hero .service-article-lead {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.service-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.service-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.service-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+}
+
+.service-feature-list li {
+    position: relative;
+    padding-left: 38px;
+    margin-bottom: 12px;
+}
+
+.service-feature-list li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(230, 95, 43, 0.12);
+    color: var(--primary-color);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+}
+
+.service-sidebar .service-cta-box {
+    margin: 0;
 }
 
 .service-cta-box {
@@ -7974,7 +9202,38 @@ body.modal-open {
     color: rgba(255, 255, 255, 0.7);
 }
 
+@media (max-width: 900px) {
+    .service-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .service-sidebar {
+        position: static;
+    }
+
+    .service-hero {
+        padding: 32px 24px;
+    }
+}
+
 @media (max-width: 768px) {
+    .floating-contact {
+        bottom: 18px;
+        right: 18px;
+        gap: 12px;
+    }
+
+    .float-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+    }
+
+    .float-btn--home {
+        right: 18px;
+        bottom: 80px;
+    }
+
     .service-page-main,
     .service-page-main--article {
         padding-top: 110px;

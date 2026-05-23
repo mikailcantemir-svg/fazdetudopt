@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="{{CANONICAL_URL}}">
+{{HREFLANG_BLOCK}}
+
+    <!-- SEO principal -->
+    <title>{{PAGE_TITLE}}</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
+    <meta name="keywords" content="handyman, faz-tudo, obras, remodelações, AVAC, ar condicionado, aquecimento, manutenção de piscinas, construção, canalizador, eletricista, pintura, pladur, telhados, impermeabilizações, pavimentos, carpintaria, caixilharia, estores, limpeza pós-obra, jardinagem, portugal, Lisboa, Azeitao, Cascais, Estoril, Setubal">
+    <meta property="og:title" content="{{OG_TITLE}}">
+    <meta property="og:description" content="{{OG_DESCRIPTION}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{CANONICAL_URL}}">
+    <meta property="og:locale" content="{{OG_LOCALE}}">
+    <meta property="og:image" content="https://www.fazdetudo.pt/logo.webp">
+
+    <script type="application/ld+json">
+    {{JSON_LD}}
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/logo.webp">
+    <link rel="apple-touch-icon" href="/logo.webp">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ASSET_PREFIX}}style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <header class="header" id="header">
+            <div class="container header-inner">
+                <a href="#" class="logo">
+                    <img src="{{ASSET_PREFIX}}logo.webp" alt="Faz de Tudo PT - Serviços de faz tudo em Lisboa" class="logo-img">
+                    <span class="logo-brand">
+                        <span class="logo-text">fazdetudo<em>.pt</em></span>
+                        <span class="logo-tagline">HANDYMAN</span>
+                    </span>
+                </a>
+                <nav class="nav" id="nav" aria-label="Navegação principal">
+                    <a href="#hero" class="nav-link" data-i18n="nav_home">Início</a>
+                    <a href="#services" class="nav-link" data-i18n="nav_services">Serviços</a>
+                    <a href="#advantages" class="nav-link" data-i18n="nav_about">Sobre nós</a>
+                    <a href="#contact" class="nav-link" data-i18n="nav_contact">Contacto</a>
+                </nav>
+                <div class="header-actions">
+{{LANG_SWITCHER}}
+                    <a href="#" class="btn-phone" id="header-phone">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>932 504 112</span>
+                    </a>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="hero-bg">
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/ferramentas.webp')"></div>
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-3.webp')"></div>
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/obra.webp')"></div>
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-4.webp')"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title" data-i18n="hero_title">O seu faz tudo de confiança em Lisboa e Margem Sul</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Pinturas, canalizações, electricidade, carpintaria e muito mais. Serviço profissional com garantia de qualidade.</p>
+            <div class="hero-actions">
+                <a href="#" class="btn btn-primary btn-lg" id="btn-quote">
+                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#" class="btn btn-outline btn-lg" id="btn-call">
+                    <i class="fa-solid fa-phone"></i>
+                    <span data-i18n="hero_btn_call">Ligue agora</span>
+                </a>
+            </div>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google</p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-light" id="services">
+        <div class="container">
+            <div class="section-header section-header--services">
+                <img src="{{ASSET_PREFIX}}logo.webp" alt="Profissional faz tudo" class="section-logo">
+                <h2 class="section-title" data-i18n="services_title">Os Nossos Serviços Profissionais</h2>
+                <p class="section-subtitle" data-i18n="services_subtitle">Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa.</p>
+            </div>
+
+            <!-- SYNC: Ordem dos cartões = script.js → T.pt.services + SERVICE_ICONS + SERVICE_LANDING_SLUGS -->
+            <div class="services-modern-grid">
+{{SERVICE_CARDS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Handyman details -->
+{{HANDYMAN_SECTION}}
+
+    <!-- Advantages -->
+    <section class="section" id="advantages">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="advantages_title">Porquê escolher-nos?</h2>
+            </div>
+            <div class="advantages-grid" id="advantages-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Reviews -->
+    <section class="section section-light" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="testimonials_title">Críticas</h2>
+            </div>
+            <div class="testimonials-summary" id="testimonials-summary">
+                <!-- Populated by JS -->
+            </div>
+            <div class="reviews-swiper-wrap">
+                <div class="swiper reviews-swiper" id="reviews-swiper">
+                    <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <button type="button" class="reviews-swiper-prev" aria-label="Crítica anterior">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="reviews-swiper-next" aria-label="Crítica seguinte">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <div class="swiper-pagination reviews-swiper-pagination"></div>
+            </div>
+            <div class="testimonials-footer">
+                <a href="#" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                    Ver críticas no Google
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="faq_title">Perguntas Frequentes</h2>
+            </div>
+            <div class="faq-list" id="faq-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section-cta" id="contact">
+        <div class="container cta-content">
+            <h2 class="cta-title" data-i18n="contact_title">Contacte-nos</h2>
+            <p class="cta-subtitle" data-i18n="contact_subtitle">Estamos prontos para ajudar. Peça o seu orçamento grátis.</p>
+            <div class="cta-actions">
+                <a href="#" class="btn btn-white btn-lg" id="cta-quote">
+                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#" class="btn btn-outline-white btn-lg" id="cta-phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span id="cta-phone-text">932 504 112</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="{{ASSET_PREFIX}}logo.webp" alt="Faz de Tudo PT" class="footer-logo-img">
+                        <span class="logo-text">fazdetudo<em>.pt</em></span>
+                    </div>
+                    <p class="footer-tagline" data-i18n="hero_title">O seu faz tudo de confiança em Lisboa e Margem Sul</p>
+                    <p class="social-cta">
+                        <span data-i18n="social_cta">Siga-nos e veja os nossos trabalhos</span>
+                        <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://www.facebook.com/profile.php?id=61571666972567" class="footer-social footer-social-facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/fazdetudo.pt?igsh=c3Y4OWMwYW85aDEy&utm_source=qr" class="footer-social footer-social-instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer_links">Links</h3>
+                    <ul>
+                        <li><a href="#hero" data-i18n="nav_home">Início</a></li>
+                        <li><a href="#services" data-i18n="nav_services">Serviços</a></li>
+                        <li><a href="#advantages" data-i18n="nav_about">Sobre nós</a></li>
+                        <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" id="footer-services">
+                    <h3 data-i18n="nav_services">Serviços</h3>
+                    <ul id="footer-services-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="nav_contact">Contacto</h3>
+                    <ul>
+                        <li>
+                            <a href="#" id="footer-phone">
+                                <i class="fa-solid fa-phone"></i>
+                                <span id="footer-phone-text">932 504 112</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="footer-email">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span id="footer-email-text">geral@fazdetudo.pt</span>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span id="footer-address-text">Lisboa, Portugal</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year">2026</span> <span data-i18n="footer_rights">Faz de Tudo PT. Todos os direitos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="{{ASSET_PREFIX}}logo.webp" alt="Faz de Tudo PT" class="wa-chat-avatar">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>Online</span>
+                </div>
+                <button class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">Como posso ajudar?</p>
+                    <span class="wa-chat-time" id="wa-chat-time"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
+                <button class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="whatsapp-float" id="whatsapp-float" aria-label="Contact via WhatsApp">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close"></i>
+        </button>
+    </div>
+
+    <a href="tel:+351932504112" class="float-btn float-btn--tel float-btn--home" aria-label="Ligar agora">
+        <i class="fa-solid fa-phone"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ASSET_PREFIX}}script.js"></script>
+</body>
+</html>

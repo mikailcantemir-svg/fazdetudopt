@@ -150,10 +150,10 @@ TEMPLATE = """<!DOCTYPE html>
     <meta property="og:description" content="{meta_description}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/{slug}">
-    <meta property="og:image" content="https://www.fazdetudo.pt/logo.png">
+    <meta property="og:image" content="https://www.fazdetudo.pt/logo.webp">
 
-    <link rel="icon" type="image/png" href="/logo.png">
-    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="icon" type="image/webp" href="/logo.webp">
+    <link rel="apple-touch-icon" href="/logo.webp">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -170,7 +170,7 @@ TEMPLATE = """<!DOCTYPE html>
       "provider": {{
         "@type": "HomeAndConstructionBusiness",
         "name": "Faz de Tudo PT",
-        "image": "https://www.fazdetudo.pt/logo.png",
+        "image": "https://www.fazdetudo.pt/logo.webp",
         "telephone": "+351932504112",
         "priceRange": "$$",
         "address": {{
@@ -195,7 +195,7 @@ TEMPLATE = """<!DOCTYPE html>
     <header class="header scrolled" id="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">
-                <img src="logo.png" alt="Faz de Tudo PT" class="logo-img">
+                <img src="logo.webp" alt="Faz de Tudo PT" class="logo-img">
                 <span class="logo-brand">
                     <span class="logo-text">fazdetudo<em>.pt</em></span>
                     <span class="logo-tagline">HANDYMAN</span>
