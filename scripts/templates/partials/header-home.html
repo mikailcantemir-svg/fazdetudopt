@@ -1,0 +1,29 @@
+        <header class="header" id="header">
+            <div class="container header-inner">
+                <a href="{{LOGO_HREF}}" class="logo">
+                    <img src="{{ASSET_PREFIX}}{{LOGO_PATH}}" alt="Faz de Tudo PT - Serviços de faz tudo em Lisboa" class="logo-img">
+                    <span class="logo-brand">
+                        <span class="logo-text">fazdetudo<em>.pt</em></span>
+                        <span class="logo-tagline">HANDYMAN</span>
+                    </span>
+                </a>
+                <nav class="nav" id="nav" aria-label="Navegação principal">
+                    <a href="#hero" class="nav-link" data-i18n="nav_home">Início</a>
+                    <a href="#services" class="nav-link" data-i18n="nav_services">Serviços</a>
+                    <a href="#advantages" class="nav-link" data-i18n="nav_about">Sobre nós</a>
+                    <a href="#contact" class="nav-link" data-i18n="nav_contact">Contacto</a>
+                </nav>
+                <div class="header-actions">
+{{LANG_SWITCHER}}
+                    <a href="{{TEL_HREF}}" class="btn-phone" id="header-phone">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span>{{PHONE_DISPLAY}}</span>
+                    </a>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </header>

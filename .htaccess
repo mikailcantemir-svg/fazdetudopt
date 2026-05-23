@@ -1,20 +1,21 @@
-# Redirect 301 permanentes: URLs antigas *-lisboa.html → páginas servico-*.html
-# Gerado a partir de scripts/generate-lisboa-redirects.py (dicionário REDIRECTS)
+# AUTO-GENERATED — scripts/generate-lisboa-redirects.py (não editar à mão)
+# Redirect 301: URLs legadas *-lisboa.html → servico-*.html (Apache mod_alias)
+# GitHub Pages ignora este ficheiro; usa os HTML *-lisboa.html na raiz.
 
-Redirect 301 /pinturas-lisboa.html /servico-pinturas.html
-Redirect 301 /pintura-fachadas-alpinismo-lisboa.html /servico-pintura-fachadas-alpinismo.html
 Redirect 301 /canalizacoes-lisboa.html /servico-canalizacoes.html
-Redirect 301 /eletricidade-lisboa.html /servico-electricidade.html
 Redirect 301 /carpintaria-lisboa.html /servico-carpintaria.html
-Redirect 301 /reparacoes-gerais-lisboa.html /servico-reparacoes-gerais.html
-Redirect 301 /manutencao-lisboa.html /servico-manutencao.html
-Redirect 301 /limpezas-lisboa.html /servico-limpezas.html
-Redirect 301 /jardinagem-lisboa.html /servico-jardinagem.html
-Redirect 301 /mudancas-lisboa.html /servico-mudancas.html
-Redirect 301 /informatica-lisboa.html /servico-informatica.html
-Redirect 301 /serralharia-lisboa.html /servico-serralharia.html
 Redirect 301 /climatizacao-lisboa.html /servico-climatizacao.html
+Redirect 301 /decoracao-interiores-lisboa.html /servico-decoracao-interiores.html
+Redirect 301 /eletricidade-lisboa.html /servico-electricidade.html
+Redirect 301 /informatica-lisboa.html /servico-informatica.html
+Redirect 301 /jardinagem-lisboa.html /servico-jardinagem.html
+Redirect 301 /limpezas-lisboa.html /servico-limpezas.html
+Redirect 301 /manutencao-lisboa.html /servico-manutencao.html
+Redirect 301 /manutencao-piscinas-lisboa.html /servico-piscinas.html
+Redirect 301 /mudancas-lisboa.html /servico-mudancas.html
+Redirect 301 /pintura-fachadas-alpinismo-lisboa.html /servico-pintura-fachadas-alpinismo.html
+Redirect 301 /pinturas-lisboa.html /servico-pinturas.html
 Redirect 301 /remodelacoes-lisboa.html /servico-remodelacoes.html
 Redirect 301 /reparacao-estores-lisboa.html /servico-estores-persianas.html
-Redirect 301 /decoracao-interiores-lisboa.html /servico-decoracao-interiores.html
-Redirect 301 /manutencao-piscinas-lisboa.html /servico-piscinas.html
+Redirect 301 /reparacoes-gerais-lisboa.html /servico-reparacoes-gerais.html
+Redirect 301 /serralharia-lisboa.html /servico-serralharia.html

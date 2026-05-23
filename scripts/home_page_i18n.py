@@ -8,7 +8,7 @@ Regenerate HTML with: python scripts/generate-servico-pages.py
 
 from __future__ import annotations
 
-from service_page_i18n import BASE_URL, LANGS, LANG_HTML
+from slug_registry import LANGS, LANG_HTML, home_url, render_home_hreflang
 
 LANG_LABELS = {
     "pt": ("Português", "https://flagcdn.com/w20/pt.png"),
@@ -16,18 +16,6 @@ LANG_LABELS = {
     "es": ("Español", "https://flagcdn.com/w20/es.png"),
     "fr": ("Français", "https://flagcdn.com/w20/fr.png"),
 }
-
-HOME_URLS = {
-    "pt": f"{BASE_URL}/",
-    "en": f"{BASE_URL}/en/",
-    "es": f"{BASE_URL}/es/",
-    "fr": f"{BASE_URL}/fr/",
-}
-
-
-def home_url(lang: str) -> str:
-    return HOME_URLS[lang]
-
 
 def lang_switch_href(current: str, target: str) -> str:
     """Relative href from current language folder to target homepage."""
@@ -38,18 +26,6 @@ def lang_switch_href(current: str, target: str) -> str:
     if current == "pt":
         return f"/{target}/"
     return f"../{target}/"
-
-
-def render_home_hreflang() -> str:
-    lines = [
-        f'    <link rel="alternate" hreflang="pt-PT" href="{HOME_URLS["pt"]}" />',
-        f'    <link rel="alternate" hreflang="pt" href="{HOME_URLS["pt"]}" />',
-        f'    <link rel="alternate" hreflang="en" href="{HOME_URLS["en"]}" />',
-        f'    <link rel="alternate" hreflang="es" href="{HOME_URLS["es"]}" />',
-        f'    <link rel="alternate" hreflang="fr" href="{HOME_URLS["fr"]}" />',
-        f'    <link rel="alternate" hreflang="x-default" href="{HOME_URLS["pt"]}" />',
-    ]
-    return "\n".join(lines)
 
 
 def render_lang_switcher(current_lang: str) -> str:

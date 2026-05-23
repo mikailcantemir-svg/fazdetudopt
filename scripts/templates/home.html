@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}">
+<head>
+{{HEAD}}
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Saltar para o conteúdo</a>
+
+    <main id="main-content">
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+{{HEADER_HOME}}
+        <div class="hero-bg">
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/ferramentas.webp')"></div>
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-3.webp')"></div>
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/obra.webp')"></div>
+            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-4.webp')"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title" data-i18n="hero_title">O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Precisa de pendurar um varão, retocar uma pintura, reparar uma torneira ou resolver aquela lista de pequenos arranjos que nunca mais acabam? Dispomos também de serviços especializados, mas somos, acima de tudo, o parceiro ideal para cuidar do seu espaço com rapidez, eficácia e limpeza. Esqueça as complicações: um único contacto resolve tudo.</p>
+            <div class="hero-actions">
+                <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="btn-quote">
+                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a href="{{TEL_HREF}}" class="btn btn-outline btn-lg" id="btn-call">
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <span data-i18n="hero_btn_call">Ligue agora</span>
+                </a>
+            </div>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google</p>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-light" id="services">
+        <div class="container">
+            <div class="section-header section-header--services">
+                <img src="{{ASSET_PREFIX}}{{LOGO_PATH}}" alt="Profissional faz tudo" class="section-logo" width="120" height="120" loading="lazy" decoding="async">
+                <h2 class="section-title" data-i18n="services_title">Os Nossos Serviços Profissionais</h2>
+                <p class="section-subtitle" data-i18n="services_subtitle">Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa.</p>
+            </div>
+
+            <div class="services-modern-grid">
+{{SERVICE_CARDS}}
+            </div>
+        </div>
+    </section>
+
+{{HANDYMAN_SECTION}}
+
+    <!-- Advantages -->
+    <section class="section" id="advantages">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="advantages_title">Porquê escolher-nos?</h2>
+            </div>
+            <div class="advantages-grid" id="advantages-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Reviews -->
+    <section class="section section-light" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="testimonials_title">Críticas</h2>
+            </div>
+            <div class="testimonials-summary" id="testimonials-summary">
+                <!-- Populated by JS -->
+            </div>
+            <div class="reviews-swiper-wrap">
+                <div class="swiper reviews-swiper" id="reviews-swiper">
+                    <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <button type="button" class="reviews-swiper-prev" aria-label="Crítica anterior">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="reviews-swiper-next" aria-label="Crítica seguinte">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <div class="swiper-pagination reviews-swiper-pagination"></div>
+            </div>
+            <div class="testimonials-footer">
+                <a href="{{GOOGLE_REVIEWS_URL}}" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                    Ver críticas no Google
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="faq_title">Perguntas Frequentes</h2>
+            </div>
+            <div class="faq-list" id="faq-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section-cta" id="contact">
+        <div class="container cta-content">
+            <h2 class="cta-title" data-i18n="contact_title">Contacte-nos</h2>
+            <p class="cta-subtitle" data-i18n="contact_subtitle">Estamos prontos para ajudar. Peça o seu orçamento grátis.</p>
+            <div class="cta-actions">
+                <a href="{{WA_HREF}}" class="btn btn-white btn-lg" id="cta-quote">
+                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a href="{{TEL_HREF}}" class="btn btn-outline-white btn-lg" id="cta-phone">
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <span id="cta-phone-text">{{PHONE_DISPLAY}}</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+{{FOOTER}}
+{{WA_WIDGET}}
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <script src="{{ASSET_PREFIX}}script.js" defer></script>
+</body>
+</html>

@@ -1,16 +1,113 @@
 # -*- coding: utf-8 -*-
-"""Reusable HTML fragments for page generators."""
+"""Compose page fragments from scripts/templates/partials/."""
 
 from __future__ import annotations
 
-from pathlib import Path
+from template_engine import render_partial
+from site_config import (
+    EMAIL_OBFUSCATED,
+    FACEBOOK_URL,
+    INSTAGRAM_URL,
+    LOGO_PATH,
+    OG_IMAGE,
+    PHONE_DISPLAY,
+    tel_href,
+)
 
-PARTIALS_DIR = Path(__file__).resolve().parent / "partials"
+SWIPER_STYLESHEET = (
+    '    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">\n'
+)
 
 
-def load_partial(name: str) -> str:
-    path = PARTIALS_DIR / name
-    return path.read_text(encoding="utf-8")
+def render_head(
+    *,
+    page_title: str,
+    meta_description: str,
+    canonical_url: str,
+    hreflang_block: str,
+    og_title: str,
+    og_description: str,
+    og_locale: str,
+    json_ld: str,
+    asset_prefix: str,
+    include_swiper_css: bool = False,
+) -> str:
+    extra_styles = SWIPER_STYLESHEET if include_swiper_css else ""
+    return render_partial(
+        "head.html",
+        {
+            "PAGE_TITLE": page_title,
+            "META_DESCRIPTION": meta_description,
+            "CANONICAL_URL": canonical_url,
+            "HREFLANG_BLOCK": hreflang_block,
+            "OG_TITLE": og_title,
+            "OG_DESCRIPTION": og_description,
+            "OG_LOCALE": og_locale,
+            "OG_IMAGE": OG_IMAGE,
+            "JSON_LD": json_ld,
+            "ASSET_PREFIX": asset_prefix,
+            "LOGO_PATH": LOGO_PATH,
+            "EXTRA_STYLESHEETS": extra_styles,
+        },
+    )
+
+
+def render_header_home(
+    *,
+    asset_prefix: str,
+    logo_href: str,
+    lang_switcher: str,
+) -> str:
+    return render_partial(
+        "header-home.html",
+        {
+            "ASSET_PREFIX": asset_prefix,
+            "LOGO_PATH": LOGO_PATH,
+            "LOGO_HREF": logo_href,
+            "LANG_SWITCHER": lang_switcher,
+            "TEL_HREF": tel_href(),
+            "PHONE_DISPLAY": PHONE_DISPLAY,
+        },
+    )
+
+
+def render_header_service(
+    *,
+    asset_prefix: str,
+    index_href: str,
+    back_label: str,
+) -> str:
+    return render_partial(
+        "header-service.html",
+        {
+            "ASSET_PREFIX": asset_prefix,
+            "LOGO_PATH": LOGO_PATH,
+            "INDEX_HREF": index_href,
+            "BACK_LABEL": back_label,
+            "TEL_HREF": tel_href(),
+            "PHONE_DISPLAY": PHONE_DISPLAY,
+        },
+    )
+
+
+def render_footer_home(*, asset_prefix: str, email_href: str) -> str:
+    return render_partial(
+        "footer.html",
+        {
+            "ASSET_PREFIX": asset_prefix,
+            "LOGO_PATH": LOGO_PATH,
+            "TEL_HREF": tel_href(),
+            "EMAIL_HREF": email_href,
+            "PHONE_DISPLAY": PHONE_DISPLAY,
+            "EMAIL_OBFUSCATED": EMAIL_OBFUSCATED,
+            "FACEBOOK_URL": FACEBOOK_URL,
+            "INSTAGRAM_URL": INSTAGRAM_URL,
+        },
+    )
+
+
+def render_footer_service(*, footer_text: str) -> str:
+    return render_partial("footer-service.html", {"FOOTER_TEXT": footer_text})
 
 
 def render_wa_widget(
@@ -23,13 +120,16 @@ def render_wa_widget(
     wa_send: str,
     wa_float_label: str,
 ) -> str:
-    return (
-        load_partial("wa-widget.html")
-        .replace("{{ASSET_PREFIX}}", asset_prefix)
-        .replace("{{WA_ONLINE}}", wa_online)
-        .replace("{{WA_GREETING}}", wa_greeting)
-        .replace("{{WA_PLACEHOLDER}}", wa_placeholder)
-        .replace("{{WA_CLOSE}}", wa_close)
-        .replace("{{WA_SEND}}", wa_send)
-        .replace("{{WA_FLOAT_LABEL}}", wa_float_label)
+    return render_partial(
+        "wa-widget.html",
+        {
+            "ASSET_PREFIX": asset_prefix,
+            "LOGO_PATH": LOGO_PATH,
+            "WA_ONLINE": wa_online,
+            "WA_GREETING": wa_greeting,
+            "WA_PLACEHOLDER": wa_placeholder,
+            "WA_CLOSE": wa_close,
+            "WA_SEND": wa_send,
+            "WA_FLOAT_LABEL": wa_float_label,
+        },
     )
