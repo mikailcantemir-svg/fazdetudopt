@@ -116,6 +116,8 @@ FILE: scripts/templates/home.html
 
 {{HANDYMAN_SECTION}}
 
+{{RECENT_WORK_SECTION}}
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -151,11 +153,7 @@ FILE: scripts/templates/home.html
                 </button>
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
-            <div class="testimonials-footer">
-                <a href="{{GOOGLE_REVIEWS_URL}}" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    {{VIEW_GOOGLE_REVIEWS}}
-                </a>
-            </div>
+{{TESTIMONIALS_FOOTER}}
         </div>
     </section>
 
@@ -848,6 +846,7 @@ from home_page_i18n import (  # noqa: E402
     HOME_META,
     HOME_UI,
     LANGS,
+    RECENT_WORK_WA,
     SERVICE_CARDS,
     TESTIMONIAL_CARDS,
     home_url,
@@ -869,6 +868,7 @@ from site_config import (  # noqa: E402
     schema_telephone,
     tel_href,
     wa_href,
+    wa_href_for_message,
 )
 from template_engine import render_template  # noqa: E402
 
@@ -965,6 +965,36 @@ def build_faq_list(lang: str) -> str:
                 </div>"""
         )
     return "\n".join(blocks)
+
+
+def build_recent_work_section(lang: str) -> str:
+    ui = HOME_UI[lang]
+    section_wa = wa_href_for_message(RECENT_WORK_WA[lang])
+    return f"""    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">{html.escape(ui["recent_work_title"])}</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">{html.escape(ui["recent_work_subtitle"])}</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">{html.escape(ui["recent_work_status"])}</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">{html.escape(ui["recent_work_notice"])}</p>
+                <a href="{section_wa}" class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">{html.escape(ui["recent_work_cta"])}</span>
+                </a>
+            </div>
+        </div>
+    </section>"""
+
+
+def build_testimonials_footer(lang: str) -> str:
+    label = HOME_UI[lang]["view_google_reviews"]
+    return f"""            <div class="testimonials-footer">
+                <a href="{GOOGLE_REVIEWS_URL}" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                    <span data-i18n="view_google_reviews">{html.escape(label)}</span>
+                </a>
+            </div>"""
 
 
 def build_footer_services(lang: str) -> str:
@@ -1182,15 +1212,16 @@ def render_homepage(lang: str) -> str:
             "LOGO_PATH": LOGO_PATH,
             "SERVICE_CARDS": build_service_cards(lang),
             "HANDYMAN_SECTION": build_handyman_section(lang),
+            "RECENT_WORK_SECTION": build_recent_work_section(lang),
             "ADVANTAGES_GRID": build_advantages_grid(lang),
             "TESTIMONIALS_SUMMARY": build_testimonials_summary(lang),
             "TESTIMONIALS_CARDS": build_testimonials_cards(lang),
+            "TESTIMONIALS_FOOTER": build_testimonials_footer(lang),
             "FAQ_LIST": build_faq_list(lang),
             "WA_HREF": wa_href(lang),
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
             "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
-            "VIEW_GOOGLE_REVIEWS": meta["view_google"],
         },
     )
     html = apply_i18n_attributes(html, lang)
@@ -1772,7 +1803,6 @@ HOME_META = {
         "menu_aria": "Abrir menu",
         "review_prev": "Crítica anterior",
         "review_next": "Crítica seguinte",
-        "view_google": "Ver críticas no Google",
         "wa_close": "Fechar chat",
         "wa_send": "Enviar mensagem",
         "wa_float": "Contactar via WhatsApp",
@@ -1790,7 +1820,6 @@ HOME_META = {
         "menu_aria": "Open menu",
         "review_prev": "Previous review",
         "review_next": "Next review",
-        "view_google": "View reviews on Google",
         "wa_close": "Close chat",
         "wa_send": "Send message",
         "wa_float": "Contact via WhatsApp",
@@ -1808,7 +1837,6 @@ HOME_META = {
         "menu_aria": "Abrir menú",
         "review_prev": "Reseña anterior",
         "review_next": "Reseña siguiente",
-        "view_google": "Ver reseñas en Google",
         "wa_close": "Cerrar chat",
         "wa_send": "Enviar mensaje",
         "wa_float": "Contactar por WhatsApp",
@@ -1826,7 +1854,6 @@ HOME_META = {
         "menu_aria": "Ouvrir le menu",
         "review_prev": "Avis précédent",
         "review_next": "Avis suivant",
-        "view_google": "Voir les avis sur Google",
         "wa_close": "Fermer le chat",
         "wa_send": "Envoyer le message",
         "wa_float": "Contacter via WhatsApp",
@@ -1853,6 +1880,12 @@ HOME_UI = {
         "services_subtitle": "Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.",
         "advantages_title": "Porquê escolher-nos?",
         "testimonials_title": "Críticas",
+        "recent_work_title": "Trabalhos recentes",
+        "recent_work_subtitle": "Galeria de intervenções reais em preparação.",
+        "recent_work_status": "EM ATUALIZAÇÃO",
+        "recent_work_notice": "Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.",
+        "recent_work_cta": "Enviar fotos pelo WhatsApp",
+        "view_google_reviews": "Ver críticas no Google",
         "reviews_google_label": "Avaliações no Google",
         "google_review_source": "Crítica de Google",
         "faq_title": "Perguntas Frequentes",
@@ -1885,6 +1918,12 @@ HOME_UI = {
         "services_subtitle": "Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.",
         "advantages_title": "Why choose us?",
         "testimonials_title": "Reviews",
+        "recent_work_title": "Recent work",
+        "recent_work_subtitle": "Gallery of real projects in preparation.",
+        "recent_work_status": "UPDATING SOON",
+        "recent_work_notice": "We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.",
+        "recent_work_cta": "Send photos via WhatsApp",
+        "view_google_reviews": "View reviews on Google",
         "reviews_google_label": "Reviews on Google",
         "google_review_source": "Google review",
         "faq_title": "Frequently Asked Questions",
@@ -1917,6 +1956,12 @@ HOME_UI = {
         "services_subtitle": "Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.",
         "advantages_title": "¿Por qué elegirnos?",
         "testimonials_title": "Reseñas",
+        "recent_work_title": "Trabajos recientes",
+        "recent_work_subtitle": "Galería de trabajos reales en preparación.",
+        "recent_work_status": "EN ACTUALIZACIÓN",
+        "recent_work_notice": "Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.",
+        "recent_work_cta": "Enviar fotos por WhatsApp",
+        "view_google_reviews": "Ver reseñas en Google",
         "reviews_google_label": "Reseñas en Google",
         "google_review_source": "Reseña de Google",
         "faq_title": "Preguntas Frecuentes",
@@ -1949,6 +1994,12 @@ HOME_UI = {
         "services_subtitle": "Solutions fiables et spécialisées pour l'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.",
         "advantages_title": "Pourquoi nous choisir ?",
         "testimonials_title": "Avis",
+        "recent_work_title": "Travaux récents",
+        "recent_work_subtitle": "Galerie d'interventions réelles en préparation.",
+        "recent_work_status": "EN COURS DE MISE À JOUR",
+        "recent_work_notice": "Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d'interventions terminées.",
+        "recent_work_cta": "Envoyer des photos par WhatsApp",
+        "view_google_reviews": "Voir les avis sur Google",
         "reviews_google_label": "Avis sur Google",
         "google_review_source": "Avis Google",
         "faq_title": "Questions Fréquentes",
@@ -2205,6 +2256,197 @@ TESTIMONIAL_CARDS = [
         ),
     },
 ]
+
+# Before/after cards — replace image paths when dedicated photos are available.
+RECENT_WORK_ITEMS = [
+    {
+        "before": "images/hero/ferramentas.webp",
+        "after": "images/hero/obra.webp",
+        "pt": (
+            "Reparações gerais",
+            "Arranjos em casa",
+            "Substituição de fechos, ajuste de portas e pequenas reparações com acabamento cuidado.",
+        ),
+        "en": (
+            "General repairs",
+            "Home fixes",
+            "Lock replacement, door adjustment and small repairs with a neat finish.",
+        ),
+        "es": (
+            "Reparaciones generales",
+            "Arreglos en casa",
+            "Sustitución de cerraduras, ajuste de puertas y pequeñas reparaciones con buen acabado.",
+        ),
+        "fr": (
+            "Réparations générales",
+            "Petits travaux",
+            "Remplacement de serrures, réglage de portes et petites réparations soignées.",
+        ),
+        "wa": {
+            "pt": "Olá! Vi o trabalho de reparações gerais e gostaria de um orçamento.",
+            "en": "Hello! I saw the general repairs project and would like a quote.",
+            "es": "¡Hola! Vi el trabajo de reparaciones generales y me gustaría un presupuesto.",
+            "fr": "Bonjour ! J'ai vu le projet de réparations générales et je souhaite un devis.",
+        },
+    },
+    {
+        "before": "images/hero/hero-3.webp",
+        "after": "images/hero/hero-4.webp",
+        "pt": (
+            "Pintura",
+            "Sala renovada",
+            "Preparação de paredes, retoque de imperfeições e pintura com acabamento uniforme.",
+        ),
+        "en": (
+            "Painting",
+            "Refreshed living room",
+            "Wall preparation, defect touch-up and painting with an even, clean finish.",
+        ),
+        "es": (
+            "Pintura",
+            "Salón renovado",
+            "Preparación de paredes, retoque de imperfecciones y pintura con acabado uniforme.",
+        ),
+        "fr": (
+            "Peinture",
+            "Salon rafraîchi",
+            "Préparation des murs, retouches et peinture avec une finition uniforme.",
+        ),
+        "wa": {
+            "pt": "Olá! Vi o trabalho de pintura e gostaria de um orçamento.",
+            "en": "Hello! I saw the painting project and would like a quote.",
+            "es": "¡Hola! Vi el trabajo de pintura y me gustaría un presupuesto.",
+            "fr": "Bonjour ! J'ai vu le projet de peinture et je souhaite un devis.",
+        },
+    },
+    {
+        "before": "images/hero/obra.webp",
+        "after": "images/hero/hero-3.webp",
+        "pt": (
+            "Remodelação",
+            "Cozinha funcional",
+            "Atualização de zonas de trabalho e acabamentos para um espaço mais prático.",
+        ),
+        "en": (
+            "Renovation",
+            "Functional kitchen",
+            "Worktop zones and finishes updated for a more practical space.",
+        ),
+        "es": (
+            "Reforma",
+            "Cocina funcional",
+            "Actualización de zonas de trabajo y acabados para un espacio más práctico.",
+        ),
+        "fr": (
+            "Rénovation",
+            "Cuisine fonctionnelle",
+            "Mise à jour des plans de travail et finitions pour un espace plus pratique.",
+        ),
+        "wa": {
+            "pt": "Olá! Vi a remodelação de cozinha e gostaria de um orçamento.",
+            "en": "Hello! I saw the kitchen renovation and would like a quote.",
+            "es": "¡Hola! Vi la reforma de cocina y me gustaría un presupuesto.",
+            "fr": "Bonjour ! J'ai vu la rénovation de cuisine et je souhaite un devis.",
+        },
+    },
+    {
+        "before": "images/hero/hero-4.webp",
+        "after": "images/hero/ferramentas.webp",
+        "pt": (
+            "Montagem",
+            "Móveis montados",
+            "Montagem de móveis e fixação segura de prateleiras e acessórios.",
+        ),
+        "en": (
+            "Assembly",
+            "Furniture fitted",
+            "Furniture assembly and secure mounting of shelves and fittings.",
+        ),
+        "es": (
+            "Montaje",
+            "Muebles montados",
+            "Montaje de muebles y fijación segura de estanterías y accesorios.",
+        ),
+        "fr": (
+            "Montage",
+            "Meubles montés",
+            "Montage de meubles et fixation sécurisée d'étagères et accessoires.",
+        ),
+        "wa": {
+            "pt": "Olá! Vi o trabalho de montagem e gostaria de um orçamento.",
+            "en": "Hello! I saw the assembly project and would like a quote.",
+            "es": "¡Hola! Vi el trabajo de montaje y me gustaría un presupuesto.",
+            "fr": "Bonjour ! J'ai vu le projet de montage et je souhaite un devis.",
+        },
+    },
+    {
+        "before": "images/hero/hero-3.webp",
+        "after": "images/hero/obra.webp",
+        "pt": (
+            "Canalizações",
+            "Casa de banho",
+            "Reparação de fugas e substituição de torneira com teste de estanquidade.",
+        ),
+        "en": (
+            "Plumbing",
+            "Bathroom",
+            "Leak repair and tap replacement with a watertight check.",
+        ),
+        "es": (
+            "Fontanería",
+            "Baño",
+            "Reparación de fugas y sustitución de grifo con prueba de estanqueidad.",
+        ),
+        "fr": (
+            "Plomberie",
+            "Salle de bain",
+            "Réparation de fuite et remplacement de robinet avec test d'étanchéité.",
+        ),
+        "wa": {
+            "pt": "Olá! Vi o trabalho de canalizações e gostaria de um orçamento.",
+            "en": "Hello! I saw the plumbing project and would like a quote.",
+            "es": "¡Hola! Vi el trabajo de fontanería y me gustaría un presupuesto.",
+            "fr": "Bonjour ! J'ai vu le projet de plomberie et je souhaite un devis.",
+        },
+    },
+    {
+        "before": "images/hero/ferramentas.webp",
+        "after": "images/hero/hero-4.webp",
+        "pt": (
+            "Limpeza pós-obra",
+            "Espaço entregue",
+            "Limpeza profunda após intervenção para entregar o espaço pronto a usar.",
+        ),
+        "en": (
+            "Post-work cleaning",
+            "Ready to use",
+            "Deep clean after the job so the space is ready to use.",
+        ),
+        "es": (
+            "Limpieza post-obra",
+            "Espacio listo",
+            "Limpieza profunda tras la intervención para dejar el espacio listo.",
+        ),
+        "fr": (
+            "Nettoyage après travaux",
+            "Espace prêt",
+            "Nettoyage en profondeur après intervention pour un espace prêt à l'emploi.",
+        ),
+        "wa": {
+            "pt": "Olá! Vi o trabalho de limpeza pós-obra e gostaria de um orçamento.",
+            "en": "Hello! I saw the post-work cleaning and would like a quote.",
+            "es": "¡Hola! Vi la limpieza post-obra y me gustaría un presupuesto.",
+            "fr": "Bonjour ! J'ai vu le nettoyage après travaux et je souhaite un devis.",
+        },
+    },
+]
+
+RECENT_WORK_WA = {
+    "pt": "Olá! Quero enviar fotos de um trabalho para a galeria de trabalhos recentes.",
+    "en": "Hello! I would like to send photos of a job for the recent work gallery.",
+    "es": "¡Hola! Quiero enviar fotos de un trabajo para la galería de trabajos recientes.",
+    "fr": "Bonjour ! Je souhaite envoyer des photos d'un travail pour la galerie de travaux récents.",
+}
 
 # SYNC: order = index.html services grid = script.js SERVICE_LANDING_SLUGS
 SERVICE_CARDS = [
@@ -5724,6 +5966,23 @@ FILE: dist/en/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Recent work</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Gallery of real projects in preparation.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">UPDATING SOON</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.</p>
+                <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20send%20photos%20of%20a%20job%20for%20the%20recent%20work%20gallery." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Send photos via WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -5860,7 +6119,7 @@ FILE: dist/en/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    View reviews on Google
+                    <span data-i18n="view_google_reviews">View reviews on Google</span>
                 </a>
             </div>
         </div>
@@ -10185,6 +10444,23 @@ FILE: dist/es/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Trabajos recientes</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galería de trabajos reales en preparación.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">EN ACTUALIZACIÓN</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.</p>
+                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Quiero%20enviar%20fotos%20de%20un%20trabajo%20para%20la%20galer%C3%ADa%20de%20trabajos%20recientes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Enviar fotos por WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -10321,7 +10597,7 @@ FILE: dist/es/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    Ver reseñas en Google
+                    <span data-i18n="view_google_reviews">Ver reseñas en Google</span>
                 </a>
             </div>
         </div>
@@ -14646,6 +14922,23 @@ FILE: dist/fr/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Travaux récents</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galerie d'interventions réelles en préparation.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">EN COURS DE MISE À JOUR</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d'interventions terminées.</p>
+                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20envoyer%20des%20photos%20d%27un%20travail%20pour%20la%20galerie%20de%20travaux%20r%C3%A9cents." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Envoyer des photos par WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -14782,7 +15075,7 @@ FILE: dist/fr/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    Voir les avis sur Google
+                    <span data-i18n="view_google_reviews">Voir les avis sur Google</span>
                 </a>
             </div>
         </div>
@@ -19107,6 +19400,23 @@ FILE: dist/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Trabalhos recentes</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galeria de intervenções reais em preparação.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">EM ATUALIZAÇÃO</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.</p>
+                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Quero%20enviar%20fotos%20de%20um%20trabalho%20para%20a%20galeria%20de%20trabalhos%20recentes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Enviar fotos pelo WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -19243,7 +19553,7 @@ FILE: dist/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    Ver críticas no Google
+                    <span data-i18n="view_google_reviews">Ver críticas no Google</span>
                 </a>
             </div>
         </div>
@@ -19916,6 +20226,11 @@ FILE: dist/script.js
                 { name: 'Contacto rápido por WhatsApp', description: 'Resposta ágil para marcar visitas e pedidos de orçamento.' }
             ],
             testimonials_title: 'Críticas',
+            recent_work_title: 'Trabalhos recentes',
+            recent_work_subtitle: 'Galeria de intervenções reais em preparação.',
+            recent_work_status: 'EM ATUALIZAÇÃO',
+            recent_work_notice: 'Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.',
+            recent_work_cta: 'Enviar fotos pelo WhatsApp',
             reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
@@ -19979,6 +20294,11 @@ FILE: dist/script.js
                 { name: 'Fast contact via WhatsApp', description: 'Quick replies to schedule visits and request quotes.' }
             ],
             testimonials_title: 'Reviews',
+            recent_work_title: 'Recent work',
+            recent_work_subtitle: 'Gallery of real projects in preparation.',
+            recent_work_status: 'UPDATING SOON',
+            recent_work_notice: 'We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.',
+            recent_work_cta: 'Send photos via WhatsApp',
             reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
@@ -20042,6 +20362,11 @@ FILE: dist/script.js
                 { name: 'Contacto rápido por WhatsApp', description: 'Respuesta ágil para visitas y solicitudes de presupuesto.' }
             ],
             testimonials_title: 'Reseñas',
+            recent_work_title: 'Trabajos recientes',
+            recent_work_subtitle: 'Galería de trabajos reales en preparación.',
+            recent_work_status: 'EN ACTUALIZACIÓN',
+            recent_work_notice: 'Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.',
+            recent_work_cta: 'Enviar fotos por WhatsApp',
             reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
@@ -20105,6 +20430,11 @@ FILE: dist/script.js
                 { name: 'Contact rapide par WhatsApp', description: 'Réponse rapide pour planifier des visites et demander un devis.' }
             ],
             testimonials_title: 'Avis',
+            recent_work_title: 'Travaux récents',
+            recent_work_subtitle: 'Galerie d\'interventions réelles en préparation.',
+            recent_work_status: 'EN COURS DE MISE À JOUR',
+            recent_work_notice: 'Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d\'interventions terminées.',
+            recent_work_cta: 'Envoyer des photos par WhatsApp',
             reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
@@ -25848,6 +26178,53 @@ body.modal-open {
     color: var(--text-light);
 }
 
+/* ===== RECENT WORK (UPDATE BANNER) ===== */
+
+.recent-work-update {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    text-align: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.recent-work-status {
+    margin: 0 0 20px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-dark);
+    line-height: 1.2;
+}
+
+.recent-work-notice {
+    margin: 0 auto 28px;
+    max-width: 52ch;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-light);
+}
+
+.recent-work-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recent-work-cta .fa-whatsapp {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 600px) {
+    .recent-work-update {
+        padding: 36px 24px;
+    }
+}
+
 /* ===== GOOGLE REVIEWS ===== */
 
 .testimonials-summary {
@@ -27607,6 +27984,23 @@ FILE: en/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Recent work</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Gallery of real projects in preparation.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">UPDATING SOON</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.</p>
+                <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20send%20photos%20of%20a%20job%20for%20the%20recent%20work%20gallery." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Send photos via WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -27743,7 +28137,7 @@ FILE: en/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    View reviews on Google
+                    <span data-i18n="view_google_reviews">View reviews on Google</span>
                 </a>
             </div>
         </div>
@@ -32068,6 +32462,23 @@ FILE: es/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Trabajos recientes</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galería de trabajos reales en preparación.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">EN ACTUALIZACIÓN</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.</p>
+                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Quiero%20enviar%20fotos%20de%20un%20trabajo%20para%20la%20galer%C3%ADa%20de%20trabajos%20recientes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Enviar fotos por WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -32204,7 +32615,7 @@ FILE: es/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    Ver reseñas en Google
+                    <span data-i18n="view_google_reviews">Ver reseñas en Google</span>
                 </a>
             </div>
         </div>
@@ -36529,6 +36940,23 @@ FILE: fr/index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Travaux récents</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galerie d'interventions réelles en préparation.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">EN COURS DE MISE À JOUR</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d'interventions terminées.</p>
+                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20envoyer%20des%20photos%20d%27un%20travail%20pour%20la%20galerie%20de%20travaux%20r%C3%A9cents." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Envoyer des photos par WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -36665,7 +37093,7 @@ FILE: fr/index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    Voir les avis sur Google
+                    <span data-i18n="view_google_reviews">Voir les avis sur Google</span>
                 </a>
             </div>
         </div>
@@ -40990,6 +41418,23 @@ FILE: index.html
         </div>
     </section>
 
+    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">Trabalhos recentes</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galeria de intervenções reais em preparação.</p>
+            </div>
+            <div class="recent-work-update fade-in" role="status">
+                <p class="recent-work-status" data-i18n="recent_work_status">EM ATUALIZAÇÃO</p>
+                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.</p>
+                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Quero%20enviar%20fotos%20de%20um%20trabalho%20para%20a%20galeria%20de%20trabalhos%20recentes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">Enviar fotos pelo WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Advantages -->
     <section class="section" id="advantages">
         <div class="container">
@@ -41126,7 +41571,7 @@ FILE: index.html
             </div>
             <div class="testimonials-footer">
                 <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
-                    Ver críticas no Google
+                    <span data-i18n="view_google_reviews">Ver críticas no Google</span>
                 </a>
             </div>
         </div>
@@ -41799,6 +42244,11 @@ FILE: script.js
                 { name: 'Contacto rápido por WhatsApp', description: 'Resposta ágil para marcar visitas e pedidos de orçamento.' }
             ],
             testimonials_title: 'Críticas',
+            recent_work_title: 'Trabalhos recentes',
+            recent_work_subtitle: 'Galeria de intervenções reais em preparação.',
+            recent_work_status: 'EM ATUALIZAÇÃO',
+            recent_work_notice: 'Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.',
+            recent_work_cta: 'Enviar fotos pelo WhatsApp',
             reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
@@ -41862,6 +42312,11 @@ FILE: script.js
                 { name: 'Fast contact via WhatsApp', description: 'Quick replies to schedule visits and request quotes.' }
             ],
             testimonials_title: 'Reviews',
+            recent_work_title: 'Recent work',
+            recent_work_subtitle: 'Gallery of real projects in preparation.',
+            recent_work_status: 'UPDATING SOON',
+            recent_work_notice: 'We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.',
+            recent_work_cta: 'Send photos via WhatsApp',
             reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
@@ -41925,6 +42380,11 @@ FILE: script.js
                 { name: 'Contacto rápido por WhatsApp', description: 'Respuesta ágil para visitas y solicitudes de presupuesto.' }
             ],
             testimonials_title: 'Reseñas',
+            recent_work_title: 'Trabajos recientes',
+            recent_work_subtitle: 'Galería de trabajos reales en preparación.',
+            recent_work_status: 'EN ACTUALIZACIÓN',
+            recent_work_notice: 'Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.',
+            recent_work_cta: 'Enviar fotos por WhatsApp',
             reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
@@ -41988,6 +42448,11 @@ FILE: script.js
                 { name: 'Contact rapide par WhatsApp', description: 'Réponse rapide pour planifier des visites et demander un devis.' }
             ],
             testimonials_title: 'Avis',
+            recent_work_title: 'Travaux récents',
+            recent_work_subtitle: 'Galerie d\'interventions réelles en préparation.',
+            recent_work_status: 'EN COURS DE MISE À JOUR',
+            recent_work_notice: 'Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d\'interventions terminées.',
+            recent_work_cta: 'Envoyer des photos par WhatsApp',
             reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
@@ -47729,6 +48194,53 @@ body.modal-open {
 .advantage-card p {
     font-size: 0.95rem;
     color: var(--text-light);
+}
+
+/* ===== RECENT WORK (UPDATE BANNER) ===== */
+
+.recent-work-update {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    text-align: center;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.recent-work-status {
+    margin: 0 0 20px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-dark);
+    line-height: 1.2;
+}
+
+.recent-work-notice {
+    margin: 0 auto 28px;
+    max-width: 52ch;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-light);
+}
+
+.recent-work-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recent-work-cta .fa-whatsapp {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 600px) {
+    .recent-work-update {
+        padding: 36px 24px;
+    }
 }
 
 /* ===== GOOGLE REVIEWS ===== */
