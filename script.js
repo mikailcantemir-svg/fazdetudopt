@@ -186,8 +186,8 @@
         pt: {
             nav_home: 'Início', nav_services: 'Serviços', nav_about: 'Sobre nós', nav_contact: 'Contacto',
             footer_links: 'Links',
-            hero_title: 'O seu faz tudo de confiança em Lisboa e Margem Sul',
-            hero_subtitle: 'Pinturas, canalizações, electricidade, carpintaria e muito mais. Serviço profissional com garantia de qualidade.',
+            hero_title: 'Reparações e Manutenção Geral no Seu Espaço — Rápido e Sem Complicações',
+            hero_subtitle: 'Esqueça as dores de cabeça com avarias ou obras inacabadas. Seja uma pequena reparação em casa ou a manutenção completa do seu negócio, garantimos um serviço profissional, limpo e com técnicos de confiança. Atendimento rápido na Grande Lisboa, Cascais e Margem Sul.',
             hero_btn_quote: 'Pedir orçamento grátis',
             hero_btn_call: 'Ligue agora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google',
