@@ -82,9 +82,9 @@
         }
     };
 
-    /* SYNC: Ordem = cartões em index.html → #services .services-modern-grid (17 entradas) */
+    /* SYNC: Ordem = cartões em index.html → #services .services-modern-grid (18 entradas) */
     const SERVICE_ICONS = [
-        'house-chimney', 'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
+        'house-chimney', 'house-circle-check', 'paint-roller', 'building', 'faucet-drip', 'bolt', 'hammer', 'screwdriver-wrench',
         'trowel-bricks', 'broom', 'seedling', 'truck-fast', 'laptop-medical', 'key', 'wind',
         'window-maximize', 'couch', 'water-ladder'
     ];
@@ -93,6 +93,7 @@
 
     const SERVICE_LANDING_SLUGS = [
         'servico-remodelacoes.html',
+        'servico-recuperar-casa.html',
         'servico-pinturas.html',
         'servico-pintura-fachadas-alpinismo.html',
         'servico-canalizacoes.html',
@@ -138,6 +139,7 @@
         'wind': 'fa-solid fa-wind',
         'window-maximize': 'fa-solid fa-window-maximize',
         'house-chimney': 'fa-solid fa-house-chimney',
+        'house-circle-check': 'fa-solid fa-house-circle-check',
         'shield-halved': 'fa-solid fa-shield-halved',
         'couch': 'fa-solid fa-couch',
         'water-ladder': 'fa-solid fa-water-ladder',
@@ -178,7 +180,8 @@
             cat_view_services: 'Ver serviços',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
             services: [
-                { name: 'Remodelações', description: 'Remodelação de cozinhas, casas de banho, pavimentos e obras gerais.' },
+                { name: 'Remodelações e Obras', description: 'Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.' },
+                { name: 'Recuperar Casa', description: 'Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.' },
                 { name: 'Pinturas', description: 'Interior e exterior. Preparação de superfícies, primários e acabamentos de qualidade.' },
                 { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
                 { name: 'Canalizações', description: 'Reparação de fugas, desentupimentos, reparação de autoclismos, instalação de torneiras, sanitas e sistemas de água.' },
@@ -245,7 +248,8 @@
             cat_casa_desc: 'Cleaning, gardening, moving, décor and pool maintenance.',
             cat_view_services: 'View services',
             services: [
-                { name: 'Renovations', description: 'Kitchen, bathroom, flooring renovations and general works.' },
+                { name: 'Renovations & Construction', description: 'Kitchen and bathroom renovations, building new rooms, extensions and structural works. From design to handover.' },
+                { name: 'Home Restoration', description: 'Complete restoration of vacant, inherited or run-down houses. From structure to finishes, we bring your property back to life.' },
                 { name: 'Painting', description: 'Interior and exterior. Surface preparation, primers and quality finishes.' },
                 { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
                 { name: 'Plumbing', description: 'Leak repair, tap, toilet and water system installation.' },
@@ -312,7 +316,8 @@
             cat_casa_desc: 'Limpieza, jardinería, mudanzas, decoración y piscinas.',
             cat_view_services: 'Ver servicios',
             services: [
-                { name: 'Reformas', description: 'Reformas de cocinas, baños, suelos y obras generales.' },
+                { name: 'Reformas y Obras', description: 'Reforma de cocinas y baños, construcción de nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.' },
+                { name: 'Recuperar Casa', description: 'Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos vida y habitabilidad a su inmueble.' },
                 { name: 'Pinturas', description: 'Interior y exterior. Preparación de superficies, imprimaciones y acabados de calidad.' },
                 { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
                 { name: 'Fontanería', description: 'Reparación de fugas, instalación de grifos, sanitarios y sistemas de agua.' },
@@ -379,7 +384,8 @@
             cat_casa_desc: 'Nettoyage, jardin, déménagement, déco et piscines.',
             cat_view_services: 'Voir les services',
             services: [
-                { name: 'Rénovations', description: 'Rénovation de cuisines, salles de bains, sols et travaux généraux.' },
+                { name: 'Rénovations et Travaux', description: 'Rénovation de cuisines et salles de bains, construction de nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.' },
+                { name: 'Rénover une Maison', description: 'Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions, nous redonnons vie à votre bien.' },
                 { name: 'Peinture', description: 'Intérieur et extérieur. Préparation des surfaces, apprêts et finitions de qualité.' },
                 { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
                 { name: 'Plomberie', description: 'Réparation de fuites, installation de robinets, toilettes et systèmes d\'eau.' },

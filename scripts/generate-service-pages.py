@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Generate SEO service landing pages from the Faz de Tudo PT template."""
+# NOTA: servico-recuperar-casa.html foi adicionado manualmente; não regenerar com este script antigo (*-lisboa.html).
 
 from pathlib import Path
 from urllib.parse import quote

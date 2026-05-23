@@ -318,15 +318,38 @@ SERVICES = [
     },
     {
         "slug": "servico-remodelacoes.html",
-        "service_name": "Remodelações",
+        "service_name": "Remodelações e Obras",
         "page_title": "Remodelações e Obras em Lisboa e Margem Sul | Faz de Tudo PT",
         "meta_description": "Remodelações em Lisboa e Setúbal: cozinhas, casas de banho e pavimentos. Equipa completa. Orçamento grátis.",
-        "h1": "Remodelações de Cozinhas, Casas de Banho e Obras",
+        "h1": "Remodelações, Obras e Construção em Lisboa e Margem Sul",
         "wa_message": "Olá! Gostaria de pedir um orçamento para remodelações.",
         "body": """
                 <p><strong>Remodelações em Lisboa</strong>, <strong>Cascais</strong> e <strong>Setúbal</strong> com coordenação de canalização, electricidade e acabamentos. Um interlocutor único do orçamento à entrega.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <p>Renovação de cozinhas e casas de banho, substituição de pavimentos, pequenas e médias obras com cronograma e preço fechado sempre que possível.</p>
+                <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
+                <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
+                <ul class="service-zones-grid">
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
+                </ul>""",
+    },
+    {
+        "slug": "servico-recuperar-casa.html",
+        "service_name": "Recuperar Casa",
+        "page_title": "Recuperação de Casas Antigas e Devolutas em Lisboa | Faz de Tudo PT",
+        "meta_description": "Recupera casas antigas, devolutas ou herdadas na Grande Lisboa e Margem Sul. Da estrutura aos acabamentos, com orçamento e prazos fechados.",
+        "h1": "Recuperação de Casas Antigas, Devolutas e Degradadas",
+        "wa_message": "Olá! Gostaria de pedir um orçamento para recuperação de casa.",
+        "body": """
+                <p>Recuperação de <strong>casas devolutas, herdadas ou degradadas</strong> na Grande Lisboa e Margem Sul com um único interlocutor e prazo fechado.</p>
+                <h2>O que fazemos nesta área:</h2>
+                <p>Avaliação do imóvel, tratamento de humidades, reabilitação de coberturas e instalações, renovação de cozinhas e casas de banho e entrega pronta a habitar.</p>
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
