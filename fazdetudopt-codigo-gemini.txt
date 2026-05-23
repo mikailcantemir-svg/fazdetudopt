@@ -1,8 +1,54 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (pós-refactor Fases 1–5)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Inclui: scripts/templates/partials/, slug_registry, site_config, geradores
-Ficheiros: 131
+Ficheiros: 133
 ================================================================================
+
+
+================================================================================
+FILE: .github/workflows/pages.yml
+================================================================================
+
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
 
 ================================================================================
@@ -469,7 +515,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "fazdetudopt-codigo-gemini.txt"
 
-EXT = {".html", ".css", ".js", ".xml", ".txt", ".py", ".md"}
+EXT = {".html", ".css", ".js", ".xml", ".txt", ".py", ".md", ".yml", ".yaml"}
+EXTRA_NAMES = {".nojekyll", ".htaccess"}
 SKIP_DIRS = {".git", "__pycache__"}
 SKIP_NAMES = {
     "fazdetudopt-codigo-completo.zip",
@@ -478,6 +525,7 @@ SKIP_NAMES = {
 
 # Templates e scripts primeiro no bundle
 PRIORITY_PREFIXES = (
+    ".github/workflows/",
     "scripts/templates/",
     "scripts/",
     "docs/",
@@ -497,7 +545,7 @@ def should_include(path: Path) -> bool:
         return False
     if path.name in SKIP_NAMES:
         return False
-    if path.name == ".htaccess":
+    if path.name in EXTRA_NAMES:
         return True
     return path.suffix.lower() in EXT
 
@@ -4789,6 +4837,12 @@ Redirect 301 /remodelacoes-lisboa.html /servico-remodelacoes.html
 Redirect 301 /reparacao-estores-lisboa.html /servico-estores-persianas.html
 Redirect 301 /reparacoes-gerais-lisboa.html /servico-reparacoes-gerais.html
 Redirect 301 /serralharia-lisboa.html /servico-serralharia.html
+
+
+================================================================================
+FILE: .nojekyll
+================================================================================
+
 
 
 ================================================================================

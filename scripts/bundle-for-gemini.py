@@ -8,7 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "fazdetudopt-codigo-gemini.txt"
 
-EXT = {".html", ".css", ".js", ".xml", ".txt", ".py", ".md"}
+EXT = {".html", ".css", ".js", ".xml", ".txt", ".py", ".md", ".yml", ".yaml"}
+EXTRA_NAMES = {".nojekyll", ".htaccess"}
 SKIP_DIRS = {".git", "__pycache__"}
 SKIP_NAMES = {
     "fazdetudopt-codigo-completo.zip",
@@ -17,6 +18,7 @@ SKIP_NAMES = {
 
 # Templates e scripts primeiro no bundle
 PRIORITY_PREFIXES = (
+    ".github/workflows/",
     "scripts/templates/",
     "scripts/",
     "docs/",
@@ -36,7 +38,7 @@ def should_include(path: Path) -> bool:
         return False
     if path.name in SKIP_NAMES:
         return False
-    if path.name == ".htaccess":
+    if path.name in EXTRA_NAMES:
         return True
     return path.suffix.lower() in EXT
 
