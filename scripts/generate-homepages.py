@@ -27,6 +27,8 @@ from home_page_i18n import (  # noqa: E402
     HOME_META,
     HOME_UI,
     LANGS,
+    RECENT_WORK_ITEMS,
+    RECENT_WORK_WA,
     SERVICE_CARDS,
     TESTIMONIAL_CARDS,
     home_url,
@@ -48,6 +50,7 @@ from site_config import (  # noqa: E402
     schema_telephone,
     tel_href,
     wa_href,
+    wa_href_for_message,
 )
 from template_engine import render_template  # noqa: E402
 
@@ -144,6 +147,68 @@ def build_faq_list(lang: str) -> str:
                 </div>"""
         )
     return "\n".join(blocks)
+
+
+def build_recent_work_section(lang: str, asset_prefix: str) -> str:
+    ui = HOME_UI[lang]
+    cards = []
+    for item in RECENT_WORK_ITEMS:
+        category, title, description = item[lang]
+        before_src = f"{asset_prefix}{item['before']}"
+        after_src = f"{asset_prefix}{item['after']}"
+        wa_link = wa_href_for_message(item["wa"][lang])
+        alt_before = f"{ui['recent_work_before']} — {category}: {title}"
+        alt_after = f"{ui['recent_work_after']} — {category}: {title}"
+        cards.append(
+            f"""                <article class="work-card fade-in">
+                    <span class="work-category">{html.escape(category)}</span>
+                    <div class="work-compare" role="group" aria-label="{html.escape(title)}">
+                        <figure class="work-photo work-photo--before">
+                            <img src="{before_src}" alt="{html.escape(alt_before)}" width="600" height="450" loading="lazy" decoding="async">
+                            <figcaption>{html.escape(ui["recent_work_before"])}</figcaption>
+                        </figure>
+                        <figure class="work-photo work-photo--after">
+                            <img src="{after_src}" alt="{html.escape(alt_after)}" width="600" height="450" loading="lazy" decoding="async">
+                            <figcaption>{html.escape(ui["recent_work_after"])}</figcaption>
+                        </figure>
+                    </div>
+                    <h3 class="work-card-title">{html.escape(title)}</h3>
+                    <p class="work-card-text">{html.escape(description)}</p>
+                    <a href="{wa_link}" class="btn btn-outline work-card-cta" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span>{html.escape(ui["recent_work_card_cta"])}</span>
+                    </a>
+                </article>"""
+        )
+    grid = "\n\n".join(cards)
+    section_wa = wa_href_for_message(RECENT_WORK_WA[lang])
+    return f"""    <section class="section" id="recent-work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="recent_work_title">{html.escape(ui["recent_work_title"])}</h2>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">{html.escape(ui["recent_work_subtitle"])}</p>
+            </div>
+            <div class="recent-work-grid">
+{grid}
+            </div>
+            <div class="recent-work-cta">
+                <a href="{section_wa}" class="btn btn-primary btn-lg" id="recent-work-cta">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="recent_work_cta">{html.escape(ui["recent_work_cta"])}</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>"""
+
+
+def build_testimonials_footer(lang: str) -> str:
+    label = HOME_UI[lang]["view_google_reviews"]
+    return f"""            <div class="testimonials-footer">
+                <a href="{GOOGLE_REVIEWS_URL}" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                    <span data-i18n="view_google_reviews">{html.escape(label)}</span>
+                </a>
+            </div>"""
 
 
 def build_footer_services(lang: str) -> str:
@@ -361,15 +426,16 @@ def render_homepage(lang: str) -> str:
             "LOGO_PATH": LOGO_PATH,
             "SERVICE_CARDS": build_service_cards(lang),
             "HANDYMAN_SECTION": build_handyman_section(lang),
+            "RECENT_WORK_SECTION": build_recent_work_section(lang, prefix),
             "ADVANTAGES_GRID": build_advantages_grid(lang),
             "TESTIMONIALS_SUMMARY": build_testimonials_summary(lang),
             "TESTIMONIALS_CARDS": build_testimonials_cards(lang),
+            "TESTIMONIALS_FOOTER": build_testimonials_footer(lang),
             "FAQ_LIST": build_faq_list(lang),
             "WA_HREF": wa_href(lang),
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
             "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
-            "VIEW_GOOGLE_REVIEWS": meta["view_google"],
         },
     )
     html = apply_i18n_attributes(html, lang)
