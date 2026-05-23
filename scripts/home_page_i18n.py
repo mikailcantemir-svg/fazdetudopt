@@ -463,57 +463,69 @@ FAQ_ITEMS = [
 
 TESTIMONIAL_CARDS = [
     {
-        "pt": (
-            "Cliente em Lisboa",
-            "Profissionais, pontuais e resolveram tudo no mesmo dia. Recomendo.",
-        ),
-        "en": (
-            "Client in Lisbon",
-            "Professional, on time and fixed everything the same day. Recommended.",
-        ),
-        "es": (
-            "Cliente en Lisboa",
-            "Profesionales, puntuales y lo resolvieron todo el mismo día. Recomiendo.",
-        ),
-        "fr": (
-            "Client à Lisbonne",
-            "Professionnels, ponctuels et tout résolu le jour même. Je recommande.",
-        ),
+        "pt": ("Mamadu", "Recomendo! Muito bom."),
+        "en": ("Mamadu", "Highly recommended! Very good."),
+        "es": ("Mamadu", "¡Recomiendo! Muy bueno."),
+        "fr": ("Mamadu", "Je recommande ! Très bien."),
+    },
+    {
+        "pt": ("Leandro", ""),
+        "en": ("Leandro", ""),
+        "es": ("Leandro", ""),
+        "fr": ("Leandro", ""),
+    },
+    {
+        "pt": ("Djadja", "Ajudou a montar os móveis, preços acessíveis."),
+        "en": ("Djadja", "Helped assemble the furniture, affordable prices."),
+        "es": ("Djadja", "Ayudó a montar los muebles, precios accesibles."),
+        "fr": ("Djadja", "A aidé à monter les meubles, prix abordables."),
+    },
+    {
+        "pt": ("Carla", "Recomendo! Muito bom profissional."),
+        "en": ("Carla", "Highly recommended! Very good professional."),
+        "es": ("Carla", "¡Recomiendo! Muy buen profesional."),
+        "fr": ("Carla", "Je recommande ! Très bon professionnel."),
+    },
+    {
+        "pt": ("Rita", "Ótimo trabalho recomendável."),
+        "en": ("Rita", "Great work, highly recommendable."),
+        "es": ("Rita", "Excelente trabajo, recomendable."),
+        "fr": ("Rita", "Excellent travail, recommandable."),
+    },
+    {
+        "pt": ("Valenty", "Ótima empresa! 👌🏻💯"),
+        "en": ("Valenty", "Great company! 👌🏻💯"),
+        "es": ("Valenty", "¡Excelente empresa! 👌🏻💯"),
+        "fr": ("Valenty", "Excellente entreprise ! 👌🏻💯"),
+    },
+    {
+        "pt": ("Sambis", "Excelente profissional e um trabalho top. RECOMENDO!"),
+        "en": ("Sambis", "Excellent professional and top-quality work. I RECOMMEND!"),
+        "es": ("Sambis", "Excelente profesional y un trabajo top. ¡RECOMIENDO!"),
+        "fr": ("Sambis", "Excellent professionnel et un travail au top. JE RECOMMANDE !"),
+    },
+    {
+        "pt": ("Ana", ""),
+        "en": ("Ana", ""),
+        "es": ("Ana", ""),
+        "fr": ("Ana", ""),
     },
     {
         "pt": (
-            "Cliente em Almada",
-            "Boa comunicação desde o WhatsApp até à conclusão do trabalho.",
+            "Isabel",
+            "Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯",
         ),
         "en": (
-            "Client in Almada",
-            "Good communication from WhatsApp through to job completion.",
+            "Isabel",
+            "Excellent service — they carried out painting and furniture assembly for me. Highly recommended 💯",
         ),
         "es": (
-            "Cliente en Almada",
-            "Buena comunicación desde WhatsApp hasta la finalización del trabajo.",
+            "Isabel",
+            "Excelente servicio, me realizaron servicio de pintura y montaje de muebles. Recomendado 💯",
         ),
         "fr": (
-            "Client à Almada",
-            "Bonne communication du WhatsApp jusqu'à la fin des travaux.",
-        ),
-    },
-    {
-        "pt": (
-            "Cliente em Cascais",
-            "Trabalho cuidado, espaço limpo e solução adequada ao que precisávamos.",
-        ),
-        "en": (
-            "Client in Cascais",
-            "Careful work, clean space and the right solution for what we needed.",
-        ),
-        "es": (
-            "Cliente en Cascais",
-            "Trabajo cuidado, espacio limpio y solución adecuada a lo que necesitábamos.",
-        ),
-        "fr": (
-            "Client à Cascais",
-            "Travail soigné, espace propre et solution adaptée à nos besoins.",
+            "Isabel",
+            "Excellent service — ils ont réalisé la peinture et le montage de meubles pour moi. Recommandé 💯",
         ),
     },
 ]

@@ -926,6 +926,11 @@ def build_testimonials_cards(lang: str) -> str:
     for card in TESTIMONIAL_CARDS:
         name, text = card[lang]
         initial = html.escape(name.strip()[0].upper())
+        text_block = (
+            f'\n                                <p class="google-review-text">{html.escape(text)}</p>'
+            if text
+            else ""
+        )
         blocks.append(
             f"""                        <div class="swiper-slide">
                             <article class="google-review-card">
@@ -941,8 +946,7 @@ def build_testimonials_cards(lang: str) -> str:
                                 </div>
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5">{_render_stars(5)}</span>
-                                </div>
-                                <p class="google-review-text">{html.escape(text)}</p>
+                                </div>{text_block}
                             </article>
                         </div>"""
         )
@@ -2202,57 +2206,69 @@ FAQ_ITEMS = [
 
 TESTIMONIAL_CARDS = [
     {
-        "pt": (
-            "Cliente em Lisboa",
-            "Profissionais, pontuais e resolveram tudo no mesmo dia. Recomendo.",
-        ),
-        "en": (
-            "Client in Lisbon",
-            "Professional, on time and fixed everything the same day. Recommended.",
-        ),
-        "es": (
-            "Cliente en Lisboa",
-            "Profesionales, puntuales y lo resolvieron todo el mismo día. Recomiendo.",
-        ),
-        "fr": (
-            "Client à Lisbonne",
-            "Professionnels, ponctuels et tout résolu le jour même. Je recommande.",
-        ),
+        "pt": ("Mamadu", "Recomendo! Muito bom."),
+        "en": ("Mamadu", "Highly recommended! Very good."),
+        "es": ("Mamadu", "¡Recomiendo! Muy bueno."),
+        "fr": ("Mamadu", "Je recommande ! Très bien."),
+    },
+    {
+        "pt": ("Leandro", ""),
+        "en": ("Leandro", ""),
+        "es": ("Leandro", ""),
+        "fr": ("Leandro", ""),
+    },
+    {
+        "pt": ("Djadja", "Ajudou a montar os móveis, preços acessíveis."),
+        "en": ("Djadja", "Helped assemble the furniture, affordable prices."),
+        "es": ("Djadja", "Ayudó a montar los muebles, precios accesibles."),
+        "fr": ("Djadja", "A aidé à monter les meubles, prix abordables."),
+    },
+    {
+        "pt": ("Carla", "Recomendo! Muito bom profissional."),
+        "en": ("Carla", "Highly recommended! Very good professional."),
+        "es": ("Carla", "¡Recomiendo! Muy buen profesional."),
+        "fr": ("Carla", "Je recommande ! Très bon professionnel."),
+    },
+    {
+        "pt": ("Rita", "Ótimo trabalho recomendável."),
+        "en": ("Rita", "Great work, highly recommendable."),
+        "es": ("Rita", "Excelente trabajo, recomendable."),
+        "fr": ("Rita", "Excellent travail, recommandable."),
+    },
+    {
+        "pt": ("Valenty", "Ótima empresa! 👌🏻💯"),
+        "en": ("Valenty", "Great company! 👌🏻💯"),
+        "es": ("Valenty", "¡Excelente empresa! 👌🏻💯"),
+        "fr": ("Valenty", "Excellente entreprise ! 👌🏻💯"),
+    },
+    {
+        "pt": ("Sambis", "Excelente profissional e um trabalho top. RECOMENDO!"),
+        "en": ("Sambis", "Excellent professional and top-quality work. I RECOMMEND!"),
+        "es": ("Sambis", "Excelente profesional y un trabajo top. ¡RECOMIENDO!"),
+        "fr": ("Sambis", "Excellent professionnel et un travail au top. JE RECOMMANDE !"),
+    },
+    {
+        "pt": ("Ana", ""),
+        "en": ("Ana", ""),
+        "es": ("Ana", ""),
+        "fr": ("Ana", ""),
     },
     {
         "pt": (
-            "Cliente em Almada",
-            "Boa comunicação desde o WhatsApp até à conclusão do trabalho.",
+            "Isabel",
+            "Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯",
         ),
         "en": (
-            "Client in Almada",
-            "Good communication from WhatsApp through to job completion.",
+            "Isabel",
+            "Excellent service — they carried out painting and furniture assembly for me. Highly recommended 💯",
         ),
         "es": (
-            "Cliente en Almada",
-            "Buena comunicación desde WhatsApp hasta la finalización del trabajo.",
+            "Isabel",
+            "Excelente servicio, me realizaron servicio de pintura y montaje de muebles. Recomendado 💯",
         ),
         "fr": (
-            "Client à Almada",
-            "Bonne communication du WhatsApp jusqu'à la fin des travaux.",
-        ),
-    },
-    {
-        "pt": (
-            "Cliente em Cascais",
-            "Trabalho cuidado, espaço limpo e solução adequada ao que precisávamos.",
-        ),
-        "en": (
-            "Client in Cascais",
-            "Careful work, clean space and the right solution for what we needed.",
-        ),
-        "es": (
-            "Cliente en Cascais",
-            "Trabajo cuidado, espacio limpio y solución adecuada a lo que necesitábamos.",
-        ),
-        "fr": (
-            "Client à Cascais",
-            "Travail soigné, espace propre et solution adaptée à nos besoins.",
+            "Isabel",
+            "Excellent service — ils ont réalisé la peinture et le montage de meubles pour moi. Recommandé 💯",
         ),
     },
 ]
@@ -4465,9 +4481,7 @@ EMAIL = "geral@fazdetudo.pt"
 EMAIL_OBFUSCATED = "geral&#64;fazdetudo.pt"
 DEFAULT_ADDRESS = "Grande Lisboa e Margem Sul, Portugal"
 
-GOOGLE_REVIEWS_URL = (
-    "https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa"
-)
+GOOGLE_REVIEWS_URL = "https://share.google/ajIgKyBugxyYCpS0J"
 
 FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61571666972567"
 INSTAGRAM_URL = (
@@ -6056,9 +6070,9 @@ FILE: dist/en/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client in Lisbon</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Google review
@@ -6068,7 +6082,42 @@ FILE: dist/en/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Professional, on time and fixed everything the same day. Recommended.</p>
+                                <p class="google-review-text">Highly recommended! Very good.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Helped assemble the furniture, affordable prices.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -6076,7 +6125,7 @@ FILE: dist/en/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client in Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Google review
@@ -6086,15 +6135,15 @@ FILE: dist/en/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Good communication from WhatsApp through to job completion.</p>
+                                <p class="google-review-text">Highly recommended! Very good professional.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client in Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Google review
@@ -6104,7 +6153,78 @@ FILE: dist/en/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Careful work, clean space and the right solution for what we needed.</p>
+                                <p class="google-review-text">Great work, highly recommendable.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Great company! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent professional and top-quality work. I RECOMMEND!</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent service — they carried out painting and furniture assembly for me. Highly recommended 💯</p>
                             </article>
                         </div>
                     </div>
@@ -6118,7 +6238,7 @@ FILE: dist/en/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">View reviews on Google</span>
                 </a>
             </div>
@@ -10534,9 +10654,9 @@ FILE: dist/es/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente en Lisboa</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Reseña de Google
@@ -10546,7 +10666,42 @@ FILE: dist/es/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Profesionales, puntuales y lo resolvieron todo el mismo día. Recomiendo.</p>
+                                <p class="google-review-text">¡Recomiendo! Muy bueno.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Ayudó a montar los muebles, precios accesibles.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -10554,7 +10709,7 @@ FILE: dist/es/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente en Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Reseña de Google
@@ -10564,15 +10719,15 @@ FILE: dist/es/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Buena comunicación desde WhatsApp hasta la finalización del trabajo.</p>
+                                <p class="google-review-text">¡Recomiendo! Muy buen profesional.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente en Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Reseña de Google
@@ -10582,7 +10737,78 @@ FILE: dist/es/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Trabajo cuidado, espacio limpio y solución adecuada a lo que necesitábamos.</p>
+                                <p class="google-review-text">Excelente trabajo, recomendable.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">¡Excelente empresa! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente profesional y un trabajo top. ¡RECOMIENDO!</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente servicio, me realizaron servicio de pintura y montaje de muebles. Recomendado 💯</p>
                             </article>
                         </div>
                     </div>
@@ -10596,7 +10822,7 @@ FILE: dist/es/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">Ver reseñas en Google</span>
                 </a>
             </div>
@@ -15012,9 +15238,9 @@ FILE: dist/fr/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client à Lisbonne</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Avis Google
@@ -15024,7 +15250,42 @@ FILE: dist/fr/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Professionnels, ponctuels et tout résolu le jour même. Je recommande.</p>
+                                <p class="google-review-text">Je recommande ! Très bien.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">A aidé à monter les meubles, prix abordables.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -15032,7 +15293,7 @@ FILE: dist/fr/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client à Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Avis Google
@@ -15042,15 +15303,15 @@ FILE: dist/fr/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Bonne communication du WhatsApp jusqu&#x27;à la fin des travaux.</p>
+                                <p class="google-review-text">Je recommande ! Très bon professionnel.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client à Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Avis Google
@@ -15060,7 +15321,78 @@ FILE: dist/fr/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Travail soigné, espace propre et solution adaptée à nos besoins.</p>
+                                <p class="google-review-text">Excellent travail, recommandable.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellente entreprise ! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent professionnel et un travail au top. JE RECOMMANDE !</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent service — ils ont réalisé la peinture et le montage de meubles pour moi. Recommandé 💯</p>
                             </article>
                         </div>
                     </div>
@@ -15074,7 +15406,7 @@ FILE: dist/fr/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">Voir les avis sur Google</span>
                 </a>
             </div>
@@ -19490,9 +19822,9 @@ FILE: dist/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente em Lisboa</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Crítica de Google
@@ -19502,7 +19834,42 @@ FILE: dist/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Profissionais, pontuais e resolveram tudo no mesmo dia. Recomendo.</p>
+                                <p class="google-review-text">Recomendo! Muito bom.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Ajudou a montar os móveis, preços acessíveis.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -19510,7 +19877,7 @@ FILE: dist/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente em Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Crítica de Google
@@ -19520,15 +19887,15 @@ FILE: dist/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Boa comunicação desde o WhatsApp até à conclusão do trabalho.</p>
+                                <p class="google-review-text">Recomendo! Muito bom profissional.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente em Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Crítica de Google
@@ -19538,7 +19905,78 @@ FILE: dist/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Trabalho cuidado, espaço limpo e solução adequada ao que precisávamos.</p>
+                                <p class="google-review-text">Ótimo trabalho recomendável.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Ótima empresa! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente profissional e um trabalho top. RECOMENDO!</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯</p>
                             </article>
                         </div>
                     </div>
@@ -19552,7 +19990,7 @@ FILE: dist/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">Ver críticas no Google</span>
                 </a>
             </div>
@@ -20015,68 +20453,68 @@ FILE: dist/script.js
         email_obfuscated: 'geral&#64;fazdetudo.pt',
         address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
-            url: 'https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa',
+            url: 'https://share.google/ajIgKyBugxyYCpS0J',
             rating: 5,
             count: 9,
             reviews: [
                 {
-                    name: 'Mamadu Sauane',
+                    name: 'Mamadu',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom.',
                     isNew: true
                 },
                 {
-                    name: 'Leandro Conceição',
+                    name: 'Leandro',
                     avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Djadja Djassi',
+                    name: 'Djadja',
                     avatar: null,
                     rating: 5,
                     text: 'Ajudou a montar os móveis, preços acessíveis.',
                     isNew: true
                 },
                 {
-                    name: 'Carla Magalhaes',
+                    name: 'Carla',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom profissional.',
                     isNew: true
                 },
                 {
-                    name: 'Rita Pereira',
+                    name: 'Rita',
                     avatar: null,
                     rating: 5,
                     text: 'Ótimo trabalho recomendável.',
                     isNew: true
                 },
                 {
-                    name: 'Valenty Balde',
+                    name: 'Valenty',
                     avatar: null,
                     rating: 5,
-                    text: 'Ótimo empresa! ✌️ 💯',
+                    text: 'Ótima empresa! 👌🏻💯',
                     isNew: true
                 },
                 {
-                    name: 'Sambis Nbk',
+                    name: 'Sambis',
                     avatar: null,
                     rating: 5,
-                    text: 'Excelente profissional e um trabalho top . RECOMENDO !',
+                    text: 'Excelente profissional e um trabalho top. RECOMENDO!',
                     isNew: true
                 },
                 {
-                    name: 'Ana Cwb',
-                    avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
+                    name: 'Ana',
+                    avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Isabel Gutierrez',
+                    name: 'Isabel',
                     avatar: null,
                     rating: 5,
                     text: 'Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯',
@@ -28074,9 +28512,9 @@ FILE: en/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client in Lisbon</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Google review
@@ -28086,7 +28524,42 @@ FILE: en/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Professional, on time and fixed everything the same day. Recommended.</p>
+                                <p class="google-review-text">Highly recommended! Very good.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Helped assemble the furniture, affordable prices.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -28094,7 +28567,7 @@ FILE: en/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client in Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Google review
@@ -28104,15 +28577,15 @@ FILE: en/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Good communication from WhatsApp through to job completion.</p>
+                                <p class="google-review-text">Highly recommended! Very good professional.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client in Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Google review
@@ -28122,7 +28595,78 @@ FILE: en/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Careful work, clean space and the right solution for what we needed.</p>
+                                <p class="google-review-text">Great work, highly recommendable.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Great company! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent professional and top-quality work. I RECOMMEND!</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent service — they carried out painting and furniture assembly for me. Highly recommended 💯</p>
                             </article>
                         </div>
                     </div>
@@ -28136,7 +28680,7 @@ FILE: en/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">View reviews on Google</span>
                 </a>
             </div>
@@ -32552,9 +33096,9 @@ FILE: es/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente en Lisboa</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Reseña de Google
@@ -32564,7 +33108,42 @@ FILE: es/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Profesionales, puntuales y lo resolvieron todo el mismo día. Recomiendo.</p>
+                                <p class="google-review-text">¡Recomiendo! Muy bueno.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Ayudó a montar los muebles, precios accesibles.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -32572,7 +33151,7 @@ FILE: es/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente en Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Reseña de Google
@@ -32582,15 +33161,15 @@ FILE: es/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Buena comunicación desde WhatsApp hasta la finalización del trabajo.</p>
+                                <p class="google-review-text">¡Recomiendo! Muy buen profesional.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente en Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Reseña de Google
@@ -32600,7 +33179,78 @@ FILE: es/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Trabajo cuidado, espacio limpio y solución adecuada a lo que necesitábamos.</p>
+                                <p class="google-review-text">Excelente trabajo, recomendable.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">¡Excelente empresa! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente profesional y un trabajo top. ¡RECOMIENDO!</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente servicio, me realizaron servicio de pintura y montaje de muebles. Recomendado 💯</p>
                             </article>
                         </div>
                     </div>
@@ -32614,7 +33264,7 @@ FILE: es/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">Ver reseñas en Google</span>
                 </a>
             </div>
@@ -37030,9 +37680,9 @@ FILE: fr/index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client à Lisbonne</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Avis Google
@@ -37042,7 +37692,42 @@ FILE: fr/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Professionnels, ponctuels et tout résolu le jour même. Je recommande.</p>
+                                <p class="google-review-text">Je recommande ! Très bien.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">A aidé à monter les meubles, prix abordables.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -37050,7 +37735,7 @@ FILE: fr/index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client à Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Avis Google
@@ -37060,15 +37745,15 @@ FILE: fr/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Bonne communication du WhatsApp jusqu&#x27;à la fin des travaux.</p>
+                                <p class="google-review-text">Je recommande ! Très bon professionnel.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Client à Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Avis Google
@@ -37078,7 +37763,78 @@ FILE: fr/index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Travail soigné, espace propre et solution adaptée à nos besoins.</p>
+                                <p class="google-review-text">Excellent travail, recommandable.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellente entreprise ! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent professionnel et un travail au top. JE RECOMMANDE !</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Avis Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excellent service — ils ont réalisé la peinture et le montage de meubles pour moi. Recommandé 💯</p>
                             </article>
                         </div>
                     </div>
@@ -37092,7 +37848,7 @@ FILE: fr/index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">Voir les avis sur Google</span>
                 </a>
             </div>
@@ -41508,9 +42264,9 @@ FILE: index.html
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">M</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente em Lisboa</strong>
+                                        <strong class="google-review-name">Mamadu</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Crítica de Google
@@ -41520,7 +42276,42 @@ FILE: index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Profissionais, pontuais e resolveram tudo no mesmo dia. Recomendo.</p>
+                                <p class="google-review-text">Recomendo! Muito bom.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">L</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Leandro</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">D</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Djadja</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Ajudou a montar os móveis, preços acessíveis.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
@@ -41528,7 +42319,7 @@ FILE: index.html
                                 <div class="google-review-top">
                                     <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente em Almada</strong>
+                                        <strong class="google-review-name">Carla</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Crítica de Google
@@ -41538,15 +42329,15 @@ FILE: index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Boa comunicação desde o WhatsApp até à conclusão do trabalho.</p>
+                                <p class="google-review-text">Recomendo! Muito bom profissional.</p>
                             </article>
                         </div>
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
-                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">R</div>
                                     <div class="google-review-meta">
-                                        <strong class="google-review-name">Cliente em Cascais</strong>
+                                        <strong class="google-review-name">Rita</strong>
                                         <span class="google-review-source">
                                             <i class="fab fa-google" aria-hidden="true"></i>
                                             Crítica de Google
@@ -41556,7 +42347,78 @@ FILE: index.html
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                                 </div>
-                                <p class="google-review-text">Trabalho cuidado, espaço limpo e solução adequada ao que precisávamos.</p>
+                                <p class="google-review-text">Ótimo trabalho recomendável.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">V</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Valenty</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Ótima empresa! 👌🏻💯</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">S</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Sambis</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente profissional e um trabalho top. RECOMENDO!</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">A</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Ana</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">I</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Isabel</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Crítica de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯</p>
                             </article>
                         </div>
                     </div>
@@ -41570,7 +42432,7 @@ FILE: index.html
                 <div class="swiper-pagination reviews-swiper-pagination"></div>
             </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/ajIgKyBugxyYCpS0J" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">Ver críticas no Google</span>
                 </a>
             </div>
@@ -42033,68 +42895,68 @@ FILE: script.js
         email_obfuscated: 'geral&#64;fazdetudo.pt',
         address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
-            url: 'https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa',
+            url: 'https://share.google/ajIgKyBugxyYCpS0J',
             rating: 5,
             count: 9,
             reviews: [
                 {
-                    name: 'Mamadu Sauane',
+                    name: 'Mamadu',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom.',
                     isNew: true
                 },
                 {
-                    name: 'Leandro Conceição',
+                    name: 'Leandro',
                     avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Djadja Djassi',
+                    name: 'Djadja',
                     avatar: null,
                     rating: 5,
                     text: 'Ajudou a montar os móveis, preços acessíveis.',
                     isNew: true
                 },
                 {
-                    name: 'Carla Magalhaes',
+                    name: 'Carla',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom profissional.',
                     isNew: true
                 },
                 {
-                    name: 'Rita Pereira',
+                    name: 'Rita',
                     avatar: null,
                     rating: 5,
                     text: 'Ótimo trabalho recomendável.',
                     isNew: true
                 },
                 {
-                    name: 'Valenty Balde',
+                    name: 'Valenty',
                     avatar: null,
                     rating: 5,
-                    text: 'Ótimo empresa! ✌️ 💯',
+                    text: 'Ótima empresa! 👌🏻💯',
                     isNew: true
                 },
                 {
-                    name: 'Sambis Nbk',
+                    name: 'Sambis',
                     avatar: null,
                     rating: 5,
-                    text: 'Excelente profissional e um trabalho top . RECOMENDO !',
+                    text: 'Excelente profissional e um trabalho top. RECOMENDO!',
                     isNew: true
                 },
                 {
-                    name: 'Ana Cwb',
-                    avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
+                    name: 'Ana',
+                    avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Isabel Gutierrez',
+                    name: 'Isabel',
                     avatar: null,
                     rating: 5,
                     text: 'Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯',

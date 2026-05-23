@@ -13,68 +13,68 @@
         email_obfuscated: 'geral&#64;fazdetudo.pt',
         address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
-            url: 'https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa',
+            url: 'https://share.google/ajIgKyBugxyYCpS0J',
             rating: 5,
             count: 9,
             reviews: [
                 {
-                    name: 'Mamadu Sauane',
+                    name: 'Mamadu',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom.',
                     isNew: true
                 },
                 {
-                    name: 'Leandro Conceição',
+                    name: 'Leandro',
                     avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Djadja Djassi',
+                    name: 'Djadja',
                     avatar: null,
                     rating: 5,
                     text: 'Ajudou a montar os móveis, preços acessíveis.',
                     isNew: true
                 },
                 {
-                    name: 'Carla Magalhaes',
+                    name: 'Carla',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom profissional.',
                     isNew: true
                 },
                 {
-                    name: 'Rita Pereira',
+                    name: 'Rita',
                     avatar: null,
                     rating: 5,
                     text: 'Ótimo trabalho recomendável.',
                     isNew: true
                 },
                 {
-                    name: 'Valenty Balde',
+                    name: 'Valenty',
                     avatar: null,
                     rating: 5,
-                    text: 'Ótimo empresa! ✌️ 💯',
+                    text: 'Ótima empresa! 👌🏻💯',
                     isNew: true
                 },
                 {
-                    name: 'Sambis Nbk',
+                    name: 'Sambis',
                     avatar: null,
                     rating: 5,
-                    text: 'Excelente profissional e um trabalho top . RECOMENDO !',
+                    text: 'Excelente profissional e um trabalho top. RECOMENDO!',
                     isNew: true
                 },
                 {
-                    name: 'Ana Cwb',
-                    avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
+                    name: 'Ana',
+                    avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Isabel Gutierrez',
+                    name: 'Isabel',
                     avatar: null,
                     rating: 5,
                     text: 'Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯',

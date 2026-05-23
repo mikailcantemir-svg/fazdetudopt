@@ -107,6 +107,11 @@ def build_testimonials_cards(lang: str) -> str:
     for card in TESTIMONIAL_CARDS:
         name, text = card[lang]
         initial = html.escape(name.strip()[0].upper())
+        text_block = (
+            f'\n                                <p class="google-review-text">{html.escape(text)}</p>'
+            if text
+            else ""
+        )
         blocks.append(
             f"""                        <div class="swiper-slide">
                             <article class="google-review-card">
@@ -122,8 +127,7 @@ def build_testimonials_cards(lang: str) -> str:
                                 </div>
                                 <div class="google-review-rating-row">
                                     <span class="google-review-stars" aria-label="5 / 5">{_render_stars(5)}</span>
-                                </div>
-                                <p class="google-review-text">{html.escape(text)}</p>
+                                </div>{text_block}
                             </article>
                         </div>"""
         )
