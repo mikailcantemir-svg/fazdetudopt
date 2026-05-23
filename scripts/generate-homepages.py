@@ -147,11 +147,10 @@ def build_faq_list(lang: str) -> str:
 
 
 def build_footer_services(lang: str) -> str:
-    prefix = asset_prefix(lang)
     lines = []
     for card in SERVICE_CARDS:
         title = card[lang][0]
-        href = f"{prefix}{card['slug']}"
+        href = card["slug"]
         lines.append(f'                        <li><a href="{href}">{html.escape(title)}</a></li>')
     return "\n".join(lines)
 

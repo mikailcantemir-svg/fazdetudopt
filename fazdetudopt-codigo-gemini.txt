@@ -874,11 +874,10 @@ def build_faq_list(lang: str) -> str:
 
 
 def build_footer_services(lang: str) -> str:
-    prefix = asset_prefix(lang)
     lines = []
     for card in SERVICE_CARDS:
         title = card[lang][0]
-        href = f"{prefix}{card['slug']}"
+        href = card["slug"]
         lines.append(f'                        <li><a href="{href}">{html.escape(title)}</a></li>')
     return "\n".join(lines)
 
@@ -5779,24 +5778,24 @@ FILE: en/index.html
                 <div class="footer-col" id="footer-services">
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
-                        <li><a href="../servico-remodelacoes.html">Renovations &amp; Construction</a></li>
-                        <li><a href="../servico-recuperar-casa.html">Home Restoration</a></li>
-                        <li><a href="../servico-pinturas.html">General Painting</a></li>
-                        <li><a href="../servico-pintura-fachadas-alpinismo.html">Rope-Access Facade Painting</a></li>
-                        <li><a href="../servico-canalizacoes.html">Plumbing</a></li>
-                        <li><a href="../servico-electricidade.html">Electrical</a></li>
-                        <li><a href="../servico-carpintaria.html">Carpentry</a></li>
-                        <li><a href="../servico-reparacoes-gerais.html">General Repairs</a></li>
-                        <li><a href="../servico-manutencao.html">Maintenance</a></li>
-                        <li><a href="../servico-limpezas.html">Cleaning</a></li>
-                        <li><a href="../servico-jardinagem.html">Gardening</a></li>
-                        <li><a href="../servico-mudancas.html">Moving</a></li>
-                        <li><a href="../servico-informatica.html">IT Services</a></li>
-                        <li><a href="../servico-serralharia.html">Locksmithing</a></li>
-                        <li><a href="../servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
-                        <li><a href="../servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
-                        <li><a href="../servico-decoracao-interiores.html">Interior Design</a></li>
-                        <li><a href="../servico-piscinas.html">Swimming Pools</a></li>
+                        <li><a href="servico-remodelacoes.html">Renovations &amp; Construction</a></li>
+                        <li><a href="servico-recuperar-casa.html">Home Restoration</a></li>
+                        <li><a href="servico-pinturas.html">General Painting</a></li>
+                        <li><a href="servico-pintura-fachadas-alpinismo.html">Rope-Access Facade Painting</a></li>
+                        <li><a href="servico-canalizacoes.html">Plumbing</a></li>
+                        <li><a href="servico-electricidade.html">Electrical</a></li>
+                        <li><a href="servico-carpintaria.html">Carpentry</a></li>
+                        <li><a href="servico-reparacoes-gerais.html">General Repairs</a></li>
+                        <li><a href="servico-manutencao.html">Maintenance</a></li>
+                        <li><a href="servico-limpezas.html">Cleaning</a></li>
+                        <li><a href="servico-jardinagem.html">Gardening</a></li>
+                        <li><a href="servico-mudancas.html">Moving</a></li>
+                        <li><a href="servico-informatica.html">IT Services</a></li>
+                        <li><a href="servico-serralharia.html">Locksmithing</a></li>
+                        <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
+                        <li><a href="servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
+                        <li><a href="servico-decoracao-interiores.html">Interior Design</a></li>
+                        <li><a href="servico-piscinas.html">Swimming Pools</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -10240,24 +10239,24 @@ FILE: es/index.html
                 <div class="footer-col" id="footer-services">
                     <h3 data-i18n="nav_services">Servicios</h3>
                     <ul id="footer-services-list">
-                        <li><a href="../servico-remodelacoes.html">Reformas y Obras</a></li>
-                        <li><a href="../servico-recuperar-casa.html">Recuperar Casa</a></li>
-                        <li><a href="../servico-pinturas.html">Pinturas Generales</a></li>
-                        <li><a href="../servico-pintura-fachadas-alpinismo.html">Pintura en Alpinismo</a></li>
-                        <li><a href="../servico-canalizacoes.html">Fontanería</a></li>
-                        <li><a href="../servico-electricidade.html">Electricidad</a></li>
-                        <li><a href="../servico-carpintaria.html">Carpintería</a></li>
-                        <li><a href="../servico-reparacoes-gerais.html">Reparaciones Generales</a></li>
-                        <li><a href="../servico-manutencao.html">Mantenimiento</a></li>
-                        <li><a href="../servico-limpezas.html">Limpieza</a></li>
-                        <li><a href="../servico-jardinagem.html">Jardinería</a></li>
-                        <li><a href="../servico-mudancas.html">Mudanzas</a></li>
-                        <li><a href="../servico-informatica.html">Informática</a></li>
-                        <li><a href="../servico-serralharia.html">Cerrajería</a></li>
-                        <li><a href="../servico-climatizacao.html">Climatización (AVAC)</a></li>
-                        <li><a href="../servico-estores-persianas.html">Persianas y Estores</a></li>
-                        <li><a href="../servico-decoracao-interiores.html">Decoración de Interiores</a></li>
-                        <li><a href="../servico-piscinas.html">Piscinas</a></li>
+                        <li><a href="servico-remodelacoes.html">Reformas y Obras</a></li>
+                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
+                        <li><a href="servico-pinturas.html">Pinturas Generales</a></li>
+                        <li><a href="servico-pintura-fachadas-alpinismo.html">Pintura en Alpinismo</a></li>
+                        <li><a href="servico-canalizacoes.html">Fontanería</a></li>
+                        <li><a href="servico-electricidade.html">Electricidad</a></li>
+                        <li><a href="servico-carpintaria.html">Carpintería</a></li>
+                        <li><a href="servico-reparacoes-gerais.html">Reparaciones Generales</a></li>
+                        <li><a href="servico-manutencao.html">Mantenimiento</a></li>
+                        <li><a href="servico-limpezas.html">Limpieza</a></li>
+                        <li><a href="servico-jardinagem.html">Jardinería</a></li>
+                        <li><a href="servico-mudancas.html">Mudanzas</a></li>
+                        <li><a href="servico-informatica.html">Informática</a></li>
+                        <li><a href="servico-serralharia.html">Cerrajería</a></li>
+                        <li><a href="servico-climatizacao.html">Climatización (AVAC)</a></li>
+                        <li><a href="servico-estores-persianas.html">Persianas y Estores</a></li>
+                        <li><a href="servico-decoracao-interiores.html">Decoración de Interiores</a></li>
+                        <li><a href="servico-piscinas.html">Piscinas</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -14701,24 +14700,24 @@ FILE: fr/index.html
                 <div class="footer-col" id="footer-services">
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
-                        <li><a href="../servico-remodelacoes.html">Rénovations et Travaux</a></li>
-                        <li><a href="../servico-recuperar-casa.html">Rénover une Maison</a></li>
-                        <li><a href="../servico-pinturas.html">Peinture Générale</a></li>
-                        <li><a href="../servico-pintura-fachadas-alpinismo.html">Peinture en Cordes</a></li>
-                        <li><a href="../servico-canalizacoes.html">Plomberie</a></li>
-                        <li><a href="../servico-electricidade.html">Électricité</a></li>
-                        <li><a href="../servico-carpintaria.html">Menuiserie</a></li>
-                        <li><a href="../servico-reparacoes-gerais.html">Réparations Générales</a></li>
-                        <li><a href="../servico-manutencao.html">Entretien</a></li>
-                        <li><a href="../servico-limpezas.html">Nettoyage</a></li>
-                        <li><a href="../servico-jardinagem.html">Jardinage</a></li>
-                        <li><a href="../servico-mudancas.html">Déménagements</a></li>
-                        <li><a href="../servico-informatica.html">Informatique</a></li>
-                        <li><a href="../servico-serralharia.html">Serrurerie</a></li>
-                        <li><a href="../servico-climatizacao.html">Climatisation (CVC)</a></li>
-                        <li><a href="../servico-estores-persianas.html">Stores et Volets</a></li>
-                        <li><a href="../servico-decoracao-interiores.html">Décoration Intérieure</a></li>
-                        <li><a href="../servico-piscinas.html">Piscines</a></li>
+                        <li><a href="servico-remodelacoes.html">Rénovations et Travaux</a></li>
+                        <li><a href="servico-recuperar-casa.html">Rénover une Maison</a></li>
+                        <li><a href="servico-pinturas.html">Peinture Générale</a></li>
+                        <li><a href="servico-pintura-fachadas-alpinismo.html">Peinture en Cordes</a></li>
+                        <li><a href="servico-canalizacoes.html">Plomberie</a></li>
+                        <li><a href="servico-electricidade.html">Électricité</a></li>
+                        <li><a href="servico-carpintaria.html">Menuiserie</a></li>
+                        <li><a href="servico-reparacoes-gerais.html">Réparations Générales</a></li>
+                        <li><a href="servico-manutencao.html">Entretien</a></li>
+                        <li><a href="servico-limpezas.html">Nettoyage</a></li>
+                        <li><a href="servico-jardinagem.html">Jardinage</a></li>
+                        <li><a href="servico-mudancas.html">Déménagements</a></li>
+                        <li><a href="servico-informatica.html">Informatique</a></li>
+                        <li><a href="servico-serralharia.html">Serrurerie</a></li>
+                        <li><a href="servico-climatizacao.html">Climatisation (CVC)</a></li>
+                        <li><a href="servico-estores-persianas.html">Stores et Volets</a></li>
+                        <li><a href="servico-decoracao-interiores.html">Décoration Intérieure</a></li>
+                        <li><a href="servico-piscinas.html">Piscines</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
