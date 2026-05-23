@@ -1520,12 +1520,19 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    isolation: isolate;
+    pointer-events: none;
+}
+
+.wa-widget .wa-chat,
+.wa-widget .whatsapp-float {
+    pointer-events: auto;
 }
 
 .whatsapp-float {
     width: 60px;
     height: 60px;
-    background: var(--primary);
+    background: #25D366;
     border-radius: 50%;
     border: none;
     display: flex;
@@ -1533,10 +1540,11 @@ body.modal-open {
     justify-content: center;
     color: white;
     font-size: 1.8rem;
-    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.4);
-    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
     cursor: pointer;
     position: relative;
+    flex-shrink: 0;
 }
 
 .whatsapp-float:hover {
@@ -1558,21 +1566,19 @@ body.modal-open {
 }
 
 .wa-widget.open .whatsapp-float {
-    background: var(--primary-dark);
+    background: #1da851;
+    box-shadow: 0 6px 24px rgba(29, 168, 81, 0.5);
 }
 
-.whatsapp-float {
-    background: #25D366 !important;
-}
-
-.wa-widget.open .whatsapp-float {
-    background: #1da851 !important;
-}
-
-/* Botão flutuante de telefone removido — chamadas via #header-phone / .btn-phone */
+/* Telefone flutuante / contacto duplicado removido — só #header-phone / .btn-phone */
+.floating-contact,
 .float-call-bar,
+.float-btn,
 .float-btn--tel,
-.float-btn--fixed {
+.float-btn--fixed,
+.float-btn--home,
+.floating-contact .btn--tel,
+.floating-contact .float-btn--tel {
     display: none !important;
 }
 
@@ -2292,6 +2298,7 @@ body.modal-open {
     .service-page-main,
     .service-page-main--article {
         padding-top: 110px;
+        padding-bottom: 88px;
     }
 
     .service-page-cta,

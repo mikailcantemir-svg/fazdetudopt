@@ -63,7 +63,7 @@ def render_lang_switcher(current_lang: str) -> str:
                         <button class="lang-toggle" id="lang-toggle" aria-expanded="false">
                             <img src="{info[1]}" alt="" class="lang-flag" id="lang-flag">
                             <span id="lang-label">{info[0]}</span>
-                            <i class="fa-solid fa-chevron-down lang-chevron"></i>
+                            <i class="fa-solid fa-chevron-down lang-chevron" aria-hidden="true"></i>
                         </button>
                         <div class="lang-dropdown" id="lang-dropdown">
 {chr(10).join(options)}
