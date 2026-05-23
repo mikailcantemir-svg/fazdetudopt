@@ -84,7 +84,7 @@
         }
     };
 
-    const ADVANTAGE_ICONS = ['award', 'shield-halved', 'clock', 'euro-sign'];
+    const ADVANTAGE_ICONS = ['file-invoice', 'location-dot', 'users', 'broom', 'screwdriver-wrench', 'comments'];
 
     const SERVICE_LANDING_SLUGS = [
         'servico-remodelacoes.html',
@@ -164,7 +164,11 @@
         'water-ladder': 'fa-solid fa-water-ladder',
         'award': 'fa-solid fa-award',
         'clock': 'fa-solid fa-clock',
-        'euro-sign': 'fa-solid fa-euro-sign'
+        'euro-sign': 'fa-solid fa-euro-sign',
+        'file-invoice': 'fa-solid fa-file-invoice',
+        'location-dot': 'fa-solid fa-location-dot',
+        'users': 'fa-solid fa-users',
+        'comments': 'fa-solid fa-comments'
     };
 
     function getGoogleReviewsCount() {
@@ -212,24 +216,27 @@
             ],
             advantages_title: 'Porquê escolher-nos?',
             advantages: [
-                { name: 'Experiência comprovada', description: 'Mais de 5 anos de experiência com profissionalismo e dedicação.' },
-                { name: 'Qualidade garantida', description: 'Garantia em todos os trabalhos realizados. Satisfação assegurada.' },
-                { name: 'Resposta rápida', description: 'Orçamentos em 24h. Disponibilidade para urgências.' },
-                { name: 'Preços justos', description: 'Orçamentos transparentes sem surpresas. Melhor relação qualidade-preço.' }
+                { name: 'Orçamento grátis', description: 'Orçamento sem compromisso para planear o seu projeto com tranquilidade.' },
+                { name: 'Atendimento na Grande Lisboa e Margem Sul', description: 'Deslocamo-nos à sua casa ou empresa em Lisboa, Cascais, Almada, Setúbal e arredores.' },
+                { name: 'Equipa polivalente', description: 'Um único contacto para reparações, manutenção e obras especializadas.' },
+                { name: 'Trabalho limpo e organizado', description: 'Protegemos o espaço e deixamos tudo arrumado no final.' },
+                { name: 'Soluções para pequenas reparações e obras maiores', description: 'Do detalhe ao projeto completo, com a mesma dedicação.' },
+                { name: 'Contacto rápido por WhatsApp', description: 'Resposta ágil para marcar visitas e pedidos de orçamento.' }
             ],
             testimonials_title: 'Críticas',
+            reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
             reviews_count_suffix: 'críticas',
             view_google_reviews: 'Ver críticas no Google',
             faq_title: 'Perguntas Frequentes',
             faqs: [
-                { question: 'Que serviços de faz tudo oferecem?', answer: 'Oferecemos uma vasta gama de serviços incluindo pinturas, canalizações, electricidade, carpintaria, reparações gerais, manutenção, limpezas, jardinagem, mudanças, informática, serralharia, climatização, remodelações, estores e persianas, decoração de interiores e piscinas.' },
-                { question: 'Quanto tempo demora para receber um orçamento?', answer: 'Normalmente respondemos com um orçamento dentro de 24 horas após o primeiro contacto. Para situações urgentes, fazemos o possível para responder no próprio dia.' },
-                { question: 'Os vossos profissionais são certificados?', answer: 'Sim, todos os nossos profissionais são qualificados e possuem as certificações necessárias para realizar os trabalhos com segurança e qualidade.' },
-                { question: 'Trabalham aos fins de semana?', answer: 'Sim, trabalhamos aos sábados mediante marcação prévia. Para situações de emergência, temos disponibilidade aos domingos e feriados.' },
-                { question: 'Oferecem garantia nos trabalhos realizados?', answer: 'Sim, oferecemos garantia em todos os trabalhos realizados. O período de garantia varia conforme o tipo de serviço prestado.' },
-                { question: 'Qual é a área de cobertura?', answer: 'Cobrimos toda a zona da Grande Lisboa e arredores, incluindo Cascais, Sintra, Oeiras, Amadora, Loures, Almada, Odivelas e outras localidades.' }
+                { question: 'Fazem pequenas reparações?', answer: 'Sim. Pendurar prateleiras, ajustar portas, retocar pinturas e resolver a lista de arranjos do dia a dia fazem parte do nosso trabalho quotidiano.' },
+                { question: 'Posso pedir orçamento por WhatsApp?', answer: 'Sim. Envie fotos e uma breve descrição pelo WhatsApp e respondemos com orientação e orçamento gratuito.' },
+                { question: 'Que zonas atendem?', answer: 'Grande Lisboa e Margem Sul, incluindo Lisboa, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro e Setúbal.' },
+                { question: 'Fazem urgências?', answer: 'Sempre que possível atendemos urgências. Contacte-nos para confirmar disponibilidade no mesmo dia ou no dia seguinte.' },
+                { question: 'Trabalham para casas e empresas?', answer: 'Sim. Atendemos particulares, condomínios, escritórios e comércios.' },
+                { question: 'O orçamento é gratuito?', answer: 'Sim. O orçamento é gratuito e sem compromisso.' }
             ],
             contact_title: 'Contacte-nos',
             contact_subtitle: 'Estamos prontos para ajudar. Peça o seu orçamento grátis.',
@@ -272,24 +279,27 @@
             ],
             advantages_title: 'Why choose us?',
             advantages: [
-                { name: 'Proven experience', description: 'Over 5 years of experience with professionalism and dedication.' },
-                { name: 'Guaranteed quality', description: 'Warranty on all work performed. Satisfaction assured.' },
-                { name: 'Fast response', description: 'Quotes within 24h. Available for emergencies.' },
-                { name: 'Fair prices', description: 'Transparent quotes with no surprises. Best value for money.' }
+                { name: 'Free quote', description: 'No-obligation quote so you can plan your project with confidence.' },
+                { name: 'Coverage in Greater Lisbon and South Bank', description: 'We come to your home or business in Lisbon, Cascais, Almada, Setúbal and surrounding areas.' },
+                { name: 'Versatile team', description: 'One point of contact for repairs, maintenance and specialist works.' },
+                { name: 'Clean, organised work', description: 'We protect your space and leave everything tidy when we finish.' },
+                { name: 'Small repairs and larger projects', description: 'From quick fixes to full projects, with the same care throughout.' },
+                { name: 'Fast contact via WhatsApp', description: 'Quick replies to schedule visits and request quotes.' }
             ],
             testimonials_title: 'Reviews',
+            reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
             reviews_count_suffix: 'reviews',
             view_google_reviews: 'View reviews on Google',
             faq_title: 'Frequently Asked Questions',
             faqs: [
-                { question: 'What handyman services do you offer?', answer: 'We offer a wide range of services including painting, plumbing, electrical, carpentry, general repairs, maintenance, cleaning, gardening, moving, IT, locksmithing, air conditioning, renovations, blinds and shutters, interior design and swimming pools.' },
-                { question: 'How long does it take to receive a quote?', answer: 'We usually respond with a quote within 24 hours of first contact. For urgent situations, we do our best to respond the same day.' },
-                { question: 'Are your professionals certified?', answer: 'Yes, all our professionals are qualified and hold the necessary certifications to carry out work safely and with quality.' },
-                { question: 'Do you work on weekends?', answer: 'Yes, we work on Saturdays by appointment. For emergencies, we are available on Sundays and public holidays.' },
-                { question: 'Do you offer warranty on completed work?', answer: 'Yes, we offer a warranty on all work completed. The warranty period varies depending on the type of service provided.' },
-                { question: 'What is your coverage area?', answer: 'We cover Greater Lisbon and the South Bank, including Cascais, Sintra, Oeiras, Amadora, Loures, Almada, Setúbal and surrounding areas.' }
+                { question: 'Do you handle small repairs?', answer: 'Yes. Hanging shelves, adjusting doors, touch-up painting and everyday fix-it jobs are part of our daily work.' },
+                { question: 'Can I request a quote via WhatsApp?', answer: 'Yes. Send photos and a short description on WhatsApp and we will reply with guidance and a free quote.' },
+                { question: 'Which areas do you cover?', answer: 'Greater Lisbon and the South Bank, including Lisbon, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro and Setúbal.' },
+                { question: 'Do you handle emergencies?', answer: 'Whenever possible we attend urgent jobs. Contact us to confirm same-day or next-day availability.' },
+                { question: 'Do you work for homes and businesses?', answer: 'Yes. We serve private clients, condominiums, offices and retail premises.' },
+                { question: 'Is the quote free?', answer: 'Yes. Quotes are free and without obligation.' }
             ],
             contact_title: 'Contact us',
             contact_subtitle: 'We are ready to help. Request your free quote.',
@@ -332,24 +342,27 @@
             ],
             advantages_title: '¿Por qué elegirnos?',
             advantages: [
-                { name: 'Experiencia comprobada', description: 'Más de 5 años de experiencia con profesionalismo y dedicación.' },
-                { name: 'Calidad garantizada', description: 'Garantía en todos los trabajos realizados. Satisfacción asegurada.' },
-                { name: 'Respuesta rápida', description: 'Presupuestos en 24h. Disponibilidad para urgencias.' },
-                { name: 'Precios justos', description: 'Presupuestos transparentes sin sorpresas. Mejor relación calidad-precio.' }
+                { name: 'Presupuesto gratis', description: 'Presupuesto sin compromiso para planificar su proyecto con tranquilidad.' },
+                { name: 'Servicio en la Gran Lisboa y Margen Sur', description: 'Nos desplazamos a su hogar o empresa en Lisboa, Cascais, Almada, Setúbal y alrededores.' },
+                { name: 'Equipo polivalente', description: 'Un solo contacto para reparaciones, mantenimiento y obras especializadas.' },
+                { name: 'Trabajo limpio y organizado', description: 'Protegemos el espacio y lo dejamos todo recogido al terminar.' },
+                { name: 'Pequeñas reparaciones y obras mayores', description: 'Del detalle al proyecto completo, con la misma dedicación.' },
+                { name: 'Contacto rápido por WhatsApp', description: 'Respuesta ágil para visitas y solicitudes de presupuesto.' }
             ],
             testimonials_title: 'Reseñas',
+            reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
             reviews_count_suffix: 'reseñas',
             view_google_reviews: 'Ver reseñas en Google',
             faq_title: 'Preguntas Frecuentes',
             faqs: [
-                { question: '¿Qué servicios ofrecen?', answer: 'Ofrecemos una amplia gama de servicios que incluyen pinturas, fontanería, electricidad, carpintería, reparaciones generales, mantenimiento, limpieza, jardinería, mudanzas, informática, cerrajería, climatización, reformas, persianas y estores, decoración de interiores y piscinas.' },
-                { question: '¿Cuánto tiempo tarda en recibir un presupuesto?', answer: 'Normalmente respondemos con un presupuesto dentro de las 24 horas. Para situaciones urgentes, hacemos lo posible por responder el mismo día.' },
-                { question: '¿Sus profesionales están certificados?', answer: 'Sí, todos nuestros profesionales están cualificados y poseen las certificaciones necesarias para realizar los trabajos con seguridad y calidad.' },
-                { question: '¿Trabajan los fines de semana?', answer: 'Sí, trabajamos los sábados con cita previa. Para emergencias, tenemos disponibilidad los domingos y festivos.' },
-                { question: '¿Ofrecen garantía en los trabajos realizados?', answer: 'Sí, ofrecemos garantía en todos los trabajos realizados. El período de garantía varía según el tipo de servicio.' },
-                { question: '¿Cuál es el área de cobertura?', answer: 'Cubrimos toda la zona de la Gran Lisboa y alrededores, incluyendo Cascais, Sintra, Oeiras, Amadora, Loures, Almada, Odivelas y otras localidades.' }
+                { question: '¿Hacen pequeñas reparaciones?', answer: 'Sí. Colgar estanterías, ajustar puertas, retocar pinturas y resolver arreglos del día a día forman parte de nuestro trabajo habitual.' },
+                { question: '¿Puedo pedir presupuesto por WhatsApp?', answer: 'Sí. Envíe fotos y una breve descripción por WhatsApp y le respondemos con orientación y presupuesto gratuito.' },
+                { question: '¿Qué zonas atienden?', answer: 'Gran Lisboa y Margen Sur, incluyendo Lisboa, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro y Setúbal.' },
+                { question: '¿Atienden urgencias?', answer: 'Siempre que es posible atendemos urgencias. Contáctenos para confirmar disponibilidad el mismo día o al siguiente.' },
+                { question: '¿Trabajan para hogares y empresas?', answer: 'Sí. Atendemos particulares, comunidades de vecinos, oficinas y comercios.' },
+                { question: '¿El presupuesto es gratuito?', answer: 'Sí. El presupuesto es gratuito y sin compromiso.' }
             ],
             contact_title: 'Contáctenos',
             contact_subtitle: 'Estamos listos para ayudar. Solicite su presupuesto gratis.',
@@ -392,24 +405,27 @@
             ],
             advantages_title: 'Pourquoi nous choisir ?',
             advantages: [
-                { name: 'Expérience prouvée', description: 'Plus de 5 ans d\'expérience avec professionnalisme et dévouement.' },
-                { name: 'Qualité garantie', description: 'Garantie sur tous les travaux réalisés. Satisfaction assurée.' },
-                { name: 'Réponse rapide', description: 'Devis en 24h. Disponibilité pour les urgences.' },
-                { name: 'Prix justes', description: 'Devis transparents sans surprises. Meilleur rapport qualité-prix.' }
+                { name: 'Devis gratuit', description: 'Devis sans engagement pour planifier votre projet en toute sérénité.' },
+                { name: 'Intervention Grand Lisbonne et Rive Sud', description: 'Nous nous déplaçons chez vous à Lisbonne, Cascais, Almada, Setúbal et environs.' },
+                { name: 'Équipe polyvalente', description: 'Un seul interlocuteur pour réparations, entretien et travaux spécialisés.' },
+                { name: 'Travail propre et soigné', description: 'Nous protégeons les lieux et laissons tout rangé à la fin.' },
+                { name: 'Petites réparations et grands travaux', description: 'Du détail au projet complet, avec le même sérieux.' },
+                { name: 'Contact rapide par WhatsApp', description: 'Réponse rapide pour planifier des visites et demander un devis.' }
             ],
             testimonials_title: 'Avis',
+            reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
             reviews_count_suffix: 'avis',
             view_google_reviews: 'Voir les avis sur Google',
             faq_title: 'Questions Fréquentes',
             faqs: [
-                { question: 'Quels services proposez-vous ?', answer: 'Nous proposons une large gamme de services incluant peinture, plomberie, électricité, menuiserie, réparations générales, entretien, nettoyage, jardinage, déménagements, informatique, serrurerie, climatisation, rénovations, stores et volets, décoration d\'intérieur et piscines.' },
-                { question: 'Combien de temps pour recevoir un devis ?', answer: 'Nous répondons généralement avec un devis dans les 24 heures. Pour les situations urgentes, nous faisons notre possible pour répondre le jour même.' },
-                { question: 'Vos professionnels sont-ils certifiés ?', answer: 'Oui, tous nos professionnels sont qualifiés et possèdent les certifications nécessaires pour réaliser les travaux en toute sécurité et qualité.' },
-                { question: 'Travaillez-vous le week-end ?', answer: 'Oui, nous travaillons le samedi sur rendez-vous. Pour les urgences, nous sommes disponibles les dimanches et jours fériés.' },
-                { question: 'Offrez-vous une garantie sur les travaux ?', answer: 'Oui, nous offrons une garantie sur tous les travaux réalisés. La durée de garantie varie selon le type de service.' },
-                { question: 'Quelle est votre zone de couverture ?', answer: 'Nous couvrons toute la zone du Grand Lisbonne et ses environs, y compris Cascais, Sintra, Oeiras, Amadora, Loures, Almada, Odivelas et d\'autres localités.' }
+                { question: 'Faites-vous les petites réparations ?', answer: 'Oui. Fixer des étagères, ajuster des portes, retouches de peinture et petits travaux du quotidien font partie de notre activité.' },
+                { question: 'Puis-je demander un devis par WhatsApp ?', answer: 'Oui. Envoyez des photos et une courte description sur WhatsApp ; nous répondons avec des conseils et un devis gratuit.' },
+                { question: 'Quelles zones couvrez-vous ?', answer: 'Grand Lisbonne et Rive Sud, dont Lisbonne, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro et Setúbal.' },
+                { question: 'Intervenez-vous en urgence ?', answer: 'Dans la mesure du possible nous traitons les urgences. Contactez-nous pour confirmer une disponibilité rapide.' },
+                { question: 'Travaillez-vous pour particuliers et entreprises ?', answer: 'Oui. Nous intervenons pour les particuliers, copropriétés, bureaux et commerces.' },
+                { question: 'Le devis est-il gratuit ?', answer: 'Oui. Le devis est gratuit et sans engagement.' }
             ],
             contact_title: 'Contactez-nous',
             contact_subtitle: 'Nous sommes prêts à vous aider. Demandez votre devis gratuit.',
@@ -425,16 +441,17 @@
 
     function renderAdvantages() {
         const grid = document.getElementById('advantages-grid');
-        if (!grid) return;
-        grid.innerHTML = T[currentLang].advantages.map((a, i) => `
-            <div class="advantage-card fade-in">
-                <div class="advantage-icon">
-                    <i class="${ICON_MAP[ADVANTAGE_ICONS[i]] || 'fa-solid fa-star'}"></i>
+        if (grid && !grid.children.length) {
+            grid.innerHTML = T[currentLang].advantages.map((a, i) => `
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="${ICON_MAP[ADVANTAGE_ICONS[i]] || 'fa-solid fa-star'}"></i>
+                    </div>
+                    <h3>${a.name}</h3>
+                    <p>${a.description}</p>
                 </div>
-                <h3>${a.name}</h3>
-                <p>${a.description}</p>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 
     function renderStars(rating) {
@@ -487,75 +504,78 @@
         const wrapper = document.getElementById('testimonials-swiper-wrapper');
         const summary = document.getElementById('testimonials-summary');
         const link = document.getElementById('google-reviews-link');
-        if (!wrapper) return;
-
         const lang = T[currentLang];
         const { googleReviews } = CONFIG;
 
-        if (summary) {
+        if (summary && !summary.children.length) {
             summary.innerHTML = `
                 <div class="reviews-aggregate fade-in">
                     <span class="reviews-score">${googleReviews.rating.toFixed(1)}</span>
                     <div class="reviews-stars" aria-label="${googleReviews.rating} / 5">${renderStars(googleReviews.rating)}</div>
-                    <span class="reviews-count">${getReviewsCountLabel(currentLang)}</span>
+                    <span class="reviews-count">${lang.reviews_google_label || getReviewsCountLabel(currentLang)}</span>
                     <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
                 </div>
             `;
         }
 
-        wrapper.innerHTML = googleReviews.reviews.map(review => {
-            const textBlock = review.text
-                ? `<p class="google-review-text">${review.text}</p>`
-                : '';
-            const newBadge = review.isNew
-                ? `<span class="google-review-new">${lang.google_new}</span>`
-                : '';
+        if (wrapper && !wrapper.children.length) {
+            wrapper.innerHTML = googleReviews.reviews.map(review => {
+                const textBlock = review.text
+                    ? `<p class="google-review-text">${review.text}</p>`
+                    : '';
+                const newBadge = review.isNew
+                    ? `<span class="google-review-new">${lang.google_new}</span>`
+                    : '';
 
-            return `
-                <div class="swiper-slide">
-                    <article class="google-review-card">
-                        <div class="google-review-top">
-                            ${renderReviewAvatar(review)}
-                            <div class="google-review-meta">
-                                <strong class="google-review-name">${review.name}</strong>
-                                <span class="google-review-source">
-                                    <i class="fab fa-google" aria-hidden="true"></i>
-                                    ${lang.google_review_source}
-                                </span>
+                return `
+                    <div class="swiper-slide">
+                        <article class="google-review-card">
+                            <div class="google-review-top">
+                                ${renderReviewAvatar(review)}
+                                <div class="google-review-meta">
+                                    <strong class="google-review-name">${review.name}</strong>
+                                    <span class="google-review-source">
+                                        <i class="fab fa-google" aria-hidden="true"></i>
+                                        ${lang.google_review_source}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="google-review-rating-row">
-                            <span class="google-review-stars" aria-label="${review.rating} / 5">${renderStars(review.rating)}</span>
-                            ${newBadge}
-                        </div>
-                        ${textBlock}
-                    </article>
-                </div>
-            `;
-        }).join('');
+                            <div class="google-review-rating-row">
+                                <span class="google-review-stars" aria-label="${review.rating} / 5">${renderStars(review.rating)}</span>
+                                ${newBadge}
+                            </div>
+                            ${textBlock}
+                        </article>
+                    </div>
+                `;
+            }).join('');
+        }
 
         if (link) {
             link.href = googleReviews.url;
             link.textContent = lang.view_google_reviews;
         }
 
-        requestAnimationFrame(() => initReviewsSwiper());
+        if (wrapper && wrapper.children.length) {
+            requestAnimationFrame(() => initReviewsSwiper());
+        }
     }
 
     function renderFAQ() {
         const list = document.getElementById('faq-list');
-        if (!list) return;
-        list.innerHTML = T[currentLang].faqs.map((f, i) => `
-            <div class="faq-item fade-in">
-                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-${i}">
-                    ${f.question}
-                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-                </button>
-                <div class="faq-answer" id="faq-answer-${i}">
-                    <div class="faq-answer-inner">${f.answer}</div>
+        if (list && !list.children.length) {
+            list.innerHTML = T[currentLang].faqs.map((f, i) => `
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-${i}">
+                        ${f.question}
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-${i}">
+                        <div class="faq-answer-inner">${f.answer}</div>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 
     function setupFAQListeners() {
@@ -587,11 +607,12 @@
 
     function renderFooterServices() {
         const list = document.getElementById('footer-services-list');
-        if (!list) return;
-        const services = T[currentLang].services || T.pt.services;
-        list.innerHTML = services.map((s, i) =>
-            `<li><a href="${serviceLandingUrl(i)}">${s.name}</a></li>`
-        ).join('');
+        if (list && !list.children.length) {
+            const services = T[currentLang].services || T.pt.services;
+            list.innerHTML = services.map((s, i) =>
+                `<li><a href="${serviceLandingUrl(i)}">${s.name}</a></li>`
+            ).join('');
+        }
     }
 
     function setupLinks() {
@@ -674,6 +695,8 @@
         const faqs = T[currentLang].faqs;
         if (!faqs) return;
         let script = document.getElementById('faq-schema');
+        /* Skip when FAQ JSON-LD already rendered in static HTML */
+        if (script && script.textContent.trim()) return;
         if (!script) {
             script = document.createElement('script');
             script.id = 'faq-schema';

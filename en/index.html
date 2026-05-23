@@ -26,48 +26,109 @@
     <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  "name": "Faz de Tudo PT",
-  "url": "https://www.fazdetudo.pt/en",
-  "logo": "https://www.fazdetudo.pt/logo.webp",
-  "image": "https://www.fazdetudo.pt/logo.webp",
-  "description": "Professional handyman, renovations, HVAC, rope-access facade painting and pool maintenance across Greater Lisbon and Setúbal.",
-  "telephone": "+351932504112",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Lisboa",
-    "addressRegion": "Grande Lisboa e Margem Sul",
-    "addressCountry": "PT"
-  },
-  "areaServed": [
+  "@graph": [
     {
-      "@type": "AdministrativeArea",
-      "name": "Lisboa"
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Faz de Tudo PT",
+      "url": "https://www.fazdetudo.pt/en",
+      "logo": "https://www.fazdetudo.pt/logo.webp",
+      "image": "https://www.fazdetudo.pt/logo.webp",
+      "description": "Professional handyman, renovations, HVAC, rope-access facade painting and pool maintenance across Greater Lisbon and Setúbal.",
+      "telephone": "+351932504112",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lisboa",
+        "addressRegion": "Grande Lisboa e Margem Sul",
+        "addressCountry": "PT"
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Lisboa"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Cascais"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Estoril"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Sintra"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Almada"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Setúbal"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Azeitão"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script type="application/ld+json" id="faq-schema">
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you handle small repairs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Hanging shelves, adjusting doors, touch-up painting and everyday fix-it jobs are part of our daily work."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Cascais"
+      "@type": "Question",
+      "name": "Can I request a quote via WhatsApp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Send photos and a short description on WhatsApp and we will reply with guidance and a free quote."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Estoril"
+      "@type": "Question",
+      "name": "Which areas do you cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Greater Lisbon and the South Bank, including Lisbon, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro and Setúbal."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Sintra"
+      "@type": "Question",
+      "name": "Do you handle emergencies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whenever possible we attend urgent jobs. Contact us to confirm same-day or next-day availability."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Almada"
+      "@type": "Question",
+      "name": "Do you work for homes and businesses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We serve private clients, condominiums, offices and retail premises."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Setúbal"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Azeitão"
+      "@type": "Question",
+      "name": "Is the quote free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Quotes are free and without obligation."
+      }
     }
   ]
 }
@@ -380,7 +441,48 @@
                 <h2 class="section-title" data-i18n="advantages_title">Why choose us?</h2>
             </div>
             <div class="advantages-grid" id="advantages-grid">
-                <!-- Populated by JS -->
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-file-invoice" aria-hidden="true"></i>
+                    </div>
+                    <h3>Free quote</h3>
+                    <p>No-obligation quote so you can plan your project with confidence.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    </div>
+                    <h3>Coverage in Greater Lisbon and South Bank</h3>
+                    <p>We come to your home or business in Lisbon, Cascais, Almada, Setúbal and surrounding areas.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-users" aria-hidden="true"></i>
+                    </div>
+                    <h3>Versatile team</h3>
+                    <p>One point of contact for repairs, maintenance and specialist works.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-broom" aria-hidden="true"></i>
+                    </div>
+                    <h3>Clean, organised work</h3>
+                    <p>We protect your space and leave everything tidy when we finish.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+                    </div>
+                    <h3>Small repairs and larger projects</h3>
+                    <p>From quick fixes to full projects, with the same care throughout.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                    </div>
+                    <h3>Fast contact via WhatsApp</h3>
+                    <p>Quick replies to schedule visits and request quotes.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -392,12 +494,70 @@
                 <h2 class="section-title" data-i18n="testimonials_title">Reviews</h2>
             </div>
             <div class="testimonials-summary" id="testimonials-summary">
-                <!-- Populated by JS -->
+                <div class="reviews-aggregate fade-in">
+                    <span class="reviews-score">5.0</span>
+                    <div class="reviews-stars" aria-label="5.0 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+                    <span class="reviews-count">Reviews on Google</span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
+                </div>
             </div>
             <div class="reviews-swiper-wrap">
                 <div class="swiper reviews-swiper" id="reviews-swiper">
                     <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
-                        <!-- Populated by JS -->
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Client in Lisbon</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Professional, on time and fixed everything the same day. Recommended.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Client in Almada</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Good communication from WhatsApp through to job completion.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Client in Cascais</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Google review
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Careful work, clean space and the right solution for what we needed.</p>
+                            </article>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="reviews-swiper-prev" aria-label="Previous review">
@@ -423,7 +583,60 @@
                 <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
             </div>
             <div class="faq-list" id="faq-list">
-                <!-- Populated by JS -->
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-0">
+                        Do you handle small repairs?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0">
+                        <div class="faq-answer-inner">Yes. Hanging shelves, adjusting doors, touch-up painting and everyday fix-it jobs are part of our daily work.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                        Can I request a quote via WhatsApp?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1">
+                        <div class="faq-answer-inner">Yes. Send photos and a short description on WhatsApp and we will reply with guidance and a free quote.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                        Which areas do you cover?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2">
+                        <div class="faq-answer-inner">Greater Lisbon and the South Bank, including Lisbon, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro and Setúbal.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                        Do you handle emergencies?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3">
+                        <div class="faq-answer-inner">Whenever possible we attend urgent jobs. Contact us to confirm same-day or next-day availability.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                        Do you work for homes and businesses?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4">
+                        <div class="faq-answer-inner">Yes. We serve private clients, condominiums, offices and retail premises.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                        Is the quote free?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-5">
+                        <div class="faq-answer-inner">Yes. Quotes are free and without obligation.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -482,7 +695,24 @@
                 <div class="footer-col" id="footer-services">
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
-                        <!-- Populated by JS -->
+                        <li><a href="../servico-remodelacoes.html">Renovations &amp; Construction</a></li>
+                        <li><a href="../servico-recuperar-casa.html">Home Restoration</a></li>
+                        <li><a href="../servico-pinturas.html">General Painting</a></li>
+                        <li><a href="../servico-pintura-fachadas-alpinismo.html">Rope-Access Facade Painting</a></li>
+                        <li><a href="../servico-canalizacoes.html">Plumbing</a></li>
+                        <li><a href="../servico-electricidade.html">Electrical</a></li>
+                        <li><a href="../servico-carpintaria.html">Carpentry</a></li>
+                        <li><a href="../servico-reparacoes-gerais.html">General Repairs</a></li>
+                        <li><a href="../servico-manutencao.html">Maintenance</a></li>
+                        <li><a href="../servico-limpezas.html">Cleaning</a></li>
+                        <li><a href="../servico-jardinagem.html">Gardening</a></li>
+                        <li><a href="../servico-mudancas.html">Moving</a></li>
+                        <li><a href="../servico-informatica.html">IT Services</a></li>
+                        <li><a href="../servico-serralharia.html">Locksmithing</a></li>
+                        <li><a href="../servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
+                        <li><a href="../servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
+                        <li><a href="../servico-decoracao-interiores.html">Interior Design</a></li>
+                        <li><a href="../servico-piscinas.html">Swimming Pools</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

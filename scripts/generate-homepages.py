@@ -8,6 +8,7 @@ Normally invoked via scripts/generate-servico-pages.py — run that for a full s
 
 from __future__ import annotations
 
+import html
 import json
 import re
 import sys
@@ -19,11 +20,15 @@ SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
 from home_page_i18n import (  # noqa: E402
+    ADVANTAGES,
+    FAQ_ITEMS,
+    GOOGLE_RATING,
     HANDYMAN,
     HOME_META,
     HOME_UI,
     LANGS,
     SERVICE_CARDS,
+    TESTIMONIAL_CARDS,
     home_url,
     render_home_hreflang,
     render_lang_switcher,
@@ -54,10 +59,125 @@ OG_LOCALE = {
 }
 
 
-def json_ld(lang: str) -> str:
-    meta = HOME_META[lang]
+def _fa_icon(icon: str) -> str:
+    return f"fa-solid fa-{icon}"
+
+
+def _render_stars(rating: int = 5) -> str:
+    return "".join(
+        f'<i class="fa-solid fa-star{"" if i < rating else " google-star-empty"}" aria-hidden="true"></i>'
+        for i in range(5)
+    )
+
+
+def build_advantages_grid(lang: str) -> str:
+    blocks = []
+    for item in ADVANTAGES:
+        name, desc = item[lang]
+        icon = item["icon"]
+        blocks.append(
+            f"""                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="{_fa_icon(icon)}" aria-hidden="true"></i>
+                    </div>
+                    <h3>{html.escape(name)}</h3>
+                    <p>{html.escape(desc)}</p>
+                </div>"""
+        )
+    return "\n".join(blocks)
+
+
+def build_testimonials_summary(lang: str) -> str:
+    ui = HOME_UI[lang]
+    rating = GOOGLE_RATING
+    stars = _render_stars(int(rating))
+    return f"""                <div class="reviews-aggregate fade-in">
+                    <span class="reviews-score">{rating:.1f}</span>
+                    <div class="reviews-stars" aria-label="{rating:.1f} / 5">{stars}</div>
+                    <span class="reviews-count">{html.escape(ui["reviews_google_label"])}</span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
+                </div>"""
+
+
+def build_testimonials_cards(lang: str) -> str:
+    ui = HOME_UI[lang]
+    blocks = []
+    for card in TESTIMONIAL_CARDS:
+        name, text = card[lang]
+        initial = html.escape(name.strip()[0].upper())
+        blocks.append(
+            f"""                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">{initial}</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">{html.escape(name)}</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            {html.escape(ui["google_review_source"])}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5">{_render_stars(5)}</span>
+                                </div>
+                                <p class="google-review-text">{html.escape(text)}</p>
+                            </article>
+                        </div>"""
+        )
+    return "\n".join(blocks)
+
+
+def build_faq_list(lang: str) -> str:
+    blocks = []
+    for i, item in enumerate(FAQ_ITEMS):
+        question, answer = item[lang]
+        blocks.append(
+            f"""                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-{i}">
+                        {html.escape(question)}
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-{i}">
+                        <div class="faq-answer-inner">{html.escape(answer)}</div>
+                    </div>
+                </div>"""
+        )
+    return "\n".join(blocks)
+
+
+def build_footer_services(lang: str) -> str:
+    prefix = asset_prefix(lang)
+    lines = []
+    for card in SERVICE_CARDS:
+        title = card[lang][0]
+        href = f"{prefix}{card['slug']}"
+        lines.append(f'                        <li><a href="{href}">{html.escape(title)}</a></li>')
+    return "\n".join(lines)
+
+
+def faq_json_ld(lang: str) -> str:
+    entities = []
+    for item in FAQ_ITEMS:
+        question, answer = item[lang]
+        entities.append(
+            {
+                "@type": "Question",
+                "name": question,
+                "acceptedAnswer": {"@type": "Answer", "text": answer},
+            }
+        )
     data = {
         "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": entities,
+    }
+    return json.dumps(data, ensure_ascii=False, indent=2)
+
+
+def json_ld(lang: str) -> str:
+    meta = HOME_META[lang]
+    business = {
         "@type": "HomeAndConstructionBusiness",
         "name": "Faz de Tudo PT",
         "url": home_url(lang).rstrip("/"),
@@ -81,6 +201,10 @@ def json_ld(lang: str) -> str:
             {"@type": "AdministrativeArea", "name": "Setúbal"},
             {"@type": "AdministrativeArea", "name": "Azeitão"},
         ],
+    }
+    data = {
+        "@context": "https://schema.org",
+        "@graph": [business],
     }
     return json.dumps(data, ensure_ascii=False, indent=2)
 
@@ -202,6 +326,7 @@ def render_homepage(lang: str) -> str:
         og_description=meta["description"],
         og_locale=OG_LOCALE[lang],
         json_ld=json_ld(lang),
+        faq_json_ld=faq_json_ld(lang),
         asset_prefix=prefix,
         include_swiper_css=True,
     )
@@ -210,7 +335,11 @@ def render_homepage(lang: str) -> str:
         logo_href=home_url(lang),
         lang_switcher=render_lang_switcher(lang),
     )
-    footer = render_footer_home(asset_prefix=prefix, email_href=mailto_href())
+    footer = render_footer_home(
+        asset_prefix=prefix,
+        email_href=mailto_href(),
+        footer_services=build_footer_services(lang),
+    )
     wa_widget = render_wa_widget(
         asset_prefix=prefix,
         wa_online=ui["wa_online"],
@@ -234,6 +363,10 @@ def render_homepage(lang: str) -> str:
             "LOGO_PATH": LOGO_PATH,
             "SERVICE_CARDS": build_service_cards(lang),
             "HANDYMAN_SECTION": build_handyman_section(lang),
+            "ADVANTAGES_GRID": build_advantages_grid(lang),
+            "TESTIMONIALS_SUMMARY": build_testimonials_summary(lang),
+            "TESTIMONIALS_CARDS": build_testimonials_cards(lang),
+            "FAQ_LIST": build_faq_list(lang),
             "WA_HREF": wa_href(lang),
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,

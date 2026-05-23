@@ -31,8 +31,16 @@ def render_head(
     json_ld: str,
     asset_prefix: str,
     include_swiper_css: bool = False,
+    faq_json_ld: str = "",
 ) -> str:
     extra_styles = SWIPER_STYLESHEET if include_swiper_css else ""
+    faq_block = ""
+    if faq_json_ld.strip():
+        faq_block = (
+            '\n    <script type="application/ld+json" id="faq-schema">\n'
+            f"    {faq_json_ld}\n"
+            "    </script>"
+        )
     return render_partial(
         "head.html",
         {
@@ -45,6 +53,7 @@ def render_head(
             "OG_LOCALE": og_locale,
             "OG_IMAGE": OG_IMAGE,
             "JSON_LD": json_ld,
+            "FAQ_JSON_LD": faq_block,
             "ASSET_PREFIX": asset_prefix,
             "LOGO_PATH": LOGO_PATH,
             "EXTRA_STYLESHEETS": extra_styles,
@@ -90,7 +99,12 @@ def render_header_service(
     )
 
 
-def render_footer_home(*, asset_prefix: str, email_href: str) -> str:
+def render_footer_home(
+    *,
+    asset_prefix: str,
+    email_href: str,
+    footer_services: str,
+) -> str:
     return render_partial(
         "footer.html",
         {
@@ -102,6 +116,7 @@ def render_footer_home(*, asset_prefix: str, email_href: str) -> str:
             "EMAIL_OBFUSCATED": EMAIL_OBFUSCATED,
             "FACEBOOK_URL": FACEBOOK_URL,
             "INSTAGRAM_URL": INSTAGRAM_URL,
+            "FOOTER_SERVICES": footer_services,
         },
     )
 

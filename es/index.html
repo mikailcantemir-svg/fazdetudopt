@@ -26,48 +26,109 @@
     <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  "name": "Faz de Tudo PT",
-  "url": "https://www.fazdetudo.pt/es",
-  "logo": "https://www.fazdetudo.pt/logo.webp",
-  "image": "https://www.fazdetudo.pt/logo.webp",
-  "description": "Servicios profesionales de manitas, reformas, climatización, pintura en alpinismo y mantenimiento de piscinas en la Gran Lisboa y Setúbal.",
-  "telephone": "+351932504112",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Lisboa",
-    "addressRegion": "Grande Lisboa e Margem Sul",
-    "addressCountry": "PT"
-  },
-  "areaServed": [
+  "@graph": [
     {
-      "@type": "AdministrativeArea",
-      "name": "Lisboa"
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Faz de Tudo PT",
+      "url": "https://www.fazdetudo.pt/es",
+      "logo": "https://www.fazdetudo.pt/logo.webp",
+      "image": "https://www.fazdetudo.pt/logo.webp",
+      "description": "Servicios profesionales de manitas, reformas, climatización, pintura en alpinismo y mantenimiento de piscinas en la Gran Lisboa y Setúbal.",
+      "telephone": "+351932504112",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lisboa",
+        "addressRegion": "Grande Lisboa e Margem Sul",
+        "addressCountry": "PT"
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Lisboa"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Cascais"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Estoril"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Sintra"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Almada"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Setúbal"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Azeitão"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script type="application/ld+json" id="faq-schema">
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Hacen pequeñas reparaciones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Colgar estanterías, ajustar puertas, retocar pinturas y resolver arreglos del día a día forman parte de nuestro trabajo habitual."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Cascais"
+      "@type": "Question",
+      "name": "¿Puedo pedir presupuesto por WhatsApp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Envíe fotos y una breve descripción por WhatsApp y le respondemos con orientación y presupuesto gratuito."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Estoril"
+      "@type": "Question",
+      "name": "¿Qué zonas atienden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gran Lisboa y Margen Sur, incluyendo Lisboa, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro y Setúbal."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Sintra"
+      "@type": "Question",
+      "name": "¿Atienden urgencias?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Siempre que es posible atendemos urgencias. Contáctenos para confirmar disponibilidad el mismo día o al siguiente."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Almada"
+      "@type": "Question",
+      "name": "¿Trabajan para hogares y empresas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Atendemos particulares, comunidades de vecinos, oficinas y comercios."
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Setúbal"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Azeitão"
+      "@type": "Question",
+      "name": "¿El presupuesto es gratuito?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. El presupuesto es gratuito y sin compromiso."
+      }
     }
   ]
 }
@@ -380,7 +441,48 @@
                 <h2 class="section-title" data-i18n="advantages_title">¿Por qué elegirnos?</h2>
             </div>
             <div class="advantages-grid" id="advantages-grid">
-                <!-- Populated by JS -->
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-file-invoice" aria-hidden="true"></i>
+                    </div>
+                    <h3>Presupuesto gratis</h3>
+                    <p>Presupuesto sin compromiso para planificar su proyecto con tranquilidad.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    </div>
+                    <h3>Servicio en la Gran Lisboa y Margen Sur</h3>
+                    <p>Nos desplazamos a su hogar o empresa en Lisboa, Cascais, Almada, Setúbal y alrededores.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-users" aria-hidden="true"></i>
+                    </div>
+                    <h3>Equipo polivalente</h3>
+                    <p>Un solo contacto para reparaciones, mantenimiento y obras especializadas.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-broom" aria-hidden="true"></i>
+                    </div>
+                    <h3>Trabajo limpio y organizado</h3>
+                    <p>Protegemos el espacio y lo dejamos todo recogido al terminar.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+                    </div>
+                    <h3>Pequeñas reparaciones y obras mayores</h3>
+                    <p>Del detalle al proyecto completo, con la misma dedicación.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">
+                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                    </div>
+                    <h3>Contacto rápido por WhatsApp</h3>
+                    <p>Respuesta ágil para visitas y solicitudes de presupuesto.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -392,12 +494,70 @@
                 <h2 class="section-title" data-i18n="testimonials_title">Reseñas</h2>
             </div>
             <div class="testimonials-summary" id="testimonials-summary">
-                <!-- Populated by JS -->
+                <div class="reviews-aggregate fade-in">
+                    <span class="reviews-score">5.0</span>
+                    <div class="reviews-stars" aria-label="5.0 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+                    <span class="reviews-count">Reseñas en Google</span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
+                </div>
             </div>
             <div class="reviews-swiper-wrap">
                 <div class="swiper reviews-swiper" id="reviews-swiper">
                     <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
-                        <!-- Populated by JS -->
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Cliente en Lisboa</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Profesionales, puntuales y lo resolvieron todo el mismo día. Recomiendo.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Cliente en Almada</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Buena comunicación desde WhatsApp hasta la finalización del trabajo.</p>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="google-review-card">
+                                <div class="google-review-top">
+                                    <div class="google-review-avatar google-review-avatar--initial" aria-hidden="true">C</div>
+                                    <div class="google-review-meta">
+                                        <strong class="google-review-name">Cliente en Cascais</strong>
+                                        <span class="google-review-source">
+                                            <i class="fab fa-google" aria-hidden="true"></i>
+                                            Reseña de Google
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="google-review-rating-row">
+                                    <span class="google-review-stars" aria-label="5 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                                </div>
+                                <p class="google-review-text">Trabajo cuidado, espacio limpio y solución adecuada a lo que necesitábamos.</p>
+                            </article>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="reviews-swiper-prev" aria-label="Reseña anterior">
@@ -423,7 +583,60 @@
                 <h2 class="section-title" data-i18n="faq_title">Preguntas Frecuentes</h2>
             </div>
             <div class="faq-list" id="faq-list">
-                <!-- Populated by JS -->
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-0">
+                        ¿Hacen pequeñas reparaciones?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-0">
+                        <div class="faq-answer-inner">Sí. Colgar estanterías, ajustar puertas, retocar pinturas y resolver arreglos del día a día forman parte de nuestro trabajo habitual.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                        ¿Puedo pedir presupuesto por WhatsApp?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1">
+                        <div class="faq-answer-inner">Sí. Envíe fotos y una breve descripción por WhatsApp y le respondemos con orientación y presupuesto gratuito.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                        ¿Qué zonas atienden?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2">
+                        <div class="faq-answer-inner">Gran Lisboa y Margen Sur, incluyendo Lisboa, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro y Setúbal.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                        ¿Atienden urgencias?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3">
+                        <div class="faq-answer-inner">Siempre que es posible atendemos urgencias. Contáctenos para confirmar disponibilidad el mismo día o al siguiente.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                        ¿Trabajan para hogares y empresas?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4">
+                        <div class="faq-answer-inner">Sí. Atendemos particulares, comunidades de vecinos, oficinas y comercios.</div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                        ¿El presupuesto es gratuito?
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-5">
+                        <div class="faq-answer-inner">Sí. El presupuesto es gratuito y sin compromiso.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -482,7 +695,24 @@
                 <div class="footer-col" id="footer-services">
                     <h3 data-i18n="nav_services">Servicios</h3>
                     <ul id="footer-services-list">
-                        <!-- Populated by JS -->
+                        <li><a href="../servico-remodelacoes.html">Reformas y Obras</a></li>
+                        <li><a href="../servico-recuperar-casa.html">Recuperar Casa</a></li>
+                        <li><a href="../servico-pinturas.html">Pinturas Generales</a></li>
+                        <li><a href="../servico-pintura-fachadas-alpinismo.html">Pintura en Alpinismo</a></li>
+                        <li><a href="../servico-canalizacoes.html">Fontanería</a></li>
+                        <li><a href="../servico-electricidade.html">Electricidad</a></li>
+                        <li><a href="../servico-carpintaria.html">Carpintería</a></li>
+                        <li><a href="../servico-reparacoes-gerais.html">Reparaciones Generales</a></li>
+                        <li><a href="../servico-manutencao.html">Mantenimiento</a></li>
+                        <li><a href="../servico-limpezas.html">Limpieza</a></li>
+                        <li><a href="../servico-jardinagem.html">Jardinería</a></li>
+                        <li><a href="../servico-mudancas.html">Mudanzas</a></li>
+                        <li><a href="../servico-informatica.html">Informática</a></li>
+                        <li><a href="../servico-serralharia.html">Cerrajería</a></li>
+                        <li><a href="../servico-climatizacao.html">Climatización (AVAC)</a></li>
+                        <li><a href="../servico-estores-persianas.html">Persianas y Estores</a></li>
+                        <li><a href="../servico-decoracao-interiores.html">Decoración de Interiores</a></li>
+                        <li><a href="../servico-piscinas.html">Piscinas</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

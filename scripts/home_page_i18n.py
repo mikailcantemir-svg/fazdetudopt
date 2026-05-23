@@ -145,6 +145,8 @@ HOME_UI = {
         "services_subtitle": "Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.",
         "advantages_title": "Porquê escolher-nos?",
         "testimonials_title": "Críticas",
+        "reviews_google_label": "Avaliações no Google",
+        "google_review_source": "Crítica de Google",
         "faq_title": "Perguntas Frequentes",
         "contact_title": "Contacte-nos",
         "contact_subtitle": "Estamos prontos para ajudar. Peça o seu orçamento grátis.",
@@ -175,6 +177,8 @@ HOME_UI = {
         "services_subtitle": "Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.",
         "advantages_title": "Why choose us?",
         "testimonials_title": "Reviews",
+        "reviews_google_label": "Reviews on Google",
+        "google_review_source": "Google review",
         "faq_title": "Frequently Asked Questions",
         "contact_title": "Contact us",
         "contact_subtitle": "We are ready to help. Request your free quote.",
@@ -205,6 +209,8 @@ HOME_UI = {
         "services_subtitle": "Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.",
         "advantages_title": "¿Por qué elegirnos?",
         "testimonials_title": "Reseñas",
+        "reviews_google_label": "Reseñas en Google",
+        "google_review_source": "Reseña de Google",
         "faq_title": "Preguntas Frecuentes",
         "contact_title": "Contáctenos",
         "contact_subtitle": "Estamos listos para ayudar. Solicite su presupuesto gratis.",
@@ -235,6 +241,8 @@ HOME_UI = {
         "services_subtitle": "Solutions fiables et spécialisées pour l'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.",
         "advantages_title": "Pourquoi nous choisir ?",
         "testimonials_title": "Avis",
+        "reviews_google_label": "Avis sur Google",
+        "google_review_source": "Avis Google",
         "faq_title": "Questions Fréquentes",
         "contact_title": "Contactez-nous",
         "contact_subtitle": "Nous sommes prêts à vous aider. Demandez votre devis gratuit.",
@@ -250,6 +258,245 @@ HOME_UI = {
         "badge_muito_requisitado": "Très Demandé",
     },
 }
+
+GOOGLE_RATING = 5.0
+
+ADVANTAGES = [
+    {
+        "icon": "file-invoice",
+        "pt": ("Orçamento grátis", "Orçamento sem compromisso para planear o seu projeto com tranquilidade."),
+        "en": ("Free quote", "No-obligation quote so you can plan your project with confidence."),
+        "es": ("Presupuesto gratis", "Presupuesto sin compromiso para planificar su proyecto con tranquilidad."),
+        "fr": ("Devis gratuit", "Devis sans engagement pour planifier votre projet en toute sérénité."),
+    },
+    {
+        "icon": "location-dot",
+        "pt": (
+            "Atendimento na Grande Lisboa e Margem Sul",
+            "Deslocamo-nos à sua casa ou empresa em Lisboa, Cascais, Almada, Setúbal e arredores.",
+        ),
+        "en": (
+            "Coverage in Greater Lisbon and South Bank",
+            "We come to your home or business in Lisbon, Cascais, Almada, Setúbal and surrounding areas.",
+        ),
+        "es": (
+            "Servicio en la Gran Lisboa y Margen Sur",
+            "Nos desplazamos a su hogar o empresa en Lisboa, Cascais, Almada, Setúbal y alrededores.",
+        ),
+        "fr": (
+            "Intervention Grand Lisbonne et Rive Sud",
+            "Nous nous déplaçons chez vous à Lisbonne, Cascais, Almada, Setúbal et environs.",
+        ),
+    },
+    {
+        "icon": "users",
+        "pt": ("Equipa polivalente", "Um único contacto para reparações, manutenção e obras especializadas."),
+        "en": ("Versatile team", "One point of contact for repairs, maintenance and specialist works."),
+        "es": ("Equipo polivalente", "Un solo contacto para reparaciones, mantenimiento y obras especializadas."),
+        "fr": ("Équipe polyvalente", "Un seul interlocuteur pour réparations, entretien et travaux spécialisés."),
+    },
+    {
+        "icon": "broom",
+        "pt": ("Trabalho limpo e organizado", "Protegemos o espaço e deixamos tudo arrumado no final."),
+        "en": ("Clean, organised work", "We protect your space and leave everything tidy when we finish."),
+        "es": ("Trabajo limpio y organizado", "Protegemos el espacio y lo dejamos todo recogido al terminar."),
+        "fr": ("Travail propre et soigné", "Nous protégeons les lieux et laissons tout rangé à la fin."),
+    },
+    {
+        "icon": "screwdriver-wrench",
+        "pt": (
+            "Soluções para pequenas reparações e obras maiores",
+            "Do detalhe ao projeto completo, com a mesma dedicação.",
+        ),
+        "en": (
+            "Small repairs and larger projects",
+            "From quick fixes to full projects, with the same care throughout.",
+        ),
+        "es": (
+            "Pequeñas reparaciones y obras mayores",
+            "Del detalle al proyecto completo, con la misma dedicación.",
+        ),
+        "fr": (
+            "Petites réparations et grands travaux",
+            "Du détail au projet complet, avec le même sérieux.",
+        ),
+    },
+    {
+        "icon": "comments",
+        "pt": ("Contacto rápido por WhatsApp", "Resposta ágil para marcar visitas e pedidos de orçamento."),
+        "en": ("Fast contact via WhatsApp", "Quick replies to schedule visits and request quotes."),
+        "es": ("Contacto rápido por WhatsApp", "Respuesta ágil para visitas y solicitudes de presupuesto."),
+        "fr": ("Contact rapide par WhatsApp", "Réponse rapide pour planifier des visites et demander un devis."),
+    },
+]
+
+FAQ_ITEMS = [
+    {
+        "pt": (
+            "Fazem pequenas reparações?",
+            "Sim. Pendurar prateleiras, ajustar portas, retocar pinturas e resolver a lista de arranjos do dia a dia fazem parte do nosso trabalho quotidiano.",
+        ),
+        "en": (
+            "Do you handle small repairs?",
+            "Yes. Hanging shelves, adjusting doors, touch-up painting and everyday fix-it jobs are part of our daily work.",
+        ),
+        "es": (
+            "¿Hacen pequeñas reparaciones?",
+            "Sí. Colgar estanterías, ajustar puertas, retocar pinturas y resolver arreglos del día a día forman parte de nuestro trabajo habitual.",
+        ),
+        "fr": (
+            "Faites-vous les petites réparations ?",
+            "Oui. Fixer des étagères, ajuster des portes, retouches de peinture et petits travaux du quotidien font partie de notre activité.",
+        ),
+    },
+    {
+        "pt": (
+            "Posso pedir orçamento por WhatsApp?",
+            "Sim. Envie fotos e uma breve descrição pelo WhatsApp e respondemos com orientação e orçamento gratuito.",
+        ),
+        "en": (
+            "Can I request a quote via WhatsApp?",
+            "Yes. Send photos and a short description on WhatsApp and we will reply with guidance and a free quote.",
+        ),
+        "es": (
+            "¿Puedo pedir presupuesto por WhatsApp?",
+            "Sí. Envíe fotos y una breve descripción por WhatsApp y le respondemos con orientación y presupuesto gratuito.",
+        ),
+        "fr": (
+            "Puis-je demander un devis par WhatsApp ?",
+            "Oui. Envoyez des photos et une courte description sur WhatsApp ; nous répondons avec des conseils et un devis gratuit.",
+        ),
+    },
+    {
+        "pt": (
+            "Que zonas atendem?",
+            "Grande Lisboa e Margem Sul, incluindo Lisboa, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro e Setúbal.",
+        ),
+        "en": (
+            "Which areas do you cover?",
+            "Greater Lisbon and the South Bank, including Lisbon, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro and Setúbal.",
+        ),
+        "es": (
+            "¿Qué zonas atienden?",
+            "Gran Lisboa y Margen Sur, incluyendo Lisboa, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro y Setúbal.",
+        ),
+        "fr": (
+            "Quelles zones couvrez-vous ?",
+            "Grand Lisbonne et Rive Sud, dont Lisbonne, Cascais, Oeiras, Sintra, Almada, Seixal, Barreiro et Setúbal.",
+        ),
+    },
+    {
+        "pt": (
+            "Fazem urgências?",
+            "Sempre que possível atendemos urgências. Contacte-nos para confirmar disponibilidade no mesmo dia ou no dia seguinte.",
+        ),
+        "en": (
+            "Do you handle emergencies?",
+            "Whenever possible we attend urgent jobs. Contact us to confirm same-day or next-day availability.",
+        ),
+        "es": (
+            "¿Atienden urgencias?",
+            "Siempre que es posible atendemos urgencias. Contáctenos para confirmar disponibilidad el mismo día o al siguiente.",
+        ),
+        "fr": (
+            "Intervenez-vous en urgence ?",
+            "Dans la mesure du possible nous traitons les urgences. Contactez-nous pour confirmer une disponibilité rapide.",
+        ),
+    },
+    {
+        "pt": (
+            "Trabalham para casas e empresas?",
+            "Sim. Atendemos particulares, condomínios, escritórios e comércios.",
+        ),
+        "en": (
+            "Do you work for homes and businesses?",
+            "Yes. We serve private clients, condominiums, offices and retail premises.",
+        ),
+        "es": (
+            "¿Trabajan para hogares y empresas?",
+            "Sí. Atendemos particulares, comunidades de vecinos, oficinas y comercios.",
+        ),
+        "fr": (
+            "Travaillez-vous pour particuliers et entreprises ?",
+            "Oui. Nous intervenons pour les particuliers, copropriétés, bureaux et commerces.",
+        ),
+    },
+    {
+        "pt": (
+            "O orçamento é gratuito?",
+            "Sim. O orçamento é gratuito e sem compromisso.",
+        ),
+        "en": (
+            "Is the quote free?",
+            "Yes. Quotes are free and without obligation.",
+        ),
+        "es": (
+            "¿El presupuesto es gratuito?",
+            "Sí. El presupuesto es gratuito y sin compromiso.",
+        ),
+        "fr": (
+            "Le devis est-il gratuit ?",
+            "Oui. Le devis est gratuit et sans engagement.",
+        ),
+    },
+]
+
+TESTIMONIAL_CARDS = [
+    {
+        "pt": (
+            "Cliente em Lisboa",
+            "Profissionais, pontuais e resolveram tudo no mesmo dia. Recomendo.",
+        ),
+        "en": (
+            "Client in Lisbon",
+            "Professional, on time and fixed everything the same day. Recommended.",
+        ),
+        "es": (
+            "Cliente en Lisboa",
+            "Profesionales, puntuales y lo resolvieron todo el mismo día. Recomiendo.",
+        ),
+        "fr": (
+            "Client à Lisbonne",
+            "Professionnels, ponctuels et tout résolu le jour même. Je recommande.",
+        ),
+    },
+    {
+        "pt": (
+            "Cliente em Almada",
+            "Boa comunicação desde o WhatsApp até à conclusão do trabalho.",
+        ),
+        "en": (
+            "Client in Almada",
+            "Good communication from WhatsApp through to job completion.",
+        ),
+        "es": (
+            "Cliente en Almada",
+            "Buena comunicación desde WhatsApp hasta la finalización del trabajo.",
+        ),
+        "fr": (
+            "Client à Almada",
+            "Bonne communication du WhatsApp jusqu'à la fin des travaux.",
+        ),
+    },
+    {
+        "pt": (
+            "Cliente em Cascais",
+            "Trabalho cuidado, espaço limpo e solução adequada ao que precisávamos.",
+        ),
+        "en": (
+            "Client in Cascais",
+            "Careful work, clean space and the right solution for what we needed.",
+        ),
+        "es": (
+            "Cliente en Cascais",
+            "Trabajo cuidado, espacio limpio y solución adecuada a lo que necesitábamos.",
+        ),
+        "fr": (
+            "Client à Cascais",
+            "Travail soigné, espace propre et solution adaptée à nos besoins.",
+        ),
+    },
+]
 
 # SYNC: order = index.html services grid = script.js SERVICE_LANDING_SLUGS
 SERVICE_CARDS = [
