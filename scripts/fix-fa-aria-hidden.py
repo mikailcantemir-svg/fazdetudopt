@@ -31,7 +31,10 @@ def iter_targets() -> list[Path]:
     return sorted(
         p
         for p in ROOT.rglob("*.html")
-        if p.is_file() and ".git" not in p.parts and "__pycache__" not in p.parts
+        if p.is_file()
+        and ".git" not in p.parts
+        and "__pycache__" not in p.parts
+        and "dist" not in p.parts
     )
 
 
