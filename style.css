@@ -1569,39 +1569,50 @@ body.modal-open {
     background: #1da851 !important;
 }
 
-.float-btn {
-    width: 60px;
-    height: 60px;
+/* ===== FLOATING PHONE (mobile: ícone redondo à esquerda) ===== */
+
+.float-contact-dock {
+    display: contents;
+}
+
+.float-call-bar {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 999;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 1.8rem;
-    text-decoration: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.float-btn:hover {
-    transform: scale(1.1);
-}
-
-.float-btn--tel {
     background: var(--primary);
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.35);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
-.float-btn--tel:hover {
-    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.45);
+.float-call-bar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.45);
+    background: var(--primary-dark);
 }
 
-/* Telefone flutuante — canto inferior esquerdo (WhatsApp fica sozinho à direita) */
-.float-btn--fixed,
-.float-btn--home {
-    position: fixed;
-    left: 24px;
-    bottom: 24px;
-    z-index: 999;
+.float-call-bar__number {
+    display: none;
+}
+
+.float-call-bar__icon {
+    line-height: 1;
+}
+
+/* Desktop: sem botão flutuante de telefone — só WhatsApp no canto inferior direito */
+@media (min-width: 769px) {
+    .float-call-bar {
+        display: none !important;
+    }
 }
 
 .wa-chat {
@@ -2016,10 +2027,12 @@ body.modal-open {
         bottom: calc(52px + 10px);
     }
 
-    .float-btn--fixed,
-    .float-btn--home {
+    .float-call-bar {
         left: 16px;
         bottom: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
     }
 }
 
@@ -2317,12 +2330,6 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
-    .float-btn {
-        width: 52px;
-        height: 52px;
-        font-size: 1.5rem;
-    }
-
     .whatsapp-float {
         width: 52px;
         height: 52px;
