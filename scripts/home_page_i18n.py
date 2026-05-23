@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Homepage (index.html) translations and URL helpers."""
+"""
+Homepage (index.html) translations and URL helpers.
+
+HOME_UI is the source of truth for hero copy and UI strings in all languages.
+Regenerate HTML with: python scripts/generate-servico-pages.py
+"""
 
 from __future__ import annotations
 
@@ -160,7 +165,7 @@ HOME_UI = {
         "hero_btn_call": "Ligue agora",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google",
         "services_title": "Os Nossos Serviços Profissionais",
-        "services_subtitle": "Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa.",
+        "services_subtitle": "Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.",
         "advantages_title": "Porquê escolher-nos?",
         "testimonials_title": "Críticas",
         "faq_title": "Perguntas Frequentes",
@@ -181,13 +186,13 @@ HOME_UI = {
         "nav_about": "About us",
         "nav_contact": "Contact",
         "footer_links": "Links",
-        "hero_title": "Your trusted handyman in Portugal",
-        "hero_subtitle": "Painting, plumbing, electrical, carpentry and much more. Professional service with quality guarantee.",
+        "hero_title": "Your Trusted Faz-Tudo in Greater Lisbon and South Bank",
+        "hero_subtitle": "Need to hang a curtain rod, touch up paint, fix a tap or finally tackle that endless list of small jobs? We also offer specialist services, but above all we are the ideal partner to care for your space quickly, efficiently and cleanly. Forget the hassle: one contact fixes everything.",
         "hero_btn_quote": "Get a free quote",
         "hero_btn_call": "Call now",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google",
         "services_title": "Our Professional Services",
-        "services_subtitle": "Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon.",
+        "services_subtitle": "Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.",
         "advantages_title": "Why choose us?",
         "testimonials_title": "Reviews",
         "faq_title": "Frequently Asked Questions",
@@ -208,13 +213,13 @@ HOME_UI = {
         "nav_about": "Sobre nosotros",
         "nav_contact": "Contacto",
         "footer_links": "Enlaces",
-        "hero_title": "Su profesional de confianza en Portugal",
-        "hero_subtitle": "Pinturas, fontanería, electricidad, carpintería y mucho más. Servicio profesional con garantía de calidad.",
+        "hero_title": "Su Faz-Tudo de Confianza en la Gran Lisboa y Margen Sur",
+        "hero_subtitle": "¿Necesita colgar una barra, retocar una pintura, reparar un grifo o resolver esa lista interminable de pequeños arreglos? También ofrecemos servicios especializados, pero somos, sobre todo, el socio ideal para cuidar de su espacio con rapidez, eficacia y limpieza. Olvídese las complicaciones: un solo contacto lo resuelve todo.",
         "hero_btn_quote": "Pedir presupuesto gratis",
         "hero_btn_call": "Llame ahora",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google",
         "services_title": "Nuestros Servicios Profesionales",
-        "services_subtitle": "Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa.",
+        "services_subtitle": "Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.",
         "advantages_title": "¿Por qué elegirnos?",
         "testimonials_title": "Reseñas",
         "faq_title": "Preguntas Frecuentes",
@@ -235,13 +240,13 @@ HOME_UI = {
         "nav_about": "À propos",
         "nav_contact": "Contact",
         "footer_links": "Liens",
-        "hero_title": "Votre homme à tout faire de confiance au Portugal",
-        "hero_subtitle": "Peinture, plomberie, électricité, menuiserie et bien plus. Service professionnel avec garantie de qualité.",
+        "hero_title": "Votre Faz-Tudo de Confiance dans le Grand Lisbonne et la Rive Sud",
+        "hero_subtitle": "Besoin d'accrocher une tringle, de retoucher une peinture, de réparer un robinet ou de vous attaquer enfin à cette liste interminable de petits travaux ? Nous proposons aussi des services spécialisés, mais nous sommes avant tout le partenaire idéal pour entretenir votre espace avec rapidité, efficacité et propreté. Oubliez les complications : un seul contact règle tout.",
         "hero_btn_quote": "Devis gratuit",
         "hero_btn_call": "Appelez maintenant",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google",
         "services_title": "Nos Services Professionnels",
-        "services_subtitle": "Solutions fiables et spécialisées pour l'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne.",
+        "services_subtitle": "Solutions fiables et spécialisées pour l'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.",
         "advantages_title": "Pourquoi nous choisir ?",
         "testimonials_title": "Avis",
         "faq_title": "Questions Fréquentes",
