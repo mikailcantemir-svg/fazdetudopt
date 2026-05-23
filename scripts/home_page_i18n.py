@@ -41,7 +41,7 @@ def render_lang_switcher(current_lang: str) -> str:
             f'<img src="{flag}" alt=""> {label}</a>'
         )
     return f"""                    <div class="lang-switcher" id="lang-switcher">
-                        <button class="lang-toggle" id="lang-toggle" aria-expanded="false">
+                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false">
                             <img src="{info[1]}" alt="" class="lang-flag" id="lang-flag">
                             <span id="lang-label">{info[0]}</span>
                             <i class="fa-solid fa-chevron-down lang-chevron" aria-hidden="true"></i>
@@ -136,6 +136,7 @@ HOME_UI = {
         "nav_contact": "Contacto",
         "footer_links": "Links",
         "hero_title": "O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul",
+        "footer_tagline": "O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul",
         "hero_subtitle": "Precisa de pendurar um varão, retocar uma pintura, reparar uma torneira ou resolver aquela lista de pequenos arranjos que nunca mais acabam? Dispomos também de serviços especializados, mas somos, acima de tudo, o parceiro ideal para cuidar do seu espaço com rapidez, eficácia e limpeza. Esqueça as complicações: um único contacto resolve tudo.",
         "hero_btn_quote": "Pedir orçamento grátis",
         "hero_btn_call": "Ligue agora",
@@ -165,6 +166,7 @@ HOME_UI = {
         "nav_contact": "Contact",
         "footer_links": "Links",
         "hero_title": "Your Trusted Handyman in Greater Lisbon and South Bank",
+        "footer_tagline": "Your Trusted Handyman in Greater Lisbon and South Bank",
         "hero_subtitle": "Need to hang a curtain rod, touch up paint, fix a tap or finally tackle that endless list of small jobs? We also offer specialist services, but above all we are the ideal partner to care for your space quickly, efficiently and cleanly. Forget the hassle: one contact fixes everything.",
         "hero_btn_quote": "Get a free quote",
         "hero_btn_call": "Call now",
@@ -194,6 +196,7 @@ HOME_UI = {
         "nav_contact": "Contacto",
         "footer_links": "Enlaces",
         "hero_title": "Su Manitas de Confianza en la Gran Lisboa y Margen Sur",
+        "footer_tagline": "Su Manitas de Confianza en la Gran Lisboa y Margen Sur",
         "hero_subtitle": "¿Necesita colgar una barra, retocar una pintura, reparar un grifo o resolver esa lista interminable de pequeños arreglos? También ofrecemos servicios especializados, pero somos, sobre todo, el socio ideal para cuidar de su espacio con rapidez, eficacia y limpieza. Olvídese las complicaciones: un solo contacto lo resuelve todo.",
         "hero_btn_quote": "Pedir presupuesto gratis",
         "hero_btn_call": "Llame ahora",
@@ -223,6 +226,7 @@ HOME_UI = {
         "nav_contact": "Contact",
         "footer_links": "Liens",
         "hero_title": "Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud",
+        "footer_tagline": "Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud",
         "hero_subtitle": "Besoin d'accrocher une tringle, de retoucher une peinture, de réparer un robinet ou de vous attaquer enfin à cette liste interminable de petits travaux ? Nous proposons aussi des services spécialisés, mais nous sommes avant tout le partenaire idéal pour entretenir votre espace avec rapidité, efficacité et propreté. Oubliez les complications : un seul contact règle tout.",
         "hero_btn_quote": "Devis gratuit",
         "hero_btn_call": "Appelez maintenant",
