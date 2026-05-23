@@ -2145,11 +2145,13 @@ TEMPLATE = """<!DOCTYPE html>
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -2229,11 +2231,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2255,11 +2259,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2277,11 +2283,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2298,11 +2306,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2320,11 +2330,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2341,11 +2353,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2362,11 +2376,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2383,11 +2399,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2404,11 +2422,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2425,11 +2445,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2446,11 +2468,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2467,11 +2491,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2488,11 +2514,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2509,11 +2537,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2530,11 +2560,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2551,11 +2583,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
     {
@@ -2572,11 +2606,13 @@ SERVICES = [
                 <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Oeiras</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul (Almada, Seixal)</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>""",
     },
 ]
@@ -2750,15 +2786,25 @@ FILE: scripts/service_rich_content.py
 # -*- coding: utf-8 -*-
 """Unique service-rich-text bodies for all servico-*.html pages."""
 
+ZONES_LI = """
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>"""
+
 ZONES_BLOCK = """
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
-                <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                <ul class="service-zones-grid">""" + ZONES_LI + """
+                </ul>"""
+
+ZONES_SECTION_LISBOA_SETUBAL = """
+                <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
+                <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
+                <ul class="service-zones-grid">""" + ZONES_LI + """
                 </ul>"""
 
 SERVICE_BODIES = {
@@ -3124,11 +3170,13 @@ FILE: servico-canalizacoes.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -3276,11 +3324,13 @@ FILE: servico-carpintaria.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -3428,11 +3478,13 @@ FILE: servico-climatizacao.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -3580,11 +3632,13 @@ FILE: servico-decoracao-interiores.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -3732,11 +3786,13 @@ FILE: servico-electricidade.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -3884,11 +3940,13 @@ FILE: servico-estores-persianas.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4036,11 +4094,13 @@ FILE: servico-informatica.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4188,11 +4248,13 @@ FILE: servico-jardinagem.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4340,11 +4402,13 @@ FILE: servico-limpezas.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4492,11 +4556,13 @@ FILE: servico-manutencao.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4644,11 +4710,13 @@ FILE: servico-mudancas.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4796,11 +4864,13 @@ FILE: servico-pintura-fachadas-alpinismo.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -4948,11 +5018,13 @@ FILE: servico-pinturas.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -5100,11 +5172,13 @@ FILE: servico-piscinas.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -5252,11 +5326,13 @@ FILE: servico-remodelacoes.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -5404,11 +5480,13 @@ FILE: servico-reparacoes-gerais.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -5556,11 +5634,13 @@ FILE: servico-serralharia.html
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>
                 </ul>
             </div>
 
@@ -7836,13 +7916,13 @@ body.modal-open {
     margin: 0 0 30px;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 10px;
 }
 
 .service-zones-grid li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     margin: 0;
 }
@@ -7850,6 +7930,7 @@ body.modal-open {
 .service-zones-grid i {
     color: var(--primary-color);
     flex-shrink: 0;
+    margin-top: 4px;
 }
 
 .service-cta-box {
