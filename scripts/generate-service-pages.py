@@ -204,7 +204,7 @@ TEMPLATE = """<!DOCTYPE html>
             <div class="header-actions">
                 <a href="index.html" class="service-page-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span>Voltar ao Início</span></a>
                 <a href="tel:+351932504112" class="btn-phone" id="header-phone">
-                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
                     <span>932 504 112</span>
                 </a>
             </div>
@@ -242,10 +242,10 @@ TEMPLATE = """<!DOCTYPE html>
                 <p>Clique abaixo para falar diretamente com o nosso técnico especialista em {service_name}.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text={wa_text}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp"></i> Orçamento por WhatsApp
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone"></i> Ligar: 932 504 112
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar: 932 504 112
                     </a>
                 </div>
             </div>
