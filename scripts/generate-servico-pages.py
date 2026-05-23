@@ -122,10 +122,20 @@ def output_path(slug: str, lang: str) -> Path:
     return ROOT / lang / slug
 
 
-def main() -> None:
-    from generate_homepages import main as generate_homepages
+def _run_generate_homepages() -> None:
+    import importlib.util
 
-    generate_homepages()
+    spec = importlib.util.spec_from_file_location(
+        "generate_homepages",
+        Path(__file__).parent / "generate-homepages.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
+def main() -> None:
+    _run_generate_homepages()
 
     written = []
     for slug in SERVICE_COPY:
