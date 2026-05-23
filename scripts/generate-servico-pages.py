@@ -1,8 +1,23 @@
 #!/usr/bin/env python3
-"""Generate servico-*.html and index.html in PT (root) and en/es/fr with hreflang."""
+"""
+Single entry point to regenerate the whole static site from templates + i18n.
+
+Run from repo root:
+    python scripts/generate-servico-pages.py
+
+Outputs (overwrites):
+  - index.html (PT) + en/es/fr/index.html
+  - servico-*.html (PT) + en/es/fr/servico-*.html (18 services × 4 languages)
+
+Source of truth:
+  - scripts/home_page_i18n.py  → homepage copy (hero, UI strings)
+  - scripts/service_page_i18n.py → service page copy
+  - scripts/index.template.html, template-servico.html → layout (WhatsApp widget only)
+"""
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -32,6 +47,8 @@ OG_LOCALE = {
     "es": "es_ES",
     "fr": "fr_FR",
 }
+
+LANG_DIRS = ("en", "es", "fr")
 
 
 def json_ld(slug: str, lang: str) -> str:
@@ -122,9 +139,30 @@ def output_path(slug: str, lang: str) -> Path:
     return ROOT / lang / slug
 
 
-def _run_generate_homepages() -> None:
-    import importlib.util
+def expected_service_paths() -> set[str]:
+    paths = set()
+    for slug in SERVICE_COPY:
+        for lang in LANGS:
+            paths.add(output_path(slug, lang).relative_to(ROOT).as_posix())
+    return paths
 
+
+def cleanup_stale_service_pages() -> list[str]:
+    """Remove obsolete servico-*.html files no longer in SERVICE_COPY."""
+    removed = []
+    expected = expected_service_paths()
+    for lang_dir in [ROOT, *[ROOT / code for code in LANG_DIRS]]:
+        if not lang_dir.is_dir():
+            continue
+        for path in lang_dir.glob("servico-*.html"):
+            rel = path.relative_to(ROOT).as_posix()
+            if rel not in expected:
+                path.unlink()
+                removed.append(rel)
+    return removed
+
+
+def _run_generate_homepages() -> None:
     spec = importlib.util.spec_from_file_location(
         "generate_homepages",
         Path(__file__).parent / "generate-homepages.py",
@@ -134,9 +172,30 @@ def _run_generate_homepages() -> None:
     mod.main()
 
 
+def _run_fix_fa_aria_hidden() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "fix_fa_aria_hidden",
+        Path(__file__).parent / "fix-fa-aria-hidden.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
 def main() -> None:
+    print("=== Regenerating fazdetudo.pt static HTML ===\n")
+
+    removed = cleanup_stale_service_pages()
+    if removed:
+        print("Removed stale pages:")
+        for rel in removed:
+            print(f"  - {rel}")
+        print()
+
+    print("--- Homepages (PT + en/es/fr) ---")
     _run_generate_homepages()
 
+    print("\n--- Service pages (18 × 4 languages) ---")
     written = []
     for slug in SERVICE_COPY:
         for lang in LANGS:
@@ -147,7 +206,15 @@ def main() -> None:
             written.append(rel)
             print(f"wrote {rel}")
 
-    print(f"\nTotal: {len(written)} pages ({len(SERVICE_COPY)} services × {len(LANGS)} languages)")
+    print("\n--- Font Awesome aria-hidden pass ---")
+    _run_fix_fa_aria_hidden()
+
+    print(
+        f"\nDone: {len(written)} service pages + 4 homepages "
+        f"({len(SERVICE_COPY)} services × {len(LANGS)} languages)."
+    )
+    print("Copy source: scripts/home_page_i18n.py, scripts/service_page_i18n.py")
+    print("Layout source: scripts/index.template.html, template-servico.html")
 
 
 if __name__ == "__main__":
