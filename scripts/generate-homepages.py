@@ -295,7 +295,6 @@ def apply_meta_strings(html: str, lang: str) -> str:
     html = html.replace('aria-label="Open menu"', f'aria-label="{meta["menu_aria"]}"')
     html = html.replace('aria-label="Crítica anterior"', f'aria-label="{meta["review_prev"]}"')
     html = html.replace('aria-label="Crítica seguinte"', f'aria-label="{meta["review_next"]}"')
-    html = html.replace(">Ver críticas no Google\n", f">{meta['view_google']}\n")
     html = html.replace('aria-label="Fechar chat"', f'aria-label="{meta["wa_close"]}"')
     html = html.replace('aria-label="Enviar mensagem"', f'aria-label="{meta["wa_send"]}"')
     html = html.replace('aria-label="Contact via WhatsApp"', f'aria-label="{meta["wa_float"]}"')
@@ -370,6 +369,7 @@ def render_homepage(lang: str) -> str:
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
             "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
+            "VIEW_GOOGLE_REVIEWS": meta["view_google"],
         },
     )
     html = apply_i18n_attributes(html, lang)
