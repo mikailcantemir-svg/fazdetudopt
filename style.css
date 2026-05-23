@@ -2117,13 +2117,13 @@ body.modal-open {
     margin: 0 0 30px;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 10px;
 }
 
 .service-zones-grid li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     margin: 0;
 }
@@ -2131,6 +2131,7 @@ body.modal-open {
 .service-zones-grid i {
     color: var(--primary-color);
     flex-shrink: 0;
+    margin-top: 4px;
 }
 
 .service-cta-box {

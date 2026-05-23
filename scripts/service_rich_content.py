@@ -1,15 +1,25 @@
 # -*- coding: utf-8 -*-
 """Unique service-rich-text bodies for all servico-*.html pages."""
 
+ZONES_LI = """
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
+                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>"""
+
 ZONES_BLOCK = """
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
-                <ul class="service-zones-grid">
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa Centro</strong> (Arroios, Benfica, Campo de Ourique)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Estoril</strong> (linha costeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra, Oeiras e Amadora</strong></li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Seixal, Barreiro)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Azeitão</strong></li>
+                <ul class="service-zones-grid">""" + ZONES_LI + """
+                </ul>"""
+
+ZONES_SECTION_LISBOA_SETUBAL = """
+                <h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>
+                <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
+                <ul class="service-zones-grid">""" + ZONES_LI + """
                 </ul>"""
 
 SERVICE_BODIES = {
