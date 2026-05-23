@@ -1034,54 +1034,95 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
     "servico-piscinas.html": {
         "pt": {
             "name": "Piscinas",
-            "h1": "Manutenção e Limpeza de Piscinas Profissional",
-            "desc": "Tratamento de água, filtros e bombas.",
-            "wa": "Olá! Gostaria de pedir um orçamento para manutenção de piscinas.",
-            "intro": "<strong>Manutenção de piscinas na Grande Lisboa e Margem Sul</strong> para água cristalina.",
+            "service_type": "Construção, Manutenção e Reparação de Piscinas",
+            "h1": "Construção, Manutenção e Reparação de Piscinas",
+            "page_title": "Construção e Manutenção de Piscinas em Lisboa | FAZDETUDO.PT",
+            "meta_description": (
+                "Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. "
+                "Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento."
+            ),
+            "desc": "Construção, manutenção e reparação de piscinas novas e existentes.",
+            "wa": "Olá! Gostaria de pedir um orçamento para construção ou manutenção de piscinas.",
+            "intro": (
+                "A FAZDETUDO.PT oferece <strong>construção, manutenção e reparação de piscinas "
+                "na Grande Lisboa e Margem Sul</strong> — desde piscinas novas a remodelações, "
+                "com atendimento em Lisboa, Cascais, Almada, Setúbal e arredores."
+            ),
             "features": [
-                "Equilíbrio químico e tratamento da água.",
-                "Limpeza de filtros, bombas e skimmers.",
-                "Reparação de fugas e revestimentos.",
-                "Planos semanais ou quinzenais.",
+                "Construção de piscinas novas para moradias e condomínios.",
+                "Remodelação de piscinas existentes.",
+                "Reparação de fugas e substituição de revestimentos.",
+                "Instalação e manutenção de sistemas de filtração.",
+                "Limpeza, tratamento de água e manutenção regular.",
             ],
         },
         "en": {
-            "name": "Swimming Pools",
-            "h1": "Professional Pool Maintenance and Cleaning",
-            "desc": "Water treatment, filters and pumps.",
-            "wa": "Hello! I would like a quote for pool maintenance.",
-            "intro": "<strong>Pool maintenance across Greater Lisbon and the South Bank</strong> for crystal-clear water.",
+            "name": "Pools",
+            "service_type": "Pool Construction, Maintenance and Repair",
+            "h1": "Pool Construction, Maintenance and Repair",
+            "page_title": "Pool Construction and Maintenance in Lisbon | FAZDETUDO.PT",
+            "meta_description": (
+                "Pool construction, maintenance and repair across Greater Lisbon and the South Bank. "
+                "New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote."
+            ),
+            "desc": "New pool builds, renovations, cleaning and water treatment.",
+            "wa": "Hello! I would like a quote for pool construction or maintenance.",
+            "intro": (
+                "<strong>Pool construction, maintenance and repair across Greater Lisbon and the South Bank</strong> "
+                "— new builds, renovations and ongoing care in Lisbon, Cascais, Almada and Setúbal."
+            ),
             "features": [
-                "Water chemistry and treatment.",
-                "Filter, pump and skimmer cleaning.",
-                "Leak and lining repair.",
-                "Weekly or bi-weekly service plans.",
+                "Construction of new residential and commercial pools.",
+                "Renovation of existing pools.",
+                "Leak repair and lining replacement.",
+                "Filtration systems installation and servicing.",
+                "Cleaning, water treatment and regular maintenance.",
             ],
         },
         "es": {
             "name": "Piscinas",
-            "h1": "Mantenimiento y Limpieza Profesional de Piscinas",
-            "desc": "Tratamiento de agua, filtros y bombas.",
-            "wa": "¡Hola! Me gustaría un presupuesto para piscinas.",
-            "intro": "<strong>Mantenimiento de piscinas en la Gran Lisboa y Margen Sur</strong>.",
+            "service_type": "Construcción, Mantenimiento y Reparación de Piscinas",
+            "h1": "Construcción, Mantenimiento y Reparación de Piscinas",
+            "page_title": "Construcción y Mantenimiento de Piscinas en Lisboa | FAZDETUDO.PT",
+            "meta_description": (
+                "Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. "
+                "Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto."
+            ),
+            "desc": "Construcción, mantenimiento y reparación de piscinas nuevas y existentes.",
+            "wa": "¡Hola! Me gustaría un presupuesto para construcción o mantenimiento de piscinas.",
+            "intro": (
+                "<strong>Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur</strong> "
+                "— desde piscinas nuevas hasta reformas, con servicio en Lisboa, Cascais, Almada y Setúbal."
+            ),
             "features": [
-                "Equilibrio químico y tratamiento del agua.",
-                "Limpieza de filtros, bombas y skimmers.",
-                "Reparación de fugas y revestimientos.",
-                "Planes semanales o quincenales.",
+                "Construcción de piscinas nuevas para viviendas y comunidades.",
+                "Reforma de piscinas existentes.",
+                "Reparación de fugas y sustitución de revestimientos.",
+                "Instalación y mantenimiento de sistemas de filtración.",
+                "Limpieza, tratamiento del agua y mantenimiento regular.",
             ],
         },
         "fr": {
             "name": "Piscines",
-            "h1": "Entretien et Nettoyage Professionnel de Piscines",
-            "desc": "Traitement eau, filtres et pompes.",
-            "wa": "Bonjour ! Je souhaite un devis pour entretien piscine.",
-            "intro": "<strong>Entretien piscines Grand Lisbonne et Rive Sud</strong> pour une eau cristalline.",
+            "service_type": "Construction, Entretien et Réparation de Piscines",
+            "h1": "Construction, Entretien et Réparation de Piscines",
+            "page_title": "Construction et Entretien de Piscines à Lisbonne | FAZDETUDO.PT",
+            "meta_description": (
+                "Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. "
+                "Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis."
+            ),
+            "desc": "Construction, entretien et réparation de piscines neuves et existantes.",
+            "wa": "Bonjour ! Je souhaite un devis pour construction ou entretien de piscine.",
+            "intro": (
+                "<strong>Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud</strong> "
+                "— piscines neuves, rénovations et suivi régulier à Lisbonne, Cascais, Almada et Setúbal."
+            ),
             "features": [
-                "Équilibre chimique et traitement de l'eau.",
-                "Nettoyage filtres, pompes et skimmers.",
-                "Réparation fuites et revêtements.",
-                "Contrats hebdomadaires ou bimensuels.",
+                "Construction de piscines neuves pour maisons et copropriétés.",
+                "Rénovation de piscines existantes.",
+                "Réparation de fuites et remplacement de revêtements.",
+                "Installation et entretien de systèmes de filtration.",
+                "Nettoyage, traitement de l'eau et entretien régulier.",
             ],
         },
     },
@@ -1094,11 +1135,13 @@ assert set(SERVICE_COPY) == set(SERVICE_SLUGS), "SERVICE_COPY e slug_registry de
 def localized_meta(slug: str, lang: str) -> dict:
     copy = SERVICE_COPY[slug][lang]
     ui = UI[lang]
-    page_title = ui["page_title_tpl"].format(h1=copy["h1"])
-    meta_description = ui["meta_tpl"].format(name=copy["name"], desc=copy["desc"])
+    page_title = copy.get("page_title") or ui["page_title_tpl"].format(h1=copy["h1"])
+    meta_description = copy.get("meta_description") or ui["meta_tpl"].format(
+        name=copy["name"], desc=copy["desc"]
+    )
     og_title = ui["og_tpl"].format(name=copy["name"])
     return {
-        "service_name": copy["name"],
+        "service_name": copy.get("service_type", copy["name"]),
         "page_title": page_title,
         "meta_description": meta_description,
         "h1": copy["h1"],

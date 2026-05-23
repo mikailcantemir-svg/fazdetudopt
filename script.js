@@ -212,7 +212,7 @@
                 { name: 'Climatização', description: 'Instalação, manutenção e reparação de ar condicionado e aquecimento.' },
                 { name: 'Estores e Persianas', description: 'Reparação e instalação de estores, persianas, mosquiteiras e toldos.' },
                 { name: 'Decoração de Interiores', description: 'Cortinas, papel de parede, iluminação decorativa, molduras e home staging.' },
-                { name: 'Piscinas', description: 'Limpeza, manutenção e reparação de piscinas. Tratamento de água, filtros, bombas e revestimentos.' }
+                { name: 'Piscinas', description: 'Construção, manutenção, reparação, limpeza e tratamento de piscinas.' }
             ],
             advantages_title: 'Porquê escolher-nos?',
             advantages: [
@@ -280,7 +280,7 @@
                 { name: 'Air Conditioning', description: 'Installation, maintenance and repair of air conditioning and heating.' },
                 { name: 'Blinds & Shutters', description: 'Repair and installation of blinds, shutters, mosquito nets and awnings.' },
                 { name: 'Interior Design', description: 'Curtains, wallpaper, decorative lighting, frames and home staging.' },
-                { name: 'Swimming Pools', description: 'Cleaning, maintenance and repair of pools. Water treatment, filters, pumps and linings.' }
+                { name: 'Pools', description: 'Pool construction, maintenance, repair, cleaning and water treatment.' }
             ],
             advantages_title: 'Why choose us?',
             advantages: [
@@ -348,7 +348,7 @@
                 { name: 'Climatización', description: 'Instalación, mantenimiento y reparación de aire acondicionado y calefacción.' },
                 { name: 'Persianas y estores', description: 'Reparación e instalación de estores, persianas, mosquiteras y toldos.' },
                 { name: 'Decoración de interiores', description: 'Cortinas, papel pintado, iluminación decorativa, molduras y home staging.' },
-                { name: 'Piscinas', description: 'Limpieza, mantenimiento y reparación de piscinas. Tratamiento de agua, filtros, bombas y revestimientos.' }
+                { name: 'Piscinas', description: 'Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.' }
             ],
             advantages_title: '¿Por qué elegirnos?',
             advantages: [
@@ -416,7 +416,7 @@
                 { name: 'Climatisation', description: 'Installation, entretien et réparation de climatisation et chauffage.' },
                 { name: 'Stores et volets', description: 'Réparation et installation de stores, volets, moustiquaires et auvents.' },
                 { name: 'Décoration d\'intérieur', description: 'Rideaux, papier peint, éclairage décoratif, moulures et home staging.' },
-                { name: 'Piscines', description: 'Nettoyage, entretien et réparation de piscines. Traitement de l\'eau, filtres, pompes et revêtements.' }
+                { name: 'Piscines', description: 'Construction, entretien, réparation, nettoyage et traitement de l\'eau.' }
             ],
             advantages_title: 'Pourquoi nous choisir ?',
             advantages: [

@@ -248,15 +248,17 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-piscinas.html": """
-                <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A FAZDETUDO.PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
+                <p>A FAZDETUDO.PT posiciona-se em <strong>construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul</strong> — desde piscinas novas a remodelações completas, com equipas que atendem moradias, condomínios, alojamentos locais e espaços comerciais em Lisboa, Cascais, Almada, Setúbal e arredores.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
-                    <li>Tratamento e equilíbrio químico da água (pH, cloro e alcalinidade).</li>
-                    <li>Aspiração de fundo, limpeza de paredes e remoção de folhas e detritos.</li>
-                    <li>Limpeza e manutenção de filtros, bombas e skimmers.</li>
-                    <li>Reparação de fugas, fissuras em revestimentos e juntas degradadas.</li>
-                    <li>Arranque de piscina na época de verão e encerramento no outono.</li>
-                    <li>Substituição de lâmpadas subaquáticas e pequenos componentes.</li>
-                    <li>Planos semanais ou quinzenais com preço mensal fixo.</li>
-                </ul>""" + ZONES_BLOCK,
+                    <li><strong>Construção de piscinas novas</strong> — projeto, escavação, estrutura, impermeabilização e acabamentos.</li>
+                    <li><strong>Remodelação de piscinas existentes</strong> — renovação de revestimentos, degraus, zonas de lazer e equipamento.</li>
+                    <li><strong>Reparação de fugas</strong> — deteção e correção em estrutura, tubagens e juntas.</li>
+                    <li><strong>Substituição ou reparação de revestimentos</strong> — liner, mosaico, betão ou outros acabamentos.</li>
+                    <li><strong>Sistemas de filtração</strong> — instalação, substituição e manutenção de filtros, bombas e circuitos hidráulicos.</li>
+                    <li><strong>Limpeza e tratamento de água</strong> — equilíbrio químico, aspiração, limpeza de paredes e fundo.</li>
+                    <li><strong>Manutenção regular</strong> — planos semanais ou quinzenais com previsibilidade de custos.</li>
+                    <li><strong>Piscinas para moradias, condomínios, alojamentos locais e comércio</strong> — soluções à medida de cada espaço.</li>
+                </ul>
+                <p>Deslocamo-nos em toda a <strong>Grande Lisboa e Margem Sul</strong> com orçamento gratuito e resposta rápida por WhatsApp.</p>""" + ZONES_BLOCK,
 }

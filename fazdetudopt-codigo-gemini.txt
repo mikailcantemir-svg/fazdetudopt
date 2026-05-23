@@ -2644,10 +2644,10 @@ SERVICE_CARDS = [
         "icon": "water-ladder",
         "featured": False,
         "badge": None,
-        "pt": ("Piscinas", "Manutenção e limpeza de piscinas, equilíbrio químico da água, revisão de filtros, bombas e deteção de fugas."),
-        "en": ("Swimming Pools", "Pool maintenance and cleaning, water chemistry, filters, pumps and leak detection."),
-        "es": ("Piscinas", "Mantenimiento y limpieza de piscinas, química del agua, filtros, bombas y fugas."),
-        "fr": ("Piscines", "Entretien et nettoyage de piscines, chimie de l'eau, filtres, pompes et fuites."),
+        "pt": ("Piscinas", "Construção, manutenção, reparação, limpeza e tratamento de piscinas."),
+        "en": ("Pools", "Pool construction, maintenance, repair, cleaning and water treatment."),
+        "es": ("Piscinas", "Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas."),
+        "fr": ("Piscines", "Construction, entretien, réparation, nettoyage et traitement de l'eau."),
     },
 ]
 
@@ -4105,54 +4105,95 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
     "servico-piscinas.html": {
         "pt": {
             "name": "Piscinas",
-            "h1": "Manutenção e Limpeza de Piscinas Profissional",
-            "desc": "Tratamento de água, filtros e bombas.",
-            "wa": "Olá! Gostaria de pedir um orçamento para manutenção de piscinas.",
-            "intro": "<strong>Manutenção de piscinas na Grande Lisboa e Margem Sul</strong> para água cristalina.",
+            "service_type": "Construção, Manutenção e Reparação de Piscinas",
+            "h1": "Construção, Manutenção e Reparação de Piscinas",
+            "page_title": "Construção e Manutenção de Piscinas em Lisboa | FAZDETUDO.PT",
+            "meta_description": (
+                "Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. "
+                "Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento."
+            ),
+            "desc": "Construção, manutenção e reparação de piscinas novas e existentes.",
+            "wa": "Olá! Gostaria de pedir um orçamento para construção ou manutenção de piscinas.",
+            "intro": (
+                "A FAZDETUDO.PT oferece <strong>construção, manutenção e reparação de piscinas "
+                "na Grande Lisboa e Margem Sul</strong> — desde piscinas novas a remodelações, "
+                "com atendimento em Lisboa, Cascais, Almada, Setúbal e arredores."
+            ),
             "features": [
-                "Equilíbrio químico e tratamento da água.",
-                "Limpeza de filtros, bombas e skimmers.",
-                "Reparação de fugas e revestimentos.",
-                "Planos semanais ou quinzenais.",
+                "Construção de piscinas novas para moradias e condomínios.",
+                "Remodelação de piscinas existentes.",
+                "Reparação de fugas e substituição de revestimentos.",
+                "Instalação e manutenção de sistemas de filtração.",
+                "Limpeza, tratamento de água e manutenção regular.",
             ],
         },
         "en": {
-            "name": "Swimming Pools",
-            "h1": "Professional Pool Maintenance and Cleaning",
-            "desc": "Water treatment, filters and pumps.",
-            "wa": "Hello! I would like a quote for pool maintenance.",
-            "intro": "<strong>Pool maintenance across Greater Lisbon and the South Bank</strong> for crystal-clear water.",
+            "name": "Pools",
+            "service_type": "Pool Construction, Maintenance and Repair",
+            "h1": "Pool Construction, Maintenance and Repair",
+            "page_title": "Pool Construction and Maintenance in Lisbon | FAZDETUDO.PT",
+            "meta_description": (
+                "Pool construction, maintenance and repair across Greater Lisbon and the South Bank. "
+                "New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote."
+            ),
+            "desc": "New pool builds, renovations, cleaning and water treatment.",
+            "wa": "Hello! I would like a quote for pool construction or maintenance.",
+            "intro": (
+                "<strong>Pool construction, maintenance and repair across Greater Lisbon and the South Bank</strong> "
+                "— new builds, renovations and ongoing care in Lisbon, Cascais, Almada and Setúbal."
+            ),
             "features": [
-                "Water chemistry and treatment.",
-                "Filter, pump and skimmer cleaning.",
-                "Leak and lining repair.",
-                "Weekly or bi-weekly service plans.",
+                "Construction of new residential and commercial pools.",
+                "Renovation of existing pools.",
+                "Leak repair and lining replacement.",
+                "Filtration systems installation and servicing.",
+                "Cleaning, water treatment and regular maintenance.",
             ],
         },
         "es": {
             "name": "Piscinas",
-            "h1": "Mantenimiento y Limpieza Profesional de Piscinas",
-            "desc": "Tratamiento de agua, filtros y bombas.",
-            "wa": "¡Hola! Me gustaría un presupuesto para piscinas.",
-            "intro": "<strong>Mantenimiento de piscinas en la Gran Lisboa y Margen Sur</strong>.",
+            "service_type": "Construcción, Mantenimiento y Reparación de Piscinas",
+            "h1": "Construcción, Mantenimiento y Reparación de Piscinas",
+            "page_title": "Construcción y Mantenimiento de Piscinas en Lisboa | FAZDETUDO.PT",
+            "meta_description": (
+                "Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. "
+                "Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto."
+            ),
+            "desc": "Construcción, mantenimiento y reparación de piscinas nuevas y existentes.",
+            "wa": "¡Hola! Me gustaría un presupuesto para construcción o mantenimiento de piscinas.",
+            "intro": (
+                "<strong>Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur</strong> "
+                "— desde piscinas nuevas hasta reformas, con servicio en Lisboa, Cascais, Almada y Setúbal."
+            ),
             "features": [
-                "Equilibrio químico y tratamiento del agua.",
-                "Limpieza de filtros, bombas y skimmers.",
-                "Reparación de fugas y revestimientos.",
-                "Planes semanales o quincenales.",
+                "Construcción de piscinas nuevas para viviendas y comunidades.",
+                "Reforma de piscinas existentes.",
+                "Reparación de fugas y sustitución de revestimientos.",
+                "Instalación y mantenimiento de sistemas de filtración.",
+                "Limpieza, tratamiento del agua y mantenimiento regular.",
             ],
         },
         "fr": {
             "name": "Piscines",
-            "h1": "Entretien et Nettoyage Professionnel de Piscines",
-            "desc": "Traitement eau, filtres et pompes.",
-            "wa": "Bonjour ! Je souhaite un devis pour entretien piscine.",
-            "intro": "<strong>Entretien piscines Grand Lisbonne et Rive Sud</strong> pour une eau cristalline.",
+            "service_type": "Construction, Entretien et Réparation de Piscines",
+            "h1": "Construction, Entretien et Réparation de Piscines",
+            "page_title": "Construction et Entretien de Piscines à Lisbonne | FAZDETUDO.PT",
+            "meta_description": (
+                "Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. "
+                "Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis."
+            ),
+            "desc": "Construction, entretien et réparation de piscines neuves et existantes.",
+            "wa": "Bonjour ! Je souhaite un devis pour construction ou entretien de piscine.",
+            "intro": (
+                "<strong>Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud</strong> "
+                "— piscines neuves, rénovations et suivi régulier à Lisbonne, Cascais, Almada et Setúbal."
+            ),
             "features": [
-                "Équilibre chimique et traitement de l'eau.",
-                "Nettoyage filtres, pompes et skimmers.",
-                "Réparation fuites et revêtements.",
-                "Contrats hebdomadaires ou bimensuels.",
+                "Construction de piscines neuves pour maisons et copropriétés.",
+                "Rénovation de piscines existantes.",
+                "Réparation de fuites et remplacement de revêtements.",
+                "Installation et entretien de systèmes de filtration.",
+                "Nettoyage, traitement de l'eau et entretien régulier.",
             ],
         },
     },
@@ -4165,11 +4206,13 @@ assert set(SERVICE_COPY) == set(SERVICE_SLUGS), "SERVICE_COPY e slug_registry de
 def localized_meta(slug: str, lang: str) -> dict:
     copy = SERVICE_COPY[slug][lang]
     ui = UI[lang]
-    page_title = ui["page_title_tpl"].format(h1=copy["h1"])
-    meta_description = ui["meta_tpl"].format(name=copy["name"], desc=copy["desc"])
+    page_title = copy.get("page_title") or ui["page_title_tpl"].format(h1=copy["h1"])
+    meta_description = copy.get("meta_description") or ui["meta_tpl"].format(
+        name=copy["name"], desc=copy["desc"]
+    )
     og_title = ui["og_tpl"].format(name=copy["name"])
     return {
-        "service_name": copy["name"],
+        "service_name": copy.get("service_type", copy["name"]),
         "page_title": page_title,
         "meta_description": meta_description,
         "h1": copy["h1"],
@@ -4450,17 +4493,19 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-piscinas.html": """
-                <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A FAZDETUDO.PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
+                <p>A FAZDETUDO.PT posiciona-se em <strong>construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul</strong> — desde piscinas novas a remodelações completas, com equipas que atendem moradias, condomínios, alojamentos locais e espaços comerciais em Lisboa, Cascais, Almada, Setúbal e arredores.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
-                    <li>Tratamento e equilíbrio químico da água (pH, cloro e alcalinidade).</li>
-                    <li>Aspiração de fundo, limpeza de paredes e remoção de folhas e detritos.</li>
-                    <li>Limpeza e manutenção de filtros, bombas e skimmers.</li>
-                    <li>Reparação de fugas, fissuras em revestimentos e juntas degradadas.</li>
-                    <li>Arranque de piscina na época de verão e encerramento no outono.</li>
-                    <li>Substituição de lâmpadas subaquáticas e pequenos componentes.</li>
-                    <li>Planos semanais ou quinzenais com preço mensal fixo.</li>
-                </ul>""" + ZONES_BLOCK,
+                    <li><strong>Construção de piscinas novas</strong> — projeto, escavação, estrutura, impermeabilização e acabamentos.</li>
+                    <li><strong>Remodelação de piscinas existentes</strong> — renovação de revestimentos, degraus, zonas de lazer e equipamento.</li>
+                    <li><strong>Reparação de fugas</strong> — deteção e correção em estrutura, tubagens e juntas.</li>
+                    <li><strong>Substituição ou reparação de revestimentos</strong> — liner, mosaico, betão ou outros acabamentos.</li>
+                    <li><strong>Sistemas de filtração</strong> — instalação, substituição e manutenção de filtros, bombas e circuitos hidráulicos.</li>
+                    <li><strong>Limpeza e tratamento de água</strong> — equilíbrio químico, aspiração, limpeza de paredes e fundo.</li>
+                    <li><strong>Manutenção regular</strong> — planos semanais ou quinzenais com previsibilidade de custos.</li>
+                    <li><strong>Piscinas para moradias, condomínios, alojamentos locais e comércio</strong> — soluções à medida de cada espaço.</li>
+                </ul>
+                <p>Deslocamo-nos em toda a <strong>Grande Lisboa e Margem Sul</strong> com orçamento gratuito e resposta rápida por WhatsApp.</p>""" + ZONES_BLOCK,
 }
 
 
@@ -5905,8 +5950,8 @@ FILE: dist/en/index.html
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
-                    <h3>Swimming Pools</h3>
-                    <p>Pool maintenance and cleaning, water chemistry, filters, pumps and leak detection.</p>
+                    <h3>Pools</h3>
+                    <p>Pool construction, maintenance, repair, cleaning and water treatment.</p>
                     <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -6389,7 +6434,7 @@ FILE: dist/en/index.html
                         <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
                         <li><a href="servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
                         <li><a href="servico-decoracao-interiores.html">Interior Design</a></li>
-                        <li><a href="servico-piscinas.html">Swimming Pools</a></li>
+                        <li><a href="servico-piscinas.html">Pools</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -9125,8 +9170,8 @@ FILE: dist/en/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Professional Pool Maintenance and Cleaning | FAZDETUDO.PT</title>
-    <meta name="description" content="Swimming Pools in Lisbon, Cascais and Setúbal. Water treatment, filters and pumps. Free quote from FAZDETUDO.PT.">
+    <title>Pool Construction and Maintenance in Lisbon | FAZDETUDO.PT</title>
+    <meta name="description" content="Pool construction, maintenance and repair across Greater Lisbon and the South Bank. New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote.">
     <link rel="canonical" href="https://www.fazdetudo.pt/en/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -9134,8 +9179,8 @@ FILE: dist/en/servico-piscinas.html
     <link rel="alternate" hreflang="es" href="https://www.fazdetudo.pt/es/servico-piscinas.html">
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
-    <meta property="og:title" content="Swimming Pools | FAZDETUDO.PT">
-    <meta property="og:description" content="Swimming Pools in Lisbon, Cascais and Setúbal. Water treatment, filters and pumps. Free quote from FAZDETUDO.PT.">
+    <meta property="og:title" content="Pools | FAZDETUDO.PT">
+    <meta property="og:description" content="Pool construction, maintenance and repair across Greater Lisbon and the South Bank. New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/en/servico-piscinas.html">
     <meta property="og:locale" content="en_GB">
@@ -9145,8 +9190,8 @@ FILE: dist/en/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Swimming Pools",
-  "description": "Swimming Pools in Lisbon, Cascais and Setúbal. Water treatment, filters and pumps. Free quote from FAZDETUDO.PT.",
+  "serviceType": "Pool Construction, Maintenance and Repair",
+  "description": "Pool construction, maintenance and repair across Greater Lisbon and the South Bank. New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -9225,20 +9270,21 @@ FILE: dist/en/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Professional Pool Maintenance and Cleaning</h1>
+                <h1 class="service-article-title">Pool Construction, Maintenance and Repair</h1>
                 <p class="service-article-lead">Professional, fast service with satisfaction guarantee across Greater Lisbon, Cascais, South Bank and Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p><strong>Pool maintenance across Greater Lisbon and the South Bank</strong> for crystal-clear water.</p>
+                <p><strong>Pool construction, maintenance and repair across Greater Lisbon and the South Bank</strong> — new builds, renovations and ongoing care in Lisbon, Cascais, Almada and Setúbal.</p>
                 <h2>What we do in this area:</h2>
                 <ul class="service-feature-list">
-                    <li>Water chemistry and treatment.</li>
-                    <li>Filter, pump and skimmer cleaning.</li>
-                    <li>Leak and lining repair.</li>
-                    <li>Weekly or bi-weekly service plans.</li>
+                    <li>Construction of new residential and commercial pools.</li>
+                    <li>Renovation of existing pools.</li>
+                    <li>Leak repair and lining replacement.</li>
+                    <li>Filtration systems installation and servicing.</li>
+                    <li>Cleaning, water treatment and regular maintenance.</li>
                 </ul>
                 <h2>Fast Service Areas</h2>
                 <p>We reach your door quickly in the following locations:</p>
@@ -9256,9 +9302,9 @@ FILE: dist/en/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Click below to speak directly with our Swimming Pools specialist.</p>
+                <p>Click below to speak directly with our Pool Construction, Maintenance and Repair specialist.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20pool%20maintenance." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20pool%20construction%20or%20maintenance." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quote via WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -10490,7 +10536,7 @@ FILE: dist/es/index.html
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
-                    <p>Mantenimiento y limpieza de piscinas, química del agua, filtros, bombas y fugas.</p>
+                    <p>Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.</p>
                     <a href="servico-piscinas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -13709,8 +13755,8 @@ FILE: dist/es/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Mantenimiento y Limpieza Profesional de Piscinas | FAZDETUDO.PT</title>
-    <meta name="description" content="Piscinas en Lisboa, Cascais y Setúbal. Tratamiento de agua, filtros y bombas. Presupuesto gratis con FAZDETUDO.PT.">
+    <title>Construcción y Mantenimiento de Piscinas en Lisboa | FAZDETUDO.PT</title>
+    <meta name="description" content="Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto.">
     <link rel="canonical" href="https://www.fazdetudo.pt/es/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -13719,7 +13765,7 @@ FILE: dist/es/servico-piscinas.html
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:title" content="Piscinas | FAZDETUDO.PT">
-    <meta property="og:description" content="Piscinas en Lisboa, Cascais y Setúbal. Tratamiento de agua, filtros y bombas. Presupuesto gratis con FAZDETUDO.PT.">
+    <meta property="og:description" content="Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/es/servico-piscinas.html">
     <meta property="og:locale" content="es_ES">
@@ -13729,8 +13775,8 @@ FILE: dist/es/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Piscinas",
-  "description": "Piscinas en Lisboa, Cascais y Setúbal. Tratamiento de agua, filtros y bombas. Presupuesto gratis con FAZDETUDO.PT.",
+  "serviceType": "Construcción, Mantenimiento y Reparación de Piscinas",
+  "description": "Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -13809,20 +13855,21 @@ FILE: dist/es/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Mantenimiento y Limpieza Profesional de Piscinas</h1>
+                <h1 class="service-article-title">Construcción, Mantenimiento y Reparación de Piscinas</h1>
                 <p class="service-article-lead">Servicio profesional, rápido y con garantía de satisfacción en la Gran Lisboa, Cascais, Margen Sur y Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p><strong>Mantenimiento de piscinas en la Gran Lisboa y Margen Sur</strong>.</p>
+                <p><strong>Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur</strong> — desde piscinas nuevas hasta reformas, con servicio en Lisboa, Cascais, Almada y Setúbal.</p>
                 <h2>Qué hacemos en esta área:</h2>
                 <ul class="service-feature-list">
-                    <li>Equilibrio químico y tratamiento del agua.</li>
-                    <li>Limpieza de filtros, bombas y skimmers.</li>
-                    <li>Reparación de fugas y revestimientos.</li>
-                    <li>Planes semanales o quincenales.</li>
+                    <li>Construcción de piscinas nuevas para viviendas y comunidades.</li>
+                    <li>Reforma de piscinas existentes.</li>
+                    <li>Reparación de fugas y sustitución de revestimientos.</li>
+                    <li>Instalación y mantenimiento de sistemas de filtración.</li>
+                    <li>Limpieza, tratamiento del agua y mantenimiento regular.</li>
                 </ul>
                 <h2>Zonas de Servicio Rápido</h2>
                 <p>Nos desplazamos rápidamente a su puerta en las siguientes localidades:</p>
@@ -13840,9 +13887,9 @@ FILE: dist/es/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Haga clic abajo para hablar directamente con nuestro especialista en Piscinas.</p>
+                <p>Haga clic abajo para hablar directamente con nuestro especialista en Construcción, Mantenimiento y Reparación de Piscinas.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20construcci%C3%B3n%20o%20mantenimiento%20de%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Presupuesto por WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -15074,7 +15121,7 @@ FILE: dist/fr/index.html
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscines</h3>
-                    <p>Entretien et nettoyage de piscines, chimie de l'eau, filtres, pompes et fuites.</p>
+                    <p>Construction, entretien, réparation, nettoyage et traitement de l'eau.</p>
                     <a href="servico-piscinas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -18293,8 +18340,8 @@ FILE: dist/fr/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Entretien et Nettoyage Professionnel de Piscines | FAZDETUDO.PT</title>
-    <meta name="description" content="Piscines à Lisbonne, Cascais et Setúbal. Traitement eau, filtres et pompes. Devis gratuit avec FAZDETUDO.PT.">
+    <title>Construction et Entretien de Piscines à Lisbonne | FAZDETUDO.PT</title>
+    <meta name="description" content="Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis.">
     <link rel="canonical" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -18303,7 +18350,7 @@ FILE: dist/fr/servico-piscinas.html
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:title" content="Piscines | FAZDETUDO.PT">
-    <meta property="og:description" content="Piscines à Lisbonne, Cascais et Setúbal. Traitement eau, filtres et pompes. Devis gratuit avec FAZDETUDO.PT.">
+    <meta property="og:description" content="Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <meta property="og:locale" content="fr_FR">
@@ -18313,8 +18360,8 @@ FILE: dist/fr/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Piscines",
-  "description": "Piscines à Lisbonne, Cascais et Setúbal. Traitement eau, filtres et pompes. Devis gratuit avec FAZDETUDO.PT.",
+  "serviceType": "Construction, Entretien et Réparation de Piscines",
+  "description": "Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -18393,20 +18440,21 @@ FILE: dist/fr/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Entretien et Nettoyage Professionnel de Piscines</h1>
+                <h1 class="service-article-title">Construction, Entretien et Réparation de Piscines</h1>
                 <p class="service-article-lead">Service professionnel, rapide et satisfaction garantie dans le Grand Lisbonne, Cascais, Rive Sud et Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p><strong>Entretien piscines Grand Lisbonne et Rive Sud</strong> pour une eau cristalline.</p>
+                <p><strong>Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud</strong> — piscines neuves, rénovations et suivi régulier à Lisbonne, Cascais, Almada et Setúbal.</p>
                 <h2>Ce que nous faisons dans ce domaine :</h2>
                 <ul class="service-feature-list">
-                    <li>Équilibre chimique et traitement de l'eau.</li>
-                    <li>Nettoyage filtres, pompes et skimmers.</li>
-                    <li>Réparation fuites et revêtements.</li>
-                    <li>Contrats hebdomadaires ou bimensuels.</li>
+                    <li>Construction de piscines neuves pour maisons et copropriétés.</li>
+                    <li>Rénovation de piscines existantes.</li>
+                    <li>Réparation de fuites et remplacement de revêtements.</li>
+                    <li>Installation et entretien de systèmes de filtration.</li>
+                    <li>Nettoyage, traitement de l'eau et entretien régulier.</li>
                 </ul>
                 <h2>Zones d'intervention rapide</h2>
                 <p>Nous nous déplaçons rapidement chez vous dans les localités suivantes :</p>
@@ -18424,9 +18472,9 @@ FILE: dist/fr/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Cliquez ci-dessous pour parler directement à notre spécialiste Piscines.</p>
+                <p>Cliquez ci-dessous pour parler directement à notre spécialiste Construction, Entretien et Réparation de Piscines.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20entretien%20piscine." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20construction%20ou%20entretien%20de%20piscine." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Devis par WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -19658,7 +19706,7 @@ FILE: dist/index.html
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
-                    <p>Manutenção e limpeza de piscinas, equilíbrio químico da água, revisão de filtros, bombas e deteção de fugas.</p>
+                    <p>Construção, manutenção, reparação, limpeza e tratamento de piscinas.</p>
                     <a href="servico-piscinas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -20660,7 +20708,7 @@ FILE: dist/script.js
                 { name: 'Climatização', description: 'Instalação, manutenção e reparação de ar condicionado e aquecimento.' },
                 { name: 'Estores e Persianas', description: 'Reparação e instalação de estores, persianas, mosquiteiras e toldos.' },
                 { name: 'Decoração de Interiores', description: 'Cortinas, papel de parede, iluminação decorativa, molduras e home staging.' },
-                { name: 'Piscinas', description: 'Limpeza, manutenção e reparação de piscinas. Tratamento de água, filtros, bombas e revestimentos.' }
+                { name: 'Piscinas', description: 'Construção, manutenção, reparação, limpeza e tratamento de piscinas.' }
             ],
             advantages_title: 'Porquê escolher-nos?',
             advantages: [
@@ -20728,7 +20776,7 @@ FILE: dist/script.js
                 { name: 'Air Conditioning', description: 'Installation, maintenance and repair of air conditioning and heating.' },
                 { name: 'Blinds & Shutters', description: 'Repair and installation of blinds, shutters, mosquito nets and awnings.' },
                 { name: 'Interior Design', description: 'Curtains, wallpaper, decorative lighting, frames and home staging.' },
-                { name: 'Swimming Pools', description: 'Cleaning, maintenance and repair of pools. Water treatment, filters, pumps and linings.' }
+                { name: 'Pools', description: 'Pool construction, maintenance, repair, cleaning and water treatment.' }
             ],
             advantages_title: 'Why choose us?',
             advantages: [
@@ -20796,7 +20844,7 @@ FILE: dist/script.js
                 { name: 'Climatización', description: 'Instalación, mantenimiento y reparación de aire acondicionado y calefacción.' },
                 { name: 'Persianas y estores', description: 'Reparación e instalación de estores, persianas, mosquiteras y toldos.' },
                 { name: 'Decoración de interiores', description: 'Cortinas, papel pintado, iluminación decorativa, molduras y home staging.' },
-                { name: 'Piscinas', description: 'Limpieza, mantenimiento y reparación de piscinas. Tratamiento de agua, filtros, bombas y revestimientos.' }
+                { name: 'Piscinas', description: 'Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.' }
             ],
             advantages_title: '¿Por qué elegirnos?',
             advantages: [
@@ -20864,7 +20912,7 @@ FILE: dist/script.js
                 { name: 'Climatisation', description: 'Installation, entretien et réparation de climatisation et chauffage.' },
                 { name: 'Stores et volets', description: 'Réparation et installation de stores, volets, moustiquaires et auvents.' },
                 { name: 'Décoration d\'intérieur', description: 'Rideaux, papier peint, éclairage décoratif, moulures et home staging.' },
-                { name: 'Piscines', description: 'Nettoyage, entretien et réparation de piscines. Traitement de l\'eau, filtres, pompes et revêtements.' }
+                { name: 'Piscines', description: 'Construction, entretien, réparation, nettoyage et traitement de l\'eau.' }
             ],
             advantages_title: 'Pourquoi nous choisir ?',
             advantages: [
@@ -24009,8 +24057,8 @@ FILE: dist/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Manutenção e Limpeza de Piscinas Profissional | FAZDETUDO.PT</title>
-    <meta name="description" content="Piscinas em Lisboa, Cascais e Setúbal. Tratamento de água, filtros e bombas. Orçamento grátis com a FAZDETUDO.PT.">
+    <title>Construção e Manutenção de Piscinas em Lisboa | FAZDETUDO.PT</title>
+    <meta name="description" content="Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento.">
     <link rel="canonical" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -24019,7 +24067,7 @@ FILE: dist/servico-piscinas.html
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:title" content="Piscinas | FAZDETUDO.PT">
-    <meta property="og:description" content="Piscinas em Lisboa, Cascais e Setúbal. Tratamento de água, filtros e bombas. Orçamento grátis com a FAZDETUDO.PT.">
+    <meta property="og:description" content="Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:locale" content="pt_PT">
@@ -24029,8 +24077,8 @@ FILE: dist/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Piscinas",
-  "description": "Piscinas em Lisboa, Cascais e Setúbal. Tratamento de água, filtros e bombas. Orçamento grátis com a FAZDETUDO.PT.",
+  "serviceType": "Construção, Manutenção e Reparação de Piscinas",
+  "description": "Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -24109,24 +24157,26 @@ FILE: dist/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Manutenção e Limpeza de Piscinas Profissional</h1>
+                <h1 class="service-article-title">Construção, Manutenção e Reparação de Piscinas</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A FAZDETUDO.PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
+                <p>A FAZDETUDO.PT posiciona-se em <strong>construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul</strong> — desde piscinas novas a remodelações completas, com equipas que atendem moradias, condomínios, alojamentos locais e espaços comerciais em Lisboa, Cascais, Almada, Setúbal e arredores.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
-                    <li>Tratamento e equilíbrio químico da água (pH, cloro e alcalinidade).</li>
-                    <li>Aspiração de fundo, limpeza de paredes e remoção de folhas e detritos.</li>
-                    <li>Limpeza e manutenção de filtros, bombas e skimmers.</li>
-                    <li>Reparação de fugas, fissuras em revestimentos e juntas degradadas.</li>
-                    <li>Arranque de piscina na época de verão e encerramento no outono.</li>
-                    <li>Substituição de lâmpadas subaquáticas e pequenos componentes.</li>
-                    <li>Planos semanais ou quinzenais com preço mensal fixo.</li>
+                    <li><strong>Construção de piscinas novas</strong> — projeto, escavação, estrutura, impermeabilização e acabamentos.</li>
+                    <li><strong>Remodelação de piscinas existentes</strong> — renovação de revestimentos, degraus, zonas de lazer e equipamento.</li>
+                    <li><strong>Reparação de fugas</strong> — deteção e correção em estrutura, tubagens e juntas.</li>
+                    <li><strong>Substituição ou reparação de revestimentos</strong> — liner, mosaico, betão ou outros acabamentos.</li>
+                    <li><strong>Sistemas de filtração</strong> — instalação, substituição e manutenção de filtros, bombas e circuitos hidráulicos.</li>
+                    <li><strong>Limpeza e tratamento de água</strong> — equilíbrio químico, aspiração, limpeza de paredes e fundo.</li>
+                    <li><strong>Manutenção regular</strong> — planos semanais ou quinzenais com previsibilidade de custos.</li>
+                    <li><strong>Piscinas para moradias, condomínios, alojamentos locais e comércio</strong> — soluções à medida de cada espaço.</li>
                 </ul>
+                <p>Deslocamo-nos em toda a <strong>Grande Lisboa e Margem Sul</strong> com orçamento gratuito e resposta rápida por WhatsApp.</p>
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
@@ -24143,9 +24193,9 @@ FILE: dist/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Piscinas.</p>
+                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Construção, Manutenção e Reparação de Piscinas.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20manuten%C3%A7%C3%A3o%20de%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20constru%C3%A7%C3%A3o%20ou%20manuten%C3%A7%C3%A3o%20de%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -28373,8 +28423,8 @@ FILE: en/index.html
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
-                    <h3>Swimming Pools</h3>
-                    <p>Pool maintenance and cleaning, water chemistry, filters, pumps and leak detection.</p>
+                    <h3>Pools</h3>
+                    <p>Pool construction, maintenance, repair, cleaning and water treatment.</p>
                     <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -28857,7 +28907,7 @@ FILE: en/index.html
                         <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
                         <li><a href="servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
                         <li><a href="servico-decoracao-interiores.html">Interior Design</a></li>
-                        <li><a href="servico-piscinas.html">Swimming Pools</a></li>
+                        <li><a href="servico-piscinas.html">Pools</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -31593,8 +31643,8 @@ FILE: en/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Professional Pool Maintenance and Cleaning | FAZDETUDO.PT</title>
-    <meta name="description" content="Swimming Pools in Lisbon, Cascais and Setúbal. Water treatment, filters and pumps. Free quote from FAZDETUDO.PT.">
+    <title>Pool Construction and Maintenance in Lisbon | FAZDETUDO.PT</title>
+    <meta name="description" content="Pool construction, maintenance and repair across Greater Lisbon and the South Bank. New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote.">
     <link rel="canonical" href="https://www.fazdetudo.pt/en/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -31602,8 +31652,8 @@ FILE: en/servico-piscinas.html
     <link rel="alternate" hreflang="es" href="https://www.fazdetudo.pt/es/servico-piscinas.html">
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
-    <meta property="og:title" content="Swimming Pools | FAZDETUDO.PT">
-    <meta property="og:description" content="Swimming Pools in Lisbon, Cascais and Setúbal. Water treatment, filters and pumps. Free quote from FAZDETUDO.PT.">
+    <meta property="og:title" content="Pools | FAZDETUDO.PT">
+    <meta property="og:description" content="Pool construction, maintenance and repair across Greater Lisbon and the South Bank. New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/en/servico-piscinas.html">
     <meta property="og:locale" content="en_GB">
@@ -31613,8 +31663,8 @@ FILE: en/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Swimming Pools",
-  "description": "Swimming Pools in Lisbon, Cascais and Setúbal. Water treatment, filters and pumps. Free quote from FAZDETUDO.PT.",
+  "serviceType": "Pool Construction, Maintenance and Repair",
+  "description": "Pool construction, maintenance and repair across Greater Lisbon and the South Bank. New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -31693,20 +31743,21 @@ FILE: en/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Professional Pool Maintenance and Cleaning</h1>
+                <h1 class="service-article-title">Pool Construction, Maintenance and Repair</h1>
                 <p class="service-article-lead">Professional, fast service with satisfaction guarantee across Greater Lisbon, Cascais, South Bank and Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p><strong>Pool maintenance across Greater Lisbon and the South Bank</strong> for crystal-clear water.</p>
+                <p><strong>Pool construction, maintenance and repair across Greater Lisbon and the South Bank</strong> — new builds, renovations and ongoing care in Lisbon, Cascais, Almada and Setúbal.</p>
                 <h2>What we do in this area:</h2>
                 <ul class="service-feature-list">
-                    <li>Water chemistry and treatment.</li>
-                    <li>Filter, pump and skimmer cleaning.</li>
-                    <li>Leak and lining repair.</li>
-                    <li>Weekly or bi-weekly service plans.</li>
+                    <li>Construction of new residential and commercial pools.</li>
+                    <li>Renovation of existing pools.</li>
+                    <li>Leak repair and lining replacement.</li>
+                    <li>Filtration systems installation and servicing.</li>
+                    <li>Cleaning, water treatment and regular maintenance.</li>
                 </ul>
                 <h2>Fast Service Areas</h2>
                 <p>We reach your door quickly in the following locations:</p>
@@ -31724,9 +31775,9 @@ FILE: en/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Click below to speak directly with our Swimming Pools specialist.</p>
+                <p>Click below to speak directly with our Pool Construction, Maintenance and Repair specialist.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20pool%20maintenance." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20pool%20construction%20or%20maintenance." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quote via WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -32958,7 +33009,7 @@ FILE: es/index.html
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
-                    <p>Mantenimiento y limpieza de piscinas, química del agua, filtros, bombas y fugas.</p>
+                    <p>Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.</p>
                     <a href="servico-piscinas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -36177,8 +36228,8 @@ FILE: es/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Mantenimiento y Limpieza Profesional de Piscinas | FAZDETUDO.PT</title>
-    <meta name="description" content="Piscinas en Lisboa, Cascais y Setúbal. Tratamiento de agua, filtros y bombas. Presupuesto gratis con FAZDETUDO.PT.">
+    <title>Construcción y Mantenimiento de Piscinas en Lisboa | FAZDETUDO.PT</title>
+    <meta name="description" content="Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto.">
     <link rel="canonical" href="https://www.fazdetudo.pt/es/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -36187,7 +36238,7 @@ FILE: es/servico-piscinas.html
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:title" content="Piscinas | FAZDETUDO.PT">
-    <meta property="og:description" content="Piscinas en Lisboa, Cascais y Setúbal. Tratamiento de agua, filtros y bombas. Presupuesto gratis con FAZDETUDO.PT.">
+    <meta property="og:description" content="Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/es/servico-piscinas.html">
     <meta property="og:locale" content="es_ES">
@@ -36197,8 +36248,8 @@ FILE: es/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Piscinas",
-  "description": "Piscinas en Lisboa, Cascais y Setúbal. Tratamiento de agua, filtros y bombas. Presupuesto gratis con FAZDETUDO.PT.",
+  "serviceType": "Construcción, Mantenimiento y Reparación de Piscinas",
+  "description": "Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -36277,20 +36328,21 @@ FILE: es/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Mantenimiento y Limpieza Profesional de Piscinas</h1>
+                <h1 class="service-article-title">Construcción, Mantenimiento y Reparación de Piscinas</h1>
                 <p class="service-article-lead">Servicio profesional, rápido y con garantía de satisfacción en la Gran Lisboa, Cascais, Margen Sur y Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p><strong>Mantenimiento de piscinas en la Gran Lisboa y Margen Sur</strong>.</p>
+                <p><strong>Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur</strong> — desde piscinas nuevas hasta reformas, con servicio en Lisboa, Cascais, Almada y Setúbal.</p>
                 <h2>Qué hacemos en esta área:</h2>
                 <ul class="service-feature-list">
-                    <li>Equilibrio químico y tratamiento del agua.</li>
-                    <li>Limpieza de filtros, bombas y skimmers.</li>
-                    <li>Reparación de fugas y revestimientos.</li>
-                    <li>Planes semanales o quincenales.</li>
+                    <li>Construcción de piscinas nuevas para viviendas y comunidades.</li>
+                    <li>Reforma de piscinas existentes.</li>
+                    <li>Reparación de fugas y sustitución de revestimientos.</li>
+                    <li>Instalación y mantenimiento de sistemas de filtración.</li>
+                    <li>Limpieza, tratamiento del agua y mantenimiento regular.</li>
                 </ul>
                 <h2>Zonas de Servicio Rápido</h2>
                 <p>Nos desplazamos rápidamente a su puerta en las siguientes localidades:</p>
@@ -36308,9 +36360,9 @@ FILE: es/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Haga clic abajo para hablar directamente con nuestro especialista en Piscinas.</p>
+                <p>Haga clic abajo para hablar directamente con nuestro especialista en Construcción, Mantenimiento y Reparación de Piscinas.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20construcci%C3%B3n%20o%20mantenimiento%20de%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Presupuesto por WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -37542,7 +37594,7 @@ FILE: fr/index.html
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscines</h3>
-                    <p>Entretien et nettoyage de piscines, chimie de l'eau, filtres, pompes et fuites.</p>
+                    <p>Construction, entretien, réparation, nettoyage et traitement de l'eau.</p>
                     <a href="servico-piscinas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -40761,8 +40813,8 @@ FILE: fr/servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Entretien et Nettoyage Professionnel de Piscines | FAZDETUDO.PT</title>
-    <meta name="description" content="Piscines à Lisbonne, Cascais et Setúbal. Traitement eau, filtres et pompes. Devis gratuit avec FAZDETUDO.PT.">
+    <title>Construction et Entretien de Piscines à Lisbonne | FAZDETUDO.PT</title>
+    <meta name="description" content="Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis.">
     <link rel="canonical" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -40771,7 +40823,7 @@ FILE: fr/servico-piscinas.html
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:title" content="Piscines | FAZDETUDO.PT">
-    <meta property="og:description" content="Piscines à Lisbonne, Cascais et Setúbal. Traitement eau, filtres et pompes. Devis gratuit avec FAZDETUDO.PT.">
+    <meta property="og:description" content="Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <meta property="og:locale" content="fr_FR">
@@ -40781,8 +40833,8 @@ FILE: fr/servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Piscines",
-  "description": "Piscines à Lisbonne, Cascais et Setúbal. Traitement eau, filtres et pompes. Devis gratuit avec FAZDETUDO.PT.",
+  "serviceType": "Construction, Entretien et Réparation de Piscines",
+  "description": "Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -40861,20 +40913,21 @@ FILE: fr/servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Entretien et Nettoyage Professionnel de Piscines</h1>
+                <h1 class="service-article-title">Construction, Entretien et Réparation de Piscines</h1>
                 <p class="service-article-lead">Service professionnel, rapide et satisfaction garantie dans le Grand Lisbonne, Cascais, Rive Sud et Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p><strong>Entretien piscines Grand Lisbonne et Rive Sud</strong> pour une eau cristalline.</p>
+                <p><strong>Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud</strong> — piscines neuves, rénovations et suivi régulier à Lisbonne, Cascais, Almada et Setúbal.</p>
                 <h2>Ce que nous faisons dans ce domaine :</h2>
                 <ul class="service-feature-list">
-                    <li>Équilibre chimique et traitement de l'eau.</li>
-                    <li>Nettoyage filtres, pompes et skimmers.</li>
-                    <li>Réparation fuites et revêtements.</li>
-                    <li>Contrats hebdomadaires ou bimensuels.</li>
+                    <li>Construction de piscines neuves pour maisons et copropriétés.</li>
+                    <li>Rénovation de piscines existantes.</li>
+                    <li>Réparation de fuites et remplacement de revêtements.</li>
+                    <li>Installation et entretien de systèmes de filtration.</li>
+                    <li>Nettoyage, traitement de l'eau et entretien régulier.</li>
                 </ul>
                 <h2>Zones d'intervention rapide</h2>
                 <p>Nous nous déplaçons rapidement chez vous dans les localités suivantes :</p>
@@ -40892,9 +40945,9 @@ FILE: fr/servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Cliquez ci-dessous pour parler directement à notre spécialiste Piscines.</p>
+                <p>Cliquez ci-dessous pour parler directement à notre spécialiste Construction, Entretien et Réparation de Piscines.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20entretien%20piscine." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20construction%20ou%20entretien%20de%20piscine." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Devis par WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
@@ -42126,7 +42179,7 @@ FILE: index.html
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
-                    <p>Manutenção e limpeza de piscinas, equilíbrio químico da água, revisão de filtros, bombas e deteção de fugas.</p>
+                    <p>Construção, manutenção, reparação, limpeza e tratamento de piscinas.</p>
                     <a href="servico-piscinas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -43128,7 +43181,7 @@ FILE: script.js
                 { name: 'Climatização', description: 'Instalação, manutenção e reparação de ar condicionado e aquecimento.' },
                 { name: 'Estores e Persianas', description: 'Reparação e instalação de estores, persianas, mosquiteiras e toldos.' },
                 { name: 'Decoração de Interiores', description: 'Cortinas, papel de parede, iluminação decorativa, molduras e home staging.' },
-                { name: 'Piscinas', description: 'Limpeza, manutenção e reparação de piscinas. Tratamento de água, filtros, bombas e revestimentos.' }
+                { name: 'Piscinas', description: 'Construção, manutenção, reparação, limpeza e tratamento de piscinas.' }
             ],
             advantages_title: 'Porquê escolher-nos?',
             advantages: [
@@ -43196,7 +43249,7 @@ FILE: script.js
                 { name: 'Air Conditioning', description: 'Installation, maintenance and repair of air conditioning and heating.' },
                 { name: 'Blinds & Shutters', description: 'Repair and installation of blinds, shutters, mosquito nets and awnings.' },
                 { name: 'Interior Design', description: 'Curtains, wallpaper, decorative lighting, frames and home staging.' },
-                { name: 'Swimming Pools', description: 'Cleaning, maintenance and repair of pools. Water treatment, filters, pumps and linings.' }
+                { name: 'Pools', description: 'Pool construction, maintenance, repair, cleaning and water treatment.' }
             ],
             advantages_title: 'Why choose us?',
             advantages: [
@@ -43264,7 +43317,7 @@ FILE: script.js
                 { name: 'Climatización', description: 'Instalación, mantenimiento y reparación de aire acondicionado y calefacción.' },
                 { name: 'Persianas y estores', description: 'Reparación e instalación de estores, persianas, mosquiteras y toldos.' },
                 { name: 'Decoración de interiores', description: 'Cortinas, papel pintado, iluminación decorativa, molduras y home staging.' },
-                { name: 'Piscinas', description: 'Limpieza, mantenimiento y reparación de piscinas. Tratamiento de agua, filtros, bombas y revestimientos.' }
+                { name: 'Piscinas', description: 'Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.' }
             ],
             advantages_title: '¿Por qué elegirnos?',
             advantages: [
@@ -43332,7 +43385,7 @@ FILE: script.js
                 { name: 'Climatisation', description: 'Installation, entretien et réparation de climatisation et chauffage.' },
                 { name: 'Stores et volets', description: 'Réparation et installation de stores, volets, moustiquaires et auvents.' },
                 { name: 'Décoration d\'intérieur', description: 'Rideaux, papier peint, éclairage décoratif, moulures et home staging.' },
-                { name: 'Piscines', description: 'Nettoyage, entretien et réparation de piscines. Traitement de l\'eau, filtres, pompes et revêtements.' }
+                { name: 'Piscines', description: 'Construction, entretien, réparation, nettoyage et traitement de l\'eau.' }
             ],
             advantages_title: 'Pourquoi nous choisir ?',
             advantages: [
@@ -46477,8 +46530,8 @@ FILE: servico-piscinas.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>Manutenção e Limpeza de Piscinas Profissional | FAZDETUDO.PT</title>
-    <meta name="description" content="Piscinas em Lisboa, Cascais e Setúbal. Tratamento de água, filtros e bombas. Orçamento grátis com a FAZDETUDO.PT.">
+    <title>Construção e Manutenção de Piscinas em Lisboa | FAZDETUDO.PT</title>
+    <meta name="description" content="Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento.">
     <link rel="canonical" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/servico-piscinas.html">
@@ -46487,7 +46540,7 @@ FILE: servico-piscinas.html
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/servico-piscinas.html">
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:title" content="Piscinas | FAZDETUDO.PT">
-    <meta property="og:description" content="Piscinas em Lisboa, Cascais e Setúbal. Tratamento de água, filtros e bombas. Orçamento grátis com a FAZDETUDO.PT.">
+    <meta property="og:description" content="Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/servico-piscinas.html">
     <meta property="og:locale" content="pt_PT">
@@ -46497,8 +46550,8 @@ FILE: servico-piscinas.html
     {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Piscinas",
-  "description": "Piscinas em Lisboa, Cascais e Setúbal. Tratamento de água, filtros e bombas. Orçamento grátis com a FAZDETUDO.PT.",
+  "serviceType": "Construção, Manutenção e Reparação de Piscinas",
+  "description": "Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento.",
   "provider": {
     "@type": "HomeAndConstructionBusiness",
     "name": "FAZDETUDO.PT",
@@ -46577,24 +46630,26 @@ FILE: servico-piscinas.html
     <main class="service-page-main service-page-main--article" id="service-main">
         <article class="container service-article">
             <header class="service-hero">
-                <h1 class="service-article-title">Manutenção e Limpeza de Piscinas Profissional</h1>
+                <h1 class="service-article-title">Construção, Manutenção e Reparação de Piscinas</h1>
                 <p class="service-article-lead">Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.</p>
             </header>
 
             <div class="service-layout">
                 <div class="service-main-col">
                     <div class="service-rich-text">
-                <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A FAZDETUDO.PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
+                <p>A FAZDETUDO.PT posiciona-se em <strong>construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul</strong> — desde piscinas novas a remodelações completas, com equipas que atendem moradias, condomínios, alojamentos locais e espaços comerciais em Lisboa, Cascais, Almada, Setúbal e arredores.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
-                    <li>Tratamento e equilíbrio químico da água (pH, cloro e alcalinidade).</li>
-                    <li>Aspiração de fundo, limpeza de paredes e remoção de folhas e detritos.</li>
-                    <li>Limpeza e manutenção de filtros, bombas e skimmers.</li>
-                    <li>Reparação de fugas, fissuras em revestimentos e juntas degradadas.</li>
-                    <li>Arranque de piscina na época de verão e encerramento no outono.</li>
-                    <li>Substituição de lâmpadas subaquáticas e pequenos componentes.</li>
-                    <li>Planos semanais ou quinzenais com preço mensal fixo.</li>
+                    <li><strong>Construção de piscinas novas</strong> — projeto, escavação, estrutura, impermeabilização e acabamentos.</li>
+                    <li><strong>Remodelação de piscinas existentes</strong> — renovação de revestimentos, degraus, zonas de lazer e equipamento.</li>
+                    <li><strong>Reparação de fugas</strong> — deteção e correção em estrutura, tubagens e juntas.</li>
+                    <li><strong>Substituição ou reparação de revestimentos</strong> — liner, mosaico, betão ou outros acabamentos.</li>
+                    <li><strong>Sistemas de filtração</strong> — instalação, substituição e manutenção de filtros, bombas e circuitos hidráulicos.</li>
+                    <li><strong>Limpeza e tratamento de água</strong> — equilíbrio químico, aspiração, limpeza de paredes e fundo.</li>
+                    <li><strong>Manutenção regular</strong> — planos semanais ou quinzenais com previsibilidade de custos.</li>
+                    <li><strong>Piscinas para moradias, condomínios, alojamentos locais e comércio</strong> — soluções à medida de cada espaço.</li>
                 </ul>
+                <p>Deslocamo-nos em toda a <strong>Grande Lisboa e Margem Sul</strong> com orçamento gratuito e resposta rápida por WhatsApp.</p>
                 <h2>Zonas de Atendimento Rápido</h2>
                 <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
                 <ul class="service-zones-grid">
@@ -46611,9 +46666,9 @@ FILE: servico-piscinas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Piscinas.</p>
+                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Construção, Manutenção e Reparação de Piscinas.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20manuten%C3%A7%C3%A3o%20de%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20constru%C3%A7%C3%A3o%20ou%20manuten%C3%A7%C3%A3o%20de%20piscinas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
                     </a>
                     <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">

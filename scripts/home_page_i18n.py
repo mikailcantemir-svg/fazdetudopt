@@ -901,10 +901,10 @@ SERVICE_CARDS = [
         "icon": "water-ladder",
         "featured": False,
         "badge": None,
-        "pt": ("Piscinas", "Manutenção e limpeza de piscinas, equilíbrio químico da água, revisão de filtros, bombas e deteção de fugas."),
-        "en": ("Swimming Pools", "Pool maintenance and cleaning, water chemistry, filters, pumps and leak detection."),
-        "es": ("Piscinas", "Mantenimiento y limpieza de piscinas, química del agua, filtros, bombas y fugas."),
-        "fr": ("Piscines", "Entretien et nettoyage de piscines, chimie de l'eau, filtres, pompes et fuites."),
+        "pt": ("Piscinas", "Construção, manutenção, reparação, limpeza e tratamento de piscinas."),
+        "en": ("Pools", "Pool construction, maintenance, repair, cleaning and water treatment."),
+        "es": ("Piscinas", "Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas."),
+        "fr": ("Piscines", "Construction, entretien, réparation, nettoyage et traitement de l'eau."),
     },
 ]
 
