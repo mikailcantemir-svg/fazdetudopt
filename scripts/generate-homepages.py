@@ -80,6 +80,10 @@ def build_service_cards(lang: str) -> str:
             badge = f'                    <span class="window-badge">{ui["badge_premium"]}</span>\n'
         elif card["badge"] == "specialty":
             badge = f'                    <span class="window-badge">{ui["badge_specialty"]}</span>\n'
+        elif card["badge"] == "acabamentos_premium":
+            badge = f'                    <span class="window-badge">{ui["badge_acabamentos_premium"]}</span>\n'
+        elif card["badge"] == "muito_requisitado":
+            badge = f'                    <span class="window-badge">{ui["badge_muito_requisitado"]}</span>\n'
         blocks.append(
             f"""                <div class="service-window-card{feat}">
 {badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>
