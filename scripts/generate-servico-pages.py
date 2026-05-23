@@ -443,7 +443,7 @@ def json_ld(service: dict) -> str:
         "provider": {
             "@type": "HomeAndConstructionBusiness",
             "name": "Faz de Tudo PT",
-            "image": "https://www.fazdetudo.pt/logo.png",
+            "image": "https://www.fazdetudo.pt/logo.webp",
             "telephone": "+351932504112",
             "priceRange": "$$",
             "address": {
