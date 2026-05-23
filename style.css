@@ -1555,6 +1555,65 @@ body.modal-open {
     background: var(--primary-dark);
 }
 
+.whatsapp-float {
+    background: #25D366 !important;
+}
+
+.wa-widget.open .whatsapp-float {
+    background: #1da851 !important;
+}
+
+.floating-contact {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.float-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.float-btn:hover {
+    transform: scale(1.1);
+}
+
+.float-btn--wa {
+    background: #25D366;
+}
+
+.float-btn--wa:hover {
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+}
+
+.float-btn--tel {
+    background: var(--primary-color);
+}
+
+.float-btn--tel:hover {
+    box-shadow: 0 6px 24px rgba(230, 95, 43, 0.5);
+}
+
+.float-btn--home {
+    position: fixed;
+    right: 28px;
+    bottom: 96px;
+    z-index: 999;
+}
+
 .wa-chat {
     position: absolute;
     bottom: 72px;
@@ -2261,6 +2320,23 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
+    .floating-contact {
+        bottom: 18px;
+        right: 18px;
+        gap: 12px;
+    }
+
+    .float-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+    }
+
+    .float-btn--home {
+        right: 18px;
+        bottom: 80px;
+    }
+
     .service-page-main,
     .service-page-main--article {
         padding-top: 110px;
