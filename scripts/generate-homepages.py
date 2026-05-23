@@ -214,7 +214,7 @@ def json_ld(lang: str) -> str:
     meta = HOME_META[lang]
     business = {
         "@type": "HomeAndConstructionBusiness",
-        "name": "Faz de Tudo PT",
+        "name": "FAZDETUDO.PT",
         "url": home_url(lang).rstrip("/"),
         "logo": "https://www.fazdetudo.pt/logo.webp",
         "image": "https://www.fazdetudo.pt/logo.webp",
@@ -326,7 +326,7 @@ def apply_i18n_attributes(html: str, lang: str) -> str:
 def apply_meta_strings(html: str, lang: str) -> str:
     meta = HOME_META[lang]
     html = html.replace('aria-label="Navegação principal"', f'aria-label="{meta["nav_aria"]}"')
-    html = html.replace('alt="Faz de Tudo PT - Serviços de faz tudo em Lisboa"', f'alt="{meta["logo_alt"]}"')
+    html = html.replace('alt="FAZDETUDO.PT - Serviços de handyman em Lisboa"', f'alt="{meta["logo_alt"]}"')
     html = html.replace('alt="Profissional faz tudo"', f'alt="{meta["section_logo_alt"]}"')
     html = html.replace('aria-label="Open menu"', f'aria-label="{meta["menu_aria"]}"')
     html = html.replace('aria-label="Crítica anterior"', f'aria-label="{meta["review_prev"]}"')

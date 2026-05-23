@@ -50,7 +50,7 @@ def redirect_html(target: str) -> str:
     <meta name="robots" content="noindex, follow">
     <meta http-equiv="refresh" content="0; url={target}">
     <link rel="canonical" href="{canonical}">
-    <title>Redirecionamento | Faz de Tudo PT</title>
+    <title>Redirecionamento | FAZDETUDO.PT</title>
 </head>
 <body>
     <p>Esta página foi movida. <a href="{target}">Continuar para o novo endereço</a>.</p>

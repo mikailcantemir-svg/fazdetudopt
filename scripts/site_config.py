@@ -13,6 +13,7 @@ EMAIL = "geral@fazdetudo.pt"
 # Texto visível no HTML (anti-scraping); mailto usa EMAIL real
 EMAIL_OBFUSCATED = "geral&#64;fazdetudo.pt"
 DEFAULT_ADDRESS = "Grande Lisboa e Margem Sul, Portugal"
+BRAND_NAME = "FAZDETUDO.PT"
 
 GOOGLE_REVIEWS_URL = (
     "https://www.google.com/maps/place/Faz+de+tudo+%7C+HANDYMAN/"

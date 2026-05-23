@@ -66,7 +66,7 @@ def json_ld(slug: str, lang: str) -> str:
         "description": meta["meta_description"],
         "provider": {
             "@type": "HomeAndConstructionBusiness",
-            "name": "Faz de Tudo PT",
+            "name": "FAZDETUDO.PT",
             "image": OG_IMAGE,
             "telephone": schema_telephone(),
             "priceRange": "$$",

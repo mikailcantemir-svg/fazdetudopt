@@ -25,7 +25,7 @@ ZONES_SECTION_LISBOA_SETUBAL = """
 
 SERVICE_BODIES = {
     "servico-pinturas.html": """
-                <p>A <strong>Faz de Tudo PT</strong> é referência em <strong>pintura residencial e comercial na Grande Lisboa e Margem Sul</strong>. Trabalhamos com tintas de qualidade, proteção integral do espaço e acabamentos uniformes em Lisboa, Cascais, Sintra, Almada e Setúbal — com orçamento gratuito e prazos acordados por escrito.</p>
+                <p>A <strong>FAZDETUDO.PT</strong> é referência em <strong>pintura residencial e comercial na Grande Lisboa e Margem Sul</strong>. Trabalhamos com tintas de qualidade, proteção integral do espaço e acabamentos uniformes em Lisboa, Cascais, Sintra, Almada e Setúbal — com orçamento gratuito e prazos acordados por escrito.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Preparação profissional de superfícies: lixagem, massa corrida, primários anti-humidade e correção de imperfeições.</li>
@@ -38,7 +38,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-pintura-fachadas-alpinismo.html": """
-                <p>Reabilitamos fachadas de edifícios em <strong>Lisboa, Cascais, Estoril e Margem Sul</strong> com <strong>alpinismo industrial (trabalho em cordas)</strong>. A Faz de Tudo PT elimina a necessidade de andaimes caros, reduz o tempo de obra e garante acesso seguro a todos os pontos da fachada — ideal para condomínios, moradias e imóveis expostos à maresia.</p>
+                <p>Reabilitamos fachadas de edifícios em <strong>Lisboa, Cascais, Estoril e Margem Sul</strong> com <strong>alpinismo industrial (trabalho em cordas)</strong>. A FAZDETUDO.PT elimina a necessidade de andaimes caros, reduz o tempo de obra e garante acesso seguro a todos os pontos da fachada — ideal para condomínios, moradias e imóveis expostos à maresia.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Lavagem de alta pressão e descontaminação de fachadas antes da pintura.</li>
@@ -51,7 +51,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-canalizacoes.html": """
-                <p>Quando surge uma fuga ou entupimento, precisa de um <strong>canalizador de confiança na Grande Lisboa e Margem Sul</strong>. A Faz de Tudo PT responde com diagnóstico rigoroso, peças adequadas e reparação duradoura em Lisboa, Cascais, Almada, Seixal e Setúbal — particulares, condomínios e comércio.</p>
+                <p>Quando surge uma fuga ou entupimento, precisa de um <strong>canalizador de confiança na Grande Lisboa e Margem Sul</strong>. A FAZDETUDO.PT responde com diagnóstico rigoroso, peças adequadas e reparação duradoura em Lisboa, Cascais, Almada, Seixal e Setúbal — particulares, condomínios e comércio.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Deteção e reparação de fugas visíveis e ocultas em tubagens, juntas e ligações.</li>
@@ -77,7 +77,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-carpintaria.html": """
-                <p>Da montagem de um roupeiro à afinação de uma porta que não fecha, a <strong>carpintaria em Lisboa e Margem Sul</strong> exige precisão e experiência. A Faz de Tudo PT executa trabalhos em madeira e derivados com acabamento cuidado em Cascais, Sintra, Oeiras, Almada e Setúbal.</p>
+                <p>Da montagem de um roupeiro à afinação de uma porta que não fecha, a <strong>carpintaria em Lisboa e Margem Sul</strong> exige precisão e experiência. A FAZDETUDO.PT executa trabalhos em madeira e derivados com acabamento cuidado em Cascais, Sintra, Oeiras, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Montagem profissional de móveis IKEA, MDF e mobiliário por medida.</li>
@@ -90,7 +90,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-reparacoes-gerais.html": """
-                <p>O seu <strong>handyman de confiança na Grande Lisboa e Margem Sul</strong> para resolver a lista de tarefas que adia há meses. A Faz de Tudo PT combina rapidez, ferramentas adequadas e soluções definitivas em Lisboa, Cascais, Almada e Setúbal — uma visita, vários arranjos resolvidos.</p>
+                <p>O seu <strong>handyman de confiança na Grande Lisboa e Margem Sul</strong> para resolver a lista de tarefas que adia há meses. A FAZDETUDO.PT combina rapidez, ferramentas adequadas e soluções definitivas em Lisboa, Cascais, Almada e Setúbal — uma visita, vários arranjos resolvidos.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Fixação de suportes de TV, estantes, espelhos e quadros em qualquer tipo de parede.</li>
@@ -103,7 +103,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-manutencao.html": """
-                <p>Evite obras caras com <strong>manutenção preventiva na Grande Lisboa e Margem Sul</strong>. A Faz de Tudo PT elabora planos periódicos para condomínios, moradias e comércio em Lisboa, Cascais, Sintra, Almada e Setúbal — com relatório do que foi verificado e corrigido.</p>
+                <p>Evite obras caras com <strong>manutenção preventiva na Grande Lisboa e Margem Sul</strong>. A FAZDETUDO.PT elabora planos periódicos para condomínios, moradias e comércio em Lisboa, Cascais, Sintra, Almada e Setúbal — com relatório do que foi verificado e corrigido.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Inspeção periódica de telhados, calhas, caleiras e ralos exteriores.</li>
@@ -129,7 +129,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-jardinagem.html": """
-                <p>Jardins bem tratados valorizam o imóvel e melhoram a qualidade de vida. A Faz de Tudo PT oferece <strong>jardinagem e manutenção de exteriores na Grande Lisboa e Margem Sul</strong> — desde o corte de relva em Cascais até à poda em Sintra, Almada e Setúbal.</p>
+                <p>Jardins bem tratados valorizam o imóvel e melhoram a qualidade de vida. A FAZDETUDO.PT oferece <strong>jardinagem e manutenção de exteriores na Grande Lisboa e Margem Sul</strong> — desde o corte de relva em Cascais até à poda em Sintra, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Corte e tratamento de relvados com equipamento profissional.</li>
@@ -142,7 +142,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-mudancas.html": """
-                <p>Uma mudança bem planead reduz stress e danos. A Faz de Tudo PT realiza <strong>mudanças residenciais e comerciais na Grande Lisboa e Margem Sul</strong> com embalagem cuidada, transporte seguro e montagem no destino — Lisboa, Cascais, Sintra, Almada, Seixal e Setúbal.</p>
+                <p>Uma mudança bem planead reduz stress e danos. A FAZDETUDO.PT realiza <strong>mudanças residenciais e comerciais na Grande Lisboa e Margem Sul</strong> com embalagem cuidada, transporte seguro e montagem no destino — Lisboa, Cascais, Sintra, Almada, Seixal e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Mudanças completas T2, T3, moradias e escritórios com equipa dedicada.</li>
@@ -155,7 +155,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-informatica.html": """
-                <p>Computadores lentos, Wi-Fi instável ou impressoras offline prejudicam o seu dia. A Faz de Tudo PT presta <strong>assistência informática ao domicílio na Grande Lisboa e Margem Sul</strong> — diagnóstico claro, soluções práticas e linguagem acessível em Lisboa, Cascais, Oeiras e Setúbal.</p>
+                <p>Computadores lentos, Wi-Fi instável ou impressoras offline prejudicam o seu dia. A FAZDETUDO.PT presta <strong>assistência informática ao domicílio na Grande Lisboa e Margem Sul</strong> — diagnóstico claro, soluções práticas e linguagem acessível em Lisboa, Cascais, Oeiras e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Remoção de vírus, malware e otimização de computadores lentos (Windows e Mac).</li>
@@ -181,7 +181,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-climatizacao.html": """
-                <p>O conforto térmico no verão e no inverno passa por um sistema AVAC bem instalado e mantido. A Faz de Tudo PT é especialista em <strong>climatização e ar condicionado na Grande Lisboa e Margem Sul</strong> — splits, multisplit e manutenção em Lisboa, Cascais, Sintra, Almada e Setúbal.</p>
+                <p>O conforto térmico no verão e no inverno passa por um sistema AVAC bem instalado e mantido. A FAZDETUDO.PT é especialista em <strong>climatização e ar condicionado na Grande Lisboa e Margem Sul</strong> — splits, multisplit e manutenção em Lisboa, Cascais, Sintra, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Instalação de ar condicionado split e multisplit com linhas frigoríficas discretas.</li>
@@ -194,7 +194,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-remodelacoes.html": """
-                <p>Renovar a cozinha ou a casa de banho transforma o dia a dia. A Faz de Tudo PT coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave — em Lisboa, Cascais, Oeiras, Almada e Setúbal.</p>
+                <p>Renovar a cozinha ou a casa de banho transforma o dia a dia. A FAZDETUDO.PT coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave — em Lisboa, Cascais, Oeiras, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Remodelação completa de cozinhas: layout, móveis, bancadas e ligações.</li>
@@ -207,7 +207,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-recuperar-casa.html": """
-                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. A Faz de Tudo PT recupera o imóvel de ponta a ponta — estrutura, instalações e acabamentos — na Grande Lisboa e Margem Sul, com um único interlocutor e prazo fechado.</p>
+                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. A FAZDETUDO.PT recupera o imóvel de ponta a ponta — estrutura, instalações e acabamentos — na Grande Lisboa e Margem Sul, com um único interlocutor e prazo fechado.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Avaliação do estado geral do imóvel: estrutura, coberturas, humidades e instalações.</li>
@@ -222,7 +222,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-estores-persianas.html": """
-                <p>Estores presos, fitas partidas ou motores silenciosos são problemas frequentes em apartamentos da linha de Cascais e em Lisboa. A Faz de Tudo PT repara e instala <strong>estores, persianas e mosquiteiras na Grande Lisboa e Margem Sul</strong> com peças adequadas e garantia de funcionamento.</p>
+                <p>Estores presos, fitas partidas ou motores silenciosos são problemas frequentes em apartamentos da linha de Cascais e em Lisboa. A FAZDETUDO.PT repara e instala <strong>estores, persianas e mosquiteiras na Grande Lisboa e Margem Sul</strong> com peças adequadas e garantia de funcionamento.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Substituição de fitas, lâminas e mecanismos de estores manuais.</li>
@@ -235,7 +235,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-decoracao-interiores.html": """
-                <p>Detalhes bem executados mudam a perceção de qualquer espaço. A Faz de Tudo PT oferece <strong>decoração de interiores na Grande Lisboa e Margem Sul</strong> — cortinados, iluminação, revestimentos e home staging para habitar ou vender em Lisboa, Cascais, Sintra e Setúbal.</p>
+                <p>Detalhes bem executados mudam a perceção de qualquer espaço. A FAZDETUDO.PT oferece <strong>decoração de interiores na Grande Lisboa e Margem Sul</strong> — cortinados, iluminação, revestimentos e home staging para habitar ou vender em Lisboa, Cascais, Sintra e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Instalação de cortinados, estores decorativos e varões duplos.</li>
@@ -248,7 +248,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-piscinas.html": """
-                <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A Faz de Tudo PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
+                <p>Uma piscina cristalina exige manutenção regular e equipamento em bom estado. A FAZDETUDO.PT presta <strong>manutenção de piscinas na Grande Lisboa e Margem Sul</strong> — moradias em Cascais, Sintra, Almada e condomínios em toda a região de Lisboa e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Tratamento e equilíbrio químico da água (pH, cloro e alcalinidade).</li>
