@@ -461,6 +461,9 @@ FAQ_ITEMS = [
     },
 ]
 
+# Críticas reais do Google (ficha Maps). Por idioma: (primeiro_nome, texto).
+# Não inventar comentários; texto vazio se a review no Google não tiver texto.
+# Rating 5 estrelas aplicado no gerador (build_testimonials_cards).
 TESTIMONIAL_CARDS = [
     {
         "pt": ("Mamadu", "Recomendo! Muito bom."),
