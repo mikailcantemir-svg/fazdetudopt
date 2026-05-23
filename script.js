@@ -13,7 +13,7 @@
         email_obfuscated: 'geral&#64;fazdetudo.pt',
         address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
-            url: 'https://share.google/ajIgKyBugxyYCpS0J',
+            url: 'https://www.google.com/maps/place/Faz+de+tudo+%7C+HANDYMAN/@38.760942,-9.2013644,17z/data=!4m6!3m5!1s0xd1ecd0033ab1b83:0x7c1b8284ba4b85da!8m2!3d38.7609378!4d-9.1987895!16s%2Fg%2F11nc7r6k6j',
             rating: 5,
             count: 9,
             reviews: [

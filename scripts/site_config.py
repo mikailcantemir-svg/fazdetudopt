@@ -14,7 +14,11 @@ EMAIL = "geral@fazdetudo.pt"
 EMAIL_OBFUSCATED = "geral&#64;fazdetudo.pt"
 DEFAULT_ADDRESS = "Grande Lisboa e Margem Sul, Portugal"
 
-GOOGLE_REVIEWS_URL = "https://share.google/ajIgKyBugxyYCpS0J"
+GOOGLE_REVIEWS_URL = (
+    "https://www.google.com/maps/place/Faz+de+tudo+%7C+HANDYMAN/"
+    "@38.760942,-9.2013644,17z/data=!4m6!3m5!1s0xd1ecd0033ab1b83:0x7c1b8284ba4b85da"
+    "!8m2!3d38.7609378!4d-9.1987895!16s%2Fg%2F11nc7r6k6j"
+)
 
 FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61571666972567"
 INSTAGRAM_URL = (
