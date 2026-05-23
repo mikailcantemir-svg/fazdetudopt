@@ -28,6 +28,7 @@ TEMPLATE = (ROOT / "template-servico.html").read_text(encoding="utf-8")
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+from html_partials import render_wa_widget  # noqa: E402
 from service_page_i18n import (  # noqa: E402
     LANGS,
     LANG_HTML,
@@ -130,6 +131,18 @@ def render_page(slug: str, lang: str) -> str:
         .replace("{{WA_FLOAT_LABEL}}", ui["wa_float_label"])
         .replace("{{WA_SEND}}", ui["wa_send"])
         .replace("{{JSON_LD}}", json_ld(slug, lang))
+        .replace(
+            "{{WA_WIDGET}}",
+            render_wa_widget(
+                asset_prefix=prefix,
+                wa_online=ui["wa_online"],
+                wa_greeting=ui["wa_greeting"],
+                wa_placeholder=ui["wa_placeholder"],
+                wa_close=ui["wa_close"],
+                wa_send=ui["wa_send"],
+                wa_float_label=ui["wa_float_label"],
+            ),
+        )
     )
 
 

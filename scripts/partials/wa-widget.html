@@ -1,0 +1,32 @@
+    <!-- WhatsApp Chat Widget -->
+    <div class="wa-widget" id="wa-widget">
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-chat-header">
+                <img src="{{ASSET_PREFIX}}logo.webp" alt="Faz de Tudo PT" class="wa-chat-avatar" width="40" height="40" loading="lazy" decoding="async">
+                <div class="wa-chat-info">
+                    <strong>Faz de Tudo PT</strong>
+                    <span>{{WA_ONLINE}}</span>
+                </div>
+                <button type="button" class="wa-chat-close" id="wa-chat-close" aria-label="{{WA_CLOSE}}">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="wa-chat-body">
+                <div class="wa-chat-bubble" id="wa-chat-bubble">
+                    <p id="wa-greeting">{{WA_GREETING}}</p>
+                    <span class="wa-chat-time" id="wa-chat-time" aria-hidden="true"></span>
+                </div>
+            </div>
+            <div class="wa-chat-footer">
+                <label class="visually-hidden" for="wa-chat-input">{{WA_PLACEHOLDER}}</label>
+                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="{{WA_PLACEHOLDER}}" autocomplete="off">
+                <button type="button" class="wa-chat-send" id="wa-chat-send" aria-label="{{WA_SEND}}">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <button type="button" class="whatsapp-float" id="whatsapp-float" aria-label="{{WA_FLOAT_LABEL}}">
+            <i class="fa-brands fa-whatsapp" id="wa-icon-open" aria-hidden="true"></i>
+            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close" aria-hidden="true"></i>
+        </button>
+    </div>

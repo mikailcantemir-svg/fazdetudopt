@@ -28,7 +28,9 @@ from home_page_i18n import (  # noqa: E402
     render_home_hreflang,
     render_lang_switcher,
 )
+from html_partials import render_wa_widget  # noqa: E402
 from service_page_i18n import LANG_HTML, asset_prefix  # noqa: E402
+from site_config import GOOGLE_REVIEWS_URL, mailto_href, tel_href, wa_href  # noqa: E402
 
 OG_LOCALE = {
     "pt": "pt_PT",
@@ -173,7 +175,17 @@ def apply_meta_strings(html: str, lang: str) -> str:
 
 def render_homepage(lang: str, template: str) -> str:
     meta = HOME_META[lang]
+    ui = HOME_UI[lang]
     prefix = asset_prefix(lang)
+    wa_widget = render_wa_widget(
+        asset_prefix=prefix,
+        wa_online=ui["wa_online"],
+        wa_greeting=ui["wa_greeting"],
+        wa_placeholder=ui["wa_placeholder"],
+        wa_close=meta["wa_close"],
+        wa_send=meta["wa_send"],
+        wa_float_label=meta["wa_float"],
+    )
     html = (
         template.replace("{{HTML_LANG}}", LANG_HTML[lang])
         .replace("{{PAGE_LANG}}", lang)
@@ -189,6 +201,12 @@ def render_homepage(lang: str, template: str) -> str:
         .replace("{{LANG_SWITCHER}}", render_lang_switcher(lang))
         .replace("{{SERVICE_CARDS}}", build_service_cards(lang))
         .replace("{{HANDYMAN_SECTION}}", build_handyman_section(lang))
+        .replace("{{LOGO_HREF}}", home_url(lang))
+        .replace("{{TEL_HREF}}", tel_href())
+        .replace("{{EMAIL_HREF}}", mailto_href())
+        .replace("{{WA_HREF}}", wa_href(lang))
+        .replace("{{GOOGLE_REVIEWS_URL}}", GOOGLE_REVIEWS_URL)
+        .replace("{{WA_WIDGET}}", wa_widget)
     )
     html = apply_i18n_attributes(html, lang)
     html = apply_meta_strings(html, lang)

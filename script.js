@@ -9,9 +9,9 @@
         phone_display: '932 504 112',
         whatsapp: '351932504112',
         email: 'geral@fazdetudo.pt',
-        address: 'Lisboa, Portugal',
+        address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
-            url: 'https://www.google.com/search?sca_esv=9fc0643cb5b0db60&rlz=1C1GCEA_pt-PTPT1212PT1212&cs=1&output=search&q=Faz+de+tudo+-HANDYMAN&ludocid=8942884991647057370&lsig=AB86z5U1euJVZrgCPLuiW7ENF_mg&sa=X&ved=2ahUKEwi2xMTDgMmUAxV_fKQEHdpLNPsQj9IGegQIEhAJ&biw=1707&bih=932&dpr=1.5',
+            url: 'https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa',
             rating: 5,
             count: 9,
             reviews: [
@@ -33,7 +33,7 @@
                     name: 'Djadja Djassi',
                     avatar: null,
                     rating: 5,
-                    text: 'Ajudou a montar os moveis, preço acessíveis.',
+                    text: 'Ajudou a montar os móveis, preços acessíveis.',
                     isNew: true
                 },
                 {
@@ -310,7 +310,7 @@
                 { question: 'Are your professionals certified?', answer: 'Yes, all our professionals are qualified and hold the necessary certifications to carry out work safely and with quality.' },
                 { question: 'Do you work on weekends?', answer: 'Yes, we work on Saturdays by appointment. For emergencies, we are available on Sundays and public holidays.' },
                 { question: 'Do you offer warranty on completed work?', answer: 'Yes, we offer a warranty on all work completed. The warranty period varies depending on the type of service provided.' },
-                { question: 'What is your coverage area?', answer: 'We cover the entire Greater Lisbon area and surroundings, including Cascais, Sintra, Oeiras, Amadora, Loures, Almada, Odivelas and other locations.' }
+                { question: 'What is your coverage area?', answer: 'We cover Greater Lisbon and the South Bank, including Cascais, Sintra, Oeiras, Amadora, Loures, Almada, Setúbal and surrounding areas.' }
             ],
             contact_title: 'Contact us',
             contact_subtitle: 'We are ready to help. Request your free quote.',
@@ -584,9 +584,9 @@
         if (!list) return;
         list.innerHTML = T[currentLang].faqs.map((f, i) => `
             <div class="faq-item fade-in">
-                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-${i}">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-${i}">
                     ${f.question}
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer" id="faq-answer-${i}">
                     <div class="faq-answer-inner">${f.answer}</div>

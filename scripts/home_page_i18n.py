@@ -93,7 +93,7 @@ HOME_META = {
         "wa_send": "Enviar mensagem",
         "wa_float": "Contactar via WhatsApp",
         "float_call": "Ligar agora",
-        "address": "Lisboa, Portugal",
+        "address": "Grande Lisboa e Margem Sul, Portugal",
     },
     "en": {
         "title": "Faz de Tudo | Handyman and Home Repair Services",
@@ -111,7 +111,7 @@ HOME_META = {
         "wa_send": "Send message",
         "wa_float": "Contact via WhatsApp",
         "float_call": "Call now",
-        "address": "Lisbon, Portugal",
+        "address": "Greater Lisbon and South Bank, Portugal",
     },
     "es": {
         "title": "Faz de Tudo | Servicios de Manitas y Reparaciones a Domicilio",
@@ -129,7 +129,7 @@ HOME_META = {
         "wa_send": "Enviar mensaje",
         "wa_float": "Contactar por WhatsApp",
         "float_call": "Llamar ahora",
-        "address": "Lisboa, Portugal",
+        "address": "Gran Lisboa y Margen Sur, Portugal",
     },
     "fr": {
         "title": "Faz de Tudo | Services de Bricolage et Réparations à Domicile",
@@ -147,7 +147,7 @@ HOME_META = {
         "wa_send": "Envoyer le message",
         "wa_float": "Contacter via WhatsApp",
         "float_call": "Appeler maintenant",
-        "address": "Lisbonne, Portugal",
+        "address": "Grand Lisbonne et Rive Sud, Portugal",
     },
 }
 
