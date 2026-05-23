@@ -151,6 +151,7 @@ def apply_meta_strings(html: str, lang: str) -> str:
     html = html.replace('aria-label="Fechar chat"', f'aria-label="{meta["wa_close"]}"')
     html = html.replace('aria-label="Enviar mensagem"', f'aria-label="{meta["wa_send"]}"')
     html = html.replace('aria-label="Contact via WhatsApp"', f'aria-label="{meta["wa_float"]}"')
+    html = html.replace("{{FLOAT_TEL_ARIA}}", meta["float_call"])
     html = html.replace('aria-label="Ligar agora"', f'aria-label="{meta["float_call"]}"')
     html = html.replace('id="footer-address-text">Lisboa, Portugal</', f'id="footer-address-text">{meta["address"]}</')
     html = html.replace('id="wa-greeting">Como posso ajudar?</', f'id="wa-greeting">{HOME_UI[lang]["wa_greeting"]}</')

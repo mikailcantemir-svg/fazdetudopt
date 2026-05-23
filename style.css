@@ -1514,9 +1514,12 @@ body.modal-open {
 
 .wa-widget {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 999;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .whatsapp-float {
@@ -1566,16 +1569,6 @@ body.modal-open {
     background: #1da851 !important;
 }
 
-.floating-contact {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
 .float-btn {
     width: 60px;
     height: 60px;
@@ -1594,32 +1587,26 @@ body.modal-open {
     transform: scale(1.1);
 }
 
-.float-btn--wa {
-    background: #25D366;
-}
-
-.float-btn--wa:hover {
-    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
-}
-
 .float-btn--tel {
-    background: var(--primary-color);
+    background: var(--primary);
 }
 
 .float-btn--tel:hover {
-    box-shadow: 0 6px 24px rgba(230, 95, 43, 0.5);
+    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.45);
 }
 
+/* Telefone flutuante — canto inferior esquerdo (WhatsApp fica sozinho à direita) */
+.float-btn--fixed,
 .float-btn--home {
     position: fixed;
-    right: 28px;
-    bottom: 96px;
+    left: 24px;
+    bottom: 24px;
     z-index: 999;
 }
 
 .wa-chat {
     position: absolute;
-    bottom: 72px;
+    bottom: calc(60px + 12px);
     right: 0;
     width: 360px;
     border-radius: 16px;
@@ -2026,6 +2013,13 @@ body.modal-open {
     .wa-chat {
         width: calc(100vw - 32px);
         right: 0;
+        bottom: calc(52px + 10px);
+    }
+
+    .float-btn--fixed,
+    .float-btn--home {
+        left: 16px;
+        bottom: 16px;
     }
 }
 
@@ -2323,21 +2317,16 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
-    .floating-contact {
-        bottom: 18px;
-        right: 18px;
-        gap: 12px;
-    }
-
     .float-btn {
         width: 52px;
         height: 52px;
         font-size: 1.5rem;
     }
 
-    .float-btn--home {
-        right: 18px;
-        bottom: 80px;
+    .whatsapp-float {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
     }
 
     .service-page-main,
