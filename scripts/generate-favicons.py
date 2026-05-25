@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate favicon.ico and PNG icons from logo.png (white bg, readable in light/dark SERP)."""
+"""Generate favicon.ico and PNG icons from logo.png (white bg, tight crop, large mascot)."""
 
 from __future__ import annotations
 
@@ -16,46 +16,88 @@ OUTPUTS = {
 }
 ICO_SIZES = (16, 32, 48)
 WHITE = (255, 255, 255, 255)
-# Mascot scale inside square canvas (breathing room for 16px favicon)
-CONTENT_SCALE = 0.86
-# Pixels this dark are treated as logo black background (not character)
+MASTER_SIZE = 512
+# Mascot fills this fraction of the square (85–92%)
+FILL_RATIO = 0.92
+# Extra padding around detected content bbox before square fit
+BBOX_PAD_RATIO = 0.08
 BG_THRESHOLD = 58
 
 
 def is_background_pixel(r: int, g: int, b: int, a: int) -> bool:
     if a < 40:
         return True
-    return max(r, g, b) < BG_THRESHOLD
+    if max(r, g, b) < BG_THRESHOLD:
+        return True
+    if min(r, g, b) > 245:
+        return True
+    return False
 
 
 def remove_black_background(img: Image.Image) -> Image.Image:
-    """Replace near-black backdrop with white so favicon is not a black blob."""
+    """Replace near-black backdrop with white."""
     px = img.load()
     w, h = img.size
     for y in range(h):
         for x in range(w):
             r, g, b, a = px[x, y]
-            if is_background_pixel(r, g, b, a):
+            if is_background_pixel(r, g, b, a) and max(r, g, b) < BG_THRESHOLD:
                 px[x, y] = WHITE
     return img
 
 
-def crop_square(img: Image.Image) -> Image.Image:
-    w, h = img.size
-    side = min(w, h)
-    left = (w - side) // 2
-    top = (h - side) // 2
-    return img.crop((left, top, left + side, top + side))
+def foreground_mask(img: Image.Image) -> Image.Image:
+    """Binary mask: 255 = visible mascot / artwork."""
+    mask = Image.new("L", img.size, 0)
+    px = img.load()
+    mpx = mask.load()
+    for y in range(img.height):
+        for x in range(img.width):
+            r, g, b, a = px[x, y]
+            if not is_background_pixel(r, g, b, a):
+                mpx[x, y] = 255
+    return mask
 
 
-def on_white_canvas(img: Image.Image) -> Image.Image:
-    """Center mascot on opaque white square (Google light + dark UI)."""
-    side = img.size[0]
-    inner = max(1, int(side * CONTENT_SCALE))
-    resized = img.resize((inner, inner), Image.Resampling.LANCZOS)
+def expand_bbox(
+    bbox: tuple[int, int, int, int],
+    width: int,
+    height: int,
+    ratio: float,
+) -> tuple[int, int, int, int]:
+    left, upper, right, lower = bbox
+    bw = right - left
+    bh = lower - upper
+    pad_x = int(bw * ratio / 2)
+    pad_y = int(bh * ratio / 2)
+    return (
+        max(0, left - pad_x),
+        max(0, upper - pad_y),
+        min(width, right + pad_x),
+        min(height, lower + pad_y),
+    )
+
+
+def crop_to_content(img: Image.Image) -> Image.Image:
+    mask = foreground_mask(img)
+    bbox = mask.getbbox()
+    if bbox is None:
+        raise SystemExit("No visible content found in logo.png")
+    bbox = expand_bbox(bbox, img.width, img.height, BBOX_PAD_RATIO)
+    return img.crop(bbox)
+
+
+def fit_on_square_canvas(crop: Image.Image, side: int, fill: float) -> Image.Image:
+    """Place cropped mascot on white square; longest side uses `fill` of canvas."""
+    cw, ch = crop.size
+    scale = (side * fill) / max(cw, ch)
+    nw = max(1, int(round(cw * scale)))
+    nh = max(1, int(round(ch * scale)))
+    resized = crop.resize((nw, nh), Image.Resampling.LANCZOS)
     canvas = Image.new("RGBA", (side, side), WHITE)
-    offset = (side - inner) // 2
-    canvas.paste(resized, (offset, offset), resized)
+    ox = (side - nw) // 2
+    oy = (side - nh) // 2
+    canvas.paste(resized, (ox, oy), resized)
     return canvas.convert("RGB")
 
 
@@ -63,21 +105,23 @@ def render_size(img: Image.Image, size: int) -> Image.Image:
     return img.resize((size, size), Image.Resampling.LANCZOS)
 
 
-def prepare_source() -> Image.Image:
+def prepare_master() -> Image.Image:
     if not SOURCE.is_file():
         raise SystemExit(f"Missing source image: {SOURCE}")
     with Image.open(SOURCE) as raw:
         img = remove_black_background(raw.convert("RGBA"))
-        img = crop_square(img)
-        return on_white_canvas(img)
+        crop = crop_to_content(img)
+        return fit_on_square_canvas(crop, MASTER_SIZE, FILL_RATIO)
 
 
 def main() -> None:
-    base = prepare_source()
+    base = prepare_master()
+    fill_pct = int(FILL_RATIO * 100)
+    print(f"master {MASTER_SIZE}px, content fill ~{fill_pct}%, bbox pad {int(BBOX_PAD_RATIO * 100)}%")
 
     for name, size in OUTPUTS.items():
         render_size(base, size).save(ROOT / name, format="PNG", optimize=True)
-        print(f"wrote {name} ({size}x{size}, white background)")
+        print(f"wrote {name} ({size}x{size})")
 
     ico_images = [render_size(base, s) for s in ICO_SIZES]
     ico_path = ROOT / "favicon.ico"
