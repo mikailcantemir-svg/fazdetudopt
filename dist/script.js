@@ -13,68 +13,68 @@
         email_obfuscated: 'geral&#64;fazdetudo.pt',
         address: 'Grande Lisboa e Margem Sul, Portugal',
         googleReviews: {
-            url: 'https://www.google.com/search?q=Faz+de+tudo+HANDYMAN+Lisboa',
+            url: 'https://www.google.com/maps/place/Faz+de+tudo+%7C+HANDYMAN/@38.760942,-9.2013644,17z/data=!4m6!3m5!1s0xd1ecd0033ab1b83:0x7c1b8284ba4b85da!8m2!3d38.7609378!4d-9.1987895!16s%2Fg%2F11nc7r6k6j',
             rating: 5,
             count: 9,
             reviews: [
                 {
-                    name: 'Mamadu Sauane',
+                    name: 'Mamadu',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom.',
                     isNew: true
                 },
                 {
-                    name: 'Leandro Conceição',
+                    name: 'Leandro',
                     avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Djadja Djassi',
+                    name: 'Djadja',
                     avatar: null,
                     rating: 5,
                     text: 'Ajudou a montar os móveis, preços acessíveis.',
                     isNew: true
                 },
                 {
-                    name: 'Carla Magalhaes',
+                    name: 'Carla',
                     avatar: null,
                     rating: 5,
                     text: 'Recomendo! Muito bom profissional.',
                     isNew: true
                 },
                 {
-                    name: 'Rita Pereira',
+                    name: 'Rita',
                     avatar: null,
                     rating: 5,
                     text: 'Ótimo trabalho recomendável.',
                     isNew: true
                 },
                 {
-                    name: 'Valenty Balde',
+                    name: 'Valenty',
                     avatar: null,
                     rating: 5,
-                    text: 'Ótimo empresa! ✌️ 💯',
+                    text: 'Ótima empresa! 👌🏻💯',
                     isNew: true
                 },
                 {
-                    name: 'Sambis Nbk',
+                    name: 'Sambis',
                     avatar: null,
                     rating: 5,
-                    text: 'Excelente profissional e um trabalho top . RECOMENDO !',
+                    text: 'Excelente profissional e um trabalho top. RECOMENDO!',
                     isNew: true
                 },
                 {
-                    name: 'Ana Cwb',
-                    avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXJ_dVcU7rVWeSDeWt94gQzcy7HeV01eC1D1UY2iBbJmJVOPzYW=s64-c-rp-mo-br100',
+                    name: 'Ana',
+                    avatar: null,
                     rating: 5,
                     text: '',
                     isNew: true
                 },
                 {
-                    name: 'Isabel Gutierrez',
+                    name: 'Isabel',
                     avatar: null,
                     rating: 5,
                     text: 'Excelente servicio me realizaron servicio de pintura y montado de muebles recomendado 💯',
@@ -187,8 +187,8 @@
             footer_links: 'Links',
             hero_title: 'O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul',
             footer_tagline: 'O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul',
-            hero_subtitle: 'Precisa de pendurar um varão, retocar uma pintura, reparar uma torneira ou resolver aquela lista de pequenos arranjos que nunca mais acabam? Dispomos também de serviços especializados, mas somos, acima de tudo, o parceiro ideal para cuidar do seu espaço com rapidez, eficácia e limpeza. Esqueça as complicações: um único contacto resolve tudo.',
-            hero_btn_quote: 'Pedir orçamento grátis',
+            hero_subtitle: 'Precisa de reparar uma torneira, pendurar uma TV, pintar uma divisão ou resolver pequenos arranjos em casa? Na FAZDETUDO.PT tratamos da sua lista de tarefas com rapidez, limpeza e orçamento gratuito na Grande Lisboa e Margem Sul.',
+            hero_btn_quote: 'Pedir orçamento por WhatsApp',
             hero_btn_call: 'Ligue agora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google',
             services_title: 'Os Nossos Serviços Profissionais',
@@ -212,7 +212,7 @@
                 { name: 'Climatização', description: 'Instalação, manutenção e reparação de ar condicionado e aquecimento.' },
                 { name: 'Estores e Persianas', description: 'Reparação e instalação de estores, persianas, mosquiteiras e toldos.' },
                 { name: 'Decoração de Interiores', description: 'Cortinas, papel de parede, iluminação decorativa, molduras e home staging.' },
-                { name: 'Piscinas', description: 'Limpeza, manutenção e reparação de piscinas. Tratamento de água, filtros, bombas e revestimentos.' }
+                { name: 'Piscinas', description: 'Construção, manutenção, reparação, limpeza e tratamento de piscinas.' }
             ],
             advantages_title: 'Porquê escolher-nos?',
             advantages: [
@@ -224,6 +224,11 @@
                 { name: 'Contacto rápido por WhatsApp', description: 'Resposta ágil para marcar visitas e pedidos de orçamento.' }
             ],
             testimonials_title: 'Críticas',
+            recent_work_title: 'Trabalhos recentes',
+            recent_work_subtitle: 'Galeria de intervenções reais em preparação.',
+            recent_work_status: 'EM ATUALIZAÇÃO',
+            recent_work_notice: 'Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.',
+            recent_work_cta: 'Enviar fotos pelo WhatsApp',
             reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
@@ -241,7 +246,7 @@
             contact_title: 'Contacte-nos',
             contact_subtitle: 'Estamos prontos para ajudar. Peça o seu orçamento grátis.',
             social_cta: 'Siga-nos e veja os nossos trabalhos',
-            footer_rights: 'Faz de Tudo PT. Todos os direitos reservados.',
+            footer_rights: 'FAZDETUDO.PT. Todos os direitos reservados.',
             wa_message: 'Olá! Gostaria de pedir um orçamento.',
             wa_greeting: 'Como posso ajudar?',
             wa_placeholder: 'Escreva uma mensagem...'
@@ -251,8 +256,8 @@
             footer_links: 'Links',
             hero_title: 'Your Trusted Handyman in Greater Lisbon and South Bank',
             footer_tagline: 'Your Trusted Handyman in Greater Lisbon and South Bank',
-            hero_subtitle: 'Need to hang a curtain rod, touch up paint, fix a tap or finally tackle that endless list of small jobs? We also offer specialist services, but above all we are the ideal partner to care for your space quickly, efficiently and cleanly. Forget the hassle: one contact fixes everything.',
-            hero_btn_quote: 'Get a free quote',
+            hero_subtitle: 'Need to fix a tap, mount a TV, paint a room or take care of small repairs at home? At FAZDETUDO.PT we handle your task list quickly, cleanly and with a free quote across Greater Lisbon and the South Bank.',
+            hero_btn_quote: 'Request quote on WhatsApp',
             hero_btn_call: 'Call now',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google',
             services_title: 'Our Professional Services',
@@ -275,7 +280,7 @@
                 { name: 'Air Conditioning', description: 'Installation, maintenance and repair of air conditioning and heating.' },
                 { name: 'Blinds & Shutters', description: 'Repair and installation of blinds, shutters, mosquito nets and awnings.' },
                 { name: 'Interior Design', description: 'Curtains, wallpaper, decorative lighting, frames and home staging.' },
-                { name: 'Swimming Pools', description: 'Cleaning, maintenance and repair of pools. Water treatment, filters, pumps and linings.' }
+                { name: 'Pools', description: 'Pool construction, maintenance, repair, cleaning and water treatment.' }
             ],
             advantages_title: 'Why choose us?',
             advantages: [
@@ -287,6 +292,11 @@
                 { name: 'Fast contact via WhatsApp', description: 'Quick replies to schedule visits and request quotes.' }
             ],
             testimonials_title: 'Reviews',
+            recent_work_title: 'Recent work',
+            recent_work_subtitle: 'Gallery of real projects in preparation.',
+            recent_work_status: 'UPDATING SOON',
+            recent_work_notice: 'We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.',
+            recent_work_cta: 'Send photos via WhatsApp',
             reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
@@ -304,7 +314,7 @@
             contact_title: 'Contact us',
             contact_subtitle: 'We are ready to help. Request your free quote.',
             social_cta: 'Follow us and see our work',
-            footer_rights: 'Faz de Tudo PT. All rights reserved.',
+            footer_rights: 'FAZDETUDO.PT. All rights reserved.',
             wa_message: 'Hello! I would like to request a quote.',
             wa_greeting: 'How can I help you?',
             wa_placeholder: 'Type a message...'
@@ -314,8 +324,8 @@
             footer_links: 'Enlaces',
             hero_title: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
             footer_tagline: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
-            hero_subtitle: '¿Necesita colgar una barra, retocar una pintura, reparar un grifo o resolver esa lista interminable de pequeños arreglos? También ofrecemos servicios especializados, pero somos, sobre todo, el socio ideal para cuidar de su espacio con rapidez, eficacia y limpieza. Olvídese las complicaciones: un solo contacto lo resuelve todo.',
-            hero_btn_quote: 'Pedir presupuesto gratis',
+            hero_subtitle: '¿Necesita reparar un grifo, colgar una TV, pintar una habitación o resolver pequeños arreglos en casa? En FAZDETUDO.PT nos encargamos de su lista de tareas con rapidez, limpieza y presupuesto gratuito en la Gran Lisboa y Margen Sur.',
+            hero_btn_quote: 'Pedir presupuesto por WhatsApp',
             hero_btn_call: 'Llame ahora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google',
             services_title: 'Nuestros Servicios Profesionales',
@@ -338,7 +348,7 @@
                 { name: 'Climatización', description: 'Instalación, mantenimiento y reparación de aire acondicionado y calefacción.' },
                 { name: 'Persianas y estores', description: 'Reparación e instalación de estores, persianas, mosquiteras y toldos.' },
                 { name: 'Decoración de interiores', description: 'Cortinas, papel pintado, iluminación decorativa, molduras y home staging.' },
-                { name: 'Piscinas', description: 'Limpieza, mantenimiento y reparación de piscinas. Tratamiento de agua, filtros, bombas y revestimientos.' }
+                { name: 'Piscinas', description: 'Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.' }
             ],
             advantages_title: '¿Por qué elegirnos?',
             advantages: [
@@ -350,6 +360,11 @@
                 { name: 'Contacto rápido por WhatsApp', description: 'Respuesta ágil para visitas y solicitudes de presupuesto.' }
             ],
             testimonials_title: 'Reseñas',
+            recent_work_title: 'Trabajos recientes',
+            recent_work_subtitle: 'Galería de trabajos reales en preparación.',
+            recent_work_status: 'EN ACTUALIZACIÓN',
+            recent_work_notice: 'Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.',
+            recent_work_cta: 'Enviar fotos por WhatsApp',
             reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
@@ -367,7 +382,7 @@
             contact_title: 'Contáctenos',
             contact_subtitle: 'Estamos listos para ayudar. Solicite su presupuesto gratis.',
             social_cta: 'Síguenos y mira nuestros trabajos',
-            footer_rights: 'Faz de Tudo PT. Todos los derechos reservados.',
+            footer_rights: 'FAZDETUDO.PT. Todos los derechos reservados.',
             wa_message: '¡Hola! Me gustaría pedir un presupuesto.',
             wa_greeting: '¿Cómo puedo ayudarle?',
             wa_placeholder: 'Escriba un mensaje...'
@@ -377,8 +392,8 @@
             footer_links: 'Liens',
             hero_title: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
             footer_tagline: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
-            hero_subtitle: 'Besoin d\'accrocher une tringle, de retoucher une peinture, de réparer un robinet ou de vous attaquer enfin à cette liste interminable de petits travaux ? Nous proposons aussi des services spécialisés, mais nous sommes avant tout le partenaire idéal pour entretenir votre espace avec rapidité, efficacité et propreté. Oubliez les complications : un seul contact règle tout.',
-            hero_btn_quote: 'Devis gratuit',
+            hero_subtitle: 'Besoin de réparer un robinet, fixer une TV, peindre une pièce ou régler de petits travaux à la maison ? Chez FAZDETUDO.PT, nous traitons votre liste de tâches rapidement, proprement et avec un devis gratuit dans le Grand Lisbonne et la Rive Sud.',
+            hero_btn_quote: 'Demander un devis sur WhatsApp',
             hero_btn_call: 'Appelez maintenant',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google',
             services_title: 'Nos Services Professionnels',
@@ -401,7 +416,7 @@
                 { name: 'Climatisation', description: 'Installation, entretien et réparation de climatisation et chauffage.' },
                 { name: 'Stores et volets', description: 'Réparation et installation de stores, volets, moustiquaires et auvents.' },
                 { name: 'Décoration d\'intérieur', description: 'Rideaux, papier peint, éclairage décoratif, moulures et home staging.' },
-                { name: 'Piscines', description: 'Nettoyage, entretien et réparation de piscines. Traitement de l\'eau, filtres, pompes et revêtements.' }
+                { name: 'Piscines', description: 'Construction, entretien, réparation, nettoyage et traitement de l\'eau.' }
             ],
             advantages_title: 'Pourquoi nous choisir ?',
             advantages: [
@@ -413,6 +428,11 @@
                 { name: 'Contact rapide par WhatsApp', description: 'Réponse rapide pour planifier des visites et demander un devis.' }
             ],
             testimonials_title: 'Avis',
+            recent_work_title: 'Travaux récents',
+            recent_work_subtitle: 'Galerie d\'interventions réelles en préparation.',
+            recent_work_status: 'EN COURS DE MISE À JOUR',
+            recent_work_notice: 'Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d\'interventions terminées.',
+            recent_work_cta: 'Envoyer des photos par WhatsApp',
             reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
@@ -430,7 +450,7 @@
             contact_title: 'Contactez-nous',
             contact_subtitle: 'Nous sommes prêts à vous aider. Demandez votre devis gratuit.',
             social_cta: 'Suivez-nous et découvrez nos réalisations',
-            footer_rights: 'Faz de Tudo PT. Tous droits réservés.',
+            footer_rights: 'FAZDETUDO.PT. Tous droits réservés.',
             wa_message: 'Bonjour ! Je souhaiterais demander un devis.',
             wa_greeting: 'Comment puis-je vous aider ?',
             wa_placeholder: 'Écrivez un message...'
@@ -513,7 +533,7 @@
                     <span class="reviews-score">${googleReviews.rating.toFixed(1)}</span>
                     <div class="reviews-stars" aria-label="${googleReviews.rating} / 5">${renderStars(googleReviews.rating)}</div>
                     <span class="reviews-count">${lang.reviews_google_label || getReviewsCountLabel(currentLang)}</span>
-                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google"></i></span>
+                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google" aria-hidden="true"></i></span>
                 </div>
             `;
         }
