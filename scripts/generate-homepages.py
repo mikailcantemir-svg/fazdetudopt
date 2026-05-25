@@ -151,6 +151,15 @@ def build_faq_list(lang: str) -> str:
     return "\n".join(blocks)
 
 
+def _recent_work_gallery_id(item: dict) -> str:
+    if item.get("gallery_id"):
+        return str(item["gallery_id"])
+    stem = Path(item["image"]).stem
+    stem = re.sub(r"-lisboa-\d+$", "", stem, flags=re.IGNORECASE)
+    stem = re.sub(r"-\d+$", "", stem)
+    return stem
+
+
 def _recent_work_img_markup(
     src: str,
     alt: str,
@@ -172,6 +181,8 @@ def _recent_work_lightbox_trigger(
     full_src: str,
     title: str,
     ui: dict,
+    gallery_id: str,
+    index: int,
     poster_src: str = "",
 ) -> str:
     poster_attr = (
@@ -184,6 +195,7 @@ def _recent_work_lightbox_trigger(
     )
     return (
         f'<button type="button" class="work-lightbox-trigger" '
+        f'data-gallery="{html.escape(gallery_id, quote=True)}" data-index="{index}" '
         f'data-type="{media_type}" data-full="{html.escape(full_src, quote=True)}" '
         f'data-title="{html.escape(title, quote=True)}"{poster_attr} '
         f'aria-label="{html.escape(trigger_label)}">\n'
@@ -202,6 +214,7 @@ def _recent_work_carousel_slides(
 ) -> list[str]:
     slides: list[str] = []
     slide_index = 0
+    gallery_id = _recent_work_gallery_id(item)
     gallery_images = item.get("images") or [item["image"]]
     alts = copy.get("alts") or [copy["alt"]] * len(gallery_images)
     video_alts = copy.get("video_alts") or []
@@ -217,6 +230,8 @@ def _recent_work_carousel_slides(
             full_src=src,
             title=title,
             ui=ui,
+            gallery_id=gallery_id,
+            index=slide_index,
         )
         slides.append(
             f"""                        <div class="recent-work-carousel-slide">
@@ -236,6 +251,8 @@ def _recent_work_carousel_slides(
             full_src=video_src,
             title=title,
             ui=ui,
+            gallery_id=gallery_id,
+            index=slide_index,
             poster_src=poster_src,
         )
         slides.append(
@@ -255,6 +272,13 @@ def build_work_lightbox_markup(lang: str) -> str:
             <button type="button" class="work-lightbox-close" id="work-lightbox-close" aria-label="{html.escape(ui["work_lightbox_close"])}" data-i18n-aria-label="work_lightbox_close">
                 ×
             </button>
+            <button type="button" class="work-lightbox-nav work-lightbox-prev" id="work-lightbox-prev" aria-label="{html.escape(ui["work_lightbox_prev"])}" data-i18n-aria-label="work_lightbox_prev" hidden>
+                ‹
+            </button>
+            <button type="button" class="work-lightbox-nav work-lightbox-next" id="work-lightbox-next" aria-label="{html.escape(ui["work_lightbox_next"])}" data-i18n-aria-label="work_lightbox_next" hidden>
+                ›
+            </button>
+            <div class="work-lightbox-counter" id="work-lightbox-counter" aria-live="polite" hidden></div>
             <div class="work-lightbox-content" id="work-lightbox-content"></div>
             <p class="work-lightbox-title" id="work-lightbox-title"></p>
         </div>
@@ -275,6 +299,7 @@ def build_recent_work_section(lang: str) -> str:
         gallery_videos = item.get("gallery_videos")
         use_carousel = (gallery_images and len(gallery_images) > 1) or gallery_videos
         card_title = copy["title"]
+        gallery_id = _recent_work_gallery_id(item)
         if use_carousel:
             slides = _recent_work_carousel_slides(item, copy, prefix, w, h, ui)
             media = (
@@ -290,6 +315,8 @@ def build_recent_work_section(lang: str) -> str:
                 full_src=f"{prefix}{item['video']}",
                 title=card_title,
                 ui=ui,
+                gallery_id=gallery_id,
+                index=0,
                 poster_src=img_src,
             )
             media = f"""                    {trigger}"""
@@ -301,6 +328,8 @@ def build_recent_work_section(lang: str) -> str:
                 full_src=img_src,
                 title=card_title,
                 ui=ui,
+                gallery_id=gallery_id,
+                index=0,
             )
             media = f"""                    {trigger}"""
         href = f"{prefix}{item['slug']}"
