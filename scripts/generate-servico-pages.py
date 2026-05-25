@@ -213,6 +213,16 @@ def _run_generate_lisboa_redirects() -> None:
     mod.main()
 
 
+def _run_build_dist() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "build_dist",
+        SCRIPTS / "build-dist.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
 def main() -> None:
     print("=== Regenerating fazdetudo.pt static HTML ===\n")
 
@@ -243,11 +253,15 @@ def main() -> None:
     print("\n--- Legacy SEO redirects (17× *-lisboa.html + .htaccess) ---")
     _run_generate_lisboa_redirects()
 
+    print("\n--- dist/ (GitHub Pages artifact) ---")
+    _run_build_dist()
+
     print(
         f"\nDone: {len(written)} service pages + 4 homepages "
         f"({len(SERVICE_SLUGS)} services × {len(LANGS)} languages)."
     )
     print("Templates: scripts/templates/ | Registry: scripts/slug_registry.py")
+    print("Deploy: dist/ (favicons + static assets)")
 
 
 if __name__ == "__main__":
