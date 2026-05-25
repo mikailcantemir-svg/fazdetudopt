@@ -70,6 +70,10 @@ def build_dist() -> Path:
 
     _copy_tree(ROOT / "images", DIST / "images")
 
+    videos = ROOT / "videos"
+    if videos.is_dir():
+        _copy_tree(videos, DIST / "videos")
+
     for lang in LANG_DIRS:
         _copy_tree(ROOT / lang, DIST / lang)
 

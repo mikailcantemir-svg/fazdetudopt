@@ -27,7 +27,7 @@ from home_page_i18n import (  # noqa: E402
     HOME_META,
     HOME_UI,
     LANGS,
-    RECENT_WORK_WA,
+    RECENT_WORK,
     SERVICE_CARDS,
     TESTIMONIAL_CARDS,
     home_url,
@@ -49,7 +49,6 @@ from site_config import (  # noqa: E402
     schema_telephone,
     tel_href,
     wa_href,
-    wa_href_for_message,
 )
 from template_engine import render_template  # noqa: E402
 
@@ -152,22 +151,106 @@ def build_faq_list(lang: str) -> str:
     return "\n".join(blocks)
 
 
+def _recent_work_carousel_slides(
+    item: dict,
+    copy: dict,
+    prefix: str,
+    w: int,
+    h: int,
+    default_alt: str,
+) -> list[str]:
+    slides: list[str] = []
+    slide_index = 0
+    gallery_images = item.get("images") or [item["image"]]
+    alts = copy.get("alts") or [copy["alt"]] * len(gallery_images)
+    for i, rel_path in enumerate(gallery_images):
+        slide_alt = html.escape(alts[i] if i < len(alts) else copy["alt"])
+        src = f"{prefix}{rel_path}"
+        loading = "eager" if slide_index == 0 else "lazy"
+        slides.append(
+            f"""                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="{src}" alt="{slide_alt}" width="{w}" height="{h}" loading="{loading}" decoding="async">
+                        </div>"""
+        )
+        slide_index += 1
+    for vid in item.get("gallery_videos") or []:
+        poster = f"{prefix}{vid['poster']}"
+        vsrc = f"{prefix}{vid['video']}"
+        slides.append(
+            f"""                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="{poster}" width="{w}" height="{h}">
+                                <source src="{vsrc}" type="video/mp4">
+                            </video>
+                        </div>"""
+        )
+        slide_index += 1
+    return slides
+
+
 def build_recent_work_section(lang: str) -> str:
     ui = HOME_UI[lang]
-    section_wa = wa_href_for_message(RECENT_WORK_WA[lang])
-    return f"""    <section class="section" id="recent-work">
+    prefix = asset_prefix(lang)
+    cards = []
+    for item in RECENT_WORK:
+        copy = item[lang]
+        img_src = f"{prefix}{item['image']}"
+        w = item["width"]
+        h = item["height"]
+        alt = html.escape(copy["alt"])
+        poster = img_src
+        gallery_images = item.get("images")
+        gallery_videos = item.get("gallery_videos")
+        use_carousel = (gallery_images and len(gallery_images) > 1) or gallery_videos
+        if use_carousel:
+            slides = _recent_work_carousel_slides(item, copy, prefix, w, h, copy["alt"])
+            media = (
+                f"""                    <div class="recent-work-carousel" role="group" aria-label="{alt}">
+{chr(10).join(slides)}
+                    </div>"""
+            )
+        elif item.get("video"):
+            media = (
+                f"""                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="{poster}" width="{w}" height="{h}">
+                        <source src="{prefix}{item['video']}" type="video/mp4">
+                    </video>"""
+            )
+        else:
+            media = (
+                f"""                    <img class="recent-work-media" src="{img_src}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">"""
+            )
+        href = f"{prefix}{item['slug']}"
+        gallery_class = " recent-work-media-wrap--gallery" if use_carousel else ""
+        cards.append(
+            f"""                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap{gallery_class}">
+{media}
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">{html.escape(copy["title"])}</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>{html.escape(ui["recent_work_zone"])}</dt>
+                                <dd>{html.escape(copy["zone"])}</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>{html.escape(ui["recent_work_service"])}</dt>
+                                <dd>{html.escape(copy["service_type"])}</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">{html.escape(copy["description"])}</p>
+                        <a href="{href}" class="recent-work-link">{html.escape(ui["recent_work_link"])} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>"""
+        )
+    grid = "\n\n".join(cards)
+    return f"""    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">{html.escape(ui["recent_work_title"])}</h2>
                 <p class="section-subtitle" data-i18n="recent_work_subtitle">{html.escape(ui["recent_work_subtitle"])}</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">{html.escape(ui["recent_work_status"])}</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">{html.escape(ui["recent_work_notice"])}</p>
-                <a href="{section_wa}" class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">{html.escape(ui["recent_work_cta"])}</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+{grid}
             </div>
         </div>
     </section>"""

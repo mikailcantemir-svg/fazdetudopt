@@ -1,9 +1,9 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-05-25 12:53 UTC
+Atualizado: 2026-05-25 14:41 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
-Ficheiros: 234
+Ficheiros: 238
 ================================================================================
 
 
@@ -587,6 +587,10 @@ def build_dist() -> Path:
 
     _copy_tree(ROOT / "images", DIST / "images")
 
+    videos = ROOT / "videos"
+    if videos.is_dir():
+        _copy_tree(videos, DIST / "videos")
+
     for lang in LANG_DIRS:
         _copy_tree(ROOT / lang, DIST / lang)
 
@@ -1035,7 +1039,7 @@ from home_page_i18n import (  # noqa: E402
     HOME_META,
     HOME_UI,
     LANGS,
-    RECENT_WORK_WA,
+    RECENT_WORK,
     SERVICE_CARDS,
     TESTIMONIAL_CARDS,
     home_url,
@@ -1057,7 +1061,6 @@ from site_config import (  # noqa: E402
     schema_telephone,
     tel_href,
     wa_href,
-    wa_href_for_message,
 )
 from template_engine import render_template  # noqa: E402
 
@@ -1160,22 +1163,106 @@ def build_faq_list(lang: str) -> str:
     return "\n".join(blocks)
 
 
+def _recent_work_carousel_slides(
+    item: dict,
+    copy: dict,
+    prefix: str,
+    w: int,
+    h: int,
+    default_alt: str,
+) -> list[str]:
+    slides: list[str] = []
+    slide_index = 0
+    gallery_images = item.get("images") or [item["image"]]
+    alts = copy.get("alts") or [copy["alt"]] * len(gallery_images)
+    for i, rel_path in enumerate(gallery_images):
+        slide_alt = html.escape(alts[i] if i < len(alts) else copy["alt"])
+        src = f"{prefix}{rel_path}"
+        loading = "eager" if slide_index == 0 else "lazy"
+        slides.append(
+            f"""                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="{src}" alt="{slide_alt}" width="{w}" height="{h}" loading="{loading}" decoding="async">
+                        </div>"""
+        )
+        slide_index += 1
+    for vid in item.get("gallery_videos") or []:
+        poster = f"{prefix}{vid['poster']}"
+        vsrc = f"{prefix}{vid['video']}"
+        slides.append(
+            f"""                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="{poster}" width="{w}" height="{h}">
+                                <source src="{vsrc}" type="video/mp4">
+                            </video>
+                        </div>"""
+        )
+        slide_index += 1
+    return slides
+
+
 def build_recent_work_section(lang: str) -> str:
     ui = HOME_UI[lang]
-    section_wa = wa_href_for_message(RECENT_WORK_WA[lang])
-    return f"""    <section class="section" id="recent-work">
+    prefix = asset_prefix(lang)
+    cards = []
+    for item in RECENT_WORK:
+        copy = item[lang]
+        img_src = f"{prefix}{item['image']}"
+        w = item["width"]
+        h = item["height"]
+        alt = html.escape(copy["alt"])
+        poster = img_src
+        gallery_images = item.get("images")
+        gallery_videos = item.get("gallery_videos")
+        use_carousel = (gallery_images and len(gallery_images) > 1) or gallery_videos
+        if use_carousel:
+            slides = _recent_work_carousel_slides(item, copy, prefix, w, h, copy["alt"])
+            media = (
+                f"""                    <div class="recent-work-carousel" role="group" aria-label="{alt}">
+{chr(10).join(slides)}
+                    </div>"""
+            )
+        elif item.get("video"):
+            media = (
+                f"""                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="{poster}" width="{w}" height="{h}">
+                        <source src="{prefix}{item['video']}" type="video/mp4">
+                    </video>"""
+            )
+        else:
+            media = (
+                f"""                    <img class="recent-work-media" src="{img_src}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">"""
+            )
+        href = f"{prefix}{item['slug']}"
+        gallery_class = " recent-work-media-wrap--gallery" if use_carousel else ""
+        cards.append(
+            f"""                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap{gallery_class}">
+{media}
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">{html.escape(copy["title"])}</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>{html.escape(ui["recent_work_zone"])}</dt>
+                                <dd>{html.escape(copy["zone"])}</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>{html.escape(ui["recent_work_service"])}</dt>
+                                <dd>{html.escape(copy["service_type"])}</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">{html.escape(copy["description"])}</p>
+                        <a href="{href}" class="recent-work-link">{html.escape(ui["recent_work_link"])} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>"""
+        )
+    grid = "\n\n".join(cards)
+    return f"""    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">{html.escape(ui["recent_work_title"])}</h2>
                 <p class="section-subtitle" data-i18n="recent_work_subtitle">{html.escape(ui["recent_work_subtitle"])}</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">{html.escape(ui["recent_work_status"])}</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">{html.escape(ui["recent_work_notice"])}</p>
-                <a href="{section_wa}" class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">{html.escape(ui["recent_work_cta"])}</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+{grid}
             </div>
         </div>
     </section>"""
@@ -2088,10 +2175,10 @@ HOME_UI = {
         "advantages_title": "Porquê escolher-nos?",
         "testimonials_title": "Críticas",
         "recent_work_title": "Trabalhos recentes",
-        "recent_work_subtitle": "Galeria de intervenções reais em preparação.",
-        "recent_work_status": "EM ATUALIZAÇÃO",
-        "recent_work_notice": "Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.",
-        "recent_work_cta": "Enviar fotos pelo WhatsApp",
+        "recent_work_subtitle": "Alguns exemplos de intervenções na Grande Lisboa e Margem Sul.",
+        "recent_work_zone": "Zona",
+        "recent_work_service": "Serviço",
+        "recent_work_link": "Ver serviço",
         "view_google_reviews": "Ver críticas no Google",
         "reviews_google_label": "Avaliações no Google",
         "google_review_source": "Crítica de Google",
@@ -2126,10 +2213,10 @@ HOME_UI = {
         "advantages_title": "Why choose us?",
         "testimonials_title": "Reviews",
         "recent_work_title": "Recent work",
-        "recent_work_subtitle": "Gallery of real projects in preparation.",
-        "recent_work_status": "UPDATING SOON",
-        "recent_work_notice": "We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.",
-        "recent_work_cta": "Send photos via WhatsApp",
+        "recent_work_subtitle": "A few examples of jobs across Greater Lisbon and the South Bank.",
+        "recent_work_zone": "Area",
+        "recent_work_service": "Service",
+        "recent_work_link": "View service",
         "view_google_reviews": "View reviews on Google",
         "reviews_google_label": "Reviews on Google",
         "google_review_source": "Google review",
@@ -2164,10 +2251,10 @@ HOME_UI = {
         "advantages_title": "¿Por qué elegirnos?",
         "testimonials_title": "Reseñas",
         "recent_work_title": "Trabajos recientes",
-        "recent_work_subtitle": "Galería de trabajos reales en preparación.",
-        "recent_work_status": "EN ACTUALIZACIÓN",
-        "recent_work_notice": "Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.",
-        "recent_work_cta": "Enviar fotos por WhatsApp",
+        "recent_work_subtitle": "Algunos ejemplos de intervenciones en la Gran Lisboa y Margen Sur.",
+        "recent_work_zone": "Zona",
+        "recent_work_service": "Servicio",
+        "recent_work_link": "Ver servicio",
         "view_google_reviews": "Ver reseñas en Google",
         "reviews_google_label": "Reseñas en Google",
         "google_review_source": "Reseña de Google",
@@ -2202,10 +2289,10 @@ HOME_UI = {
         "advantages_title": "Pourquoi nous choisir ?",
         "testimonials_title": "Avis",
         "recent_work_title": "Travaux récents",
-        "recent_work_subtitle": "Galerie d'interventions réelles en préparation.",
-        "recent_work_status": "EN COURS DE MISE À JOUR",
-        "recent_work_notice": "Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d'interventions terminées.",
-        "recent_work_cta": "Envoyer des photos par WhatsApp",
+        "recent_work_subtitle": "Quelques exemples d'interventions dans le Grand Lisbonne et la Rive Sud.",
+        "recent_work_zone": "Zone",
+        "recent_work_service": "Service",
+        "recent_work_link": "Voir le service",
         "view_google_reviews": "Voir les avis sur Google",
         "reviews_google_label": "Avis sur Google",
         "google_review_source": "Avis Google",
@@ -2479,196 +2566,310 @@ TESTIMONIAL_CARDS = [
     },
 ]
 
-# Before/after cards — replace image paths when dedicated photos are available.
-RECENT_WORK_ITEMS = [
+# Real project cards (images/trabalhos + videos/trabalhos). Regenerate after media changes.
+RECENT_WORK = [
     {
-        "before": "images/hero/ferramentas.webp",
-        "after": "images/hero/obra.webp",
-        "pt": (
-            "Reparações gerais",
-            "Arranjos em casa",
-            "Substituição de fechos, ajuste de portas e pequenas reparações com acabamento cuidado.",
-        ),
-        "en": (
-            "General repairs",
-            "Home fixes",
-            "Lock replacement, door adjustment and small repairs with a neat finish.",
-        ),
-        "es": (
-            "Reparaciones generales",
-            "Arreglos en casa",
-            "Sustitución de cerraduras, ajuste de puertas y pequeñas reparaciones con buen acabado.",
-        ),
-        "fr": (
-            "Réparations générales",
-            "Petits travaux",
-            "Remplacement de serrures, réglage de portes et petites réparations soignées.",
-        ),
-        "wa": {
-            "pt": "Olá! Vi o trabalho de reparações gerais e gostaria de um orçamento.",
-            "en": "Hello! I saw the general repairs project and would like a quote.",
-            "es": "¡Hola! Vi el trabajo de reparaciones generales y me gustaría un presupuesto.",
-            "fr": "Bonjour ! J'ai vu le projet de réparations générales et je souhaite un devis.",
+        "image": "images/trabalhos/reparacao-casa-banho-lisboa-01.webp",
+        "video": "videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4",
+        "width": 1200,
+        "height": 1600,
+        "slug": "servico-reparacoes-gerais.html",
+        "pt": {
+            "title": "Reparações em casa de banho",
+            "zone": "Grande Lisboa",
+            "service_type": "Reparações gerais",
+            "description": "Intervenções interiores, acabamentos e pequenos arranjos em casa de banho.",
+            "alt": "Reparação e acabamento de chão de casa de banho na Grande Lisboa",
+        },
+        "en": {
+            "title": "Bathroom repairs",
+            "zone": "Greater Lisbon",
+            "service_type": "General repairs",
+            "description": "Interior work, finishes and small fixes in bathrooms.",
+            "alt": "Bathroom floor repair and finishing in Greater Lisbon",
+        },
+        "es": {
+            "title": "Reparaciones en baño",
+            "zone": "Gran Lisboa",
+            "service_type": "Reparaciones generales",
+            "description": "Intervenciones interiores, acabados y pequeños arreglos en baños.",
+            "alt": "Reparación y acabado de suelo de baño en la Gran Lisboa",
+        },
+        "fr": {
+            "title": "Réparations salle de bain",
+            "zone": "Grand Lisbonne",
+            "service_type": "Réparations générales",
+            "description": "Interventions intérieures, finitions et petits travaux en salle de bain.",
+            "alt": "Réparation et finition de sol de salle de bain dans le Grand Lisbonne",
         },
     },
     {
-        "before": "images/hero/hero-3.webp",
-        "after": "images/hero/hero-4.webp",
-        "pt": (
-            "Pintura",
-            "Sala renovada",
-            "Preparação de paredes, retoque de imperfeições e pintura com acabamento uniforme.",
-        ),
-        "en": (
-            "Painting",
-            "Refreshed living room",
-            "Wall preparation, defect touch-up and painting with an even, clean finish.",
-        ),
-        "es": (
-            "Pintura",
-            "Salón renovado",
-            "Preparación de paredes, retoque de imperfecciones y pintura con acabado uniforme.",
-        ),
-        "fr": (
-            "Peinture",
-            "Salon rafraîchi",
-            "Préparation des murs, retouches et peinture avec une finition uniforme.",
-        ),
-        "wa": {
-            "pt": "Olá! Vi o trabalho de pintura e gostaria de um orçamento.",
-            "en": "Hello! I saw the painting project and would like a quote.",
-            "es": "¡Hola! Vi el trabajo de pintura y me gustaría un presupuesto.",
-            "fr": "Bonjour ! J'ai vu le projet de peinture et je souhaite un devis.",
+        "image": "images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp",
+        "images": [
+            "images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp",
+            "images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp",
+            "images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp",
+            "images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp",
+            "images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp",
+        ],
+        "width": 1200,
+        "height": 1600,
+        "slug": "servico-pinturas.html",
+        "pt": {
+            "title": "Pintura e acabamentos interiores",
+            "zone": "Grande Lisboa",
+            "service_type": "Pinturas",
+            "description": "Pintura de paredes, tetos e pequenos retoques interiores com acabamento limpo e cuidado.",
+            "alt": "Pintura interior profissional em espaço comercial na Grande Lisboa",
+            "alts": [
+                "Pintura interior em grande espaço comercial com pilares pretos e teto branco em Lisboa",
+                "Obra de pintura interior com proteção de pavimento e equipamento profissional",
+                "Parede de acento pintada a preto com logótipo branco e acabamento de teto",
+                "Linha limpa entre parede escura e teto branco com proteção de equipamentos",
+                "Pintura de paredes interiores com acabamento uniforme e coluna pintada",
+            ],
+        },
+        "en": {
+            "title": "Interior painting and finishes",
+            "zone": "Greater Lisbon",
+            "service_type": "Painting",
+            "description": "Wall and ceiling painting plus small interior touch-ups with a clean, careful finish.",
+            "alt": "Professional interior painting in a commercial space in Greater Lisbon",
+            "alts": [
+                "Interior painting in a large commercial space with black pillars and white ceiling in Lisbon",
+                "Interior painting job with floor protection and professional equipment",
+                "Black accent wall with white logo and ceiling finish",
+                "Clean line between dark wall and white ceiling with protected fixtures",
+                "Interior wall painting with uniform finish on a painted column",
+            ],
+        },
+        "es": {
+            "title": "Pintura y acabados interiores",
+            "zone": "Gran Lisboa",
+            "service_type": "Pinturas",
+            "description": "Pintura de paredes, techos y pequeños retoques interiores con acabado limpio y cuidado.",
+            "alt": "Pintura interior profesional en espacio comercial en la Gran Lisboa",
+            "alts": [
+                "Pintura interior en gran espacio comercial con pilares negros y techo blanco en Lisboa",
+                "Obra de pintura interior con protección del suelo y equipo profesional",
+                "Pared de acento pintada en negro con logotipo blanco y acabado de techo",
+                "Línea limpia entre pared oscura y techo blanco con equipos protegidos",
+                "Pintura de paredes interiores con acabado uniforme en columna",
+            ],
+        },
+        "fr": {
+            "title": "Peinture et finitions intérieures",
+            "zone": "Grand Lisbonne",
+            "service_type": "Peinture",
+            "description": "Peinture de murs, plafonds et petites retouches intérieures avec une finition soignée.",
+            "alt": "Peinture intérieure professionnelle dans un espace commercial au Grand Lisbonne",
+            "alts": [
+                "Peinture intérieure dans un grand espace commercial avec piliers noirs et plafond blanc à Lisbonne",
+                "Travaux de peinture intérieure avec protection du sol et matériel professionnel",
+                "Mur d'accent peint en noir avec logo blanc et finition de plafond",
+                "Ligne nette entre mur foncé et plafond blanc avec équipements protégés",
+                "Peinture de murs intérieurs avec finition uniforme sur un pilier",
+            ],
         },
     },
     {
-        "before": "images/hero/obra.webp",
-        "after": "images/hero/hero-3.webp",
-        "pt": (
-            "Remodelação",
-            "Cozinha funcional",
-            "Atualização de zonas de trabalho e acabamentos para um espaço mais prático.",
-        ),
-        "en": (
-            "Renovation",
-            "Functional kitchen",
-            "Worktop zones and finishes updated for a more practical space.",
-        ),
-        "es": (
-            "Reforma",
-            "Cocina funcional",
-            "Actualización de zonas de trabajo y acabados para un espacio más práctico.",
-        ),
-        "fr": (
-            "Rénovation",
-            "Cuisine fonctionnelle",
-            "Mise à jour des plans de travail et finitions pour un espace plus pratique.",
-        ),
-        "wa": {
-            "pt": "Olá! Vi a remodelação de cozinha e gostaria de um orçamento.",
-            "en": "Hello! I saw the kitchen renovation and would like a quote.",
-            "es": "¡Hola! Vi la reforma de cocina y me gustaría un presupuesto.",
-            "fr": "Bonjour ! J'ai vu la rénovation de cuisine et je souhaite un devis.",
+        "image": "images/trabalhos/relva-sistema-rega-lisboa-01.webp",
+        "images": [
+            "images/trabalhos/relva-sistema-rega-lisboa-01.webp",
+            "images/trabalhos/relva-sistema-rega-lisboa-02.webp",
+            "images/trabalhos/relva-sistema-rega-lisboa-03.webp",
+            "images/trabalhos/relva-sistema-rega-lisboa-04.webp",
+            "images/trabalhos/relva-sistema-rega-lisboa-05.webp",
+            "images/trabalhos/relva-sistema-rega-lisboa-06.webp",
+        ],
+        "gallery_videos": [
+            {
+                "video": "videos/trabalhos/relva-sistema-rega-lisboa-01.mp4",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-01.webp",
+            },
+            {
+                "video": "videos/trabalhos/relva-sistema-rega-lisboa-02.mp4",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-02.webp",
+            },
+            {
+                "video": "videos/trabalhos/relva-sistema-rega-lisboa-03.mp4",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-03.webp",
+            },
+        ],
+        "width": 1200,
+        "height": 1600,
+        "slug": "servico-jardinagem.html",
+        "pt": {
+            "title": "Substituição de relva e sistema de rega",
+            "zone": "Grande Lisboa e Margem Sul",
+            "service_type": "Jardinagem e manutenção exterior",
+            "description": "Remoção de relva antiga, preparação do terreno, instalação de sistema de rega e colocação de relva nova.",
+            "alt": "Relva nova e jardim renovado com sistema de rega na Grande Lisboa",
+            "alts": [
+                "Relva nova instalada em jardim de moradia na Grande Lisboa",
+                "Colocação de relva nova com acabamento profissional no jardim",
+                "Preparação do terreno e remoção de relva antiga no jardim",
+                "Relvado renovado em quintal com árvores e zona exterior cuidada",
+                "Relva nova com juntas visíveis após instalação profissional",
+                "Relvado amplo e verde após substituição de relva no jardim",
+            ],
+        },
+        "en": {
+            "title": "Lawn replacement and irrigation system",
+            "zone": "Greater Lisbon and South Bank",
+            "service_type": "Gardening and outdoor maintenance",
+            "description": "Removal of old turf, ground preparation, irrigation system installation and new lawn laying.",
+            "alt": "New lawn and renovated garden with irrigation in Greater Lisbon",
+            "alts": [
+                "New turf installed in a residential garden in Greater Lisbon",
+                "Professional new lawn laying in the garden",
+                "Ground preparation and removal of old turf",
+                "Renewed lawn in a backyard with trees and tidy outdoor space",
+                "Fresh sod with visible seams after professional installation",
+                "Large green lawn after turf replacement in the garden",
+            ],
+        },
+        "es": {
+            "title": "Sustitución de césped y sistema de riego",
+            "zone": "Gran Lisboa y Margen Sur",
+            "service_type": "Jardinería y mantenimiento exterior",
+            "description": "Retirada de césped antiguo, preparación del terreno, instalación de riego y colocación de césped nuevo.",
+            "alt": "Césped nuevo y jardín renovado con riego en la Gran Lisboa",
+            "alts": [
+                "Césped nuevo instalado en jardín residencial en la Gran Lisboa",
+                "Colocación de césped nuevo con acabado profesional",
+                "Preparación del terreno y retirada de césped antiguo",
+                "Césped renovado en patio con árboles y zona exterior cuidada",
+                "Césped nuevo tras instalación profesional",
+                "Amplio césped verde tras sustitución en el jardín",
+            ],
+        },
+        "fr": {
+            "title": "Remplacement de gazon et système d'arrosage",
+            "zone": "Grand Lisbonne et Rive Sud",
+            "service_type": "Jardinage et entretien extérieur",
+            "description": "Retrait de l'ancienne pelouse, préparation du sol, installation d'arrosage et pose de gazon neuf.",
+            "alt": "Nouvelle pelouse et jardin rénové avec arrosage au Grand Lisbonne",
+            "alts": [
+                "Nouvelle pelouse installée dans un jardin résidentiel au Grand Lisbonne",
+                "Pose de gazon neuf avec finition professionnelle",
+                "Préparation du sol et retrait de l'ancienne pelouse",
+                "Pelouse rénovée dans un jardin avec arbres",
+                "Gazon neuf après installation professionnelle",
+                "Grande pelouse verte après remplacement dans le jardin",
+            ],
         },
     },
     {
-        "before": "images/hero/hero-4.webp",
-        "after": "images/hero/ferramentas.webp",
-        "pt": (
-            "Montagem",
-            "Móveis montados",
-            "Montagem de móveis e fixação segura de prateleiras e acessórios.",
-        ),
-        "en": (
-            "Assembly",
-            "Furniture fitted",
-            "Furniture assembly and secure mounting of shelves and fittings.",
-        ),
-        "es": (
-            "Montaje",
-            "Muebles montados",
-            "Montaje de muebles y fijación segura de estanterías y accesorios.",
-        ),
-        "fr": (
-            "Montage",
-            "Meubles montés",
-            "Montage de meubles et fixation sécurisée d'étagères et accessoires.",
-        ),
-        "wa": {
-            "pt": "Olá! Vi o trabalho de montagem e gostaria de um orçamento.",
-            "en": "Hello! I saw the assembly project and would like a quote.",
-            "es": "¡Hola! Vi el trabajo de montaje y me gustaría un presupuesto.",
-            "fr": "Bonjour ! J'ai vu le projet de montage et je souhaite un devis.",
+        "image": "images/trabalhos/instalacao-tv-parede-lisboa-01.webp",
+        "images": [
+            "images/trabalhos/instalacao-tv-parede-lisboa-01.webp",
+            "images/trabalhos/instalacao-tv-parede-lisboa-02.webp",
+            "images/trabalhos/instalacao-tv-parede-lisboa-03.webp",
+            "images/trabalhos/instalacao-tv-parede-lisboa-04.webp",
+            "images/trabalhos/instalacao-tv-parede-lisboa-05.webp",
+            "images/trabalhos/instalacao-tv-parede-lisboa-06.webp",
+        ],
+        "width": 1200,
+        "height": 1600,
+        "slug": "servico-reparacoes-gerais.html",
+        "pt": {
+            "title": "Instalação de TV na parede",
+            "zone": "Grande Lisboa",
+            "service_type": "Reparações gerais",
+            "description": "Montagem de televisão na parede, passagem/organização de cabos e acabamento limpo no espaço interior.",
+            "alt": "Televisão montada na parede com cabos organizados na Grande Lisboa",
+            "alts": [
+                "Televisão montada na parede na sala com móvel e cabos organizados",
+                "TV na parede em escritório com passagem de cabos e secretária",
+                "Montagem de televisão na parede com consola e soundbar",
+                "Instalação de TV na parede com cabos e computador no escritório",
+                "Televisão fixada na parede com ligação elétrica na parede",
+                "TV montada na parede num apartamento com zona de estar",
+            ],
+        },
+        "en": {
+            "title": "Wall-mounted TV installation",
+            "zone": "Greater Lisbon",
+            "service_type": "General repairs",
+            "description": "TV wall mounting, cable routing and tidy finishing in your living space.",
+            "alt": "Wall-mounted TV with organised cables in Greater Lisbon",
+            "alts": [
+                "TV mounted on the wall in a living room with media unit and cables",
+                "Wall-mounted TV in a home office with desk and cable routing",
+                "TV wall mount above a wooden media console with soundbar",
+                "TV installation with cables at a desk workspace",
+                "TV on the wall with power connection routed to the outlet",
+                "Wall-mounted TV in an open-plan apartment living area",
+            ],
+        },
+        "es": {
+            "title": "Instalación de TV en la pared",
+            "zone": "Gran Lisboa",
+            "service_type": "Reparaciones generales",
+            "description": "Montaje de televisión en la pared, paso y organización de cables y acabado limpio en el interior.",
+            "alt": "Televisión montada en la pared con cables organizados en la Gran Lisboa",
+            "alts": [
+                "TV montada en la pared en salón con mueble y cables",
+                "TV en la pared en oficina con cables y escritorio",
+                "Montaje de TV sobre mueble con barra de sonido",
+                "Instalación de TV con cables en zona de trabajo",
+                "TV fijada en la pared con conexión eléctrica",
+                "TV montada en apartamento con zona de estar",
+            ],
+        },
+        "fr": {
+            "title": "Installation de TV murale",
+            "zone": "Grand Lisbonne",
+            "service_type": "Réparations générales",
+            "description": "Fixation de téléviseur au mur, passage et rangement des câbles et finition soignée.",
+            "alt": "Téléviseur fixé au mur avec câbles organisés au Grand Lisbonne",
+            "alts": [
+                "TV murale dans un salon avec meuble et câbles",
+                "TV murale dans un bureau avec passage de câbles",
+                "Montage TV au-dessus d'un meuble avec barre de son",
+                "Installation TV avec câbles au bureau",
+                "TV au mur avec raccordement électrique",
+                "TV murale dans un appartement avec coin salon",
+            ],
         },
     },
     {
-        "before": "images/hero/hero-3.webp",
-        "after": "images/hero/obra.webp",
-        "pt": (
-            "Canalizações",
-            "Casa de banho",
-            "Reparação de fugas e substituição de torneira com teste de estanquidade.",
-        ),
-        "en": (
-            "Plumbing",
-            "Bathroom",
-            "Leak repair and tap replacement with a watertight check.",
-        ),
-        "es": (
-            "Fontanería",
-            "Baño",
-            "Reparación de fugas y sustitución de grifo con prueba de estanqueidad.",
-        ),
-        "fr": (
-            "Plomberie",
-            "Salle de bain",
-            "Réparation de fuite et remplacement de robinet avec test d'étanchéité.",
-        ),
-        "wa": {
-            "pt": "Olá! Vi o trabalho de canalizações e gostaria de um orçamento.",
-            "en": "Hello! I saw the plumbing project and would like a quote.",
-            "es": "¡Hola! Vi el trabajo de fontanería y me gustaría un presupuesto.",
-            "fr": "Bonjour ! J'ai vu le projet de plomberie et je souhaite un devis.",
+        "image": "images/trabalhos/manutencao-interior-lisboa-01.webp",
+        "video": "videos/trabalhos/manutencao-interior-lisboa-01.mp4",
+        "width": 1200,
+        "height": 1600,
+        "slug": "servico-manutencao.html",
+        "pt": {
+            "title": "Manutenção e remodelação interior",
+            "zone": "Grande Lisboa",
+            "service_type": "Manutenção",
+            "description": "Trabalhos de manutenção, reparação e melhoria de espaços interiores.",
+            "alt": "Casa de banho remodelada com azulejos cinzentos na Grande Lisboa",
         },
-    },
-    {
-        "before": "images/hero/ferramentas.webp",
-        "after": "images/hero/hero-4.webp",
-        "pt": (
-            "Limpeza pós-obra",
-            "Espaço entregue",
-            "Limpeza profunda após intervenção para entregar o espaço pronto a usar.",
-        ),
-        "en": (
-            "Post-work cleaning",
-            "Ready to use",
-            "Deep clean after the job so the space is ready to use.",
-        ),
-        "es": (
-            "Limpieza post-obra",
-            "Espacio listo",
-            "Limpieza profunda tras la intervención para dejar el espacio listo.",
-        ),
-        "fr": (
-            "Nettoyage après travaux",
-            "Espace prêt",
-            "Nettoyage en profondeur après intervention pour un espace prêt à l'emploi.",
-        ),
-        "wa": {
-            "pt": "Olá! Vi o trabalho de limpeza pós-obra e gostaria de um orçamento.",
-            "en": "Hello! I saw the post-work cleaning and would like a quote.",
-            "es": "¡Hola! Vi la limpieza post-obra y me gustaría un presupuesto.",
-            "fr": "Bonjour ! J'ai vu le nettoyage après travaux et je souhaite un devis.",
+        "en": {
+            "title": "Interior maintenance and renovation",
+            "zone": "Greater Lisbon",
+            "service_type": "Maintenance",
+            "description": "Maintenance, repair and improvement of interior spaces.",
+            "alt": "Renovated bathroom with grey tiles in Greater Lisbon",
+        },
+        "es": {
+            "title": "Mantenimiento y reforma interior",
+            "zone": "Gran Lisboa",
+            "service_type": "Mantenimiento",
+            "description": "Trabajos de mantenimiento, reparación y mejora de espacios interiores.",
+            "alt": "Baño reformado con azulejos grises en la Gran Lisboa",
+        },
+        "fr": {
+            "title": "Entretien et rénovation intérieure",
+            "zone": "Grand Lisbonne",
+            "service_type": "Entretien",
+            "description": "Travaux d'entretien, réparation et amélioration des espaces intérieurs.",
+            "alt": "Salle de bain rénovée avec carrelage gris dans le Grand Lisbonne",
         },
     },
 ]
-
-RECENT_WORK_WA = {
-    "pt": "Olá! Quero enviar fotos de um trabalho para a galeria de trabalhos recentes.",
-    "en": "Hello! I would like to send photos of a job for the recent work gallery.",
-    "es": "¡Hola! Quiero enviar fotos de un trabajo para la galería de trabajos recientes.",
-    "fr": "Bonjour ! Je souhaite envoyer des photos d'un travail pour la galerie de travaux récents.",
-}
 
 # SYNC: order = index.html services grid = script.js SERVICE_LANDING_SLUGS
 SERVICE_CARDS = [
@@ -3156,6 +3357,313 @@ def render_wa_widget(
             "WA_FLOAT_LABEL": wa_float_label,
         },
     )
+
+
+================================================================================
+FILE: scripts/import-instalacao-tv-trabalhos.py
+================================================================================
+
+#!/usr/bin/env python3
+"""Import TV wall-mount photos (15.28.09 batch) into instalacao-tv-parede-lisboa-*.webp."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SRC = Path(r"C:\Users\mikai\Documents\fotos website")
+OUT = ROOT / "images" / "trabalhos"
+MAX_WIDTH = 1200
+WEBP_QUALITY = 82
+
+# Apenas fotos de instalação de TV (lote 15.28.09 / 15.28.10)
+JOBS = [
+    ("WhatsApp Image 2026-05-25 at 15.28.09 (4).jpeg", "instalacao-tv-parede-lisboa-01.webp"),
+    ("WhatsApp Image 2026-05-25 at 15.28.09 (3).jpeg", "instalacao-tv-parede-lisboa-02.webp"),
+    ("WhatsApp Image 2026-05-25 at 15.28.09 (2).jpeg", "instalacao-tv-parede-lisboa-03.webp"),
+    ("WhatsApp Image 2026-05-25 at 15.28.09 (1).jpeg", "instalacao-tv-parede-lisboa-04.webp"),
+    ("WhatsApp Image 2026-05-25 at 15.28.09.jpeg", "instalacao-tv-parede-lisboa-05.webp"),
+    ("WhatsApp Image 2026-05-25 at 15.28.10 (1).jpeg", "instalacao-tv-parede-lisboa-06.webp"),
+]
+
+
+def optimize_image(src: Path, dst: Path) -> tuple[int, int]:
+    from PIL import Image
+
+    with Image.open(src) as im:
+        im = im.convert("RGB")
+        w, h = im.size
+        if w > MAX_WIDTH:
+            nh = round(h * MAX_WIDTH / w)
+            im = im.resize((MAX_WIDTH, nh), Image.Resampling.LANCZOS)
+        w, h = im.size
+        im.save(dst, "WEBP", quality=WEBP_QUALITY, method=6)
+    return w, h
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    print("=== Instalacao TV (origem -> webp) ===")
+    for src_name, webp_name in JOBS:
+        src = SRC / src_name
+        dst = OUT / webp_name
+        if not src.is_file():
+            raise SystemExit(f"Missing: {src}")
+        w, h = optimize_image(src, dst)
+        print(f"  {src_name}")
+        print(f"    -> {dst.relative_to(ROOT)} ({w}x{h}, {dst.stat().st_size:,} B)")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================================
+FILE: scripts/import-pintura-trabalhos.py
+================================================================================
+
+#!/usr/bin/env python3
+"""Import 5 painting photos for the recent-work gallery card."""
+
+from __future__ import annotations
+
+import shutil
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SRC = Path(r"C:\Users\mikai\Documents\fotos website")
+OUT = ROOT / "images" / "trabalhos"
+MAX_WIDTH = 1200
+WEBP_QUALITY = 82
+
+JOBS = [
+    ("WhatsApp Image 2026-05-25 at 14.19.40 (1).jpeg", "pintura-acabamentos-interiores-lisboa-01.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.19.40 (2).jpeg", "pintura-acabamentos-interiores-lisboa-02.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.19.40 (3).jpeg", "pintura-acabamentos-interiores-lisboa-03.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.19.40 (4).jpeg", "pintura-acabamentos-interiores-lisboa-04.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.19.40 (5).jpeg", "pintura-acabamentos-interiores-lisboa-05.webp"),
+]
+
+
+def optimize_image(src: Path, dst: Path) -> tuple[int, int]:
+    from PIL import Image
+
+    with Image.open(src) as im:
+        im = im.convert("RGB")
+        w, h = im.size
+        if w > MAX_WIDTH:
+            nh = round(h * MAX_WIDTH / w)
+            im = im.resize((MAX_WIDTH, nh), Image.Resampling.LANCZOS)
+        w, h = im.size
+        im.save(dst, "WEBP", quality=WEBP_QUALITY, method=6)
+    return w, h
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    dims: dict[str, tuple[int, int]] = {}
+    print("=== Pintura (origem -> webp) ===")
+    for src_name, webp_name in JOBS:
+        src = SRC / src_name
+        dst = OUT / webp_name
+        if not src.is_file():
+            raise SystemExit(f"Missing: {src}")
+        w, h = optimize_image(src, dst)
+        dims[webp_name] = (w, h)
+        print(f"  {src_name}")
+        print(f"    -> {dst.relative_to(ROOT)} ({w}x{h}, {dst.stat().st_size:,} B)")
+
+    old = OUT / "pintura-interior-lisboa-01.webp"
+    if old.is_file():
+        print(f"\n  (old file kept on disk: {old.name} — not used by gallery)")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================================
+FILE: scripts/import-relva-trabalhos.py
+================================================================================
+
+#!/usr/bin/env python3
+"""Import lawn + irrigation photos/videos for recent-work gallery."""
+
+from __future__ import annotations
+
+import shutil
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SRC = Path(r"C:\Users\mikai\Documents\fotos website")
+IMG_OUT = ROOT / "images" / "trabalhos"
+VID_OUT = ROOT / "videos" / "trabalhos"
+MAX_WIDTH = 1200
+WEBP_QUALITY = 82
+
+IMAGE_JOBS = [
+    ("WhatsApp Image 2026-05-25 at 14.22.09 (9).jpeg", "relva-sistema-rega-lisboa-01.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.22.09 (11).jpeg", "relva-sistema-rega-lisboa-02.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.22.10 (2).jpeg", "relva-sistema-rega-lisboa-03.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.22.09 (10).jpeg", "relva-sistema-rega-lisboa-04.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.22.09 (12).jpeg", "relva-sistema-rega-lisboa-05.webp"),
+    ("WhatsApp Image 2026-05-25 at 14.22.10.jpeg", "relva-sistema-rega-lisboa-06.webp"),
+]
+
+VIDEO_JOBS = [
+    ("WhatsApp Video 2026-05-25 at 14.22.09 (1).mp4", "relva-sistema-rega-lisboa-01.mp4"),
+    ("WhatsApp Video 2026-05-25 at 14.22.10 (2).mp4", "relva-sistema-rega-lisboa-02.mp4"),
+    ("WhatsApp Video 2026-05-25 at 14.22.10 (3).mp4", "relva-sistema-rega-lisboa-03.mp4"),
+]
+
+
+def optimize_image(src: Path, dst: Path) -> tuple[int, int]:
+    from PIL import Image
+
+    with Image.open(src) as im:
+        im = im.convert("RGB")
+        w, h = im.size
+        if w > MAX_WIDTH:
+            nh = round(h * MAX_WIDTH / w)
+            im = im.resize((MAX_WIDTH, nh), Image.Resampling.LANCZOS)
+        w, h = im.size
+        im.save(dst, "WEBP", quality=WEBP_QUALITY, method=6)
+    return w, h
+
+
+def main() -> None:
+    IMG_OUT.mkdir(parents=True, exist_ok=True)
+    VID_OUT.mkdir(parents=True, exist_ok=True)
+
+    print("=== Imagens (origem -> webp) ===")
+    for src_name, webp_name in IMAGE_JOBS:
+        src = SRC / src_name
+        dst = IMG_OUT / webp_name
+        if not src.is_file():
+            raise SystemExit(f"Missing: {src}")
+        w, h = optimize_image(src, dst)
+        print(f"  {src_name}")
+        print(f"    -> {dst.relative_to(ROOT)} ({w}x{h}, {dst.stat().st_size:,} B)")
+
+    print("\n=== Videos (origem -> mp4) ===")
+    for src_name, mp4_name in VIDEO_JOBS:
+        src = SRC / src_name
+        dst = VID_OUT / mp4_name
+        if not src.is_file():
+            raise SystemExit(f"Missing: {src}")
+        shutil.copy2(src, dst)
+        mb = dst.stat().st_size / (1024 * 1024)
+        flag = " WARNING: >10 MB" if mb > 10 else ""
+        print(f"  {src_name}")
+        print(f"    -> {dst.relative_to(ROOT)} ({mb:.2f} MB){flag}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================================
+FILE: scripts/import-trabalhos-media.py
+================================================================================
+
+#!/usr/bin/env python3
+"""Copy and optimize trabalhos media from the user's photos folder (one-off)."""
+
+from __future__ import annotations
+
+import shutil
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SRC = Path(r"C:\Users\mikai\Documents\fotos website")
+IMG_OUT = ROOT / "images" / "trabalhos"
+VID_OUT = ROOT / "videos" / "trabalhos"
+MAX_WIDTH = 1200
+WEBP_QUALITY = 82
+
+# (source image, webp name, mp4 name, source video) — 4 pairs = 8 files
+JOBS = [
+    (
+        "WhatsApp Image 2026-05-25 at 14.19.41 (2).jpeg",
+        "reparacao-casa-banho-lisboa-01.webp",
+        "reparacao-casa-banho-lisboa-01.mp4",
+        "WhatsApp Video 2026-05-25 at 14.19.41.mp4",
+    ),
+    (
+        "WhatsApp Image 2026-05-25 at 14.19.40 (3).jpeg",
+        "pintura-interior-lisboa-01.webp",
+        "pintura-interior-lisboa-01.mp4",
+        "WhatsApp Video 2026-05-25 at 14.16.22 (1).mp4",
+    ),
+    (
+        "WhatsApp Image 2026-05-25 at 14.16.21.jpeg",
+        "trabalhos-exteriores-jardim-01.webp",
+        "trabalhos-exteriores-jardim-01.mp4",
+        "WhatsApp Video 2026-05-25 at 14.16.22 (3).mp4",
+    ),
+    (
+        "WhatsApp Image 2026-05-25 at 14.16.22.jpeg",
+        "manutencao-interior-lisboa-01.webp",
+        "manutencao-interior-lisboa-01.mp4",
+        "WhatsApp Video 2026-05-25 at 14.16.22 (2).mp4",
+    ),
+]
+
+
+def optimize_image(src: Path, dst: Path) -> tuple[int, int]:
+    from PIL import Image
+
+    with Image.open(src) as im:
+        im = im.convert("RGB")
+        w, h = im.size
+        if w > MAX_WIDTH:
+            nh = round(h * MAX_WIDTH / w)
+            im = im.resize((MAX_WIDTH, nh), Image.Resampling.LANCZOS)
+        w, h = im.size
+        im.save(dst, "WEBP", quality=WEBP_QUALITY, method=6)
+    return w, h
+
+
+def main() -> None:
+    try:
+        from PIL import Image  # noqa: F401
+    except ImportError as e:
+        raise SystemExit("Install Pillow: pip install Pillow") from e
+
+    IMG_OUT.mkdir(parents=True, exist_ok=True)
+    VID_OUT.mkdir(parents=True, exist_ok=True)
+
+    print("=== Imagens (origem -> destino) ===")
+    dims: dict[str, tuple[int, int]] = {}
+    for src_name, webp_name, _vid_name, _vid_src in JOBS:
+        src = SRC / src_name
+        dst = IMG_OUT / webp_name
+        if not src.is_file():
+            raise SystemExit(f"Missing source image: {src}")
+        w, h = optimize_image(src, dst)
+        dims[webp_name] = (w, h)
+        print(f"  {src_name}")
+        print(f"    -> {dst.relative_to(ROOT)} ({w}x{h}, {dst.stat().st_size:,} B)")
+
+    print("\n=== Videos (origem -> destino) ===")
+    for _img_src, _webp, mp4_name, vid_src_name in JOBS:
+        src = SRC / vid_src_name
+        dst = VID_OUT / mp4_name
+        if not src.is_file():
+            raise SystemExit(f"Missing source video: {src}")
+        shutil.copy2(src, dst)
+        mb = dst.stat().st_size / (1024 * 1024)
+        flag = " WARNING: >10 MB" if mb > 10 else ""
+        print(f"  {vid_src_name}")
+        print(f"    -> {dst.relative_to(ROOT)} ({mb:.2f} MB){flag}")
+
+    print("\n=== Dimensoes (home_page_i18n RECENT_WORK) ===")
+    for webp_name, (w, h) in dims.items():
+        print(f"  {webp_name}: width={w}, height={h}")
+
+
+if __name__ == "__main__":
+    main()
 
 
 ================================================================================
@@ -6266,19 +6774,190 @@ FILE: dist/en/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Recent work</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Gallery of real projects in preparation.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">A few examples of jobs across Greater Lisbon and the South Bank.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">UPDATING SOON</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.</p>
-                <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20send%20photos%20of%20a%20job%20for%20the%20recent%20work%20gallery." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Send photos via WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Bathroom repairs</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>General repairs</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Interior work, finishes and small fixes in bathrooms.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Professional interior painting in a commercial space in Greater Lisbon">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Interior painting in a large commercial space with black pillars and white ceiling in Lisbon" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Interior painting job with floor protection and professional equipment" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Black accent wall with white logo and ceiling finish" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Clean line between dark wall and white ceiling with protected fixtures" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Interior wall painting with uniform finish on a painted column" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Interior painting and finishes</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Painting</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Wall and ceiling painting plus small interior touch-ups with a clean, careful finish.</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="New lawn and renovated garden with irrigation in Greater Lisbon">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="New turf installed in a residential garden in Greater Lisbon" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Professional new lawn laying in the garden" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Ground preparation and removal of old turf" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Renewed lawn in a backyard with trees and tidy outdoor space" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Fresh sod with visible seams after professional installation" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Large green lawn after turf replacement in the garden" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Lawn replacement and irrigation system</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon and South Bank</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Gardening and outdoor maintenance</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Removal of old turf, ground preparation, irrigation system installation and new lawn laying.</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Wall-mounted TV with organised cables in Greater Lisbon">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="TV mounted on the wall in a living room with media unit and cables" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="Wall-mounted TV in a home office with desk and cable routing" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="TV wall mount above a wooden media console with soundbar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="TV installation with cables at a desk workspace" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="TV on the wall with power connection routed to the outlet" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="Wall-mounted TV in an open-plan apartment living area" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Wall-mounted TV installation</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>General repairs</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">TV wall mounting, cable routing and tidy finishing in your living space.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Interior maintenance and renovation</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Maintenance</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Maintenance, repair and improvement of interior spaces.</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -10889,19 +11568,190 @@ FILE: dist/es/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Trabajos recientes</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galería de trabajos reales en preparación.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Algunos ejemplos de intervenciones en la Gran Lisboa y Margen Sur.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">EN ACTUALIZACIÓN</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.</p>
-                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Quiero%20enviar%20fotos%20de%20un%20trabajo%20para%20la%20galer%C3%ADa%20de%20trabajos%20recientes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Enviar fotos por WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Reparaciones en baño</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Reparaciones generales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Intervenciones interiores, acabados y pequeños arreglos en baños.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Pintura interior profesional en espacio comercial en la Gran Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Pintura interior en gran espacio comercial con pilares negros y techo blanco en Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Obra de pintura interior con protección del suelo y equipo profesional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Pared de acento pintada en negro con logotipo blanco y acabado de techo" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Línea limpia entre pared oscura y techo blanco con equipos protegidos" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Pintura de paredes interiores con acabado uniforme en columna" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Pintura y acabados interiores</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Pinturas</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Pintura de paredes, techos y pequeños retoques interiores con acabado limpio y cuidado.</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Césped nuevo y jardín renovado con riego en la Gran Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="Césped nuevo instalado en jardín residencial en la Gran Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Colocación de césped nuevo con acabado profesional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Preparación del terreno y retirada de césped antiguo" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Césped renovado en patio con árboles y zona exterior cuidada" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Césped nuevo tras instalación profesional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Amplio césped verde tras sustitución en el jardín" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Sustitución de césped y sistema de riego</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa y Margen Sur</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Jardinería y mantenimiento exterior</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Retirada de césped antiguo, preparación del terreno, instalación de riego y colocación de césped nuevo.</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Televisión montada en la pared con cables organizados en la Gran Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="TV montada en la pared en salón con mueble y cables" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="TV en la pared en oficina con cables y escritorio" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="Montaje de TV sobre mueble con barra de sonido" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="Instalación de TV con cables en zona de trabajo" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="TV fijada en la pared con conexión eléctrica" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="TV montada en apartamento con zona de estar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Instalación de TV en la pared</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Reparaciones generales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Montaje de televisión en la pared, paso y organización de cables y acabado limpio en el interior.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Mantenimiento y reforma interior</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Mantenimiento</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Trabajos de mantenimiento, reparación y mejora de espacios interiores.</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -15512,19 +16362,190 @@ FILE: dist/fr/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Travaux récents</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galerie d'interventions réelles en préparation.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Quelques exemples d'interventions dans le Grand Lisbonne et la Rive Sud.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">EN COURS DE MISE À JOUR</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d'interventions terminées.</p>
-                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20envoyer%20des%20photos%20d%27un%20travail%20pour%20la%20galerie%20de%20travaux%20r%C3%A9cents." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Envoyer des photos par WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Réparations salle de bain</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Réparations générales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Interventions intérieures, finitions et petits travaux en salle de bain.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Peinture intérieure professionnelle dans un espace commercial au Grand Lisbonne">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Peinture intérieure dans un grand espace commercial avec piliers noirs et plafond blanc à Lisbonne" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Travaux de peinture intérieure avec protection du sol et matériel professionnel" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Mur d&#x27;accent peint en noir avec logo blanc et finition de plafond" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Ligne nette entre mur foncé et plafond blanc avec équipements protégés" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Peinture de murs intérieurs avec finition uniforme sur un pilier" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Peinture et finitions intérieures</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Peinture</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Peinture de murs, plafonds et petites retouches intérieures avec une finition soignée.</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Nouvelle pelouse et jardin rénové avec arrosage au Grand Lisbonne">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="Nouvelle pelouse installée dans un jardin résidentiel au Grand Lisbonne" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Pose de gazon neuf avec finition professionnelle" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Préparation du sol et retrait de l&#x27;ancienne pelouse" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Pelouse rénovée dans un jardin avec arbres" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Gazon neuf après installation professionnelle" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Grande pelouse verte après remplacement dans le jardin" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Remplacement de gazon et système d&#x27;arrosage</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne et Rive Sud</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Jardinage et entretien extérieur</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Retrait de l&#x27;ancienne pelouse, préparation du sol, installation d&#x27;arrosage et pose de gazon neuf.</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Téléviseur fixé au mur avec câbles organisés au Grand Lisbonne">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="TV murale dans un salon avec meuble et câbles" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="TV murale dans un bureau avec passage de câbles" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="Montage TV au-dessus d&#x27;un meuble avec barre de son" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="Installation TV avec câbles au bureau" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="TV au mur avec raccordement électrique" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="TV murale dans un appartement avec coin salon" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Installation de TV murale</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Réparations générales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Fixation de téléviseur au mur, passage et rangement des câbles et finition soignée.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Entretien et rénovation intérieure</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Entretien</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Travaux d&#x27;entretien, réparation et amélioration des espaces intérieurs.</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -20135,19 +21156,190 @@ FILE: dist/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Trabalhos recentes</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galeria de intervenções reais em preparação.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Alguns exemplos de intervenções na Grande Lisboa e Margem Sul.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">EM ATUALIZAÇÃO</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.</p>
-                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Quero%20enviar%20fotos%20de%20um%20trabalho%20para%20a%20galeria%20de%20trabalhos%20recentes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Enviar fotos pelo WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Reparações em casa de banho</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Reparações gerais</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Intervenções interiores, acabamentos e pequenos arranjos em casa de banho.</p>
+                        <a href="servico-reparacoes-gerais.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Pintura interior profissional em espaço comercial na Grande Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Pintura interior em grande espaço comercial com pilares pretos e teto branco em Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Obra de pintura interior com proteção de pavimento e equipamento profissional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Parede de acento pintada a preto com logótipo branco e acabamento de teto" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Linha limpa entre parede escura e teto branco com proteção de equipamentos" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Pintura de paredes interiores com acabamento uniforme e coluna pintada" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Pintura e acabamentos interiores</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Pinturas</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Pintura de paredes, tetos e pequenos retoques interiores com acabamento limpo e cuidado.</p>
+                        <a href="servico-pinturas.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Relva nova e jardim renovado com sistema de rega na Grande Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="Relva nova instalada em jardim de moradia na Grande Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Colocação de relva nova com acabamento profissional no jardim" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Preparação do terreno e remoção de relva antiga no jardim" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Relvado renovado em quintal com árvores e zona exterior cuidada" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Relva nova com juntas visíveis após instalação profissional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Relvado amplo e verde após substituição de relva no jardim" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Substituição de relva e sistema de rega</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa e Margem Sul</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Jardinagem e manutenção exterior</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Remoção de relva antiga, preparação do terreno, instalação de sistema de rega e colocação de relva nova.</p>
+                        <a href="servico-jardinagem.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Televisão montada na parede com cabos organizados na Grande Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="Televisão montada na parede na sala com móvel e cabos organizados" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="TV na parede em escritório com passagem de cabos e secretária" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="Montagem de televisão na parede com consola e soundbar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="Instalação de TV na parede com cabos e computador no escritório" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="Televisão fixada na parede com ligação elétrica na parede" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="TV montada na parede num apartamento com zona de estar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Instalação de TV na parede</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Reparações gerais</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Montagem de televisão na parede, passagem/organização de cabos e acabamento limpo no espaço interior.</p>
+                        <a href="servico-reparacoes-gerais.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Manutenção e remodelação interior</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Manutenção</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Trabalhos de manutenção, reparação e melhoria de espaços interiores.</p>
+                        <a href="servico-manutencao.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -21068,10 +22260,10 @@ FILE: dist/script.js
             ],
             testimonials_title: 'Críticas',
             recent_work_title: 'Trabalhos recentes',
-            recent_work_subtitle: 'Galeria de intervenções reais em preparação.',
-            recent_work_status: 'EM ATUALIZAÇÃO',
-            recent_work_notice: 'Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.',
-            recent_work_cta: 'Enviar fotos pelo WhatsApp',
+            recent_work_subtitle: 'Alguns exemplos de intervenções na Grande Lisboa e Margem Sul.',
+            recent_work_zone: 'Zona',
+            recent_work_service: 'Serviço',
+            recent_work_link: 'Ver serviço',
             reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
@@ -21136,10 +22328,10 @@ FILE: dist/script.js
             ],
             testimonials_title: 'Reviews',
             recent_work_title: 'Recent work',
-            recent_work_subtitle: 'Gallery of real projects in preparation.',
-            recent_work_status: 'UPDATING SOON',
-            recent_work_notice: 'We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.',
-            recent_work_cta: 'Send photos via WhatsApp',
+            recent_work_subtitle: 'A few examples of jobs across Greater Lisbon and the South Bank.',
+            recent_work_zone: 'Area',
+            recent_work_service: 'Service',
+            recent_work_link: 'View service',
             reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
@@ -21204,10 +22396,10 @@ FILE: dist/script.js
             ],
             testimonials_title: 'Reseñas',
             recent_work_title: 'Trabajos recientes',
-            recent_work_subtitle: 'Galería de trabajos reales en preparación.',
-            recent_work_status: 'EN ACTUALIZACIÓN',
-            recent_work_notice: 'Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.',
-            recent_work_cta: 'Enviar fotos por WhatsApp',
+            recent_work_subtitle: 'Algunos ejemplos de intervenciones en la Gran Lisboa y Margen Sur.',
+            recent_work_zone: 'Zona',
+            recent_work_service: 'Servicio',
+            recent_work_link: 'Ver servicio',
             reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
@@ -21272,10 +22464,10 @@ FILE: dist/script.js
             ],
             testimonials_title: 'Avis',
             recent_work_title: 'Travaux récents',
-            recent_work_subtitle: 'Galerie d\'interventions réelles en préparation.',
-            recent_work_status: 'EN COURS DE MISE À JOUR',
-            recent_work_notice: 'Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d\'interventions terminées.',
-            recent_work_cta: 'Envoyer des photos par WhatsApp',
+            recent_work_subtitle: 'Quelques exemples d\'interventions dans le Grand Lisbonne et la Rive Sud.',
+            recent_work_zone: 'Zone',
+            recent_work_service: 'Service',
+            recent_work_link: 'Voir le service',
             reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
@@ -27083,51 +28275,120 @@ body.modal-open {
     color: var(--text-light);
 }
 
-/* ===== RECENT WORK (UPDATE BANNER) ===== */
+/* ===== RECENT WORK (GALLERY) ===== */
 
-.recent-work-update {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 48px 40px;
-    text-align: center;
+.recent-work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.recent-work-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-work-media-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
     background: var(--bg-light);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    overflow: hidden;
 }
 
-.recent-work-status {
-    margin: 0 0 20px;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--primary-dark);
-    line-height: 1.2;
+.recent-work-media-wrap--gallery {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
-.recent-work-notice {
-    margin: 0 auto 28px;
-    max-width: 52ch;
-    font-size: 1.05rem;
-    line-height: 1.65;
-    color: var(--text-light);
+.recent-work-carousel {
+    display: flex;
+    height: 100%;
+    min-width: 100%;
 }
 
-.recent-work-cta {
-    display: inline-flex;
-    align-items: center;
+.recent-work-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    height: 100%;
+}
+
+.recent-work-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.recent-work-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     gap: 10px;
 }
 
-.recent-work-cta .fa-whatsapp {
-    font-size: 1.25rem;
+.recent-work-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin: 0;
+    line-height: 1.35;
 }
 
-@media (max-width: 600px) {
-    .recent-work-update {
-        padding: 36px 24px;
-    }
+.recent-work-meta {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.recent-work-meta-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+    font-size: 0.88rem;
+}
+
+.recent-work-meta dt {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+.recent-work-meta dd {
+    margin: 0;
+    color: var(--text-light);
+}
+
+.recent-work-desc {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+}
+
+.recent-work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    margin-top: 4px;
+}
+
+.recent-work-link:hover {
+    text-decoration: underline;
 }
 
 /* ===== GOOGLE REVIEWS ===== */
@@ -28891,19 +30152,190 @@ FILE: en/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Recent work</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Gallery of real projects in preparation.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">A few examples of jobs across Greater Lisbon and the South Bank.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">UPDATING SOON</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.</p>
-                <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20send%20photos%20of%20a%20job%20for%20the%20recent%20work%20gallery." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Send photos via WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Bathroom repairs</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>General repairs</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Interior work, finishes and small fixes in bathrooms.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Professional interior painting in a commercial space in Greater Lisbon">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Interior painting in a large commercial space with black pillars and white ceiling in Lisbon" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Interior painting job with floor protection and professional equipment" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Black accent wall with white logo and ceiling finish" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Clean line between dark wall and white ceiling with protected fixtures" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Interior wall painting with uniform finish on a painted column" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Interior painting and finishes</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Painting</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Wall and ceiling painting plus small interior touch-ups with a clean, careful finish.</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="New lawn and renovated garden with irrigation in Greater Lisbon">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="New turf installed in a residential garden in Greater Lisbon" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Professional new lawn laying in the garden" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Ground preparation and removal of old turf" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Renewed lawn in a backyard with trees and tidy outdoor space" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Fresh sod with visible seams after professional installation" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Large green lawn after turf replacement in the garden" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Lawn replacement and irrigation system</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon and South Bank</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Gardening and outdoor maintenance</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Removal of old turf, ground preparation, irrigation system installation and new lawn laying.</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Wall-mounted TV with organised cables in Greater Lisbon">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="TV mounted on the wall in a living room with media unit and cables" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="Wall-mounted TV in a home office with desk and cable routing" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="TV wall mount above a wooden media console with soundbar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="TV installation with cables at a desk workspace" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="TV on the wall with power connection routed to the outlet" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="Wall-mounted TV in an open-plan apartment living area" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Wall-mounted TV installation</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>General repairs</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">TV wall mounting, cable routing and tidy finishing in your living space.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Interior maintenance and renovation</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Area</dt>
+                                <dd>Greater Lisbon</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Maintenance</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Maintenance, repair and improvement of interior spaces.</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -33514,19 +34946,190 @@ FILE: es/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Trabajos recientes</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galería de trabajos reales en preparación.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Algunos ejemplos de intervenciones en la Gran Lisboa y Margen Sur.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">EN ACTUALIZACIÓN</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.</p>
-                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Quiero%20enviar%20fotos%20de%20un%20trabajo%20para%20la%20galer%C3%ADa%20de%20trabajos%20recientes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Enviar fotos por WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Reparaciones en baño</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Reparaciones generales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Intervenciones interiores, acabados y pequeños arreglos en baños.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Pintura interior profesional en espacio comercial en la Gran Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Pintura interior en gran espacio comercial con pilares negros y techo blanco en Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Obra de pintura interior con protección del suelo y equipo profesional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Pared de acento pintada en negro con logotipo blanco y acabado de techo" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Línea limpia entre pared oscura y techo blanco con equipos protegidos" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Pintura de paredes interiores con acabado uniforme en columna" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Pintura y acabados interiores</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Pinturas</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Pintura de paredes, techos y pequeños retoques interiores con acabado limpio y cuidado.</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Césped nuevo y jardín renovado con riego en la Gran Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="Césped nuevo instalado en jardín residencial en la Gran Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Colocación de césped nuevo con acabado profesional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Preparación del terreno y retirada de césped antiguo" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Césped renovado en patio con árboles y zona exterior cuidada" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Césped nuevo tras instalación profesional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Amplio césped verde tras sustitución en el jardín" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Sustitución de césped y sistema de riego</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa y Margen Sur</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Jardinería y mantenimiento exterior</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Retirada de césped antiguo, preparación del terreno, instalación de riego y colocación de césped nuevo.</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Televisión montada en la pared con cables organizados en la Gran Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="TV montada en la pared en salón con mueble y cables" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="TV en la pared en oficina con cables y escritorio" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="Montaje de TV sobre mueble con barra de sonido" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="Instalación de TV con cables en zona de trabajo" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="TV fijada en la pared con conexión eléctrica" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="TV montada en apartamento con zona de estar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Instalación de TV en la pared</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Reparaciones generales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Montaje de televisión en la pared, paso y organización de cables y acabado limpio en el interior.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Mantenimiento y reforma interior</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Gran Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Servicio</dt>
+                                <dd>Mantenimiento</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Trabajos de mantenimiento, reparación y mejora de espacios interiores.</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -38137,19 +39740,190 @@ FILE: fr/index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Travaux récents</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galerie d'interventions réelles en préparation.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Quelques exemples d'interventions dans le Grand Lisbonne et la Rive Sud.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">EN COURS DE MISE À JOUR</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d'interventions terminées.</p>
-                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20envoyer%20des%20photos%20d%27un%20travail%20pour%20la%20galerie%20de%20travaux%20r%C3%A9cents." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Envoyer des photos par WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Réparations salle de bain</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Réparations générales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Interventions intérieures, finitions et petits travaux en salle de bain.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Peinture intérieure professionnelle dans un espace commercial au Grand Lisbonne">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Peinture intérieure dans un grand espace commercial avec piliers noirs et plafond blanc à Lisbonne" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Travaux de peinture intérieure avec protection du sol et matériel professionnel" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Mur d&#x27;accent peint en noir avec logo blanc et finition de plafond" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Ligne nette entre mur foncé et plafond blanc avec équipements protégés" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Peinture de murs intérieurs avec finition uniforme sur un pilier" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Peinture et finitions intérieures</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Peinture</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Peinture de murs, plafonds et petites retouches intérieures avec une finition soignée.</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Nouvelle pelouse et jardin rénové avec arrosage au Grand Lisbonne">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="Nouvelle pelouse installée dans un jardin résidentiel au Grand Lisbonne" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Pose de gazon neuf avec finition professionnelle" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Préparation du sol et retrait de l&#x27;ancienne pelouse" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Pelouse rénovée dans un jardin avec arbres" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Gazon neuf après installation professionnelle" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Grande pelouse verte après remplacement dans le jardin" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="../videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Remplacement de gazon et système d&#x27;arrosage</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne et Rive Sud</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Jardinage et entretien extérieur</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Retrait de l&#x27;ancienne pelouse, préparation du sol, installation d&#x27;arrosage et pose de gazon neuf.</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Téléviseur fixé au mur avec câbles organisés au Grand Lisbonne">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="TV murale dans un salon avec meuble et câbles" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="TV murale dans un bureau avec passage de câbles" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="Montage TV au-dessus d&#x27;un meuble avec barre de son" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="Installation TV avec câbles au bureau" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="TV au mur avec raccordement électrique" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="../images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="TV murale dans un appartement avec coin salon" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Installation de TV murale</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Réparations générales</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Fixation de téléviseur au mur, passage et rangement des câbles et finition soignée.</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="../images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="../videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Entretien et rénovation intérieure</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zone</dt>
+                                <dd>Grand Lisbonne</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Service</dt>
+                                <dd>Entretien</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Travaux d&#x27;entretien, réparation et amélioration des espaces intérieurs.</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -42760,19 +44534,190 @@ FILE: index.html
         </div>
     </section>
 
-    <section class="section" id="recent-work">
+    <section class="section section-light" id="recent-work">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title" data-i18n="recent_work_title">Trabalhos recentes</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">Galeria de intervenções reais em preparação.</p>
+                <p class="section-subtitle" data-i18n="recent_work_subtitle">Alguns exemplos de intervenções na Grande Lisboa e Margem Sul.</p>
             </div>
-            <div class="recent-work-update fade-in" role="status">
-                <p class="recent-work-status" data-i18n="recent_work_status">EM ATUALIZAÇÃO</p>
-                <p class="recent-work-notice" data-i18n="recent_work_notice">Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.</p>
-                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Quero%20enviar%20fotos%20de%20um%20trabalho%20para%20a%20galeria%20de%20trabalhos%20recentes." class="btn btn-primary btn-lg recent-work-cta" id="recent-work-cta" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="recent_work_cta">Enviar fotos pelo WhatsApp</span>
-                </a>
+            <div class="recent-work-grid" id="recent-work-grid">
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/reparacao-casa-banho-lisboa-01.webp" width="1200" height="1600">
+                        <source src="videos/trabalhos/reparacao-casa-banho-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Reparações em casa de banho</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Reparações gerais</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Intervenções interiores, acabamentos e pequenos arranjos em casa de banho.</p>
+                        <a href="servico-reparacoes-gerais.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Pintura interior profissional em espaço comercial na Grande Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-01.webp" alt="Pintura interior em grande espaço comercial com pilares pretos e teto branco em Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-02.webp" alt="Obra de pintura interior com proteção de pavimento e equipamento profissional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-03.webp" alt="Parede de acento pintada a preto com logótipo branco e acabamento de teto" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-04.webp" alt="Linha limpa entre parede escura e teto branco com proteção de equipamentos" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/pintura-acabamentos-interiores-lisboa-05.webp" alt="Pintura de paredes interiores com acabamento uniforme e coluna pintada" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Pintura e acabamentos interiores</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Pinturas</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Pintura de paredes, tetos e pequenos retoques interiores com acabamento limpo e cuidado.</p>
+                        <a href="servico-pinturas.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Relva nova e jardim renovado com sistema de rega na Grande Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-01.webp" alt="Relva nova instalada em jardim de moradia na Grande Lisboa" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-02.webp" alt="Colocação de relva nova com acabamento profissional no jardim" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-03.webp" alt="Preparação do terreno e remoção de relva antiga no jardim" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-04.webp" alt="Relvado renovado em quintal com árvores e zona exterior cuidada" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-05.webp" alt="Relva nova com juntas visíveis após instalação profissional" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/relva-sistema-rega-lisboa-06.webp" alt="Relvado amplo e verde após substituição de relva no jardim" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/relva-sistema-rega-lisboa-01.webp" width="1200" height="1600">
+                                <source src="videos/trabalhos/relva-sistema-rega-lisboa-01.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/relva-sistema-rega-lisboa-02.webp" width="1200" height="1600">
+                                <source src="videos/trabalhos/relva-sistema-rega-lisboa-02.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/relva-sistema-rega-lisboa-03.webp" width="1200" height="1600">
+                                <source src="videos/trabalhos/relva-sistema-rega-lisboa-03.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Substituição de relva e sistema de rega</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa e Margem Sul</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Jardinagem e manutenção exterior</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Remoção de relva antiga, preparação do terreno, instalação de sistema de rega e colocação de relva nova.</p>
+                        <a href="servico-jardinagem.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
+                    <div class="recent-work-carousel" role="group" aria-label="Televisão montada na parede com cabos organizados na Grande Lisboa">
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-01.webp" alt="Televisão montada na parede na sala com móvel e cabos organizados" width="1200" height="1600" loading="eager" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-02.webp" alt="TV na parede em escritório com passagem de cabos e secretária" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-03.webp" alt="Montagem de televisão na parede com consola e soundbar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-04.webp" alt="Instalação de TV na parede com cabos e computador no escritório" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-05.webp" alt="Televisão fixada na parede com ligação elétrica na parede" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                        <div class="recent-work-carousel-slide">
+                            <img class="recent-work-media" src="images/trabalhos/instalacao-tv-parede-lisboa-06.webp" alt="TV montada na parede num apartamento com zona de estar" width="1200" height="1600" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Instalação de TV na parede</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Reparações gerais</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Montagem de televisão na parede, passagem/organização de cabos e acabamento limpo no espaço interior.</p>
+                        <a href="servico-reparacoes-gerais.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+                <article class="recent-work-card fade-in">
+                    <div class="recent-work-media-wrap">
+                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="images/trabalhos/manutencao-interior-lisboa-01.webp" width="1200" height="1600">
+                        <source src="videos/trabalhos/manutencao-interior-lisboa-01.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="recent-work-body">
+                        <h3 class="recent-work-title">Manutenção e remodelação interior</h3>
+                        <dl class="recent-work-meta">
+                            <div class="recent-work-meta-row">
+                                <dt>Zona</dt>
+                                <dd>Grande Lisboa</dd>
+                            </div>
+                            <div class="recent-work-meta-row">
+                                <dt>Serviço</dt>
+                                <dd>Manutenção</dd>
+                            </div>
+                        </dl>
+                        <p class="recent-work-desc">Trabalhos de manutenção, reparação e melhoria de espaços interiores.</p>
+                        <a href="servico-manutencao.html" class="recent-work-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -43693,10 +45638,10 @@ FILE: script.js
             ],
             testimonials_title: 'Críticas',
             recent_work_title: 'Trabalhos recentes',
-            recent_work_subtitle: 'Galeria de intervenções reais em preparação.',
-            recent_work_status: 'EM ATUALIZAÇÃO',
-            recent_work_notice: 'Estamos a preparar esta galeria com trabalhos reais. Em breve publicaremos antes/depois de intervenções concluídas.',
-            recent_work_cta: 'Enviar fotos pelo WhatsApp',
+            recent_work_subtitle: 'Alguns exemplos de intervenções na Grande Lisboa e Margem Sul.',
+            recent_work_zone: 'Zona',
+            recent_work_service: 'Serviço',
+            recent_work_link: 'Ver serviço',
             reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
@@ -43761,10 +45706,10 @@ FILE: script.js
             ],
             testimonials_title: 'Reviews',
             recent_work_title: 'Recent work',
-            recent_work_subtitle: 'Gallery of real projects in preparation.',
-            recent_work_status: 'UPDATING SOON',
-            recent_work_notice: 'We are preparing this gallery with real projects. Before/after photos of completed jobs will be published soon.',
-            recent_work_cta: 'Send photos via WhatsApp',
+            recent_work_subtitle: 'A few examples of jobs across Greater Lisbon and the South Bank.',
+            recent_work_zone: 'Area',
+            recent_work_service: 'Service',
+            recent_work_link: 'View service',
             reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
@@ -43829,10 +45774,10 @@ FILE: script.js
             ],
             testimonials_title: 'Reseñas',
             recent_work_title: 'Trabajos recientes',
-            recent_work_subtitle: 'Galería de trabajos reales en preparación.',
-            recent_work_status: 'EN ACTUALIZACIÓN',
-            recent_work_notice: 'Estamos preparando esta galería con trabajos reales. Pronto publicaremos antes/después de intervenciones concluidas.',
-            recent_work_cta: 'Enviar fotos por WhatsApp',
+            recent_work_subtitle: 'Algunos ejemplos de intervenciones en la Gran Lisboa y Margen Sur.',
+            recent_work_zone: 'Zona',
+            recent_work_service: 'Servicio',
+            recent_work_link: 'Ver servicio',
             reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
@@ -43897,10 +45842,10 @@ FILE: script.js
             ],
             testimonials_title: 'Avis',
             recent_work_title: 'Travaux récents',
-            recent_work_subtitle: 'Galerie d\'interventions réelles en préparation.',
-            recent_work_status: 'EN COURS DE MISE À JOUR',
-            recent_work_notice: 'Nous préparons cette galerie avec des travaux réels. Bientôt, nous publierons des avant/après d\'interventions terminées.',
-            recent_work_cta: 'Envoyer des photos par WhatsApp',
+            recent_work_subtitle: 'Quelques exemples d\'interventions dans le Grand Lisbonne et la Rive Sud.',
+            recent_work_zone: 'Zone',
+            recent_work_service: 'Service',
+            recent_work_link: 'Voir le service',
             reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
@@ -49708,51 +51653,120 @@ body.modal-open {
     color: var(--text-light);
 }
 
-/* ===== RECENT WORK (UPDATE BANNER) ===== */
+/* ===== RECENT WORK (GALLERY) ===== */
 
-.recent-work-update {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 48px 40px;
-    text-align: center;
+.recent-work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.recent-work-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-work-media-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
     background: var(--bg-light);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    overflow: hidden;
 }
 
-.recent-work-status {
-    margin: 0 0 20px;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--primary-dark);
-    line-height: 1.2;
+.recent-work-media-wrap--gallery {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
-.recent-work-notice {
-    margin: 0 auto 28px;
-    max-width: 52ch;
-    font-size: 1.05rem;
-    line-height: 1.65;
-    color: var(--text-light);
+.recent-work-carousel {
+    display: flex;
+    height: 100%;
+    min-width: 100%;
 }
 
-.recent-work-cta {
-    display: inline-flex;
-    align-items: center;
+.recent-work-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    height: 100%;
+}
+
+.recent-work-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.recent-work-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     gap: 10px;
 }
 
-.recent-work-cta .fa-whatsapp {
-    font-size: 1.25rem;
+.recent-work-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin: 0;
+    line-height: 1.35;
 }
 
-@media (max-width: 600px) {
-    .recent-work-update {
-        padding: 36px 24px;
-    }
+.recent-work-meta {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.recent-work-meta-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+    font-size: 0.88rem;
+}
+
+.recent-work-meta dt {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin: 0;
+}
+
+.recent-work-meta dd {
+    margin: 0;
+    color: var(--text-light);
+}
+
+.recent-work-desc {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+}
+
+.recent-work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    margin-top: 4px;
+}
+
+.recent-work-link:hover {
+    text-decoration: underline;
 }
 
 /* ===== GOOGLE REVIEWS ===== */
