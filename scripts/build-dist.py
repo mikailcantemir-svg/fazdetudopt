@@ -2,12 +2,11 @@
 """
 Assemble dist/ for GitHub Pages (deploy artifact only).
 
-Run after generate-servico-pages.py and generate-sitemap.py, or via the
-integrated pipeline at the end of generate-servico-pages.py.
+Run after generate-servico-pages.py (includes sitemap), or standalone.
 
 Contents mirror the live site root:
-  index.html, sitemap.xml, robots.txt, CNAME, .nojekyll,
-  style.css, script.js, logo.webp, images/, en/, es/, fr/,
+  index.html, sitemap.xml, robots.txt, favicons, CNAME, .nojekyll, .htaccess,
+  style.css, script.js, logo.webp, logo.png, images/, en/, es/, fr/,
   servico-*.html, *-lisboa.html
 """
 
@@ -19,6 +18,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
+FAVICON_FILES = (
+    "favicon.ico",
+    "favicon-48x48.png",
+    "favicon-192x192.png",
+    "apple-touch-icon.png",
+)
+
 ROOT_FILES = (
     "index.html",
     "sitemap.xml",
@@ -28,9 +34,12 @@ ROOT_FILES = (
     "style.css",
     "script.js",
     "logo.webp",
+    "logo.png",
+    *FAVICON_FILES,
 )
 
 LANG_DIRS = ("en", "es", "fr")
+EXTRA_ROOT_FILES = (".htaccess",)
 
 
 def _copy_file(src: Path, dest: Path) -> None:
@@ -54,6 +63,11 @@ def build_dist() -> Path:
     for name in ROOT_FILES:
         _copy_file(ROOT / name, DIST / name)
 
+    for name in EXTRA_ROOT_FILES:
+        src = ROOT / name
+        if src.is_file():
+            _copy_file(src, DIST / name)
+
     _copy_tree(ROOT / "images", DIST / "images")
 
     for lang in LANG_DIRS:
@@ -70,7 +84,7 @@ def build_dist() -> Path:
 def main() -> None:
     out = build_dist()
     html_count = len(list(out.rglob("*.html")))
-    print(f"Wrote {out.relative_to(ROOT)}/ ({html_count} HTML files)")
+    print(f"Wrote dist/ ({html_count} HTML files)")
 
 
 if __name__ == "__main__":

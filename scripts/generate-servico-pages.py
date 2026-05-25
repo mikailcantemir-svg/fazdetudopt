@@ -274,7 +274,7 @@ def main() -> None:
         f"({len(SERVICE_SLUGS)} services × {len(LANGS)} languages)."
     )
     print("Templates: scripts/templates/ | Registry: scripts/slug_registry.py")
-    print("Deploy: dist/ (see .github/workflows/pages.yml)")
+    print("Deploy: dist/ (favicons + static assets; see .github/workflows/pages.yml)")
 
 
 if __name__ == "__main__":
