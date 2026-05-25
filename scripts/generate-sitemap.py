@@ -15,13 +15,9 @@ TODAY = date.today().isoformat()
 
 URLS = [
     ("/", "weekly", "1.0"),
-    ("/index.html", "weekly", "1.0"),
     ("/en/", "weekly", "1.0"),
-    ("/en/index.html", "weekly", "1.0"),
     ("/es/", "weekly", "1.0"),
-    ("/es/index.html", "weekly", "1.0"),
     ("/fr/", "weekly", "1.0"),
-    ("/fr/index.html", "weekly", "1.0"),
 ]
 
 LANG_PREFIXES = ("", "/en", "/es", "/fr")

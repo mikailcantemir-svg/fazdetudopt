@@ -8,19 +8,7 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.fazdetudo.pt/index.html</loc>
-        <lastmod>2026-05-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-05-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://www.fazdetudo.pt/en/index.html</loc>
         <lastmod>2026-05-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -32,19 +20,7 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.fazdetudo.pt/es/index.html</loc>
-        <lastmod>2026-05-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-05-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://www.fazdetudo.pt/fr/index.html</loc>
         <lastmod>2026-05-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>

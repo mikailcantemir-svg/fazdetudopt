@@ -83,7 +83,10 @@ def asset_prefix(lang: str) -> str:
 
 
 def index_href(lang: str) -> str:
-    return "index.html" if lang == "pt" else "../index.html"
+    """Link relativo/raiz para a homepage canónica (sem index.html)."""
+    if lang == "pt":
+        return "/"
+    return f"/{lang}/"
 
 
 def home_url(lang: str) -> str:

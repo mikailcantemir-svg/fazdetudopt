@@ -124,14 +124,17 @@
         return lang === 'pt' ? '' : `${lang}/`;
     }
 
+    function homeServicesHashUrl() {
+        const path = window.location.pathname.replace(/\\/g, '/');
+        const langMatch = path.match(/^\/(en|es|fr)(\/|$)/);
+        if (langMatch) return `/${langMatch[1]}/#services`;
+        return '/#services';
+    }
+
     function serviceLandingUrl(serviceIndex) {
         const slug = SERVICE_LANDING_SLUGS[serviceIndex];
         const base = getServiceBasePath();
-        if (!slug) {
-            if (base) return `${base}index.html#services`;
-            const inLangFolder = /^\/(en|es|fr)\//.test(window.location.pathname.replace(/\\/g, '/'));
-            return inLangFolder ? '../index.html#services' : 'index.html#services';
-        }
+        if (!slug) return homeServicesHashUrl();
         return `${base}${slug}`;
     }
 
