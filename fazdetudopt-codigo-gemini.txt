@@ -1,6 +1,8 @@
-FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (pós-refactor Fases 1–5)
+FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
-Inclui: scripts/templates/partials/, slug_registry, site_config, geradores
+Gerado automaticamente por scripts/bundle-for-gemini.py
+Atualizado: 2026-05-25 12:53 UTC
+Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
 Ficheiros: 234
 ================================================================================
 
@@ -660,12 +662,18 @@ def collect_files() -> list[Path]:
     return sorted(paths, key=sort_key)
 
 
-def main() -> None:
+def write_bundle() -> Path:
+    """Write fazdetudopt-codigo-gemini.txt; called after every site rebuild."""
+    from datetime import datetime, timezone
+
     files = collect_files()
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     lines = [
-        "FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (pós-refactor Fases 1–5)",
+        "FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)",
         "Repositório: https://github.com/mikailcantemir-svg/fazdetudopt",
-        "Inclui: scripts/templates/partials/, slug_registry, site_config, geradores",
+        "Gerado automaticamente por scripts/bundle-for-gemini.py",
+        f"Atualizado: {stamp}",
+        "Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs",
         f"Ficheiros: {len(files)}",
         "=" * 80,
         "",
@@ -680,7 +688,12 @@ def main() -> None:
             lines.append(f"[binary skipped: {rel}]")
 
     OUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Created {OUT.name} ({OUT.stat().st_size / 1024:.1f} KB, {len(files)} files)")
+    return OUT
+
+
+def main() -> None:
+    out = write_bundle()
+    print(f"Created {out.name} ({out.stat().st_size / 1024:.1f} KB, {len(collect_files())} files)")
 
 
 if __name__ == "__main__":
@@ -967,6 +980,22 @@ def main() -> None:
         append_images=ico_images[1:],
     )
     print(f"wrote favicon.ico ({', '.join(str(s) for s in ICO_SIZES)})")
+
+    _refresh_gemini_bundle()
+
+
+def _refresh_gemini_bundle() -> None:
+    import importlib.util
+
+    scripts = Path(__file__).resolve().parent
+    spec = importlib.util.spec_from_file_location(
+        "bundle_for_gemini",
+        scripts / "bundle-for-gemini.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    print("\n--- Gemini code bundle ---")
+    mod.main()
 
 
 if __name__ == "__main__":
@@ -1558,6 +1587,7 @@ Run from repo root:
 Outputs (overwrites):
   - index.html (PT) + en/es/fr/index.html
   - servico-*.html (PT) + en/es/fr/servico-*.html (18 services × 4 languages)
+  - sitemap.xml, dist/, fazdetudopt-codigo-gemini.txt (auto)
 
 Source of truth:
   - scripts/home_page_i18n.py  → homepage copy
@@ -1783,6 +1813,16 @@ def _run_build_dist() -> None:
     mod.main()
 
 
+def _run_bundle_for_gemini() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "bundle_for_gemini",
+        SCRIPTS / "bundle-for-gemini.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
 def main() -> None:
     print("=== Regenerating fazdetudo.pt static HTML ===\n")
 
@@ -1818,6 +1858,9 @@ def main() -> None:
 
     print("\n--- dist/ (GitHub Pages artifact) ---")
     _run_build_dist()
+
+    print("\n--- Gemini code bundle (fazdetudopt-codigo-gemini.txt) ---")
+    _run_bundle_for_gemini()
 
     print(
         f"\nDone: {len(written)} service pages + 4 homepages "
@@ -5484,7 +5527,8 @@ fazdetudopt/
 ```bash
 python scripts/generate-servico-pages.py
 python scripts/generate-sitemap.py
-python scripts/bundle-for-gemini.py
+# fazdetudopt-codigo-gemini.txt é atualizado automaticamente no final de generate-servico-pages.py
+python scripts/bundle-for-gemini.py   # opcional: só o bundle
 ```
 
 O gerador principal produz:
@@ -5564,7 +5608,7 @@ Hreflang e canonical são gerados a partir de `slug_registry.py`.
 |--------|-----|
 | `optimize-images.py` | Gera `.webp` a partir de PNG/JPG |
 | `apply-rich-text.py` / `scan-rich-text.py` | Conteúdo rico PT |
-| `bundle-for-gemini.py` | Export `fazdetudopt-codigo-gemini.txt` |
+| `bundle-for-gemini.py` | Export `fazdetudopt-codigo-gemini.txt` (auto após cada rebuild) |
 
 
 ================================================================================

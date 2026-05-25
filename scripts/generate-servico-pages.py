@@ -8,6 +8,7 @@ Run from repo root:
 Outputs (overwrites):
   - index.html (PT) + en/es/fr/index.html
   - servico-*.html (PT) + en/es/fr/servico-*.html (18 services × 4 languages)
+  - sitemap.xml, dist/, fazdetudopt-codigo-gemini.txt (auto)
 
 Source of truth:
   - scripts/home_page_i18n.py  → homepage copy
@@ -233,6 +234,16 @@ def _run_build_dist() -> None:
     mod.main()
 
 
+def _run_bundle_for_gemini() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "bundle_for_gemini",
+        SCRIPTS / "bundle-for-gemini.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
 def main() -> None:
     print("=== Regenerating fazdetudo.pt static HTML ===\n")
 
@@ -268,6 +279,9 @@ def main() -> None:
 
     print("\n--- dist/ (GitHub Pages artifact) ---")
     _run_build_dist()
+
+    print("\n--- Gemini code bundle (fazdetudopt-codigo-gemini.txt) ---")
+    _run_bundle_for_gemini()
 
     print(
         f"\nDone: {len(written)} service pages + 4 homepages "

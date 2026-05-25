@@ -44,7 +44,8 @@ fazdetudopt/
 ```bash
 python scripts/generate-servico-pages.py
 python scripts/generate-sitemap.py
-python scripts/bundle-for-gemini.py
+# fazdetudopt-codigo-gemini.txt é atualizado automaticamente no final de generate-servico-pages.py
+python scripts/bundle-for-gemini.py   # opcional: só o bundle
 ```
 
 O gerador principal produz:
@@ -124,4 +125,4 @@ Hreflang e canonical são gerados a partir de `slug_registry.py`.
 |--------|-----|
 | `optimize-images.py` | Gera `.webp` a partir de PNG/JPG |
 | `apply-rich-text.py` / `scan-rich-text.py` | Conteúdo rico PT |
-| `bundle-for-gemini.py` | Export `fazdetudopt-codigo-gemini.txt` |
+| `bundle-for-gemini.py` | Export `fazdetudopt-codigo-gemini.txt` (auto após cada rebuild) |

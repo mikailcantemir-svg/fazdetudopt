@@ -133,6 +133,22 @@ def main() -> None:
     )
     print(f"wrote favicon.ico ({', '.join(str(s) for s in ICO_SIZES)})")
 
+    _refresh_gemini_bundle()
+
+
+def _refresh_gemini_bundle() -> None:
+    import importlib.util
+
+    scripts = Path(__file__).resolve().parent
+    spec = importlib.util.spec_from_file_location(
+        "bundle_for_gemini",
+        scripts / "bundle-for-gemini.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    print("\n--- Gemini code bundle ---")
+    mod.main()
+
 
 if __name__ == "__main__":
     main()

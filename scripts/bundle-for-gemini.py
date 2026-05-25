@@ -48,12 +48,18 @@ def collect_files() -> list[Path]:
     return sorted(paths, key=sort_key)
 
 
-def main() -> None:
+def write_bundle() -> Path:
+    """Write fazdetudopt-codigo-gemini.txt; called after every site rebuild."""
+    from datetime import datetime, timezone
+
     files = collect_files()
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     lines = [
-        "FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (pós-refactor Fases 1–5)",
+        "FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)",
         "Repositório: https://github.com/mikailcantemir-svg/fazdetudopt",
-        "Inclui: scripts/templates/partials/, slug_registry, site_config, geradores",
+        "Gerado automaticamente por scripts/bundle-for-gemini.py",
+        f"Atualizado: {stamp}",
+        "Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs",
         f"Ficheiros: {len(files)}",
         "=" * 80,
         "",
@@ -68,7 +74,12 @@ def main() -> None:
             lines.append(f"[binary skipped: {rel}]")
 
     OUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Created {OUT.name} ({OUT.stat().st_size / 1024:.1f} KB, {len(files)} files)")
+    return OUT
+
+
+def main() -> None:
+    out = write_bundle()
+    print(f"Created {out.name} ({out.stat().st_size / 1024:.1f} KB, {len(collect_files())} files)")
 
 
 if __name__ == "__main__":
