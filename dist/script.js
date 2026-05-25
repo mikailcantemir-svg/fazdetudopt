@@ -229,6 +229,10 @@
             recent_work_zone: 'Zona',
             recent_work_service: 'Serviço',
             recent_work_link: 'Ver serviço',
+            work_lightbox_close: 'Fechar',
+            work_lightbox_dialog: 'Visualização do trabalho',
+            work_lightbox_open_image: 'Ver imagem em tamanho maior',
+            work_lightbox_open_video: 'Ver vídeo em tamanho maior',
             reviews_google_label: 'Avaliações no Google',
             google_review_source: 'Crítica de Google',
             google_new: 'NOVA',
@@ -297,6 +301,10 @@
             recent_work_zone: 'Area',
             recent_work_service: 'Service',
             recent_work_link: 'View service',
+            work_lightbox_close: 'Close',
+            work_lightbox_dialog: 'Work preview',
+            work_lightbox_open_image: 'View larger image',
+            work_lightbox_open_video: 'View larger video',
             reviews_google_label: 'Reviews on Google',
             google_review_source: 'Google review',
             google_new: 'NEW',
@@ -365,6 +373,10 @@
             recent_work_zone: 'Zona',
             recent_work_service: 'Servicio',
             recent_work_link: 'Ver servicio',
+            work_lightbox_close: 'Cerrar',
+            work_lightbox_dialog: 'Vista del trabajo',
+            work_lightbox_open_image: 'Ver imagen ampliada',
+            work_lightbox_open_video: 'Ver vídeo ampliado',
             reviews_google_label: 'Reseñas en Google',
             google_review_source: 'Reseña de Google',
             google_new: 'NUEVA',
@@ -433,6 +445,10 @@
             recent_work_zone: 'Zone',
             recent_work_service: 'Service',
             recent_work_link: 'Voir le service',
+            work_lightbox_close: 'Fermer',
+            work_lightbox_dialog: 'Aperçu du travail',
+            work_lightbox_open_image: "Voir l'image en grand",
+            work_lightbox_open_video: 'Voir la vidéo en grand',
             reviews_google_label: 'Avis sur Google',
             google_review_source: 'Avis Google',
             google_new: 'NOUVEAU',
@@ -819,12 +835,83 @@
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     }
 
+    function setupWorkLightbox() {
+        const root = document.getElementById('work-lightbox');
+        if (!root) return;
+
+        const content = document.getElementById('work-lightbox-content');
+        const titleEl = document.getElementById('work-lightbox-title');
+        const closeBtn = document.getElementById('work-lightbox-close');
+        const backdrop = root.querySelector('.work-lightbox-backdrop');
+        if (!content || !titleEl || !closeBtn || !backdrop) return;
+
+        function closeLightbox() {
+            root.classList.remove('is-open');
+            root.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('lightbox-open');
+            content.innerHTML = '';
+            titleEl.textContent = '';
+        }
+
+        function openLightbox(trigger) {
+            const type = trigger.dataset.type;
+            const full = trigger.dataset.full;
+            const title = trigger.dataset.title || '';
+            const poster = trigger.dataset.poster || '';
+            if (!full) return;
+
+            content.innerHTML = '';
+            if (type === 'video') {
+                const video = document.createElement('video');
+                video.src = full;
+                video.controls = true;
+                video.muted = true;
+                video.autoplay = true;
+                video.playsInline = true;
+                video.setAttribute('playsinline', '');
+                if (poster) video.poster = poster;
+                content.appendChild(video);
+                video.play().catch(() => {});
+            } else {
+                const img = document.createElement('img');
+                img.src = full;
+                img.alt = title;
+                img.decoding = 'async';
+                content.appendChild(img);
+            }
+
+            titleEl.textContent = title;
+            root.classList.add('is-open');
+            root.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('lightbox-open');
+            closeBtn.focus();
+        }
+
+        document.querySelectorAll('.work-lightbox-trigger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openLightbox(btn);
+            });
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        backdrop.addEventListener('click', closeLightbox);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && root.classList.contains('is-open')) {
+                closeLightbox();
+            }
+        });
+    }
+
     function init() {
         applyLanguage(detectPageLang());
         setupFAQListeners();
         setupHeader();
         setupLangSwitcher();
         setupWhatsAppChat();
+        setupWorkLightbox();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }

@@ -151,40 +151,114 @@ def build_faq_list(lang: str) -> str:
     return "\n".join(blocks)
 
 
+def _recent_work_img_markup(
+    src: str,
+    alt: str,
+    w: int,
+    h: int,
+    *,
+    loading: str = "lazy",
+) -> str:
+    return (
+        f"""<img class="recent-work-media" src="{src}" alt="{alt}" """
+        f"""width="{w}" height="{h}" loading="{loading}" decoding="async">"""
+    )
+
+
+def _recent_work_lightbox_trigger(
+    media_html: str,
+    *,
+    media_type: str,
+    full_src: str,
+    title: str,
+    ui: dict,
+    poster_src: str = "",
+) -> str:
+    poster_attr = (
+        f' data-poster="{html.escape(poster_src, quote=True)}"' if poster_src else ""
+    )
+    trigger_label = (
+        ui["work_lightbox_open_video"]
+        if media_type == "video"
+        else ui["work_lightbox_open_image"]
+    )
+    return (
+        f'<button type="button" class="work-lightbox-trigger" '
+        f'data-type="{media_type}" data-full="{html.escape(full_src, quote=True)}" '
+        f'data-title="{html.escape(title, quote=True)}"{poster_attr} '
+        f'aria-label="{html.escape(trigger_label)}">\n'
+        f"{media_html}\n"
+        f"</button>"
+    )
+
+
 def _recent_work_carousel_slides(
     item: dict,
     copy: dict,
     prefix: str,
     w: int,
     h: int,
-    default_alt: str,
+    ui: dict,
 ) -> list[str]:
     slides: list[str] = []
     slide_index = 0
     gallery_images = item.get("images") or [item["image"]]
     alts = copy.get("alts") or [copy["alt"]] * len(gallery_images)
+    video_alts = copy.get("video_alts") or []
     for i, rel_path in enumerate(gallery_images):
-        slide_alt = html.escape(alts[i] if i < len(alts) else copy["alt"])
+        title = alts[i] if i < len(alts) else copy["alt"]
+        slide_alt = html.escape(title)
         src = f"{prefix}{rel_path}"
         loading = "eager" if slide_index == 0 else "lazy"
+        img = _recent_work_img_markup(src, slide_alt, w, h, loading=loading)
+        trigger = _recent_work_lightbox_trigger(
+            img,
+            media_type="image",
+            full_src=src,
+            title=title,
+            ui=ui,
+        )
         slides.append(
             f"""                        <div class="recent-work-carousel-slide">
-                            <img class="recent-work-media" src="{src}" alt="{slide_alt}" width="{w}" height="{h}" loading="{loading}" decoding="async">
+                            {trigger}
                         </div>"""
         )
         slide_index += 1
-    for vid in item.get("gallery_videos") or []:
-        poster = f"{prefix}{vid['poster']}"
-        vsrc = f"{prefix}{vid['video']}"
+    for vi, vid in enumerate(item.get("gallery_videos") or []):
+        poster_src = f"{prefix}{vid['poster']}"
+        video_src = f"{prefix}{vid['video']}"
+        title = video_alts[vi] if vi < len(video_alts) else copy["alt"]
+        slide_alt = html.escape(title)
+        img = _recent_work_img_markup(poster_src, slide_alt, w, h, loading="lazy")
+        trigger = _recent_work_lightbox_trigger(
+            img,
+            media_type="video",
+            full_src=video_src,
+            title=title,
+            ui=ui,
+            poster_src=poster_src,
+        )
         slides.append(
             f"""                        <div class="recent-work-carousel-slide">
-                            <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="{poster}" width="{w}" height="{h}">
-                                <source src="{vsrc}" type="video/mp4">
-                            </video>
+                            {trigger}
                         </div>"""
         )
         slide_index += 1
     return slides
+
+
+def build_work_lightbox_markup(lang: str) -> str:
+    ui = HOME_UI[lang]
+    return f"""    <div class="work-lightbox" id="work-lightbox" aria-hidden="true">
+        <div class="work-lightbox-backdrop" data-lightbox-close></div>
+        <div class="work-lightbox-dialog" role="dialog" aria-modal="true" aria-label="{html.escape(ui["work_lightbox_dialog"])}" data-i18n-aria-label="work_lightbox_dialog">
+            <button type="button" class="work-lightbox-close" id="work-lightbox-close" aria-label="{html.escape(ui["work_lightbox_close"])}" data-i18n-aria-label="work_lightbox_close">
+                ×
+            </button>
+            <div class="work-lightbox-content" id="work-lightbox-content"></div>
+            <p class="work-lightbox-title" id="work-lightbox-title"></p>
+        </div>
+    </div>"""
 
 
 def build_recent_work_section(lang: str) -> str:
@@ -197,27 +271,38 @@ def build_recent_work_section(lang: str) -> str:
         w = item["width"]
         h = item["height"]
         alt = html.escape(copy["alt"])
-        poster = img_src
         gallery_images = item.get("images")
         gallery_videos = item.get("gallery_videos")
         use_carousel = (gallery_images and len(gallery_images) > 1) or gallery_videos
+        card_title = copy["title"]
         if use_carousel:
-            slides = _recent_work_carousel_slides(item, copy, prefix, w, h, copy["alt"])
+            slides = _recent_work_carousel_slides(item, copy, prefix, w, h, ui)
             media = (
                 f"""                    <div class="recent-work-carousel" role="group" aria-label="{alt}">
 {chr(10).join(slides)}
                     </div>"""
             )
         elif item.get("video"):
-            media = (
-                f"""                    <video class="recent-work-media" autoplay muted loop playsinline preload="metadata" poster="{poster}" width="{w}" height="{h}">
-                        <source src="{prefix}{item['video']}" type="video/mp4">
-                    </video>"""
+            img = _recent_work_img_markup(img_src, alt, w, h, loading="eager")
+            trigger = _recent_work_lightbox_trigger(
+                img,
+                media_type="video",
+                full_src=f"{prefix}{item['video']}",
+                title=card_title,
+                ui=ui,
+                poster_src=img_src,
             )
+            media = f"""                    {trigger}"""
         else:
-            media = (
-                f"""                    <img class="recent-work-media" src="{img_src}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async">"""
+            img = _recent_work_img_markup(img_src, alt, w, h, loading="lazy")
+            trigger = _recent_work_lightbox_trigger(
+                img,
+                media_type="image",
+                full_src=img_src,
+                title=card_title,
+                ui=ui,
             )
+            media = f"""                    {trigger}"""
         href = f"{prefix}{item['slug']}"
         gallery_class = " recent-work-media-wrap--gallery" if use_carousel else ""
         cards.append(
@@ -481,6 +566,7 @@ def render_homepage(lang: str) -> str:
             "SERVICE_CARDS": build_service_cards(lang),
             "HANDYMAN_SECTION": build_handyman_section(lang),
             "RECENT_WORK_SECTION": build_recent_work_section(lang),
+            "WORK_LIGHTBOX": build_work_lightbox_markup(lang),
             "ADVANTAGES_GRID": build_advantages_grid(lang),
             "TESTIMONIALS_SUMMARY": build_testimonials_summary(lang),
             "TESTIMONIALS_CARDS": build_testimonials_cards(lang),
