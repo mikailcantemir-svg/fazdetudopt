@@ -150,6 +150,7 @@ HOME_UI = {
         "work_lightbox_dialog": "Visualização do trabalho",
         "work_lightbox_open_image": "Ver imagem em tamanho maior",
         "work_lightbox_open_video": "Ver vídeo em tamanho maior",
+        "work_video_badge": "Vídeo",
         "work_lightbox_prev": "Imagem anterior",
         "work_lightbox_next": "Imagem seguinte",
         "view_google_reviews": "Ver críticas no Google",
@@ -198,6 +199,7 @@ HOME_UI = {
         "work_lightbox_dialog": "Work preview",
         "work_lightbox_open_image": "View larger image",
         "work_lightbox_open_video": "View larger video",
+        "work_video_badge": "Video",
         "work_lightbox_prev": "Previous image",
         "work_lightbox_next": "Next image",
         "view_google_reviews": "View reviews on Google",
@@ -246,6 +248,7 @@ HOME_UI = {
         "work_lightbox_dialog": "Vista del trabajo",
         "work_lightbox_open_image": "Ver imagen ampliada",
         "work_lightbox_open_video": "Ver vídeo ampliado",
+        "work_video_badge": "Vídeo",
         "work_lightbox_prev": "Imagen anterior",
         "work_lightbox_next": "Imagen siguiente",
         "view_google_reviews": "Ver reseñas en Google",
@@ -294,6 +297,7 @@ HOME_UI = {
         "work_lightbox_dialog": "Aperçu du travail",
         "work_lightbox_open_image": "Voir l'image en grand",
         "work_lightbox_open_video": "Voir la vidéo en grand",
+        "work_video_badge": "Vidéo",
         "work_lightbox_prev": "Image précédente",
         "work_lightbox_next": "Image suivante",
         "view_google_reviews": "Voir les avis sur Google",
@@ -1062,12 +1066,12 @@ RECENT_WORK = [
             {
                 "type": "video",
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-preparacao-terreno.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-03.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-preparacao-terreno-poster.webp",
             },
             {
                 "type": "video",
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-preparacao-terreno-02.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-03.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-preparacao-terreno-02-poster.webp",
             },
             {
                 "type": "image",
@@ -1084,22 +1088,22 @@ RECENT_WORK = [
             {
                 "type": "video",
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-01.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-01.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-01-poster.webp",
             },
             {
                 "type": "video",
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-02.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-02.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-02-poster.webp",
             },
             {
                 "type": "video",
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-03.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-03.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-03-poster.webp",
             },
             {
                 "type": "video",
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-04.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-04.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-04-poster.webp",
             },
         ],
         "images": [
@@ -1113,19 +1117,19 @@ RECENT_WORK = [
         "gallery_videos": [
             {
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-01.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-01.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-01-poster.webp",
             },
             {
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-02.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-02.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-02-poster.webp",
             },
             {
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-03.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-03.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-03-poster.webp",
             },
             {
                 "video": "videos/trabalhos/relva-sistema-rega-lisboa-04.mp4",
-                "poster": "images/trabalhos/relva-sistema-rega-lisboa-04.webp",
+                "poster": "images/trabalhos/relva-sistema-rega-lisboa-video-04-poster.webp",
             },
         ],
         "width": 1200,

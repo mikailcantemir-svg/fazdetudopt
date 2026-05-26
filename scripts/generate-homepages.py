@@ -178,6 +178,16 @@ def _recent_work_img_markup(
     )
 
 
+def _recent_work_video_overlay(ui: dict) -> str:
+    badge = html.escape(ui.get("work_video_badge", "Vídeo"))
+    return (
+        '<span class="work-video-play" aria-hidden="true">\n'
+        '    <i class="fa-solid fa-play"></i>\n'
+        "</span>\n"
+        f'<span class="work-video-badge">{badge}</span>'
+    )
+
+
 def _recent_work_lightbox_trigger(
     media_html: str,
     *,
@@ -197,13 +207,20 @@ def _recent_work_lightbox_trigger(
         if media_type == "video"
         else ui["work_lightbox_open_image"]
     )
+    video_class = (
+        " work-lightbox-trigger--video" if media_type == "video" else ""
+    )
+    overlay = (
+        "\n" + _recent_work_video_overlay(ui) if media_type == "video" else ""
+    )
     return (
-        f'<button type="button" class="work-lightbox-trigger" '
+        f'<button type="button" class="work-lightbox-trigger{video_class}" '
         f'data-gallery="{html.escape(gallery_id, quote=True)}" data-index="{index}" '
         f'data-type="{media_type}" data-full="{html.escape(full_src, quote=True)}" '
         f'data-title="{html.escape(title, quote=True)}"{poster_attr} '
         f'aria-label="{html.escape(trigger_label)}">\n'
         f"{media_html}\n"
+        f"{overlay}\n"
         f"</button>"
     )
 
