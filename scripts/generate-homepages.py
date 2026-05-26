@@ -45,6 +45,10 @@ from site_config import (  # noqa: E402
     GOOGLE_REVIEWS_URL,
     LOGO_PATH,
     PHONE_DISPLAY,
+    PRIMARY_OFFICE_STREET_LINE1,
+    PRIMARY_OFFICE_STREET_LINE2,
+    SECOND_OFFICE_STREET_LINE1,
+    SECOND_OFFICE_STREET_LINE2,
     mailto_href,
     schema_telephone,
     tel_href,
@@ -522,6 +526,7 @@ def apply_i18n_attributes(html: str, lang: str) -> str:
 
 def apply_meta_strings(html: str, lang: str) -> str:
     meta = HOME_META[lang]
+    ui = HOME_UI[lang]
     html = html.replace('aria-label="Navegação principal"', f'aria-label="{meta["nav_aria"]}"')
     html = html.replace('alt="FAZDETUDO.PT - Serviços de handyman em Lisboa"', f'alt="{meta["logo_alt"]}"')
     html = html.replace('alt="Profissional faz tudo"', f'alt="{meta["section_logo_alt"]}"')
@@ -532,7 +537,7 @@ def apply_meta_strings(html: str, lang: str) -> str:
     html = html.replace('aria-label="Enviar mensagem"', f'aria-label="{meta["wa_send"]}"')
     html = html.replace('aria-label="Contact via WhatsApp"', f'aria-label="{meta["wa_float"]}"')
     html = html.replace('aria-label="Ligar agora"', f'aria-label="{meta["float_call"]}"')
-    html = html.replace('id="footer-address-text">Lisboa, Portugal</', f'id="footer-address-text">{meta["address"]}</')
+    html = html.replace('aria-label="Localizações"', f'aria-label="{ui["contact_locations_aria"]}"')
     html = html.replace('id="wa-greeting">Como posso ajudar?</', f'id="wa-greeting">{HOME_UI[lang]["wa_greeting"]}</')
     html = html.replace(
         'placeholder="Escreva uma mensagem..."',
@@ -605,6 +610,10 @@ def render_homepage(lang: str) -> str:
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
             "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
+            "PRIMARY_OFFICE_STREET_LINE1": PRIMARY_OFFICE_STREET_LINE1,
+            "PRIMARY_OFFICE_STREET_LINE2": PRIMARY_OFFICE_STREET_LINE2,
+            "SECOND_OFFICE_STREET_LINE1": SECOND_OFFICE_STREET_LINE1,
+            "SECOND_OFFICE_STREET_LINE2": SECOND_OFFICE_STREET_LINE2,
         },
     )
     html = apply_i18n_attributes(html, lang)

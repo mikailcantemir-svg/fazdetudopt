@@ -50,9 +50,23 @@
                                 <span id="footer-email-text">{{EMAIL_OBFUSCATED}}</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="footer-location-item">
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            <span id="footer-address-text">Lisboa, Portugal</span>
+                            <div class="footer-location-body">
+                                <p class="footer-location-label" data-i18n="address_primary_label">Escritório principal</p>
+                                <p class="footer-location-line">{{PRIMARY_OFFICE_STREET_LINE1}}</p>
+                                <p class="footer-location-line">{{PRIMARY_OFFICE_STREET_LINE2}}</p>
+                                <p class="footer-location-note" data-i18n="address_appointment_note">Atendimento mediante marcação</p>
+                            </div>
+                        </li>
+                        <li class="footer-location-item footer-location-item--secondary">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <div class="footer-location-body">
+                                <p class="footer-location-label" data-i18n="address_secondary_label">Segundo escritório / apoio operacional</p>
+                                <p class="footer-location-line">{{SECOND_OFFICE_STREET_LINE1}}</p>
+                                <p class="footer-location-line">{{SECOND_OFFICE_STREET_LINE2}}</p>
+                                <p class="footer-location-note" data-i18n="address_appointment_note">Atendimento mediante marcação</p>
+                            </div>
                         </li>
                     </ul>
                 </div>

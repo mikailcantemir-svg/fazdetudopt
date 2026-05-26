@@ -1884,7 +1884,79 @@ body.lightbox-open {
 .cta-subtitle {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 36px;
+    margin-bottom: 32px;
+}
+
+.section-cta .cta-actions {
+    margin-bottom: 44px;
+}
+
+/* Contacte-nos — moradas secundárias, duas colunas no desktop */
+.section-cta .contact-addresses {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: left;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.section-cta .contact-address-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.section-cta .contact-address-card > i {
+    flex-shrink: 0;
+    width: 16px;
+    margin-top: 0.2em;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.section-cta .contact-address-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.section-cta .contact-address-card p {
+    margin: 0;
+}
+
+.section-cta .contact-address-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.section-cta .contact-address-note {
+    font-size: 0.75rem;
+    opacity: 0.62;
+    margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .section-cta .cta-subtitle {
+        margin-bottom: 28px;
+    }
+
+    .section-cta .cta-actions {
+        margin-bottom: 32px;
+    }
+
+    .section-cta .contact-addresses {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        max-width: 360px;
+        padding-top: 6px;
+    }
 }
 
 .cta-actions {
@@ -2003,6 +2075,35 @@ body.lightbox-open {
     align-items: center;
     gap: 8px;
     font-size: 0.9rem;
+}
+
+.footer ul li.footer-location-item {
+    align-items: flex-start;
+}
+
+.footer ul li.footer-location-item--secondary {
+    margin-top: 12px;
+}
+
+.footer-location-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.footer-location-body p {
+    margin: 0;
+    line-height: 1.45;
+}
+
+.footer-location-label {
+    font-weight: 700;
+}
+
+.footer-location-note {
+    font-size: 0.82rem;
+    opacity: 0.72;
+    margin-top: 0.2rem;
 }
 
 .footer ul li i {
