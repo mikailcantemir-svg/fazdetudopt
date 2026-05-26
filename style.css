@@ -447,16 +447,21 @@ a.lang-option {
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
-    width: 100%;
+    width: fit-content;
+    max-width: 760px;
+    min-height: auto;
     margin: 0 auto;
-    padding: calc(88px + 3rem) 2rem 3rem;
+    padding: clamp(32px, 4vw, 48px);
     background: rgba(17, 24, 39, 0.75);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: 16px;
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
-    isolation: isolate;
+}
+
+.hero-title,
+.hero-subtitle {
+    max-width: 640px;
 }
 
 .hero-title {
@@ -473,7 +478,15 @@ a.lang-option {
     line-height: 1.6;
     color: #f3f4f6;
     margin-bottom: 2rem;
-    max-width: none;
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        width: calc(100% - 32px);
+        max-width: none;
+        padding: 28px 22px;
+        border-radius: 12px;
+    }
 }
 
 .hero-actions {
@@ -2406,12 +2419,6 @@ body.lightbox-open {
         min-height: 100vh;
         align-items: center;
         padding-bottom: 48px;
-    }
-
-    .hero-content {
-        max-width: 100%;
-        padding: calc(80px + 1.75rem) 1.25rem 1.75rem;
-        border-radius: 12px;
     }
 
     .hero-title {
