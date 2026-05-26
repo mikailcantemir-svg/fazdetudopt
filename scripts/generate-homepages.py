@@ -237,11 +237,7 @@ def _recent_work_carousel_slides(
             gallery_id=gallery_id,
             index=slide_index,
         )
-        slides.append(
-            f"""                        <div class="recent-work-carousel-slide">
-                            {trigger}
-                        </div>"""
-        )
+        slides.append(trigger)
         slide_index += 1
     for vi, vid in enumerate(item.get("gallery_videos") or []):
         poster_src = f"{prefix}{vid['poster']}"
@@ -259,13 +255,51 @@ def _recent_work_carousel_slides(
             index=slide_index,
             poster_src=poster_src,
         )
-        slides.append(
-            f"""                        <div class="recent-work-carousel-slide">
-                            {trigger}
-                        </div>"""
-        )
+        slides.append(trigger)
         slide_index += 1
     return slides
+
+
+def _build_work_carousel_markup(slides: list[str], ui: dict, alt: str) -> str:
+    if not slides:
+        return ""
+    if len(slides) == 1:
+        return f"""                    <div class="work-carousel work-carousel--single" data-work-carousel>
+                        <div class="work-carousel-track">
+                            <div class="work-carousel-slide active">
+                                {slides[0]}
+                            </div>
+                        </div>
+                    </div>"""
+
+    slide_blocks = []
+    for i, slide_html in enumerate(slides):
+        active = " active" if i == 0 else ""
+        slide_blocks.append(
+            f"""                            <div class="work-carousel-slide{active}">
+                                {slide_html}
+                            </div>"""
+        )
+    dot_blocks = []
+    for i in range(len(slides)):
+        active = " active" if i == 0 else ""
+        n = i + 1
+        dot_blocks.append(
+            f"""                            <button type="button" class="work-carousel-dot{active}" """
+            f"""data-slide-to="{i}" role="tab" aria-label="{n} / {len(slides)}" """
+            f"""aria-selected="{"true" if i == 0 else "false"}"></button>"""
+        )
+
+    return f"""                    <div class="work-carousel" data-work-carousel>
+                        <button type="button" class="work-carousel-btn work-carousel-prev" aria-label="{html.escape(ui["work_lightbox_prev"])}">‹</button>
+                        <div class="work-carousel-track">
+{chr(10).join(slide_blocks)}
+                        </div>
+                        <button type="button" class="work-carousel-btn work-carousel-next" aria-label="{html.escape(ui["work_lightbox_next"])}">›</button>
+                        <div class="work-carousel-dots" role="tablist" aria-label="{html.escape(alt)}">
+{chr(10).join(dot_blocks)}
+                        </div>
+                    </div>"""
 
 
 def build_work_lightbox_markup(lang: str) -> str:
@@ -306,11 +340,7 @@ def build_recent_work_section(lang: str) -> str:
         gallery_id = _recent_work_gallery_id(item)
         if use_carousel:
             slides = _recent_work_carousel_slides(item, copy, prefix, w, h, ui)
-            media = (
-                f"""                    <div class="recent-work-carousel" role="group" aria-label="{alt}">
-{chr(10).join(slides)}
-                    </div>"""
-            )
+            media = _build_work_carousel_markup(slides, ui, copy["alt"])
         elif item.get("video"):
             img = _recent_work_img_markup(img_src, alt, w, h, loading="eager")
             trigger = _recent_work_lightbox_trigger(

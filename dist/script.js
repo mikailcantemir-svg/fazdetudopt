@@ -1016,12 +1016,67 @@
         }, { passive: true });
     }
 
+    function setupWorkCarousels() {
+        document.querySelectorAll('[data-work-carousel]').forEach(carousel => {
+            const slides = [...carousel.querySelectorAll('.work-carousel-slide')];
+            if (slides.length <= 1) return;
+
+            const prevBtn = carousel.querySelector('.work-carousel-prev');
+            const nextBtn = carousel.querySelector('.work-carousel-next');
+            const dots = [...carousel.querySelectorAll('.work-carousel-dot')];
+            let index = slides.findIndex(s => s.classList.contains('active'));
+            if (index < 0) index = 0;
+
+            function goTo(nextIndex) {
+                index = (nextIndex + slides.length) % slides.length;
+                slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                    dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+                });
+            }
+
+            prevBtn?.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                goTo(index - 1);
+            });
+            nextBtn?.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                goTo(index + 1);
+            });
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    goTo(i);
+                });
+            });
+
+            let touchStartX = 0;
+            carousel.addEventListener('touchstart', (e) => {
+                if (e.target.closest('.work-carousel-btn, .work-carousel-dot')) return;
+                touchStartX = e.changedTouches[0].clientX;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', (e) => {
+                if (e.target.closest('.work-carousel-btn, .work-carousel-dot')) return;
+                const touchEndX = e.changedTouches[0].clientX;
+                const delta = touchEndX - touchStartX;
+                if (delta > 45) goTo(index - 1);
+                else if (delta < -45) goTo(index + 1);
+            }, { passive: true });
+        });
+    }
+
     function init() {
         applyLanguage(detectPageLang());
         setupFAQListeners();
         setupHeader();
         setupLangSwitcher();
         setupWhatsAppChat();
+        setupWorkCarousels();
         setupWorkLightbox();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
