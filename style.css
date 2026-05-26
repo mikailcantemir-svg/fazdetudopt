@@ -85,65 +85,53 @@ body {
 /* ===== HEADER ===== */
 
 .header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 99999;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.12) 65%, transparent 100%);
-    border-bottom: none;
-    backdrop-filter: none;
-    transition: background var(--transition), box-shadow var(--transition), border-color var(--transition);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
     overflow: visible;
+    transition: box-shadow var(--transition);
 }
 
 .header.scrolled {
-    position: fixed;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
-
-.header:not(.scrolled) .logo-text {
-    color: #ffffff;
-}
-
-.header:not(.scrolled) .logo-tagline {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.header:not(.scrolled) .nav-link {
-    color: #ffffff;
-}
-
-.header:not(.scrolled) .nav-link:hover,
-.header:not(.scrolled) .nav-link.active {
-    color: var(--primary-light);
-}
-
-.header:not(.scrolled) .lang-toggle {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.35);
-    color: #ffffff;
-}
-
-.header:not(.scrolled) .lang-chevron {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.header:not(.scrolled) .menu-toggle span {
-    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
 }
 
 .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 72px;
-    padding: 8px 0;
+    min-height: 76px;
+    padding: 10px 0;
+    gap: 16px;
     overflow: visible;
+}
+
+@media (min-width: 769px) {
+    .header-inner:has(.nav) {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .header-inner:has(.nav) .logo {
+        justify-self: start;
+    }
+
+    .header-inner:has(.nav) .nav {
+        justify-self: center;
+    }
+
+    .header-inner:has(.nav) .header-actions {
+        justify-self: end;
+    }
 }
 
 .logo {
@@ -2150,7 +2138,7 @@ body.lightbox-open {
 .whatsapp-float {
     width: 60px;
     height: 60px;
-    background: #25D366;
+    background: var(--primary);
     border-radius: 50%;
     border: none;
     display: flex;
@@ -2158,7 +2146,7 @@ body.lightbox-open {
     justify-content: center;
     color: white;
     font-size: 1.8rem;
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
+    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.45);
     transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
     cursor: pointer;
     position: relative;
@@ -2166,8 +2154,9 @@ body.lightbox-open {
 }
 
 .whatsapp-float:hover {
+    background: var(--primary-dark);
     transform: scale(1.1);
-    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.5);
+    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.55);
 }
 
 .whatsapp-float .wa-icon-close {
@@ -2184,8 +2173,8 @@ body.lightbox-open {
 }
 
 .wa-widget.open .whatsapp-float {
-    background: #1da851;
-    box-shadow: 0 6px 24px rgba(29, 168, 81, 0.5);
+    background: var(--primary-dark);
+    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.55);
 }
 
 /* Telefone flutuante / contacto duplicado removido — só #header-phone / .btn-phone */
@@ -2422,7 +2411,6 @@ body.lightbox-open {
         pointer-events: auto;
     }
 
-    .header:not(.scrolled) .nav .nav-link,
     .nav.active .nav-link,
     .nav .nav-link {
         display: block;
@@ -2620,14 +2608,6 @@ body.lightbox-open {
 }
 
 /* ===== SERVICE LANDING PAGES ===== */
-
-.service-page .header {
-    position: fixed;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-}
 
 .service-page .header-inner {
     justify-content: space-between;

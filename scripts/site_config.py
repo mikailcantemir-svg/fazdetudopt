@@ -15,7 +15,7 @@ EMAIL_OBFUSCATED = "geral&#64;fazdetudo.pt"
 DEFAULT_ADDRESS = "Grande Lisboa e Margem Sul, Portugal"
 PRIMARY_OFFICE_STREET_LINE1 = "R. José Saramago"
 PRIMARY_OFFICE_STREET_LINE2 = "1675-180 Pontinha"
-SECOND_OFFICE_STREET_LINE1 = "R. Ana de Castro Osório 14"
+SECOND_OFFICE_STREET_LINE1 = "R. Ana de Castro Osório"
 SECOND_OFFICE_STREET_LINE2 = "2925-060 São Lourenço"
 BRAND_NAME = "FAZDETUDO.PT"
 
