@@ -642,7 +642,7 @@ def render_homepage(lang: str) -> str:
     meta = HOME_META[lang]
     ui = HOME_UI[lang]
     prefix = asset_prefix(lang)
-    canonical = home_url(lang).rstrip("/")
+    canonical = home_url(lang)
 
     head = render_head(
         page_title=meta["title"],
