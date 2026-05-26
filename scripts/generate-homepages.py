@@ -219,6 +219,45 @@ def _recent_work_carousel_slides(
     slides: list[str] = []
     slide_index = 0
     gallery_id = _recent_work_gallery_id(item)
+    mixed_media = item.get("media")
+    if mixed_media:
+        alts = copy.get("alts") or [copy["alt"]] * len(mixed_media)
+        for i, media_item in enumerate(mixed_media):
+            media_type = media_item.get("type", "image")
+            title = alts[i] if i < len(alts) else copy["alt"]
+            slide_alt = html.escape(title)
+            loading = "eager" if slide_index == 0 else "lazy"
+            if media_type == "video":
+                poster_src = f"{prefix}{media_item['poster']}"
+                video_src = f"{prefix}{media_item['video']}"
+                img = _recent_work_img_markup(
+                    poster_src, slide_alt, w, h, loading=loading
+                )
+                trigger = _recent_work_lightbox_trigger(
+                    img,
+                    media_type="video",
+                    full_src=video_src,
+                    title=title,
+                    ui=ui,
+                    gallery_id=gallery_id,
+                    index=slide_index,
+                    poster_src=poster_src,
+                )
+            else:
+                src = f"{prefix}{media_item['src']}"
+                img = _recent_work_img_markup(src, slide_alt, w, h, loading=loading)
+                trigger = _recent_work_lightbox_trigger(
+                    img,
+                    media_type="image",
+                    full_src=src,
+                    title=title,
+                    ui=ui,
+                    gallery_id=gallery_id,
+                    index=slide_index,
+                )
+            slides.append(trigger)
+            slide_index += 1
+        return slides
     gallery_images = item.get("images") or [item["image"]]
     alts = copy.get("alts") or [copy["alt"]] * len(gallery_images)
     video_alts = copy.get("video_alts") or []
@@ -335,7 +374,12 @@ def build_recent_work_section(lang: str) -> str:
         alt = html.escape(copy["alt"])
         gallery_images = item.get("images")
         gallery_videos = item.get("gallery_videos")
-        use_carousel = (gallery_images and len(gallery_images) > 1) or gallery_videos
+        mixed_media = item.get("media")
+        use_carousel = (
+            (mixed_media and len(mixed_media) > 1)
+            or (gallery_images and len(gallery_images) > 1)
+            or gallery_videos
+        )
         card_title = copy["title"]
         gallery_id = _recent_work_gallery_id(item)
         if use_carousel:
