@@ -35,9 +35,6 @@ jobs:
       - name: Build static site
         run: python scripts/generate-servico-pages.py
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
