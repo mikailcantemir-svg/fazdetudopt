@@ -17,6 +17,14 @@ LANG_LABELS = {
     "fr": ("Français", "https://flagcdn.com/w20/fr.png"),
 }
 
+# Alt text descritivo para as bandeiras do dropdown (localizado por idioma da página).
+FLAG_ALT = {
+    "pt": {"pt": "Bandeira de Portugal", "en": "Bandeira do Reino Unido", "es": "Bandeira de Espanha", "fr": "Bandeira de França"},
+    "en": {"pt": "Flag of Portugal", "en": "Flag of the United Kingdom", "es": "Flag of Spain", "fr": "Flag of France"},
+    "es": {"pt": "Bandera de Portugal", "en": "Bandera del Reino Unido", "es": "Bandera de España", "fr": "Bandera de Francia"},
+    "fr": {"pt": "Drapeau du Portugal", "en": "Drapeau du Royaume-Uni", "es": "Drapeau de l'Espagne", "fr": "Drapeau de la France"},
+}
+
 def lang_switch_href(current: str, target: str) -> str:
     """Relative href from current language folder to target homepage."""
     if current == target:
@@ -35,10 +43,11 @@ def render_lang_switcher(current_lang: str) -> str:
         href = lang_switch_href(current_lang, code)
         label, flag = LANG_LABELS[code]
         active = " active" if code == current_lang else ""
+        flag_alt = FLAG_ALT[current_lang][code]
         options.append(
             f'                            <a href="{href}" class="lang-option lang-option--nav{active}" '
             f'hreflang="{LANG_HTML[code]}" lang="{LANG_HTML[code]}">'
-            f'<img src="{flag}" alt=""> {label}</a>'
+            f'<img src="{flag}" alt="{flag_alt}"> {label}</a>'
         )
     return f"""                    <div class="lang-switcher" id="lang-switcher">
                         <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false">
@@ -54,8 +63,8 @@ def render_lang_switcher(current_lang: str) -> str:
 
 HOME_META = {
     "pt": {
-        "title": "FAZDETUDO.PT | Serviços de Handyman e Reparações ao Domicílio",
-        "description": "Precisa de especialistas? Do AVAC e piscinas, às remodelações completas e pequenas reparações. A FAZDETUDO.PT tem a equipa certa para qualquer obra ou manutenção na sua casa ou empresa na Grande Lisboa, Cascais, Estoril e Setúbal. Rapidez e garantia!",
+        "title": "FAZDETUDO.PT | Handyman e Reparações ao Domicílio",
+        "description": "Especialistas em handyman, remodelações, AVAC, pinturas e manutenção de piscinas na Grande Lisboa, Cascais e Setúbal. Orçamento grátis com a FAZDETUDO.PT.",
         "og_title": "FAZDETUDO.PT | Serviços de Handyman e Reparações",
         "json_desc": "Serviços profissionais de handyman, remodelações, AVAC, pintura em alpinismo e manutenção de piscinas na Grande Lisboa e Setúbal.",
         "nav_aria": "Navegação principal",
@@ -72,7 +81,7 @@ HOME_META = {
     },
     "en": {
         "title": "FAZDETUDO.PT | Handyman and Home Repair Services",
-        "description": "Need specialists? From HVAC and pools to full renovations and small repairs. FAZDETUDO.PT has the right team for any job at your home or business in Greater Lisbon, Cascais, Estoril and Setúbal.",
+        "description": "Handyman, renovations, HVAC, painting and pool maintenance specialists across Greater Lisbon, Cascais and Setúbal. Get your free quote from FAZDETUDO.PT.",
         "og_title": "FAZDETUDO.PT | Handyman and Home Repair Services",
         "json_desc": "Professional handyman, renovations, HVAC, rope-access facade painting and pool maintenance across Greater Lisbon and Setúbal.",
         "nav_aria": "Main navigation",
@@ -88,8 +97,8 @@ HOME_META = {
         "address": "Greater Lisbon and South Bank, Portugal",
     },
     "es": {
-        "title": "FAZDETUDO.PT | Servicios de Manitas y Reparaciones a Domicilio",
-        "description": "¿Necesita especialistas? Del AVAC y piscinas a reformas completas y pequeñas reparaciones. FAZDETUDO.PT tiene el equipo adecuado en la Gran Lisboa, Cascais, Estoril y Setúbal.",
+        "title": "FAZDETUDO.PT | Manitas y Reparaciones a Domicilio",
+        "description": "Especialistas en manitas, reformas, AVAC, pintura y mantenimiento de piscinas en la Gran Lisboa, Cascais y Setúbal. Presupuesto gratis con FAZDETUDO.PT.",
         "og_title": "FAZDETUDO.PT | Servicios de Manitas y Reparaciones",
         "json_desc": "Servicios profesionales de manitas, reformas, climatización, pintura en alpinismo y mantenimiento de piscinas en la Gran Lisboa y Setúbal.",
         "nav_aria": "Navegación principal",
@@ -105,8 +114,8 @@ HOME_META = {
         "address": "Gran Lisboa y Margen Sur, Portugal",
     },
     "fr": {
-        "title": "FAZDETUDO.PT | Services de Bricolage et Réparations à Domicile",
-        "description": "Besoin de spécialistes ? De la climatisation et piscines aux rénovations complètes et petites réparations. FAZDETUDO.PT intervient dans le Grand Lisbonne, Cascais, Estoril et Setúbal.",
+        "title": "FAZDETUDO.PT | Bricolage et Réparations à Domicile",
+        "description": "Spécialistes du bricolage, rénovations, climatisation, peinture et piscines au Grand Lisbonne, Cascais et Setúbal. Devis gratuit avec FAZDETUDO.PT.",
         "og_title": "FAZDETUDO.PT | Bricolage et Réparations à Domicile",
         "json_desc": "Services professionnels de bricolage, rénovations, CVC, peinture en cordes et entretien de piscines dans le Grand Lisbonne et Setúbal.",
         "nav_aria": "Navigation principale",

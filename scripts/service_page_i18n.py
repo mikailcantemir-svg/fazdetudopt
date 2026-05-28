@@ -117,6 +117,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Remodelações e Obras",
             "h1": "Remodelações, Obras e Construção em Lisboa e Margem Sul",
+            "page_title": "Remodelações, Obras e Construção em Lisboa | FAZDETUDO.PT",
             "desc": "Remodelações com equipa completa.",
             "wa": "Olá! Gostaria de pedir um orçamento para remodelações.",
             "intro": "A <strong>FAZDETUDO.PT</strong> coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave.",
@@ -130,6 +131,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Renovations & Construction",
             "h1": "Renovations, Building Work and Construction in Lisbon",
+            "page_title": "Renovations and Construction in Lisbon | FAZDETUDO.PT",
             "desc": "Full renovation team with clear quotes.",
             "wa": "Hello! I would like a quote for renovations.",
             "intro": "<strong>FAZDETUDO.PT</strong> coordinates <strong>renovations across Greater Lisbon and the South Bank</strong> with a single point of contact from quote to handover.",
@@ -143,7 +145,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Reformas y Obras",
             "h1": "Reformas, Obras y Construcción en Lisboa y Margen Sur",
-            "desc": "Reformas con equipo completo.",
+            "page_title": "Reformas, Obras y Construcción en Lisboa | FAZDETUDO.PT",
+            "desc": "Reformas integrales con equipo completo y presupuesto claro.",
             "wa": "¡Hola! Me gustaría un presupuesto para reformas.",
             "intro": "<strong>FAZDETUDO.PT</strong> coordina <strong>reformas en la Gran Lisboa y Margen Sur</strong> con un único interlocutor, del presupuesto a la entrega.",
             "features": [
@@ -156,6 +159,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Rénovations et Travaux",
             "h1": "Rénovations, Travaux et Construction à Lisbonne",
+            "page_title": "Rénovations et Travaux à Lisbonne | FAZDETUDO.PT",
             "desc": "Rénovations avec équipe complète.",
             "wa": "Bonjour ! Je souhaite un devis pour des rénovations.",
             "intro": "<strong>FAZDETUDO.PT</strong> coordonne les <strong>rénovations dans le Grand Lisbonne et la Rive Sud</strong> avec un seul interlocuteur, du devis à la livraison.",
@@ -171,6 +175,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Recuperar Casa",
             "h1": "Recuperação de Casas Antigas, Devolutas e Degradadas",
+            "page_title": "Recuperação de Casas Antigas e Degradadas | FAZDETUDO.PT",
             "desc": "Recuperação integral de imóveis degradados.",
             "wa": "Olá! Gostaria de pedir um orçamento para recuperação de casa.",
             "intro": "Recuperação de <strong>casas devolutas, herdadas ou degradadas</strong> na Grande Lisboa e Margem Sul com prazo fechado.",
@@ -184,7 +189,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Home Restoration",
             "h1": "Restoration of Old, Vacant and Run-Down Homes",
-            "desc": "Full recovery of neglected properties.",
+            "desc": "Full restoration of old and run-down properties, ready to live in or rent.",
             "wa": "Hello! I would like a quote for home restoration.",
             "intro": "We restore <strong>vacant, inherited or run-down homes</strong> across Greater Lisbon and the South Bank with a fixed timeline.",
             "features": [
@@ -197,7 +202,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Recuperar Casa",
             "h1": "Recuperación de Casas Antiguas, Vacías y Deterioradas",
-            "desc": "Recuperación integral de inmuebles.",
+            "page_title": "Recuperación de Casas Antiguas y Degradadas | FAZDETUDO.PT",
+            "desc": "Recuperación integral de casas deterioradas, listas para habitar o alquilar.",
             "wa": "¡Hola! Me gustaría un presupuesto para recuperar una casa.",
             "intro": "Recuperamos <strong>casas vacías, heredadas o deterioradas</strong> en la Gran Lisboa y Margen Sur con plazo cerrado.",
             "features": [
@@ -210,6 +216,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Rénover une Maison",
             "h1": "Réhabilitation de Maisons Anciennes et Dégradées",
+            "page_title": "Réhabilitation de Maisons Anciennes | FAZDETUDO.PT",
             "desc": "Récupération complète de biens dégradés.",
             "wa": "Bonjour ! Je souhaite un devis pour rénover une maison.",
             "intro": "Nous réhabilitons les <strong>maisons vacantes, héritées ou dégradées</strong> dans le Grand Lisbonne avec délai fixe.",
@@ -225,6 +232,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Pinturas",
             "h1": "Pinturas Interiores e Exteriores Profissionais",
+            "page_title": "Pinturas Interiores e Exteriores | FAZDETUDO.PT",
             "desc": "Pintura interior e exterior com acabamentos profissionais.",
             "wa": "Olá! Gostaria de pedir um orçamento para pinturas.",
             "intro": "Referência em <strong>pintura residencial e comercial na Grande Lisboa e Margem Sul</strong> com orçamento gratuito.",
@@ -251,6 +259,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Pinturas",
             "h1": "Pinturas Interiores y Exteriores Profesionales",
+            "page_title": "Pinturas Interiores y Exteriores | FAZDETUDO.PT",
             "desc": "Pintura interior y exterior con acabados de calidad.",
             "wa": "¡Hola! Me gustaría un presupuesto para pinturas.",
             "intro": "Referencia en <strong>pintura residencial y comercial en la Gran Lisboa y Margen Sur</strong> con presupuesto gratis.",
@@ -264,7 +273,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Peinture",
             "h1": "Peinture Intérieure et Extérieure Professionnelle",
-            "desc": "Peinture intérieure et extérieure de qualité.",
+            "page_title": "Peinture Intérieure et Extérieure | FAZDETUDO.PT",
+            "desc": "Peinture intérieure et extérieure, enduits et finitions de qualité soignées.",
             "wa": "Bonjour ! Je souhaite un devis pour de la peinture.",
             "intro": "Référence en <strong>peinture résidentielle et commerciale dans le Grand Lisbonne</strong> avec devis gratuit.",
             "features": [
@@ -279,6 +289,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Pintura de Fachadas em Alpinismo",
             "h1": "Pintura de Fachadas e Prédios em Alpinismo Industrial",
+            "page_title": "Pintura de Fachadas em Alpinismo | FAZDETUDO.PT",
             "desc": "Fachadas com alpinismo industrial, sem andaimes.",
             "wa": "Olá! Gostaria de um orçamento para pintura de fachadas em alpinismo.",
             "intro": "Reabilitação de fachadas com <strong>alpinismo industrial (trabalho em cordas)</strong> em Lisboa, Cascais e Margem Sul.",
@@ -292,6 +303,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Facade Painting (Rope Access)",
             "h1": "Facade and Building Painting with Industrial Rope Access",
+            "page_title": "Facade Painting by Rope Access | FAZDETUDO.PT",
             "desc": "Facade work by rope access, no scaffolding.",
             "wa": "Hello! I would like a quote for rope-access facade painting.",
             "intro": "Facade refurbishment using <strong>industrial rope access</strong> across Lisbon, Cascais and the South Bank.",
@@ -305,6 +317,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Pintura de Fachadas (Alpinismo)",
             "h1": "Pintura de Fachadas y Edificios con Alpinismo Industrial",
+            "page_title": "Pintura de Fachadas con Alpinismo | FAZDETUDO.PT",
             "desc": "Fachadas con alpinismo, sin andamios.",
             "wa": "¡Hola! Me gustaría un presupuesto para pintura de fachadas.",
             "intro": "Rehabilitación de fachadas con <strong>alpinismo industrial</strong> en Lisboa, Cascais y Margen Sur.",
@@ -318,6 +331,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Peinture de Façades (Alpinisme)",
             "h1": "Peinture de Façades et Immeubles par Alpinisme Industriel",
+            "page_title": "Peinture de Façades par Alpinisme | FAZDETUDO.PT",
             "desc": "Façades en cordes, sans échafaudage.",
             "wa": "Bonjour ! Je souhaite un devis pour peinture de façade.",
             "intro": "Réhabilitation de façades par <strong>alpinisme industriel</strong> à Lisbonne, Cascais et Rive Sud.",
@@ -346,7 +360,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Plumbing",
             "h1": "Plumber and Emergency Plumbing Services",
-            "desc": "Leaks, unblocking and urgent repairs.",
+            "desc": "Leak detection, drain unblocking, pipe repairs and urgent plumbing call-outs at home.",
             "wa": "Hello! I would like a quote for plumbing.",
             "intro": "Trusted <strong>plumber across Greater Lisbon and the South Bank</strong> with clear diagnosis and lasting repairs.",
             "features": [
@@ -372,7 +386,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Plomberie",
             "h1": "Plombier et Dépannage Plomberie Urgent",
-            "desc": "Fuites, débouchage et urgences.",
+            "desc": "Détection de fuites, débouchage, réparations et dépannage en urgence.",
             "wa": "Bonjour ! Je souhaite un devis pour de la plomberie.",
             "intro": "<strong>Plombier de confiance dans le Grand Lisbonne</strong> avec diagnostic clair et réparation durable.",
             "features": [
@@ -400,7 +414,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Electrical",
             "h1": "Certified Electrician for Home and Business",
-            "desc": "Faults, sockets, lighting and fuse boards.",
+            "desc": "Faults, sockets, lighting, fuse boards and rewiring by a certified electrician.",
             "wa": "Hello! I would like a quote for electrical work.",
             "intro": "Specialists in <strong>electrical services across Greater Lisbon, South Bank and Cascais</strong>.",
             "features": [
@@ -426,7 +440,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Électricité",
             "h1": "Électricien Certifié pour Maison et Entreprise",
-            "desc": "Pannes, prises, éclairage et tableaux.",
+            "page_title": "Électricien Certifié Maison et Entreprise | FAZDETUDO.PT",
+            "desc": "Pannes, prises, éclairage, tableaux et mise aux normes par un électricien.",
             "wa": "Bonjour ! Je souhaite un devis pour l'électricité.",
             "intro": "Spécialistes <strong>électricité Grand Lisbonne, Rive Sud et Cascais</strong>.",
             "features": [
@@ -454,7 +469,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Carpentry",
             "h1": "Carpentry and Furniture Assembly at Home",
-            "desc": "Furniture assembly, doors and woodwork.",
+            "desc": "Flat-pack furniture assembly, fitted wardrobes, doors and custom woodwork at home.",
             "wa": "Hello! I would like a quote for carpentry.",
             "intro": "<strong>Carpentry across Greater Lisbon and the South Bank</strong> with precise, professional finishes.",
             "features": [
@@ -467,7 +482,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Carpintería",
             "h1": "Carpintería y Montaje de Muebles a Domicilio",
-            "desc": "Montaje de muebles, puertas y madera.",
+            "desc": "Montaje de muebles, armarios a medida, puertas y trabajos de madera a domicilio.",
             "wa": "¡Hola! Me gustaría un presupuesto para carpintería.",
             "intro": "<strong>Carpintería en la Gran Lisboa y Margen Sur</strong> con acabado profesional.",
             "features": [
@@ -480,7 +495,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Menuiserie",
             "h1": "Menuiserie et Montage de Meubles à Domicile",
-            "desc": "Montage, portes et travaux bois.",
+            "desc": "Montage de meubles, placards sur mesure, portes et travaux de menuiserie à domicile.",
             "wa": "Bonjour ! Je souhaite un devis pour menuiserie.",
             "intro": "<strong>Menuiserie Grand Lisbonne et Rive Sud</strong> avec finitions soignées.",
             "features": [
@@ -508,7 +523,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "General Repairs",
             "h1": "General Repairs and Handyman at Home",
-            "desc": "Handyman for multiple jobs in one visit.",
+            "desc": "Handyman for multiple small jobs and repairs in a single home visit.",
             "wa": "Hello! I would like a quote for general repairs.",
             "intro": "Your trusted <strong>handyman across Greater Lisbon and the South Bank</strong> — one visit, many fixes.",
             "features": [
@@ -549,6 +564,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Manutenção",
             "h1": "Manutenção Preventiva e Reparações para Condomínios",
+            "page_title": "Manutenção Preventiva para Condomínios | FAZDETUDO.PT",
             "desc": "Manutenção preventiva e lavagem alta pressão.",
             "wa": "Olá! Gostaria de pedir um orçamento para manutenção.",
             "intro": "<strong>Manutenção preventiva na Grande Lisboa e Margem Sul</strong> para evitar obras caras.",
@@ -562,7 +578,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Maintenance",
             "h1": "Preventive Maintenance for Buildings and Homes",
-            "desc": "Preventive maintenance and pressure washing.",
+            "page_title": "Preventive Maintenance for Buildings | FAZDETUDO.PT",
+            "desc": "Preventive maintenance, small repairs and pressure washing for buildings and homes.",
             "wa": "Hello! I would like a quote for maintenance.",
             "intro": "<strong>Preventive maintenance across Greater Lisbon and the South Bank</strong> to avoid costly repairs.",
             "features": [
@@ -575,6 +592,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Mantenimiento",
             "h1": "Mantenimiento Preventivo para Comunidades y Hogares",
+            "page_title": "Mantenimiento Preventivo para Comunidades | FAZDETUDO.PT",
             "desc": "Mantenimiento preventivo y alta presión.",
             "wa": "¡Hola! Me gustaría un presupuesto para mantenimiento.",
             "intro": "<strong>Mantenimiento preventivo en la Gran Lisboa y Margen Sur</strong> para evitar obras caras.",
@@ -603,7 +621,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Limpezas",
             "h1": "Limpezas Domésticas e Pós-Obra Profissionais",
-            "desc": "Limpeza doméstica, pós-obra e comercial.",
+            "desc": "Limpeza doméstica, pós-obra e comercial, com produtos próprios e equipa experiente.",
             "wa": "Olá! Gostaria de pedir um orçamento para limpezas.",
             "intro": "<strong>Limpezas profissionais na Grande Lisboa e Margem Sul</strong> para casa, escritório e pós-obra.",
             "features": [
@@ -616,7 +634,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Cleaning",
             "h1": "Domestic and Post-Construction Cleaning",
-            "desc": "Home, post-build and commercial cleaning.",
+            "desc": "Home, post-construction and commercial cleaning with our own products and trained team.",
             "wa": "Hello! I would like a quote for cleaning.",
             "intro": "<strong>Professional cleaning across Greater Lisbon and the South Bank</strong> for homes, offices and post-build.",
             "features": [
@@ -629,7 +647,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Limpieza",
             "h1": "Limpiezas Domésticas y Post-Obra Profesionales",
-            "desc": "Limpieza doméstica, post-obra y comercial.",
+            "page_title": "Limpiezas Domésticas y Post-Obra | FAZDETUDO.PT",
+            "desc": "Limpieza doméstica, post-obra y comercial con productos propios y equipo experto.",
             "wa": "¡Hola! Me gustaría un presupuesto para limpieza.",
             "intro": "<strong>Limpieza profesional en la Gran Lisboa y Margen Sur</strong> para hogar, oficina y post-obra.",
             "features": [
@@ -642,7 +661,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Nettoyage",
             "h1": "Nettoyage Domestique et Après-Travaux",
-            "desc": "Nettoyage maison, après-travaux et bureaux.",
+            "desc": "Nettoyage maison, après-travaux et bureaux, avec nos produits et équipe formée.",
             "wa": "Bonjour ! Je souhaite un devis pour nettoyage.",
             "intro": "<strong>Nettoyage professionnel Grand Lisbonne et Rive Sud</strong> pour maison, bureau et fin de chantier.",
             "features": [
@@ -657,7 +676,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Jardinagem",
             "h1": "Jardinagem e Manutenção de Jardins",
-            "desc": "Relva, poda e sistemas de rega.",
+            "desc": "Relva, poda, sistemas de rega e limpeza e manutenção de jardins.",
             "wa": "Olá! Gostaria de pedir um orçamento para jardinagem.",
             "intro": "<strong>Jardinagem na Grande Lisboa e Margem Sul</strong> para moradias e condomínios.",
             "features": [
@@ -670,7 +689,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Gardening",
             "h1": "Gardening and Garden Maintenance",
-            "desc": "Lawn care, pruning and irrigation.",
+            "desc": "Lawn care, hedge and tree pruning, irrigation systems and regular garden maintenance.",
             "wa": "Hello! I would like a quote for gardening.",
             "intro": "<strong>Gardening across Greater Lisbon and the South Bank</strong> for homes and condominiums.",
             "features": [
@@ -683,7 +702,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Jardinería",
             "h1": "Jardinería y Mantenimiento de Jardines",
-            "desc": "Césped, poda y riego.",
+            "desc": "Césped, poda, sistemas de riego y limpieza y mantenimiento de jardines.",
             "wa": "¡Hola! Me gustaría un presupuesto para jardinería.",
             "intro": "<strong>Jardinería en la Gran Lisboa y Margen Sur</strong> para hogares y comunidades.",
             "features": [
@@ -696,7 +715,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Jardinage",
             "h1": "Jardinage et Entretien de Jardins",
-            "desc": "Pelouse, taille et arrosage.",
+            "desc": "Entretien de pelouse, taille de haies et arbres, arrosage et nettoyage de jardins.",
             "wa": "Bonjour ! Je souhaite un devis pour jardinage.",
             "intro": "<strong>Jardinage Grand Lisbonne et Rive Sud</strong> pour maisons et copropriétés.",
             "features": [
@@ -711,7 +730,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Mudanças",
             "h1": "Mudanças Residenciais e Comerciais com Embalagem",
-            "desc": "Transporte, embalagem e montagem.",
+            "page_title": "Mudanças Residenciais e Comerciais | FAZDETUDO.PT",
+            "desc": "Transporte, embalagem, desmontagem e montagem de móveis em mudanças locais.",
             "wa": "Olá! Gostaria de pedir um orçamento para mudanças.",
             "intro": "<strong>Mudanças na Grande Lisboa e Margem Sul</strong> com embalagem e montagem no destino.",
             "features": [
@@ -724,7 +744,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Moving",
             "h1": "Residential and Commercial Moving with Packing",
-            "desc": "Transport, packing and assembly.",
+            "page_title": "Residential and Commercial Moving | FAZDETUDO.PT",
+            "desc": "Transport, packing of fragile items, furniture disassembly and reassembly for local moves.",
             "wa": "Hello! I would like a quote for moving.",
             "intro": "<strong>Moving services across Greater Lisbon and the South Bank</strong> with packing and reassembly.",
             "features": [
@@ -737,7 +758,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Mudanzas",
             "h1": "Mudanzas Residenciales y Comerciales con Embalaje",
-            "desc": "Transporte, embalaje y montaje.",
+            "page_title": "Mudanzas Residenciales y Comerciales | FAZDETUDO.PT",
+            "desc": "Transporte, embalaje, desmontaje y montaje de muebles en mudanzas locales.",
             "wa": "¡Hola! Me gustaría un presupuesto para mudanzas.",
             "intro": "<strong>Mudanzas en la Gran Lisboa y Margen Sur</strong> con embalaje y montaje.",
             "features": [
@@ -750,7 +772,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Déménagements",
             "h1": "Déménagements Résidentiels et Commerciaux",
-            "desc": "Transport, emballage et montage.",
+            "desc": "Transport, emballage des fragiles, démontage et remontage de meubles en local.",
             "wa": "Bonjour ! Je souhaite un devis pour déménagement.",
             "intro": "<strong>Déménagements Grand Lisbonne et Rive Sud</strong> avec emballage et remontage.",
             "features": [
@@ -765,7 +787,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Informática",
             "h1": "Assistência Informática e Redes Wi-Fi",
-            "desc": "PCs, Wi-Fi, impressoras e smart home.",
+            "desc": "Reparação de PCs, redes Wi-Fi, impressoras, backups e smart home.",
             "wa": "Olá! Gostaria de pedir um orçamento para informática.",
             "intro": "<strong>Assistência informática ao domicílio</strong> na Grande Lisboa e Margem Sul.",
             "features": [
@@ -778,7 +800,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "IT Services",
             "h1": "IT Support and Wi-Fi Networks",
-            "desc": "PCs, Wi-Fi, printers and smart home.",
+            "desc": "PC repair, Wi-Fi setup, networks, printers, backups and basic smart home installation.",
             "wa": "Hello! I would like a quote for IT support.",
             "intro": "<strong>On-site IT support</strong> across Greater Lisbon and the South Bank.",
             "features": [
@@ -791,7 +813,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Informática",
             "h1": "Asistencia Informática y Redes Wi-Fi",
-            "desc": "PCs, Wi-Fi, impresoras y smart home.",
+            "desc": "Reparación de PCs, redes Wi-Fi, impresoras, copias de seguridad y smart home.",
             "wa": "¡Hola! Me gustaría un presupuesto para informática.",
             "intro": "<strong>Asistencia informática a domicilio</strong> en la Gran Lisboa y Margen Sur.",
             "features": [
@@ -819,7 +841,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Serralharia",
             "h1": "Serralharia e Abertura de Portas Urgente",
-            "desc": "Fechaduras, portões e abertura urgente.",
+            "desc": "Abertura urgente de portas, troca de fechaduras e cilindros, portões e segurança.",
             "wa": "Olá! Gostaria de pedir um orçamento para serralharia.",
             "intro": "<strong>Serralharia na Grande Lisboa e Margem Sul</strong> com resposta rápida.",
             "features": [
@@ -832,7 +854,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Locksmithing",
             "h1": "Locksmithing and Emergency Door Opening",
-            "desc": "Locks, gates and urgent access.",
+            "desc": "Emergency door opening, lock and cylinder replacement, gates and security upgrades.",
             "wa": "Hello! I would like a quote for locksmithing.",
             "intro": "<strong>Locksmith services across Greater Lisbon and the South Bank</strong> with fast response.",
             "features": [
@@ -845,7 +867,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Cerrajería",
             "h1": "Cerrajería y Apertura Urgente de Puertas",
-            "desc": "Cerraduras, portones y urgencias.",
+            "desc": "Apertura urgente, cambio de cerraduras y bombines, portones y seguridad.",
             "wa": "¡Hola! Me gustaría un presupuesto para cerrajería.",
             "intro": "<strong>Cerrajería en la Gran Lisboa y Margen Sur</strong> con respuesta rápida.",
             "features": [
@@ -858,7 +880,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Serrurerie",
             "h1": "Serrurerie et Ouverture de Porte d'Urgence",
-            "desc": "Serrures, portails et urgences.",
+            "desc": "Ouverture en urgence, remplacement de serrures et cylindres, portails et sécurité.",
             "wa": "Bonjour ! Je souhaite un devis pour serrurerie.",
             "intro": "<strong>Serrurerie Grand Lisbonne et Rive Sud</strong> avec intervention rapide.",
             "features": [
@@ -873,6 +895,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Climatização",
             "h1": "Instalação e Reparação de Ar Condicionado (AVAC)",
+            "page_title": "Ar Condicionado e Climatização (AVAC) | FAZDETUDO.PT",
             "desc": "Instalação, manutenção e reparação AVAC.",
             "wa": "Olá! Gostaria de pedir um orçamento para climatização.",
             "intro": "<strong>Climatização e ar condicionado na Grande Lisboa e Margem Sul</strong> o ano inteiro.",
@@ -886,7 +909,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Air Conditioning",
             "h1": "Air Conditioning Installation and Repair (HVAC)",
-            "desc": "AC install, maintenance and repair.",
+            "page_title": "Air Conditioning and HVAC Repair | FAZDETUDO.PT",
+            "desc": "AC installation, gas recharge, filter cleaning, leak and breakdown repair.",
             "wa": "Hello! I would like a quote for air conditioning.",
             "intro": "<strong>HVAC and air conditioning across Greater Lisbon and the South Bank</strong> year-round.",
             "features": [
@@ -899,6 +923,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Climatización",
             "h1": "Instalación y Reparación de Aire Acondicionado",
+            "page_title": "Aire Acondicionado y Climatización | FAZDETUDO.PT",
             "desc": "Instalación, mantenimiento y reparación.",
             "wa": "¡Hola! Me gustaría un presupuesto para climatización.",
             "intro": "<strong>Climatización en la Gran Lisboa y Margen Sur</strong> todo el año.",
@@ -912,7 +937,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Climatisation",
             "h1": "Installation et Réparation Climatisation (CVC)",
-            "desc": "Installation, entretien et dépannage.",
+            "page_title": "Climatisation et Réparation (CVC) | FAZDETUDO.PT",
+            "desc": "Installation de climatiseurs, recharge de gaz, nettoyage de filtres et dépannage.",
             "wa": "Bonjour ! Je souhaite un devis pour climatisation.",
             "intro": "<strong>Climatisation Grand Lisbonne et Rive Sud</strong> toute l'année.",
             "features": [
@@ -953,6 +979,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "es": {
             "name": "Persianas y estores",
             "h1": "Reparación e Instalación de Persianas y Estores",
+            "page_title": "Reparación de Persianas y Estores | FAZDETUDO.PT",
             "desc": "Estores, persianas, mosquiteras y toldos.",
             "wa": "¡Hola! Me gustaría un presupuesto para persianas.",
             "intro": "<strong>Persianas y estores en la Gran Lisboa y Margen Sur</strong>.",
@@ -994,7 +1021,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Interior Design",
             "h1": "Interior Design and Home Staging",
-            "desc": "Curtains, wallpaper and home staging.",
+            "desc": "Curtains, wallpaper, decorative lighting and home staging for sale or rent.",
             "wa": "Hello! I would like a quote for interior design.",
             "intro": "<strong>Interior design across Greater Lisbon and the South Bank</strong> to live in or sell.",
             "features": [
@@ -1039,7 +1066,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "page_title": "Construção e Manutenção de Piscinas em Lisboa | FAZDETUDO.PT",
             "meta_description": (
                 "Construção, manutenção e reparação de piscinas na Grande Lisboa e Margem Sul. "
-                "Piscinas novas, remodelações, limpeza, filtração, fugas e tratamento de água. Peça orçamento."
+                "Piscinas novas, remodelações, limpeza, filtração e tratamento de água."
             ),
             "desc": "Construção, manutenção e reparação de piscinas novas e existentes.",
             "wa": "Olá! Gostaria de pedir um orçamento para construção ou manutenção de piscinas.",
@@ -1063,7 +1090,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "page_title": "Pool Construction and Maintenance in Lisbon | FAZDETUDO.PT",
             "meta_description": (
                 "Pool construction, maintenance and repair across Greater Lisbon and the South Bank. "
-                "New pools, renovations, cleaning, filtration, leak repair and water treatment. Request a quote."
+                "New pools, renovations, cleaning, filtration and water treatment."
             ),
             "desc": "New pool builds, renovations, cleaning and water treatment.",
             "wa": "Hello! I would like a quote for pool construction or maintenance.",
@@ -1083,10 +1110,10 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Piscinas",
             "service_type": "Construcción, Mantenimiento y Reparación de Piscinas",
             "h1": "Construcción, Mantenimiento y Reparación de Piscinas",
-            "page_title": "Construcción y Mantenimiento de Piscinas en Lisboa | FAZDETUDO.PT",
+            "page_title": "Construcción y Mantenimiento de Piscinas | FAZDETUDO.PT",
             "meta_description": (
                 "Construcción, mantenimiento y reparación de piscinas en la Gran Lisboa y Margen Sur. "
-                "Piscinas nuevas, reformas, limpieza, filtración, fugas y tratamiento del agua. Pida presupuesto."
+                "Piscinas nuevas, reformas, limpieza, filtración y tratamiento del agua."
             ),
             "desc": "Construcción, mantenimiento y reparación de piscinas nuevas y existentes.",
             "wa": "¡Hola! Me gustaría un presupuesto para construcción o mantenimiento de piscinas.",
@@ -1106,10 +1133,10 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Piscines",
             "service_type": "Construction, Entretien et Réparation de Piscines",
             "h1": "Construction, Entretien et Réparation de Piscines",
-            "page_title": "Construction et Entretien de Piscines à Lisbonne | FAZDETUDO.PT",
+            "page_title": "Construction et Entretien de Piscines | FAZDETUDO.PT",
             "meta_description": (
                 "Construction, entretien et réparation de piscines au Grand Lisbonne et Rive Sud. "
-                "Piscines neuves, rénovations, nettoyage, filtration, fuites et traitement de l'eau. Demandez un devis."
+                "Piscines neuves, rénovations, nettoyage, filtration et traitement de l'eau."
             ),
             "desc": "Construction, entretien et réparation de piscines neuves et existantes.",
             "wa": "Bonjour ! Je souhaite un devis pour construction ou entretien de piscine.",
