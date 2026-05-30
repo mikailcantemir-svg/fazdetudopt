@@ -49,9 +49,10 @@ def render_lang_switcher(current_lang: str) -> str:
             f'hreflang="{LANG_HTML[code]}" lang="{LANG_HTML[code]}">'
             f'<img src="{flag}" alt="{flag_alt}"> {label}</a>'
         )
+    current_flag_alt = FLAG_ALT[current_lang][current_lang]
     return f"""                    <div class="lang-switcher" id="lang-switcher">
                         <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false">
-                            <img src="{info[1]}" alt="" class="lang-flag" id="lang-flag">
+                            <img src="{info[1]}" alt="{current_flag_alt}" class="lang-flag" id="lang-flag">
                             <span id="lang-label">{info[0]}</span>
                             <i class="fa-solid fa-chevron-down lang-chevron" aria-hidden="true"></i>
                         </button>
