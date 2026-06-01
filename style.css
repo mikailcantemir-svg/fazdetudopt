@@ -3074,3 +3074,81 @@ body.lightbox-open {
         border-radius: 50%;
     }
 }
+
+/* ============================================================
+   Artigos (Guias e Dicas) — reutiliza o layout das páginas de serviço
+   ============================================================ */
+.article-meta {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.article-related {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.article-related p {
+    margin: 0 0 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.article-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.article-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.article-card:hover {
+    box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.10);
+    transform: translateY(-2px);
+}
+
+.article-card h2 {
+    margin: 0 0 0.35rem;
+    font-size: 1.25rem;
+}
+
+.article-card h2 a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.article-card h2 a:hover {
+    color: var(--primary-color);
+}
+
+.article-card p {
+    margin: 0 0 0.85rem;
+    color: var(--text-light);
+}
+
+.article-readmore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.article-readmore:hover {
+    text-decoration: underline;
+}

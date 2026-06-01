@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}">
+<head>
+{{HEAD}}
+</head>
+<body class="service-page">
+    <a class="skip-link" href="#article-main">Saltar para o conteúdo</a>
+
+{{HEADER_SERVICE}}
+
+    <main class="service-page-main service-page-main--article" id="article-main">
+        <article class="container service-article">
+            <header class="service-hero">
+                {{ARTICLE_META}}
+                <h1 class="service-article-title">{{H1_TITLE}}</h1>
+                <p class="service-article-lead">{{LEAD_TEXT}}</p>
+            </header>
+
+            <div class="service-layout">
+                <div class="service-main-col">
+                    <div class="service-rich-text">
+                {{BODY_HTML}}
+                    </div>
+{{RELATED_BLOCK}}
+                </div>
+                <aside class="service-sidebar">
+                    <div class="service-cta-box">
+                <h3>{{CTA_H3}}</h3>
+                <p>{{CTA_P}}</p>
+                <div class="service-cta-box-actions">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {{CTA_WA}}
+                    </a>
+                    <a href="{{TEL_HREF}}" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {{CTA_CALL}}
+                    </a>
+                </div>
+                    </div>
+                </aside>
+            </div>
+        </article>
+    </main>
+
+{{FOOTER}}
+{{WA_WIDGET}}
+
+    <script src="{{ASSET_PREFIX}}script.js" defer></script>
+</body>
+</html>

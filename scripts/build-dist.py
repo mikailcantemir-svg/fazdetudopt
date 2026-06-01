@@ -77,6 +77,10 @@ def build_dist() -> Path:
     for lang in LANG_DIRS:
         _copy_tree(ROOT / lang, DIST / lang)
 
+    articles = ROOT / "artigos"
+    if articles.is_dir():
+        _copy_tree(articles, DIST / "artigos")
+
     for pattern in ("servico-*.html", "*-lisboa.html"):
         for src in sorted(ROOT.glob(pattern)):
             if src.is_file():

@@ -11,6 +11,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from site_config import BASE_URL
 from slug_registry import SERVICE_SLUGS
 
+try:
+    from articles_data import ARTICLES, ARTICLES_INDEX
+except ImportError:
+    ARTICLES, ARTICLES_INDEX = [], None
+
 TODAY = date.today().isoformat()
 
 URLS = [
@@ -31,6 +36,11 @@ def main():
     for slug in SERVICE_SLUGS:
         for prefix in LANG_PREFIXES:
             entries.append(url_entry(f"{prefix}/{slug}", "weekly", "0.8"))
+
+    if ARTICLES_INDEX is not None:
+        entries.append(url_entry("/artigos/", "monthly", "0.6"))
+        for article in ARTICLES:
+            entries.append(url_entry(f"/artigos/{article['slug']}", "monthly", "0.7"))
 
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <!-- Atualizar lastmod: python scripts/generate-sitemap.py -->

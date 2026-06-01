@@ -187,6 +187,7 @@
     const T = {
         pt: {
             nav_home: 'Início', nav_services: 'Serviços', nav_about: 'Sobre nós', nav_contact: 'Contacto',
+            nav_articles: 'Artigos',
             footer_links: 'Links',
             hero_title: 'O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul',
             footer_tagline: 'O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul',
@@ -262,6 +263,7 @@
         },
         en: {
             nav_home: 'Home', nav_services: 'Services', nav_about: 'About us', nav_contact: 'Contact',
+            nav_articles: 'Articles',
             footer_links: 'Links',
             hero_title: 'Your Trusted Handyman in Greater Lisbon and South Bank',
             footer_tagline: 'Your Trusted Handyman in Greater Lisbon and South Bank',
@@ -336,6 +338,7 @@
         },
         es: {
             nav_home: 'Inicio', nav_services: 'Servicios', nav_about: 'Sobre nosotros', nav_contact: 'Contacto',
+            nav_articles: 'Artículos',
             footer_links: 'Enlaces',
             hero_title: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
             footer_tagline: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
@@ -410,6 +413,7 @@
         },
         fr: {
             nav_home: 'Accueil', nav_services: 'Services', nav_about: 'À propos', nav_contact: 'Contact',
+            nav_articles: 'Articles',
             footer_links: 'Liens',
             hero_title: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
             footer_tagline: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
