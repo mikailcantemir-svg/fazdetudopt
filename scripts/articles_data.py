@@ -29,6 +29,7 @@ ARTICLES_INDEX = {
 
 
 IMG_VERAO = "../images/artigos/reparacoes-verao-lisboa"
+IMG_AC = "../images/artigos/ar-condicionado"
 
 ARTICLES = [
     {
@@ -221,139 +222,308 @@ ARTICLES = [
     },
     {
         "slug": "ar-condicionado-lisboa-instalar-limpar-manter-split.html",
-        "category": "Climatização",
+        "category": "Guias de Climatização",
         "published": "2026-06-01",
         "updated": "2026-06-01",
-        "h1": "Ar Condicionado em Lisboa: Instalar, Limpar e Manter o Split",
-        "page_title": "Ar Condicionado em Lisboa: Instalar e Manter | FAZDETUDO.PT",
+        "h1": "Ar Condicionado Lisboa: Instalar, Limpar e Manter o Split",
+        "page_title": "Ar Condicionado em Lisboa: Instalar e Manter Split | FAZDETUDO.PT",
         "meta_description": (
-            "Guia prático para instalar, limpar e manter o ar condicionado (split) "
-            "em Lisboa e Margem Sul. Dicas de manutenção e quando pedir assistência."
+            "Guia prático sobre instalação, limpeza e manutenção de ar condicionado "
+            "em Lisboa, Cascais e Setúbal. Saiba quando instalar, limpar filtros e pedir assistência."
         ),
-        "og_title": "Ar Condicionado em Lisboa: Instalar, Limpar e Manter o Split",
+        "og_title": "Ar Condicionado Lisboa: Instalar, Limpar e Manter o Split",
         "lead": (
-            "Um ar condicionado bem instalado e com manutenção regular trabalha melhor, "
-            "consome menos e dura mais anos. Reunimos o essencial sobre instalação, "
-            "limpeza e manutenção de splits para casas e escritórios na Grande Lisboa e Margem Sul."
+            "Um split bem instalado e com manutenção regular trabalha melhor, pode consumir "
+            "menos energia e tende a durar mais tempo. Reunimos o essencial sobre instalação, "
+            "limpeza e revisão para casas e escritórios na Grande Lisboa, Cascais e Setúbal."
         ),
         "excerpt": (
-            "Como escolher, instalar, limpar e manter um split de ar condicionado em casa "
-            "— e quando vale a pena chamar um técnico."
+            "Quando instalar, como limpar filtros, que manutenção fazer e quando pedir "
+            "assistência técnica para o ar condicionado em Lisboa."
         ),
         "related_service_url": f"{BASE_URL}/servico-climatizacao.html",
         "related_service_label": "Ver serviço de Climatização e Ar Condicionado",
-        "related_intro": "Precisa de ajuda profissional com o seu equipamento?",
+        "related_intro": "Precisa de instalar, limpar ou fazer manutenção ao equipamento?",
         "wa_message": (
-            "Olá! Gostaria de pedir um orçamento para ar condicionado "
-            "(instalação, limpeza ou manutenção)."
+            "Olá! Gostaria de pedir um orçamento para instalação ou manutenção de ar condicionado."
         ),
         "cta_h3": "Precisa de ar condicionado ou de uma revisão?",
         "cta_p": (
-            "Fale com a nossa equipa para instalação, limpeza ou manutenção de "
+            "Fale connosco pelo WhatsApp para instalação, limpeza ou manutenção de "
             "ar condicionado em Lisboa, Cascais, Almada e Setúbal."
         ),
         "cta_button": "Pedir orçamento para ar condicionado",
-        "body_html": """
-                <p>O ar condicionado deixou de ser um luxo e passou a ser parte do conforto
-                de muitas casas e escritórios na região de Lisboa, tanto no calor do verão
-                como no apoio ao aquecimento em dias mais frios. Para tirar o melhor partido
-                do equipamento — e evitar surpresas — convém perceber três fases: a
-                <strong>instalação</strong>, a <strong>limpeza</strong> e a
-                <strong>manutenção</strong>.</p>
+        "body_html": f"""
+                <p>O ar condicionado é hoje parte do conforto de muitas casas e escritórios na "
+                "região de Lisboa — no calor do verão e também no apoio ao aquecimento em dias "
+                "mais frios. Para tirar o melhor partido do equipamento e evitar surpresas, "
+                "convém planear bem a <strong>instalação</strong>, manter a <strong>limpeza</strong> "
+                "e não adiar a <strong>manutenção</strong>. Se precisar de apoio, a nossa equipa de "
+                f'<a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a> '
+                "pode avaliar o seu caso.</p>
 
-                <h2>1. Instalação do split: o que ter em conta</h2>
-                <p>A instalação influencia diretamente o desempenho e o consumo do
-                equipamento. Alguns pontos que ajudam a tomar uma boa decisão:</p>
+                <h2>Primavera: A Janela Ideal para Instalação</h2>
+                <figure class="article-figure">
+                    <img src="{IMG_AC}/ar-condicionado-lisboa-split-sala.webp"
+                         alt="Ar condicionado split instalado numa sala em Lisboa"
+                         width="1024" height="1024" loading="eager" decoding="async">
+                    <figcaption>Um split bem instalado melhora o conforto da casa e evita consumos desnecessários.</figcaption>
+                </figure>
+                <p>Março, abril e maio costumam ser meses favoráveis para instalar ou substituir um "
+                "split: as temperaturas são mais amenas para o trabalho nas unidades exteriores, a "
+                "procura de técnicos ainda não está no pico de verão e há tempo para testar o "
+                "equipamento antes do calor intenso.</p>
+                <p>Em muitos condomínios na Grande Lisboa, a instalação de unidades exteriores na "
+                "fachada pode exigir autorização da administração. Vale a pena confirmar as regras "
+                "do prédio antes de marcar a obra.</p>
+
+                <h2>Inverno: Uma Oportunidade Subestimada</h2>
+                <p>Os splits modernos com bomba de calor podem aquecer de forma eficiente mesmo com "
+                "temperaturas externas baixas. Em Lisboa, onde o inverno é relativamente ameno, o "
+                "modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em "
+                "escritórios com pouca exposição solar.</p>
+                <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro "
+                "pode dar mais margem de agenda. Muitas empresas — incluindo a FAZDETUDO.PT — têm "
+                "disponibilidade mais flexível fora da época alta.</p>
+
+                <h2>Tipos de Split para Casas e Escritórios em Lisboa</h2>
+                <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na "
+                "fatura da luz. Para habitação na Grande Lisboa, estes são os formatos mais "
+                "comuns:</p>
+                <h3>Split Mono Inverter</h3>
+                <p>É a opção mais frequente em apartamentos e moradias: uma unidade exterior alimenta "
+                "uma unidade interior. A tecnologia inverter ajusta a potência ao necessário, o que "
+                "pode ajudar a manter o conforto com menor desgaste do compressor.</p>
+                <h3>Multi-Split</h3>
+                <p>Uma unidade exterior serve várias unidades interiores. Pode fazer sentido quando o "
+                "espaço na fachada ou na cobertura é limitado e quer climatizar mais do que uma "
+                "divisão com um só sistema.</p>
+                <h3>Cassete de Teto</h3>
+                <p>Usada sobretudo em escritórios, lojas e espaços comerciais. Distribui o ar em "
+                "várias direções e integra-se no teto falso — útil em salas amplas.</p>
+                <p>Na faixa costeira de Cascais e Setúbal, a salinidade pode acelerar a corrosão "
+                "das aletas da unidade exterior. Em zonas próximas do mar, convém considerar "
+                "equipamentos com tratamento anticorrosivo e incluir a revisão da unidade exterior "
+                "no plano de <a href="{BASE_URL}/servico-manutencao.html">manutenção</a>.</p>
+
+                <h2>Limpeza de Filtros: O Que Acontece Quando se Ignora</h2>
+                <p>Um filtro sujo é um dos problemas mais frequentes nos splits domésticos. Não é "
+                "apenas estética: filtros entupidos obrigam o equipamento a trabalhar mais para "
+                "atingir a temperatura desejada, o que <strong>pode reduzir a eficiência</strong> e "
+                "<strong>pode aumentar o consumo</strong>. A qualidade do ar interior também tende "
+                "a piorar.</p>
+                <p>Durante os meses de uso intensivo (junho a setembro para arrefecimento, e "
+                "dezembro a fevereiro para aquecimento), a limpeza regular dos filtros é "
+                "recomendada. Em Lisboa e Cascais, onde o pó e o sal marinho podem acumular-se "
+                "mais depressa junto à costa, convém não deixar passar demasiado tempo entre "
+                "lavagens.</p>
+
+                <h3>Como Limpar os Filtros de um Split em Casa</h3>
+                <p>Num split de parede doméstico, o processo é simples: desligue o aparelho, abra a "
+                "tampa frontal da unidade interior, retire os filtros (geralmente encaixados por "
+                "clips), lave com água morna e detergente suave, enxague bem e deixe secar "
+                "completamente antes de recolocar.</p>
+                <figure class="article-figure">
+                    <img src="{IMG_AC}/limpeza-filtros-ar-condicionado-split.webp"
+                         alt="Limpeza de filtros de ar condicionado split"
+                         width="1024" height="1024" loading="lazy" decoding="async">
+                    <figcaption>A limpeza regular dos filtros ajuda o equipamento a trabalhar melhor e melhora a qualidade do ar.</figcaption>
+                </figure>
+                <p>Se ao abrir a tampa encontrar manchas escuras no evaporador ou um cheiro a mofo "
+                "quando liga o equipamento, a limpeza caseira dos filtros já não chega — nesse "
+                "caso, peça uma <a href="{BASE_URL}/servico-climatizacao.html">limpeza técnica "
+                "profissional</a>.</p>
+
+                <h3>Limpeza Profissional vs. Limpeza Doméstica</h3>
+                <p>A limpeza dos filtros pelo utilizador é suficiente como manutenção regular. "
+                "Uma vez por ano, habitualmente na primavera, convém contratar uma limpeza "
+                "profunda: serpentina interior, turbina, bandeja de condensados e verificação da "
+                "unidade exterior. Esta distinção entre manutenção mensal e revisão técnica anual "
+                "é frequentemente ignorada — e pode encurtar a vida útil do equipamento se só se "
+                "limparem os filtros.</p>
+
+                <h2>Manutenção AVAC em Lisboa: O Que Inclui e Com Que Frequência</h2>
+                <p>A manutenção de climatização abrange mais do que a limpeza dos filtros. Em "
+                "habitação, um plano típico inclui verificação de pressões, estado das serpentinas, "
+                "drenagem de condensados, ligações elétricas e teste de funcionamento nos modos "
+                "frio e calor. A <a href="{BASE_URL}/servico-electricidade.html">parte elétrica</a> "
+                "deve ser verificada por quem tem competência para o efeito.</p>
+                <p>Em sistemas comerciais ou de maior dimensão, podem existir requisitos legais e "
+                "técnicos específicos. Trabalhos que envolvam gases refrigerantes, pressões do "
+                "circuito ou intervenção técnica no equipamento devem ser realizados por técnicos "
+                "habilitados ou certificados.</p>
+                <blockquote>
+                    <p>A falta de manutenção nos sistemas de climatização pode contribuir para "
+                    "desperdício energético em edifícios — por isso, uma revisão preventiva antes "
+                    "do verão costuma compensar.</p>
+                </blockquote>
+
+                <h3>Calendário de Manutenção Recomendado para Lisboa</h3>
+                <p>Abril é, para muitas famílias, um bom mês para a manutenção anual: o verão ainda "
+                "não chegou, há tempo para corrigir pequenas falhas e o equipamento entra na época "
+                "quente em melhores condições.</p>
                 <ul>
-                    <li><strong>Potência adequada à divisão.</strong> Um aparelho subdimensionado
-                    trabalha sempre no máximo; um sobredimensionado liga e desliga em excesso.
-                    A escolha depende da área, da exposição solar e do isolamento.</li>
-                    <li><strong>Localização das unidades.</strong> A unidade interior deve
-                    distribuir bem o ar, sem apontar diretamente para zonas de descanso; a
-                    exterior precisa de ventilação e acesso para manutenção.</li>
-                    <li><strong>Distância e percurso da tubagem.</strong> Percursos mais curtos
-                    e bem isolados tendem a manter a eficiência do sistema.</li>
-                    <li><strong>Instalação por técnico habilitado.</strong> O manuseamento de
-                    gás refrigerante e a ligação elétrica devem ser feitos por profissionais,
-                    por questões de segurança e de garantia do fabricante.</li>
+                    <li><strong>Habitação:</strong> manutenção anual na primavera; limpeza dos "
+                    "filtros de junho a setembro (e no aquecimento, se usar com frequência).</li>
+                    <li><strong>Comércio e serviços:</strong> intervalos mais curtos, consoante "
+                    "horas de funcionamento e normas internas do edifício.</li>
                 </ul>
 
-                <h2>2. Limpeza do ar condicionado</h2>
-                <p>A limpeza regular é, provavelmente, o gesto com melhor relação
-                custo-benefício. Um equipamento limpo arrefece melhor e mantém o ar mais
-                saudável.</p>
-                <h3>O que pode fazer em casa</h3>
+                <h2>Instalação, Manutenção Própria vs. Serviço Profissional</h2>
+                <p>A questão mais comum entre proprietários em Lisboa é simples: o que posso fazer "
+                "eu mesmo e o que exige um técnico? A resposta prática, em cartões:</p>
+                <div class="article-task-cards">
+                    <article class="article-task-card">
+                        <h3>Instalação da unidade</h3>
+                        <p><strong>Abordagem:</strong> Deve ser feita por técnico habilitado, com "
+                        "formação adequada para gases refrigerantes e ligação elétrica segura.</p>
+                        <p><strong>Em Lisboa e Cascais:</strong> Peça orçamento a instalador "
+                        "certificado; instalação incorreta pode invalidar a garantia e aumentar "
+                        "riscos.</p>
+                    </article>
+                    <article class="article-task-card">
+                        <h3>Limpeza de filtros</h3>
+                        <p><strong>Abordagem:</strong> Pode ser feita pelo utilizador com "
+                        "regularidade durante a época de uso.</p>
+                        <p><strong>Em Lisboa e Cascais:</strong> Reserve alguns minutos por mês; "
+                        "filtros limpos ajudam o aparelho a trabalhar melhor.</p>
+                    </article>
+                    <article class="article-task-card">
+                        <h3>Limpeza do evaporador e condensador</h3>
+                        <p><strong>Abordagem:</strong> Requer produtos e ferramentas adequados; "
+                        "recomenda-se serviço técnico.</p>
+                        <p><strong>Em Lisboa e Cascais:</strong> Uma vez por ano, antes do verão, "
+                        "pode evitar odores, mau desempenho e avarias.</p>
+                    </article>
+                    <article class="article-task-card">
+                        <h3>Recarga de gás refrigerante</h3>
+                        <p><strong>Abordagem:</strong> Apenas por técnico habilitado; envolve "
+                        "manuseamento de fluidos refrigerantes e verificação de estanquidade.</p>
+                        <p><strong>Em Lisboa e Cascais:</strong> Se o aparelho arrefece pouco, não "
+                        "tente resolver sozinho — peça diagnóstico.</p>
+                    </article>
+                    <article class="article-task-card">
+                        <h3>Verificação de pressões e carga elétrica</h3>
+                        <p><strong>Abordagem:</strong> Profissional, com instrumentação adequada "
+                        "ao tipo de gás e modelo do equipamento.</p>
+                        <p><strong>Em Lisboa e Cascais:</strong> Incluir na manutenção anual de "
+                        "primavera pode detetar fugas antes de avarias maiores.</p>
+                    </article>
+                </div>
+
+                <h2>Custos de Instalação e Manutenção na Grande Lisboa</h2>
+                <p>Os valores publicados online raramente refletem a realidade de cada casa: acesso "
+                "à fachada, comprimento da tubagem, potência do equipamento e estado da instalação "
+                "elétrica alteram o orçamento. Os intervalos abaixo são <strong>orientativos</strong> "
+                "e devem ser confirmados após visita ou descrição do trabalho.</p>
+                <h3>Instalação de um split doméstico</h3>
+                <p>Para um split standard (potência habitual para quartos ou salas pequenas), com "
+                "acesso razoável ao exterior, a instalação costuma situar-se numa faixa que varia "
+                "consoante marca, distância entre unidades e trabalhos extra (suportes, furações, "
+                "proteções). Peça sempre orçamento por escrito.</p>
+                <h3>Manutenção anual</h3>
+                <p>Uma revisão técnica completa de um split doméstico em Lisboa pode oscilar entre "
+                "valores modestos e montantes mais altos se forem necessárias peças, produtos de "
+                "higienização ou deslocação. A <a href="{BASE_URL}/servico-manutencao.html">manutenção "
+                "preventiva</a> costuma sair mais barata do que uma reparação de emergência no "
+                "agosto.</p>
+                <h3>O custo de adiar a manutenção</h3>
+                <p>Recargas de gás, substituição de compressor ou reparações elétricas podem custar "
+                "significativamente mais do que uma revisão anual. Além do valor financeiro, um "
+                "equipamento mal mantido <strong>pode aumentar o consumo</strong> e "
+                "<strong>pode encurtar a vida útil</strong> do aparelho.</p>
+
+                <figure class="article-figure">
+                    <img src="{IMG_AC}/manutencao-ar-condicionado-checklist.webp"
+                         alt="Checklist de manutenção de ar condicionado antes do verão"
+                         width="1024" height="1024" loading="lazy" decoding="async">
+                    <figcaption>Uma revisão preventiva antes do verão reduz o risco de avarias nos meses de maior calor.</figcaption>
+                </figure>
+
+                <h2>Erros Mais Comuns na Instalação e Uso do Split em Lisboa</h2>
+                <p>Na instalação e no dia a dia, estes padrões repetem-se com frequência na Grande "
+                "Lisboa:</p>
                 <ul>
-                    <li><strong>Filtros da unidade interior:</strong> retirar e lavar os filtros
-                    com água morna a cada poucas semanas durante a época de maior utilização,
-                    deixando secar bem antes de recolocar.</li>
-                    <li><strong>Grelhas e exterior do aparelho:</strong> limpar o pó com um pano
-                    húmido, com o equipamento desligado.</li>
-                </ul>
-                <h3>O que é trabalho de técnico</h3>
-                <ul>
-                    <li>Limpeza profunda da serpentina e da turbina interior.</li>
-                    <li>Higienização e tratamento de odores.</li>
-                    <li>Verificação e limpeza da unidade exterior e da drenagem de condensados.</li>
+                    <li><strong>Subdimensionar o equipamento.</strong> Um quarto exposto a sul com "
+                    "janelas amplas pode precisar de mais capacidade do que a área em m² sugere à "
+                    "primeira vista.</li>
+                    <li><strong>Má ventilação da unidade exterior.</strong> Instalar em patamar "
+                    "fechado ou sem espaço de renovação de ar pode forçar o sistema e aumentar o "
+                    "desgaste.</li>
+                    <li><strong>Ignorar a drenagem.</strong> O condensado da unidade interior deve "
+                    "escoar corretamente; tubagens entupidas ou mal inclinadas causam gotejamentos "
+                    "e humidade nas paredes — situações que a nossa equipa de "
+                    f'<a href="{BASE_URL}/servico-reparacoes-gerais.html">reparações gerais</a> '
+                    "também pode ajudar a resolver.</li>
                 </ul>
 
-                <h2>3. Manutenção e sinais de alerta</h2>
-                <p>Além da limpeza, uma revisão periódica ajuda a detetar pequenos problemas
-                antes que se tornem avarias maiores. Alguns sinais que justificam contactar um
-                profissional:</p>
-                <ul>
-                    <li>O aparelho arrefece (ou aquece) menos do que costumava.</li>
-                    <li>Ruídos invulgares, vibração ou cheiros persistentes.</li>
-                    <li>Água a pingar da unidade interior.</li>
-                    <li>Aumento pouco habitual do consumo elétrico.</li>
-                </ul>
-                <p>Em equipamentos usados de forma intensa, é comum recomendar-se uma
-                <strong>revisão anual</strong>; o intervalo ideal pode variar consoante o uso e
-                as indicações do fabricante.</p>
-
-                <h2>Quanto custa? Uma nota honesta</h2>
-                <p>O valor de uma instalação ou de uma manutenção depende de vários fatores —
-                tipo e potência do equipamento, dificuldade do acesso, comprimento da tubagem e
-                estado do aparelho. Por isso, em vez de indicar preços que podem não corresponder
-                ao seu caso, preferimos avaliar a situação e apresentar um
-                <strong>orçamento claro e sem compromisso</strong>.</p>
-
-                <h2>Porquê falar com a FAZDETUDO.PT</h2>
-                <p>Fazemos <a href="https://www.fazdetudo.pt/servico-climatizacao.html">instalação,
-                limpeza e manutenção de ar condicionado</a> em Lisboa, Cascais, Almada, Setúbal e
-                arredores, com atendimento por marcação e orçamento prévio. Se preferir, pode
-                falar connosco diretamente por WhatsApp e descrever o que precisa.</p>
+                <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "
+                "Fale connosco pelo WhatsApp e peça uma avaliação sem compromisso.</p>
         """,
         "faq": [
             {
-                "q": "Com que frequência devo limpar os filtros do ar condicionado?",
+                "q": "Qual é o melhor mês para instalar ar condicionado em Lisboa?",
                 "a": (
-                    "Durante a época de maior utilização, lavar os filtros a cada poucas "
-                    "semanas costuma ser suficiente. Filtros limpos ajudam o aparelho a "
-                    "arrefecer melhor e a manter o ar mais saudável."
+                    "Abril costuma ser um bom mês: a procura ainda não está no pico, há "
+                    "disponibilidade de técnicos e as temperaturas permitem testar o equipamento "
+                    "antes do calor intenso. Março e maio também são opções sólidas."
                 ),
             },
             {
-                "q": "É preciso fazer manutenção mesmo que o aparelho pareça funcionar bem?",
+                "q": "Com que frequência devo limpar os filtros do meu split em Lisboa?",
                 "a": (
-                    "Sim, uma revisão periódica ajuda a manter a eficiência e a detetar "
-                    "pequenos problemas cedo. Em equipamentos muito usados é comum "
-                    "recomendar-se uma revisão anual, mas o intervalo pode variar."
+                    "Durante os meses de uso intensivo (junho a setembro para arrefecimento e, "
+                    "se usar aquecimento, dezembro a fevereiro), lavar os filtros a cada poucas "
+                    "semanas costuma ser adequado. Em zonas com mais pó ou perto do mar, pode "
+                    "ser necessário limpar com mais frequência."
                 ),
             },
             {
-                "q": "Posso instalar o ar condicionado por conta própria?",
+                "q": "A manutenção do ar condicionado é obrigatória por lei em Portugal?",
                 "a": (
-                    "A instalação envolve gás refrigerante e ligações elétricas, pelo que "
-                    "deve ser feita por um técnico habilitado, por razões de segurança e "
-                    "para preservar a garantia do fabricante."
+                    "Em habitações particulares, a manutenção preventiva é sobretudo uma "
+                    "recomendação técnica e de garantia. Em edifícios comerciais ou sistemas de "
+                    "maior dimensão, podem aplicar-se requisitos legais específicos. Em caso de "
+                    "dúvida, confirme com técnico habilitado."
                 ),
             },
             {
-                "q": "Fazem ar condicionado fora de Lisboa?",
+                "q": "Porque é que o meu split cheira a mofo quando liga?",
                 "a": (
-                    "Sim. Trabalhamos na Grande Lisboa e Margem Sul — incluindo Cascais, "
-                    "Almada, Setúbal e arredores. Contacte-nos para confirmar a sua zona."
+                    "O cheiro a mofo costuma indicar humidade e depósitos no evaporador da unidade "
+                    "interior — muitas vezes após filtros sujos ou longos períodos sem limpeza "
+                    "profunda. Uma higienização técnica resolve na maioria dos casos."
+                ),
+            },
+            {
+                "q": "Preciso de autorização do condomínio para instalar um split em Lisboa?",
+                "a": (
+                    "Na maioria dos casos, sim. A colocação de unidades exteriores em fachadas de "
+                    "prédios em regime de condomínio requer aprovação prévia da administração. "
+                    "Confirme o regulamento interno antes de avançar."
+                ),
+            },
+            {
+                "q": "Qual a diferença entre instalar um split em Cascais e no centro de Lisboa?",
+                "a": (
+                    "A proximidade ao mar em Cascais e na faixa costeira de Setúbal favorece a "
+                    "corrosão das aletas exteriores. Convém equipamentos com proteção adequada e "
+                    "revisões mais atentas à unidade exterior."
+                ),
+            },
+            {
+                "q": "Vale a pena comprar um split com maior potência do que o necessário?",
+                "a": (
+                    "Em geral, não. Um split sobredimensionado pode ligar e desligar com demasiada "
+                    "frequência, o que pode aumentar o desgaste e o consumo sem melhorar o "
+                    "conforto de forma proporcional."
+                ),
+            },
+            {
+                "q": "Fazem instalação e manutenção fora de Lisboa?",
+                "a": (
+                    "Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e "
+                    "arredores. Contacte-nos para confirmar a sua zona."
                 ),
             },
         ],
