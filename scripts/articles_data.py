@@ -44,6 +44,10 @@ ARTICLES = [
             "Cascais e Setúbal para evitar avarias, infiltrações e gastos de emergência."
         ),
         "og_title": "10 Reparações em Casa Antes do Verão em Lisboa",
+        "og_image": (
+            f"{BASE_URL}/images/artigos/reparacoes-verao-lisboa/"
+            "ar-condicionado-lisboa-limpeza-filtros.webp"
+        ),
         "lead": (
             "Muitos proprietários só percebem que a casa precisa de atenção quando o calor "
             "aperta e surge uma avaria ou uma infiltração. Reunimos dez intervenções práticas "
@@ -226,12 +230,16 @@ ARTICLES = [
         "published": "2026-06-01",
         "updated": "2026-06-01",
         "h1": "Ar Condicionado Lisboa: Instalar, Limpar e Manter o Split",
-        "page_title": "Ar Condicionado em Lisboa: Instalar e Manter Split | FAZDETUDO.PT",
+        "page_title": "Ar Condicionado Lisboa: Instalar Split | FAZDETUDO.PT",
         "meta_description": (
             "Guia prático sobre instalação, limpeza e manutenção de ar condicionado "
             "em Lisboa, Cascais e Setúbal. Saiba quando instalar, limpar filtros e pedir assistência."
         ),
         "og_title": "Ar Condicionado Lisboa: Instalar, Limpar e Manter o Split",
+        "og_image": (
+            f"{BASE_URL}/images/artigos/ar-condicionado/"
+            "ar-condicionado-lisboa-split-sala.webp"
+        ),
         "lead": (
             "Um split bem instalado e com manutenção regular trabalha melhor, pode consumir "
             "menos energia e tende a durar mais tempo. Reunimos o essencial sobre instalação, "

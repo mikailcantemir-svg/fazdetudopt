@@ -54,7 +54,7 @@ def article_url(slug: str) -> str:
 
 
 def _common_parts(*, page_title: str, meta_description: str, canonical: str,
-                  og_title: str, json_ld: str, faq_json_ld: str = "") -> dict:
+                  og_title: str, og_image: str, json_ld: str, faq_json_ld: str = "") -> dict:
     ui = UI[LANG]
     head = render_head(
         page_title=page_title,
@@ -64,6 +64,7 @@ def _common_parts(*, page_title: str, meta_description: str, canonical: str,
         og_title=og_title,
         og_description=meta_description,
         og_locale=OG_LOCALE,
+        og_image=og_image,
         json_ld=json_ld,
         asset_prefix=ASSET_PREFIX,
         include_swiper_css=False,
@@ -116,6 +117,7 @@ def _faq_json_ld(faq: list[dict]) -> str:
 
 
 def _article_json_ld(article: dict, canonical: str) -> str:
+    article_image = article.get("og_image", OG_IMAGE)
     data = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -124,7 +126,7 @@ def _article_json_ld(article: dict, canonical: str) -> str:
         "inLanguage": "pt-PT",
         "datePublished": article["published"],
         "dateModified": article["updated"],
-        "image": OG_IMAGE,
+        "image": article_image,
         "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
         "author": {"@type": "Organization", "name": "FAZDETUDO.PT", "url": BASE_URL},
         "publisher": {
@@ -143,6 +145,7 @@ def render_article(article: dict) -> str:
         meta_description=article["meta_description"],
         canonical=canonical,
         og_title=article["og_title"],
+        og_image=article.get("og_image", OG_IMAGE),
         json_ld=_article_json_ld(article, canonical),
         faq_json_ld=_faq_json_ld(article.get("faq", [])),
     )
@@ -229,6 +232,7 @@ def render_index() -> str:
         meta_description=ARTICLES_INDEX["meta_description"],
         canonical=canonical,
         og_title=ARTICLES_INDEX["og_title"],
+        og_image=OG_IMAGE,
         json_ld=_index_json_ld(canonical),
     )
     return render_template(
