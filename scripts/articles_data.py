@@ -30,6 +30,7 @@ ARTICLES_INDEX = {
 
 IMG_VERAO = "../images/artigos/reparacoes-verao-lisboa"
 IMG_AC = "../images/artigos/ar-condicionado"
+IMG_HANDY = "../images/artigos/preco-handyman-lisboa"
 
 ARTICLES = [
     {
@@ -532,6 +533,156 @@ ARTICLES = [
                 "a": (
                     "Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e "
                     "arredores. Contacte-nos para confirmar a sua zona."
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "preco-handyman-lisboa-guia-custos.html",
+        "category": "Guias de Reparações",
+        "published": "2026-06-02",
+        "updated": "2026-06-02",
+        "h1": "Preço Handyman Lisboa: Guia de Custos e O Que Esperar",
+        "page_title": "Preço Handyman Lisboa: Guia de Custos | FAZDETUDO.PT",
+        "meta_description": (
+            "Descubra preços indicativos de handyman em Lisboa, Cascais e Setúbal. "
+            "Veja custos por tipo de serviço, fatores que influenciam o orçamento e "
+            "dicas para comparar propostas."
+        ),
+        "og_title": "Preço Handyman Lisboa: Guia de Custos e O Que Esperar",
+        "og_image": (
+            f"{BASE_URL}/images/artigos/preco-handyman-lisboa/"
+            "preco-handyman-lisboa-orcamento-ferramentas.webp"
+        ),
+        "lead": (
+            "Saber quanto pode custar um serviço de handyman e faz-tudo ajuda a evitar "
+            "surpresas e a comparar propostas com mais confiança. Este guia reúne "
+            "valores indicativos praticados atualmente na Grande Lisboa, Cascais e "
+            "Setúbal, com foco em transparência e decisões informadas."
+        ),
+        "excerpt": (
+            "Guia com valores de referência para handyman e faz-tudo em Lisboa, "
+            "fatores de preço, comparação de orçamentos e perguntas frequentes."
+        ),
+        "related_service_url": f"{BASE_URL}/servico-reparacoes-gerais.html",
+        "related_service_label": "Ver serviço de Reparações Gerais e Faz-Tudo",
+        "related_intro": "Precisa de resolver várias tarefas numa só visita?",
+        "wa_message": (
+            "Olá! Gostaria de pedir um orçamento para serviço de handyman / "
+            "faz-tudo em Lisboa."
+        ),
+        "cta_h3": "Precisa de apoio para reparações em casa?",
+        "cta_p": (
+            "Fale com a equipa da FAZDETUDO.PT para avaliar o trabalho e receber "
+            "um orçamento sem compromisso na Grande Lisboa e Margem Sul."
+        ),
+        "cta_button": "Pedir orçamento para handyman",
+        "body_html": f"""
+                <p>Quando surge uma lista de tarefas em casa, é normal perguntar: quanto pode custar um <strong>serviço de handyman e faz-tudo ao domicílio</strong> em Lisboa? A resposta depende sempre do tipo de trabalho, materiais, deslocação e urgência. Ainda assim, há <strong>valores de referência na Grande Lisboa</strong> que ajudam a comparar propostas com mais clareza antes de adjudicar.</p>
+
+                <figure class="article-figure">
+                    <img src="{IMG_HANDY}/preco-handyman-lisboa-orcamento-ferramentas.webp"
+                         alt="Orçamento de serviço handyman com ferramentas em Lisboa"
+                         width="1024" height="1024" loading="eager" decoding="async">
+                    <figcaption>Comparar orçamentos ajuda a perceber o preço real de um serviço de handyman.</figcaption>
+                </figure>
+
+                <p>Se precisa de resolver vários pontos numa única visita, pode começar por pedir avaliação no serviço de <a href="{BASE_URL}/servico-reparacoes-gerais.html">reparações gerais e faz-tudo</a>. Para trabalhos específicos, também pode cruzar preços com <a href="{BASE_URL}/servico-canalizacoes.html">canalizações</a>, <a href="{BASE_URL}/servico-electricidade.html">electricidade</a>, <a href="{BASE_URL}/servico-pinturas.html">pinturas</a>, <a href="{BASE_URL}/servico-carpintaria.html">carpintaria</a>, <a href="{BASE_URL}/servico-serralharia.html">serralharia</a>, <a href="{BASE_URL}/servico-manutencao.html">manutenção</a> e <a href="{BASE_URL}/servico-piscinas.html">piscinas</a>.</p>
+
+                <h2>Valores indicativos de handyman e faz-tudo em Lisboa</h2>
+                <p>Para serviços domésticos gerais, é comum encontrar <strong>valores por hora</strong> na ordem de 25 € a 55 €, dependendo da complexidade do trabalho e da zona. Em muitos casos existe também um <strong>valor mínimo de deslocação/serviço</strong>, que pode variar entre 50 € e 80 €.</p>
+                <p>Em tarefas simples de curta duração (por exemplo, ajustar portas, montar mobiliário ou trocar acessórios), o custo final pode variar entre 60 € e 150 €. Já para intervenções com mais preparação, materiais e tempo de execução, é comum encontrar valores numa faixa mais ampla.</p>
+
+                <h2>Preços por tipo de trabalho: o que é comum no mercado</h2>
+                <h3>Pequenos arranjos e reparações rápidas</h3>
+                <p>Montagem de móveis, fixação de suportes, pequenas correções de fechaduras e ajustes em casa são normalmente os trabalhos mais acessíveis. O orçamento depende do número de tarefas no mesmo pedido e do tempo real de execução.</p>
+
+                <h3>Canalização e electricidade de baixa complexidade</h3>
+                <p>Substituição de torneiras, sifões, tomadas, interruptores ou pequenas correções elétricas podem ter valores intermédios, com variação conforme o acesso ao local e necessidade de peças. Se houver diagnóstico técnico mais profundo, o valor tende a subir.</p>
+
+                <h3>Pintura, carpintaria e serralharia</h3>
+                <p>Trabalhos por divisão ou por área (como pintura, reparação de madeira ou elementos metálicos) costumam depender muito da preparação prévia e do estado atual das superfícies. Por isso, o mais seguro é pedir medição e escopo detalhado antes de comparar preços.</p>
+
+                <h2>Lisboa, Cascais e Setúbal: há diferenças de preço?</h2>
+                <p>Sim, pode haver diferenças. Em zonas com procura mais elevada, como Cascais e algumas áreas centrais de Lisboa, é comum encontrar valores ligeiramente acima da média. Na Margem Sul e em partes da região de Setúbal, os preços podem ser mais competitivos em alguns serviços.</p>
+
+                <figure class="article-figure">
+                    <img src="{IMG_HANDY}/servico-handyman-lisboa-reparacoes-casa.webp"
+                         alt="Serviço de handyman e faz-tudo em casa na Grande Lisboa"
+                         width="1024" height="1024" loading="lazy" decoding="async">
+                    <figcaption>Um serviço faz-tudo pode resolver várias pequenas reparações numa só visita.</figcaption>
+                </figure>
+
+                <p>Mesmo dentro da mesma cidade, o orçamento final depende da deslocação, estacionamento, acessos (por exemplo, ausência de elevador) e janela horária solicitada. Serviços urgentes fora de horário normal podem incluir majoração.</p>
+
+                <h2>Fatores que mais influenciam o orçamento</h2>
+                <ul>
+                    <li><strong>Complexidade técnica:</strong> tarefas simples têm custos diferentes de intervenções com diagnóstico, desmontagem ou testes.</li>
+                    <li><strong>Materiais e consumíveis:</strong> confirme sempre se estão incluídos no valor apresentado.</li>
+                    <li><strong>Deslocação:</strong> distância e tempo de viagem podem influenciar o total.</li>
+                    <li><strong>Urgência:</strong> pedidos para o próprio dia ou fim de semana tendem a ter acréscimo.</li>
+                    <li><strong>Agrupamento de tarefas:</strong> juntar vários trabalhos numa visita pode melhorar a relação custo-benefício.</li>
+                </ul>
+
+                <h2>Como comparar propostas sem cair em armadilhas</h2>
+                <p>Peça pelo menos dois ou três orçamentos com o <strong>mesmo escopo</strong>. Compare não só o preço total, mas também o que está incluído: mão de obra, materiais, deslocação, prazo e garantia. Um valor muito baixo pode excluir itens importantes e gerar custos extra depois.</p>
+                <p>Uma proposta clara deve indicar tarefas, quantidades, condições de pagamento e eventuais exclusões. Esta transparência reduz conflitos e facilita a decisão.</p>
+
+                <h2>Handyman/faz-tudo ou especialista: quando escolher cada opção</h2>
+                <p>Para múltiplas reparações pequenas no mesmo imóvel, o <strong>handyman e faz-tudo</strong> costuma ser a solução mais prática. Para trabalhos que exijam certificação específica, projeto técnico ou intervenção estrutural, pode ser necessário um especialista dedicado.</p>
+                <p>Na prática, muitos pedidos combinam as duas abordagens: começar pelo serviço faz-tudo para resolver o essencial e, quando necessário, avançar para especialidades técnicas.</p>
+
+                <h2>Conclusão</h2>
+                <p>Os preços de handyman/faz-tudo em Lisboa, Cascais e Setúbal devem ser lidos como <strong>valores indicativos praticados atualmente</strong>. O orçamento final depende sempre da avaliação concreta do trabalho, materiais, deslocação, urgência e complexidade da intervenção.</p>
+                <p><strong>Precisa de um handyman ou faz-tudo em Lisboa? Fale connosco pelo WhatsApp e peça um orçamento sem compromisso.</strong></p>
+        """,
+        "faq": [
+            {
+                "q": "Qual é o preço médio por hora de um handyman/faz-tudo em Lisboa?",
+                "a": (
+                    "Como referência, é comum encontrar valores na ordem de 25 € a 55 € "
+                    "por hora. O valor final depende do tipo de tarefa, da zona e da "
+                    "complexidade técnica."
+                ),
+            },
+            {
+                "q": "Porque é que dois orçamentos para o mesmo trabalho podem ser diferentes?",
+                "a": (
+                    "Diferenças de preço podem resultar de materiais incluídos, deslocação, "
+                    "nível de detalhe do serviço, urgência e garantia oferecida. Compare "
+                    "sempre o escopo completo e não apenas o total."
+                ),
+            },
+            {
+                "q": "Em Cascais os preços são mais altos do que em Lisboa?",
+                "a": (
+                    "Em alguns serviços pode haver valores ligeiramente superiores, sobretudo "
+                    "em zonas de maior procura. Ainda assim, o mais importante é pedir "
+                    "orçamento com descrição detalhada do trabalho."
+                ),
+            },
+            {
+                "q": "Setúbal e Margem Sul têm preços mais baixos?",
+                "a": (
+                    "Em vários casos os valores podem ser mais competitivos, mas não é regra "
+                    "absoluta. O preço depende também de acessos, deslocação, urgência e "
+                    "materiais necessários."
+                ),
+            },
+            {
+                "q": "Os materiais estão incluídos no orçamento de handyman/faz-tudo?",
+                "a": (
+                    "Nem sempre. Alguns orçamentos incluem apenas mão de obra; outros incluem "
+                    "também materiais e consumíveis. Confirme sempre esta separação antes de "
+                    "aprovar."
+                ),
+            },
+            {
+                "q": "Como pedir um orçamento mais preciso para evitar surpresas?",
+                "a": (
+                    "Indique morada, lista de tarefas, fotos, medidas aproximadas e se há "
+                    "urgência. Quanto mais contexto fornecer, mais fiável será a proposta "
+                    "inicial."
                 ),
             },
         ],
