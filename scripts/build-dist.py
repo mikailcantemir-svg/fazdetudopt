@@ -6,7 +6,7 @@ Run after generate-servico-pages.py (includes sitemap), or standalone.
 
 Contents mirror the live site root:
   index.html, sitemap.xml, robots.txt, favicons, CNAME, .nojekyll, .htaccess,
-  style.css, script.js, logo.webp, logo.png, images/, en/, es/, fr/,
+  style.css, script.js, logo.webp, logo.png, images/, assets/, en/, es/, fr/,
   servico-*.html, *-lisboa.html
 """
 
@@ -69,6 +69,9 @@ def build_dist() -> Path:
             _copy_file(src, DIST / name)
 
     _copy_tree(ROOT / "images", DIST / "images")
+    assets = ROOT / "assets"
+    if assets.is_dir():
+        _copy_tree(assets, DIST / "assets")
 
     videos = ROOT / "videos"
     if videos.is_dir():

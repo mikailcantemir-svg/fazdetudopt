@@ -691,6 +691,17 @@ a.lang-option {
     border-radius: 50px;
 }
 
+.window-badge--airfix-partner {
+    background: linear-gradient(135deg, #0F3D6E 0%, #1a5a96 55%, #FF6A00 100%);
+    box-shadow: 0 6px 16px rgba(15, 61, 110, 0.2);
+    letter-spacing: 0.05em;
+    font-size: 0.64rem;
+    padding: 5px 11px;
+    max-width: calc(100% - 28px);
+    text-align: center;
+    line-height: 1.2;
+}
+
 .service-window-icon {
     width: 52px;
     height: 52px;
@@ -733,6 +744,186 @@ a.lang-option {
 .service-window-link:hover {
     gap: 12px;
     color: var(--primary-dark);
+}
+
+.service-window-card--partner {
+    border-color: rgba(13, 110, 253, 0.35);
+    box-shadow: 0 14px 34px rgba(13, 110, 253, 0.12);
+}
+
+.service-window-link--secondary {
+    margin-top: 10px;
+    font-size: 0.84rem;
+    color: #4a5568;
+}
+
+.airfix-partner-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    margin-bottom: 12px;
+    padding: 8px 12px 8px 8px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 61, 110, 0.14);
+    box-shadow: 0 10px 28px rgba(15, 61, 110, 0.12);
+    color: #0F3D6E;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.82rem;
+}
+
+.airfix-logo-circle {
+    position: relative;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 3px rgba(255, 138, 0, 0.16),
+        0 10px 22px rgba(15, 61, 110, 0.16);
+}
+
+.airfix-logo-circle img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    display: block;
+}
+
+.airfix-logo-circle-large {
+    width: 68px;
+    height: 68px;
+}
+
+.airfix-pulse-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0));
+    animation: airfixPulseRing 1.8s ease-in-out infinite;
+    z-index: 1;
+}
+
+.airfix-badge-text {
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+@keyframes airfixPulseRing {
+    0%, 100% {
+        transform: scale(0.92);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+}
+
+.airfix-recommended-box {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid rgba(255, 138, 0, 0.28);
+    box-shadow: 0 18px 42px rgba(15, 61, 110, 0.12);
+}
+
+.airfix-recommended-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.airfix-logo-featured {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.airfix-kicker {
+    display: inline-flex;
+    margin-bottom: 4px;
+    color: #FF6A00;
+    font-weight: 900;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.airfix-recommended-box h3 {
+    margin: 0 0 4px;
+    color: #0F3D6E;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.airfix-recommended-box p {
+    margin: 0;
+    color: #526174;
+    line-height: 1.5;
+}
+
+.airfix-seo-link {
+    margin-top: 12px;
+}
+
+.airfix-seo-link a {
+    color: #0F3D6E;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.airfix-seo-link a:hover {
+    text-decoration: underline;
+}
+
+.airfix-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.airfix-tags span {
+    display: inline-flex;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(15, 61, 110, 0.06);
+    color: #0F3D6E;
+    font-weight: 800;
+    font-size: 0.78rem;
+}
+
+.airfix-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: #0F3D6E;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 900;
+    box-shadow: 0 12px 28px rgba(15, 61, 110, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.airfix-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px rgba(15, 61, 110, 0.28);
 }
 
 /* ===== HANDYMAN DETAILS ===== */
@@ -792,6 +983,42 @@ a.lang-option {
     .handyman-detailed-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .window-badge--airfix-partner {
+        font-size: 0.58rem;
+        padding: 4px 8px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .airfix-recommended-header {
+        align-items: flex-start;
+    }
+
+    .airfix-logo-circle-large {
+        width: 58px;
+        height: 58px;
+    }
+
+    .airfix-badge-text {
+        font-size: 0.76rem;
+    }
+
+    .airfix-tags {
+        gap: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .airfix-pulse-ring {
+        animation: none !important;
+    }
+
+    .airfix-cta:hover {
+        transform: none;
     }
 }
 

@@ -1,7 +1,7 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-06-02 08:42 UTC
+Atualizado: 2026-07-07 10:47 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
 Ficheiros: 250
 ================================================================================
@@ -165,6 +165,7 @@ FILE: scripts/templates/home.html
             <div class="services-modern-grid">
 {{SERVICE_CARDS}}
             </div>
+{{HVAC_PARTNER_BLOCK}}
         </div>
     </section>
 
@@ -1308,7 +1309,7 @@ Run after generate-servico-pages.py (includes sitemap), or standalone.
 
 Contents mirror the live site root:
   index.html, sitemap.xml, robots.txt, favicons, CNAME, .nojekyll, .htaccess,
-  style.css, script.js, logo.webp, logo.png, images/, en/, es/, fr/,
+  style.css, script.js, logo.webp, logo.png, images/, assets/, en/, es/, fr/,
   servico-*.html, *-lisboa.html
 """
 
@@ -1371,6 +1372,9 @@ def build_dist() -> Path:
             _copy_file(src, DIST / name)
 
     _copy_tree(ROOT / "images", DIST / "images")
+    assets = ROOT / "assets"
+    if assets.is_dir():
+        _copy_tree(assets, DIST / "assets")
 
     videos = ROOT / "videos"
     if videos.is_dir():
@@ -2643,15 +2647,76 @@ def build_service_cards(lang: str) -> str:
             badge = f'                    <span class="window-badge">{ui["badge_acabamentos_premium"]}</span>\n'
         elif card["badge"] == "muito_requisitado":
             badge = f'                    <span class="window-badge">{ui["badge_muito_requisitado"]}</span>\n'
+        is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
+        partner_note = ""
+        link_href = card["slug"]
+        link_text = ui["learn_more"]
+        secondary_link = ""
+        if is_hvac_pt:
+            feat = f"{feat} service-window-card--partner"
+            badge = (
+                '                    <span class="window-badge window-badge--airfix-partner">'
+                f'{ui["badge_parceiro_certificado"]}</span>\n'
+            )
+            partner_note = (
+                '\n                    <a class="airfix-partner-badge" href="https://airfix.pt/" '
+                'target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt">'
+                '<span class="airfix-pulse-ring" aria-hidden="true"></span>'
+                '<span class="airfix-logo-circle">'
+                '<img src="assets/partners/airfix-icon.png" alt="AirFix.pt">'
+                "</span>"
+                '<span class="airfix-badge-text">Parceiro recomendado</span>'
+                "</a>"
+            )
+            link_href = "https://airfix.pt/"
+            link_text = "Ver parceiro AVAC"
+            secondary_link = (
+                '\n                    <a href="servico-climatizacao.html" '
+                'class="service-window-link service-window-link--secondary">'
+                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
+            )
         blocks.append(
             f"""                <div class="service-window-card{feat}">
 {badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>
                     <h3>{title}</h3>
                     <p>{desc}</p>
-                    <a href="{card["slug"]}" class="service-window-link">{ui["learn_more"]} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+{partner_note}
+                    <a href="{link_href}" class="service-window-link"{' target="_blank" rel="noopener noreferrer"' if is_hvac_pt else ''}>{link_text} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>{secondary_link}
                 </div>"""
         )
     return "\n\n".join(blocks)
+
+
+def build_hvac_partner_block(lang: str, prefix: str) -> str:
+    if lang != "pt":
+        return ""
+    return f"""            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
+                <div class="airfix-recommended-header">
+                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
+                      <span class="airfix-logo-circle airfix-logo-circle-large">
+                        <img src="{prefix}assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
+                      </span>
+                    </a>
+
+                    <div>
+                      <span class="airfix-kicker">Parceiro recomendado</span>
+                      <h3>AirFix.pt</h3>
+                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
+                    </div>
+                </div>
+                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
+                <div class="airfix-tags">
+                  <span>Instalação AVAC</span>
+                  <span>Manutenção</span>
+                  <span>Limpeza</span>
+                  <span>Reparação</span>
+                </div>
+
+                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
+                  Visitar AirFix.pt
+                </a>
+            </div>"""
 
 
 def build_handyman_section(lang: str) -> str:
@@ -2781,6 +2846,7 @@ def render_homepage(lang: str) -> str:
             "ASSET_PREFIX": prefix,
             "LOGO_PATH": LOGO_PATH,
             "SERVICE_CARDS": build_service_cards(lang),
+            "HVAC_PARTNER_BLOCK": build_hvac_partner_block(lang, prefix),
             "HANDYMAN_SECTION": build_handyman_section(lang),
             "RECENT_WORK_SECTION": build_recent_work_section(lang),
             "WORK_LIGHTBOX": build_work_lightbox_markup(lang),
@@ -3530,6 +3596,7 @@ HOME_UI = {
         "badge_specialty": "Especialidade",
         "badge_acabamentos_premium": "Acabamentos Premium",
         "badge_muito_requisitado": "Muito Requisitado",
+        "badge_parceiro_certificado": "Parceiro certificado",
     },
     "en": {
         "nav_home": "Home",
@@ -4681,14 +4748,14 @@ SERVICE_CARDS = [
         "fr": ("Rénovations et Travaux", "Rénovation cuisines et salles de bains, nouvelles pièces, extensions et gros œuvre. Du projet à la livraison."),
     },
     {
-        "slug": "servico-recuperar-casa.html",
-        "icon": "house-circle-check",
+        "slug": "servico-climatizacao.html",
+        "icon": "wind",
         "featured": False,
         "badge": None,
-        "pt": ("Recuperar Casa", "Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel."),
-        "en": ("Home Restoration", "Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life."),
-        "es": ("Recuperar Casa", "Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos habitabilidad."),
-        "fr": ("Rénover une Maison", "Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions."),
+        "pt": ("Climatização (AVAC)", "Instalação, manutenção, limpeza e reparação de ar condicionado para casas, apartamentos, lojas e empresas."),
+        "en": ("Air Conditioning (HVAC)", "AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance."),
+        "es": ("Climatización (AVAC)", "Instalación de aire acondicionado, carga de gas, filtros y mantenimiento AVAC."),
+        "fr": ("Climatisation (CVC)", "Installation climatisation, recharge gaz, filtres et entretien CVC."),
     },
     {
         "slug": "servico-pinturas.html",
@@ -4811,14 +4878,14 @@ SERVICE_CARDS = [
         "fr": ("Serrurerie", "Ouverture de porte d'urgence, serrures, portails et grilles."),
     },
     {
-        "slug": "servico-climatizacao.html",
-        "icon": "wind",
+        "slug": "servico-recuperar-casa.html",
+        "icon": "house-circle-check",
         "featured": False,
         "badge": None,
-        "pt": ("Climatização (AVAC)", "Instalação de ar condicionado (splits), cargas de gás, limpeza de filtros e manutenção preventiva AVAC."),
-        "en": ("Air Conditioning (HVAC)", "AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance."),
-        "es": ("Climatización (AVAC)", "Instalación de aire acondicionado, carga de gas, filtros y mantenimiento AVAC."),
-        "fr": ("Climatisation (CVC)", "Installation climatisation, recharge gaz, filtres et entretien CVC."),
+        "pt": ("Recuperar Casa", "Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel."),
+        "en": ("Home Restoration", "Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life."),
+        "es": ("Recuperar Casa", "Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos habitabilidad."),
+        "fr": ("Rénover une Maison", "Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions."),
     },
     {
         "slug": "servico-estores-persianas.html",
@@ -11007,14 +11074,16 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Renovations & Construction</h3>
                     <p>Kitchen and bathroom renovations, new rooms, extensions and structural works. From design to handover.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Home Restoration</h3>
-                    <p>Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Air Conditioning (HVAC)</h3>
+                    <p>AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance.</p>
+
+                    <a href="servico-climatizacao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -11022,6 +11091,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>General Painting</h3>
                     <p>Interior and exterior painting with furniture protection, damp treatment and premium finishes.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11029,6 +11099,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Rope-Access Facade Painting</h3>
                     <p>High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11036,6 +11107,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Plumbing</h3>
                     <p>Leak repair, urgent unblocking, tap, toilet and pipe replacement.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11043,6 +11115,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Electrical</h3>
                     <p>Electrical faults, fuse boards, breakers, sockets and LED lighting upgrades.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11050,6 +11123,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Carpentry</h3>
                     <p>Furniture assembly (IKEA and custom), door adjustment, skirting and woodwork.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11058,6 +11132,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>General Repairs</h3>
                     <p>Your handyman for shelves, TVs, curtain rails, silicone sealing and small fix-it jobs.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11065,6 +11140,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Maintenance</h3>
                     <p>Preventive plans for condominiums, roof and gutter inspection, pressure washing.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11072,6 +11148,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Cleaning</h3>
                     <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11079,6 +11156,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Gardening</h3>
                     <p>Garden maintenance, lawn mowing, tree pruning, plot clearance and irrigation repair.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11086,6 +11164,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Moving</h3>
                     <p>Residential and commercial moves with safe transport, careful packing and furniture disassembly.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11093,6 +11172,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>IT Services</h3>
                     <p>Computer repair, stable Wi-Fi setup, printers and smart home solutions.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11100,20 +11180,23 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Locksmithing</h3>
                     <p>Emergency door opening, lock and cylinder replacement, gates and grilles.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Air Conditioning (HVAC)</h3>
-                    <p>AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Home Restoration</h3>
+                    <p>Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Blinds & Shutters</h3>
                     <p>Manual and electric blind repair, broken tapes, stuck motors and mosquito nets.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11121,6 +11204,7 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Interior Design</h3>
                     <p>Curtains, wallpaper, lighting and home staging to enhance or sell your property.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -11128,9 +11212,11 @@ FILE: dist/en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Pools</h3>
                     <p>Pool construction, maintenance, repair, cleaning and water treatment.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -12731,7 +12817,7 @@ FILE: dist/en/index.html
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Renovations &amp; Construction</a></li>
-                        <li><a href="servico-recuperar-casa.html">Home Restoration</a></li>
+                        <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
                         <li><a href="servico-pinturas.html">General Painting</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Rope-Access Facade Painting</a></li>
                         <li><a href="servico-canalizacoes.html">Plumbing</a></li>
@@ -12744,7 +12830,7 @@ FILE: dist/en/index.html
                         <li><a href="servico-mudancas.html">Moving</a></li>
                         <li><a href="servico-informatica.html">IT Services</a></li>
                         <li><a href="servico-serralharia.html">Locksmithing</a></li>
-                        <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Home Restoration</a></li>
                         <li><a href="servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
                         <li><a href="servico-decoracao-interiores.html">Interior Design</a></li>
                         <li><a href="servico-piscinas.html">Pools</a></li>
@@ -16799,14 +16885,16 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Reformas y Obras</h3>
                     <p>Reforma de cocinas y baños, nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Recuperar Casa</h3>
-                    <p>Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos habitabilidad.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Climatización (AVAC)</h3>
+                    <p>Instalación de aire acondicionado, carga de gas, filtros y mantenimiento AVAC.</p>
+
+                    <a href="servico-climatizacao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -16814,6 +16902,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>Pinturas Generales</h3>
                     <p>Pintura interior y exterior con protección del mobiliario, humedades y acabados premium.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16821,6 +16910,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Pintura en Alpinismo</h3>
                     <p>Rehabilitación de fachadas en altura con cuerdas. Sin andamios, más rápido y económico.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16828,6 +16918,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Fontanería</h3>
                     <p>Reparación de fugas, desatascos urgentes, grifos, inodoros y tuberías.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16835,6 +16926,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Electricidad</h3>
                     <p>Averías eléctricas, cuadros, magnetotérmicos, enchufes e iluminación LED.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16842,6 +16934,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Carpintería</h3>
                     <p>Montaje de muebles (IKEA y a medida), ajuste de puertas, rodapiés y madera.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16850,6 +16943,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Reparaciones Generales</h3>
                     <p>Su manitas para estanterías, TV, cortinajes, silicona y pequeños arreglos.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16857,6 +16951,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Mantenimiento</h3>
                     <p>Planes preventivos para comunidades, tejados, canalones y lavado a presión.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16864,6 +16959,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpieza</h3>
                     <p>Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16871,6 +16967,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Jardinería</h3>
                     <p>Mantenimiento de jardines, césped, poda, limpieza de terrenos y riego.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16878,6 +16975,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Mudanzas</h3>
                     <p>Mudanzas residenciales y comerciales con transporte seguro, embalaje y montaje.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16885,6 +16983,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>Informática</h3>
                     <p>Reparación de ordenadores, Wi-Fi, impresoras y smart home.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16892,20 +16991,23 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Cerrajería</h3>
                     <p>Apertura urgente de puertas, cerraduras, portones y rejas.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Climatización (AVAC)</h3>
-                    <p>Instalación de aire acondicionado, carga de gas, filtros y mantenimiento AVAC.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Recuperar Casa</h3>
+                    <p>Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos habitabilidad.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Persianas y Estores</h3>
                     <p>Reparación de estores manuales y eléctricos, cintas, motores y mosquiteras.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16913,6 +17015,7 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Decoración de Interiores</h3>
                     <p>Cortinas, papel pintado, iluminación y home staging para vender su inmueble.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -16920,9 +17023,11 @@ FILE: dist/es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
                     <p>Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -18523,7 +18628,7 @@ FILE: dist/es/index.html
                     <h3 data-i18n="nav_services">Servicios</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Reformas y Obras</a></li>
-                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
+                        <li><a href="servico-climatizacao.html">Climatización (AVAC)</a></li>
                         <li><a href="servico-pinturas.html">Pinturas Generales</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Pintura en Alpinismo</a></li>
                         <li><a href="servico-canalizacoes.html">Fontanería</a></li>
@@ -18536,7 +18641,7 @@ FILE: dist/es/index.html
                         <li><a href="servico-mudancas.html">Mudanzas</a></li>
                         <li><a href="servico-informatica.html">Informática</a></li>
                         <li><a href="servico-serralharia.html">Cerrajería</a></li>
-                        <li><a href="servico-climatizacao.html">Climatización (AVAC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
                         <li><a href="servico-estores-persianas.html">Persianas y Estores</a></li>
                         <li><a href="servico-decoracao-interiores.html">Decoración de Interiores</a></li>
                         <li><a href="servico-piscinas.html">Piscinas</a></li>
@@ -22591,14 +22696,16 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Rénovations et Travaux</h3>
                     <p>Rénovation cuisines et salles de bains, nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Rénover une Maison</h3>
-                    <p>Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Climatisation (CVC)</h3>
+                    <p>Installation climatisation, recharge gaz, filtres et entretien CVC.</p>
+
+                    <a href="servico-climatizacao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -22606,6 +22713,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>Peinture Générale</h3>
                     <p>Peinture intérieure et extérieure avec protection du mobilier et finitions premium.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22613,6 +22721,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Peinture en Cordes</h3>
                     <p>Réhabilitation de façades en hauteur par cordes. Sans échafaudage, plus rapide et économique.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22620,6 +22729,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Plomberie</h3>
                     <p>Réparation de fuites, débouchage urgent, robinets, WC et canalisations.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22627,6 +22737,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Électricité</h3>
                     <p>Pannes électriques, tableaux, disjoncteurs, prises et éclairage LED.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22634,6 +22745,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Menuiserie</h3>
                     <p>Montage de meubles (IKEA et sur mesure), réglage de portes et boiseries.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22642,6 +22754,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Réparations Générales</h3>
                     <p>Votre bricoleur pour étagères, TV, tringles, silicone et petites réparations.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22649,6 +22762,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Entretien</h3>
                     <p>Plans préventifs pour copropriétés, toitures, gouttières et nettoyage haute pression.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22656,6 +22770,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Nettoyage</h3>
                     <p>Nettoyage profond domestique, après-travaux, bureaux et copropriétés.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22663,6 +22778,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Jardinage</h3>
                     <p>Entretien de jardins, tonte, taille, nettoyage de terrains et arrosage.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22670,6 +22786,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Déménagements</h3>
                     <p>Déménagements résidentiels et commerciaux avec transport sécurisé et emballage.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22677,6 +22794,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>Informatique</h3>
                     <p>Réparation PC, Wi-Fi, imprimantes et maison connectée.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22684,20 +22802,23 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Serrurerie</h3>
                     <p>Ouverture de porte d'urgence, serrures, portails et grilles.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Climatisation (CVC)</h3>
-                    <p>Installation climatisation, recharge gaz, filtres et entretien CVC.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Rénover une Maison</h3>
+                    <p>Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Stores et Volets</h3>
                     <p>Réparation de stores manuels et électriques, sangles, moteurs et moustiquaires.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22705,6 +22826,7 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Décoration Intérieure</h3>
                     <p>Rideaux, papier peint, éclairage et home staging pour valoriser votre bien.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -22712,9 +22834,11 @@ FILE: dist/fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscines</h3>
                     <p>Construction, entretien, réparation, nettoyage et traitement de l'eau.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -24315,7 +24439,7 @@ FILE: dist/fr/index.html
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Rénovations et Travaux</a></li>
-                        <li><a href="servico-recuperar-casa.html">Rénover une Maison</a></li>
+                        <li><a href="servico-climatizacao.html">Climatisation (CVC)</a></li>
                         <li><a href="servico-pinturas.html">Peinture Générale</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Peinture en Cordes</a></li>
                         <li><a href="servico-canalizacoes.html">Plomberie</a></li>
@@ -24328,7 +24452,7 @@ FILE: dist/fr/index.html
                         <li><a href="servico-mudancas.html">Déménagements</a></li>
                         <li><a href="servico-informatica.html">Informatique</a></li>
                         <li><a href="servico-serralharia.html">Serrurerie</a></li>
-                        <li><a href="servico-climatizacao.html">Climatisation (CVC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Rénover une Maison</a></li>
                         <li><a href="servico-estores-persianas.html">Stores et Volets</a></li>
                         <li><a href="servico-decoracao-interiores.html">Décoration Intérieure</a></li>
                         <li><a href="servico-piscinas.html">Piscines</a></li>
@@ -28383,14 +28507,19 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Remodelações e Obras</h3>
                     <p>Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Recuperar Casa</h3>
-                    <p>Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                <div class="service-window-card service-window-card--partner">
+                    <span class="window-badge window-badge--airfix-partner">Parceiro certificado</span>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Climatização (AVAC)</h3>
+                    <p>Instalação, manutenção, limpeza e reparação de ar condicionado para casas, apartamentos, lojas e empresas.</p>
+
+                    <a class="airfix-partner-badge" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt"><span class="airfix-pulse-ring" aria-hidden="true"></span><span class="airfix-logo-circle"><img src="assets/partners/airfix-icon.png" alt="AirFix.pt"></span><span class="airfix-badge-text">Parceiro recomendado</span></a>
+                    <a href="https://airfix.pt/" class="service-window-link" target="_blank" rel="noopener noreferrer">Ver parceiro AVAC <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <a href="servico-climatizacao.html" class="service-window-link service-window-link--secondary">Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -28398,6 +28527,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>Pinturas Gerais</h3>
                     <p>Pintura interior e exterior com proteção de mobiliário, tratamento de humidades e acabamentos premium.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28405,6 +28535,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Pintura em Alpinismo</h3>
                     <p>Reabilitação de fachadas em altura com trabalho em cordas. Sem andaimes, mais rápido e económico.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28412,6 +28543,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Canalizações</h3>
                     <p>Reparação de fugas, desentupimentos urgentes, substituição de torneiras, autoclismos e tubagens.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28419,6 +28551,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Electricidade</h3>
                     <p>Avarias elétricas, quadros, disjuntores, instalação de tomadas e modernização para iluminação LED.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28426,6 +28559,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Carpintaria</h3>
                     <p>Montagem de móveis (IKEA e medida), afinação de portas, rodapés e pequenas estruturas em madeira.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28434,6 +28568,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Reparações Gerais</h3>
                     <p>O seu faz-tudo para fixar prateleiras, TVs, cortinados, selar juntas e resolver a lista de pequenos arranjos.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28441,6 +28576,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Manutenção</h3>
                     <p>Planos preventivos para condomínios, inspeção de telhados, calhas e lavagem de pátios a alta pressão.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28448,6 +28584,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpezas</h3>
                     <p>Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28455,6 +28592,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Jardinagem</h3>
                     <p>Manutenção de jardins, corte de relva, poda de árvores, limpeza de terrenos e reparação de sistemas de rega.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28462,6 +28600,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Mudanças</h3>
                     <p>Mudanças residenciais e comerciais com transporte seguro, embalagem cuidada e desmontagem de móveis.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28469,6 +28608,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>Informática</h3>
                     <p>Reparação de computadores, configuração de redes Wi-Fi estáveis, impressoras e soluções de smart home.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28476,20 +28616,23 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Serralharia</h3>
                     <p>Abertura de portas urgente, substituição de fechaduras e cilindros, e reparação de portões e grades.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Climatização (AVAC)</h3>
-                    <p>Instalação de ar condicionado (splits), cargas de gás, limpeza de filtros e manutenção preventiva AVAC.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Recuperar Casa</h3>
+                    <p>Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Estores e Persianas</h3>
                     <p>Reparação de estores manuais e eléctricos, fitas partidas, motores encravados e montagem de mosquiteiras.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28497,6 +28640,7 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Decoração de Interiores</h3>
                     <p>Aplicação de cortinados, papel de parede, iluminação e home staging para valorizar ou vender o seu imóvel.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -28504,8 +28648,36 @@ FILE: dist/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
                     <p>Construção, manutenção, reparação, limpeza e tratamento de piscinas.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
+            </div>
+            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
+                <div class="airfix-recommended-header">
+                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
+                      <span class="airfix-logo-circle airfix-logo-circle-large">
+                        <img src="assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
+                      </span>
+                    </a>
+
+                    <div>
+                      <span class="airfix-kicker">Parceiro recomendado</span>
+                      <h3>AirFix.pt</h3>
+                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
+                    </div>
+                </div>
+                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
+                <div class="airfix-tags">
+                  <span>Instalação AVAC</span>
+                  <span>Manutenção</span>
+                  <span>Limpeza</span>
+                  <span>Reparação</span>
+                </div>
+
+                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
+                  Visitar AirFix.pt
+                </a>
             </div>
         </div>
     </section>
@@ -30107,7 +30279,7 @@ FILE: dist/index.html
                     <h3 data-i18n="nav_services">Serviços</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Remodelações e Obras</a></li>
-                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
+                        <li><a href="servico-climatizacao.html">Climatização (AVAC)</a></li>
                         <li><a href="servico-pinturas.html">Pinturas Gerais</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Pintura em Alpinismo</a></li>
                         <li><a href="servico-canalizacoes.html">Canalizações</a></li>
@@ -30120,7 +30292,7 @@ FILE: dist/index.html
                         <li><a href="servico-mudancas.html">Mudanças</a></li>
                         <li><a href="servico-informatica.html">Informática</a></li>
                         <li><a href="servico-serralharia.html">Serralharia</a></li>
-                        <li><a href="servico-climatizacao.html">Climatização (AVAC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
                         <li><a href="servico-estores-persianas.html">Estores e Persianas</a></li>
                         <li><a href="servico-decoracao-interiores.html">Decoração de Interiores</a></li>
                         <li><a href="servico-piscinas.html">Piscinas</a></li>
@@ -35351,481 +35523,481 @@ FILE: dist/sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -36529,6 +36701,17 @@ a.lang-option {
     border-radius: 50px;
 }
 
+.window-badge--airfix-partner {
+    background: linear-gradient(135deg, #0F3D6E 0%, #1a5a96 55%, #FF6A00 100%);
+    box-shadow: 0 6px 16px rgba(15, 61, 110, 0.2);
+    letter-spacing: 0.05em;
+    font-size: 0.64rem;
+    padding: 5px 11px;
+    max-width: calc(100% - 28px);
+    text-align: center;
+    line-height: 1.2;
+}
+
 .service-window-icon {
     width: 52px;
     height: 52px;
@@ -36571,6 +36754,186 @@ a.lang-option {
 .service-window-link:hover {
     gap: 12px;
     color: var(--primary-dark);
+}
+
+.service-window-card--partner {
+    border-color: rgba(13, 110, 253, 0.35);
+    box-shadow: 0 14px 34px rgba(13, 110, 253, 0.12);
+}
+
+.service-window-link--secondary {
+    margin-top: 10px;
+    font-size: 0.84rem;
+    color: #4a5568;
+}
+
+.airfix-partner-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    margin-bottom: 12px;
+    padding: 8px 12px 8px 8px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 61, 110, 0.14);
+    box-shadow: 0 10px 28px rgba(15, 61, 110, 0.12);
+    color: #0F3D6E;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.82rem;
+}
+
+.airfix-logo-circle {
+    position: relative;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 3px rgba(255, 138, 0, 0.16),
+        0 10px 22px rgba(15, 61, 110, 0.16);
+}
+
+.airfix-logo-circle img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    display: block;
+}
+
+.airfix-logo-circle-large {
+    width: 68px;
+    height: 68px;
+}
+
+.airfix-pulse-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0));
+    animation: airfixPulseRing 1.8s ease-in-out infinite;
+    z-index: 1;
+}
+
+.airfix-badge-text {
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+@keyframes airfixPulseRing {
+    0%, 100% {
+        transform: scale(0.92);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+}
+
+.airfix-recommended-box {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid rgba(255, 138, 0, 0.28);
+    box-shadow: 0 18px 42px rgba(15, 61, 110, 0.12);
+}
+
+.airfix-recommended-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.airfix-logo-featured {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.airfix-kicker {
+    display: inline-flex;
+    margin-bottom: 4px;
+    color: #FF6A00;
+    font-weight: 900;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.airfix-recommended-box h3 {
+    margin: 0 0 4px;
+    color: #0F3D6E;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.airfix-recommended-box p {
+    margin: 0;
+    color: #526174;
+    line-height: 1.5;
+}
+
+.airfix-seo-link {
+    margin-top: 12px;
+}
+
+.airfix-seo-link a {
+    color: #0F3D6E;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.airfix-seo-link a:hover {
+    text-decoration: underline;
+}
+
+.airfix-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.airfix-tags span {
+    display: inline-flex;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(15, 61, 110, 0.06);
+    color: #0F3D6E;
+    font-weight: 800;
+    font-size: 0.78rem;
+}
+
+.airfix-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: #0F3D6E;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 900;
+    box-shadow: 0 12px 28px rgba(15, 61, 110, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.airfix-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px rgba(15, 61, 110, 0.28);
 }
 
 /* ===== HANDYMAN DETAILS ===== */
@@ -36630,6 +36993,42 @@ a.lang-option {
     .handyman-detailed-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .window-badge--airfix-partner {
+        font-size: 0.58rem;
+        padding: 4px 8px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .airfix-recommended-header {
+        align-items: flex-start;
+    }
+
+    .airfix-logo-circle-large {
+        width: 58px;
+        height: 58px;
+    }
+
+    .airfix-badge-text {
+        font-size: 0.76rem;
+    }
+
+    .airfix-tags {
+        gap: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .airfix-pulse-ring {
+        animation: none !important;
+    }
+
+    .airfix-cta:hover {
+        transform: none;
     }
 }
 
@@ -39322,14 +39721,16 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Renovations & Construction</h3>
                     <p>Kitchen and bathroom renovations, new rooms, extensions and structural works. From design to handover.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Home Restoration</h3>
-                    <p>Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Air Conditioning (HVAC)</h3>
+                    <p>AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance.</p>
+
+                    <a href="servico-climatizacao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -39337,6 +39738,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>General Painting</h3>
                     <p>Interior and exterior painting with furniture protection, damp treatment and premium finishes.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39344,6 +39746,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Rope-Access Facade Painting</h3>
                     <p>High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39351,6 +39754,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Plumbing</h3>
                     <p>Leak repair, urgent unblocking, tap, toilet and pipe replacement.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39358,6 +39762,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Electrical</h3>
                     <p>Electrical faults, fuse boards, breakers, sockets and LED lighting upgrades.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39365,6 +39770,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Carpentry</h3>
                     <p>Furniture assembly (IKEA and custom), door adjustment, skirting and woodwork.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39373,6 +39779,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>General Repairs</h3>
                     <p>Your handyman for shelves, TVs, curtain rails, silicone sealing and small fix-it jobs.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39380,6 +39787,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Maintenance</h3>
                     <p>Preventive plans for condominiums, roof and gutter inspection, pressure washing.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39387,6 +39795,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Cleaning</h3>
                     <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39394,6 +39803,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Gardening</h3>
                     <p>Garden maintenance, lawn mowing, tree pruning, plot clearance and irrigation repair.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39401,6 +39811,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Moving</h3>
                     <p>Residential and commercial moves with safe transport, careful packing and furniture disassembly.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39408,6 +39819,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>IT Services</h3>
                     <p>Computer repair, stable Wi-Fi setup, printers and smart home solutions.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39415,20 +39827,23 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Locksmithing</h3>
                     <p>Emergency door opening, lock and cylinder replacement, gates and grilles.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Air Conditioning (HVAC)</h3>
-                    <p>AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Home Restoration</h3>
+                    <p>Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Blinds & Shutters</h3>
                     <p>Manual and electric blind repair, broken tapes, stuck motors and mosquito nets.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39436,6 +39851,7 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Interior Design</h3>
                     <p>Curtains, wallpaper, lighting and home staging to enhance or sell your property.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -39443,9 +39859,11 @@ FILE: en/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Pools</h3>
                     <p>Pool construction, maintenance, repair, cleaning and water treatment.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -41046,7 +41464,7 @@ FILE: en/index.html
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Renovations &amp; Construction</a></li>
-                        <li><a href="servico-recuperar-casa.html">Home Restoration</a></li>
+                        <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
                         <li><a href="servico-pinturas.html">General Painting</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Rope-Access Facade Painting</a></li>
                         <li><a href="servico-canalizacoes.html">Plumbing</a></li>
@@ -41059,7 +41477,7 @@ FILE: en/index.html
                         <li><a href="servico-mudancas.html">Moving</a></li>
                         <li><a href="servico-informatica.html">IT Services</a></li>
                         <li><a href="servico-serralharia.html">Locksmithing</a></li>
-                        <li><a href="servico-climatizacao.html">Air Conditioning (HVAC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Home Restoration</a></li>
                         <li><a href="servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
                         <li><a href="servico-decoracao-interiores.html">Interior Design</a></li>
                         <li><a href="servico-piscinas.html">Pools</a></li>
@@ -45114,14 +45532,16 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Reformas y Obras</h3>
                     <p>Reforma de cocinas y baños, nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Recuperar Casa</h3>
-                    <p>Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos habitabilidad.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Climatización (AVAC)</h3>
+                    <p>Instalación de aire acondicionado, carga de gas, filtros y mantenimiento AVAC.</p>
+
+                    <a href="servico-climatizacao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -45129,6 +45549,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>Pinturas Generales</h3>
                     <p>Pintura interior y exterior con protección del mobiliario, humedades y acabados premium.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45136,6 +45557,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Pintura en Alpinismo</h3>
                     <p>Rehabilitación de fachadas en altura con cuerdas. Sin andamios, más rápido y económico.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45143,6 +45565,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Fontanería</h3>
                     <p>Reparación de fugas, desatascos urgentes, grifos, inodoros y tuberías.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45150,6 +45573,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Electricidad</h3>
                     <p>Averías eléctricas, cuadros, magnetotérmicos, enchufes e iluminación LED.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45157,6 +45581,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Carpintería</h3>
                     <p>Montaje de muebles (IKEA y a medida), ajuste de puertas, rodapiés y madera.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45165,6 +45590,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Reparaciones Generales</h3>
                     <p>Su manitas para estanterías, TV, cortinajes, silicona y pequeños arreglos.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45172,6 +45598,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Mantenimiento</h3>
                     <p>Planes preventivos para comunidades, tejados, canalones y lavado a presión.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45179,6 +45606,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpieza</h3>
                     <p>Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45186,6 +45614,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Jardinería</h3>
                     <p>Mantenimiento de jardines, césped, poda, limpieza de terrenos y riego.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45193,6 +45622,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Mudanzas</h3>
                     <p>Mudanzas residenciales y comerciales con transporte seguro, embalaje y montaje.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45200,6 +45630,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>Informática</h3>
                     <p>Reparación de ordenadores, Wi-Fi, impresoras y smart home.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45207,20 +45638,23 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Cerrajería</h3>
                     <p>Apertura urgente de puertas, cerraduras, portones y rejas.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Climatización (AVAC)</h3>
-                    <p>Instalación de aire acondicionado, carga de gas, filtros y mantenimiento AVAC.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Recuperar Casa</h3>
+                    <p>Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos habitabilidad.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Persianas y Estores</h3>
                     <p>Reparación de estores manuales y eléctricos, cintas, motores y mosquiteras.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45228,6 +45662,7 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Decoración de Interiores</h3>
                     <p>Cortinas, papel pintado, iluminación y home staging para vender su inmueble.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -45235,9 +45670,11 @@ FILE: es/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
                     <p>Construcción, mantenimiento, reparación, limpieza y tratamiento de piscinas.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -46838,7 +47275,7 @@ FILE: es/index.html
                     <h3 data-i18n="nav_services">Servicios</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Reformas y Obras</a></li>
-                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
+                        <li><a href="servico-climatizacao.html">Climatización (AVAC)</a></li>
                         <li><a href="servico-pinturas.html">Pinturas Generales</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Pintura en Alpinismo</a></li>
                         <li><a href="servico-canalizacoes.html">Fontanería</a></li>
@@ -46851,7 +47288,7 @@ FILE: es/index.html
                         <li><a href="servico-mudancas.html">Mudanzas</a></li>
                         <li><a href="servico-informatica.html">Informática</a></li>
                         <li><a href="servico-serralharia.html">Cerrajería</a></li>
-                        <li><a href="servico-climatizacao.html">Climatización (AVAC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
                         <li><a href="servico-estores-persianas.html">Persianas y Estores</a></li>
                         <li><a href="servico-decoracao-interiores.html">Decoración de Interiores</a></li>
                         <li><a href="servico-piscinas.html">Piscinas</a></li>
@@ -50906,14 +51343,16 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Rénovations et Travaux</h3>
                     <p>Rénovation cuisines et salles de bains, nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Rénover une Maison</h3>
-                    <p>Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Climatisation (CVC)</h3>
+                    <p>Installation climatisation, recharge gaz, filtres et entretien CVC.</p>
+
+                    <a href="servico-climatizacao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -50921,6 +51360,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>Peinture Générale</h3>
                     <p>Peinture intérieure et extérieure avec protection du mobilier et finitions premium.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50928,6 +51368,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Peinture en Cordes</h3>
                     <p>Réhabilitation de façades en hauteur par cordes. Sans échafaudage, plus rapide et économique.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50935,6 +51376,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Plomberie</h3>
                     <p>Réparation de fuites, débouchage urgent, robinets, WC et canalisations.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50942,6 +51384,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Électricité</h3>
                     <p>Pannes électriques, tableaux, disjoncteurs, prises et éclairage LED.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50949,6 +51392,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Menuiserie</h3>
                     <p>Montage de meubles (IKEA et sur mesure), réglage de portes et boiseries.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50957,6 +51401,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Réparations Générales</h3>
                     <p>Votre bricoleur pour étagères, TV, tringles, silicone et petites réparations.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50964,6 +51409,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Entretien</h3>
                     <p>Plans préventifs pour copropriétés, toitures, gouttières et nettoyage haute pression.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50971,6 +51417,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Nettoyage</h3>
                     <p>Nettoyage profond domestique, après-travaux, bureaux et copropriétés.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50978,6 +51425,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Jardinage</h3>
                     <p>Entretien de jardins, tonte, taille, nettoyage de terrains et arrosage.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50985,6 +51433,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Déménagements</h3>
                     <p>Déménagements résidentiels et commerciaux avec transport sécurisé et emballage.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50992,6 +51441,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>Informatique</h3>
                     <p>Réparation PC, Wi-Fi, imprimantes et maison connectée.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -50999,20 +51449,23 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Serrurerie</h3>
                     <p>Ouverture de porte d'urgence, serrures, portails et grilles.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Climatisation (CVC)</h3>
-                    <p>Installation climatisation, recharge gaz, filtres et entretien CVC.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Rénover une Maison</h3>
+                    <p>Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Stores et Volets</h3>
                     <p>Réparation de stores manuels et électriques, sangles, moteurs et moustiquaires.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -51020,6 +51473,7 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Décoration Intérieure</h3>
                     <p>Rideaux, papier peint, éclairage et home staging pour valoriser votre bien.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -51027,9 +51481,11 @@ FILE: fr/index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscines</h3>
                     <p>Construction, entretien, réparation, nettoyage et traitement de l'eau.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -52630,7 +53086,7 @@ FILE: fr/index.html
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Rénovations et Travaux</a></li>
-                        <li><a href="servico-recuperar-casa.html">Rénover une Maison</a></li>
+                        <li><a href="servico-climatizacao.html">Climatisation (CVC)</a></li>
                         <li><a href="servico-pinturas.html">Peinture Générale</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Peinture en Cordes</a></li>
                         <li><a href="servico-canalizacoes.html">Plomberie</a></li>
@@ -52643,7 +53099,7 @@ FILE: fr/index.html
                         <li><a href="servico-mudancas.html">Déménagements</a></li>
                         <li><a href="servico-informatica.html">Informatique</a></li>
                         <li><a href="servico-serralharia.html">Serrurerie</a></li>
-                        <li><a href="servico-climatizacao.html">Climatisation (CVC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Rénover une Maison</a></li>
                         <li><a href="servico-estores-persianas.html">Stores et Volets</a></li>
                         <li><a href="servico-decoracao-interiores.html">Décoration Intérieure</a></li>
                         <li><a href="servico-piscinas.html">Piscines</a></li>
@@ -56698,14 +57154,19 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
                     <h3>Remodelações e Obras</h3>
                     <p>Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.</p>
+
                     <a href="servico-remodelacoes.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Recuperar Casa</h3>
-                    <p>Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.</p>
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                <div class="service-window-card service-window-card--partner">
+                    <span class="window-badge window-badge--airfix-partner">Parceiro certificado</span>
+                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
+                    <h3>Climatização (AVAC)</h3>
+                    <p>Instalação, manutenção, limpeza e reparação de ar condicionado para casas, apartamentos, lojas e empresas.</p>
+
+                    <a class="airfix-partner-badge" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt"><span class="airfix-pulse-ring" aria-hidden="true"></span><span class="airfix-logo-circle"><img src="assets/partners/airfix-icon.png" alt="AirFix.pt"></span><span class="airfix-badge-text">Parceiro recomendado</span></a>
+                    <a href="https://airfix.pt/" class="service-window-link" target="_blank" rel="noopener noreferrer">Ver parceiro AVAC <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <a href="servico-climatizacao.html" class="service-window-link service-window-link--secondary">Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -56713,6 +57174,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
                     <h3>Pinturas Gerais</h3>
                     <p>Pintura interior e exterior com proteção de mobiliário, tratamento de humidades e acabamentos premium.</p>
+
                     <a href="servico-pinturas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56720,6 +57182,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
                     <h3>Pintura em Alpinismo</h3>
                     <p>Reabilitação de fachadas em altura com trabalho em cordas. Sem andaimes, mais rápido e económico.</p>
+
                     <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56727,6 +57190,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
                     <h3>Canalizações</h3>
                     <p>Reparação de fugas, desentupimentos urgentes, substituição de torneiras, autoclismos e tubagens.</p>
+
                     <a href="servico-canalizacoes.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56734,6 +57198,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                     <h3>Electricidade</h3>
                     <p>Avarias elétricas, quadros, disjuntores, instalação de tomadas e modernização para iluminação LED.</p>
+
                     <a href="servico-electricidade.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56741,6 +57206,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
                     <h3>Carpintaria</h3>
                     <p>Montagem de móveis (IKEA e medida), afinação de portas, rodapés e pequenas estruturas em madeira.</p>
+
                     <a href="servico-carpintaria.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56749,6 +57215,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
                     <h3>Reparações Gerais</h3>
                     <p>O seu faz-tudo para fixar prateleiras, TVs, cortinados, selar juntas e resolver a lista de pequenos arranjos.</p>
+
                     <a href="servico-reparacoes-gerais.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56756,6 +57223,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
                     <h3>Manutenção</h3>
                     <p>Planos preventivos para condomínios, inspeção de telhados, calhas e lavagem de pátios a alta pressão.</p>
+
                     <a href="servico-manutencao.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56763,6 +57231,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpezas</h3>
                     <p>Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas.</p>
+
                     <a href="servico-limpezas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56770,6 +57239,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
                     <h3>Jardinagem</h3>
                     <p>Manutenção de jardins, corte de relva, poda de árvores, limpeza de terrenos e reparação de sistemas de rega.</p>
+
                     <a href="servico-jardinagem.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56777,6 +57247,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
                     <h3>Mudanças</h3>
                     <p>Mudanças residenciais e comerciais com transporte seguro, embalagem cuidada e desmontagem de móveis.</p>
+
                     <a href="servico-mudancas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56784,6 +57255,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
                     <h3>Informática</h3>
                     <p>Reparação de computadores, configuração de redes Wi-Fi estáveis, impressoras e soluções de smart home.</p>
+
                     <a href="servico-informatica.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56791,20 +57263,23 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
                     <h3>Serralharia</h3>
                     <p>Abertura de portas urgente, substituição de fechaduras e cilindros, e reparação de portões e grades.</p>
+
                     <a href="servico-serralharia.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Climatização (AVAC)</h3>
-                    <p>Instalação de ar condicionado (splits), cargas de gás, limpeza de filtros e manutenção preventiva AVAC.</p>
-                    <a href="servico-climatizacao.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
+                    <h3>Recuperar Casa</h3>
+                    <p>Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.</p>
+
+                    <a href="servico-recuperar-casa.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
                     <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
                     <h3>Estores e Persianas</h3>
                     <p>Reparação de estores manuais e eléctricos, fitas partidas, motores encravados e montagem de mosquiteiras.</p>
+
                     <a href="servico-estores-persianas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56812,6 +57287,7 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
                     <h3>Decoração de Interiores</h3>
                     <p>Aplicação de cortinados, papel de parede, iluminação e home staging para valorizar ou vender o seu imóvel.</p>
+
                     <a href="servico-decoracao-interiores.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -56819,8 +57295,36 @@ FILE: index.html
                     <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
                     <h3>Piscinas</h3>
                     <p>Construção, manutenção, reparação, limpeza e tratamento de piscinas.</p>
+
                     <a href="servico-piscinas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
+            </div>
+            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
+                <div class="airfix-recommended-header">
+                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
+                      <span class="airfix-logo-circle airfix-logo-circle-large">
+                        <img src="assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
+                      </span>
+                    </a>
+
+                    <div>
+                      <span class="airfix-kicker">Parceiro recomendado</span>
+                      <h3>AirFix.pt</h3>
+                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
+                    </div>
+                </div>
+                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
+                <div class="airfix-tags">
+                  <span>Instalação AVAC</span>
+                  <span>Manutenção</span>
+                  <span>Limpeza</span>
+                  <span>Reparação</span>
+                </div>
+
+                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
+                  Visitar AirFix.pt
+                </a>
             </div>
         </div>
     </section>
@@ -58422,7 +58926,7 @@ FILE: index.html
                     <h3 data-i18n="nav_services">Serviços</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Remodelações e Obras</a></li>
-                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
+                        <li><a href="servico-climatizacao.html">Climatização (AVAC)</a></li>
                         <li><a href="servico-pinturas.html">Pinturas Gerais</a></li>
                         <li><a href="servico-pintura-fachadas-alpinismo.html">Pintura em Alpinismo</a></li>
                         <li><a href="servico-canalizacoes.html">Canalizações</a></li>
@@ -58435,7 +58939,7 @@ FILE: index.html
                         <li><a href="servico-mudancas.html">Mudanças</a></li>
                         <li><a href="servico-informatica.html">Informática</a></li>
                         <li><a href="servico-serralharia.html">Serralharia</a></li>
-                        <li><a href="servico-climatizacao.html">Climatização (AVAC)</a></li>
+                        <li><a href="servico-recuperar-casa.html">Recuperar Casa</a></li>
                         <li><a href="servico-estores-persianas.html">Estores e Persianas</a></li>
                         <li><a href="servico-decoracao-interiores.html">Decoração de Interiores</a></li>
                         <li><a href="servico-piscinas.html">Piscinas</a></li>
@@ -63666,481 +64170,481 @@ FILE: sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-06-02</lastmod>
+        <lastmod>2026-07-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -64844,6 +65348,17 @@ a.lang-option {
     border-radius: 50px;
 }
 
+.window-badge--airfix-partner {
+    background: linear-gradient(135deg, #0F3D6E 0%, #1a5a96 55%, #FF6A00 100%);
+    box-shadow: 0 6px 16px rgba(15, 61, 110, 0.2);
+    letter-spacing: 0.05em;
+    font-size: 0.64rem;
+    padding: 5px 11px;
+    max-width: calc(100% - 28px);
+    text-align: center;
+    line-height: 1.2;
+}
+
 .service-window-icon {
     width: 52px;
     height: 52px;
@@ -64886,6 +65401,186 @@ a.lang-option {
 .service-window-link:hover {
     gap: 12px;
     color: var(--primary-dark);
+}
+
+.service-window-card--partner {
+    border-color: rgba(13, 110, 253, 0.35);
+    box-shadow: 0 14px 34px rgba(13, 110, 253, 0.12);
+}
+
+.service-window-link--secondary {
+    margin-top: 10px;
+    font-size: 0.84rem;
+    color: #4a5568;
+}
+
+.airfix-partner-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    margin-bottom: 12px;
+    padding: 8px 12px 8px 8px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 61, 110, 0.14);
+    box-shadow: 0 10px 28px rgba(15, 61, 110, 0.12);
+    color: #0F3D6E;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.82rem;
+}
+
+.airfix-logo-circle {
+    position: relative;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 3px rgba(255, 138, 0, 0.16),
+        0 10px 22px rgba(15, 61, 110, 0.16);
+}
+
+.airfix-logo-circle img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    display: block;
+}
+
+.airfix-logo-circle-large {
+    width: 68px;
+    height: 68px;
+}
+
+.airfix-pulse-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0));
+    animation: airfixPulseRing 1.8s ease-in-out infinite;
+    z-index: 1;
+}
+
+.airfix-badge-text {
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+@keyframes airfixPulseRing {
+    0%, 100% {
+        transform: scale(0.92);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+}
+
+.airfix-recommended-box {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid rgba(255, 138, 0, 0.28);
+    box-shadow: 0 18px 42px rgba(15, 61, 110, 0.12);
+}
+
+.airfix-recommended-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.airfix-logo-featured {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.airfix-kicker {
+    display: inline-flex;
+    margin-bottom: 4px;
+    color: #FF6A00;
+    font-weight: 900;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.airfix-recommended-box h3 {
+    margin: 0 0 4px;
+    color: #0F3D6E;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.airfix-recommended-box p {
+    margin: 0;
+    color: #526174;
+    line-height: 1.5;
+}
+
+.airfix-seo-link {
+    margin-top: 12px;
+}
+
+.airfix-seo-link a {
+    color: #0F3D6E;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.airfix-seo-link a:hover {
+    text-decoration: underline;
+}
+
+.airfix-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.airfix-tags span {
+    display: inline-flex;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(15, 61, 110, 0.06);
+    color: #0F3D6E;
+    font-weight: 800;
+    font-size: 0.78rem;
+}
+
+.airfix-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: #0F3D6E;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 900;
+    box-shadow: 0 12px 28px rgba(15, 61, 110, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.airfix-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px rgba(15, 61, 110, 0.28);
 }
 
 /* ===== HANDYMAN DETAILS ===== */
@@ -64945,6 +65640,42 @@ a.lang-option {
     .handyman-detailed-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .window-badge--airfix-partner {
+        font-size: 0.58rem;
+        padding: 4px 8px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .airfix-recommended-header {
+        align-items: flex-start;
+    }
+
+    .airfix-logo-circle-large {
+        width: 58px;
+        height: 58px;
+    }
+
+    .airfix-badge-text {
+        font-size: 0.76rem;
+    }
+
+    .airfix-tags {
+        gap: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .airfix-pulse-ring {
+        animation: none !important;
+    }
+
+    .airfix-cta:hover {
+        transform: none;
     }
 }
 
