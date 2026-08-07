@@ -58,20 +58,24 @@ OG_LOCALE = {
 CLEANING_PARTNER_PHONE = "+351963212185"
 CLEANING_PARTNER_CTA = {
     "pt": {
-        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.",
-        "call": "Ligar diretamente à Caterina · 963 212 185",
+        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina para combinar disponibilidade e o serviço.",
+        "call": "Ligar à Caterina · 963 212 185",
+        "whatsapp": "WhatsApp da Caterina · 963 212 185",
     },
     "en": {
-        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.",
-        "call": "Call Caterina directly · 963 212 185",
+        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina directly to discuss availability and the service.",
+        "call": "Call Caterina · 963 212 185",
+        "whatsapp": "WhatsApp Caterina · 963 212 185",
     },
     "es": {
-        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.",
-        "call": "Llamar directamente a Caterina · 963 212 185",
+        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina para consultar disponibilidad y el servicio.",
+        "call": "Llamar a Caterina · 963 212 185",
+        "whatsapp": "WhatsApp Caterina · 963 212 185",
     },
     "fr": {
-        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.",
-        "call": "Appeler Caterina directement · 963 212 185",
+        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina pour convenir des disponibilités et du service.",
+        "call": "Appeler Caterina · 963 212 185",
+        "whatsapp": "WhatsApp Caterina · 963 212 185",
     },
 }
 
@@ -129,12 +133,16 @@ def render_page(slug: str, lang: str) -> str:
     is_cleaning_partner = slug == "servico-limpezas.html"
     cta_p = ui["cta_p"].format(service=meta["service_name"])
     cta_call = ui["cta_call"]
+    cta_wa = ui["cta_wa"]
     call_href = tel_href()
+    wa_link = wa_href_for_message(meta["wa_message"])
     if is_cleaning_partner:
         partner_cta = CLEANING_PARTNER_CTA[lang]
         cta_p = partner_cta["text"]
         cta_call = partner_cta["call"]
+        cta_wa = partner_cta["whatsapp"]
         call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+        wa_link = "https://wa.me/351963212185"
 
     head = render_head(
         page_title=meta["page_title"],
@@ -176,9 +184,9 @@ def render_page(slug: str, lang: str) -> str:
             "BODY_HTML": get_body_html(slug, lang),
             "CTA_H3": ui["cta_h3"],
             "CTA_P": cta_p,
-            "CTA_WA": ui["cta_wa"],
+            "CTA_WA": cta_wa,
             "CTA_CALL": cta_call,
-            "WA_HREF": wa_href_for_message(meta["wa_message"]),
+            "WA_HREF": wa_link,
             "TEL_HREF": call_href,
         },
     )

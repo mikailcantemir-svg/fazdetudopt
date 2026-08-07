@@ -64,37 +64,38 @@ OG_LOCALE = {
 }
 
 CLEANING_PARTNER = {
-    "name": "Caterina Cantemir",
+    "name": "Caterina",
     "phone_display": "963 212 185",
     "tel_href": "tel:+351963212185",
+    "whatsapp_href": "https://wa.me/351963212185",
     "labels": {
         "pt": {
             "badge": "Parceira recomendada",
             "role": "Empregada de limpeza · contacto direto",
-            "call": "Ligar diretamente",
+            "call": "Ligar",
             "details": "Ver serviço",
-            "aria": "Ligar diretamente para Caterina Cantemir, parceira de limpezas",
+            "aria": "Ligar diretamente para Caterina, parceira de limpezas",
         },
         "en": {
             "badge": "Recommended partner",
             "role": "Cleaning professional · direct contact",
-            "call": "Call directly",
+            "call": "Call",
             "details": "View service",
-            "aria": "Call Caterina Cantemir directly, recommended cleaning partner",
+            "aria": "Call Caterina directly, recommended cleaning partner",
         },
         "es": {
             "badge": "Colaboradora recomendada",
             "role": "Profesional de limpieza · contacto directo",
             "call": "Llamar directamente",
             "details": "Ver servicio",
-            "aria": "Llamar directamente a Caterina Cantemir, colaboradora de limpieza",
+            "aria": "Llamar directamente a Caterina, colaboradora de limpieza",
         },
         "fr": {
             "badge": "Partenaire recommandée",
             "role": "Professionnelle du ménage · contact direct",
-            "call": "Appeler directement",
+            "call": "Appeler",
             "details": "Voir le service",
-            "aria": "Appeler directement Caterina Cantemir, partenaire ménage recommandée",
+            "aria": "Appeler directement Caterina, partenaire ménage recommandée",
         },
     },
 }
@@ -632,6 +633,11 @@ def build_service_cards(lang: str) -> str:
                 '<i class="fa-solid fa-phone" aria-hidden="true"></i>'
                 f'<span>{html.escape(labels["call"])}</span>'
                 f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
+                '</a>'
+                f'<a class="cleaning-partner-call cleaning-partner-whatsapp" href="{CLEANING_PARTNER["whatsapp_href"]}" '
+                'target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp">'
+                '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
+                '<span>WhatsApp</span>'
                 '</a>'
                 '</div>'
             )

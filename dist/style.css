@@ -3521,3 +3521,12 @@ body.lightbox-open {
         text-align: center;
     }
 }
+
+
+.cleaning-partner-whatsapp {
+    background: #25D366;
+}
+
+.cleaning-partner-whatsapp:hover {
+    background: #1DA851;
+}

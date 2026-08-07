@@ -1,47 +1,10 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-08-07 23:36 UTC
+Atualizado: 2026-08-07 23:48 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
-Ficheiros: 252
+Ficheiros: 255
 ================================================================================
-
-
-================================================================================
-FILE: .github/workflows/add-cleaning-partner.yml
-================================================================================
-
-name: Add cleaning partner
-
-on:
-  push:
-    paths:
-      - '.github/workflows/add-cleaning-partner.yml'
-
-permissions:
-  contents: write
-
-jobs:
-  update-site:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Update cleaning partner contact
-        run: |
-          python .github/scripts/add-cleaning-partner.py
-          python scripts/generate-servico-pages.py
-          rm .github/workflows/add-cleaning-partner.yml
-          rm .github/scripts/add-cleaning-partner.py
-          git diff --check
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Add direct cleaning partner contact"
-          git push origin HEAD:main
 
 
 ================================================================================
@@ -93,6 +56,42 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+
+================================================================================
+FILE: .github/workflows/update-cleaning-contact.yml
+================================================================================
+
+name: Finalize cleaning contact
+
+on:
+  push:
+    paths:
+      - .github/workflows/update-cleaning-contact.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python scripts/update-cleaning-contact-temp.py
+      - run: python scripts/generate-servico-pages.py
+      - name: Commit changes
+        run: |
+          rm -f docs/DEBUG-CLEANING-BUILD.txt docs/DEBUG-CLEANING-BUILD-2.txt
+          rm .github/workflows/update-cleaning-contact.yml
+          rm scripts/update-cleaning-contact-temp.py
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Use Caterina with direct call and WhatsApp"
+          git push origin HEAD:main
 
 
 ================================================================================
@@ -2197,37 +2196,38 @@ OG_LOCALE = {
 }
 
 CLEANING_PARTNER = {
-    "name": "Caterina Cantemir",
+    "name": "Caterina",
     "phone_display": "963 212 185",
     "tel_href": "tel:+351963212185",
+    "whatsapp_href": "https://wa.me/351963212185",
     "labels": {
         "pt": {
             "badge": "Parceira recomendada",
             "role": "Empregada de limpeza · contacto direto",
-            "call": "Ligar diretamente",
+            "call": "Ligar",
             "details": "Ver serviço",
-            "aria": "Ligar diretamente para Caterina Cantemir, parceira de limpezas",
+            "aria": "Ligar diretamente para Caterina, parceira de limpezas",
         },
         "en": {
             "badge": "Recommended partner",
             "role": "Cleaning professional · direct contact",
-            "call": "Call directly",
+            "call": "Call",
             "details": "View service",
-            "aria": "Call Caterina Cantemir directly, recommended cleaning partner",
+            "aria": "Call Caterina directly, recommended cleaning partner",
         },
         "es": {
             "badge": "Colaboradora recomendada",
             "role": "Profesional de limpieza · contacto directo",
             "call": "Llamar directamente",
             "details": "Ver servicio",
-            "aria": "Llamar directamente a Caterina Cantemir, colaboradora de limpieza",
+            "aria": "Llamar directamente a Caterina, colaboradora de limpieza",
         },
         "fr": {
             "badge": "Partenaire recommandée",
             "role": "Professionnelle du ménage · contact direct",
-            "call": "Appeler directement",
+            "call": "Appeler",
             "details": "Voir le service",
-            "aria": "Appeler directement Caterina Cantemir, partenaire ménage recommandée",
+            "aria": "Appeler directement Caterina, partenaire ménage recommandée",
         },
     },
 }
@@ -2766,6 +2766,11 @@ def build_service_cards(lang: str) -> str:
                 f'<span>{html.escape(labels["call"])}</span>'
                 f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
                 '</a>'
+                f'<a class="cleaning-partner-call cleaning-partner-whatsapp" href="{CLEANING_PARTNER["whatsapp_href"]}" '
+                'target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp">'
+                '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
+                '<span>WhatsApp</span>'
+                '</a>'
                 '</div>'
             )
             link_text = labels["details"]
@@ -3179,20 +3184,24 @@ OG_LOCALE = {
 CLEANING_PARTNER_PHONE = "+351963212185"
 CLEANING_PARTNER_CTA = {
     "pt": {
-        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.",
-        "call": "Ligar diretamente à Caterina · 963 212 185",
+        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina para combinar disponibilidade e o serviço.",
+        "call": "Ligar à Caterina · 963 212 185",
+        "whatsapp": "WhatsApp da Caterina · 963 212 185",
     },
     "en": {
-        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.",
-        "call": "Call Caterina directly · 963 212 185",
+        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina directly to discuss availability and the service.",
+        "call": "Call Caterina · 963 212 185",
+        "whatsapp": "WhatsApp Caterina · 963 212 185",
     },
     "es": {
-        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.",
-        "call": "Llamar directamente a Caterina · 963 212 185",
+        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina para consultar disponibilidad y el servicio.",
+        "call": "Llamar a Caterina · 963 212 185",
+        "whatsapp": "WhatsApp Caterina · 963 212 185",
     },
     "fr": {
-        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.",
-        "call": "Appeler Caterina directement · 963 212 185",
+        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina pour convenir des disponibilités et du service.",
+        "call": "Appeler Caterina · 963 212 185",
+        "whatsapp": "WhatsApp Caterina · 963 212 185",
     },
 }
 
@@ -3250,12 +3259,16 @@ def render_page(slug: str, lang: str) -> str:
     is_cleaning_partner = slug == "servico-limpezas.html"
     cta_p = ui["cta_p"].format(service=meta["service_name"])
     cta_call = ui["cta_call"]
+    cta_wa = ui["cta_wa"]
     call_href = tel_href()
+    wa_link = wa_href_for_message(meta["wa_message"])
     if is_cleaning_partner:
         partner_cta = CLEANING_PARTNER_CTA[lang]
         cta_p = partner_cta["text"]
         cta_call = partner_cta["call"]
+        cta_wa = partner_cta["whatsapp"]
         call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+        wa_link = "https://wa.me/351963212185"
 
     head = render_head(
         page_title=meta["page_title"],
@@ -3297,9 +3310,9 @@ def render_page(slug: str, lang: str) -> str:
             "BODY_HTML": get_body_html(slug, lang),
             "CTA_H3": ui["cta_h3"],
             "CTA_P": cta_p,
-            "CTA_WA": ui["cta_wa"],
+            "CTA_WA": cta_wa,
             "CTA_CALL": cta_call,
-            "WA_HREF": wa_href_for_message(meta["wa_message"]),
+            "WA_HREF": wa_link,
             "TEL_HREF": call_href,
         },
     )
@@ -7542,6 +7555,117 @@ def render_template(name: str, variables: dict[str, str]) -> str:
 
 
 ================================================================================
+FILE: scripts/update-cleaning-contact-temp.py
+================================================================================
+
+from pathlib import Path
+
+# Homepage cleaning card
+p = Path('scripts/generate-homepages.py')
+s = p.read_text(encoding='utf-8')
+s = s.replace('Caterina Cantemir', 'Caterina')
+if '"whatsapp_href": "https://wa.me/351963212185"' not in s:
+    s = s.replace(
+        '    "tel_href": "tel:+351963212185",\n    "labels": {',
+        '    "tel_href": "tel:+351963212185",\n    "whatsapp_href": "https://wa.me/351963212185",\n    "labels": {'
+    )
+s = s.replace('"call": "Ligar diretamente"', '"call": "Ligar"')
+s = s.replace('"call": "Call directly"', '"call": "Call"')
+s = s.replace('"call": "Llamar diretamente"', '"call": "Llamar"')
+s = s.replace('"call": "Appeler directement"', '"call": "Appeler"')
+if 'cleaning-partner-whatsapp' not in s:
+    old = '''                '</a>'
+                '</div>'
+            )
+            link_text = labels["details"]'''
+    new = '''                '</a>'
+                f'<a class="cleaning-partner-call cleaning-partner-whatsapp" href="{CLEANING_PARTNER["whatsapp_href"]}" '
+                'target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp">'
+                '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
+                '<span>WhatsApp</span>'
+                '</a>'
+                '</div>'
+            )
+            link_text = labels["details"]'''
+    s = s.replace(old, new, 1)
+p.write_text(s, encoding='utf-8')
+
+# Cleaning service page: call and WhatsApp both direct to Caterina
+p = Path('scripts/generate-servico-pages.py')
+s = p.read_text(encoding='utf-8').replace('Caterina Cantemir', 'Caterina')
+if '"whatsapp": "WhatsApp da Caterina · 963 212 185"' not in s:
+    s = s.replace(
+        '        "call": "Ligar diretamente à Caterina · 963 212 185",',
+        '        "call": "Ligar à Caterina · 963 212 185",\n        "whatsapp": "WhatsApp da Caterina · 963 212 185",'
+    )
+    s = s.replace(
+        '        "call": "Call Caterina directly · 963 212 185",',
+        '        "call": "Call Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
+    )
+    s = s.replace(
+        '        "call": "Llamar directamente a Caterina · 963 212 185",',
+        '        "call": "Llamar a Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
+    )
+    s = s.replace(
+        '        "call": "Appeler Caterina directement · 963 212 185",',
+        '        "call": "Appeler Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
+    )
+
+if 'cta_wa = ui["cta_wa"]' not in s:
+    s = s.replace(
+'''    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    call_href = tel_href()
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+''',
+'''    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    cta_wa = ui["cta_wa"]
+    call_href = tel_href()
+    wa_link = wa_href_for_message(meta["wa_message"])
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        cta_wa = partner_cta["whatsapp"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+        wa_link = "https://wa.me/351963212185"
+''')
+
+s = s.replace(
+'''            "CTA_WA": ui["cta_wa"],
+            "CTA_CALL": cta_call,
+            "WA_HREF": wa_href_for_message(meta["wa_message"]),
+''',
+'''            "CTA_WA": cta_wa,
+            "CTA_CALL": cta_call,
+            "WA_HREF": wa_link,
+''')
+p.write_text(s, encoding='utf-8')
+
+# Styling
+p = Path('style.css')
+s = p.read_text(encoding='utf-8')
+if '.cleaning-partner-whatsapp {' not in s:
+    s += '\n\n.cleaning-partner-whatsapp {\n    background: #25D366;\n}\n\n.cleaning-partner-whatsapp:hover {\n    background: #1DA851;\n}\n'
+p.write_text(s, encoding='utf-8')
+
+# Public project note
+doc = Path('docs/CLEANING_PARTNER.md')
+if doc.exists():
+    d = doc.read_text(encoding='utf-8').replace('Caterina Cantemir', 'Caterina')
+    if 'wa.me/351963212185' not in d:
+        d += '\n- WhatsApp direto: `https://wa.me/351963212185`\n'
+    doc.write_text(d, encoding='utf-8')
+
+print('Cleaning contact source update complete')
+
+
+================================================================================
 FILE: docs/ASSETS-CANDIDATES-REMOVAL.md
 ================================================================================
 
@@ -7582,6 +7706,155 @@ Após aprovação, por exemplo:
 Remove-Item images/hero/*.png, images/hero/*.jpg
 # opcional: Remove-Item logo.png
 ```
+
+
+================================================================================
+FILE: docs/CLEANING-PARTNER.md
+================================================================================
+
+# Parceira de limpezas
+
+Contacto direto apresentado no site para pedidos de empregada/profissional de limpeza.
+
+- Nome: Caterina Cantemir
+- Telefone: +351 963 212 185
+- Categoria: Limpezas
+- Homepage: cartão de Limpezas com botão de chamada direta
+- Página de serviço: botão de chamada direcionado diretamente para a parceira
+- WhatsApp geral da FAZDETUDO.PT mantém-se separado
+
+As versões PT/EN/ES/FR apresentam o mesmo contacto com texto localizado.
+
+
+================================================================================
+FILE: docs/DEBUG-CLEANING-BUILD-2.txt
+================================================================================
+
+=== Regenerating fazdetudo.pt static HTML ===
+
+--- Homepages (PT + en/es/fr) ---
+wrote index.html
+wrote en/index.html
+wrote es/index.html
+wrote fr/index.html
+
+Total: 4 homepages
+
+--- Service pages (18 × 4 languages) ---
+wrote servico-remodelacoes.html
+wrote en/servico-remodelacoes.html
+wrote es/servico-remodelacoes.html
+wrote fr/servico-remodelacoes.html
+wrote servico-recuperar-casa.html
+wrote en/servico-recuperar-casa.html
+wrote es/servico-recuperar-casa.html
+wrote fr/servico-recuperar-casa.html
+wrote servico-pinturas.html
+wrote en/servico-pinturas.html
+wrote es/servico-pinturas.html
+wrote fr/servico-pinturas.html
+wrote servico-pintura-fachadas-alpinismo.html
+wrote en/servico-pintura-fachadas-alpinismo.html
+wrote es/servico-pintura-fachadas-alpinismo.html
+wrote fr/servico-pintura-fachadas-alpinismo.html
+wrote servico-canalizacoes.html
+wrote en/servico-canalizacoes.html
+wrote es/servico-canalizacoes.html
+wrote fr/servico-canalizacoes.html
+wrote servico-electricidade.html
+wrote en/servico-electricidade.html
+wrote es/servico-electricidade.html
+wrote fr/servico-electricidade.html
+wrote servico-carpintaria.html
+wrote en/servico-carpintaria.html
+wrote es/servico-carpintaria.html
+wrote fr/servico-carpintaria.html
+wrote servico-reparacoes-gerais.html
+wrote en/servico-reparacoes-gerais.html
+wrote es/servico-reparacoes-gerais.html
+wrote fr/servico-reparacoes-gerais.html
+wrote servico-manutencao.html
+wrote en/servico-manutencao.html
+wrote es/servico-manutencao.html
+wrote fr/servico-manutencao.html
+wrote servico-limpezas.html
+wrote en/servico-limpezas.html
+wrote es/servico-limpezas.html
+Traceback (most recent call last):
+  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 344, in <module>
+    main()
+  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 312, in main
+    path.write_text(render_page(slug, lang), encoding="utf-8")
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 142, in render_page
+    cta_wa = partner_cta["whatsapp"]
+             ~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'whatsapp'
+
+
+================================================================================
+FILE: docs/DEBUG-CLEANING-BUILD.txt
+================================================================================
+
+=== Regenerating fazdetudo.pt static HTML ===
+
+--- Homepages (PT + en/es/fr) ---
+wrote index.html
+wrote en/index.html
+wrote es/index.html
+wrote fr/index.html
+
+Total: 4 homepages
+
+--- Service pages (18 × 4 languages) ---
+wrote servico-remodelacoes.html
+wrote en/servico-remodelacoes.html
+wrote es/servico-remodelacoes.html
+wrote fr/servico-remodelacoes.html
+wrote servico-recuperar-casa.html
+wrote en/servico-recuperar-casa.html
+wrote es/servico-recuperar-casa.html
+wrote fr/servico-recuperar-casa.html
+wrote servico-pinturas.html
+wrote en/servico-pinturas.html
+wrote es/servico-pinturas.html
+wrote fr/servico-pinturas.html
+wrote servico-pintura-fachadas-alpinismo.html
+wrote en/servico-pintura-fachadas-alpinismo.html
+wrote es/servico-pintura-fachadas-alpinismo.html
+wrote fr/servico-pintura-fachadas-alpinismo.html
+wrote servico-canalizacoes.html
+wrote en/servico-canalizacoes.html
+wrote es/servico-canalizacoes.html
+wrote fr/servico-canalizacoes.html
+wrote servico-electricidade.html
+wrote en/servico-electricidade.html
+wrote es/servico-electricidade.html
+wrote fr/servico-electricidade.html
+wrote servico-carpintaria.html
+wrote en/servico-carpintaria.html
+wrote es/servico-carpintaria.html
+wrote fr/servico-carpintaria.html
+wrote servico-reparacoes-gerais.html
+wrote en/servico-reparacoes-gerais.html
+wrote es/servico-reparacoes-gerais.html
+wrote fr/servico-reparacoes-gerais.html
+wrote servico-manutencao.html
+wrote en/servico-manutencao.html
+wrote es/servico-manutencao.html
+wrote fr/servico-manutencao.html
+wrote servico-limpezas.html
+wrote en/servico-limpezas.html
+Traceback (most recent call last):
+  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 344, in <module>
+    main()
+  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 312, in main
+    path.write_text(render_page(slug, lang), encoding="utf-8")
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 142, in render_page
+    cta_wa = partner_cta["whatsapp"]
+             ~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'whatsapp'
 
 
 ================================================================================
@@ -8027,281 +8300,6 @@ FILE: docs/REFACTOR-REPORT.md
 python scripts/generate-servico-pages.py
 python scripts/generate-sitemap.py
 ```
-
-
-================================================================================
-FILE: .github/scripts/add-cleaning-partner.py
-================================================================================
-
-from pathlib import Path
-
-
-def replace_once(path: str, old: str, new: str) -> None:
-    p = Path(path)
-    text = p.read_text(encoding="utf-8")
-    if old not in text:
-        raise RuntimeError(f"Expected block not found in {path}")
-    p.write_text(text.replace(old, new, 1), encoding="utf-8")
-
-
-# Homepage generator: partner config and localized contact card.
-replace_once(
-    "scripts/generate-homepages.py",
-    '''OG_LOCALE = {
-    "pt": "pt_PT",
-    "en": "en_GB",
-    "es": "es_ES",
-    "fr": "fr_FR",
-}
-''',
-    '''OG_LOCALE = {
-    "pt": "pt_PT",
-    "en": "en_GB",
-    "es": "es_ES",
-    "fr": "fr_FR",
-}
-
-CLEANING_PARTNER = {
-    "name": "Caterina Cantemir",
-    "phone_display": "963 212 185",
-    "tel_href": "tel:+351963212185",
-    "labels": {
-        "pt": {
-            "badge": "Parceira recomendada",
-            "role": "Empregada de limpeza · contacto direto",
-            "call": "Ligar diretamente",
-            "details": "Ver serviço",
-            "aria": "Ligar diretamente para Caterina Cantemir, parceira de limpezas",
-        },
-        "en": {
-            "badge": "Recommended partner",
-            "role": "Cleaning professional · direct contact",
-            "call": "Call directly",
-            "details": "View service",
-            "aria": "Call Caterina Cantemir directly, recommended cleaning partner",
-        },
-        "es": {
-            "badge": "Colaboradora recomendada",
-            "role": "Profesional de limpieza · contacto directo",
-            "call": "Llamar directamente",
-            "details": "Ver servicio",
-            "aria": "Llamar directamente a Caterina Cantemir, colaboradora de limpieza",
-        },
-        "fr": {
-            "badge": "Partenaire recommandée",
-            "role": "Professionnelle du ménage · contact direct",
-            "call": "Appeler directement",
-            "details": "Voir le service",
-            "aria": "Appeler directement Caterina Cantemir, partenaire ménage recommandée",
-        },
-    },
-}
-''',
-)
-
-replace_once(
-    "scripts/generate-homepages.py",
-    '''        is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
-        partner_note = ""
-''',
-    '''        is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
-        is_cleaning_partner = card["slug"] == "servico-limpezas.html"
-        partner_note = ""
-''',
-)
-
-replace_once(
-    "scripts/generate-homepages.py",
-    '''            secondary_link = (
-                '\\n                    <a href="servico-climatizacao.html" '
-                'class="service-window-link service-window-link--secondary">'
-                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
-            )
-        blocks.append(
-''',
-    '''            secondary_link = (
-                '\\n                    <a href="servico-climatizacao.html" '
-                'class="service-window-link service-window-link--secondary">'
-                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
-            )
-        if is_cleaning_partner:
-            labels = CLEANING_PARTNER["labels"][lang]
-            feat = f"{feat} service-window-card--cleaning-partner"
-            badge = (
-                '                    <span class="window-badge window-badge--cleaning-partner">'
-                f'{html.escape(labels["badge"])}</span>\\n'
-            )
-            partner_note = (
-                '\\n                    <div class="cleaning-partner-contact">'
-                f'<span class="cleaning-partner-role">{html.escape(labels["role"])}</span>'
-                f'<strong class="cleaning-partner-name">{html.escape(CLEANING_PARTNER["name"])}</strong>'
-                f'<a class="cleaning-partner-call" href="{CLEANING_PARTNER["tel_href"]}" '
-                f'aria-label="{html.escape(labels["aria"], quote=True)}">'
-                '<i class="fa-solid fa-phone" aria-hidden="true"></i>'
-                f'<span>{html.escape(labels["call"])}</span>'
-                f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
-                '</a>'
-                '</div>'
-            )
-            link_text = labels["details"]
-        blocks.append(
-''',
-)
-
-# Cleaning service page: direct call goes to Caterina and explains who answers.
-replace_once(
-    "scripts/generate-servico-pages.py",
-    '''OG_LOCALE = {
-    "pt": "pt_PT",
-    "en": "en_GB",
-    "es": "es_ES",
-    "fr": "fr_FR",
-}
-''',
-    '''OG_LOCALE = {
-    "pt": "pt_PT",
-    "en": "en_GB",
-    "es": "es_ES",
-    "fr": "fr_FR",
-}
-
-CLEANING_PARTNER_PHONE = "+351963212185"
-CLEANING_PARTNER_CTA = {
-    "pt": {
-        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.",
-        "call": "Ligar diretamente à Caterina · 963 212 185",
-    },
-    "en": {
-        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.",
-        "call": "Call Caterina directly · 963 212 185",
-    },
-    "es": {
-        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.",
-        "call": "Llamar directamente a Caterina · 963 212 185",
-    },
-    "fr": {
-        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.",
-        "call": "Appeler Caterina directement · 963 212 185",
-    },
-}
-''',
-)
-
-replace_once(
-    "scripts/generate-servico-pages.py",
-    '''    canonical = page_url(slug, lang)
-
-    head = render_head(
-''',
-    '''    canonical = page_url(slug, lang)
-    is_cleaning_partner = slug == "servico-limpezas.html"
-    cta_p = ui["cta_p"].format(service=meta["service_name"])
-    cta_call = ui["cta_call"]
-    call_href = tel_href()
-    if is_cleaning_partner:
-        partner_cta = CLEANING_PARTNER_CTA[lang]
-        cta_p = partner_cta["text"]
-        cta_call = partner_cta["call"]
-        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
-
-    head = render_head(
-''',
-)
-
-replace_once(
-    "scripts/generate-servico-pages.py",
-    '''            "CTA_P": ui["cta_p"].format(service=meta["service_name"]),
-            "CTA_WA": ui["cta_wa"],
-            "CTA_CALL": ui["cta_call"],
-            "WA_HREF": wa_href_for_message(meta["wa_message"]),
-            "TEL_HREF": tel_href(),
-''',
-    '''            "CTA_P": cta_p,
-            "CTA_WA": ui["cta_wa"],
-            "CTA_CALL": cta_call,
-            "WA_HREF": wa_href_for_message(meta["wa_message"]),
-            "TEL_HREF": call_href,
-''',
-)
-
-css = Path("style.css")
-css_text = css.read_text(encoding="utf-8")
-marker = "/* ===== CLEANING PARTNER DIRECT CONTACT ===== */"
-if marker not in css_text:
-    css_text += '''
-
-/* ===== CLEANING PARTNER DIRECT CONTACT ===== */
-.service-window-card--cleaning-partner {
-    border: 2px solid rgba(var(--primary-rgb), 0.28);
-    box-shadow: 0 12px 34px rgba(26, 43, 73, 0.12);
-}
-
-.window-badge--cleaning-partner {
-    background: var(--secondary-color);
-    color: #fff;
-}
-
-.cleaning-partner-contact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    margin: 18px 0 6px;
-    padding: 14px;
-    background: rgba(var(--primary-rgb), 0.07);
-    border: 1px solid rgba(var(--primary-rgb), 0.18);
-    border-radius: 12px;
-}
-
-.cleaning-partner-role {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.cleaning-partner-name {
-    font-size: 1rem;
-    color: var(--secondary-color);
-}
-
-.cleaning-partner-call {
-    display: inline-flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 6px;
-    padding: 11px 14px;
-    border-radius: 10px;
-    background: var(--primary-color);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    line-height: 1.25;
-    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
-}
-
-.cleaning-partner-call:hover {
-    background: var(--primary-dark);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.25);
-}
-
-.cleaning-partner-call strong {
-    white-space: nowrap;
-}
-
-@media (max-width: 480px) {
-    .cleaning-partner-call {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-    }
-}
-'''
-    css.write_text(css_text, encoding="utf-8")
 
 
 ================================================================================
@@ -11548,7 +11546,7 @@ FILE: dist/en/index.html
                     <h3>Cleaning</h3>
                     <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina Cantemir directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call directly</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -15130,13 +15128,13 @@ FILE: dist/en/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.</p>
+                <p>Looking for a cleaning professional? You can call our recommended partner Caterina directly to discuss availability and the service.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20cleaning." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quote via WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Caterina directly · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -17361,7 +17359,7 @@ FILE: dist/es/index.html
                     <h3>Limpieza</h3>
                     <p>Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Profesional de limpieza · contacto directo</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Llamar directamente a Caterina Cantemir, colaboradora de limpieza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Llamar directamente</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Profesional de limpieza · contacto directo</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Llamar directamente a Caterina, colaboradora de limpieza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Llamar directamente</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -20943,13 +20941,13 @@ FILE: dist/es/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.</p>
+                <p>¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina para consultar disponibilidad y el servicio.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20limpieza." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Presupuesto por WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar directamente a Caterina · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar a Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -23174,7 +23172,7 @@ FILE: dist/fr/index.html
                     <h3>Nettoyage</h3>
                     <p>Nettoyage profond domestique, après-travaux, bureaux et copropriétés.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Professionnelle du ménage · contact direct</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Appeler directement Caterina Cantemir, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler directement</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Professionnelle du ménage · contact direct</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Appeler directement Caterina, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -26756,13 +26754,13 @@ FILE: dist/fr/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.</p>
+                <p>Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina pour convenir des disponibilités et du service.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20nettoyage." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Devis par WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Caterina directement · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -28990,7 +28988,7 @@ FILE: dist/index.html
                     <h3>Limpezas</h3>
                     <p>Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Empregada de limpeza · contacto direto</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina Cantemir, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar diretamente</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Empregada de limpeza · contacto direto</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -33975,13 +33973,13 @@ FILE: dist/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.</p>
+                <p>Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina para combinar disponibilidade e o serviço.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20limpezas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp da Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar diretamente à Caterina · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar à Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -39939,6 +39937,15 @@ body.lightbox-open {
 }
 
 
+.cleaning-partner-whatsapp {
+    background: #25D366;
+}
+
+.cleaning-partner-whatsapp:hover {
+    background: #1DA851;
+}
+
+
 ================================================================================
 FILE: eletricidade-lisboa.html
 ================================================================================
@@ -40275,7 +40282,7 @@ FILE: en/index.html
                     <h3>Cleaning</h3>
                     <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina Cantemir directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call directly</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -43857,13 +43864,13 @@ FILE: en/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.</p>
+                <p>Looking for a cleaning professional? You can call our recommended partner Caterina directly to discuss availability and the service.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20cleaning." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quote via WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Caterina directly · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -46088,7 +46095,7 @@ FILE: es/index.html
                     <h3>Limpieza</h3>
                     <p>Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Profesional de limpieza · contacto directo</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Llamar directamente a Caterina Cantemir, colaboradora de limpieza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Llamar directamente</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Profesional de limpieza · contacto directo</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Llamar directamente a Caterina, colaboradora de limpieza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Llamar directamente</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -49670,13 +49677,13 @@ FILE: es/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.</p>
+                <p>¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina para consultar disponibilidad y el servicio.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20limpieza." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Presupuesto por WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar directamente a Caterina · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar a Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -51901,7 +51908,7 @@ FILE: fr/index.html
                     <h3>Nettoyage</h3>
                     <p>Nettoyage profond domestique, après-travaux, bureaux et copropriétés.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Professionnelle du ménage · contact direct</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Appeler directement Caterina Cantemir, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler directement</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Professionnelle du ménage · contact direct</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Appeler directement Caterina, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -55483,13 +55490,13 @@ FILE: fr/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.</p>
+                <p>Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina pour convenir des disponibilités et du service.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20nettoyage." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Devis par WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Caterina directement · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -57717,7 +57724,7 @@ FILE: index.html
                     <h3>Limpezas</h3>
                     <p>Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas.</p>
 
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Empregada de limpeza · contacto direto</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina Cantemir, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar diretamente</span><strong>963 212 185</strong></a></div>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Empregada de limpeza · contacto direto</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
                     <a href="servico-limpezas.html" class="service-window-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
@@ -62702,13 +62709,13 @@ FILE: servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.</p>
+                <p>Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina para combinar disponibilidade e o serviço.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20limpezas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
+                    <a href="https://wa.me/351963212185" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp da Caterina · 963 212 185
                     </a>
                     <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar diretamente à Caterina · 963 212 185
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar à Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -68663,4 +68670,13 @@ body.lightbox-open {
         justify-content: center;
         text-align: center;
     }
+}
+
+
+.cleaning-partner-whatsapp {
+    background: #25D366;
+}
+
+.cleaning-partner-whatsapp:hover {
+    background: #1DA851;
 }
