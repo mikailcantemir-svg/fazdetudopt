@@ -70,6 +70,10 @@ O gerador principal produz:
 | URLs e hreflang | `scripts/slug_registry.py` |
 | Redirects `*-lisboa.html` | `scripts/generate-lisboa-redirects.py` (`REDIRECTS`) |
 
+### Contactos de parceiros
+
+A categoria **Limpezas** inclui contacto direto da parceira **Caterina**, com opções de chamada e WhatsApp para `963 212 185`. A configuração é preservada pelos geradores para não desaparecer num rebuild.
+
 ---
 
 ## Adicionar um novo idioma (ex.: `de`)
