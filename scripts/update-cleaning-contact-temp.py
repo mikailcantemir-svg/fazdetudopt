@@ -12,7 +12,7 @@ if '"whatsapp_href": "https://wa.me/351963212185"' not in s:
 s = s.replace('"call": "Ligar diretamente"', '"call": "Ligar"')
 s = s.replace('"call": "Call directly"', '"call": "Call"')
 s = s.replace('"call": "Llamar diretamente"', '"call": "Llamar"')
-s = s.replace('"call": "Appeler directement"', '"call": "Appeler"')
+s = s.replace('"call": "Appeler diretamente"', '"call": "Appeler"')
 if 'cleaning-partner-whatsapp' not in s:
     old = '''                '</a>'
                 '</div>'
@@ -43,11 +43,11 @@ if '"whatsapp": "WhatsApp da Caterina · 963 212 185"' not in s:
         '        "call": "Call Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
     )
     s = s.replace(
-        '        "call": "Llamar diretamente a Caterina · 963 212 185",',
+        '        "call": "Llamar directamente a Caterina · 963 212 185",',
         '        "call": "Llamar a Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
     )
     s = s.replace(
-        '        "call": "Appeler Caterina directement · 963 212 185",',
+        '        "call": "Appeler Caterina diretamente · 963 212 185",',
         '        "call": "Appeler Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
     )
 
