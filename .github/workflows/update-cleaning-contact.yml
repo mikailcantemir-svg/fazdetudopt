@@ -15,15 +15,116 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Update Caterina contact options
+
+      - name: Update Caterina call and WhatsApp
         run: |
-          echo 'CmZyb20gcGF0aGxpYiBpbXBvcnQgUGF0aAoKZGVmIHJlcGwocGF0aCwgb2xkLCBuZXcsIGNvdW50PTEpOgogICAgcD1QYXRoKHBhdGgpCiAgICBzPXAucmVhZF90ZXh0KGVuY29kaW5nPSJ1dGYtOCIpCiAgICBpZiBvbGQgbm90IGluIHM6CiAgICAgICAgcmFpc2UgUnVudGltZUVycm9yKGYiRXhwZWN0ZWQgYmxvY2sgbm90IGZvdW5kIGluIHtwYXRofToge29sZFs6ODBdIXJ9IikKICAgIHM9cy5yZXBsYWNlKG9sZCxuZXcsY291bnQpCiAgICBwLndyaXRlX3RleHQocyxlbmNvZGluZz0idXRmLTgiKQoKcmVwbCgic2NyaXB0cy9nZW5lcmF0ZS1ob21lcGFnZXMucHkiLAonJycgICAgIm5hbWUiOiAiQ2F0ZXJpbmEgQ2FudGVtaXIiLAogICAgInBob25lX2Rpc3BsYXkiOiAiOTYzIDIxMiAxODUiLAogICAgInRlbF9ocmVmIjogInRlbDorMzUxOTYzMjEyMTg1IiwKJycnLAonJycgICAgIm5hbWUiOiAiQ2F0ZXJpbmEiLAogICAgInBob25lX2Rpc3BsYXkiOiAiOTYzIDIxMiAxODUiLAogICAgInRlbF9ocmVmIjogInRlbDorMzUxOTYzMjEyMTg1IiwKICAgICJ3aGF0c2FwcF9ocmVmIjogImh0dHBzOi8vd2EubWUvMzUxOTYzMjEyMTg1IiwKJycnKQoKcmVwbHMgPSBbCignJycgICAgICAgICAgICAiY2FsbCI6ICJMaWdhciBkaXJldGFtZW50ZSIsCiAgICAgICAgICAgICJkZXRhaWxzIjogIlZlciBzZXJ2acOnbyIsCiAgICAgICAgICAgICJhcmlhIjogIkxpZ2FyIGRpcmV0YW1lbnRlIHBhcmEgQ2F0ZXJpbmEgQ2FudGVtaXIsIHBhcmNlaXJhIGRlIGxpbXBlemFzIiwKJycnLAonJycgICAgICAgICAgICAiY2FsbCI6ICJMaWdhciIsCiAgICAgICAgICAgICJ3aGF0c2FwcCI6ICJXaGF0c0FwcCIsCiAgICAgICAgICAgICJkZXRhaWxzIjogIlZlciBzZXJ2acOnbyIsCiAgICAgICAgICAgICJhcmlhX2NhbGwiOiAiTGlnYXIgZGlyZXRhbWVudGUgcGFyYSBDYXRlcmluYSwgcGFyY2VpcmEgZGUgbGltcGV6YXMiLAogICAgICAgICAgICAiYXJpYV93aGF0c2FwcCI6ICJDb250YWN0YXIgQ2F0ZXJpbmEgcG9yIFdoYXRzQXBwLCBwYXJjZWlyYSBkZSBsaW1wZXphcyIsCicnJyksCignJycgICAgICAgICAgICAiY2FsbCI6ICJDYWxsIGRpcmVjdGx5IiwKICAgICAgICAgICAgImRldGFpbHMiOiAiVmlldyBzZXJ2aWNlIiwKICAgICAgICAgICAgImFyaWEiOiAiQ2FsbCBDYXRlcmluYSBDYW50ZW1pciBkaXJlY3RseSwgcmVjb21tZW5kZWQgY2xlYW5pbmcgcGFydG5lciIsCicnJywKJycnICAgICAgICAgICAgImNhbGwiOiAiQ2FsbCIsCiAgICAgICAgICAgICJ3aGF0c2FwcCI6ICJXaGF0c0FwcCIsCiAgICAgICAgICAgICJkZXRhaWxzIjogIlZpZXcgc2VydmljZSIsCiAgICAgICAgICAgICJhcmlhX2NhbGwiOiAiQ2FsbCBDYXRlcmluYSBkaXJlY3RseSwgcmVjb21tZW5kZWQgY2xlYW5pbmcgcGFydG5lciIsCiAgICAgICAgICAgICJhcmlhX3doYXRzYXBwIjogIkNvbnRhY3QgQ2F0ZXJpbmEgb24gV2hhdHNBcHAsIHJlY29tbWVuZGVkIGNsZWFuaW5nIHBhcnRuZXIiLAonJycpLAooJycnICAgICAgICAgICAgImNhbGwiOiAiTGxhbWFyIGRpcmVjdGFtZW50ZSIsCiAgICAgICAgICAgICJkZXRhaWxzIjogIlZlciBzZXJ2aWNpbyIsCiAgICAgICAgICAgICJhcmlhIjogIkxsYW1hciBkaXJlY3RhbWVudGUgYSBDYXRlcmluYSBDYW50ZW1pciwgY29sYWJvcmFkb3JhIGRlIGxpbXBpZXphIiwKJycnLAonJycgICAgICAgICAgICAiY2FsbCI6ICJMbGFtYXIiLAogICAgICAgICAgICAid2hhdHNhcHAiOiAiV2hhdHNBcHAiLAogICAgICAgICAgICAiZGV0YWlscyI6ICJWZXIgc2VydmljaW8iLAogICAgICAgICAgICAiYXJpYV9jYWxsIjogIkxsYW1hciBkaXJlY3RhbWVudGUgYSBDYXRlcmluYSwgY29sYWJvcmFkb3JhIGRlIGxpbXBpZXphIiwKICAgICAgICAgICAgImFyaWFfd2hhdHNhcHAiOiAiQ29udGFjdGFyIGEgQ2F0ZXJpbmEgcG9yIFdoYXRzQXBwLCBjb2xhYm9yYWRvcmEgZGUgbGltcGllemEiLAonJycpLAooJycnICAgICAgICAgICAgImNhbGwiOiAiQXBwZWxlciBkaXJlY3RlbWVudCIsCiAgICAgICAgICAgICJkZXRhaWxzIjogIlZvaXIgbGUgc2VydmljZSIsCiAgICAgICAgICAgICJhcmlhIjogIkFwcGVsZXIgZGlyZWN0ZW1lbnQgQ2F0ZXJpbmEgQ2FudGVtaXIsIHBhcnRlbmFpcmUgbcOpbmFnZSByZWNvbW1hbmTDqWUiLAonJycLAonJycgICAgICAgICAgICAiY2FsbCI6ICJBcHBlbGVyIiwKICAgICAgICAgICAgIndoYXRzYXBwIjogIldoYXRzQXBwIiwKICAgICAgICAgICAgImRldGFpbHMiOiAiVm9pciBsZSBzZXJ2aWNlIiwKICAgICAgICAgICAgImFyaWFfY2FsbCI6ICJBcHBlbGVyIGRpcmVjdGVtZW50IENhdGVyaW5hLCBwYXJ0ZW5haXJlIG3DqW5hZ2UgcmVjb21tYW5kw6llIiwKICAgICAgICAgICAgImFyaWFfd2hhdHNhcHAiOiAiQ29udGFjdGVyIENhdGVyaW5hIHN1ciBXaGF0c0FwcCwgcGFydGVuYWlyZSBtw6luYWdlIHJlY29tbWFuZMOpZSIsCicnJykKXQpmb3Igb2xkLG5ldyBpbiByZXBsczoKICAgIHJlcGwoc2NyaXB0cy9nZW5lcmF0ZS1ob21lcGFnZXMucHkiLG9sZCxuZXcpCgpyZXBsKCJzY3JpcHRzL2dlbmVyYXRlLWhvbWVwYWdlcy5weSIsCicnJyAgICAgICAgICAgICAgICBmJzxhIGNsYXNzPSJjbGVhbmluZy1wYXJ0bmVyLWNhbGwiIGhyZWY9IntDTEVBTklOR19QQVJUTkVSWyJ0ZWxfaHJlZiJdfSIgJwogICAgICAgICAgICAgICAgZidhcmlhLWxhYmVsPSJ7aHRtbC5lc2NhcGUobGFiZWxzWyJhcmlhIl0sIHF1b3RlPVRydWUpfSI+JwogICAgICAgICAgICAgICAgJzxpIGNsYXNzPSJmYS1zb2xpZCBmYS1waG9uZSIgYXJpYS1oaWRkZW49InRydWUiPjwvaT4nCiAgICAgICAgICAgICAgICBmJzxzcGFuPntodG1sLmVzY2FwZShsYWJlbHNbImNhbGwiXSl9PC9zcGFuPicKICAgICAgICAgICAgICAgIGYnPHN0cm9uZz57aHRtbC5lc2NhcGUoQ0xFQU5JTkdfUEFSVE5FUlsicGhvbmVfZGlzcGxheSJdKX08L3N0cm9uZz4nCiAgICAgICAgICAgICAgICAnPC9hPicKJycnLAonJycgICAgICAgICAgICAgICAgJzxkaXYgY2xhc3M9ImNsZWFuaW5nLXBhcnRuZXItYWN0aW9ucyI+JwogICAgICAgICAgICAgICAgZyc8YSBjbGFzcz0iY2xlYW5pbmctcGFydG5lci1jYWxsIiBocmVmPSJ7Q0xFQU5JTkdfUEFSVE5FUlsidGVsX2hyZWYiXX0iICcKICAgICAgICAgICAgICAgIGYnYXJpYS1sYWJlbD0ie2h0bWwuZXNjYXBlKGxhYmVsc1siYXJpYV9jYWxsIl0sIHF1b3RlPVRydWUpfSI+JwogICAgICAgICAgICAgICAgJzxpIGNsYXNzPSJmYS1zb2xpZCBmYS1waG9uZSIgYXJpYS1oaWRkZW49InRydWUiPjwvaT4nCiAgICAgICAgICAgICAgICBmJzxzcGFuPntodG1sLmVzY2FwZShsYWJlbHNbImNhbGwiXSl9PC9zcGFuPicKICAgICAgICAgICAgICAgICc8L2E+JwogICAgICAgICAgICAgICAgZyc8YSBjbGFzcz0iY2xlYW5pbmctcGFydG5lci1jYWxsIGNsZWFuaW5nLXBhcnRuZXItd2hhdHNhcHAiIGhyZWY9IntDTEVBTklOR19QQVJUTkVSWyJ3aGF0c2FwcF9ocmVmIl19IiAnCiAgICAgICAgICAgICAgICBmJ3RhcmdldD0iX2JsYW5rIiByZWw9Im5vb3BlbmVyIG5vcmVmZXJyZXIiIGFyaWEtbGFiZWw9IntodG1sLmVzY2FwZShsYWJlbHNbImFyaWFfd2hhdHNhcHAiXSwgcXVvdGU9VHJ1ZSl9Ij4nCiAgICAgICAgICAgICAgICAnPGkgY2xhc3M9ImZhLWJyYW5kcyBmYS13aGF0c2FwcCIgYXJpYS1oaWRkZW49InRydWUiPjwvaT4nCiAgICAgICAgICAgICAgICBmJzxzcGFuPntodG1sLmVzY2FwZShsYWJlbHNbIndoYXRzYXBwIl0pfTwvc3Bhbj4nCiAgICAgICAgICAgICAgICAnPC9hPicKICAgICAgICAgICAgICAgICc8L2Rpdj4nCiAgICAgICAgICAgICAgICBmJzxhIGNsYXNzPSJjbGVhbmluZy1wYXJ0bmVyLXBob25lIiBocmVmPSJ7Q0xFQU5JTkdfUEFSVE5FUlsidGVsX2hyZWYiXX0iPicKICAgICAgICAgICAgICAgIGYne2h0bWwuZXNjYXBlKENGTEVBTklOR19QQVJUTkVSWyJwaG9uZV9kaXNwbGF5Il0pfTwvYT4nCicnJykKCmZvciBvbGQsbmV3IGluIFsKKCJDYXRlcmluYSBDYW50ZW1pciBwYXJhIGNvbWJpbmFyIGRpc3BvbmliaWxpZGFkZSIsICJDYXRlcmluYSBwYXJhIGNvbWJpbmFyIGRpc3BvbmliaWxpZGFkZSIpLAooIm91ciByZWNvbW1lbmRlZCBwYXJ0bmVyIENhdGVyaW5hIENhbnRlbWlyIGRpcmVjdGx5IiwgIm91ciByZWNvbW1lbmRlZCBwYXJ0bmVyIENhdGVyaW5hIGRpcmVjdGx5IiksCigibnVlc3RyYSBjb2xhYm9yYWRvcmEgQ2F0ZXJpbmEgQ2FudGVtaXIgcGFyYSBjb25zdWx0YXIiLCAibnVlc3RyYSBjb2xhYm9yYWRvcmEgQ2F0ZXJpbmEgcGFyYSBjb25zdWx0YXIiKSwKKCJub3RyZSBwYXJ0ZW5haXJlIENhdGVyaW5hIENhbnRlbWlyIHBvdXIgY29udmVuaXIiLCAibm90cmUgcGFydGVuYWlyZSBDYXRlcmluYSBwb3VyIGNvbnZlbmlyIiksCl06CiAgICByZXBsKCJzY3JpcHRzL2dlbmVyYXRlLXNlcnZpY28tcGFnZXMucHkiLCBvbGQsIG5ldykKCmZvciBvbGQsbmV3IGluIFsKKCcnJyAgICAgICAgImNhbGwiOiAiTGlnYXIgZGlyZXRhbWVudGUgw6AgQ2F0ZXJpbmEgwrcgOTYzIDIxMiAxODUiLAonJycsJycnICAgICAgICAiY2FsbCI6ICJMaWdhciDDoCBDYXRlcmluYSDCtyA5NjMgMjEyIDE4NSIsCiAgICAgICAgIndoYXRzYXBwIjogIldoYXRzQXBwIGRhIENhdGVyaW5hIMK3IDk2MyAyMTIgMTg1IiwKJycnKSwKKCcnJyAgICAgICAgImNhbGwiOiAiQ2FsbCBDYXRlcmluYSBkaXJlY3RseSDCtyA5NjMgMjEyIDE4NSIsCicnJywnJycgICAgICAgICJjYWxsIjogIkNhbGwgQ2F0ZXJpbmEgwrcgOTYzIDIxMiAxODUiLAogICAgICAgICJ3aGF0c2FwcCI6ICJXaGF0c0FwcCBDYXRlcmluYSDCtyA5NjMgMjEyIDE4NSIsCicnJyksCignJycgICAgICAgICJjYWxsIjogIkxsYW1hciBkaXJlY3RhbWVudGUgYSBDYXRlcmluYSDCtyA5NjMgMjEyIDE4NSIsCicnJywnJycgICAgICAgICJjYWxsIjogIkxsYW1hciBhIENhdGVyaW5hIMK3IDk2MyAyMTIgMTg1IiwKICAgICAgICAid2hhdHNhcHAiOiAiV2hhdHNBcHAgQ2F0ZXJpbmEgwrcgOTYzIDIxMiAxODUiLAonJycpLAooJycnICAgICAgICAiY2FsbCI6ICJBcHBlbGVyIENhdGVyaW5hIGRpcmVjdGVtZW50IMK3IDk2MyAyMTIgMTg1IiwKJycnLAonJycgICAgICAgICJjYWxsIjogIkFwcGVsZXIgQ2F0ZXJpbmEgwrcgOTYzIDIxMiAxODUiLAogICAgICAgICJ3aGF0c2FwcCI6ICJXaGF0c0FwcCBDYXRlcmluYSDCtyA5NjMgMjEyIDE4NSIsCicnJykKXToKICAgIHJlcGwoc2NyaXB0cy9nZW5lcmF0ZS1zZXJ2aWNvLXBhZ2VzLnB5IixvbGQsbmV3KQoKcmVwbCgic2NyaXB0cy9nZW5lcmF0ZS1zZXJ2aWNvLXBhZ2VzLnB5IiwKJycnICAgIGN0YV9wID0gdWlbImN0YV9wIl0uZm9ybWF0KHNlcnZpY2U9bWV0YVsic2VydmljZV9uYW1lIl0pCiAgICBjdGFfY2FsbCA9IHVpWyJjdGFfY2FsbCJdCiAgICBjYWxsX2hyZWYgPSB0ZWxfaHJlZigpCiAgICBpZiBpc19jbGVhbmluZ19wYXJ0bmVyOgogICAgICAgIHBhcnRuZXJfY3RhID0gQ0xFQU5JTkdfUEFSVE5FUl9DVEFbbGFuZ10KICAgICAgICBjdGFfcCA9IHBhcnRuZXJfY3RhWyJ0ZXh0Il0KICAgICAgICBjdGFfY2FsbCA9IHBhcnRuZXJfY3RhWyJjYWxsIl0KICAgICAgICBjYWxsX2hyZWYgPSBmInRlbDp7Q0xFQU5JTkdfUEFSVE5FUl9QSE9ORX0iCicnJywKJycnICAgIGN0YV9wID0gdWlbImN0YV9wIl0uZm9ybWF0KHNlcnZpY2U9bWV0YVsic2VydmljZV9uYW1lIl0pCiAgICBjdGFfY2FsbCA9IHVpWyJjdGFfY2FsbCJdCiAgICBjdGFfd2EgPSB1aVsiY3RhX3dhIl0KICAgIGNhbGxfaHJlZiA9IHRlbF9ocmVmKCkKICAgIHdhX2xpbmsgPSB3YV9ocmVmX2Zvcl9tZXNzYWdlKG1ldGFbIndhX21lc3NhZ2UiXSkKICAgIGlmIGlzX2NsZWFuaW5nX3BhcnRuZXI6CiAgICAgICAgcGFydG5lcl9jdGEgPSBDTEVBTklOR19QQVJUTkVSX0NUQVtsYW5nXQogICAgICAgIGN0YV9wID0gcGFydG5lcl9jdGFbInRleHQiXQogICAgICAgIGN0YV9jYWxsID0gcGFydG5lcl9jdGFbImNhbGwiXQogICAgICAgIGN0YV93YSA9IHBhcnRuZXJfY3RhWyJ3aGF0c2FwcCJdCiAgICAgICAgY2FsbF9ocmVmID0gZiJ0ZWw6e0NMRUFOSU5HX1BBUlRORVJfUEhPTkV9IgogICAgICAgIHdhX2xpbmsgPSAiaHR0cHM6Ly93YS5tZS8zNTE5NjMyMTIxODUiCicnJykKCnJlcGwoc2NyaXB0cy9nZW5lcmF0ZS1zZXJ2aWNvLXBhZ2VzLnB5IiwKJycnICAgICAgICAgICAgIkNUQV9XQSI6IHVpWyJjdGFfd2EiXSwKICAgICAgICAgICAgIkNUQV9DQUxMIjogY3RhX2NhbGwsCiAgICAgICAgICAgICJXQV9IUkVGIjogd2FfaHJlZl9mb3JfbWVzc2FnZShtZXRhWyJ3YV9tZXNzYWdlIl0pLAonJycsCicnJyAgICAgICAgICAgICJDVEFfV0EiOiBjdGFfd2EsCiAgICAgICAgICAgICJDVEFfQ0FMTCI6IGN0YV9jYWxsLAogICAgICAgICAgICAiV0FfSFJFRiI6IHdhX2xpbmssCicnJykKCnA9UGF0aCgic3R5bGUuY3NzIikKcz1wLnJlYWRfdGV4dChlbmNvZGluZz0idXRmLTgiKQppZiAiLmNsZWFuaW5nLXBhcnRuZXItYWN0aW9ucyB7IiBub3QgaW4gczoKICAgIHMgKz0gcicnJwoKLmNsZWFuaW5nLXBhcnRuZXItYWN0aW9ucyB7CiAgICBkaXNwbGF5OiBmbGV4OwogICAgZmxleC13cmFwOiB3cmFwOwogICAgZ2FwOiA4cHg7CiAgICB3aWR0aDogMTAwJTsKICAgIG1hcmdpbi10b3A6IDZweDsKfQoKLmNsZWFuaW5nLXBhcnRuZXItYWN0aW9ucyAuY2xlYW5pbmctcGFydG5lci1jYWxsIHsKICAgIGZsZXg6IDEgMSAxMjBweDsKICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgbWFyZ2luLXRvcDogMDsKfQoKLmNsZWFuaW5nLXBhcnRuZXItd2hhdHNhcHAgewogICAgYmFja2dyb3VuZDogIzI1RDM2NjsKfQoKLmNsZWFuaW5nLXBhcnRuZXItd2hhdHNhcHA6aG92ZXIgewogICAgYmFja2dyb3VuZDogIzFEQTg1MTsKfQoKLmNsZWFuaW5nLXBhcnRuZXItcGhvbmUgewogICAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogICAgbWFyZ2luLXRvcDogNnB4OwogICAgY29sb3I6IHZhcigtLXNlY29uZGFyeS1jb2xvcik7CiAgICBmb250LXdlaWdodDogODAwOwogICAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogICAgbGV0dGVyLXNwYWNpbmc6IDAuMDJlbTsKfQoKLmNsZWFuaW5nLXBhcnRuZXItcGhvbmU6aG92ZXIgewogICAgY29sb3I6IHZhcigtLXByaW1hcnktY29sb3IpOwp9CicnJwogICAgcC53cml0ZV90ZXh0KHMsIGVuY29kaW5nPSJ1dGYtOCIpCgpkb2M9UGF0aCgiZG9jcy9DTEVBTklOR19QQVJUTkVSLm1kIikKaWYgZG9jLmV4aXN0cygpOgogICAgcz1kb2MucmVhZF90ZXh0KGVuY29kaW5nPSJ1dGYtOCIpCiAgICBzPXMucmVwbGFjZSgiQ2F0ZXJpbmEgQ2FudGVtaXIiLCAiQ2F0ZXJpbmEiKQogICAgcz1zLnJlcGxhY2UoImRpcmVjdC1jYWxsIiwgImRpcmVjdCBjYWxsL1doYXRzQXBwIikKICAgIGlmICJodHRwczovL3dhLm1lLzM1MTk2MzIxMjE4NSIgbm90IGluIHM6CiAgICAgICAgcyArPSAiXG4tIFdoYXRzQXBwIGRpcmV0bzogYGh0dHBzOi8vd2EubWUvMzUxOTYzMjEyMTg1YFxuIgogICAgZG9jLndyaXRlX3RleHQocyxlbmNvZGluZz0idXRmLTgiKQo=' | base64 -d > /tmp/update_cleaning.py
-          python /tmp/update_cleaning.py
+          python - <<'PY'
+          from pathlib import Path
+
+          # Homepage cleaning card
+          p = Path('scripts/generate-homepages.py')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('Caterina Cantemir', 'Caterina')
+          s = s.replace(
+              '    "tel_href": "tel:+351963212185",\n    "labels": {',
+              '    "tel_href": "tel:+351963212185",\n    "whatsapp_href": "https://wa.me/351963212185",\n    "labels": {'
+          )
+          s = s.replace('"call": "Ligar diretamente"', '"call": "Ligar"')
+          s = s.replace('"call": "Call directly"', '"call": "Call"')
+          s = s.replace('"call": "Llamar directamente"', '"call": "Llamar"')
+          s = s.replace('"call": "Appeler directement"', '"call": "Appeler"')
+          old = '''                f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
+                '</a>'
+                '</div>'
+'''
+          new = '''                f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
+                '</a>'
+                f'<a class="cleaning-partner-call cleaning-partner-whatsapp" href="{CLEANING_PARTNER["whatsapp_href"]}" '
+                'target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp">'
+                '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
+                '<span>WhatsApp</span>'
+                '</a>'
+                '</div>'
+'''
+          if old not in s:
+              raise RuntimeError('Homepage cleaning contact block not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+
+          # Cleaning service page: call and WhatsApp both go directly to Caterina
+          p = Path('scripts/generate-servico-pages.py')
+          s = p.read_text(encoding='utf-8').replace('Caterina Cantemir', 'Caterina')
+          replacements = {
+              '        "call": "Ligar diretamente à Caterina · 963 212 185",': '        "call": "Ligar à Caterina · 963 212 185",\n        "whatsapp": "WhatsApp da Caterina · 963 212 185",',
+              '        "call": "Call Caterina directly · 963 212 185",': '        "call": "Call Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",',
+              '        "call": "Llamar directamente a Caterina · 963 212 185",': '        "call": "Llamar a Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",',
+              '        "call": "Appeler Caterina directement · 963 212 185",': '        "call": "Appeler Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",',
+          }
+          for old_text, new_text in replacements.items():
+              if old_text not in s:
+                  raise RuntimeError(f'Missing CTA text: {old_text}')
+              s = s.replace(old_text, new_text, 1)
+
+          old = '''    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    call_href = tel_href()
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+'''
+          new = '''    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    cta_wa = ui["cta_wa"]
+    call_href = tel_href()
+    wa_link = wa_href_for_message(meta["wa_message"])
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        cta_wa = partner_cta["whatsapp"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+        wa_link = "https://wa.me/351963212185"
+'''
+          if old not in s:
+              raise RuntimeError('Service CTA variable block not found')
+          s = s.replace(old, new, 1)
+
+          old = '''            "CTA_WA": ui["cta_wa"],
+            "CTA_CALL": cta_call,
+            "WA_HREF": wa_href_for_message(meta["wa_message"]),
+'''
+          new = '''            "CTA_WA": cta_wa,
+            "CTA_CALL": cta_call,
+            "WA_HREF": wa_link,
+'''
+          if old not in s:
+              raise RuntimeError('Service template CTA mapping not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+
+          # Styling for WhatsApp button
+          p = Path('style.css')
+          s = p.read_text(encoding='utf-8')
+          if '.cleaning-partner-whatsapp {' not in s:
+              s += '''\n\n.cleaning-partner-whatsapp {\n    background: #25D366;\n}\n\n.cleaning-partner-whatsapp:hover {\n    background: #1DA851;\n}\n'''
+          p.write_text(s, encoding='utf-8')
+
+          # Remove surname from project note too
+          doc = Path('docs/CLEANING_PARTNER.md')
+          if doc.exists():
+              d = doc.read_text(encoding='utf-8').replace('Caterina Cantemir', 'Caterina')
+              if 'wa.me/351963212185' not in d:
+                  d += '\n- WhatsApp direto: `https://wa.me/351963212185`\n'
+              doc.write_text(d, encoding='utf-8')
+          PY
+
           python scripts/generate-servico-pages.py
           rm .github/workflows/update-cleaning-contact.yml
           git diff --check
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Add direct call and WhatsApp for cleaning partner"
+          git commit -m "Use Caterina first name with call and WhatsApp"
           git push origin HEAD:main
