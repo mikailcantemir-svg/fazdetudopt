@@ -63,6 +63,42 @@ OG_LOCALE = {
     "fr": "fr_FR",
 }
 
+CLEANING_PARTNER = {
+    "name": "Caterina Cantemir",
+    "phone_display": "963 212 185",
+    "tel_href": "tel:+351963212185",
+    "labels": {
+        "pt": {
+            "badge": "Parceira recomendada",
+            "role": "Empregada de limpeza · contacto direto",
+            "call": "Ligar diretamente",
+            "details": "Ver serviço",
+            "aria": "Ligar diretamente para Caterina Cantemir, parceira de limpezas",
+        },
+        "en": {
+            "badge": "Recommended partner",
+            "role": "Cleaning professional · direct contact",
+            "call": "Call directly",
+            "details": "View service",
+            "aria": "Call Caterina Cantemir directly, recommended cleaning partner",
+        },
+        "es": {
+            "badge": "Colaboradora recomendada",
+            "role": "Profesional de limpieza · contacto directo",
+            "call": "Llamar directamente",
+            "details": "Ver servicio",
+            "aria": "Llamar directamente a Caterina Cantemir, colaboradora de limpieza",
+        },
+        "fr": {
+            "badge": "Partenaire recommandée",
+            "role": "Professionnelle du ménage · contact direct",
+            "call": "Appeler directement",
+            "details": "Voir le service",
+            "aria": "Appeler directement Caterina Cantemir, partenaire ménage recommandée",
+        },
+    },
+}
+
 
 def _fa_icon(icon: str) -> str:
     return f"fa-solid fa-{icon}"
@@ -552,6 +588,7 @@ def build_service_cards(lang: str) -> str:
         elif card["badge"] == "muito_requisitado":
             badge = f'                    <span class="window-badge">{ui["badge_muito_requisitado"]}</span>\n'
         is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
+        is_cleaning_partner = card["slug"] == "servico-limpezas.html"
         partner_note = ""
         link_href = card["slug"]
         link_text = ui["learn_more"]
@@ -579,6 +616,26 @@ def build_service_cards(lang: str) -> str:
                 'class="service-window-link service-window-link--secondary">'
                 'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
             )
+        if is_cleaning_partner:
+            labels = CLEANING_PARTNER["labels"][lang]
+            feat = f"{feat} service-window-card--cleaning-partner"
+            badge = (
+                '                    <span class="window-badge window-badge--cleaning-partner">'
+                f'{html.escape(labels["badge"])}</span>\n'
+            )
+            partner_note = (
+                '\n                    <div class="cleaning-partner-contact">'
+                f'<span class="cleaning-partner-role">{html.escape(labels["role"])}</span>'
+                f'<strong class="cleaning-partner-name">{html.escape(CLEANING_PARTNER["name"])}</strong>'
+                f'<a class="cleaning-partner-call" href="{CLEANING_PARTNER["tel_href"]}" '
+                f'aria-label="{html.escape(labels["aria"], quote=True)}">'
+                '<i class="fa-solid fa-phone" aria-hidden="true"></i>'
+                f'<span>{html.escape(labels["call"])}</span>'
+                f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
+                '</a>'
+                '</div>'
+            )
+            link_text = labels["details"]
         blocks.append(
             f"""                <div class="service-window-card{feat}">
 {badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>

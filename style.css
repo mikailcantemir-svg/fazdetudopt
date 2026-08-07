@@ -3449,3 +3449,75 @@ body.lightbox-open {
     font-size: 0.95rem;
     line-height: 1.55;
 }
+
+
+/* ===== CLEANING PARTNER DIRECT CONTACT ===== */
+.service-window-card--cleaning-partner {
+    border: 2px solid rgba(var(--primary-rgb), 0.28);
+    box-shadow: 0 12px 34px rgba(26, 43, 73, 0.12);
+}
+
+.window-badge--cleaning-partner {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.cleaning-partner-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin: 18px 0 6px;
+    padding: 14px;
+    background: rgba(var(--primary-rgb), 0.07);
+    border: 1px solid rgba(var(--primary-rgb), 0.18);
+    border-radius: 12px;
+}
+
+.cleaning-partner-role {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cleaning-partner-name {
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+
+.cleaning-partner-call {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.cleaning-partner-call:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.25);
+}
+
+.cleaning-partner-call strong {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .cleaning-partner-call {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}

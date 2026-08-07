@@ -55,6 +55,26 @@ OG_LOCALE = {
     "fr": "fr_FR",
 }
 
+CLEANING_PARTNER_PHONE = "+351963212185"
+CLEANING_PARTNER_CTA = {
+    "pt": {
+        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.",
+        "call": "Ligar diretamente à Caterina · 963 212 185",
+    },
+    "en": {
+        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.",
+        "call": "Call Caterina directly · 963 212 185",
+    },
+    "es": {
+        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.",
+        "call": "Llamar directamente a Caterina · 963 212 185",
+    },
+    "fr": {
+        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.",
+        "call": "Appeler Caterina directement · 963 212 185",
+    },
+}
+
 LANG_DIRS = ("en", "es", "fr")
 
 
@@ -106,6 +126,15 @@ def render_page(slug: str, lang: str) -> str:
     ui = UI[lang]
     prefix = asset_prefix(lang)
     canonical = page_url(slug, lang)
+    is_cleaning_partner = slug == "servico-limpezas.html"
+    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    call_href = tel_href()
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
 
     head = render_head(
         page_title=meta["page_title"],
@@ -146,11 +175,11 @@ def render_page(slug: str, lang: str) -> str:
             "LEAD_TEXT": ui["lead"],
             "BODY_HTML": get_body_html(slug, lang),
             "CTA_H3": ui["cta_h3"],
-            "CTA_P": ui["cta_p"].format(service=meta["service_name"]),
+            "CTA_P": cta_p,
             "CTA_WA": ui["cta_wa"],
-            "CTA_CALL": ui["cta_call"],
+            "CTA_CALL": cta_call,
             "WA_HREF": wa_href_for_message(meta["wa_message"]),
-            "TEL_HREF": tel_href(),
+            "TEL_HREF": call_href,
         },
     )
     return html

@@ -1,10 +1,47 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-07-07 10:47 UTC
+Atualizado: 2026-08-07 23:36 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
-Ficheiros: 250
+Ficheiros: 252
 ================================================================================
+
+
+================================================================================
+FILE: .github/workflows/add-cleaning-partner.yml
+================================================================================
+
+name: Add cleaning partner
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-cleaning-partner.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update cleaning partner contact
+        run: |
+          python .github/scripts/add-cleaning-partner.py
+          python scripts/generate-servico-pages.py
+          rm .github/workflows/add-cleaning-partner.yml
+          rm .github/scripts/add-cleaning-partner.py
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add direct cleaning partner contact"
+          git push origin HEAD:main
 
 
 ================================================================================
@@ -149,7 +186,7 @@ FILE: scripts/templates/home.html
                     <span data-i18n="hero_btn_call">Ligue agora</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês</p>
         </div>
     </section>
 
@@ -2159,6 +2196,42 @@ OG_LOCALE = {
     "fr": "fr_FR",
 }
 
+CLEANING_PARTNER = {
+    "name": "Caterina Cantemir",
+    "phone_display": "963 212 185",
+    "tel_href": "tel:+351963212185",
+    "labels": {
+        "pt": {
+            "badge": "Parceira recomendada",
+            "role": "Empregada de limpeza · contacto direto",
+            "call": "Ligar diretamente",
+            "details": "Ver serviço",
+            "aria": "Ligar diretamente para Caterina Cantemir, parceira de limpezas",
+        },
+        "en": {
+            "badge": "Recommended partner",
+            "role": "Cleaning professional · direct contact",
+            "call": "Call directly",
+            "details": "View service",
+            "aria": "Call Caterina Cantemir directly, recommended cleaning partner",
+        },
+        "es": {
+            "badge": "Colaboradora recomendada",
+            "role": "Profesional de limpieza · contacto directo",
+            "call": "Llamar directamente",
+            "details": "Ver servicio",
+            "aria": "Llamar directamente a Caterina Cantemir, colaboradora de limpieza",
+        },
+        "fr": {
+            "badge": "Partenaire recommandée",
+            "role": "Professionnelle du ménage · contact direct",
+            "call": "Appeler directement",
+            "details": "Voir le service",
+            "aria": "Appeler directement Caterina Cantemir, partenaire ménage recommandée",
+        },
+    },
+}
+
 
 def _fa_icon(icon: str) -> str:
     return f"fa-solid fa-{icon}"
@@ -2648,6 +2721,7 @@ def build_service_cards(lang: str) -> str:
         elif card["badge"] == "muito_requisitado":
             badge = f'                    <span class="window-badge">{ui["badge_muito_requisitado"]}</span>\n'
         is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
+        is_cleaning_partner = card["slug"] == "servico-limpezas.html"
         partner_note = ""
         link_href = card["slug"]
         link_text = ui["learn_more"]
@@ -2675,6 +2749,26 @@ def build_service_cards(lang: str) -> str:
                 'class="service-window-link service-window-link--secondary">'
                 'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
             )
+        if is_cleaning_partner:
+            labels = CLEANING_PARTNER["labels"][lang]
+            feat = f"{feat} service-window-card--cleaning-partner"
+            badge = (
+                '                    <span class="window-badge window-badge--cleaning-partner">'
+                f'{html.escape(labels["badge"])}</span>\n'
+            )
+            partner_note = (
+                '\n                    <div class="cleaning-partner-contact">'
+                f'<span class="cleaning-partner-role">{html.escape(labels["role"])}</span>'
+                f'<strong class="cleaning-partner-name">{html.escape(CLEANING_PARTNER["name"])}</strong>'
+                f'<a class="cleaning-partner-call" href="{CLEANING_PARTNER["tel_href"]}" '
+                f'aria-label="{html.escape(labels["aria"], quote=True)}">'
+                '<i class="fa-solid fa-phone" aria-hidden="true"></i>'
+                f'<span>{html.escape(labels["call"])}</span>'
+                f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
+                '</a>'
+                '</div>'
+            )
+            link_text = labels["details"]
         blocks.append(
             f"""                <div class="service-window-card{feat}">
 {badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>
@@ -3082,6 +3176,26 @@ OG_LOCALE = {
     "fr": "fr_FR",
 }
 
+CLEANING_PARTNER_PHONE = "+351963212185"
+CLEANING_PARTNER_CTA = {
+    "pt": {
+        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.",
+        "call": "Ligar diretamente à Caterina · 963 212 185",
+    },
+    "en": {
+        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.",
+        "call": "Call Caterina directly · 963 212 185",
+    },
+    "es": {
+        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.",
+        "call": "Llamar directamente a Caterina · 963 212 185",
+    },
+    "fr": {
+        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.",
+        "call": "Appeler Caterina directement · 963 212 185",
+    },
+}
+
 LANG_DIRS = ("en", "es", "fr")
 
 
@@ -3133,6 +3247,15 @@ def render_page(slug: str, lang: str) -> str:
     ui = UI[lang]
     prefix = asset_prefix(lang)
     canonical = page_url(slug, lang)
+    is_cleaning_partner = slug == "servico-limpezas.html"
+    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    call_href = tel_href()
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
 
     head = render_head(
         page_title=meta["page_title"],
@@ -3173,11 +3296,11 @@ def render_page(slug: str, lang: str) -> str:
             "LEAD_TEXT": ui["lead"],
             "BODY_HTML": get_body_html(slug, lang),
             "CTA_H3": ui["cta_h3"],
-            "CTA_P": ui["cta_p"].format(service=meta["service_name"]),
+            "CTA_P": cta_p,
             "CTA_WA": ui["cta_wa"],
-            "CTA_CALL": ui["cta_call"],
+            "CTA_CALL": cta_call,
             "WA_HREF": wa_href_for_message(meta["wa_message"]),
-            "TEL_HREF": tel_href(),
+            "TEL_HREF": call_href,
         },
     )
     return html
@@ -3559,7 +3682,7 @@ HOME_UI = {
         "hero_subtitle": "Precisa de reparar uma torneira, pendurar uma TV, pintar uma divisão ou resolver pequenos arranjos em casa? Na FAZDETUDO.PT tratamos da sua lista de tarefas com rapidez, limpeza e orçamento gratuito na Grande Lisboa e Margem Sul.",
         "hero_btn_quote": "Pedir orçamento por WhatsApp",
         "hero_btn_call": "Ligue agora",
-        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google",
+        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês",
         "services_title": "Os Nossos Serviços Profissionais",
         "services_subtitle": "Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.",
         "advantages_title": "Porquê escolher-nos?",
@@ -3609,7 +3732,7 @@ HOME_UI = {
         "hero_subtitle": "Need to fix a tap, mount a TV, paint a room or take care of small repairs at home? At FAZDETUDO.PT we handle your task list quickly, cleanly and with a free quote across Greater Lisbon and the South Bank.",
         "hero_btn_quote": "Request quote on WhatsApp",
         "hero_btn_call": "Call now",
-        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google",
+        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese",
         "services_title": "Our Professional Services",
         "services_subtitle": "Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.",
         "advantages_title": "Why choose us?",
@@ -3658,7 +3781,7 @@ HOME_UI = {
         "hero_subtitle": "¿Necesita reparar un grifo, colgar una TV, pintar una habitación o resolver pequeños arreglos en casa? En FAZDETUDO.PT nos encargamos de su lista de tareas con rapidez, limpieza y presupuesto gratuito en la Gran Lisboa y Margen Sur.",
         "hero_btn_quote": "Pedir presupuesto por WhatsApp",
         "hero_btn_call": "Llame ahora",
-        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google",
+        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés",
         "services_title": "Nuestros Servicios Profesionales",
         "services_subtitle": "Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.",
         "advantages_title": "¿Por qué elegirnos?",
@@ -3707,7 +3830,7 @@ HOME_UI = {
         "hero_subtitle": "Besoin de réparer un robinet, fixer une TV, peindre une pièce ou régler de petits travaux à la maison ? Chez FAZDETUDO.PT, nous traitons votre liste de tâches rapidement, proprement et avec un devis gratuit dans le Grand Lisbonne et la Rive Sud.",
         "hero_btn_quote": "Demander un devis sur WhatsApp",
         "hero_btn_call": "Appelez maintenant",
-        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google",
+        "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais",
         "services_title": "Nos Services Professionnels",
         "services_subtitle": "Solutions fiables et spécialisées pour l'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.",
         "advantages_title": "Pourquoi nous choisir ?",
@@ -7907,6 +8030,281 @@ python scripts/generate-sitemap.py
 
 
 ================================================================================
+FILE: .github/scripts/add-cleaning-partner.py
+================================================================================
+
+from pathlib import Path
+
+
+def replace_once(path: str, old: str, new: str) -> None:
+    p = Path(path)
+    text = p.read_text(encoding="utf-8")
+    if old not in text:
+        raise RuntimeError(f"Expected block not found in {path}")
+    p.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+
+# Homepage generator: partner config and localized contact card.
+replace_once(
+    "scripts/generate-homepages.py",
+    '''OG_LOCALE = {
+    "pt": "pt_PT",
+    "en": "en_GB",
+    "es": "es_ES",
+    "fr": "fr_FR",
+}
+''',
+    '''OG_LOCALE = {
+    "pt": "pt_PT",
+    "en": "en_GB",
+    "es": "es_ES",
+    "fr": "fr_FR",
+}
+
+CLEANING_PARTNER = {
+    "name": "Caterina Cantemir",
+    "phone_display": "963 212 185",
+    "tel_href": "tel:+351963212185",
+    "labels": {
+        "pt": {
+            "badge": "Parceira recomendada",
+            "role": "Empregada de limpeza · contacto direto",
+            "call": "Ligar diretamente",
+            "details": "Ver serviço",
+            "aria": "Ligar diretamente para Caterina Cantemir, parceira de limpezas",
+        },
+        "en": {
+            "badge": "Recommended partner",
+            "role": "Cleaning professional · direct contact",
+            "call": "Call directly",
+            "details": "View service",
+            "aria": "Call Caterina Cantemir directly, recommended cleaning partner",
+        },
+        "es": {
+            "badge": "Colaboradora recomendada",
+            "role": "Profesional de limpieza · contacto directo",
+            "call": "Llamar directamente",
+            "details": "Ver servicio",
+            "aria": "Llamar directamente a Caterina Cantemir, colaboradora de limpieza",
+        },
+        "fr": {
+            "badge": "Partenaire recommandée",
+            "role": "Professionnelle du ménage · contact direct",
+            "call": "Appeler directement",
+            "details": "Voir le service",
+            "aria": "Appeler directement Caterina Cantemir, partenaire ménage recommandée",
+        },
+    },
+}
+''',
+)
+
+replace_once(
+    "scripts/generate-homepages.py",
+    '''        is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
+        partner_note = ""
+''',
+    '''        is_hvac_pt = lang == "pt" and card["slug"] == "servico-climatizacao.html"
+        is_cleaning_partner = card["slug"] == "servico-limpezas.html"
+        partner_note = ""
+''',
+)
+
+replace_once(
+    "scripts/generate-homepages.py",
+    '''            secondary_link = (
+                '\\n                    <a href="servico-climatizacao.html" '
+                'class="service-window-link service-window-link--secondary">'
+                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
+            )
+        blocks.append(
+''',
+    '''            secondary_link = (
+                '\\n                    <a href="servico-climatizacao.html" '
+                'class="service-window-link service-window-link--secondary">'
+                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
+            )
+        if is_cleaning_partner:
+            labels = CLEANING_PARTNER["labels"][lang]
+            feat = f"{feat} service-window-card--cleaning-partner"
+            badge = (
+                '                    <span class="window-badge window-badge--cleaning-partner">'
+                f'{html.escape(labels["badge"])}</span>\\n'
+            )
+            partner_note = (
+                '\\n                    <div class="cleaning-partner-contact">'
+                f'<span class="cleaning-partner-role">{html.escape(labels["role"])}</span>'
+                f'<strong class="cleaning-partner-name">{html.escape(CLEANING_PARTNER["name"])}</strong>'
+                f'<a class="cleaning-partner-call" href="{CLEANING_PARTNER["tel_href"]}" '
+                f'aria-label="{html.escape(labels["aria"], quote=True)}">'
+                '<i class="fa-solid fa-phone" aria-hidden="true"></i>'
+                f'<span>{html.escape(labels["call"])}</span>'
+                f'<strong>{html.escape(CLEANING_PARTNER["phone_display"])}</strong>'
+                '</a>'
+                '</div>'
+            )
+            link_text = labels["details"]
+        blocks.append(
+''',
+)
+
+# Cleaning service page: direct call goes to Caterina and explains who answers.
+replace_once(
+    "scripts/generate-servico-pages.py",
+    '''OG_LOCALE = {
+    "pt": "pt_PT",
+    "en": "en_GB",
+    "es": "es_ES",
+    "fr": "fr_FR",
+}
+''',
+    '''OG_LOCALE = {
+    "pt": "pt_PT",
+    "en": "en_GB",
+    "es": "es_ES",
+    "fr": "fr_FR",
+}
+
+CLEANING_PARTNER_PHONE = "+351963212185"
+CLEANING_PARTNER_CTA = {
+    "pt": {
+        "text": "Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.",
+        "call": "Ligar diretamente à Caterina · 963 212 185",
+    },
+    "en": {
+        "text": "Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.",
+        "call": "Call Caterina directly · 963 212 185",
+    },
+    "es": {
+        "text": "¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.",
+        "call": "Llamar directamente a Caterina · 963 212 185",
+    },
+    "fr": {
+        "text": "Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.",
+        "call": "Appeler Caterina directement · 963 212 185",
+    },
+}
+''',
+)
+
+replace_once(
+    "scripts/generate-servico-pages.py",
+    '''    canonical = page_url(slug, lang)
+
+    head = render_head(
+''',
+    '''    canonical = page_url(slug, lang)
+    is_cleaning_partner = slug == "servico-limpezas.html"
+    cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_call = ui["cta_call"]
+    call_href = tel_href()
+    if is_cleaning_partner:
+        partner_cta = CLEANING_PARTNER_CTA[lang]
+        cta_p = partner_cta["text"]
+        cta_call = partner_cta["call"]
+        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
+
+    head = render_head(
+''',
+)
+
+replace_once(
+    "scripts/generate-servico-pages.py",
+    '''            "CTA_P": ui["cta_p"].format(service=meta["service_name"]),
+            "CTA_WA": ui["cta_wa"],
+            "CTA_CALL": ui["cta_call"],
+            "WA_HREF": wa_href_for_message(meta["wa_message"]),
+            "TEL_HREF": tel_href(),
+''',
+    '''            "CTA_P": cta_p,
+            "CTA_WA": ui["cta_wa"],
+            "CTA_CALL": cta_call,
+            "WA_HREF": wa_href_for_message(meta["wa_message"]),
+            "TEL_HREF": call_href,
+''',
+)
+
+css = Path("style.css")
+css_text = css.read_text(encoding="utf-8")
+marker = "/* ===== CLEANING PARTNER DIRECT CONTACT ===== */"
+if marker not in css_text:
+    css_text += '''
+
+/* ===== CLEANING PARTNER DIRECT CONTACT ===== */
+.service-window-card--cleaning-partner {
+    border: 2px solid rgba(var(--primary-rgb), 0.28);
+    box-shadow: 0 12px 34px rgba(26, 43, 73, 0.12);
+}
+
+.window-badge--cleaning-partner {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.cleaning-partner-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin: 18px 0 6px;
+    padding: 14px;
+    background: rgba(var(--primary-rgb), 0.07);
+    border: 1px solid rgba(var(--primary-rgb), 0.18);
+    border-radius: 12px;
+}
+
+.cleaning-partner-role {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cleaning-partner-name {
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+
+.cleaning-partner-call {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.cleaning-partner-call:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.25);
+}
+
+.cleaning-partner-call strong {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .cleaning-partner-call {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+'''
+    css.write_text(css_text, encoding="utf-8")
+
+
+================================================================================
 FILE: .htaccess
 ================================================================================
 
@@ -11055,7 +11453,7 @@ FILE: dist/en/index.html
                     <span data-i18n="hero_btn_call">Call now</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese</p>
         </div>
     </section>
 
@@ -11144,12 +11542,14 @@ FILE: dist/en/index.html
                     <a href="servico-manutencao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Recommended partner</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Cleaning</h3>
                     <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina Cantemir directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call directly</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -14730,13 +15130,13 @@ FILE: dist/en/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Click below to speak directly with our Cleaning specialist.</p>
+                <p>Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20cleaning." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quote via WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call: 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Caterina directly · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -16866,7 +17266,7 @@ FILE: dist/es/index.html
                     <span data-i18n="hero_btn_call">Llame ahora</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés</p>
         </div>
     </section>
 
@@ -16955,12 +17355,14 @@ FILE: dist/es/index.html
                     <a href="servico-manutencao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Colaboradora recomendada</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpieza</h3>
                     <p>Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Profesional de limpieza · contacto directo</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Llamar directamente a Caterina Cantemir, colaboradora de limpieza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Llamar directamente</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -20541,13 +20943,13 @@ FILE: dist/es/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Haga clic abajo para hablar directamente con nuestro especialista en Limpieza.</p>
+                <p>¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20limpieza." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Presupuesto por WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar: 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar directamente a Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -22677,7 +23079,7 @@ FILE: dist/fr/index.html
                     <span data-i18n="hero_btn_call">Appelez maintenant</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais</p>
         </div>
     </section>
 
@@ -22766,12 +23168,14 @@ FILE: dist/fr/index.html
                     <a href="servico-manutencao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Partenaire recommandée</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Nettoyage</h3>
                     <p>Nettoyage profond domestique, après-travaux, bureaux et copropriétés.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Professionnelle du ménage · contact direct</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Appeler directement Caterina Cantemir, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler directement</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -26352,13 +26756,13 @@ FILE: dist/fr/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Cliquez ci-dessous pour parler directement à notre spécialiste Nettoyage.</p>
+                <p>Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20nettoyage." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Devis par WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler : 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Caterina directement · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -28488,7 +28892,7 @@ FILE: dist/index.html
                     <span data-i18n="hero_btn_call">Ligue agora</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês</p>
         </div>
     </section>
 
@@ -28580,12 +28984,14 @@ FILE: dist/index.html
                     <a href="servico-manutencao.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Parceira recomendada</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpezas</h3>
                     <p>Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Empregada de limpeza · contacto direto</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina Cantemir, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar diretamente</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -30828,7 +31234,7 @@ FILE: dist/script.js
             hero_subtitle: 'Precisa de reparar uma torneira, pendurar uma TV, pintar uma divisão ou resolver pequenos arranjos em casa? Na FAZDETUDO.PT tratamos da sua lista de tarefas com rapidez, limpeza e orçamento gratuito na Grande Lisboa e Margem Sul.',
             hero_btn_quote: 'Pedir orçamento por WhatsApp',
             hero_btn_call: 'Ligue agora',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês',
             services_title: 'Os Nossos Serviços Profissionais',
             services_subtitle: 'Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
@@ -30904,7 +31310,7 @@ FILE: dist/script.js
             hero_subtitle: 'Need to fix a tap, mount a TV, paint a room or take care of small repairs at home? At FAZDETUDO.PT we handle your task list quickly, cleanly and with a free quote across Greater Lisbon and the South Bank.',
             hero_btn_quote: 'Request quote on WhatsApp',
             hero_btn_call: 'Call now',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese',
             services_title: 'Our Professional Services',
             services_subtitle: 'Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.',
             services: [
@@ -30979,7 +31385,7 @@ FILE: dist/script.js
             hero_subtitle: '¿Necesita reparar un grifo, colgar una TV, pintar una habitación o resolver pequeños arreglos en casa? En FAZDETUDO.PT nos encargamos de su lista de tareas con rapidez, limpieza y presupuesto gratuito en la Gran Lisboa y Margen Sur.',
             hero_btn_quote: 'Pedir presupuesto por WhatsApp',
             hero_btn_call: 'Llame ahora',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés',
             services_title: 'Nuestros Servicios Profesionales',
             services_subtitle: 'Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.',
             services: [
@@ -31054,7 +31460,7 @@ FILE: dist/script.js
             hero_subtitle: 'Besoin de réparer un robinet, fixer une TV, peindre une pièce ou régler de petits travaux à la maison ? Chez FAZDETUDO.PT, nous traitons votre liste de tâches rapidement, proprement et avec un devis gratuit dans le Grand Lisbonne et la Rive Sud.',
             hero_btn_quote: 'Demander un devis sur WhatsApp',
             hero_btn_call: 'Appelez maintenant',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais',
             services_title: 'Nos Services Professionnels',
             services_subtitle: 'Solutions fiables et spécialisées pour l\'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.',
             services: [
@@ -33569,13 +33975,13 @@ FILE: dist/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Limpezas.</p>
+                <p>Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20limpezas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar: 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar diretamente à Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -35523,481 +35929,481 @@ FILE: dist/sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -39461,6 +39867,78 @@ body.lightbox-open {
 }
 
 
+/* ===== CLEANING PARTNER DIRECT CONTACT ===== */
+.service-window-card--cleaning-partner {
+    border: 2px solid rgba(var(--primary-rgb), 0.28);
+    box-shadow: 0 12px 34px rgba(26, 43, 73, 0.12);
+}
+
+.window-badge--cleaning-partner {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.cleaning-partner-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin: 18px 0 6px;
+    padding: 14px;
+    background: rgba(var(--primary-rgb), 0.07);
+    border: 1px solid rgba(var(--primary-rgb), 0.18);
+    border-radius: 12px;
+}
+
+.cleaning-partner-role {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cleaning-partner-name {
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+
+.cleaning-partner-call {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.cleaning-partner-call:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.25);
+}
+
+.cleaning-partner-call strong {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .cleaning-partner-call {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+
 ================================================================================
 FILE: eletricidade-lisboa.html
 ================================================================================
@@ -39702,7 +40180,7 @@ FILE: en/index.html
                     <span data-i18n="hero_btn_call">Call now</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese</p>
         </div>
     </section>
 
@@ -39791,12 +40269,14 @@ FILE: en/index.html
                     <a href="servico-manutencao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Recommended partner</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Cleaning</h3>
                     <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina Cantemir directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call directly</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -43377,13 +43857,13 @@ FILE: en/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Click below to speak directly with our Cleaning specialist.</p>
+                <p>Looking for a cleaning professional? You can call our recommended partner Caterina Cantemir directly to discuss availability and the service.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20a%20quote%20for%20cleaning." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quote via WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call: 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Caterina directly · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -45513,7 +45993,7 @@ FILE: es/index.html
                     <span data-i18n="hero_btn_call">Llame ahora</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés</p>
         </div>
     </section>
 
@@ -45602,12 +46082,14 @@ FILE: es/index.html
                     <a href="servico-manutencao.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Colaboradora recomendada</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpieza</h3>
                     <p>Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Profesional de limpieza · contacto directo</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Llamar directamente a Caterina Cantemir, colaboradora de limpieza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Llamar directamente</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">Ver servicio <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -49188,13 +49670,13 @@ FILE: es/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Haga clic abajo para hablar directamente con nuestro especialista en Limpieza.</p>
+                <p>¿Busca una profesional de limpieza? Puede llamar directamente a nuestra colaboradora Caterina Cantemir para consultar disponibilidad y el servicio.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20un%20presupuesto%20para%20limpieza." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Presupuesto por WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar: 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar directamente a Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -51324,7 +51806,7 @@ FILE: fr/index.html
                     <span data-i18n="hero_btn_call">Appelez maintenant</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais</p>
         </div>
     </section>
 
@@ -51413,12 +51895,14 @@ FILE: fr/index.html
                     <a href="servico-manutencao.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Partenaire recommandée</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Nettoyage</h3>
                     <p>Nettoyage profond domestique, après-travaux, bureaux et copropriétés.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Professionnelle du ménage · contact direct</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Appeler directement Caterina Cantemir, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler directement</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">Voir le service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -54999,13 +55483,13 @@ FILE: fr/servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Cliquez ci-dessous pour parler directement à notre spécialiste Nettoyage.</p>
+                <p>Vous cherchez une professionnelle du ménage ? Vous pouvez appeler directement notre partenaire Caterina Cantemir pour convenir des disponibilités et du service.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20un%20devis%20pour%20nettoyage." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Devis par WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler : 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Caterina directement · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -57135,7 +57619,7 @@ FILE: index.html
                     <span data-i18n="hero_btn_call">Ligue agora</span>
                 </a>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google</p>
+            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês</p>
         </div>
     </section>
 
@@ -57227,12 +57711,14 @@ FILE: index.html
                     <a href="servico-manutencao.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
-                <div class="service-window-card">
+                <div class="service-window-card service-window-card--cleaning-partner">
+                    <span class="window-badge window-badge--cleaning-partner">Parceira recomendada</span>
                     <div class="service-window-icon"><i class="fa-solid fa-broom" aria-hidden="true"></i></div>
                     <h3>Limpezas</h3>
                     <p>Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas.</p>
 
-                    <a href="servico-limpezas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Empregada de limpeza · contacto direto</span><strong class="cleaning-partner-name">Caterina Cantemir</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina Cantemir, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar diretamente</span><strong>963 212 185</strong></a></div>
+                    <a href="servico-limpezas.html" class="service-window-link">Ver serviço <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="service-window-card">
@@ -59475,7 +59961,7 @@ FILE: script.js
             hero_subtitle: 'Precisa de reparar uma torneira, pendurar uma TV, pintar uma divisão ou resolver pequenos arranjos em casa? Na FAZDETUDO.PT tratamos da sua lista de tarefas com rapidez, limpeza e orçamento gratuito na Grande Lisboa e Margem Sul.',
             hero_btn_quote: 'Pedir orçamento por WhatsApp',
             hero_btn_call: 'Ligue agora',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês',
             services_title: 'Os Nossos Serviços Profissionais',
             services_subtitle: 'Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
@@ -59551,7 +60037,7 @@ FILE: script.js
             hero_subtitle: 'Need to fix a tap, mount a TV, paint a room or take care of small repairs at home? At FAZDETUDO.PT we handle your task list quickly, cleanly and with a free quote across Greater Lisbon and the South Bank.',
             hero_btn_quote: 'Request quote on WhatsApp',
             hero_btn_call: 'Call now',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese',
             services_title: 'Our Professional Services',
             services_subtitle: 'Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.',
             services: [
@@ -59626,7 +60112,7 @@ FILE: script.js
             hero_subtitle: '¿Necesita reparar un grifo, colgar una TV, pintar una habitación o resolver pequeños arreglos en casa? En FAZDETUDO.PT nos encargamos de su lista de tareas con rapidez, limpieza y presupuesto gratuito en la Gran Lisboa y Margen Sur.',
             hero_btn_quote: 'Pedir presupuesto por WhatsApp',
             hero_btn_call: 'Llame ahora',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés',
             services_title: 'Nuestros Servicios Profesionales',
             services_subtitle: 'Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.',
             services: [
@@ -59701,7 +60187,7 @@ FILE: script.js
             hero_subtitle: 'Besoin de réparer un robinet, fixer une TV, peindre une pièce ou régler de petits travaux à la maison ? Chez FAZDETUDO.PT, nous traitons votre liste de tâches rapidement, proprement et avec un devis gratuit dans le Grand Lisbonne et la Rive Sud.',
             hero_btn_quote: 'Demander un devis sur WhatsApp',
             hero_btn_call: 'Appelez maintenant',
-            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google',
+            hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais',
             services_title: 'Nos Services Professionnels',
             services_subtitle: 'Solutions fiables et spécialisées pour l\'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.',
             services: [
@@ -62216,13 +62702,13 @@ FILE: servico-limpezas.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Clique abaixo para falar diretamente com o nosso técnico especialista em Limpezas.</p>
+                <p>Procura uma empregada de limpeza? Pode ligar diretamente para a nossa parceira Caterina Cantemir para combinar disponibilidade e o serviço.</p>
                 <div class="service-cta-box-actions">
                     <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20limpezas." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Orçamento por WhatsApp
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar: 932 504 112
+                    <a href="tel:+351963212185" class="btn btn-outline btn-lg service-cta-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar diretamente à Caterina · 963 212 185
                     </a>
                 </div>
                     </div>
@@ -64170,481 +64656,481 @@ FILE: sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-07-07</lastmod>
+        <lastmod>2026-08-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -68105,4 +68591,76 @@ body.lightbox-open {
     margin: 0.35rem 0;
     font-size: 0.95rem;
     line-height: 1.55;
+}
+
+
+/* ===== CLEANING PARTNER DIRECT CONTACT ===== */
+.service-window-card--cleaning-partner {
+    border: 2px solid rgba(var(--primary-rgb), 0.28);
+    box-shadow: 0 12px 34px rgba(26, 43, 73, 0.12);
+}
+
+.window-badge--cleaning-partner {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+.cleaning-partner-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin: 18px 0 6px;
+    padding: 14px;
+    background: rgba(var(--primary-rgb), 0.07);
+    border: 1px solid rgba(var(--primary-rgb), 0.18);
+    border-radius: 12px;
+}
+
+.cleaning-partner-role {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cleaning-partner-name {
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+
+.cleaning-partner-call {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.cleaning-partner-call:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.25);
+}
+
+.cleaning-partner-call strong {
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .cleaning-partner-call {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
 }
