@@ -1,4 +1,4 @@
-name: Final cleaning contact update
+name: Debug final cleaning contact
 
 on:
   push:
@@ -9,17 +9,29 @@ permissions:
   contents: write
 
 jobs:
-  update:
+  debug:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - run: python scripts/update-cleaning-contact-temp.py
-      - run: python scripts/generate-servico-pages.py
-      - name: Commit changes
+      - name: Build and capture
         run: |
-          rm -f docs/DEBUG-CLEANING-BUILD.txt
+          set +e
+          python scripts/generate-servico-pages.py > /tmp/build2.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            git reset --hard HEAD
+            cp /tmp/build2.log docs/DEBUG-CLEANING-BUILD-2.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/DEBUG-CLEANING-BUILD-2.txt
+            git commit -m "Capture second cleaning build error"
+            git push origin HEAD:main
+            exit 0
+          fi
+          rm -f docs/DEBUG-CLEANING-BUILD.txt docs/DEBUG-CLEANING-BUILD-2.txt
           rm .github/workflows/update-cleaning-contact.yml
           rm scripts/update-cleaning-contact-temp.py
           git diff --check
