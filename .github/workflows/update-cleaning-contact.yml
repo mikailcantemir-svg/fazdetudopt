@@ -27,3 +27,4 @@ jobs:
           git add -A
           git commit -m "Use Caterina with call and WhatsApp"
           git push origin HEAD:main
+# retry after updater fix
