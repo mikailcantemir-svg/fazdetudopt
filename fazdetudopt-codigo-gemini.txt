@@ -1,9 +1,9 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-08-07 23:48 UTC
+Atualizado: 2026-08-08 00:05 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
-Ficheiros: 255
+Ficheiros: 251
 ================================================================================
 
 
@@ -56,42 +56,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
-================================================================================
-FILE: .github/workflows/update-cleaning-contact.yml
-================================================================================
-
-name: Finalize cleaning contact
-
-on:
-  push:
-    paths:
-      - .github/workflows/update-cleaning-contact.yml
-
-permissions:
-  contents: write
-
-jobs:
-  update:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - run: python scripts/update-cleaning-contact-temp.py
-      - run: python scripts/generate-servico-pages.py
-      - name: Commit changes
-        run: |
-          rm -f docs/DEBUG-CLEANING-BUILD.txt docs/DEBUG-CLEANING-BUILD-2.txt
-          rm .github/workflows/update-cleaning-contact.yml
-          rm scripts/update-cleaning-contact-temp.py
-          git diff --check
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Use Caterina with direct call and WhatsApp"
-          git push origin HEAD:main
 
 
 ================================================================================
@@ -201,7 +165,6 @@ FILE: scripts/templates/home.html
             <div class="services-modern-grid">
 {{SERVICE_CARDS}}
             </div>
-{{HVAC_PARTNER_BLOCK}}
         </div>
     </section>
 
@@ -2726,29 +2689,40 @@ def build_service_cards(lang: str) -> str:
         link_href = card["slug"]
         link_text = ui["learn_more"]
         secondary_link = ""
+        show_default_link = True
         if is_hvac_pt:
             feat = f"{feat} service-window-card--partner"
             badge = (
-                '                    <span class="window-badge window-badge--airfix-partner">'
-                f'{ui["badge_parceiro_certificado"]}</span>\n'
+                '                    <span class="window-badge service-badge partner-recommended">'
+                f'{ui["badge_parceiro_recomendado"]}</span>\n'
             )
-            partner_note = (
-                '\n                    <a class="airfix-partner-badge" href="https://airfix.pt/" '
-                'target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt">'
-                '<span class="airfix-pulse-ring" aria-hidden="true"></span>'
-                '<span class="airfix-logo-circle">'
-                '<img src="assets/partners/airfix-icon.png" alt="AirFix.pt">'
-                "</span>"
-                '<span class="airfix-badge-text">Parceiro recomendado</span>'
-                "</a>"
-            )
-            link_href = "https://airfix.pt/"
-            link_text = "Ver parceiro AVAC"
-            secondary_link = (
-                '\n                    <a href="servico-climatizacao.html" '
-                'class="service-window-link service-window-link--secondary">'
-                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
-            )
+            partner_note = """
+                <div class="partner-mini-card">
+                  <a class="partner-logo-pulse" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                    <span class="partner-pulse-ring" aria-hidden="true"></span>
+                    <span class="partner-logo-circle">
+                      <img src="assets/partners/airfix-icon.png" alt="AirFix.pt" width="46" height="46" loading="lazy" decoding="async">
+                    </span>
+                  </a>
+
+                  <div class="partner-mini-content">
+                    <strong>AirFix.pt</strong>
+                    <span>Especialista em ar condicionado</span>
+                  </div>
+                </div>
+
+                <div class="partner-actions">
+                  <a class="partner-primary-link" href="https://airfix.pt/" target="_blank" rel="noopener">
+                    Ver parceiro AVAC
+                    <span aria-hidden="true">›</span>
+                  </a>
+
+                  <a class="partner-secondary-link" href="servico-climatizacao.html">
+                    Ver serviço FAZDETUDO
+                    <span aria-hidden="true">›</span>
+                  </a>
+                </div>"""
+            show_default_link = False
         if is_cleaning_partner:
             labels = CLEANING_PARTNER["labels"][lang]
             feat = f"{feat} service-window-card--cleaning-partner"
@@ -2774,48 +2748,28 @@ def build_service_cards(lang: str) -> str:
                 '</div>'
             )
             link_text = labels["details"]
+        default_link = ""
+        if show_default_link:
+            default_link = (
+                f'                    <a href="{link_href}" class="service-window-link">'
+                f'{link_text} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
+                f'{secondary_link}'
+            )
         blocks.append(
             f"""                <div class="service-window-card{feat}">
 {badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>
                     <h3>{title}</h3>
                     <p>{desc}</p>
 {partner_note}
-                    <a href="{link_href}" class="service-window-link"{' target="_blank" rel="noopener noreferrer"' if is_hvac_pt else ''}>{link_text} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>{secondary_link}
+{default_link}
                 </div>"""
         )
     return "\n\n".join(blocks)
 
 
 def build_hvac_partner_block(lang: str, prefix: str) -> str:
-    if lang != "pt":
-        return ""
-    return f"""            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
-                <div class="airfix-recommended-header">
-                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
-                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
-                      <span class="airfix-logo-circle airfix-logo-circle-large">
-                        <img src="{prefix}assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
-                      </span>
-                    </a>
-
-                    <div>
-                      <span class="airfix-kicker">Parceiro recomendado</span>
-                      <h3>AirFix.pt</h3>
-                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
-                    </div>
-                </div>
-                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
-                <div class="airfix-tags">
-                  <span>Instalação AVAC</span>
-                  <span>Manutenção</span>
-                  <span>Limpeza</span>
-                  <span>Reparação</span>
-                </div>
-
-                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
-                  Visitar AirFix.pt
-                </a>
-            </div>"""
+    # Bloco grande removido: o destaque AirFix fica só no mini-card do serviço AVAC.
+    return ""
 
 
 def build_handyman_section(lang: str) -> str:
@@ -3732,7 +3686,7 @@ HOME_UI = {
         "badge_specialty": "Especialidade",
         "badge_acabamentos_premium": "Acabamentos Premium",
         "badge_muito_requisitado": "Muito Requisitado",
-        "badge_parceiro_certificado": "Parceiro certificado",
+        "badge_parceiro_recomendado": "Parceiro recomendado",
     },
     "en": {
         "nav_home": "Home",
@@ -7555,117 +7509,6 @@ def render_template(name: str, variables: dict[str, str]) -> str:
 
 
 ================================================================================
-FILE: scripts/update-cleaning-contact-temp.py
-================================================================================
-
-from pathlib import Path
-
-# Homepage cleaning card
-p = Path('scripts/generate-homepages.py')
-s = p.read_text(encoding='utf-8')
-s = s.replace('Caterina Cantemir', 'Caterina')
-if '"whatsapp_href": "https://wa.me/351963212185"' not in s:
-    s = s.replace(
-        '    "tel_href": "tel:+351963212185",\n    "labels": {',
-        '    "tel_href": "tel:+351963212185",\n    "whatsapp_href": "https://wa.me/351963212185",\n    "labels": {'
-    )
-s = s.replace('"call": "Ligar diretamente"', '"call": "Ligar"')
-s = s.replace('"call": "Call directly"', '"call": "Call"')
-s = s.replace('"call": "Llamar diretamente"', '"call": "Llamar"')
-s = s.replace('"call": "Appeler directement"', '"call": "Appeler"')
-if 'cleaning-partner-whatsapp' not in s:
-    old = '''                '</a>'
-                '</div>'
-            )
-            link_text = labels["details"]'''
-    new = '''                '</a>'
-                f'<a class="cleaning-partner-call cleaning-partner-whatsapp" href="{CLEANING_PARTNER["whatsapp_href"]}" '
-                'target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp">'
-                '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
-                '<span>WhatsApp</span>'
-                '</a>'
-                '</div>'
-            )
-            link_text = labels["details"]'''
-    s = s.replace(old, new, 1)
-p.write_text(s, encoding='utf-8')
-
-# Cleaning service page: call and WhatsApp both direct to Caterina
-p = Path('scripts/generate-servico-pages.py')
-s = p.read_text(encoding='utf-8').replace('Caterina Cantemir', 'Caterina')
-if '"whatsapp": "WhatsApp da Caterina · 963 212 185"' not in s:
-    s = s.replace(
-        '        "call": "Ligar diretamente à Caterina · 963 212 185",',
-        '        "call": "Ligar à Caterina · 963 212 185",\n        "whatsapp": "WhatsApp da Caterina · 963 212 185",'
-    )
-    s = s.replace(
-        '        "call": "Call Caterina directly · 963 212 185",',
-        '        "call": "Call Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
-    )
-    s = s.replace(
-        '        "call": "Llamar directamente a Caterina · 963 212 185",',
-        '        "call": "Llamar a Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
-    )
-    s = s.replace(
-        '        "call": "Appeler Caterina directement · 963 212 185",',
-        '        "call": "Appeler Caterina · 963 212 185",\n        "whatsapp": "WhatsApp Caterina · 963 212 185",'
-    )
-
-if 'cta_wa = ui["cta_wa"]' not in s:
-    s = s.replace(
-'''    cta_p = ui["cta_p"].format(service=meta["service_name"])
-    cta_call = ui["cta_call"]
-    call_href = tel_href()
-    if is_cleaning_partner:
-        partner_cta = CLEANING_PARTNER_CTA[lang]
-        cta_p = partner_cta["text"]
-        cta_call = partner_cta["call"]
-        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
-''',
-'''    cta_p = ui["cta_p"].format(service=meta["service_name"])
-    cta_call = ui["cta_call"]
-    cta_wa = ui["cta_wa"]
-    call_href = tel_href()
-    wa_link = wa_href_for_message(meta["wa_message"])
-    if is_cleaning_partner:
-        partner_cta = CLEANING_PARTNER_CTA[lang]
-        cta_p = partner_cta["text"]
-        cta_call = partner_cta["call"]
-        cta_wa = partner_cta["whatsapp"]
-        call_href = f"tel:{CLEANING_PARTNER_PHONE}"
-        wa_link = "https://wa.me/351963212185"
-''')
-
-s = s.replace(
-'''            "CTA_WA": ui["cta_wa"],
-            "CTA_CALL": cta_call,
-            "WA_HREF": wa_href_for_message(meta["wa_message"]),
-''',
-'''            "CTA_WA": cta_wa,
-            "CTA_CALL": cta_call,
-            "WA_HREF": wa_link,
-''')
-p.write_text(s, encoding='utf-8')
-
-# Styling
-p = Path('style.css')
-s = p.read_text(encoding='utf-8')
-if '.cleaning-partner-whatsapp {' not in s:
-    s += '\n\n.cleaning-partner-whatsapp {\n    background: #25D366;\n}\n\n.cleaning-partner-whatsapp:hover {\n    background: #1DA851;\n}\n'
-p.write_text(s, encoding='utf-8')
-
-# Public project note
-doc = Path('docs/CLEANING_PARTNER.md')
-if doc.exists():
-    d = doc.read_text(encoding='utf-8').replace('Caterina Cantemir', 'Caterina')
-    if 'wa.me/351963212185' not in d:
-        d += '\n- WhatsApp direto: `https://wa.me/351963212185`\n'
-    doc.write_text(d, encoding='utf-8')
-
-print('Cleaning contact source update complete')
-
-
-================================================================================
 FILE: docs/ASSETS-CANDIDATES-REMOVAL.md
 ================================================================================
 
@@ -7724,137 +7567,6 @@ Contacto direto apresentado no site para pedidos de empregada/profissional de li
 - WhatsApp geral da FAZDETUDO.PT mantém-se separado
 
 As versões PT/EN/ES/FR apresentam o mesmo contacto com texto localizado.
-
-
-================================================================================
-FILE: docs/DEBUG-CLEANING-BUILD-2.txt
-================================================================================
-
-=== Regenerating fazdetudo.pt static HTML ===
-
---- Homepages (PT + en/es/fr) ---
-wrote index.html
-wrote en/index.html
-wrote es/index.html
-wrote fr/index.html
-
-Total: 4 homepages
-
---- Service pages (18 × 4 languages) ---
-wrote servico-remodelacoes.html
-wrote en/servico-remodelacoes.html
-wrote es/servico-remodelacoes.html
-wrote fr/servico-remodelacoes.html
-wrote servico-recuperar-casa.html
-wrote en/servico-recuperar-casa.html
-wrote es/servico-recuperar-casa.html
-wrote fr/servico-recuperar-casa.html
-wrote servico-pinturas.html
-wrote en/servico-pinturas.html
-wrote es/servico-pinturas.html
-wrote fr/servico-pinturas.html
-wrote servico-pintura-fachadas-alpinismo.html
-wrote en/servico-pintura-fachadas-alpinismo.html
-wrote es/servico-pintura-fachadas-alpinismo.html
-wrote fr/servico-pintura-fachadas-alpinismo.html
-wrote servico-canalizacoes.html
-wrote en/servico-canalizacoes.html
-wrote es/servico-canalizacoes.html
-wrote fr/servico-canalizacoes.html
-wrote servico-electricidade.html
-wrote en/servico-electricidade.html
-wrote es/servico-electricidade.html
-wrote fr/servico-electricidade.html
-wrote servico-carpintaria.html
-wrote en/servico-carpintaria.html
-wrote es/servico-carpintaria.html
-wrote fr/servico-carpintaria.html
-wrote servico-reparacoes-gerais.html
-wrote en/servico-reparacoes-gerais.html
-wrote es/servico-reparacoes-gerais.html
-wrote fr/servico-reparacoes-gerais.html
-wrote servico-manutencao.html
-wrote en/servico-manutencao.html
-wrote es/servico-manutencao.html
-wrote fr/servico-manutencao.html
-wrote servico-limpezas.html
-wrote en/servico-limpezas.html
-wrote es/servico-limpezas.html
-Traceback (most recent call last):
-  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 344, in <module>
-    main()
-  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 312, in main
-    path.write_text(render_page(slug, lang), encoding="utf-8")
-                    ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 142, in render_page
-    cta_wa = partner_cta["whatsapp"]
-             ~~~~~~~~~~~^^^^^^^^^^^^
-KeyError: 'whatsapp'
-
-
-================================================================================
-FILE: docs/DEBUG-CLEANING-BUILD.txt
-================================================================================
-
-=== Regenerating fazdetudo.pt static HTML ===
-
---- Homepages (PT + en/es/fr) ---
-wrote index.html
-wrote en/index.html
-wrote es/index.html
-wrote fr/index.html
-
-Total: 4 homepages
-
---- Service pages (18 × 4 languages) ---
-wrote servico-remodelacoes.html
-wrote en/servico-remodelacoes.html
-wrote es/servico-remodelacoes.html
-wrote fr/servico-remodelacoes.html
-wrote servico-recuperar-casa.html
-wrote en/servico-recuperar-casa.html
-wrote es/servico-recuperar-casa.html
-wrote fr/servico-recuperar-casa.html
-wrote servico-pinturas.html
-wrote en/servico-pinturas.html
-wrote es/servico-pinturas.html
-wrote fr/servico-pinturas.html
-wrote servico-pintura-fachadas-alpinismo.html
-wrote en/servico-pintura-fachadas-alpinismo.html
-wrote es/servico-pintura-fachadas-alpinismo.html
-wrote fr/servico-pintura-fachadas-alpinismo.html
-wrote servico-canalizacoes.html
-wrote en/servico-canalizacoes.html
-wrote es/servico-canalizacoes.html
-wrote fr/servico-canalizacoes.html
-wrote servico-electricidade.html
-wrote en/servico-electricidade.html
-wrote es/servico-electricidade.html
-wrote fr/servico-electricidade.html
-wrote servico-carpintaria.html
-wrote en/servico-carpintaria.html
-wrote es/servico-carpintaria.html
-wrote fr/servico-carpintaria.html
-wrote servico-reparacoes-gerais.html
-wrote en/servico-reparacoes-gerais.html
-wrote es/servico-reparacoes-gerais.html
-wrote fr/servico-reparacoes-gerais.html
-wrote servico-manutencao.html
-wrote en/servico-manutencao.html
-wrote es/servico-manutencao.html
-wrote fr/servico-manutencao.html
-wrote servico-limpezas.html
-wrote en/servico-limpezas.html
-Traceback (most recent call last):
-  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 344, in <module>
-    main()
-  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 312, in main
-    path.write_text(render_page(slug, lang), encoding="utf-8")
-                    ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/fazdetudopt/fazdetudopt/scripts/generate-servico-pages.py", line 142, in render_page
-    cta_wa = partner_cta["whatsapp"]
-             ~~~~~~~~~~~^^^^^^^^^^^^
-KeyError: 'whatsapp'
 
 
 ================================================================================
@@ -8410,6 +8122,10 @@ O gerador principal produz:
 | Reviews, FAQ dinâmico, WhatsApp (homepage) | `script.js` |
 | URLs e hreflang | `scripts/slug_registry.py` |
 | Redirects `*-lisboa.html` | `scripts/generate-lisboa-redirects.py` (`REDIRECTS`) |
+
+### Contactos de parceiros
+
+A categoria **Limpezas** inclui contacto direto da parceira **Caterina**, com opções de chamada e WhatsApp para `963 212 185`. A configuração é preservada pelos geradores para não desaparecer num rebuild.
 
 ---
 
@@ -11614,7 +11330,6 @@ FILE: dist/en/index.html
                     <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -17427,7 +17142,6 @@ FILE: dist/es/index.html
                     <a href="servico-piscinas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -23240,7 +22954,6 @@ FILE: dist/fr/index.html
                     <a href="servico-piscinas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -28914,14 +28627,37 @@ FILE: dist/index.html
                 </div>
 
                 <div class="service-window-card service-window-card--partner">
-                    <span class="window-badge window-badge--airfix-partner">Parceiro certificado</span>
+                    <span class="window-badge service-badge partner-recommended">Parceiro recomendado</span>
                     <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
                     <h3>Climatização (AVAC)</h3>
                     <p>Instalação, manutenção, limpeza e reparação de ar condicionado para casas, apartamentos, lojas e empresas.</p>
 
-                    <a class="airfix-partner-badge" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt"><span class="airfix-pulse-ring" aria-hidden="true"></span><span class="airfix-logo-circle"><img src="assets/partners/airfix-icon.png" alt="AirFix.pt"></span><span class="airfix-badge-text">Parceiro recomendado</span></a>
-                    <a href="https://airfix.pt/" class="service-window-link" target="_blank" rel="noopener noreferrer">Ver parceiro AVAC <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                    <a href="servico-climatizacao.html" class="service-window-link service-window-link--secondary">Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                <div class="partner-mini-card">
+                  <a class="partner-logo-pulse" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                    <span class="partner-pulse-ring" aria-hidden="true"></span>
+                    <span class="partner-logo-circle">
+                      <img src="assets/partners/airfix-icon.png" alt="AirFix.pt" width="46" height="46" loading="lazy" decoding="async">
+                    </span>
+                  </a>
+
+                  <div class="partner-mini-content">
+                    <strong>AirFix.pt</strong>
+                    <span>Especialista em ar condicionado</span>
+                  </div>
+                </div>
+
+                <div class="partner-actions">
+                  <a class="partner-primary-link" href="https://airfix.pt/" target="_blank" rel="noopener">
+                    Ver parceiro AVAC
+                    <span aria-hidden="true">›</span>
+                  </a>
+
+                  <a class="partner-secondary-link" href="servico-climatizacao.html">
+                    Ver serviço FAZDETUDO
+                    <span aria-hidden="true">›</span>
+                  </a>
+                </div>
+
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -29055,33 +28791,6 @@ FILE: dist/index.html
 
                     <a href="servico-piscinas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
-            </div>
-            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
-                <div class="airfix-recommended-header">
-                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
-                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
-                      <span class="airfix-logo-circle airfix-logo-circle-large">
-                        <img src="assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
-                      </span>
-                    </a>
-
-                    <div>
-                      <span class="airfix-kicker">Parceiro recomendado</span>
-                      <h3>AirFix.pt</h3>
-                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
-                    </div>
-                </div>
-                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
-                <div class="airfix-tags">
-                  <span>Instalação AVAC</span>
-                  <span>Manutenção</span>
-                  <span>Limpeza</span>
-                  <span>Reparação</span>
-                </div>
-
-                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
-                  Visitar AirFix.pt
-                </a>
             </div>
         </div>
     </section>
@@ -35927,481 +35636,481 @@ FILE: dist/sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -37105,15 +36814,16 @@ a.lang-option {
     border-radius: 50px;
 }
 
-.window-badge--airfix-partner {
-    background: linear-gradient(135deg, #0F3D6E 0%, #1a5a96 55%, #FF6A00 100%);
-    box-shadow: 0 6px 16px rgba(15, 61, 110, 0.2);
-    letter-spacing: 0.05em;
-    font-size: 0.64rem;
-    padding: 5px 11px;
+.window-badge--airfix-partner,
+.service-badge.partner-recommended {
+    background: #ea5b2a;
+    color: #ffffff;
+    font-size: 0.62rem;
+    padding: 4px 10px;
     max-width: calc(100% - 28px);
     text-align: center;
     line-height: 1.2;
+    letter-spacing: 0.05em;
 }
 
 .service-window-icon {
@@ -37161,8 +36871,8 @@ a.lang-option {
 }
 
 .service-window-card--partner {
-    border-color: rgba(13, 110, 253, 0.35);
-    box-shadow: 0 14px 34px rgba(13, 110, 253, 0.12);
+    border-color: rgba(234, 91, 42, 0.22);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
 .service-window-link--secondary {
@@ -37171,29 +36881,30 @@ a.lang-option {
     color: #4a5568;
 }
 
-.airfix-partner-badge {
-    position: relative;
-    display: inline-flex;
+.partner-mini-card {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 14px;
-    margin-bottom: 12px;
-    padding: 8px 12px 8px 8px;
-    border-radius: 999px;
-    background: #ffffff;
-    border: 1px solid rgba(15, 61, 110, 0.14);
-    box-shadow: 0 10px 28px rgba(15, 61, 110, 0.12);
-    color: #0F3D6E;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.82rem;
+    gap: 12px;
+    margin-top: 22px;
+    padding: 12px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 248, 240, 0.95), rgba(255, 255, 255, 0.95));
+    border: 1px solid rgba(234, 91, 42, 0.18);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
-.airfix-logo-circle {
+.partner-logo-pulse {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.partner-logo-circle {
     position: relative;
     z-index: 2;
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: #ffffff;
     display: inline-flex;
@@ -37201,143 +36912,86 @@ a.lang-option {
     justify-content: center;
     overflow: hidden;
     box-shadow:
-        0 0 0 3px rgba(255, 138, 0, 0.16),
-        0 10px 22px rgba(15, 61, 110, 0.16);
+        0 0 0 3px rgba(234, 91, 42, 0.12),
+        0 8px 20px rgba(15, 23, 42, 0.14);
 }
 
-.airfix-logo-circle img {
+.partner-logo-circle img {
     width: 78%;
     height: 78%;
     object-fit: contain;
     display: block;
 }
 
-.airfix-logo-circle-large {
-    width: 68px;
-    height: 68px;
-}
-
-.airfix-pulse-ring {
+.partner-pulse-ring {
     position: absolute;
     inset: -5px;
     border-radius: 999px;
-    background: radial-gradient(circle, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0));
-    animation: airfixPulseRing 1.8s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(234, 91, 42, 0.28), rgba(234, 91, 42, 0));
+    animation: partnerPulse 2s ease-in-out infinite;
     z-index: 1;
 }
 
-.airfix-badge-text {
-    position: relative;
-    z-index: 2;
-    white-space: nowrap;
-}
-
-@keyframes airfixPulseRing {
+@keyframes partnerPulse {
     0%, 100% {
         transform: scale(0.92);
         opacity: 0.45;
     }
 
     50% {
-        transform: scale(1.18);
+        transform: scale(1.16);
         opacity: 1;
     }
 }
 
-.airfix-recommended-box {
-    margin-top: 18px;
-    padding: 18px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-    border: 1px solid rgba(255, 138, 0, 0.28);
-    box-shadow: 0 18px 42px rgba(15, 61, 110, 0.12);
+.partner-mini-content {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
 }
 
-.airfix-recommended-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.airfix-logo-featured {
-    position: relative;
-    display: inline-flex;
-    flex: 0 0 auto;
-    text-decoration: none;
-}
-
-.airfix-kicker {
-    display: inline-flex;
-    margin-bottom: 4px;
-    color: #FF6A00;
+.partner-mini-content strong {
+    color: #0f172a;
+    font-size: 0.95rem;
     font-weight: 900;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    line-height: 1.2;
 }
 
-.airfix-recommended-box h3 {
-    margin: 0 0 4px;
-    color: #0F3D6E;
-    font-size: 1.2rem;
-    font-weight: 900;
-}
-
-.airfix-recommended-box p {
-    margin: 0;
-    color: #526174;
-    line-height: 1.5;
-}
-
-.airfix-seo-link {
-    margin-top: 12px;
-}
-
-.airfix-seo-link a {
-    color: #0F3D6E;
-    text-decoration: none;
+.partner-mini-content span {
+    color: #64748b;
+    font-size: 0.82rem;
     font-weight: 700;
+    line-height: 1.3;
 }
 
-.airfix-seo-link a:hover {
-    text-decoration: underline;
-}
-
-.airfix-tags {
-    display: flex;
-    flex-wrap: wrap;
+.partner-actions {
+    display: grid;
     gap: 8px;
     margin-top: 14px;
 }
 
-.airfix-tags span {
-    display: inline-flex;
-    padding: 7px 10px;
-    border-radius: 999px;
-    background: rgba(15, 61, 110, 0.06);
-    color: #0F3D6E;
-    font-weight: 800;
-    font-size: 0.78rem;
-}
-
-.airfix-cta {
+.partner-primary-link,
+.partner-secondary-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 16px;
-    padding: 11px 16px;
-    border-radius: 999px;
-    background: #0F3D6E;
-    color: #ffffff;
+    gap: 7px;
+    width: fit-content;
     text-decoration: none;
     font-weight: 900;
-    box-shadow: 0 12px 28px rgba(15, 61, 110, 0.22);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0.9rem;
 }
 
-.airfix-cta:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 16px 36px rgba(15, 61, 110, 0.28);
+.partner-primary-link {
+    color: #ea5b2a;
+}
+
+.partner-secondary-link {
+    color: #334155;
+}
+
+.partner-primary-link:hover,
+.partner-secondary-link:hover {
+    text-decoration: underline;
 }
 
 /* ===== HANDYMAN DETAILS ===== */
@@ -37401,38 +37055,36 @@ a.lang-option {
 }
 
 @media (max-width: 640px) {
-    .window-badge--airfix-partner {
+    .window-badge--airfix-partner,
+    .service-badge.partner-recommended {
         font-size: 0.58rem;
         padding: 4px 8px;
         top: 12px;
         right: 12px;
     }
 
-    .airfix-recommended-header {
-        align-items: flex-start;
+    .partner-mini-card {
+        align-items: center;
+        padding: 10px;
     }
 
-    .airfix-logo-circle-large {
-        width: 58px;
-        height: 58px;
+    .partner-logo-circle {
+        width: 42px;
+        height: 42px;
     }
 
-    .airfix-badge-text {
-        font-size: 0.76rem;
+    .partner-mini-content strong {
+        font-size: 0.9rem;
     }
 
-    .airfix-tags {
-        gap: 6px;
+    .partner-mini-content span {
+        font-size: 0.78rem;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .airfix-pulse-ring {
+    .partner-pulse-ring {
         animation: none !important;
-    }
-
-    .airfix-cta:hover {
-        transform: none;
     }
 }
 
@@ -40350,7 +40002,6 @@ FILE: en/index.html
                     <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -46163,7 +45814,6 @@ FILE: es/index.html
                     <a href="servico-piscinas.html" class="service-window-link">Saber más <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -51976,7 +51626,6 @@ FILE: fr/index.html
                     <a href="servico-piscinas.html" class="service-window-link">En savoir plus <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -57650,14 +57299,37 @@ FILE: index.html
                 </div>
 
                 <div class="service-window-card service-window-card--partner">
-                    <span class="window-badge window-badge--airfix-partner">Parceiro certificado</span>
+                    <span class="window-badge service-badge partner-recommended">Parceiro recomendado</span>
                     <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
                     <h3>Climatização (AVAC)</h3>
                     <p>Instalação, manutenção, limpeza e reparação de ar condicionado para casas, apartamentos, lojas e empresas.</p>
 
-                    <a class="airfix-partner-badge" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt"><span class="airfix-pulse-ring" aria-hidden="true"></span><span class="airfix-logo-circle"><img src="assets/partners/airfix-icon.png" alt="AirFix.pt"></span><span class="airfix-badge-text">Parceiro recomendado</span></a>
-                    <a href="https://airfix.pt/" class="service-window-link" target="_blank" rel="noopener noreferrer">Ver parceiro AVAC <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                    <a href="servico-climatizacao.html" class="service-window-link service-window-link--secondary">Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                <div class="partner-mini-card">
+                  <a class="partner-logo-pulse" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                    <span class="partner-pulse-ring" aria-hidden="true"></span>
+                    <span class="partner-logo-circle">
+                      <img src="assets/partners/airfix-icon.png" alt="AirFix.pt" width="46" height="46" loading="lazy" decoding="async">
+                    </span>
+                  </a>
+
+                  <div class="partner-mini-content">
+                    <strong>AirFix.pt</strong>
+                    <span>Especialista em ar condicionado</span>
+                  </div>
+                </div>
+
+                <div class="partner-actions">
+                  <a class="partner-primary-link" href="https://airfix.pt/" target="_blank" rel="noopener">
+                    Ver parceiro AVAC
+                    <span aria-hidden="true">›</span>
+                  </a>
+
+                  <a class="partner-secondary-link" href="servico-climatizacao.html">
+                    Ver serviço FAZDETUDO
+                    <span aria-hidden="true">›</span>
+                  </a>
+                </div>
+
                 </div>
 
                 <div class="service-window-card service-window-featured">
@@ -57791,33 +57463,6 @@ FILE: index.html
 
                     <a href="servico-piscinas.html" class="service-window-link">Saber mais <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
-            </div>
-            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
-                <div class="airfix-recommended-header">
-                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
-                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
-                      <span class="airfix-logo-circle airfix-logo-circle-large">
-                        <img src="assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
-                      </span>
-                    </a>
-
-                    <div>
-                      <span class="airfix-kicker">Parceiro recomendado</span>
-                      <h3>AirFix.pt</h3>
-                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
-                    </div>
-                </div>
-                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
-                <div class="airfix-tags">
-                  <span>Instalação AVAC</span>
-                  <span>Manutenção</span>
-                  <span>Limpeza</span>
-                  <span>Reparação</span>
-                </div>
-
-                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
-                  Visitar AirFix.pt
-                </a>
             </div>
         </div>
     </section>
@@ -64663,481 +64308,481 @@ FILE: sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-08-07</lastmod>
+        <lastmod>2026-08-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -65841,15 +65486,16 @@ a.lang-option {
     border-radius: 50px;
 }
 
-.window-badge--airfix-partner {
-    background: linear-gradient(135deg, #0F3D6E 0%, #1a5a96 55%, #FF6A00 100%);
-    box-shadow: 0 6px 16px rgba(15, 61, 110, 0.2);
-    letter-spacing: 0.05em;
-    font-size: 0.64rem;
-    padding: 5px 11px;
+.window-badge--airfix-partner,
+.service-badge.partner-recommended {
+    background: #ea5b2a;
+    color: #ffffff;
+    font-size: 0.62rem;
+    padding: 4px 10px;
     max-width: calc(100% - 28px);
     text-align: center;
     line-height: 1.2;
+    letter-spacing: 0.05em;
 }
 
 .service-window-icon {
@@ -65897,8 +65543,8 @@ a.lang-option {
 }
 
 .service-window-card--partner {
-    border-color: rgba(13, 110, 253, 0.35);
-    box-shadow: 0 14px 34px rgba(13, 110, 253, 0.12);
+    border-color: rgba(234, 91, 42, 0.22);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
 .service-window-link--secondary {
@@ -65907,29 +65553,30 @@ a.lang-option {
     color: #4a5568;
 }
 
-.airfix-partner-badge {
-    position: relative;
-    display: inline-flex;
+.partner-mini-card {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 14px;
-    margin-bottom: 12px;
-    padding: 8px 12px 8px 8px;
-    border-radius: 999px;
-    background: #ffffff;
-    border: 1px solid rgba(15, 61, 110, 0.14);
-    box-shadow: 0 10px 28px rgba(15, 61, 110, 0.12);
-    color: #0F3D6E;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.82rem;
+    gap: 12px;
+    margin-top: 22px;
+    padding: 12px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 248, 240, 0.95), rgba(255, 255, 255, 0.95));
+    border: 1px solid rgba(234, 91, 42, 0.18);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
-.airfix-logo-circle {
+.partner-logo-pulse {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.partner-logo-circle {
     position: relative;
     z-index: 2;
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: #ffffff;
     display: inline-flex;
@@ -65937,143 +65584,86 @@ a.lang-option {
     justify-content: center;
     overflow: hidden;
     box-shadow:
-        0 0 0 3px rgba(255, 138, 0, 0.16),
-        0 10px 22px rgba(15, 61, 110, 0.16);
+        0 0 0 3px rgba(234, 91, 42, 0.12),
+        0 8px 20px rgba(15, 23, 42, 0.14);
 }
 
-.airfix-logo-circle img {
+.partner-logo-circle img {
     width: 78%;
     height: 78%;
     object-fit: contain;
     display: block;
 }
 
-.airfix-logo-circle-large {
-    width: 68px;
-    height: 68px;
-}
-
-.airfix-pulse-ring {
+.partner-pulse-ring {
     position: absolute;
     inset: -5px;
     border-radius: 999px;
-    background: radial-gradient(circle, rgba(255, 138, 0, 0.28), rgba(255, 138, 0, 0));
-    animation: airfixPulseRing 1.8s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(234, 91, 42, 0.28), rgba(234, 91, 42, 0));
+    animation: partnerPulse 2s ease-in-out infinite;
     z-index: 1;
 }
 
-.airfix-badge-text {
-    position: relative;
-    z-index: 2;
-    white-space: nowrap;
-}
-
-@keyframes airfixPulseRing {
+@keyframes partnerPulse {
     0%, 100% {
         transform: scale(0.92);
         opacity: 0.45;
     }
 
     50% {
-        transform: scale(1.18);
+        transform: scale(1.16);
         opacity: 1;
     }
 }
 
-.airfix-recommended-box {
-    margin-top: 18px;
-    padding: 18px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-    border: 1px solid rgba(255, 138, 0, 0.28);
-    box-shadow: 0 18px 42px rgba(15, 61, 110, 0.12);
+.partner-mini-content {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
 }
 
-.airfix-recommended-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.airfix-logo-featured {
-    position: relative;
-    display: inline-flex;
-    flex: 0 0 auto;
-    text-decoration: none;
-}
-
-.airfix-kicker {
-    display: inline-flex;
-    margin-bottom: 4px;
-    color: #FF6A00;
+.partner-mini-content strong {
+    color: #0f172a;
+    font-size: 0.95rem;
     font-weight: 900;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    line-height: 1.2;
 }
 
-.airfix-recommended-box h3 {
-    margin: 0 0 4px;
-    color: #0F3D6E;
-    font-size: 1.2rem;
-    font-weight: 900;
-}
-
-.airfix-recommended-box p {
-    margin: 0;
-    color: #526174;
-    line-height: 1.5;
-}
-
-.airfix-seo-link {
-    margin-top: 12px;
-}
-
-.airfix-seo-link a {
-    color: #0F3D6E;
-    text-decoration: none;
+.partner-mini-content span {
+    color: #64748b;
+    font-size: 0.82rem;
     font-weight: 700;
+    line-height: 1.3;
 }
 
-.airfix-seo-link a:hover {
-    text-decoration: underline;
-}
-
-.airfix-tags {
-    display: flex;
-    flex-wrap: wrap;
+.partner-actions {
+    display: grid;
     gap: 8px;
     margin-top: 14px;
 }
 
-.airfix-tags span {
-    display: inline-flex;
-    padding: 7px 10px;
-    border-radius: 999px;
-    background: rgba(15, 61, 110, 0.06);
-    color: #0F3D6E;
-    font-weight: 800;
-    font-size: 0.78rem;
-}
-
-.airfix-cta {
+.partner-primary-link,
+.partner-secondary-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 16px;
-    padding: 11px 16px;
-    border-radius: 999px;
-    background: #0F3D6E;
-    color: #ffffff;
+    gap: 7px;
+    width: fit-content;
     text-decoration: none;
     font-weight: 900;
-    box-shadow: 0 12px 28px rgba(15, 61, 110, 0.22);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0.9rem;
 }
 
-.airfix-cta:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 16px 36px rgba(15, 61, 110, 0.28);
+.partner-primary-link {
+    color: #ea5b2a;
+}
+
+.partner-secondary-link {
+    color: #334155;
+}
+
+.partner-primary-link:hover,
+.partner-secondary-link:hover {
+    text-decoration: underline;
 }
 
 /* ===== HANDYMAN DETAILS ===== */
@@ -66137,38 +65727,36 @@ a.lang-option {
 }
 
 @media (max-width: 640px) {
-    .window-badge--airfix-partner {
+    .window-badge--airfix-partner,
+    .service-badge.partner-recommended {
         font-size: 0.58rem;
         padding: 4px 8px;
         top: 12px;
         right: 12px;
     }
 
-    .airfix-recommended-header {
-        align-items: flex-start;
+    .partner-mini-card {
+        align-items: center;
+        padding: 10px;
     }
 
-    .airfix-logo-circle-large {
-        width: 58px;
-        height: 58px;
+    .partner-logo-circle {
+        width: 42px;
+        height: 42px;
     }
 
-    .airfix-badge-text {
-        font-size: 0.76rem;
+    .partner-mini-content strong {
+        font-size: 0.9rem;
     }
 
-    .airfix-tags {
-        gap: 6px;
+    .partner-mini-content span {
+        font-size: 0.78rem;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .airfix-pulse-ring {
+    .partner-pulse-ring {
         animation: none !important;
-    }
-
-    .airfix-cta:hover {
-        transform: none;
     }
 }
 

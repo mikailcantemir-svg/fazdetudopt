@@ -183,7 +183,7 @@ HOME_UI = {
         "badge_specialty": "Especialidade",
         "badge_acabamentos_premium": "Acabamentos Premium",
         "badge_muito_requisitado": "Muito Requisitado",
-        "badge_parceiro_certificado": "Parceiro certificado",
+        "badge_parceiro_recomendado": "Parceiro recomendado",
     },
     "en": {
         "nav_home": "Home",

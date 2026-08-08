@@ -594,29 +594,40 @@ def build_service_cards(lang: str) -> str:
         link_href = card["slug"]
         link_text = ui["learn_more"]
         secondary_link = ""
+        show_default_link = True
         if is_hvac_pt:
             feat = f"{feat} service-window-card--partner"
             badge = (
-                '                    <span class="window-badge window-badge--airfix-partner">'
-                f'{ui["badge_parceiro_certificado"]}</span>\n'
+                '                    <span class="window-badge service-badge partner-recommended">'
+                f'{ui["badge_parceiro_recomendado"]}</span>\n'
             )
-            partner_note = (
-                '\n                    <a class="airfix-partner-badge" href="https://airfix.pt/" '
-                'target="_blank" rel="noopener" aria-label="Ver parceiro recomendado AirFix.pt">'
-                '<span class="airfix-pulse-ring" aria-hidden="true"></span>'
-                '<span class="airfix-logo-circle">'
-                '<img src="assets/partners/airfix-icon.png" alt="AirFix.pt">'
-                "</span>"
-                '<span class="airfix-badge-text">Parceiro recomendado</span>'
-                "</a>"
-            )
-            link_href = "https://airfix.pt/"
-            link_text = "Ver parceiro AVAC"
-            secondary_link = (
-                '\n                    <a href="servico-climatizacao.html" '
-                'class="service-window-link service-window-link--secondary">'
-                'Ver serviço FAZDETUDO <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
-            )
+            partner_note = """
+                <div class="partner-mini-card">
+                  <a class="partner-logo-pulse" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
+                    <span class="partner-pulse-ring" aria-hidden="true"></span>
+                    <span class="partner-logo-circle">
+                      <img src="assets/partners/airfix-icon.png" alt="AirFix.pt" width="46" height="46" loading="lazy" decoding="async">
+                    </span>
+                  </a>
+
+                  <div class="partner-mini-content">
+                    <strong>AirFix.pt</strong>
+                    <span>Especialista em ar condicionado</span>
+                  </div>
+                </div>
+
+                <div class="partner-actions">
+                  <a class="partner-primary-link" href="https://airfix.pt/" target="_blank" rel="noopener">
+                    Ver parceiro AVAC
+                    <span aria-hidden="true">›</span>
+                  </a>
+
+                  <a class="partner-secondary-link" href="servico-climatizacao.html">
+                    Ver serviço FAZDETUDO
+                    <span aria-hidden="true">›</span>
+                  </a>
+                </div>"""
+            show_default_link = False
         if is_cleaning_partner:
             labels = CLEANING_PARTNER["labels"][lang]
             feat = f"{feat} service-window-card--cleaning-partner"
@@ -642,48 +653,28 @@ def build_service_cards(lang: str) -> str:
                 '</div>'
             )
             link_text = labels["details"]
+        default_link = ""
+        if show_default_link:
+            default_link = (
+                f'                    <a href="{link_href}" class="service-window-link">'
+                f'{link_text} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>'
+                f'{secondary_link}'
+            )
         blocks.append(
             f"""                <div class="service-window-card{feat}">
 {badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>
                     <h3>{title}</h3>
                     <p>{desc}</p>
 {partner_note}
-                    <a href="{link_href}" class="service-window-link"{' target="_blank" rel="noopener noreferrer"' if is_hvac_pt else ''}>{link_text} <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>{secondary_link}
+{default_link}
                 </div>"""
         )
     return "\n\n".join(blocks)
 
 
 def build_hvac_partner_block(lang: str, prefix: str) -> str:
-    if lang != "pt":
-        return ""
-    return f"""            <div class="airfix-recommended-box" aria-label="Parceiro recomendado em Climatização">
-                <div class="airfix-recommended-header">
-                    <a class="airfix-logo-featured" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
-                      <span class="airfix-pulse-ring" aria-hidden="true"></span>
-                      <span class="airfix-logo-circle airfix-logo-circle-large">
-                        <img src="{prefix}assets/partners/airfix-icon.png" alt="AirFix.pt — parceiro recomendado AVAC" width="68" height="68" loading="lazy" decoding="async">
-                      </span>
-                    </a>
-
-                    <div>
-                      <span class="airfix-kicker">Parceiro recomendado</span>
-                      <h3>AirFix.pt</h3>
-                      <p>Especialistas em instalação, manutenção, limpeza e reparação de ar condicionado.</p>
-                    </div>
-                </div>
-                <p class="airfix-seo-link"><a href="https://airfix.pt/" target="_blank" rel="noopener">AirFix.pt — instalação e manutenção de ar condicionado</a></p>
-                <div class="airfix-tags">
-                  <span>Instalação AVAC</span>
-                  <span>Manutenção</span>
-                  <span>Limpeza</span>
-                  <span>Reparação</span>
-                </div>
-
-                <a class="airfix-cta" href="https://airfix.pt/" target="_blank" rel="noopener">
-                  Visitar AirFix.pt
-                </a>
-            </div>"""
+    # Bloco grande removido: o destaque AirFix fica só no mini-card do serviço AVAC.
+    return ""
 
 
 def build_handyman_section(lang: str) -> str:
