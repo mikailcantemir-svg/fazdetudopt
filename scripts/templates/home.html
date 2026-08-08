@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}">
+<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}" data-wa-message="{{WA_MESSAGE_ATTR}}">
 <head>
 {{HEAD}}
 </head>
@@ -18,29 +18,33 @@
             <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-4.webp')"></div>
         </div>
         <div class="container hero-content">
-            <h1 class="hero-title" data-i18n="hero_title">O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul</h1>
-            <p class="hero-subtitle" data-i18n="hero_subtitle">Precisa de pendurar um varão, retocar uma pintura, reparar uma torneira ou resolver aquela lista de pequenos arranjos que nunca mais acabam? Dispomos também de serviços especializados, mas somos, acima de tudo, o parceiro ideal para cuidar do seu espaço com rapidez, eficácia e limpeza. Esqueça as complicações: um único contacto resolve tudo.</p>
+            <h1 class="hero-title" data-i18n="hero_title">Encontre Profissionais de Confiança para a Sua Casa</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Handyman, reparações, manutenção e serviços especializados num só lugar. Escolha o serviço de que precisa e encontre profissionais disponíveis na Grande Lisboa e Margem Sul.</p>
             <div class="hero-actions">
-                <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="btn-quote">
-                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                <a href="#parceiros-recomendados" class="btn btn-primary btn-lg" id="btn-find-partner">
+                    <span data-i18n="hero_btn_find">Encontrar profissional</span>
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
-                <a href="{{TEL_HREF}}" class="btn btn-outline btn-lg" id="btn-call">
-                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                    <span data-i18n="hero_btn_call">Ligue agora</span>
+                <a href="{{WA_HREF}}" class="btn btn-outline btn-lg" id="btn-quote">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    <span data-i18n="hero_btn_help">Preciso de ajuda</span>
                 </a>
             </div>
             <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês</p>
         </div>
     </section>
 
+{{PARTNER_DIRECTORY_SECTION}}
+
+{{HOW_IT_WORKS_SECTION}}
+
     <!-- Services -->
     <section class="section section-light" id="services">
         <div class="container">
             <div class="section-header section-header--services">
                 <img src="{{ASSET_PREFIX}}{{LOGO_PATH}}" alt="Profissional faz tudo" class="section-logo" width="120" height="120" loading="lazy" decoding="async">
-                <h2 class="section-title" data-i18n="services_title">Os Nossos Serviços Profissionais</h2>
-                <p class="section-subtitle" data-i18n="services_subtitle">Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa.</p>
+                <h2 class="section-title" data-i18n="services_title">Serviços para a Sua Casa</h2>
+                <p class="section-subtitle" data-i18n="services_subtitle">Encontre soluções para reparações, manutenção, obras e serviços especializados através da FAZDETUDO.PT e da nossa rede de profissionais.</p>
             </div>
 
             <div class="services-modern-grid">
@@ -48,6 +52,8 @@
             </div>
         </div>
     </section>
+
+{{PARTNER_RECRUIT_SECTION}}
 
 {{HANDYMAN_SECTION}}
 
@@ -107,11 +113,11 @@
     <!-- Contact CTA -->
     <section class="section-cta" id="contact">
         <div class="container cta-content">
-            <h2 class="cta-title" data-i18n="contact_title">Contacte-nos</h2>
-            <p class="cta-subtitle" data-i18n="contact_subtitle">Estamos prontos para ajudar. Peça o seu orçamento grátis.</p>
+            <h2 class="cta-title" data-i18n="contact_title">Precisa de ajuda a encontrar um profissional?</h2>
+            <p class="cta-subtitle" data-i18n="contact_subtitle">Fale connosco e ajudamos a encontrar a solução certa para o serviço de que precisa.</p>
             <div class="cta-actions">
                 <a href="{{WA_HREF}}" class="btn btn-white btn-lg" id="cta-quote">
-                    <span data-i18n="hero_btn_quote">Pedir orçamento grátis</span>
+                    <span data-i18n="contact_cta">Falar connosco</span>
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
                 <a href="{{TEL_HREF}}" class="btn btn-outline-white btn-lg" id="cta-phone">

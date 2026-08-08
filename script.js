@@ -90,13 +90,13 @@
         'servico-remodelacoes.html',
         'servico-recuperar-casa.html',
         'servico-pinturas.html',
-        'servico-pintura-fachadas-alpinismo.html',
+        'servico-limpezas.html',
         'servico-canalizacoes.html',
         'servico-electricidade.html',
         'servico-carpintaria.html',
         'servico-reparacoes-gerais.html',
         'servico-manutencao.html',
-        'servico-limpezas.html',
+        'servico-pintura-fachadas-alpinismo.html',
         'servico-jardinagem.html',
         'servico-mudancas.html',
         'servico-informatica.html',
@@ -186,29 +186,31 @@
 
     const T = {
         pt: {
-            nav_home: 'Início', nav_services: 'Serviços', nav_about: 'Sobre nós', nav_contact: 'Contacto',
+            nav_home: 'Início', nav_services: 'Serviços', nav_partners: 'Parceiros', nav_about: 'Sobre nós', nav_contact: 'Contacto',
             nav_articles: 'Artigos',
             footer_links: 'Links',
-            hero_title: 'O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul',
-            footer_tagline: 'O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul',
-            hero_subtitle: 'Precisa de reparar uma torneira, pendurar uma TV, pintar uma divisão ou resolver pequenos arranjos em casa? Na FAZDETUDO.PT tratamos da sua lista de tarefas com rapidez, limpeza e orçamento gratuito na Grande Lisboa e Margem Sul.',
-            hero_btn_quote: 'Pedir orçamento por WhatsApp',
+            hero_title: 'Encontre Profissionais de Confiança para a Sua Casa',
+            footer_tagline: 'Profissionais para a sua casa, num só lugar.',
+            hero_subtitle: 'Handyman, reparações, manutenção e serviços especializados num só lugar. Escolha o serviço de que precisa e encontre profissionais disponíveis na Grande Lisboa e Margem Sul.',
+            hero_btn_find: 'Encontrar profissional',
+            hero_btn_help: 'Preciso de ajuda',
+            hero_btn_quote: 'Preciso de ajuda',
             hero_btn_call: 'Ligue agora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês',
-            services_title: 'Os Nossos Serviços Profissionais',
-            services_subtitle: 'Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.',
+            services_title: 'Serviços para a Sua Casa',
+            services_subtitle: 'Encontre soluções para reparações, manutenção, obras e serviços especializados através da FAZDETUDO.PT e da nossa rede de profissionais.',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
             services: [
                 { name: 'Remodelações e Obras', description: 'Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.' },
                 { name: 'Recuperar Casa', description: 'Recuperação completa de casas devolutas, herdadas ou degradadas. Da estrutura aos acabamentos, devolvemos vida e habitabilidade ao seu imóvel.' },
                 { name: 'Pinturas', description: 'Interior e exterior. Preparação de superfícies, primários e acabamentos de qualidade.' },
-                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
+                { name: 'Limpezas', description: 'Limpeza doméstica, pós-obra, de escritórios e espaços comerciais.' },
                 { name: 'Canalizações', description: 'Reparação de fugas, desentupimentos, reparação de autoclismos, instalação de torneiras, sanitas e sistemas de água.' },
                 { name: 'Electricidade', description: 'Instalações eléctricas, tomadas, iluminação e quadros eléctricos.' },
                 { name: 'Carpintaria', description: 'Montagem de móveis, reparação de portas, janelas e trabalhos em madeira.' },
                 { name: 'Reparações Gerais', description: 'Pequenas e grandes reparações para manter a sua casa em perfeitas condições.' },
                 { name: 'Manutenção', description: 'Serviços de manutenção preventiva, reparações gerais e lavagem de alta pressão de telhados, pátios e fachadas.' },
-                { name: 'Limpezas', description: 'Limpeza doméstica, pós-obra, de escritórios e espaços comerciais.' },
+                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
                 { name: 'Jardinagem', description: 'Manutenção de jardins, poda de árvores e sistemas de rega.' },
                 { name: 'Mudanças', description: 'Mudanças residenciais e comerciais. Transporte, embalagem e montagem.' },
                 { name: 'Informática', description: 'Reparação de computadores, redes Wi-Fi e smart home.' },
@@ -253,8 +255,9 @@
                 { question: 'Trabalham para casas e empresas?', answer: 'Sim. Atendemos particulares, condomínios, escritórios e comércios.' },
                 { question: 'O orçamento é gratuito?', answer: 'Sim. O orçamento é gratuito e sem compromisso.' }
             ],
-            contact_title: 'Contacte-nos',
-            contact_subtitle: 'Estamos prontos para ajudar. Peça o seu orçamento grátis.',
+            contact_title: 'Precisa de ajuda a encontrar um profissional?',
+            contact_subtitle: 'Fale connosco e ajudamos a encontrar a solução certa para o serviço de que precisa.',
+            contact_cta: 'Falar connosco',
             social_cta: 'Siga-nos e veja os nossos trabalhos',
             footer_rights: 'FAZDETUDO.PT. Todos os direitos reservados.',
             wa_message: 'Olá! Gostaria de pedir um orçamento.',
@@ -262,28 +265,30 @@
             wa_placeholder: 'Escreva uma mensagem...'
         },
         en: {
-            nav_home: 'Home', nav_services: 'Services', nav_about: 'About us', nav_contact: 'Contact',
+            nav_home: 'Home', nav_services: 'Services', nav_partners: 'Partners', nav_about: 'About us', nav_contact: 'Contact',
             nav_articles: 'Articles',
             footer_links: 'Links',
-            hero_title: 'Your Trusted Handyman in Greater Lisbon and South Bank',
-            footer_tagline: 'Your Trusted Handyman in Greater Lisbon and South Bank',
-            hero_subtitle: 'Need to fix a tap, mount a TV, paint a room or take care of small repairs at home? At FAZDETUDO.PT we handle your task list quickly, cleanly and with a free quote across Greater Lisbon and the South Bank.',
-            hero_btn_quote: 'Request quote on WhatsApp',
+            hero_title: 'Find Trusted Professionals for Your Home',
+            footer_tagline: 'Home professionals, in one place.',
+            hero_subtitle: 'Handyman, repairs, maintenance and specialist services in one place. Choose the service you need and find available professionals in Greater Lisbon and the South Bank.',
+            hero_btn_find: 'Find a professional',
+            hero_btn_help: 'I need help',
+            hero_btn_quote: 'I need help',
             hero_btn_call: 'Call now',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese',
-            services_title: 'Our Professional Services',
-            services_subtitle: 'Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.',
+            services_title: 'Services for Your Home',
+            services_subtitle: 'Find solutions for repairs, maintenance, works and specialist services through FAZDETUDO.PT and our network of professionals.',
             services: [
                 { name: 'Renovations & Construction', description: 'Kitchen and bathroom renovations, building new rooms, extensions and structural works. From design to handover.' },
                 { name: 'Home Restoration', description: 'Complete restoration of vacant, inherited or run-down houses. From structure to finishes, we bring your property back to life.' },
                 { name: 'Painting', description: 'Interior and exterior. Surface preparation, primers and quality finishes.' },
-                { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
+                { name: 'Cleaning', description: 'Domestic, post-construction, office and commercial space cleaning.' },
                 { name: 'Plumbing', description: 'Leak repair, tap, toilet and water system installation.' },
                 { name: 'Electrical', description: 'Electrical installations, sockets, lighting and electrical panels.' },
                 { name: 'Carpentry', description: 'Furniture assembly, door and window repair, woodwork.' },
                 { name: 'General Repairs', description: 'Small and large repairs to keep your home in perfect condition.' },
                 { name: 'Maintenance', description: 'Preventive maintenance services for properties and condominiums.' },
-                { name: 'Cleaning', description: 'Domestic, post-construction, office and commercial space cleaning.' },
+                { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
                 { name: 'Gardening', description: 'Garden maintenance, tree pruning and irrigation systems.' },
                 { name: 'Moving', description: 'Residential and commercial moving. Transport, packing and assembly.' },
                 { name: 'IT Services', description: 'Computer repair, Wi-Fi networks and smart home.' },
@@ -328,8 +333,9 @@
                 { question: 'Do you work for homes and businesses?', answer: 'Yes. We serve private clients, condominiums, offices and retail premises.' },
                 { question: 'Is the quote free?', answer: 'Yes. Quotes are free and without obligation.' }
             ],
-            contact_title: 'Contact us',
-            contact_subtitle: 'We are ready to help. Request your free quote.',
+            contact_title: 'Need help finding a professional?',
+            contact_subtitle: 'Talk to us and we\'ll help you find the right solution for the service you need.',
+            contact_cta: 'Talk to us',
             social_cta: 'Follow us and see our work',
             footer_rights: 'FAZDETUDO.PT. All rights reserved.',
             wa_message: 'Hello! I would like to request a quote.',
@@ -337,28 +343,30 @@
             wa_placeholder: 'Type a message...'
         },
         es: {
-            nav_home: 'Inicio', nav_services: 'Servicios', nav_about: 'Sobre nosotros', nav_contact: 'Contacto',
+            nav_home: 'Inicio', nav_services: 'Servicios', nav_partners: 'Colaboradores', nav_about: 'Sobre nosotros', nav_contact: 'Contacto',
             nav_articles: 'Artículos',
             footer_links: 'Enlaces',
-            hero_title: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
-            footer_tagline: 'Su Manitas de Confianza en la Gran Lisboa y Margen Sur',
-            hero_subtitle: '¿Necesita reparar un grifo, colgar una TV, pintar una habitación o resolver pequeños arreglos en casa? En FAZDETUDO.PT nos encargamos de su lista de tareas con rapidez, limpieza y presupuesto gratuito en la Gran Lisboa y Margen Sur.',
-            hero_btn_quote: 'Pedir presupuesto por WhatsApp',
+            hero_title: 'Encuentre Profesionales de Confianza para Su Casa',
+            footer_tagline: 'Profesionales para su casa, en un solo lugar.',
+            hero_subtitle: 'Manitas, reparaciones, mantenimiento y servicios especializados en un solo lugar. Elija el servicio que necesita y encuentre profesionales disponibles en la Gran Lisboa y la Margen Sur.',
+            hero_btn_find: 'Encontrar profesional',
+            hero_btn_help: 'Necesito ayuda',
+            hero_btn_quote: 'Necesito ayuda',
             hero_btn_call: 'Llame ahora',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés',
-            services_title: 'Nuestros Servicios Profesionales',
-            services_subtitle: 'Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.',
+            services_title: 'Servicios para Su Casa',
+            services_subtitle: 'Encuentre soluciones para reparaciones, mantenimiento, obras y servicios especializados a través de FAZDETUDO.PT y nuestra red de profesionales.',
             services: [
                 { name: 'Reformas y Obras', description: 'Reforma de cocinas y baños, construcción de nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.' },
                 { name: 'Recuperar Casa', description: 'Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos vida y habitabilidad a su inmueble.' },
                 { name: 'Pinturas', description: 'Interior y exterior. Preparación de superficies, imprimaciones y acabados de calidad.' },
-                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
+                { name: 'Limpieza', description: 'Limpieza doméstica, post-obra, de oficinas y espacios comerciales.' },
                 { name: 'Fontanería', description: 'Reparación de fugas, instalación de grifos, sanitarios y sistemas de agua.' },
                 { name: 'Electricidad', description: 'Instalaciones eléctricas, enchufes, iluminación y cuadros eléctricos.' },
                 { name: 'Carpintería', description: 'Montaje de muebles, reparación de puertas, ventanas y trabajos en madera.' },
                 { name: 'Reparaciones generales', description: 'Pequeñas y grandes reparaciones para mantener su casa en perfectas condiciones.' },
                 { name: 'Mantenimiento', description: 'Servicios de mantenimiento preventivo para propiedades y comunidades.' },
-                { name: 'Limpieza', description: 'Limpieza doméstica, post-obra, de oficinas y espacios comerciales.' },
+                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
                 { name: 'Jardinería', description: 'Mantenimiento de jardines, poda de árboles y sistemas de riego.' },
                 { name: 'Mudanzas', description: 'Mudanzas residenciales y comerciales. Transporte, embalaje y montaje.' },
                 { name: 'Informática', description: 'Reparación de ordenadores, redes Wi-Fi y smart home.' },
@@ -403,8 +411,9 @@
                 { question: '¿Trabajan para hogares y empresas?', answer: 'Sí. Atendemos particulares, comunidades de vecinos, oficinas y comercios.' },
                 { question: '¿El presupuesto es gratuito?', answer: 'Sí. El presupuesto es gratuito y sin compromiso.' }
             ],
-            contact_title: 'Contáctenos',
-            contact_subtitle: 'Estamos listos para ayudar. Solicite su presupuesto gratis.',
+            contact_title: '¿Necesita ayuda para encontrar un profesional?',
+            contact_subtitle: 'Hable con nosotros y le ayudamos a encontrar la solución adecuada para el servicio que necesita.',
+            contact_cta: 'Hablar con nosotros',
             social_cta: 'Síguenos y mira nuestros trabajos',
             footer_rights: 'FAZDETUDO.PT. Todos los derechos reservados.',
             wa_message: '¡Hola! Me gustaría pedir un presupuesto.',
@@ -412,28 +421,30 @@
             wa_placeholder: 'Escriba un mensaje...'
         },
         fr: {
-            nav_home: 'Accueil', nav_services: 'Services', nav_about: 'À propos', nav_contact: 'Contact',
+            nav_home: 'Accueil', nav_services: 'Services', nav_partners: 'Partenaires', nav_about: 'À propos', nav_contact: 'Contact',
             nav_articles: 'Articles',
             footer_links: 'Liens',
-            hero_title: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
-            footer_tagline: 'Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud',
-            hero_subtitle: 'Besoin de réparer un robinet, fixer une TV, peindre une pièce ou régler de petits travaux à la maison ? Chez FAZDETUDO.PT, nous traitons votre liste de tâches rapidement, proprement et avec un devis gratuit dans le Grand Lisbonne et la Rive Sud.',
-            hero_btn_quote: 'Demander un devis sur WhatsApp',
+            hero_title: 'Trouvez des Professionnels de Confiance pour Votre Maison',
+            footer_tagline: 'Des professionnels pour votre maison, au même endroit.',
+            hero_subtitle: 'Bricolage, réparations, entretien et services spécialisés au même endroit. Choisissez le service dont vous avez besoin et trouvez des professionnels disponibles dans le Grand Lisbonne et la Rive Sud.',
+            hero_btn_find: 'Trouver un professionnel',
+            hero_btn_help: 'J\'ai besoin d\'aide',
+            hero_btn_quote: 'J\'ai besoin d\'aide',
             hero_btn_call: 'Appelez maintenant',
             hero_reviews: '⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais',
-            services_title: 'Nos Services Professionnels',
-            services_subtitle: 'Solutions fiables et spécialisées pour l\'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.',
+            services_title: 'Services pour Votre Maison',
+            services_subtitle: 'Trouvez des solutions pour réparations, entretien, travaux et services spécialisés via FAZDETUDO.PT et notre réseau de professionnels.',
             services: [
                 { name: 'Rénovations et Travaux', description: 'Rénovation de cuisines et salles de bains, construction de nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.' },
                 { name: 'Rénover une Maison', description: 'Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions, nous redonnons vie à votre bien.' },
                 { name: 'Peinture', description: 'Intérieur et extérieur. Préparation des surfaces, apprêts et finitions de qualité.' },
-                { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
+                { name: 'Nettoyage', description: 'Nettoyage domestique, après-travaux, de bureaux et espaces commerciaux.' },
                 { name: 'Plomberie', description: 'Réparation de fuites, installation de robinets, toilettes et systèmes d\'eau.' },
                 { name: 'Électricité', description: 'Installations électriques, prises, éclairage et tableaux électriques.' },
                 { name: 'Menuiserie', description: 'Montage de meubles, réparation de portes, fenêtres et travaux en bois.' },
                 { name: 'Réparations générales', description: 'Petites et grandes réparations pour maintenir votre maison en parfait état.' },
                 { name: 'Entretien', description: 'Services d\'entretien préventif pour propriétés et copropriétés.' },
-                { name: 'Nettoyage', description: 'Nettoyage domestique, après-travaux, de bureaux et espaces commerciaux.' },
+                { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
                 { name: 'Jardinage', description: 'Entretien de jardins, taille d\'arbres et systèmes d\'irrigation.' },
                 { name: 'Déménagements', description: 'Déménagements résidentiels et commerciaux. Transport, emballage et montage.' },
                 { name: 'Informatique', description: 'Réparation d\'ordinateurs, réseaux Wi-Fi et maison intelligente.' },
@@ -478,8 +489,9 @@
                 { question: 'Travaillez-vous pour particuliers et entreprises ?', answer: 'Oui. Nous intervenons pour les particuliers, copropriétés, bureaux et commerces.' },
                 { question: 'Le devis est-il gratuit ?', answer: 'Oui. Le devis est gratuit et sans engagement.' }
             ],
-            contact_title: 'Contactez-nous',
-            contact_subtitle: 'Nous sommes prêts à vous aider. Demandez votre devis gratuit.',
+            contact_title: 'Besoin d\'aide pour trouver un professionnel ?',
+            contact_subtitle: 'Parlez-nous et nous vous aidons à trouver la bonne solution pour le service dont vous avez besoin.',
+            contact_cta: 'Nous parler',
             social_cta: 'Suivez-nous et découvrez nos réalisations',
             footer_rights: 'FAZDETUDO.PT. Tous droits réservés.',
             wa_message: 'Bonjour ! Je souhaiterais demander un devis.',
@@ -489,6 +501,12 @@
     };
 
     function t(key) { return T[currentLang][key] || T.pt[key] || ''; }
+
+    function getWaMessage() {
+        const fromPage = document.documentElement.getAttribute('data-wa-message');
+        if (fromPage && fromPage.trim()) return fromPage.trim();
+        return t('wa_message');
+    }
 
     function renderAdvantages() {
         const grid = document.getElementById('advantages-grid');
@@ -668,7 +686,7 @@
 
     function setupLinks() {
         const waNum = CONFIG.whatsapp;
-        const waMsg = encodeURIComponent(t('wa_message'));
+        const waMsg = encodeURIComponent(getWaMessage());
         const telHref = `tel:${CONFIG.phone}`;
 
         ['header-phone', 'btn-call', 'cta-phone', 'footer-phone'].forEach(id => {
@@ -723,7 +741,7 @@
         }
 
         function sendMessage() {
-            const msg = (input && input.value.trim()) || t('wa_message');
+            const msg = (input && input.value.trim()) || getWaMessage();
             const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank', 'noopener');
             if (input) input.value = '';
@@ -1074,6 +1092,45 @@
         });
     }
 
+    function setupPartnerDirectory() {
+        const select = document.getElementById('partner-category-select');
+        const grid = document.getElementById('partner-directory-grid');
+        const results = document.getElementById('partner-directory-results');
+        const empty = document.getElementById('partner-directory-empty');
+        if (!select || !grid || !results) return;
+
+        const cards = [...grid.querySelectorAll('[data-partner-category]')];
+
+        function applyFilter(opts) {
+            const scrollOnMobile = opts && opts.scrollOnMobile;
+            const value = select.value || '';
+
+            if (!value) {
+                cards.forEach((card) => { card.hidden = true; });
+                if (empty) empty.hidden = true;
+                results.hidden = true;
+                return;
+            }
+
+            let visible = 0;
+            cards.forEach((card) => {
+                const match = card.getAttribute('data-partner-category') === value;
+                card.hidden = !match;
+                if (match) visible += 1;
+            });
+
+            results.hidden = false;
+            if (empty) empty.hidden = visible > 0;
+
+            if (scrollOnMobile && window.matchMedia('(max-width: 768px)').matches) {
+                results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        select.addEventListener('change', () => applyFilter({ scrollOnMobile: true }));
+        applyFilter();
+    }
+
     function init() {
         applyLanguage(detectPageLang());
         setupFAQListeners();
@@ -1082,6 +1139,7 @@
         setupWhatsAppChat();
         setupWorkCarousels();
         setupWorkLightbox();
+        setupPartnerDirectory();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }

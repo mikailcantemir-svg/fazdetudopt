@@ -41,6 +41,14 @@ WA_MESSAGE: dict[str, str] = {
     "fr": "Bonjour ! Je souhaite demander un devis.",
 }
 
+# Homepage CTAs + chat widget (platform positioning). Service pages keep their own messages.
+HOME_WA_MESSAGE: dict[str, str] = {
+    "pt": "Olá! Preciso de ajuda a encontrar um profissional para um serviço.",
+    "en": "Hello! I need help finding a professional for a service.",
+    "es": "¡Hola! Necesito ayuda para encontrar un profesional para un servicio.",
+    "fr": "Bonjour ! J'ai besoin d'aide pour trouver un professionnel pour un service.",
+}
+
 
 def tel_href() -> str:
     return f"tel:{PHONE_E164}"
@@ -52,6 +60,11 @@ def mailto_href() -> str:
 
 def wa_href(lang: str = "pt") -> str:
     msg = WA_MESSAGE.get(lang, WA_MESSAGE["pt"])
+    return wa_href_for_message(msg)
+
+
+def wa_href_home(lang: str = "pt") -> str:
+    msg = HOME_WA_MESSAGE.get(lang, HOME_WA_MESSAGE["pt"])
     return wa_href_for_message(msg)
 
 

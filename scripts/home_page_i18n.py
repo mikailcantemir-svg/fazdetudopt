@@ -65,9 +65,9 @@ def render_lang_switcher(current_lang: str) -> str:
 HOME_META = {
     "pt": {
         "title": "FAZDETUDO.PT | Handyman e Reparações ao Domicílio",
-        "description": "Especialistas em handyman, remodelações, AVAC, pinturas e manutenção de piscinas na Grande Lisboa, Cascais e Setúbal. Orçamento grátis com a FAZDETUDO.PT.",
-        "og_title": "FAZDETUDO.PT | Serviços de Handyman e Reparações",
-        "json_desc": "Serviços profissionais de handyman, remodelações, AVAC, pintura em alpinismo e manutenção de piscinas na Grande Lisboa e Setúbal.",
+        "description": "Encontre profissionais de confiança para handyman, reparações, remodelações, AVAC, pinturas e manutenção na Grande Lisboa e Margem Sul. Rede FAZDETUDO.PT.",
+        "og_title": "FAZDETUDO.PT | Handyman, Reparações e Profissionais para Casa",
+        "json_desc": "Plataforma para encontrar profissionais de handyman, reparações, remodelações, AVAC, pintura e manutenção na Grande Lisboa e Setúbal.",
         "nav_aria": "Navegação principal",
         "logo_alt": "FAZDETUDO.PT - Serviços de handyman em Lisboa",
         "section_logo_alt": "Profissional faz tudo",
@@ -82,9 +82,9 @@ HOME_META = {
     },
     "en": {
         "title": "FAZDETUDO.PT | Handyman and Home Repair Services",
-        "description": "Handyman, renovations, HVAC, painting and pool maintenance specialists across Greater Lisbon, Cascais and Setúbal. Get your free quote from FAZDETUDO.PT.",
-        "og_title": "FAZDETUDO.PT | Handyman and Home Repair Services",
-        "json_desc": "Professional handyman, renovations, HVAC, rope-access facade painting and pool maintenance across Greater Lisbon and Setúbal.",
+        "description": "Find trusted professionals for handyman work, repairs, renovations, HVAC, painting and maintenance in Greater Lisbon and the South Bank. FAZDETUDO.PT network.",
+        "og_title": "FAZDETUDO.PT | Handyman, Repairs and Home Professionals",
+        "json_desc": "Platform to find handyman, repair, renovation, HVAC, painting and maintenance professionals across Greater Lisbon and Setúbal.",
         "nav_aria": "Main navigation",
         "logo_alt": "FAZDETUDO.PT - Handyman services in Lisbon",
         "section_logo_alt": "Professional handyman",
@@ -99,9 +99,9 @@ HOME_META = {
     },
     "es": {
         "title": "FAZDETUDO.PT | Manitas y Reparaciones a Domicilio",
-        "description": "Especialistas en manitas, reformas, AVAC, pintura y mantenimiento de piscinas en la Gran Lisboa, Cascais y Setúbal. Presupuesto gratis con FAZDETUDO.PT.",
-        "og_title": "FAZDETUDO.PT | Servicios de Manitas y Reparaciones",
-        "json_desc": "Servicios profesionales de manitas, reformas, climatización, pintura en alpinismo y mantenimiento de piscinas en la Gran Lisboa y Setúbal.",
+        "description": "Encuentre profesionales de confianza para manitas, reparaciones, reformas, AVAC, pintura y mantenimiento en la Gran Lisboa y Margen Sur. Red FAZDETUDO.PT.",
+        "og_title": "FAZDETUDO.PT | Manitas, Reparaciones y Profesionales para Casa",
+        "json_desc": "Plataforma para encontrar profesionales de manitas, reparaciones, reformas, AVAC, pintura y mantenimiento en la Gran Lisboa y Setúbal.",
         "nav_aria": "Navegación principal",
         "logo_alt": "FAZDETUDO.PT - Servicios en Lisboa",
         "section_logo_alt": "Profesional manitas",
@@ -116,9 +116,9 @@ HOME_META = {
     },
     "fr": {
         "title": "FAZDETUDO.PT | Bricolage et Réparations à Domicile",
-        "description": "Spécialistes du bricolage, rénovations, climatisation, peinture et piscines au Grand Lisbonne, Cascais et Setúbal. Devis gratuit avec FAZDETUDO.PT.",
-        "og_title": "FAZDETUDO.PT | Bricolage et Réparations à Domicile",
-        "json_desc": "Services professionnels de bricolage, rénovations, CVC, peinture en cordes et entretien de piscines dans le Grand Lisbonne et Setúbal.",
+        "description": "Trouvez des professionnels de confiance pour le bricolage, les réparations, rénovations, CVC, peinture et entretien dans le Grand Lisbonne et la Rive Sud. Réseau FAZDETUDO.PT.",
+        "og_title": "FAZDETUDO.PT | Bricolage, Réparations et Professionnels pour la Maison",
+        "json_desc": "Plateforme pour trouver des professionnels du bricolage, réparations, rénovations, CVC, peinture et entretien dans le Grand Lisbonne et Setúbal.",
         "nav_aria": "Navigation principale",
         "logo_alt": "FAZDETUDO.PT - Services à Lisbonne",
         "section_logo_alt": "Professionnel bricolage",
@@ -138,17 +138,20 @@ HOME_UI = {
     "pt": {
         "nav_home": "Início",
         "nav_services": "Serviços",
+        "nav_partners": "Parceiros",
         "nav_about": "Sobre nós",
         "nav_contact": "Contacto",
         "footer_links": "Links",
-        "hero_title": "O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul",
-        "footer_tagline": "O Seu Faz-Tudo de Confiança na Grande Lisboa e Margem Sul",
-        "hero_subtitle": "Precisa de reparar uma torneira, pendurar uma TV, pintar uma divisão ou resolver pequenos arranjos em casa? Na FAZDETUDO.PT tratamos da sua lista de tarefas com rapidez, limpeza e orçamento gratuito na Grande Lisboa e Margem Sul.",
-        "hero_btn_quote": "Pedir orçamento por WhatsApp",
+        "hero_title": "Encontre Profissionais de Confiança para a Sua Casa",
+        "footer_tagline": "Profissionais para a sua casa, num só lugar.",
+        "hero_subtitle": "Handyman, reparações, manutenção e serviços especializados num só lugar. Escolha o serviço de que precisa e encontre profissionais disponíveis na Grande Lisboa e Margem Sul.",
+        "hero_btn_find": "Encontrar profissional",
+        "hero_btn_help": "Preciso de ajuda",
+        "hero_btn_quote": "Preciso de ajuda",
         "hero_btn_call": "Ligue agora",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês",
-        "services_title": "Os Nossos Serviços Profissionais",
-        "services_subtitle": "Soluções fiáveis e especializadas para a manutenção, reparação e remodelação da sua casa ou empresa na Grande Lisboa e Margem Sul.",
+        "services_title": "Serviços para a Sua Casa",
+        "services_subtitle": "Encontre soluções para reparações, manutenção, obras e serviços especializados através da FAZDETUDO.PT e da nossa rede de profissionais.",
         "advantages_title": "Porquê escolher-nos?",
         "testimonials_title": "Críticas",
         "recent_work_title": "Trabalhos recentes",
@@ -167,8 +170,9 @@ HOME_UI = {
         "reviews_google_label": "Avaliações no Google",
         "google_review_source": "Crítica de Google",
         "faq_title": "Perguntas Frequentes",
-        "contact_title": "Contacte-nos",
-        "contact_subtitle": "Estamos prontos para ajudar. Peça o seu orçamento grátis.",
+        "contact_title": "Precisa de ajuda a encontrar um profissional?",
+        "contact_subtitle": "Fale connosco e ajudamos a encontrar a solução certa para o serviço de que precisa.",
+        "contact_cta": "Falar connosco",
         "contact_locations_aria": "Localizações",
         "address_primary_label": "Escritório principal",
         "address_secondary_label": "Segundo escritório / apoio operacional",
@@ -188,17 +192,20 @@ HOME_UI = {
     "en": {
         "nav_home": "Home",
         "nav_services": "Services",
+        "nav_partners": "Partners",
         "nav_about": "About us",
         "nav_contact": "Contact",
         "footer_links": "Links",
-        "hero_title": "Your Trusted Handyman in Greater Lisbon and South Bank",
-        "footer_tagline": "Your Trusted Handyman in Greater Lisbon and South Bank",
-        "hero_subtitle": "Need to fix a tap, mount a TV, paint a room or take care of small repairs at home? At FAZDETUDO.PT we handle your task list quickly, cleanly and with a free quote across Greater Lisbon and the South Bank.",
-        "hero_btn_quote": "Request quote on WhatsApp",
+        "hero_title": "Find Trusted Professionals for Your Home",
+        "footer_tagline": "Home professionals, in one place.",
+        "hero_subtitle": "Handyman, repairs, maintenance and specialist services in one place. Choose the service you need and find available professionals in Greater Lisbon and the South Bank.",
+        "hero_btn_find": "Find a professional",
+        "hero_btn_help": "I need help",
+        "hero_btn_quote": "I need help",
         "hero_btn_call": "Call now",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese",
-        "services_title": "Our Professional Services",
-        "services_subtitle": "Reliable, specialist solutions for maintenance, repairs and renovations at your home or business in Greater Lisbon and South Bank.",
+        "services_title": "Services for Your Home",
+        "services_subtitle": "Find solutions for repairs, maintenance, works and specialist services through FAZDETUDO.PT and our network of professionals.",
         "advantages_title": "Why choose us?",
         "testimonials_title": "Reviews",
         "recent_work_title": "Recent work",
@@ -217,8 +224,9 @@ HOME_UI = {
         "reviews_google_label": "Reviews on Google",
         "google_review_source": "Google review",
         "faq_title": "Frequently Asked Questions",
-        "contact_title": "Contact us",
-        "contact_subtitle": "We are ready to help. Request your free quote.",
+        "contact_title": "Need help finding a professional?",
+        "contact_subtitle": "Talk to us and we'll help you find the right solution for the service you need.",
+        "contact_cta": "Talk to us",
         "contact_locations_aria": "Locations",
         "address_primary_label": "Main office",
         "address_secondary_label": "Second office / operational support",
@@ -237,17 +245,20 @@ HOME_UI = {
     "es": {
         "nav_home": "Inicio",
         "nav_services": "Servicios",
+        "nav_partners": "Colaboradores",
         "nav_about": "Sobre nosotros",
         "nav_contact": "Contacto",
         "footer_links": "Enlaces",
-        "hero_title": "Su Manitas de Confianza en la Gran Lisboa y Margen Sur",
-        "footer_tagline": "Su Manitas de Confianza en la Gran Lisboa y Margen Sur",
-        "hero_subtitle": "¿Necesita reparar un grifo, colgar una TV, pintar una habitación o resolver pequeños arreglos en casa? En FAZDETUDO.PT nos encargamos de su lista de tareas con rapidez, limpieza y presupuesto gratuito en la Gran Lisboa y Margen Sur.",
-        "hero_btn_quote": "Pedir presupuesto por WhatsApp",
+        "hero_title": "Encuentre Profesionales de Confianza para Su Casa",
+        "footer_tagline": "Profesionales para su casa, en un solo lugar.",
+        "hero_subtitle": "Manitas, reparaciones, mantenimiento y servicios especializados en un solo lugar. Elija el servicio que necesita y encuentre profesionales disponibles en la Gran Lisboa y la Margen Sur.",
+        "hero_btn_find": "Encontrar profesional",
+        "hero_btn_help": "Necesito ayuda",
+        "hero_btn_quote": "Necesito ayuda",
         "hero_btn_call": "Llame ahora",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Valorado con 5.0 en Google · Atención disponible en portugués e inglés",
-        "services_title": "Nuestros Servicios Profesionales",
-        "services_subtitle": "Soluciones fiables y especializadas para el mantenimiento, reparación y reforma de su hogar o empresa en la Gran Lisboa y Margen Sur.",
+        "services_title": "Servicios para Su Casa",
+        "services_subtitle": "Encuentre soluciones para reparaciones, mantenimiento, obras y servicios especializados a través de FAZDETUDO.PT y nuestra red de profesionales.",
         "advantages_title": "¿Por qué elegirnos?",
         "testimonials_title": "Reseñas",
         "recent_work_title": "Trabajos recientes",
@@ -266,8 +277,9 @@ HOME_UI = {
         "reviews_google_label": "Reseñas en Google",
         "google_review_source": "Reseña de Google",
         "faq_title": "Preguntas Frecuentes",
-        "contact_title": "Contáctenos",
-        "contact_subtitle": "Estamos listos para ayudar. Solicite su presupuesto gratis.",
+        "contact_title": "¿Necesita ayuda para encontrar un profesional?",
+        "contact_subtitle": "Hable con nosotros y le ayudamos a encontrar la solución adecuada para el servicio que necesita.",
+        "contact_cta": "Hablar con nosotros",
         "contact_locations_aria": "Ubicaciones",
         "address_primary_label": "Oficina principal",
         "address_secondary_label": "Segunda oficina / apoyo operativo",
@@ -286,17 +298,20 @@ HOME_UI = {
     "fr": {
         "nav_home": "Accueil",
         "nav_services": "Services",
+        "nav_partners": "Partenaires",
         "nav_about": "À propos",
         "nav_contact": "Contact",
         "footer_links": "Liens",
-        "hero_title": "Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud",
-        "footer_tagline": "Votre Bricoleur de Confiance dans le Grand Lisbonne et la Rive Sud",
-        "hero_subtitle": "Besoin de réparer un robinet, fixer une TV, peindre une pièce ou régler de petits travaux à la maison ? Chez FAZDETUDO.PT, nous traitons votre liste de tâches rapidement, proprement et avec un devis gratuit dans le Grand Lisbonne et la Rive Sud.",
-        "hero_btn_quote": "Demander un devis sur WhatsApp",
+        "hero_title": "Trouvez des Professionnels de Confiance pour Votre Maison",
+        "footer_tagline": "Des professionnels pour votre maison, au même endroit.",
+        "hero_subtitle": "Bricolage, réparations, entretien et services spécialisés au même endroit. Choisissez le service dont vous avez besoin et trouvez des professionnels disponibles dans le Grand Lisbonne et la Rive Sud.",
+        "hero_btn_find": "Trouver un professionnel",
+        "hero_btn_help": "J'ai besoin d'aide",
+        "hero_btn_quote": "J'ai besoin d'aide",
         "hero_btn_call": "Appelez maintenant",
         "hero_reviews": "⭐ ⭐ ⭐ ⭐ ⭐ Noté 5.0 sur Google · Service disponible en portugais et en anglais",
-        "services_title": "Nos Services Professionnels",
-        "services_subtitle": "Solutions fiables et spécialisées pour l'entretien, la réparation et la rénovation de votre maison ou entreprise dans le Grand Lisbonne et la Rive Sud.",
+        "services_title": "Services pour Votre Maison",
+        "services_subtitle": "Trouvez des solutions pour réparations, entretien, travaux et services spécialisés via FAZDETUDO.PT et notre réseau de professionnels.",
         "advantages_title": "Pourquoi nous choisir ?",
         "testimonials_title": "Avis",
         "recent_work_title": "Travaux récents",
@@ -315,8 +330,9 @@ HOME_UI = {
         "reviews_google_label": "Avis sur Google",
         "google_review_source": "Avis Google",
         "faq_title": "Questions Fréquentes",
-        "contact_title": "Contactez-nous",
-        "contact_subtitle": "Nous sommes prêts à vous aider. Demandez votre devis gratuit.",
+        "contact_title": "Besoin d'aide pour trouver un professionnel ?",
+        "contact_subtitle": "Parlez-nous et nous vous aidons à trouver la bonne solution pour le service dont vous avez besoin.",
+        "contact_cta": "Nous parler",
         "contact_locations_aria": "Implantations",
         "address_primary_label": "Bureau principal",
         "address_secondary_label": "Second bureau / appui opérationnel",
@@ -1355,14 +1371,14 @@ SERVICE_CARDS = [
         "fr": ("Peinture Générale", "Peinture intérieure et extérieure avec protection du mobilier et finitions premium."),
     },
     {
-        "slug": "servico-pintura-fachadas-alpinismo.html",
-        "icon": "building",
+        "slug": "servico-limpezas.html",
+        "icon": "broom",
         "featured": False,
         "badge": None,
-        "pt": ("Pintura em Alpinismo", "Reabilitação de fachadas em altura com trabalho em cordas. Sem andaimes, mais rápido e económico."),
-        "en": ("Rope-Access Facade Painting", "High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical."),
-        "es": ("Pintura en Alpinismo", "Rehabilitación de fachadas en altura con cuerdas. Sin andamios, más rápido y económico."),
-        "fr": ("Peinture en Cordes", "Réhabilitation de façades en hauteur par cordes. Sans échafaudage, plus rapide et économique."),
+        "pt": ("Limpezas", "Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas."),
+        "en": ("Cleaning", "Deep domestic, post-construction, office and condominium cleaning by experienced teams."),
+        "es": ("Limpieza", "Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos."),
+        "fr": ("Nettoyage", "Nettoyage profond domestique, après-travaux, bureaux et copropriétés."),
     },
     {
         "slug": "servico-canalizacoes.html",
@@ -1415,14 +1431,14 @@ SERVICE_CARDS = [
         "fr": ("Entretien", "Plans préventifs pour copropriétés, toitures, gouttières et nettoyage haute pression."),
     },
     {
-        "slug": "servico-limpezas.html",
-        "icon": "broom",
+        "slug": "servico-pintura-fachadas-alpinismo.html",
+        "icon": "building",
         "featured": False,
         "badge": None,
-        "pt": ("Limpezas", "Limpeza profunda doméstica, pós-obra, escritórios e condomínios com equipas experientes e rigorosas."),
-        "en": ("Cleaning", "Deep domestic, post-construction, office and condominium cleaning by experienced teams."),
-        "es": ("Limpieza", "Limpieza profunda doméstica, post-obra, oficinas y comunidades con equipos expertos."),
-        "fr": ("Nettoyage", "Nettoyage profond domestique, après-travaux, bureaux et copropriétés."),
+        "pt": ("Pintura em Alpinismo", "Reabilitação de fachadas em altura com trabalho em cordas. Sem andaimes, mais rápido e económico."),
+        "en": ("Rope-Access Facade Painting", "High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical."),
+        "es": ("Pintura en Alpinismo", "Rehabilitación de fachadas en altura con cuerdas. Sin andamios, más rápido y económico."),
+        "fr": ("Peinture en Cordes", "Réhabilitation de façades en hauteur par cordes. Sans échafaudage, plus rapide et économique."),
     },
     {
         "slug": "servico-jardinagem.html",
@@ -1650,5 +1666,137 @@ HANDYMAN = {
                 "Pose de séchoirs à linge",
             ]),
         ],
+    },
+}
+
+
+PARTNER_RECRUIT = {
+    "pt": {
+        "badge": "NOVO · Procuramos parceiros",
+        "title": "É profissional? Receba novos clientes através da FAZDETUDO.PT",
+        "text": (
+            "Tenha o seu perfil na categoria do seu serviço e permita que potenciais "
+            "clientes entrem em contacto diretamente consigo."
+        ),
+        "benefits": [
+            (
+                "star",
+                "Visibilidade na sua categoria",
+                "O seu negócio aparece quando clientes procuram o seu serviço.",
+            ),
+            (
+                "comments",
+                "Contacto direto",
+                "Telefone, WhatsApp ou website diretamente no seu perfil.",
+            ),
+            (
+                "calendar-check",
+                "Planos mensais",
+                "Escolha entre presença normal ou maior destaque no site.",
+            ),
+        ],
+        "cta": "Quero ser parceiro",
+        "note": "Vagas limitadas por categoria e zona.",
+        "wa_message": (
+            "Olá! Sou profissional e gostaria de saber como posso aparecer na "
+            "FAZDETUDO.PT e quais são os planos para parceiros."
+        ),
+        "cta_aria": "Contactar FAZDETUDO.PT no WhatsApp para ser parceiro",
+    },
+    "en": {
+        "badge": "NEW · Looking for partners",
+        "title": "Are you a professional? Get new clients through FAZDETUDO.PT",
+        "text": (
+            "Get your profile in your service category and let potential clients "
+            "contact you directly."
+        ),
+        "benefits": [
+            (
+                "star",
+                "Visibility in your category",
+                "Your business appears when clients search for your service.",
+            ),
+            (
+                "comments",
+                "Direct contact",
+                "Phone, WhatsApp or website right on your profile.",
+            ),
+            (
+                "calendar-check",
+                "Monthly plans",
+                "Choose standard presence or greater visibility on the site.",
+            ),
+        ],
+        "cta": "I want to become a partner",
+        "note": "Limited spots per category and area.",
+        "wa_message": (
+            "Hello! I'm a professional and I'd like to know how I can appear on "
+            "FAZDETUDO.PT and what the partner plans are."
+        ),
+        "cta_aria": "Contact FAZDETUDO.PT on WhatsApp to become a partner",
+    },
+    "es": {
+        "badge": "NUEVO · Buscamos colaboradores",
+        "title": "¿Es profesional? Reciba nuevos clientes a través de FAZDETUDO.PT",
+        "text": (
+            "Tenga su perfil en la categoría de su servicio y permita que potenciales "
+            "clientes contacten directamente con usted."
+        ),
+        "benefits": [
+            (
+                "star",
+                "Visibilidad en su categoría",
+                "Su negocio aparece cuando los clientes buscan su servicio.",
+            ),
+            (
+                "comments",
+                "Contacto directo",
+                "Teléfono, WhatsApp o web directamente en su perfil.",
+            ),
+            (
+                "calendar-check",
+                "Planes mensuales",
+                "Elija entre presencia normal o mayor destaque en el sitio.",
+            ),
+        ],
+        "cta": "Quiero ser colaborador",
+        "note": "Plazas limitadas por categoría y zona.",
+        "wa_message": (
+            "¡Hola! Soy profesional y me gustaría saber cómo puedo aparecer en "
+            "FAZDETUDO.PT y cuáles son los planes para colaboradores."
+        ),
+        "cta_aria": "Contactar FAZDETUDO.PT por WhatsApp para ser colaborador",
+    },
+    "fr": {
+        "badge": "NOUVEAU · Nous cherchons des partenaires",
+        "title": "Vous êtes professionnel ? Recevez de nouveaux clients via FAZDETUDO.PT",
+        "text": (
+            "Ayez votre profil dans la catégorie de votre service et permettez aux "
+            "clients potentiels de vous contacter directement."
+        ),
+        "benefits": [
+            (
+                "star",
+                "Visibilité dans votre catégorie",
+                "Votre activité apparaît quand les clients cherchent votre service.",
+            ),
+            (
+                "comments",
+                "Contact direct",
+                "Téléphone, WhatsApp ou site web directement sur votre profil.",
+            ),
+            (
+                "calendar-check",
+                "Formules mensuelles",
+                "Choisissez une présence standard ou une meilleure mise en avant.",
+            ),
+        ],
+        "cta": "Je veux devenir partenaire",
+        "note": "Places limitées par catégorie et zone.",
+        "wa_message": (
+            "Bonjour ! Je suis professionnel et j'aimerais savoir comment apparaître "
+            "sur FAZDETUDO.PT et quels sont les plans pour les partenaires."
+        ),
+        "cta_aria": "Contacter FAZDETUDO.PT sur WhatsApp pour devenir partenaire",
     },
 }

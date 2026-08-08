@@ -27,6 +27,7 @@ from home_page_i18n import (  # noqa: E402
     HOME_META,
     HOME_UI,
     LANGS,
+    PARTNER_RECRUIT,
     RECENT_WORK,
     SERVICE_CARDS,
     TESTIMONIAL_CARDS,
@@ -40,6 +41,15 @@ from html_partials import (  # noqa: E402
     render_header_home,
     render_wa_widget,
 )
+from recommended_partners import (  # noqa: E402
+    FILTER_CATEGORY_IDS,
+    HOW_IT_WORKS,
+    PARTNER_CATEGORIES,
+    PARTNER_DIRECTORY_UI,
+    PARTNER_STATUS_LABELS,
+    active_partners,
+    partner_badge_keys,
+)
 from slug_registry import LANG_HTML, asset_prefix  # noqa: E402
 from site_config import (  # noqa: E402
     GOOGLE_REVIEWS_URL,
@@ -52,7 +62,9 @@ from site_config import (  # noqa: E402
     mailto_href,
     schema_telephone,
     tel_href,
-    wa_href,
+    wa_href_for_message,
+    wa_href_home,
+    HOME_WA_MESSAGE,
 )
 from template_engine import render_template  # noqa: E402
 
@@ -573,7 +585,7 @@ def json_ld(lang: str) -> str:
     return json.dumps(data, ensure_ascii=False, indent=2)
 
 
-def build_service_cards(lang: str) -> str:
+def build_service_cards(lang: str, prefix: str = "") -> str:
     ui = HOME_UI[lang]
     blocks = []
     for card in SERVICE_CARDS:
@@ -595,18 +607,22 @@ def build_service_cards(lang: str) -> str:
         link_text = ui["learn_more"]
         secondary_link = ""
         show_default_link = True
+        icon_html = (
+            f'                    <div class="service-window-icon">'
+            f'<i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>'
+        )
         if is_hvac_pt:
             feat = f"{feat} service-window-card--partner"
             badge = (
                 '                    <span class="window-badge service-badge partner-recommended">'
                 f'{ui["badge_parceiro_recomendado"]}</span>\n'
             )
-            partner_note = """
+            partner_note = f"""
                 <div class="partner-mini-card">
                   <a class="partner-logo-pulse" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">
                     <span class="partner-pulse-ring" aria-hidden="true"></span>
                     <span class="partner-logo-circle">
-                      <img src="assets/partners/airfix-icon.png" alt="AirFix.pt" width="46" height="46" loading="lazy" decoding="async">
+                      <img src="{prefix}assets/partners/airfix-icon.png" alt="AirFix.pt" width="46" height="46" loading="lazy" decoding="async">
                     </span>
                   </a>
 
@@ -635,6 +651,14 @@ def build_service_cards(lang: str) -> str:
                 '                    <span class="window-badge window-badge--cleaning-partner">'
                 f'{html.escape(labels["badge"])}</span>\n'
             )
+            icon_html = (
+                '                    <div class="cleaning-partner-photo-wrap">\n'
+                f'                      <img class="cleaning-partner-photo" '
+                f'src="{prefix}assets/partners/caterina.jpg" '
+                f'alt="{html.escape(CLEANING_PARTNER["name"], quote=True)}" '
+                'width="96" height="96" loading="lazy" decoding="async">\n'
+                '                    </div>'
+            )
             partner_note = (
                 '\n                    <div class="cleaning-partner-contact">'
                 f'<span class="cleaning-partner-role">{html.escape(labels["role"])}</span>'
@@ -662,7 +686,7 @@ def build_service_cards(lang: str) -> str:
             )
         blocks.append(
             f"""                <div class="service-window-card{feat}">
-{badge}                    <div class="service-window-icon"><i class="fa-solid fa-{card["icon"]}" aria-hidden="true"></i></div>
+{badge}{icon_html}
                     <h3>{title}</h3>
                     <p>{desc}</p>
 {partner_note}
@@ -675,6 +699,194 @@ def build_service_cards(lang: str) -> str:
 def build_hvac_partner_block(lang: str, prefix: str) -> str:
     # Bloco grande removido: o destaque AirFix fica só no mini-card do serviço AVAC.
     return ""
+
+
+def _build_partner_directory_card(partner: dict, lang: str, prefix: str) -> str:
+    copy = partner["copy"][lang]
+    category_id = partner["category"]
+    category_label = PARTNER_CATEGORIES[category_id][lang]
+    name = html.escape(partner["name"])
+    cat_esc = html.escape(category_label)
+    card_class = f'partner-dir-card partner-dir-card--{html.escape(partner["type"])}'
+    status_flags = []
+    if partner.get("recommended"):
+        status_flags.append("recommended")
+    if partner.get("featured"):
+        status_flags.append("featured")
+    status_attr = " ".join(status_flags) if status_flags else "partner"
+
+    badges_html = []
+    for key in partner_badge_keys(partner):
+        label = PARTNER_STATUS_LABELS[key][lang]
+        mod = key.replace("_f", "")
+        badges_html.append(
+            f'<span class="partner-dir-badge partner-dir-badge--{html.escape(mod)}">'
+            f"{html.escape(label)}</span>"
+        )
+    badges_block = "\n                            ".join(badges_html)
+
+    if partner["type"] == "external":
+        logo_src = html.escape(f'{prefix}{partner["logo"]}', quote=True)
+        website = html.escape(partner["website"], quote=True)
+        service_href = html.escape(partner["service_slug"], quote=True)
+        return f"""                <article class="{card_class}" data-partner-category="{html.escape(category_id)}" data-partner-id="{html.escape(partner["id"])}" data-partner-status="{html.escape(status_attr)}" hidden>
+                    <div class="partner-dir-media">
+                        <img src="{logo_src}" alt="{name}" width="72" height="72" loading="lazy" decoding="async">
+                    </div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            {badges_block}
+                            <span class="partner-dir-category">{cat_esc}</span>
+                        </div>
+                        <h3 class="partner-dir-name">{name}</h3>
+                        <p class="partner-dir-blurb">{html.escape(copy["blurb"])}</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--primary" href="{website}" target="_blank" rel="noopener" aria-label="{html.escape(copy["visit_aria"])}">{html.escape(copy["primary_cta"])}</a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="{service_href}">{html.escape(copy["secondary_cta"])}</a>
+                        </div>
+                    </div>
+                </article>"""
+
+    # direct_contact (e.g. Caterina)
+    photo_src = html.escape(f'{prefix}{partner["photo"]}', quote=True)
+    tel_href_val = html.escape(partner["tel_href"], quote=True)
+    wa_href_val = html.escape(partner["whatsapp_href"], quote=True)
+    service_href = html.escape(partner["service_slug"], quote=True)
+    return f"""                <article class="{card_class}" data-partner-category="{html.escape(category_id)}" data-partner-id="{html.escape(partner["id"])}" data-partner-status="{html.escape(status_attr)}" hidden>
+                    <div class="partner-dir-media partner-dir-media--photo">
+                        <img src="{photo_src}" alt="{name}" width="96" height="96" loading="lazy" decoding="async">
+                    </div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            {badges_block}
+                            <span class="partner-dir-category">{cat_esc}</span>
+                        </div>
+                        <h3 class="partner-dir-name">{name}</h3>
+                        <p class="partner-dir-role">{html.escape(copy["role"])}</p>
+                        <p class="partner-dir-phone">{html.escape(partner["phone_display"])}</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="{tel_href_val}" aria-label="{html.escape(copy["call_aria"])}">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>{html.escape(copy["call"])}</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="{wa_href_val}" target="_blank" rel="noopener noreferrer" aria-label="{html.escape(copy["wa_aria"])}">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                <span>{html.escape(copy["whatsapp"])}</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="{service_href}">{html.escape(copy["secondary_cta"])}</a>
+                        </div>
+                    </div>
+                </article>"""
+
+
+def build_partner_directory_section(lang: str, prefix: str = "") -> str:
+    """Client-facing partner search bar + on-demand results (after hero)."""
+    ui = PARTNER_DIRECTORY_UI[lang]
+    options = [
+        f'                            <option value="" selected>{html.escape(ui["select_placeholder"])}</option>'
+    ]
+    for cat_id in FILTER_CATEGORY_IDS:
+        label = PARTNER_CATEGORIES[cat_id][lang]
+        options.append(
+            f'                            <option value="{html.escape(cat_id)}">{html.escape(label)}</option>'
+        )
+    cards = "\n".join(
+        _build_partner_directory_card(p, lang, prefix) for p in active_partners()
+    )
+    return f"""    <section class="partner-directory-section" id="parceiros-recomendados" aria-labelledby="partner-directory-title">
+        <div class="container">
+            <div class="partner-directory-bar" id="partner-directory-bar">
+                <div class="partner-directory-bar-title">
+                    <span class="partner-directory-bar-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>
+                    <div>
+                        <h2 id="partner-directory-title">{html.escape(ui["title"])}</h2>
+                        <p>{html.escape(ui["subtitle"])}</p>
+                    </div>
+                </div>
+                <div class="partner-directory-bar-controls">
+                    <label class="partner-directory-select-wrap" for="partner-category-select">
+                        <span class="partner-directory-field-label">{html.escape(ui["select_label"])}</span>
+                        <select id="partner-category-select" name="category" aria-label="{html.escape(ui["select_aria"])}">
+{chr(10).join(options)}
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="partner-directory-results" id="partner-directory-results" hidden aria-live="polite" aria-label="{html.escape(ui["results_aria"])}">
+                <div class="partner-directory-grid" id="partner-directory-grid">
+{cards}
+                </div>
+                <p class="partner-directory-empty" id="partner-directory-empty" hidden>{html.escape(ui["empty"])}</p>
+            </div>
+        </div>
+    </section>"""
+
+
+def build_how_it_works_section(lang: str) -> str:
+    copy = HOW_IT_WORKS[lang]
+    steps = []
+    for num, icon, title, text in copy["steps"]:
+        steps.append(
+            f"""                <div class="how-it-works-step">
+                    <div class="how-it-works-step-top">
+                        <span class="how-it-works-num" aria-hidden="true">{html.escape(num)}</span>
+                        <span class="how-it-works-icon" aria-hidden="true"><i class="fa-solid fa-{html.escape(icon)}"></i></span>
+                    </div>
+                    <h3>{html.escape(title)}</h3>
+                    <p>{html.escape(text)}</p>
+                </div>"""
+        )
+    return f"""    <section class="how-it-works-section" id="como-funciona" aria-labelledby="how-it-works-title">
+        <div class="container">
+            <div class="how-it-works-header">
+                <h2 id="how-it-works-title">{html.escape(copy["title"])}</h2>
+            </div>
+            <div class="how-it-works-grid">
+{chr(10).join(steps)}
+            </div>
+        </div>
+    </section>"""
+
+
+def build_partner_recruit_section(lang: str) -> str:
+    """Secção para angariar profissionais/parceiros (mensalidade)."""
+    copy = PARTNER_RECRUIT[lang]
+    wa_link = wa_href_for_message(copy["wa_message"])
+    benefits = []
+    for icon, title, text in copy["benefits"]:
+        benefits.append(
+            f"""                <div class="partner-recruit-benefit">
+                    <div class="partner-recruit-benefit-icon" aria-hidden="true">
+                        <i class="fa-solid fa-{html.escape(icon)}"></i>
+                    </div>
+                    <h3>{html.escape(title)}</h3>
+                    <p>{html.escape(text)}</p>
+                </div>"""
+        )
+    benefits_html = "\n".join(benefits)
+    return f"""    <section class="partner-recruit-section" id="tornar-parceiro" aria-labelledby="partner-recruit-title">
+        <div class="container">
+            <div class="partner-recruit-panel">
+                <span class="partner-recruit-badge">{html.escape(copy["badge"])}</span>
+                <h2 id="partner-recruit-title">{html.escape(copy["title"])}</h2>
+                <p class="partner-recruit-lead">{html.escape(copy["text"])}</p>
+                <div class="partner-recruit-benefits">
+{benefits_html}
+                </div>
+                <div class="partner-recruit-cta-wrap">
+                    <a href="{html.escape(wa_link, quote=True)}"
+                       class="btn btn-lg partner-recruit-cta"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="{html.escape(copy["cta_aria"])}">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span>{html.escape(copy["cta"])}</span>
+                    </a>
+                    <p class="partner-recruit-note">{html.escape(copy["note"])}</p>
+                </div>
+            </div>
+        </div>
+    </section>"""
 
 
 def build_handyman_section(lang: str) -> str:
@@ -791,8 +1003,10 @@ def render_homepage(lang: str) -> str:
         wa_send=meta["wa_send"],
         wa_float_label=meta["wa_float"],
     )
+    home_wa_message = HOME_WA_MESSAGE.get(lang, HOME_WA_MESSAGE["pt"])
+    wa_message_attr = html.escape(home_wa_message, quote=True)
 
-    html = render_template(
+    page_html = render_template(
         "home.html",
         {
             "HTML_LANG": LANG_HTML[lang],
@@ -803,8 +1017,11 @@ def render_homepage(lang: str) -> str:
             "WA_WIDGET": wa_widget,
             "ASSET_PREFIX": prefix,
             "LOGO_PATH": LOGO_PATH,
-            "SERVICE_CARDS": build_service_cards(lang),
+            "PARTNER_DIRECTORY_SECTION": build_partner_directory_section(lang, prefix),
+            "HOW_IT_WORKS_SECTION": build_how_it_works_section(lang),
+            "SERVICE_CARDS": build_service_cards(lang, prefix),
             "HVAC_PARTNER_BLOCK": build_hvac_partner_block(lang, prefix),
+            "PARTNER_RECRUIT_SECTION": build_partner_recruit_section(lang),
             "HANDYMAN_SECTION": build_handyman_section(lang),
             "RECENT_WORK_SECTION": build_recent_work_section(lang),
             "WORK_LIGHTBOX": build_work_lightbox_markup(lang),
@@ -813,7 +1030,8 @@ def render_homepage(lang: str) -> str:
             "TESTIMONIALS_CARDS": build_testimonials_cards(lang),
             "TESTIMONIALS_FOOTER": build_testimonials_footer(lang),
             "FAQ_LIST": build_faq_list(lang),
-            "WA_HREF": wa_href(lang),
+            "WA_HREF": wa_href_home(lang),
+            "WA_MESSAGE_ATTR": wa_message_attr,
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
             "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
@@ -823,9 +1041,9 @@ def render_homepage(lang: str) -> str:
             "SECOND_OFFICE_STREET_LINE2": SECOND_OFFICE_STREET_LINE2,
         },
     )
-    html = apply_i18n_attributes(html, lang)
-    html = apply_meta_strings(html, lang)
-    return html
+    page_html = apply_i18n_attributes(page_html, lang)
+    page_html = apply_meta_strings(page_html, lang)
+    return page_html
 
 
 def output_path(lang: str) -> Path:
