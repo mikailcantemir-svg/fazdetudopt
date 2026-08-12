@@ -3,481 +3,505 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.fazdetudo.pt/</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
+        <loc>https://www.fazdetudo.pt/parceiros/</loc>
+        <lastmod>2026-08-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/en/parceiros/</loc>
+        <lastmod>2026-08-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/es/parceiros/</loc>
+        <lastmod>2026-08-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/fr/parceiros/</loc>
+        <lastmod>2026-08-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
         <loc>https://www.fazdetudo.pt/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-remodelacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-recuperar-casa.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pinturas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pinturas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pinturas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pinturas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-limpezas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-limpezas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-limpezas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-limpezas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-canalizacoes.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-electricidade.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-electricidade.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-electricidade.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-electricidade.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-carpintaria.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-carpintaria.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-carpintaria.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-carpintaria.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-reparacoes-gerais.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-manutencao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-manutencao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-manutencao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-manutencao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-pintura-fachadas-alpinismo.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-jardinagem.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-jardinagem.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-jardinagem.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-jardinagem.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-mudancas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-mudancas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-mudancas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-mudancas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-informatica.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-informatica.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-informatica.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-informatica.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-serralharia.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-serralharia.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-serralharia.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-serralharia.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-climatizacao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-climatizacao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-climatizacao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-climatizacao.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-estores-persianas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-decoracao-interiores.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/servico-piscinas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/en/servico-piscinas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/es/servico-piscinas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/fr/servico-piscinas.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.fazdetudo.pt/artigos/preco-handyman-lisboa-guia-custos.html</loc>
-        <lastmod>2026-08-08</lastmod>
+        <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

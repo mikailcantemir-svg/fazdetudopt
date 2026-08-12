@@ -84,6 +84,10 @@ def build_dist() -> Path:
     if articles.is_dir():
         _copy_tree(articles, DIST / "artigos")
 
+    partners = ROOT / "parceiros"
+    if partners.is_dir():
+        _copy_tree(partners, DIST / "parceiros")
+
     for pattern in ("servico-*.html", "*-lisboa.html"):
         for src in sorted(ROOT.glob(pattern)):
             if src.is_file():

@@ -261,6 +261,16 @@ def _run_generate_articles() -> None:
     mod.main()
 
 
+def _run_generate_parceiros() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "generate_parceiros",
+        SCRIPTS / "generate-parceiros.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
 def _run_generate_sitemap() -> None:
     spec = importlib.util.spec_from_file_location(
         "generate_sitemap",
@@ -317,6 +327,9 @@ def main() -> None:
 
     print("\n--- Articles (Guias e Dicas) ---")
     _run_generate_articles()
+
+    print("\n--- Partners directory (/parceiros/) ---")
+    _run_generate_parceiros()
 
     print("\n--- Font Awesome aria-hidden pass ---")
     _run_fix_fa_aria_hidden()

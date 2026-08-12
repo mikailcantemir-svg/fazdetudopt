@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-page-lang="en" data-wa-message="Hello! I need help finding a professional for a service.">
+<html lang="en" data-page-lang="en" data-wa-message="Hello! I would like to request a quote for a handyman or home repair service.">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <title>FAZDETUDO.PT | Handyman and Home Repair Services</title>
-    <meta name="description" content="Find trusted professionals for handyman work, repairs, renovations, HVAC, painting and maintenance in Greater Lisbon and the South Bank. FAZDETUDO.PT network.">
+    <title>Handyman and Home Repair Services | FAZDETUDO.PT</title>
+    <meta name="description" content="Handyman services, small repairs, assembly and home maintenance in Greater Lisbon and the South Bank. Request a quote on WhatsApp.">
     <link rel="canonical" href="https://www.fazdetudo.pt/en/">
     <link rel="alternate" hreflang="pt-PT" href="https://www.fazdetudo.pt/" />
     <link rel="alternate" hreflang="pt" href="https://www.fazdetudo.pt/" />
@@ -16,8 +16,8 @@
     <link rel="alternate" hreflang="es" href="https://www.fazdetudo.pt/es/" />
     <link rel="alternate" hreflang="fr" href="https://www.fazdetudo.pt/fr/" />
     <link rel="alternate" hreflang="x-default" href="https://www.fazdetudo.pt/" />
-    <meta property="og:title" content="FAZDETUDO.PT | Handyman, Repairs and Home Professionals">
-    <meta property="og:description" content="Find trusted professionals for handyman work, repairs, renovations, HVAC, painting and maintenance in Greater Lisbon and the South Bank. FAZDETUDO.PT network.">
+    <meta property="og:title" content="FAZDETUDO.PT | Handyman and Home Repairs">
+    <meta property="og:description" content="Handyman services, small repairs, assembly and home maintenance in Greater Lisbon and the South Bank. Request a quote on WhatsApp.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.fazdetudo.pt/en/">
     <meta property="og:locale" content="en_GB">
@@ -33,7 +33,7 @@
       "url": "https://www.fazdetudo.pt/en",
       "logo": "https://www.fazdetudo.pt/logo.webp",
       "image": "https://www.fazdetudo.pt/logo.webp",
-      "description": "Platform to find handyman, repair, renovation, HVAC, painting and maintenance professionals across Greater Lisbon and Setúbal.",
+      "description": "Handyman services, small repairs, assembly and home maintenance across Greater Lisbon, the South Bank and Setúbal.",
       "telephone": "+351932504112",
       "priceRange": "$$",
       "address": {
@@ -144,16 +144,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 </head>
-<body>
+<body class="page-home">
     <a class="skip-link" href="#main-content">Saltar para o conteúdo</a>
 
-    <main id="main-content">
 
-    <!-- Hero -->
-    <section class="hero" id="hero">
         <header class="header" id="header">
             <div class="container header-inner">
                 <a href="https://www.fazdetudo.pt/en/" class="logo">
@@ -164,10 +161,11 @@
                     </span>
                 </a>
                 <nav class="nav" id="nav" aria-label="Main navigation">
-                    <a href="#hero" class="nav-link" data-i18n="nav_home">Home</a>
                     <a href="#services" class="nav-link" data-i18n="nav_services">Services</a>
-                    <a href="#parceiros-recomendados" class="nav-link" data-i18n="nav_partners">Partners</a>
+                    <a href="#recent-work" class="nav-link" data-i18n="nav_works">Our work</a>
                     <a href="#advantages" class="nav-link" data-i18n="nav_about">About us</a>
+                    <a href="/en/parceiros/" class="nav-link" data-i18n="nav_partners">Partners</a>
+                    <a href="#hero" class="nav-link nav-link--mobile-only" data-i18n="nav_home">Home</a>
                     <a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a>
                 </nav>
                 <div class="header-actions">
@@ -184,9 +182,12 @@
                             <a href="../fr/" class="lang-option lang-option--nav" hreflang="fr" lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Flag of France"> Français</a>
                         </div>
                     </div>
-                    <a href="tel:+351932504112" class="btn-phone" id="header-phone">
+                    <a href="tel:+351932504112" class="header-phone" id="header-phone">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         <span>932 504 112</span>
+                    </a>
+                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20request%20a%20quote%20for%20a%20handyman%20or%20home%20repair%20service." class="btn btn-primary btn-header-quote" id="header-quote">
+                        <span data-i18n="header_quote">Request a quote</span>
                     </a>
                     <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open menu">
                         <span></span>
@@ -197,425 +198,160 @@
             </div>
         </header>
 
-        <div class="hero-bg">
-            <div class="hero-bg-item" style="background-image: url('../images/hero/ferramentas.webp')"></div>
-            <div class="hero-bg-item" style="background-image: url('../images/hero/hero-3.webp')"></div>
-            <div class="hero-bg-item" style="background-image: url('../images/hero/obra.webp')"></div>
-            <div class="hero-bg-item" style="background-image: url('../images/hero/hero-4.webp')"></div>
-        </div>
-        <div class="container hero-content">
-            <h1 class="hero-title" data-i18n="hero_title">Find Trusted Professionals for Your Home</h1>
-            <p class="hero-subtitle" data-i18n="hero_subtitle">Handyman, repairs, maintenance and specialist services in one place. Choose the service you need and find available professionals in Greater Lisbon and the South Bank.</p>
-            <div class="hero-actions">
-                <a href="#parceiros-recomendados" class="btn btn-primary btn-lg" id="btn-find-partner">
-                    <span data-i18n="hero_btn_find">Find a professional</span>
-                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                <a href="https://wa.me/351932504112?text=Hello%21%20I%20need%20help%20finding%20a%20professional%20for%20a%20service." class="btn btn-outline btn-lg" id="btn-quote">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="hero_btn_help">I need help</span>
-                </a>
-            </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Rated 5.0 on Google · Service available in English and Portuguese</p>
-        </div>
-    </section>
 
-    <section class="partner-directory-section" id="parceiros-recomendados" aria-labelledby="partner-directory-title">
-        <div class="container">
-            <div class="partner-directory-bar" id="partner-directory-bar">
-                <div class="partner-directory-bar-title">
-                    <span class="partner-directory-bar-icon" aria-hidden="true"><i class="fa-solid fa-star" aria-hidden="true"></i></span>
-                    <div>
-                        <h2 id="partner-directory-title">Which professional do you need?</h2>
-                        <p>Choose a service and find professionals available for direct contact.</p>
-                    </div>
-                </div>
-                <div class="partner-directory-bar-controls">
-                    <label class="partner-directory-select-wrap" for="partner-category-select">
-                        <span class="partner-directory-field-label">Select a service</span>
-                        <select id="partner-category-select" name="category" aria-label="Select a service to see professionals">
-                            <option value="" selected>Select a service</option>
-                            <option value="avac">Air Conditioning / HVAC</option>
-                            <option value="limpezas">Cleaning</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-            <div class="partner-directory-results" id="partner-directory-results" hidden aria-live="polite" aria-label="Available professionals">
-                <div class="partner-directory-grid" id="partner-directory-grid">
-                <article class="partner-dir-card partner-dir-card--external" data-partner-category="avac" data-partner-id="airfix" data-partner-status="recommended" hidden>
-                    <div class="partner-dir-media">
-                        <img src="../assets/partners/airfix-icon.png" alt="AirFix.pt" width="72" height="72" loading="lazy" decoding="async">
-                    </div>
-                    <div class="partner-dir-body">
-                        <div class="partner-dir-meta">
-                            <span class="partner-dir-badge partner-dir-badge--recommended">Recommended partner</span>
-                            <span class="partner-dir-category">Air Conditioning / HVAC</span>
-                        </div>
-                        <h3 class="partner-dir-name">AirFix.pt</h3>
-                        <p class="partner-dir-blurb">Air conditioning installation, maintenance, cleaning and technical support.</p>
-                        <div class="partner-dir-actions">
-                            <a class="partner-dir-btn partner-dir-btn--primary" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visit AirFix.pt">Visit AirFix.pt</a>
-                            <a class="partner-dir-btn partner-dir-btn--secondary" href="servico-climatizacao.html">View HVAC services</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="partner-dir-card partner-dir-card--direct_contact" data-partner-category="limpezas" data-partner-id="caterina" data-partner-status="recommended" hidden>
-                    <div class="partner-dir-media partner-dir-media--photo">
-                        <img src="../assets/partners/caterina.jpg" alt="Caterina" width="96" height="96" loading="lazy" decoding="async">
-                    </div>
-                    <div class="partner-dir-body">
-                        <div class="partner-dir-meta">
-                            <span class="partner-dir-badge partner-dir-badge--recommended">Recommended partner</span>
-                            <span class="partner-dir-category">Cleaning</span>
-                        </div>
-                        <h3 class="partner-dir-name">Caterina</h3>
-                        <p class="partner-dir-role">Cleaning professional · direct contact</p>
-                        <p class="partner-dir-phone">963 212 185</p>
-                        <div class="partner-dir-actions">
-                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963212185" aria-label="Call Caterina directly, recommended cleaning partner">
-                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                                <span>Call</span>
-                            </a>
-                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contact Caterina on WhatsApp">
-                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                                <span>WhatsApp</span>
-                            </a>
-                            <a class="partner-dir-btn partner-dir-btn--secondary" href="servico-limpezas.html">View service</a>
-                        </div>
-                    </div>
-                </article>
-                </div>
-                <p class="partner-directory-empty" id="partner-directory-empty" hidden>No partners in this category yet. More coming soon.</p>
-            </div>
-        </div>
-    </section>
+    <main id="main-content">
 
-    <section class="how-it-works-section" id="como-funciona" aria-labelledby="how-it-works-title">
-        <div class="container">
-            <div class="how-it-works-header">
-                <h2 id="how-it-works-title">Finding a professional is simple</h2>
-            </div>
-            <div class="how-it-works-grid">
-                <div class="how-it-works-step">
-                    <div class="how-it-works-step-top">
-                        <span class="how-it-works-num" aria-hidden="true">1</span>
-                        <span class="how-it-works-icon" aria-hidden="true"><i class="fa-solid fa-list" aria-hidden="true"></i></span>
-                    </div>
-                    <h3>Choose the service</h3>
-                    <p>Tell us what kind of professional you need.</p>
-                </div>
-                <div class="how-it-works-step">
-                    <div class="how-it-works-step-top">
-                        <span class="how-it-works-num" aria-hidden="true">2</span>
-                        <span class="how-it-works-icon" aria-hidden="true"><i class="fa-solid fa-users" aria-hidden="true"></i></span>
-                    </div>
-                    <h3>See available professionals</h3>
-                    <p>Browse partners, specialties and contact options.</p>
-                </div>
-                <div class="how-it-works-step">
-                    <div class="how-it-works-step-top">
-                        <span class="how-it-works-num" aria-hidden="true">3</span>
-                        <span class="how-it-works-icon" aria-hidden="true"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
-                    </div>
-                    <h3>Contact them directly</h3>
-                    <p>Call, message on WhatsApp or visit the professional&#x27;s website.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section class="section section-light" id="services">
-        <div class="container">
-            <div class="section-header section-header--services">
-                <img src="../logo.webp" alt="Professional handyman" class="section-logo" width="120" height="120" loading="lazy" decoding="async">
-                <h2 class="section-title" data-i18n="services_title">Services for Your Home</h2>
-                <p class="section-subtitle" data-i18n="services_subtitle">Find solutions for repairs, maintenance, works and specialist services through FAZDETUDO.PT and our network of professionals.</p>
-            </div>
-
-            <div class="services-modern-grid">
-                <div class="service-window-card service-window-featured">
-                    <span class="window-badge">Specialty</span>
-                    <div class="service-window-icon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
-                    <h3>Renovations & Construction</h3>
-                    <p>Kitchen and bathroom renovations, new rooms, extensions and structural works. From design to handover.</p>
-
-                    <a href="servico-remodelacoes.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                    <h3>Air Conditioning (HVAC)</h3>
-                    <p>AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance.</p>
-
-                    <a href="servico-climatizacao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card service-window-featured">
-                    <span class="window-badge">Premium Finishes</span>
-                    <div class="service-window-icon"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
-                    <h3>General Painting</h3>
-                    <p>Interior and exterior painting with furniture protection, damp treatment and premium finishes.</p>
-
-                    <a href="servico-pinturas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card service-window-card--cleaning-partner">
-                    <span class="window-badge window-badge--cleaning-partner">Recommended partner</span>
-                    <div class="cleaning-partner-photo-wrap">
-                      <img class="cleaning-partner-photo" src="../assets/partners/caterina.jpg" alt="Caterina" width="96" height="96" loading="lazy" decoding="async">
-                    </div>
-                    <h3>Cleaning</h3>
-                    <p>Deep domestic, post-construction, office and condominium cleaning by experienced teams.</p>
-
-                    <div class="cleaning-partner-contact"><span class="cleaning-partner-role">Cleaning professional · direct contact</span><strong class="cleaning-partner-name">Caterina</strong><a class="cleaning-partner-call" href="tel:+351963212185" aria-label="Call Caterina directly, recommended cleaning partner"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Call</span><strong>963 212 185</strong></a><a class="cleaning-partner-call cleaning-partner-whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a></div>
-                    <a href="servico-limpezas.html" class="service-window-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></div>
-                    <h3>Plumbing</h3>
-                    <p>Leak repair, urgent unblocking, tap, toilet and pipe replacement.</p>
-
-                    <a href="servico-canalizacoes.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
-                    <h3>Electrical</h3>
-                    <p>Electrical faults, fuse boards, breakers, sockets and LED lighting upgrades.</p>
-
-                    <a href="servico-electricidade.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-hammer" aria-hidden="true"></i></div>
-                    <h3>Carpentry</h3>
-                    <p>Furniture assembly (IKEA and custom), door adjustment, skirting and woodwork.</p>
-
-                    <a href="servico-carpintaria.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card service-window-featured">
-                    <span class="window-badge">Highly Requested</span>
-                    <div class="service-window-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
-                    <h3>General Repairs</h3>
-                    <p>Your handyman for shelves, TVs, curtain rails, silicone sealing and small fix-it jobs.</p>
-
-                    <a href="servico-reparacoes-gerais.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
-                    <h3>Maintenance</h3>
-                    <p>Preventive plans for condominiums, roof and gutter inspection, pressure washing.</p>
-
-                    <a href="servico-manutencao.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
-                    <h3>Rope-Access Facade Painting</h3>
-                    <p>High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical.</p>
-
-                    <a href="servico-pintura-fachadas-alpinismo.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
-                    <h3>Gardening</h3>
-                    <p>Garden maintenance, lawn mowing, tree pruning, plot clearance and irrigation repair.</p>
-
-                    <a href="servico-jardinagem.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div>
-                    <h3>Moving</h3>
-                    <p>Residential and commercial moves with safe transport, careful packing and furniture disassembly.</p>
-
-                    <a href="servico-mudancas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></div>
-                    <h3>IT Services</h3>
-                    <p>Computer repair, stable Wi-Fi setup, printers and smart home solutions.</p>
-
-                    <a href="servico-informatica.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
-                    <h3>Locksmithing</h3>
-                    <p>Emergency door opening, lock and cylinder replacement, gates and grilles.</p>
-
-                    <a href="servico-serralharia.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></div>
-                    <h3>Home Restoration</h3>
-                    <p>Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life.</p>
-
-                    <a href="servico-recuperar-casa.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></div>
-                    <h3>Blinds & Shutters</h3>
-                    <p>Manual and electric blind repair, broken tapes, stuck motors and mosquito nets.</p>
-
-                    <a href="servico-estores-persianas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-couch" aria-hidden="true"></i></div>
-                    <h3>Interior Design</h3>
-                    <p>Curtains, wallpaper, lighting and home staging to enhance or sell your property.</p>
-
-                    <a href="servico-decoracao-interiores.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-
-                <div class="service-window-card">
-                    <div class="service-window-icon"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></div>
-                    <h3>Pools</h3>
-                    <p>Pool construction, maintenance, repair, cleaning and water treatment.</p>
-
-                    <a href="servico-piscinas.html" class="service-window-link">Learn more <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="partner-recruit-section" id="tornar-parceiro" aria-labelledby="partner-recruit-title">
-        <div class="container">
-            <div class="partner-recruit-panel">
-                <span class="partner-recruit-badge">NEW · Looking for partners</span>
-                <h2 id="partner-recruit-title">Are you a professional? Get new clients through FAZDETUDO.PT</h2>
-                <p class="partner-recruit-lead">Get your profile in your service category and let potential clients contact you directly.</p>
-                <div class="partner-recruit-benefits">
-                <div class="partner-recruit-benefit">
-                    <div class="partner-recruit-benefit-icon" aria-hidden="true">
-                        <i class="fa-solid fa-star" aria-hidden="true"></i>
-                    </div>
-                    <h3>Visibility in your category</h3>
-                    <p>Your business appears when clients search for your service.</p>
-                </div>
-                <div class="partner-recruit-benefit">
-                    <div class="partner-recruit-benefit-icon" aria-hidden="true">
-                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
-                    </div>
-                    <h3>Direct contact</h3>
-                    <p>Phone, WhatsApp or website right on your profile.</p>
-                </div>
-                <div class="partner-recruit-benefit">
-                    <div class="partner-recruit-benefit-icon" aria-hidden="true">
-                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                    </div>
-                    <h3>Monthly plans</h3>
-                    <p>Choose standard presence or greater visibility on the site.</p>
-                </div>
-                </div>
-                <div class="partner-recruit-cta-wrap">
-                    <a href="https://wa.me/351932504112?text=Hello%21%20I%27m%20a%20professional%20and%20I%27d%20like%20to%20know%20how%20I%20can%20appear%20on%20FAZDETUDO.PT%20and%20what%20the%20partner%20plans%20are."
-                       class="btn btn-lg partner-recruit-cta"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="Contact FAZDETUDO.PT on WhatsApp to become a partner">
+    <section class="hero" id="hero">
+        <img class="hero-backdrop" src="../images/hero/mihail-handyman-prateleiras.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <h1 class="hero-title">
+                    <span class="hero-title-line">Handyman &</span>
+                    <span class="hero-title-line hero-title-accent">Home Repairs</span>
+                    <span class="hero-title-line">at Your Doorstep</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Small repairs, assembly, maintenance and home jobs. One contact for multiple tasks.</p>
+                <div class="hero-actions">
+                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20request%20a%20quote%20for%20a%20handyman%20or%20home%20repair%20service." class="btn btn-primary btn-lg" id="btn-quote">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                        <span>I want to become a partner</span>
+                        <span data-i18n="hero_btn_quote">Request a quote on WhatsApp</span>
                     </a>
-                    <p class="partner-recruit-note">Limited spots per category and area.</p>
+                    <a href="tel:+351932504112" class="btn btn-outline-light btn-lg" id="btn-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span data-i18n="hero_btn_call">Call now</span>
+                    </a>
+                </div>
+                <div class="hero-proof-row">
+                    <div class="hero-google-proof">
+                        <a href="https://share.google/We1LViOoXucwIwBQl" class="hero-reviews-link" target="_blank" rel="noopener noreferrer" data-i18n="hero_reviews_rating">★★★★★ 5.0 on Google</a>
+                    </div>
+                    <div class="hero-language-proof" aria-label="Idiomas de atendimento">
+                        <span class="hero-language-label" data-i18n="hero_reviews_suffix">PT · EN · ES · RO</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section handyman-details" id="handyman-details">
+    <section class="section section-services" id="services">
         <div class="container">
-            <div class="section-header handyman-details-header">
-                <span class="handyman-badge">Everyday Service</span>
-                <h2 class="section-title">What Does a Professional Handyman Do?</h2>
-                <p class="section-subtitle">Don't spend your weekend with tools. We clear your pending small jobs quickly and efficiently.</p>
+            <div class="section-header section-header--center">
+                <p class="section-kicker">WHAT WE DO</p>
+                <h2 class="section-title" data-i18n="services_title">Handyman Services</h2>
+                <p class="section-subtitle" data-i18n="services_subtitle">Repairs, assembly, maintenance and small jobs with direct service across Greater Lisbon and the South Bank.</p>
             </div>
+            <div class="services-showcase-grid" id="services-grid">
+                <a href="../servico-reparacoes-gerais.html" class="service-showcase-card fade-in" aria-label="General Repairs — Your handyman for shelves, TVs, curtain rails, silicone sealing and small fix-it jobs.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">General Repairs</span>
+                </a>
 
-            <div class="handyman-detailed-grid">
-                <div class="handyman-detail-box">
-                    <div class="handyman-box-header">
-                        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-                        <h3>Small Installations</h3>
-                    </div>
-                    <ul class="handyman-list">
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> TV wall mount installation</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Curtain poles and track fitting</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Hanging pictures, heavy mirrors and panels</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Shelf, cube and niche mounting</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Bathroom and kitchen accessory fitting</li>
-                    </ul>
-                </div>
+                <a href="../servico-carpintaria.html" class="service-showcase-card fade-in" aria-label="Carpentry — Furniture assembly (IKEA and custom), door adjustment, skirting and woodwork.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-hammer" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Carpentry</span>
+                </a>
 
-                <div class="handyman-detail-box">
-                    <div class="handyman-box-header">
-                        <i class="fa-solid fa-door-closed" aria-hidden="true"></i>
-                        <h3>Doors, Windows & Hardware</h3>
-                    </div>
-                    <ul class="handyman-list">
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Adjusting sticking doors and frames</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Lock, cylinder and latch replacement</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Door and cabinet handle replacement</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Door closer and stop installation</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Lubrication and sliding track adjustment</li>
-                    </ul>
-                </div>
+                <a href="../servico-pinturas.html" class="service-showcase-card fade-in" aria-label="General Painting — Interior and exterior painting with furniture protection, damp treatment and premium finishes.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">General Painting</span>
+                </a>
 
-                <div class="handyman-detail-box">
-                    <div class="handyman-box-header">
-                        <i class="fa-solid fa-plug" aria-hidden="true"></i>
-                        <h3>Quick Fixes & DIY</h3>
-                    </div>
-                    <ul class="handyman-list">
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Replacing old bulbs with LED fittings</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Faulty socket and switch faceplate replacement</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Silicone sealing for baths and worktops</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Filling old holes in plasterboard or masonry</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Modular furniture assembly and fixing</li>
-                    </ul>
-                </div>
+                <a href="../servico-canalizacoes.html" class="service-showcase-card fade-in" aria-label="Plumbing — Leak repair, urgent unblocking, tap, toilet and pipe replacement.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Plumbing</span>
+                </a>
 
-                <div class="handyman-detail-box">
-                    <div class="handyman-box-header">
-                        <i class="fa-solid fa-house-laptop" aria-hidden="true"></i>
-                        <h3>Preventive Maintenance</h3>
-                    </div>
-                    <ul class="handyman-list">
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Pressure washing patios, terraces and walls</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Gutter cleaning and external drain clearing</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Minor gate or wooden fence repairs</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Sealing small external cracks with mastic</li>
-                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> Clothes line installation (wall or ceiling)</li>
-                    </ul>
-                </div>
+                <a href="../servico-electricidade.html" class="service-showcase-card fade-in" aria-label="Electrical — Electrical faults, fuse boards, breakers, sockets and LED lighting upgrades.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Electrical</span>
+                </a>
+
+                <a href="../servico-climatizacao.html" class="service-showcase-card fade-in" aria-label="Air Conditioning (HVAC) — AC installation (splits), gas recharge, filter cleaning and preventive HVAC maintenance.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-wind" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Air Conditioning (HVAC)</span>
+                </a>
+
+                <a href="../servico-limpezas.html" class="service-showcase-card fade-in" aria-label="Cleaning — Home, post-construction, office and condominium cleaning.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-broom" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Cleaning</span>
+                </a>
+
+                <a href="../servico-manutencao.html" class="service-showcase-card fade-in" aria-label="Maintenance — Preventive plans for condominiums, roof and gutter inspection, pressure washing.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Maintenance</span>
+                </a>
             </div>
-
-            <div class="handyman-cta-wrap">
-                <a href="servico-reparacoes-gerais.html" class="btn btn-primary btn-lg handyman-cta-btn">
-                    <span>View All General Repair Details</span>
+            <div class="services-more-wrap">
+                <button type="button" class="services-more-toggle" id="services-more-toggle" aria-expanded="false" aria-controls="services-more">
+                    <span data-i18n="services_see_all">View all services</span>
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="services-showcase-grid services-showcase-grid--more" id="services-more" hidden>
+                <a href="../servico-remodelacoes.html" class="service-showcase-card fade-in" aria-label="Renovations &amp; Construction — Kitchen and bathroom renovations, new rooms, extensions and structural works. From design to handover.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Renovations &amp; Construction</span>
+                </a>
+
+                <a href="../servico-pintura-fachadas-alpinismo.html" class="service-showcase-card fade-in" aria-label="Rope-Access Facade Painting — High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Rope-Access Facade Painting</span>
+                </a>
+
+                <a href="../servico-jardinagem.html" class="service-showcase-card fade-in" aria-label="Gardening — Garden maintenance, lawn mowing, tree pruning, plot clearance and irrigation repair.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Gardening</span>
+                </a>
+
+                <a href="../servico-mudancas.html" class="service-showcase-card fade-in" aria-label="Moving — Residential and commercial moves with safe transport, careful packing and furniture disassembly.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Moving</span>
+                </a>
+
+                <a href="../servico-informatica.html" class="service-showcase-card fade-in" aria-label="IT Services — Computer repair, stable Wi-Fi setup, printers and smart home solutions.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-laptop-medical" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">IT Services</span>
+                </a>
+
+                <a href="../servico-serralharia.html" class="service-showcase-card fade-in" aria-label="Locksmithing — Emergency door opening, lock and cylinder replacement, gates and grilles.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-key" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Locksmithing</span>
+                </a>
+
+                <a href="../servico-recuperar-casa.html" class="service-showcase-card fade-in" aria-label="Home Restoration — Complete restoration of vacant, inherited or run-down homes. From structure to finishes, we bring your property back to life.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Home Restoration</span>
+                </a>
+
+                <a href="../servico-estores-persianas.html" class="service-showcase-card fade-in" aria-label="Blinds &amp; Shutters — Manual and electric blind repair, broken tapes, stuck motors and mosquito nets.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Blinds &amp; Shutters</span>
+                </a>
+
+                <a href="../servico-decoracao-interiores.html" class="service-showcase-card fade-in" aria-label="Interior Design — Curtains, wallpaper, lighting and home staging to enhance or sell your property.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-couch" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Interior Design</span>
+                </a>
+
+                <a href="../servico-piscinas.html" class="service-showcase-card fade-in" aria-label="Pools — Pool construction, maintenance, repair, cleaning and water treatment.">
+                    <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-water-ladder" aria-hidden="true"></i></span>
+                    <span class="service-showcase-title">Pools</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <section class="section section-light" id="recent-work">
+    <section class="section section-work" id="recent-work">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="recent_work_title">Recent work</h2>
-                <p class="section-subtitle" data-i18n="recent_work_subtitle">A few examples of jobs across Greater Lisbon and the South Bank.</p>
+            <div class="section-header section-header--center">
+                <p class="section-kicker">RECENT WORK</p>
+                <h2 class="section-title" data-i18n="recent_work_title">See some of our recent work</h2>
             </div>
-            <div class="recent-work-grid" id="recent-work-grid">
-                <article class="recent-work-card fade-in">
+            <div class="work-rail-shell">
+                <button type="button" class="work-rail-btn work-rail-btn--prev" data-work-rail-dir="-1" aria-label="Previous image"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                <div class="recent-work-grid recent-work-grid--portfolio" id="recent-work-grid">
+                <article class="recent-work-card recent-work-card--featured fade-in">
                     <div class="recent-work-media-wrap recent-work-media-wrap--gallery">
                     <div class="work-carousel" data-work-carousel>
                         <button type="button" class="work-carousel-btn work-carousel-prev" aria-label="Previous image">‹</button>
@@ -1069,18 +805,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Turnkey house construction</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Azeitão, South Bank</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Renovations &amp; Construction</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">House built from the ground up, from initial preparation to final finishes, with project coordination and turnkey handover.</p>
-                        <a href="../servico-remodelacoes.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Azeitão, South Bank · Renovations &amp; Construction</p>
+                        <a href="../servico-remodelacoes.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1181,18 +907,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Brick wall construction</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Azeitão, South Bank</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Renovations &amp; Construction</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Brick masonry work with wall construction, structural preparation and site organisation for the next construction stages.</p>
-                        <a href="../servico-remodelacoes.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Azeitão, South Bank · Renovations &amp; Construction</p>
+                        <a href="../servico-remodelacoes.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1237,18 +953,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Bathroom floor waterproofing</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Greater Lisbon</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>General repairs</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Waterproof membrane applied to the floor to prevent water infiltration and protect the bathroom base.</p>
-                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Greater Lisbon · General repairs</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1300,18 +1006,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Interior painting and finishes</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Greater Lisbon</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Painting</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Wall and ceiling painting plus small interior touch-ups with a clean, careful finish.</p>
-                        <a href="../servico-pinturas.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Greater Lisbon · Painting</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1384,18 +1080,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Exterior wood restoration and painting</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Greater Lisbon and South Bank</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Exterior painting and maintenance</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Treatment, sanding and protective coating on exterior wood to restore appearance and improve resistance to sun and moisture.</p>
-                        <a href="../servico-pinturas.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Greater Lisbon and South Bank · Exterior painting and maintenance</p>
+                        <a href="../servico-pinturas.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1496,18 +1182,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Living room furniture assembly</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Greater Lisbon</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Furniture assembly</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Assembly of dining table, sideboard and living room furniture, with door alignment, hardware adjustment and a tidy finish.</p>
-                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Greater Lisbon · Furniture assembly</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1625,18 +1301,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Lawn replacement and irrigation system</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Azeitão, South Bank</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Gardening and outdoor maintenance</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Removal of old turf, ground preparation, irrigation system installation and new lawn laying.</p>
-                        <a href="../servico-jardinagem.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Azeitão, South Bank · Gardening and outdoor maintenance</p>
+                        <a href="../servico-jardinagem.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1695,18 +1361,8 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Wall-mounted TV installation</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Greater Lisbon</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>General repairs</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">TV wall mounting, cable routing and tidy finishing in your living space.</p>
-                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Greater Lisbon · General repairs</p>
+                        <a href="../servico-reparacoes-gerais.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
 
@@ -1723,94 +1379,56 @@
                     </div>
                     <div class="recent-work-body">
                         <h3 class="recent-work-title">Interior maintenance and renovation</h3>
-                        <dl class="recent-work-meta">
-                            <div class="recent-work-meta-row">
-                                <dt>Area</dt>
-                                <dd>Greater Lisbon</dd>
-                            </div>
-                            <div class="recent-work-meta-row">
-                                <dt>Service</dt>
-                                <dd>Maintenance</dd>
-                            </div>
-                        </dl>
-                        <p class="recent-work-desc">Maintenance, repair and improvement of interior spaces.</p>
-                        <a href="../servico-manutencao.html" class="recent-work-link">View service <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></a>
+                        <p class="recent-work-meta-line">Greater Lisbon · Maintenance</p>
+                        <a href="../servico-manutencao.html" class="recent-work-link">View work <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </article>
+                </div>
+                <button type="button" class="work-rail-btn work-rail-btn--next" data-work-rail-dir="1" aria-label="Next image"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
             </div>
         </div>
     </section>
 
-    <!-- Advantages -->
-    <section class="section" id="advantages">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="advantages_title">Why choose us?</h2>
+    <section class="section proof-band" id="advantages">
+        <div class="container proof-grid">
+            <div class="proof-column proof-why">
+                <p class="proof-heading" data-i18n="advantages_title">Why choose us?</p>
+                <ul class="why-list" id="advantages-grid">
+                <li class="why-list-item fade-in">
+                    <span class="why-check" aria-hidden="true"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span>No-obligation quote</span>
+                </li>
+                <li class="why-list-item fade-in">
+                    <span class="why-check" aria-hidden="true"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span>Greater Lisbon and South Bank</span>
+                </li>
+                <li class="why-list-item fade-in">
+                    <span class="why-check" aria-hidden="true"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span>Clean, organised work</span>
+                </li>
+                <li class="why-list-item fade-in">
+                    <span class="why-check" aria-hidden="true"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span>Small repairs and larger jobs</span>
+                </li>
+                <li class="why-list-item fade-in">
+                    <span class="why-check" aria-hidden="true"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                    <span>Fast contact via WhatsApp</span>
+                </li>
+                </ul>
             </div>
-            <div class="advantages-grid" id="advantages-grid">
-                <div class="advantage-card fade-in">
-                    <div class="advantage-icon">
-                        <i class="fa-solid fa-file-invoice" aria-hidden="true"></i>
-                    </div>
-                    <h3>Free quote</h3>
-                    <p>No-obligation quote so you can plan your project with confidence.</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <div class="advantage-icon">
-                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                    </div>
-                    <h3>Coverage in Greater Lisbon and South Bank</h3>
-                    <p>We come to your home or business in Lisbon, Cascais, Almada, Setúbal and surrounding areas.</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <div class="advantage-icon">
-                        <i class="fa-solid fa-users" aria-hidden="true"></i>
-                    </div>
-                    <h3>Versatile team</h3>
-                    <p>One point of contact for repairs, maintenance and specialist works.</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <div class="advantage-icon">
-                        <i class="fa-solid fa-broom" aria-hidden="true"></i>
-                    </div>
-                    <h3>Clean, organised work</h3>
-                    <p>We protect your space and leave everything tidy when we finish.</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <div class="advantage-icon">
-                        <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
-                    </div>
-                    <h3>Small repairs and larger projects</h3>
-                    <p>From quick fixes to full projects, with the same care throughout.</p>
-                </div>
-                <div class="advantage-card fade-in">
-                    <div class="advantage-icon">
-                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
-                    </div>
-                    <h3>Fast contact via WhatsApp</h3>
-                    <p>Quick replies to schedule visits and request quotes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Google Reviews -->
-    <section class="section section-light" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="testimonials_title">Reviews</h2>
-            </div>
-            <div class="testimonials-summary" id="testimonials-summary">
-                <div class="reviews-aggregate fade-in">
+            <div class="proof-column proof-reviews" id="testimonials">
+                <p class="proof-heading" data-i18n="testimonials_title">What our clients say</p>
+                <div class="testimonials-summary" id="testimonials-summary">
+                <a href="https://share.google/We1LViOoXucwIwBQl" class="reviews-aggregate reviews-aggregate--link fade-in" target="_blank" rel="noopener noreferrer" aria-label="View reviews on Google">
                     <span class="reviews-score">5.0</span>
-                    <div class="reviews-stars" aria-label="5.0 / 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
-                    <span class="reviews-count">Reviews on Google</span>
-                    <span class="reviews-google" aria-hidden="true"><i class="fab fa-google" aria-hidden="true"></i></span>
+                    <div class="reviews-stars" aria-hidden="true"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+                    <span class="reviews-count">Google</span>
+                </a>
                 </div>
-            </div>
-            <div class="reviews-swiper-wrap">
-                <div class="swiper reviews-swiper" id="reviews-swiper">
-                    <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
+                <div class="reviews-swiper-wrap">
+                    <div class="swiper reviews-swiper" id="reviews-swiper">
+                        <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
                         <div class="swiper-slide">
                             <article class="google-review-card">
                                 <div class="google-review-top">
@@ -1971,28 +1589,71 @@
                                 <p class="google-review-text">Excellent service — they carried out painting and furniture assembly for me. Highly recommended 💯</p>
                             </article>
                         </div>
+                        </div>
                     </div>
+                    <button type="button" class="reviews-swiper-prev" aria-label="Previous review">
+                        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="reviews-swiper-next" aria-label="Next review">
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                    <div class="swiper-pagination reviews-swiper-pagination"></div>
                 </div>
-                <button type="button" class="reviews-swiper-prev" aria-label="Previous review">
-                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="reviews-swiper-next" aria-label="Next review">
-                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                </button>
-                <div class="swiper-pagination reviews-swiper-pagination"></div>
-            </div>
             <div class="testimonials-footer">
-                <a href="https://www.google.com/maps/place/Faz+de+tudo+%7C+HANDYMAN/@38.760942,-9.2013644,17z/data=!4m6!3m5!1s0xd1ecd0033ab1b83:0x7c1b8284ba4b85da!8m2!3d38.7609378!4d-9.1987895!16s%2Fg%2F11nc7r6k6j" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://share.google/We1LViOoXucwIwBQl" class="btn-google-reviews" id="google-reviews-link" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="view_google_reviews">View reviews on Google</span>
                 </a>
+            </div>
+            </div>
+
+            <div class="proof-column proof-partners" id="parceiros-recomendados">
+                <p class="proof-heading">SPECIALIST SERVICES</p>
+                <div class="partners-teaser-groups">
+                <div class="partners-cat-group">
+                    <p class="partners-cat-label">Air Conditioning / HVAC</p>
+                    <a class="partners-mini-card partners-mini-card--category fade-in" href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">
+                        <span class="partners-mini-media"><img src="../assets/partners/airfix-icon.png" alt="" width="36" height="36" loading="lazy"></span>
+                        <span class="partners-mini-copy">
+                            <span class="partners-mini-badge">Partner in this category</span>
+                            <span class="partners-mini-name">AirFix.pt</span>
+                            <span class="partners-mini-specialty">Air Conditioning / HVAC</span>
+                        </span>
+                        <span class="partners-mini-cta">Visit <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <div class="partners-cat-group">
+                    <p class="partners-cat-label">Cleaning</p>
+                    <a class="partners-mini-card partners-mini-card--category fade-in" href="tel:+351963212185">
+                        <span class="partners-mini-media partners-mini-media--photo"><img src="../assets/partners/caterina.jpg" alt="" width="36" height="36" loading="lazy"></span>
+                        <span class="partners-mini-copy">
+                            <span class="partners-mini-badge">Partner in this category</span>
+                            <span class="partners-mini-name">Caterina</span>
+                            <span class="partners-mini-specialty">Cleaning · South Bank · Azeitão</span>
+                        </span>
+                        <span class="partners-mini-cta">Contact <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                <div class="partners-cat-group">
+                    <p class="partners-cat-label">TV Wall Mounting</p>
+                    <a class="partners-mini-card partners-mini-card--category fade-in" href="https://www.wallfixtv.pt/" target="_blank" rel="noopener noreferrer">
+                        <span class="partners-mini-media partners-mini-media--icon" aria-hidden="true"><i class="fa-solid fa-tv" aria-hidden="true"></i></span>
+                        <span class="partners-mini-copy">
+                            <span class="partners-mini-badge">Partner in this category</span>
+                            <span class="partners-mini-name">WallFixTV.pt</span>
+                            <span class="partners-mini-specialty">TV Wall Mounting · Greater Lisbon · South Bank</span>
+                        </span>
+                        <span class="partners-mini-cta">Visit <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+                </div>
+                <a href="/en/parceiros/" class="text-link partners-teaser-cta"><span data-i18n="partners_teaser_cta">View all partners</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section" id="faq">
-        <div class="container">
-            <div class="section-header">
+    <section class="section section-faq" id="faq">
+        <div class="container container--narrow">
+            <div class="section-header section-header--center">
                 <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
             </div>
             <div class="faq-list" id="faq-list">
@@ -2054,41 +1715,29 @@
         </div>
     </section>
 
-    <!-- Contact CTA -->
     <section class="section-cta" id="contact">
-        <div class="container cta-content">
-            <h2 class="cta-title" data-i18n="contact_title">Need help finding a professional?</h2>
-            <p class="cta-subtitle" data-i18n="contact_subtitle">Talk to us and we'll help you find the right solution for the service you need.</p>
-            <div class="cta-actions">
-                <a href="https://wa.me/351932504112?text=Hello%21%20I%20need%20help%20finding%20a%20professional%20for%20a%20service." class="btn btn-white btn-lg" id="cta-quote">
-                    <span data-i18n="contact_cta">Talk to us</span>
-                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                <a href="tel:+351932504112" class="btn btn-outline-white btn-lg" id="cta-phone">
-                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                    <span id="cta-phone-text">932 504 112</span>
-                </a>
-            </div>
-            <div class="contact-addresses" aria-label="Locations">
-                <div class="contact-address-card">
-                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                    <div class="contact-address-body">
-                        <p class="contact-address-label" data-i18n="address_primary_label">Main office</p>
-                        <p class="contact-address-line">R. José Saramago</p>
-                        <p class="contact-address-line">1675-180 Pontinha</p>
-                        <p class="contact-address-note" data-i18n="address_appointment_note">By appointment only</p>
-                    </div>
-                </div>
-                <div class="contact-address-card">
-                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                    <div class="contact-address-body">
-                        <p class="contact-address-label" data-i18n="address_secondary_label">Second office / operational support</p>
-                        <p class="contact-address-line">R. Ana de Castro Osório</p>
-                        <p class="contact-address-line">2925-060 São Lourenço</p>
-                        <p class="contact-address-note" data-i18n="address_appointment_note">By appointment only</p>
-                    </div>
+        <div class="container">
+            <div class="cta-main-grid">
+                <h2 class="cta-title" data-i18n="contact_title">Have jobs to do at home?</h2>
+                <p class="cta-subtitle" data-i18n="contact_subtitle">Send us photos and a short description of what you need. We'll reply with guidance and a quote.</p>
+                <div class="cta-actions">
+                    <a href="https://wa.me/351932504112?text=Hello%21%20I%20would%20like%20to%20request%20a%20quote%20for%20a%20handyman%20or%20home%20repair%20service." class="btn btn-primary btn-lg" id="cta-quote">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span data-i18n="contact_cta">Request a quote on WhatsApp</span>
+                    </a>
+                    <a href="tel:+351932504112" class="btn btn-outline-light btn-lg" id="cta-phone">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span id="cta-phone-text">932 504 112</span>
+                    </a>
                 </div>
             </div>
+            <ul class="cta-trust-row" aria-label="Vantagens do serviço">
+                <li><a href="https://share.google/We1LViOoXucwIwBQl" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-star" aria-hidden="true"></i><span data-i18n="trust_google">5.0 Google</span></a></li>
+                <li><i class="fa-regular fa-file-lines" aria-hidden="true"></i><span data-i18n="trust_quote">Free quote</span></li>
+                <li><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Fast response</span></li>
+                <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span data-i18n="trust_area">Greater Lisbon & South Bank</span></li>
+                <li><i class="fa-solid fa-language" aria-hidden="true"></i><span>PT · EN · ES · FR</span></li>
+            </ul>
         </div>
     </section>
 
@@ -2097,16 +1746,12 @@
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col">
+                <div class="footer-col footer-col--brand">
                     <div class="footer-logo">
                         <img src="../logo.webp" alt="FAZDETUDO.PT" class="footer-logo-img">
                         <span class="logo-text">fazdetudo<em>.pt</em></span>
                     </div>
-                    <p class="footer-tagline" data-i18n="footer_tagline">Home professionals, in one place.</p>
-                    <p class="social-cta">
-                        <span data-i18n="social_cta">Follow us and see our work</span>
-                        <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    </p>
+                    <p class="footer-tagline" data-i18n="footer_tagline">Handyman, repairs and home maintenance.</p>
                     <div class="footer-socials">
                         <a href="https://www.facebook.com/profile.php?id=61571666972567" class="footer-social footer-social-facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <i class="fab fa-facebook-f" aria-hidden="true"></i>
@@ -2117,16 +1762,6 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h3 data-i18n="footer_links">Links</h3>
-                    <ul>
-                        <li><a href="#hero" data-i18n="nav_home">Home</a></li>
-                        <li><a href="#services" data-i18n="nav_services">Services</a></li>
-                        <li><a href="#advantages" data-i18n="nav_about">About us</a></li>
-                        <li><a href="/artigos/" data-i18n="nav_articles">Artigos</a></li>
-                        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col" id="footer-services">
                     <h3 data-i18n="nav_services">Services</h3>
                     <ul id="footer-services-list">
                         <li><a href="servico-remodelacoes.html">Renovations &amp; Construction</a></li>
@@ -2147,6 +1782,16 @@
                         <li><a href="servico-estores-persianas.html">Blinds &amp; Shutters</a></li>
                         <li><a href="servico-decoracao-interiores.html">Interior Design</a></li>
                         <li><a href="servico-piscinas.html">Pools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer_company">Company</h3>
+                    <ul>
+                        <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+                        <li><a href="#advantages" data-i18n="nav_about">About us</a></li>
+                        <li><a href="#recent-work" data-i18n="nav_works">Our work</a></li>
+                        <li><a href="/parceiros/" data-i18n="nav_partners">Partners</a></li>
+                        <li><a href="/artigos/" data-i18n="nav_articles">Articles</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

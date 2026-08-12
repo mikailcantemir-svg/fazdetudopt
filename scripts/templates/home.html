@@ -3,105 +3,108 @@
 <head>
 {{HEAD}}
 </head>
-<body>
+<body class="page-home">
     <a class="skip-link" href="#main-content">Saltar para o conteúdo</a>
+
+{{HEADER_HOME}}
 
     <main id="main-content">
 
-    <!-- Hero -->
     <section class="hero" id="hero">
-{{HEADER_HOME}}
-        <div class="hero-bg">
-            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/ferramentas.webp')"></div>
-            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-3.webp')"></div>
-            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/obra.webp')"></div>
-            <div class="hero-bg-item" style="background-image: url('{{ASSET_PREFIX}}images/hero/hero-4.webp')"></div>
-        </div>
-        <div class="container hero-content">
-            <h1 class="hero-title" data-i18n="hero_title">Encontre Profissionais de Confiança para a Sua Casa</h1>
-            <p class="hero-subtitle" data-i18n="hero_subtitle">Handyman, reparações, manutenção e serviços especializados num só lugar. Escolha o serviço de que precisa e encontre profissionais disponíveis na Grande Lisboa e Margem Sul.</p>
-            <div class="hero-actions">
-                <a href="#parceiros-recomendados" class="btn btn-primary btn-lg" id="btn-find-partner">
-                    <span data-i18n="hero_btn_find">Encontrar profissional</span>
-                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                <a href="{{WA_HREF}}" class="btn btn-outline btn-lg" id="btn-quote">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="hero_btn_help">Preciso de ajuda</span>
-                </a>
+        <img class="hero-backdrop" src="{{ASSET_PREFIX}}images/hero/mihail-handyman-prateleiras.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <h1 class="hero-title">
+                    <span class="hero-title-line">{{HERO_TITLE_PREFIX}}</span>
+                    <span class="hero-title-line hero-title-accent">{{HERO_TITLE_ACCENT}}</span>
+                    <span class="hero-title-line">{{HERO_TITLE_SUFFIX}}</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Pequenas reparações, montagens, manutenção e trabalhos em casa. Um contacto para resolver várias tarefas.</p>
+                <div class="hero-actions">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="btn-quote">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span data-i18n="hero_btn_quote">Pedir orçamento por WhatsApp</span>
+                    </a>
+                    <a href="{{TEL_HREF}}" class="btn btn-outline-light btn-lg" id="btn-call">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span data-i18n="hero_btn_call">Ligar agora</span>
+                    </a>
+                </div>
+                <div class="hero-proof-row">
+                    <div class="hero-google-proof">
+                        <a href="{{GOOGLE_REVIEWS_URL}}" class="hero-reviews-link" target="_blank" rel="noopener noreferrer" data-i18n="hero_reviews_rating">★★★★★ 5.0 no Google</a>
+                    </div>
+                    <div class="hero-language-proof" aria-label="Idiomas de atendimento">
+                        <span class="hero-language-label" data-i18n="hero_reviews_suffix">PT · EN · ES · RO</span>
+                    </div>
+                </div>
             </div>
-            <p class="hero-reviews" data-i18n="hero_reviews">⭐ ⭐ ⭐ ⭐ ⭐ Avaliado com 5.0 no Google · Atendimento em Português e Inglês</p>
         </div>
     </section>
 
-{{PARTNER_DIRECTORY_SECTION}}
-
-{{HOW_IT_WORKS_SECTION}}
-
-    <!-- Services -->
-    <section class="section section-light" id="services">
+    <section class="section section-services" id="services">
         <div class="container">
-            <div class="section-header section-header--services">
-                <img src="{{ASSET_PREFIX}}{{LOGO_PATH}}" alt="Profissional faz tudo" class="section-logo" width="120" height="120" loading="lazy" decoding="async">
-                <h2 class="section-title" data-i18n="services_title">Serviços para a Sua Casa</h2>
-                <p class="section-subtitle" data-i18n="services_subtitle">Encontre soluções para reparações, manutenção, obras e serviços especializados através da FAZDETUDO.PT e da nossa rede de profissionais.</p>
+            <div class="section-header section-header--center">
+                <p class="section-kicker">{{SERVICES_KICKER}}</p>
+                <h2 class="section-title" data-i18n="services_title">Serviços de Handyman</h2>
+                <p class="section-subtitle" data-i18n="services_subtitle">Reparações, montagens, manutenção e pequenos trabalhos com atendimento direto na Grande Lisboa e Margem Sul.</p>
             </div>
-
-            <div class="services-modern-grid">
+            <div class="services-showcase-grid" id="services-grid">
 {{SERVICE_CARDS}}
             </div>
+            <div class="services-more-wrap">
+                <button type="button" class="services-more-toggle" id="services-more-toggle" aria-expanded="false" aria-controls="services-more">
+                    <span data-i18n="services_see_all">Ver todos os serviços</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="services-showcase-grid services-showcase-grid--more" id="services-more" hidden>
+{{SERVICE_CARDS_MORE}}
+            </div>
         </div>
     </section>
-
-{{PARTNER_RECRUIT_SECTION}}
-
-{{HANDYMAN_SECTION}}
 
 {{RECENT_WORK_SECTION}}
 
-    <!-- Advantages -->
-    <section class="section" id="advantages">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="advantages_title">Porquê escolher-nos?</h2>
-            </div>
-            <div class="advantages-grid" id="advantages-grid">
+    <section class="section proof-band" id="advantages">
+        <div class="container proof-grid">
+            <div class="proof-column proof-why">
+                <p class="proof-heading" data-i18n="advantages_title">Porquê escolher-nos?</p>
+                <ul class="why-list" id="advantages-grid">
 {{ADVANTAGES_GRID}}
+                </ul>
             </div>
-        </div>
-    </section>
 
-    <!-- Google Reviews -->
-    <section class="section section-light" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="testimonials_title">Críticas</h2>
-            </div>
-            <div class="testimonials-summary" id="testimonials-summary">
+            <div class="proof-column proof-reviews" id="testimonials">
+                <p class="proof-heading" data-i18n="testimonials_title">O que dizem os nossos clientes</p>
+                <div class="testimonials-summary" id="testimonials-summary">
 {{TESTIMONIALS_SUMMARY}}
-            </div>
-            <div class="reviews-swiper-wrap">
-                <div class="swiper reviews-swiper" id="reviews-swiper">
-                    <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
-{{TESTIMONIALS_CARDS}}
-                    </div>
                 </div>
-                <button type="button" class="reviews-swiper-prev" aria-label="Crítica anterior">
-                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="reviews-swiper-next" aria-label="Crítica seguinte">
-                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                </button>
-                <div class="swiper-pagination reviews-swiper-pagination"></div>
-            </div>
+                <div class="reviews-swiper-wrap">
+                    <div class="swiper reviews-swiper" id="reviews-swiper">
+                        <div class="swiper-wrapper" id="testimonials-swiper-wrapper">
+{{TESTIMONIALS_CARDS}}
+                        </div>
+                    </div>
+                    <button type="button" class="reviews-swiper-prev" aria-label="Crítica anterior">
+                        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="reviews-swiper-next" aria-label="Crítica seguinte">
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                    <div class="swiper-pagination reviews-swiper-pagination"></div>
+                </div>
 {{TESTIMONIALS_FOOTER}}
+            </div>
+
+{{PARTNERS_TEASER_SECTION}}
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section" id="faq">
-        <div class="container">
-            <div class="section-header">
+    <section class="section section-faq" id="faq">
+        <div class="container container--narrow">
+            <div class="section-header section-header--center">
                 <h2 class="section-title" data-i18n="faq_title">Perguntas Frequentes</h2>
             </div>
             <div class="faq-list" id="faq-list">
@@ -110,41 +113,29 @@
         </div>
     </section>
 
-    <!-- Contact CTA -->
     <section class="section-cta" id="contact">
-        <div class="container cta-content">
-            <h2 class="cta-title" data-i18n="contact_title">Precisa de ajuda a encontrar um profissional?</h2>
-            <p class="cta-subtitle" data-i18n="contact_subtitle">Fale connosco e ajudamos a encontrar a solução certa para o serviço de que precisa.</p>
-            <div class="cta-actions">
-                <a href="{{WA_HREF}}" class="btn btn-white btn-lg" id="cta-quote">
-                    <span data-i18n="contact_cta">Falar connosco</span>
-                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                <a href="{{TEL_HREF}}" class="btn btn-outline-white btn-lg" id="cta-phone">
-                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                    <span id="cta-phone-text">{{PHONE_DISPLAY}}</span>
-                </a>
-            </div>
-            <div class="contact-addresses" aria-label="Localizações">
-                <div class="contact-address-card">
-                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                    <div class="contact-address-body">
-                        <p class="contact-address-label" data-i18n="address_primary_label">Escritório principal</p>
-                        <p class="contact-address-line">{{PRIMARY_OFFICE_STREET_LINE1}}</p>
-                        <p class="contact-address-line">{{PRIMARY_OFFICE_STREET_LINE2}}</p>
-                        <p class="contact-address-note" data-i18n="address_appointment_note">Atendimento mediante marcação</p>
-                    </div>
-                </div>
-                <div class="contact-address-card">
-                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                    <div class="contact-address-body">
-                        <p class="contact-address-label" data-i18n="address_secondary_label">Segundo escritório / apoio operacional</p>
-                        <p class="contact-address-line">{{SECOND_OFFICE_STREET_LINE1}}</p>
-                        <p class="contact-address-line">{{SECOND_OFFICE_STREET_LINE2}}</p>
-                        <p class="contact-address-note" data-i18n="address_appointment_note">Atendimento mediante marcação</p>
-                    </div>
+        <div class="container">
+            <div class="cta-main-grid">
+                <h2 class="cta-title" data-i18n="contact_title">Tem trabalhos para fazer em casa?</h2>
+                <p class="cta-subtitle" data-i18n="contact_subtitle">Envie-nos fotografias e uma breve descrição do que precisa. Respondemos com orientação e orçamento.</p>
+                <div class="cta-actions">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="cta-quote">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span data-i18n="contact_cta">Pedir orçamento por WhatsApp</span>
+                    </a>
+                    <a href="{{TEL_HREF}}" class="btn btn-outline-light btn-lg" id="cta-phone">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span id="cta-phone-text">{{PHONE_DISPLAY}}</span>
+                    </a>
                 </div>
             </div>
+            <ul class="cta-trust-row" aria-label="Vantagens do serviço">
+                <li><a href="{{GOOGLE_REVIEWS_URL}}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-star" aria-hidden="true"></i><span data-i18n="trust_google">5.0 Google</span></a></li>
+                <li><i class="fa-regular fa-file-lines" aria-hidden="true"></i><span data-i18n="trust_quote">Orçamento gratuito</span></li>
+                <li><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>{{CTA_RESPONSE_LABEL}}</span></li>
+                <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span data-i18n="trust_area">Grande Lisboa e Margem Sul</span></li>
+                <li><i class="fa-solid fa-language" aria-hidden="true"></i><span>PT · EN · ES · FR</span></li>
+            </ul>
         </div>
     </section>
 

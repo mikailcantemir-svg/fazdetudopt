@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}" data-wa-message="{{WA_MESSAGE_ATTR}}">
+<head>
+{{HEAD}}
+</head>
+<body class="partners-page">
+    <a class="skip-link" href="#partners-main">{{SKIP_LINK}}</a>
+
+{{HEADER_HOME}}
+
+    <main id="partners-main">
+        <section class="partners-hero" aria-labelledby="partners-hero-title">
+            <div class="container partners-hero-inner">
+                <h1 id="partners-hero-title">{{HERO_TITLE}}</h1>
+                <p class="partners-hero-subtitle">{{HERO_SUBTITLE}}</p>
+                <p class="partners-hero-area"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{HERO_AREA}}</p>
+            </div>
+        </section>
+
+        <section class="partners-directory" id="procurar-profissionais" aria-labelledby="partners-search-title">
+            <div class="container">
+                <div class="partners-search-panel">
+                    <h2 id="partners-search-title">{{SEARCH_TITLE}}</h2>
+                    <div class="partners-filters">
+                        <label class="partners-filter" for="partners-service-select">
+                            <span class="partners-filter-label">{{SERVICE_LABEL}}</span>
+                            <select id="partners-service-select" name="service" aria-label="{{SERVICE_ARIA}}">
+{{SERVICE_OPTIONS}}
+                            </select>
+                        </label>
+                        <label class="partners-filter" for="partners-zone-select">
+                            <span class="partners-filter-label">{{ZONE_LABEL}}</span>
+                            <select id="partners-zone-select" name="zone" aria-label="{{ZONE_ARIA}}">
+{{ZONE_OPTIONS}}
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="partners-results" id="partners-results" aria-live="polite" aria-label="{{RESULTS_ARIA}}">
+                    <div class="partners-results-list" id="partners-results-list">
+{{PARTNER_CARDS}}
+                    </div>
+                    <div class="partners-empty" id="partners-empty" hidden>
+                        <h3>{{EMPTY_TITLE}}</h3>
+                        <p>{{EMPTY_TEXT}}</p>
+                        <a class="btn btn-primary partners-empty-cta" href="{{EMPTY_WA_HREF}}" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                            <span>{{EMPTY_CTA}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="partners-recruit-section" id="tornar-parceiro" aria-labelledby="partners-recruit-title">
+            <div class="container">
+                <div class="partners-recruit-panel">
+                    <h2 id="partners-recruit-title">{{RECRUIT_TITLE}}</h2>
+                    <p class="partners-recruit-lead">{{RECRUIT_TEXT}}</p>
+                    <div class="partners-recruit-benefits">
+{{RECRUIT_BENEFITS}}
+                    </div>
+                    <div class="partners-recruit-cta-wrap">
+                        <a href="{{RECRUIT_WA_HREF}}"
+                           class="btn btn-lg partners-recruit-cta"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="{{RECRUIT_ARIA}}">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                            <span>{{RECRUIT_CTA}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{{FOOTER}}
+{{WA_WIDGET}}
+
+    <script src="{{ASSET_PREFIX}}script.js" defer></script>
+</body>
+</html>

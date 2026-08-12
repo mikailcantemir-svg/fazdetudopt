@@ -19,11 +19,7 @@ SECOND_OFFICE_STREET_LINE1 = "R. Ana de Castro Osório"
 SECOND_OFFICE_STREET_LINE2 = "2925-060 São Lourenço"
 BRAND_NAME = "FAZDETUDO.PT"
 
-GOOGLE_REVIEWS_URL = (
-    "https://www.google.com/maps/place/Faz+de+tudo+%7C+HANDYMAN/"
-    "@38.760942,-9.2013644,17z/data=!4m6!3m5!1s0xd1ecd0033ab1b83:0x7c1b8284ba4b85da"
-    "!8m2!3d38.7609378!4d-9.1987895!16s%2Fg%2F11nc7r6k6j"
-)
+GOOGLE_REVIEWS_URL = "https://share.google/We1LViOoXucwIwBQl"
 
 FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61571666972567"
 INSTAGRAM_URL = (
@@ -41,12 +37,13 @@ WA_MESSAGE: dict[str, str] = {
     "fr": "Bonjour ! Je souhaite demander un devis.",
 }
 
-# Homepage CTAs + chat widget (platform positioning). Service pages keep their own messages.
+# Homepage CTAs + chat widget (direct handyman quote). Service pages keep WA_MESSAGE;
+# /parceiros/ empty-state and recruit keep their own messages.
 HOME_WA_MESSAGE: dict[str, str] = {
-    "pt": "Olá! Preciso de ajuda a encontrar um profissional para um serviço.",
-    "en": "Hello! I need help finding a professional for a service.",
-    "es": "¡Hola! Necesito ayuda para encontrar un profesional para un servicio.",
-    "fr": "Bonjour ! J'ai besoin d'aide pour trouver un professionnel pour un service.",
+    "pt": "Olá! Gostaria de pedir um orçamento para um serviço de handyman/reparação.",
+    "en": "Hello! I would like to request a quote for a handyman or home repair service.",
+    "es": "¡Hola! Me gustaría solicitar un presupuesto para un servicio de handyman o reparación.",
+    "fr": "Bonjour ! Je souhaite demander un devis pour un service de handyman ou de réparation à domicile.",
 }
 
 

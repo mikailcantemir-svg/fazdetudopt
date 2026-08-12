@@ -1,26 +1,31 @@
+
         <header class="header" id="header">
             <div class="container header-inner">
                 <a href="{{LOGO_HREF}}" class="logo">
-                    <img src="{{ASSET_PREFIX}}{{LOGO_PATH}}" alt="FAZDETUDO.PT - Serviços de handyman em Lisboa" class="logo-img">
+                    <img src="{{ASSET_PREFIX}}{{LOGO_PATH}}" alt="{{LOGO_ALT}}" class="logo-img">
                     <span class="logo-brand">
                         <span class="logo-text">fazdetudo<em>.pt</em></span>
                         <span class="logo-tagline">HANDYMAN</span>
                     </span>
                 </a>
-                <nav class="nav" id="nav" aria-label="Navegação principal">
-                    <a href="#hero" class="nav-link" data-i18n="nav_home">Início</a>
-                    <a href="#services" class="nav-link" data-i18n="nav_services">Serviços</a>
-                    <a href="#parceiros-recomendados" class="nav-link" data-i18n="nav_partners">Parceiros</a>
-                    <a href="#advantages" class="nav-link" data-i18n="nav_about">Sobre nós</a>
-                    <a href="#contact" class="nav-link" data-i18n="nav_contact">Contacto</a>
+                <nav class="nav" id="nav" aria-label="{{NAV_ARIA}}">
+                    <a href="{{NAV_SERVICES_HREF}}" class="nav-link" data-i18n="nav_services">{{NAV_SERVICES_LABEL}}</a>
+                    <a href="{{NAV_WORKS_HREF}}" class="nav-link" data-i18n="nav_works">{{NAV_WORKS_LABEL}}</a>
+                    <a href="{{NAV_ABOUT_HREF}}" class="nav-link" data-i18n="nav_about">{{NAV_ABOUT_LABEL}}</a>
+                    <a href="{{NAV_PARTNERS_HREF}}" class="nav-link" data-i18n="nav_partners">{{NAV_PARTNERS_LABEL}}</a>
+                    <a href="{{NAV_HOME_HREF}}" class="nav-link nav-link--mobile-only" data-i18n="nav_home">{{NAV_HOME_LABEL}}</a>
+                    <a href="{{NAV_CONTACT_HREF}}" class="nav-link" data-i18n="nav_contact">{{NAV_CONTACT_LABEL}}</a>
                 </nav>
                 <div class="header-actions">
 {{LANG_SWITCHER}}
-                    <a href="{{TEL_HREF}}" class="btn-phone" id="header-phone">
+                    <a href="{{TEL_HREF}}" class="header-phone" id="header-phone">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         <span>{{PHONE_DISPLAY}}</span>
                     </a>
-                    <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-header-quote" id="header-quote">
+                        <span data-i18n="header_quote">{{HEADER_QUOTE_LABEL}}</span>
+                    </a>
+                    <button type="button" class="menu-toggle" id="menu-toggle" aria-label="{{MENU_ARIA}}">
                         <span></span>
                         <span></span>
                         <span></span>

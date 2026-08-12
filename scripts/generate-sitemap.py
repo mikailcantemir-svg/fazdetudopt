@@ -23,6 +23,10 @@ URLS = [
     ("/en/", "weekly", "1.0"),
     ("/es/", "weekly", "1.0"),
     ("/fr/", "weekly", "1.0"),
+    ("/parceiros/", "weekly", "0.9"),
+    ("/en/parceiros/", "weekly", "0.9"),
+    ("/es/parceiros/", "weekly", "0.9"),
+    ("/fr/parceiros/", "weekly", "0.9"),
 ]
 
 LANG_PREFIXES = ("", "/en", "/es", "/fr")
