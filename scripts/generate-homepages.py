@@ -594,10 +594,10 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
         },
     }
     valeriu_extra = {
-        "pt": "Obras Gerais · Recuperação de Casas · Remodelações Gerais",
-        "en": "General Construction · Home Restoration · General Renovations",
-        "es": "Obras Generales · Rehabilitación de Viviendas · Reformas Generales",
-        "fr": "Travaux Généraux · Rénovation de Maisons · Remodelage Général",
+        "pt": "",
+        "en": "",
+        "es": "",
+        "fr": "",
     }
     visit_cta = {
         "airfix": {
@@ -641,7 +641,7 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
             )
 
         extra_cats = ""
-        if p["id"] == "valeriu-cantemir":
+        if p["id"] == "valeriu-cantemir" and valeriu_extra.get(lang):
             extra_cats = (
                 f'<p class="partners-showcase-extra">{html.escape(valeriu_extra[lang])}</p>'
             )

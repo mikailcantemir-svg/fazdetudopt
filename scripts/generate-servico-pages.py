@@ -118,30 +118,30 @@ PARTNER_SERVICE_CTA = {
         "pt": {
             "text": (
                 "Serviço disponibilizado através de parceiro FAZDETUDO.PT "
-                "especializado em obras e remodelações."
+                "especializado em obras e remodelações. Ligue para Valeriu Cantemir."
             ),
-            "call": "Ligar para Valeriu Cantemir · 964 400 960",
+            "call": "Ligar · 964 400 960",
         },
         "en": {
             "text": (
                 "Service provided through a FAZDETUDO.PT partner specialised "
-                "in construction and renovations."
+                "in construction and renovations. Call Valeriu Cantemir."
             ),
-            "call": "Call Valeriu Cantemir · 964 400 960",
+            "call": "Call · 964 400 960",
         },
         "es": {
             "text": (
                 "Servicio disponible a través de colaborador FAZDETUDO.PT "
-                "especializado en obras y reformas."
+                "especializado en obras y reformas. Llame a Valeriu Cantemir."
             ),
-            "call": "Llamar a Valeriu Cantemir · 964 400 960",
+            "call": "Llamar · 964 400 960",
         },
         "fr": {
             "text": (
                 "Service proposé via un partenaire FAZDETUDO.PT spécialisé "
-                "en travaux et rénovations."
+                "en travaux et rénovations. Appelez Valeriu Cantemir."
             ),
-            "call": "Appeler Valeriu Cantemir · 964 400 960",
+            "call": "Appeler · 964 400 960",
         },
     },
     "servico-recuperar-casa.html": {
@@ -155,30 +155,30 @@ PARTNER_SERVICE_CTA = {
         "pt": {
             "text": (
                 "Serviço disponibilizado através de parceiro FAZDETUDO.PT "
-                "especializado em obras e remodelações."
+                "especializado em obras e remodelações. Ligue para Valeriu Cantemir."
             ),
-            "call": "Ligar para Valeriu Cantemir · 964 400 960",
+            "call": "Ligar · 964 400 960",
         },
         "en": {
             "text": (
                 "Service provided through a FAZDETUDO.PT partner specialised "
-                "in construction and renovations."
+                "in construction and renovations. Call Valeriu Cantemir."
             ),
-            "call": "Call Valeriu Cantemir · 964 400 960",
+            "call": "Call · 964 400 960",
         },
         "es": {
             "text": (
                 "Servicio disponible a través de colaborador FAZDETUDO.PT "
-                "especializado en obras y reformas."
+                "especializado en obras y reformas. Llame a Valeriu Cantemir."
             ),
-            "call": "Llamar a Valeriu Cantemir · 964 400 960",
+            "call": "Llamar · 964 400 960",
         },
         "fr": {
             "text": (
                 "Service proposé via un partenaire FAZDETUDO.PT spécialisé "
-                "en travaux et rénovations."
+                "en travaux et rénovations. Appelez Valeriu Cantemir."
             ),
-            "call": "Appeler Valeriu Cantemir · 964 400 960",
+            "call": "Appeler · 964 400 960",
         },
     },
     "servico-climatizacao.html": {

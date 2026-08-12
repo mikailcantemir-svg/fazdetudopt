@@ -1,9 +1,9 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-08-12 23:15 UTC
+Atualizado: 2026-08-12 23:26 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
-Ficheiros: 266
+Ficheiros: 263
 ================================================================================
 
 
@@ -674,381 +674,6 @@ FILE: scripts/templates/service.html
     <script src="{{ASSET_PREFIX}}script.js" defer></script>
 </body>
 </html>
-
-
-================================================================================
-FILE: scripts/_audit_screenshots.py
-================================================================================
-
-# -*- coding: utf-8 -*-
-"""Capture audit confirmation screenshots (no redesign)."""
-from __future__ import annotations
-
-import threading
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
-
-from playwright.sync_api import sync_playwright
-
-ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / ".tmp-preview"
-OUT.mkdir(exist_ok=True)
-
-
-def main() -> None:
-    server = ThreadingHTTPServer(("127.0.0.1", 8765), SimpleHTTPRequestHandler)
-    thread = threading.Thread(target=server.serve_forever, daemon=True)
-    thread.start()
-    base = "http://127.0.0.1:8765"
-
-    shots = [
-        ("01-home-desktop.png", "/", {"width": 1440, "height": 900}, None),
-        ("02-hero.png", "/", {"width": 1440, "height": 900}, "#hero"),
-        ("03-hero-langs.png", "/", {"width": 1440, "height": 900}, ".hero-language-row, .hero-reviews, .hero-copy"),
-        ("04-services-direct.png", "/", {"width": 1440, "height": 900}, "#services"),
-        ("05-partners.png", "/", {"width": 1440, "height": 900}, "#partners, .partners-showcase, .partners-teaser"),
-        ("06-caterina.png", "/", {"width": 1440, "height": 900}, "[data-partner-id='caterina'], .partners-showcase-card"),
-        ("07-valeriu.png", "/", {"width": 1440, "height": 900}, None),  # crop Valeriu card via JS
-        ("08-limpezas.png", "/servico-limpezas.html", {"width": 1280, "height": 900}, "main"),
-        ("09-remodelacoes.png", "/servico-remodelacoes.html", {"width": 1280, "height": 900}, "main"),
-        ("10-avac.png", "/servico-climatizacao.html", {"width": 1280, "height": 900}, "main"),
-        ("11-home-mobile.png", "/", {"width": 390, "height": 844}, None),
-    ]
-
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        for name, path, viewport, selector in shots:
-            page = browser.new_page(viewport=viewport)
-            page.goto(base + path, wait_until="networkidle")
-            page.wait_for_timeout(400)
-            out = OUT / name
-            if name == "07-valeriu.png":
-                card = page.locator(".partners-showcase-name", has_text="Valeriu").locator("xpath=ancestor::*[contains(@class,'partners-showcase')][1]")
-                if card.count() == 0:
-                    card = page.locator("text=Valeriu Cantemir").first
-                card.screenshot(path=str(out))
-            elif name == "06-caterina.png":
-                card = page.locator(".partners-showcase-name", has_text="Caterina").locator("xpath=ancestor::*[contains(@class,'partners-showcase')][1]")
-                if card.count() == 0:
-                    card = page.locator("text=Caterina").first
-                card.screenshot(path=str(out))
-            elif name == "03-hero-langs.png":
-                loc = page.locator(".hero-language-row")
-                if loc.count() == 0:
-                    loc = page.locator(".hero-copy")
-                loc.first.screenshot(path=str(out))
-            elif selector and page.locator(selector.split(",")[0].strip()).count():
-                page.locator(selector.split(",")[0].strip()).first.screenshot(path=str(out))
-            else:
-                page.screenshot(path=str(out), full_page=False)
-            print("wrote", out)
-            page.close()
-        browser.close()
-    server.shutdown()
-    print("done")
-
-
-if __name__ == "__main__":
-    import os
-
-    os.chdir(ROOT)
-    main()
-
-
-================================================================================
-FILE: scripts/_final_audit_report.py
-================================================================================
-
-# -*- coding: utf-8 -*-
-"""Final HTML audit report (read-only)."""
-from __future__ import annotations
-
-import json
-import re
-import xml.etree.ElementTree as ET
-from collections import Counter, defaultdict
-from pathlib import Path
-from urllib.parse import urlparse
-
-ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://www.fazdetudo.pt"
-SKIP_DIRS = {".tmp-preview", "dist", ".git", "node_modules", "scripts"}
-
-
-def iter_html() -> list[Path]:
-    files = []
-    for p in ROOT.rglob("*.html"):
-        parts = set(p.relative_to(ROOT).parts)
-        if parts & SKIP_DIRS:
-            continue
-        if any(part.startswith(".") for part in p.relative_to(ROOT).parts):
-            continue
-        files.append(p)
-    return sorted(files)
-
-
-def extract(tag_re: re.Pattern, html: str) -> list[str]:
-    return [m.group(1).strip() for m in tag_re.finditer(html)]
-
-
-def main() -> None:
-    files = iter_html()
-    title_re = re.compile(r"<title>(.*?)</title>", re.I | re.S)
-    desc_re = re.compile(
-        r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']', re.I | re.S
-    )
-    h1_re = re.compile(r"<h1\b[^>]*>(.*?)</h1>", re.I | re.S)
-    canon_re = re.compile(
-        r'<link\s+rel=["\']canonical["\']\s+href=["\'](.*?)["\']', re.I
-    )
-    href_re = re.compile(r'href=["\']([^"\']+)["\']', re.I)
-    hreflang_re = re.compile(
-        r'<link\s+rel=["\']alternate["\']\s+hreflang=["\']([^"\']+)["\']\s+href=["\']([^"\']+)["\']',
-        re.I,
-    )
-    jsonld_re = re.compile(
-        r'<script\s+type=["\']application/ld\+json["\']>(.*?)</script>', re.I | re.S
-    )
-
-    titles: dict[str, list[str]] = defaultdict(list)
-    descs: dict[str, list[str]] = defaultdict(list)
-    canons: dict[str, list[str]] = defaultdict(list)
-    missing_h1 = []
-    multi_h1 = []
-    missing_title = []
-    missing_desc = []
-    missing_canon = []
-    bad_jsonld = []
-    broken_internal = []
-    hreflang_pt_generic = []
-    hreflang_map: dict[str, dict[str, str]] = {}
-
-    problem_hits = Counter()
-    problem_patterns = {
-        "24h": re.compile(r"\b24\s*h(?:oras)?\b|24/7", re.I),
-        "garantia_satisfacao": re.compile(r"garantia de satisfação|satisfaction guarantee|garantía de satisfacción|satisfaction garantie", re.I),
-        "certified_electrician": re.compile(r"Certified Electrician|Eletricista Certificado|Electricista Certificado|Électricien Certifié", re.I),
-        "romana": re.compile(r"Română|Romanian", re.I),
-        "valeriu_piscinas": re.compile(r"Valeriu[^<]{0,80}piscin|piscin[^<]{0,80}Valeriu|construção de piscinas", re.I),
-        "valeriu_whatsapp": re.compile(r"Valeriu[^<]{0,200}whatsapp|whatsapp[^<]{0,200}964\s*400\s*960|wa\.me/351964400960", re.I),
-        "servicos_faz_de_tudo_js": None,  # checked separately
-        "parceiro_especializado_old_js": None,
-    }
-
-    existing = {p.relative_to(ROOT).as_posix() for p in files}
-    # also allow directories with index
-    for p in files:
-        rel = p.relative_to(ROOT).as_posix()
-        if rel.endswith("/index.html"):
-            existing.add(rel[: -len("index.html")])
-            existing.add(rel[: -len("index.html")].rstrip("/") + "/")
-
-    for path in files:
-        html = path.read_text(encoding="utf-8", errors="replace")
-        rel = path.relative_to(ROOT).as_posix()
-
-        titles_found = extract(title_re, html)
-        if not titles_found or not titles_found[0]:
-            missing_title.append(rel)
-        else:
-            titles[re.sub(r"\s+", " ", titles_found[0])].append(rel)
-
-        descs_found = extract(desc_re, html)
-        if not descs_found or not descs_found[0]:
-            missing_desc.append(rel)
-        else:
-            descs[re.sub(r"\s+", " ", descs_found[0])].append(rel)
-
-        h1s = extract(h1_re, html)
-        h1s_clean = [re.sub(r"<[^>]+>", "", h).strip() for h in h1s if h.strip()]
-        if not h1s_clean:
-            missing_h1.append(rel)
-        elif len(h1s_clean) > 1:
-            multi_h1.append((rel, len(h1s_clean)))
-
-        can = extract(canon_re, html)
-        if not can:
-            missing_canon.append(rel)
-        else:
-            canons[can[0]].append(rel)
-
-        for m in hreflang_re.finditer(html):
-            code, href = m.group(1), m.group(2)
-            if code == "pt":
-                hreflang_pt_generic.append(rel)
-            hreflang_map.setdefault(rel, {})[code] = href
-
-        for block in jsonld_re.findall(html):
-            try:
-                json.loads(block)
-            except json.JSONDecodeError as e:
-                bad_jsonld.append((rel, str(e)))
-
-        for key, pat in problem_patterns.items():
-            if pat and pat.search(html):
-                problem_hits[key] += 1
-
-        # internal links
-        for href in href_re.findall(html):
-            if href.startswith(("#", "mailto:", "tel:", "javascript:", "data:")):
-                continue
-            if href.startswith("http"):
-                if not href.startswith(BASE):
-                    continue
-                path_part = urlparse(href).path.lstrip("/")
-            else:
-                # resolve relative
-                base_dir = path.parent.relative_to(ROOT).as_posix()
-                if base_dir == ".":
-                    base_dir = ""
-                if href.startswith("/"):
-                    path_part = href.lstrip("/")
-                else:
-                    from posixpath import normpath
-
-                    joined = f"{base_dir}/{href}" if base_dir else href
-                    path_part = normpath(joined).lstrip("./")
-            if not path_part or path_part.endswith(".xml") or path_part.endswith(".css") or path_part.endswith(".js"):
-                continue
-            if path_part.endswith((".webp", ".jpg", ".png", ".svg", ".ico", ".woff2", ".pdf")):
-                continue
-            candidates = {path_part, path_part.rstrip("/"), path_part.rstrip("/") + "/", path_part.rstrip("/") + "/index.html"}
-            if path_part.endswith(".html"):
-                candidates.add(path_part)
-            else:
-                candidates.add(path_part.rstrip("/") + "/index.html")
-                candidates.add(path_part.rstrip("/") + ".html")
-            if not (candidates & existing):
-                # ignore share.google and external already filtered
-                if "share.google" in href or "facebook.com" in href or "instagram.com" in href:
-                    continue
-                if "wa.me" in href or "airfix.pt" in href or "wallfixtv.pt" in href:
-                    continue
-                broken_internal.append((rel, href))
-
-    # sitemap
-    sm = ROOT / "sitemap.xml"
-    sm_missing = []
-    sm_urls = []
-    if sm.exists():
-        root = ET.parse(sm).getroot()
-        ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-        for loc in root.findall(".//s:loc", ns):
-            url = loc.text or ""
-            sm_urls.append(url)
-            path_part = urlparse(url).path.lstrip("/")
-            if not path_part:
-                path_part = "index.html"
-            elif path_part.endswith("/"):
-                path_part = path_part + "index.html"
-            if path_part not in existing and path_part.rstrip("/") + "/index.html" not in existing:
-                # try exact
-                if (ROOT / path_part).exists() or (ROOT / path_part / "index.html").exists():
-                    continue
-                sm_missing.append(url)
-
-    # JS canonical checks
-    js = (ROOT / "script.js").read_text(encoding="utf-8")
-    js_hits = {
-        "Serviços de faz de tudo": "Serviços de faz de tudo" in js,
-        "Precisa de um serviço especializado?": "Precisa de um serviço especializado?" in js,
-    }
-
-    dup_titles = {k: v for k, v in titles.items() if len(v) > 1}
-    dup_descs = {k: v for k, v in descs.items() if len(v) > 1}
-    dup_canons = {k: v for k, v in canons.items() if len(v) > 1}
-
-    print("=== AUDIT REPORT ===")
-    print(f"HTML pages analyzed: {len(files)}")
-    print(f"Missing H1: {len(missing_h1)}")
-    if missing_h1[:10]:
-        print("  ", missing_h1[:10])
-    print(f"Multiple H1: {len(multi_h1)}")
-    if multi_h1[:10]:
-        print("  ", multi_h1[:10])
-    print(f"Missing title: {len(missing_title)}")
-    print(f"Duplicate titles: {len(dup_titles)}")
-    print(f"Missing meta description: {len(missing_desc)}")
-    print(f"Duplicate descriptions: {len(dup_descs)}")
-    print(f"Missing canonical: {len(missing_canon)}")
-    print(f"Duplicate canonical targets: {len(dup_canons)}")
-    print(f"Broken internal links (unique pairs): {len(set(broken_internal))}")
-    # show a few
-    for item in list(dict.fromkeys(broken_internal))[:15]:
-        print("  broken:", item)
-    print(f"hreflang=\"pt\" generic leftovers: {len(hreflang_pt_generic)}")
-    print(f"Invalid JSON-LD: {len(bad_jsonld)}")
-    for item in bad_jsonld[:5]:
-        print("  jsonld:", item)
-    print(f"Sitemap URLs: {len(sm_urls)}")
-    print(f"Sitemap URLs missing on disk: {len(sm_missing)}")
-    for u in sm_missing[:10]:
-        print("  sm:", u)
-    print("--- Problem pattern hits (HTML pages containing) ---")
-    for k, v in problem_hits.items():
-        print(f"  {k}: {v}")
-    # Valeriu+piscinas detail
-    print("--- JS canonical ---")
-    for k, v in js_hits.items():
-        print(f"  '{k}' present: {v}")
-    print("--- lastmod in sitemap ---")
-    print("  lastmod present:", "<lastmod>" in sm.read_text(encoding="utf-8"))
-
-
-if __name__ == "__main__":
-    main()
-
-
-================================================================================
-FILE: scripts/_reshoot_partners.py
-================================================================================
-
-# -*- coding: utf-8 -*-
-from __future__ import annotations
-
-import os
-import threading
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
-
-from playwright.sync_api import sync_playwright
-
-ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / ".tmp-preview"
-
-
-def main() -> None:
-    os.chdir(ROOT)
-    server = ThreadingHTTPServer(("127.0.0.1", 8767), SimpleHTTPRequestHandler)
-    threading.Thread(target=server.serve_forever, daemon=True).start()
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page(viewport={"width": 1440, "height": 900})
-        page.goto("http://127.0.0.1:8767/", wait_until="networkidle")
-        page.wait_for_timeout(500)
-        page.locator("text=Serviços especializados com parceiros").first.scroll_into_view_if_needed()
-        page.wait_for_timeout(200)
-        sec = page.locator("section").filter(has_text="Serviços especializados com parceiros")
-        if sec.count():
-            sec.first.screenshot(path=str(OUT / "05-partners.png"))
-            print("05 ok")
-        for name, label in (("06-caterina.png", "Caterina"), ("07-valeriu.png", "Valeriu Cantemir")):
-            heading = page.locator(".partners-showcase-name", has_text=label)
-            heading.first.scroll_into_view_if_needed()
-            page.wait_for_timeout(150)
-            card = heading.locator("xpath=ancestor::article[1]")
-            if card.count() == 0:
-                card = heading.locator("xpath=ancestor::div[contains(@class,'card')][1]")
-            if card.count() == 0:
-                card = heading.locator("xpath=ancestor::div[1]")
-            card.first.screenshot(path=str(OUT / name))
-            print(name, "ok", card.first.evaluate("e => e.className"))
-        browser.close()
-    server.shutdown()
-
-
-if __name__ == "__main__":
-    main()
 
 
 ================================================================================
@@ -3188,10 +2813,10 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
         },
     }
     valeriu_extra = {
-        "pt": "Obras Gerais · Recuperação de Casas · Remodelações Gerais",
-        "en": "General Construction · Home Restoration · General Renovations",
-        "es": "Obras Generales · Rehabilitación de Viviendas · Reformas Generales",
-        "fr": "Travaux Généraux · Rénovation de Maisons · Remodelage Général",
+        "pt": "",
+        "en": "",
+        "es": "",
+        "fr": "",
     }
     visit_cta = {
         "airfix": {
@@ -3235,7 +2860,7 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
             )
 
         extra_cats = ""
-        if p["id"] == "valeriu-cantemir":
+        if p["id"] == "valeriu-cantemir" and valeriu_extra.get(lang):
             extra_cats = (
                 f'<p class="partners-showcase-extra">{html.escape(valeriu_extra[lang])}</p>'
             )
@@ -4320,30 +3945,30 @@ PARTNER_SERVICE_CTA = {
         "pt": {
             "text": (
                 "Serviço disponibilizado através de parceiro FAZDETUDO.PT "
-                "especializado em obras e remodelações."
+                "especializado em obras e remodelações. Ligue para Valeriu Cantemir."
             ),
-            "call": "Ligar para Valeriu Cantemir · 964 400 960",
+            "call": "Ligar · 964 400 960",
         },
         "en": {
             "text": (
                 "Service provided through a FAZDETUDO.PT partner specialised "
-                "in construction and renovations."
+                "in construction and renovations. Call Valeriu Cantemir."
             ),
-            "call": "Call Valeriu Cantemir · 964 400 960",
+            "call": "Call · 964 400 960",
         },
         "es": {
             "text": (
                 "Servicio disponible a través de colaborador FAZDETUDO.PT "
-                "especializado en obras y reformas."
+                "especializado en obras y reformas. Llame a Valeriu Cantemir."
             ),
-            "call": "Llamar a Valeriu Cantemir · 964 400 960",
+            "call": "Llamar · 964 400 960",
         },
         "fr": {
             "text": (
                 "Service proposé via un partenaire FAZDETUDO.PT spécialisé "
-                "en travaux et rénovations."
+                "en travaux et rénovations. Appelez Valeriu Cantemir."
             ),
-            "call": "Appeler Valeriu Cantemir · 964 400 960",
+            "call": "Appeler · 964 400 960",
         },
     },
     "servico-recuperar-casa.html": {
@@ -4357,30 +3982,30 @@ PARTNER_SERVICE_CTA = {
         "pt": {
             "text": (
                 "Serviço disponibilizado através de parceiro FAZDETUDO.PT "
-                "especializado em obras e remodelações."
+                "especializado em obras e remodelações. Ligue para Valeriu Cantemir."
             ),
-            "call": "Ligar para Valeriu Cantemir · 964 400 960",
+            "call": "Ligar · 964 400 960",
         },
         "en": {
             "text": (
                 "Service provided through a FAZDETUDO.PT partner specialised "
-                "in construction and renovations."
+                "in construction and renovations. Call Valeriu Cantemir."
             ),
-            "call": "Call Valeriu Cantemir · 964 400 960",
+            "call": "Call · 964 400 960",
         },
         "es": {
             "text": (
                 "Servicio disponible a través de colaborador FAZDETUDO.PT "
-                "especializado en obras y reformas."
+                "especializado en obras y reformas. Llame a Valeriu Cantemir."
             ),
-            "call": "Llamar a Valeriu Cantemir · 964 400 960",
+            "call": "Llamar · 964 400 960",
         },
         "fr": {
             "text": (
                 "Service proposé via un partenaire FAZDETUDO.PT spécialisé "
-                "en travaux et rénovations."
+                "en travaux et rénovations. Appelez Valeriu Cantemir."
             ),
-            "call": "Appeler Valeriu Cantemir · 964 400 960",
+            "call": "Appeler · 964 400 960",
         },
     },
     "servico-climatizacao.html": {
@@ -14350,7 +13975,6 @@ FILE: dist/en/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">General Construction · Home Restoration · General Renovations</p>
                     <p class="partners-showcase-blurb">General construction, home restoration and renovations.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisbon · South Bank · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -18849,10 +18473,10 @@ FILE: dist/en/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations.</p>
+                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations. Call Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -19016,10 +18640,10 @@ FILE: dist/en/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations.</p>
+                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations. Call Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -19892,7 +19516,6 @@ FILE: dist/es/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">Obras Generales · Rehabilitación de Viviendas · Reformas Generales</p>
                     <p class="partners-showcase-blurb">Obras generales, rehabilitación de viviendas y reformas.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisboa · Margen Sur · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -24391,10 +24014,10 @@ FILE: dist/es/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas.</p>
+                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas. Llame a Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar a Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -24558,10 +24181,10 @@ FILE: dist/es/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas.</p>
+                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas. Llame a Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar a Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -25434,7 +25057,6 @@ FILE: dist/fr/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">Travaux Généraux · Rénovation de Maisons · Remodelage Général</p>
                     <p class="partners-showcase-blurb">Travaux généraux, rénovation de maisons et remodelage.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisbonne · Rive Sud · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -29933,10 +29555,10 @@ FILE: dist/fr/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations.</p>
+                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations. Appelez Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -30100,10 +29722,10 @@ FILE: dist/fr/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations.</p>
+                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations. Appelez Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -30976,7 +30598,6 @@ FILE: dist/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">Obras Gerais · Recuperação de Casas · Remodelações Gerais</p>
                     <p class="partners-showcase-blurb">Obras gerais, recuperação de casas e remodelações.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisboa · Margem Sul · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -37133,10 +36754,10 @@ FILE: dist/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações.</p>
+                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações. Ligue para Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar para Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -37304,10 +36925,10 @@ FILE: dist/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações.</p>
+                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações. Ligue para Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar para Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -42026,6 +41647,19 @@ a.reviews-aggregate--link:focus-visible {
 
 .service-cta-call {
     background: #ffffff;
+    color: var(--secondary-color);
+}
+
+.service-cta-box-actions .btn-primary.service-cta-call {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.service-cta-box-actions .btn-primary.service-cta-call:hover {
+    background: var(--primary-dark, #d45520);
+    border-color: var(--primary-dark, #d45520);
+    color: #fff;
 }
 
 .service-page-footer--brand {
@@ -43232,7 +42866,7 @@ a.reviews-aggregate--link:focus-visible {
 .page-home .partners-showcase-phone { font-weight: 800; color: var(--home-ink); font-size: .92rem; }
 .page-home .partners-showcase-note { color: #8a7480; font-style: italic; }
 .page-home .partners-showcase-actions {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px;
 }
 .page-home .partners-showcase-cta {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -43392,7 +43026,7 @@ a.reviews-aggregate--link:focus-visible {
     .page-home .hero-language-proof { gap:8px; }
     .page-home .hero-language-label { width:auto; }
 
-    .page-home .quick-repair { padding: 20px 0 22px; }
+    .page-home .quick-repair { padding: 20px 0 28px; }
     .page-home .quick-repair-inner {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -43400,13 +43034,23 @@ a.reviews-aggregate--link:focus-visible {
     }
     .page-home .quick-repair-icon { display: none; }
     .page-home .quick-repair-title { font-size: 1.28rem; margin-bottom: 8px; }
-    .page-home .quick-repair-text { font-size: .9rem; margin-bottom: 10px; max-width: none; }
-    .page-home .quick-repair-tags { font-size: .72rem; }
+    .page-home .quick-repair-text {
+        font-size: .9rem;
+        margin-bottom: 10px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .page-home .quick-repair-tags {
+        font-size: .72rem;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+    }
     .page-home .quick-repair-action {
         justify-self: stretch;
         width: 100%;
         max-width: none;
         gap: 10px;
+        padding-bottom: 8px;
     }
     .page-home .quick-repair-note { font-size: .76rem; text-align: left; }
     .page-home .quick-repair-cta { width: 100%; white-space: normal; justify-content: center; }
@@ -43447,12 +43091,18 @@ a.reviews-aggregate--link:focus-visible {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         gap: 12px;
-        padding-bottom: 6px;
+        padding: 2px 4px 10px;
+        margin: 0 -4px;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
     }
     .page-home .partners-showcase-card {
-        flex: 0 0 min(86vw, 320px);
+        flex: 0 0 min(82vw, 300px);
         scroll-snap-align: start;
+        min-height: 0;
+    }
+    .page-home .partners-showcase-blurb {
+        flex: 0 1 auto;
     }
 
     .page-home .section-faq { padding:42px 0; }
@@ -43940,7 +43590,6 @@ FILE: en/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">General Construction · Home Restoration · General Renovations</p>
                     <p class="partners-showcase-blurb">General construction, home restoration and renovations.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisbon · South Bank · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -48439,10 +48088,10 @@ FILE: en/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations.</p>
+                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations. Call Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -48606,10 +48255,10 @@ FILE: en/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Need help or a free quote?</h3>
-                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations.</p>
+                <p>Service provided through a FAZDETUDO.PT partner specialised in construction and renovations. Call Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -49482,7 +49131,6 @@ FILE: es/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">Obras Generales · Rehabilitación de Viviendas · Reformas Generales</p>
                     <p class="partners-showcase-blurb">Obras generales, rehabilitación de viviendas y reformas.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisboa · Margen Sur · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -53981,10 +53629,10 @@ FILE: es/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas.</p>
+                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas. Llame a Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar a Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -54148,10 +53796,10 @@ FILE: es/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>¿Necesita ayuda o un presupuesto gratis?</h3>
-                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas.</p>
+                <p>Servicio disponible a través de colaborador FAZDETUDO.PT especializado en obras y reformas. Llame a Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar a Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Llamar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -55024,7 +54672,6 @@ FILE: fr/index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">Travaux Généraux · Rénovation de Maisons · Remodelage Général</p>
                     <p class="partners-showcase-blurb">Travaux généraux, rénovation de maisons et remodelage.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisbonne · Rive Sud · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -59523,10 +59170,10 @@ FILE: fr/servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations.</p>
+                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations. Appelez Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -59690,10 +59337,10 @@ FILE: fr/servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Besoin d'aide ou d'un devis gratuit ?</h3>
-                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations.</p>
+                <p>Service proposé via un partenaire FAZDETUDO.PT spécialisé en travaux et rénovations. Appelez Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -60566,7 +60213,6 @@ FILE: index.html
                         </div>
                     </div>
                     <h3 class="partners-showcase-name">Valeriu Cantemir</h3>
-                    <p class="partners-showcase-extra">Obras Gerais · Recuperação de Casas · Remodelações Gerais</p>
                     <p class="partners-showcase-blurb">Obras gerais, recuperação de casas e remodelações.</p>
                     <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisboa · Margem Sul · Azeitão</p>
                     <p class="partners-showcase-phone">964 400 960</p>
@@ -66723,10 +66369,10 @@ FILE: servico-recuperar-casa.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações.</p>
+                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações. Ligue para Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar para Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -66894,10 +66540,10 @@ FILE: servico-remodelacoes.html
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de assistência ou quer um orçamento gratuito?</h3>
-                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações.</p>
+                <p>Serviço disponibilizado através de parceiro FAZDETUDO.PT especializado em obras e remodelações. Ligue para Valeriu Cantemir.</p>
                 <div class="service-cta-box-actions">
                     <a href="tel:+351964400960" class="btn btn-primary btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar para Valeriu Cantemir · 964 400 960
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar · 964 400 960
                     </a>
                 </div>
                     </div>
@@ -71616,6 +71262,19 @@ a.reviews-aggregate--link:focus-visible {
 
 .service-cta-call {
     background: #ffffff;
+    color: var(--secondary-color);
+}
+
+.service-cta-box-actions .btn-primary.service-cta-call {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.service-cta-box-actions .btn-primary.service-cta-call:hover {
+    background: var(--primary-dark, #d45520);
+    border-color: var(--primary-dark, #d45520);
+    color: #fff;
 }
 
 .service-page-footer--brand {
@@ -72822,7 +72481,7 @@ a.reviews-aggregate--link:focus-visible {
 .page-home .partners-showcase-phone { font-weight: 800; color: var(--home-ink); font-size: .92rem; }
 .page-home .partners-showcase-note { color: #8a7480; font-style: italic; }
 .page-home .partners-showcase-actions {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px;
 }
 .page-home .partners-showcase-cta {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -72982,7 +72641,7 @@ a.reviews-aggregate--link:focus-visible {
     .page-home .hero-language-proof { gap:8px; }
     .page-home .hero-language-label { width:auto; }
 
-    .page-home .quick-repair { padding: 20px 0 22px; }
+    .page-home .quick-repair { padding: 20px 0 28px; }
     .page-home .quick-repair-inner {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -72990,13 +72649,23 @@ a.reviews-aggregate--link:focus-visible {
     }
     .page-home .quick-repair-icon { display: none; }
     .page-home .quick-repair-title { font-size: 1.28rem; margin-bottom: 8px; }
-    .page-home .quick-repair-text { font-size: .9rem; margin-bottom: 10px; max-width: none; }
-    .page-home .quick-repair-tags { font-size: .72rem; }
+    .page-home .quick-repair-text {
+        font-size: .9rem;
+        margin-bottom: 10px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .page-home .quick-repair-tags {
+        font-size: .72rem;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+    }
     .page-home .quick-repair-action {
         justify-self: stretch;
         width: 100%;
         max-width: none;
         gap: 10px;
+        padding-bottom: 8px;
     }
     .page-home .quick-repair-note { font-size: .76rem; text-align: left; }
     .page-home .quick-repair-cta { width: 100%; white-space: normal; justify-content: center; }
@@ -73037,12 +72706,18 @@ a.reviews-aggregate--link:focus-visible {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         gap: 12px;
-        padding-bottom: 6px;
+        padding: 2px 4px 10px;
+        margin: 0 -4px;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
     }
     .page-home .partners-showcase-card {
-        flex: 0 0 min(86vw, 320px);
+        flex: 0 0 min(82vw, 300px);
         scroll-snap-align: start;
+        min-height: 0;
+    }
+    .page-home .partners-showcase-blurb {
+        flex: 0 1 auto;
     }
 
     .page-home .section-faq { padding:42px 0; }

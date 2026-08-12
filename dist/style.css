@@ -3879,6 +3879,19 @@ a.reviews-aggregate--link:focus-visible {
 
 .service-cta-call {
     background: #ffffff;
+    color: var(--secondary-color);
+}
+
+.service-cta-box-actions .btn-primary.service-cta-call {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.service-cta-box-actions .btn-primary.service-cta-call:hover {
+    background: var(--primary-dark, #d45520);
+    border-color: var(--primary-dark, #d45520);
+    color: #fff;
 }
 
 .service-page-footer--brand {
@@ -5085,7 +5098,7 @@ a.reviews-aggregate--link:focus-visible {
 .page-home .partners-showcase-phone { font-weight: 800; color: var(--home-ink); font-size: .92rem; }
 .page-home .partners-showcase-note { color: #8a7480; font-style: italic; }
 .page-home .partners-showcase-actions {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px;
 }
 .page-home .partners-showcase-cta {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -5245,7 +5258,7 @@ a.reviews-aggregate--link:focus-visible {
     .page-home .hero-language-proof { gap:8px; }
     .page-home .hero-language-label { width:auto; }
 
-    .page-home .quick-repair { padding: 20px 0 22px; }
+    .page-home .quick-repair { padding: 20px 0 28px; }
     .page-home .quick-repair-inner {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -5253,13 +5266,23 @@ a.reviews-aggregate--link:focus-visible {
     }
     .page-home .quick-repair-icon { display: none; }
     .page-home .quick-repair-title { font-size: 1.28rem; margin-bottom: 8px; }
-    .page-home .quick-repair-text { font-size: .9rem; margin-bottom: 10px; max-width: none; }
-    .page-home .quick-repair-tags { font-size: .72rem; }
+    .page-home .quick-repair-text {
+        font-size: .9rem;
+        margin-bottom: 10px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .page-home .quick-repair-tags {
+        font-size: .72rem;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+    }
     .page-home .quick-repair-action {
         justify-self: stretch;
         width: 100%;
         max-width: none;
         gap: 10px;
+        padding-bottom: 8px;
     }
     .page-home .quick-repair-note { font-size: .76rem; text-align: left; }
     .page-home .quick-repair-cta { width: 100%; white-space: normal; justify-content: center; }
@@ -5300,12 +5323,18 @@ a.reviews-aggregate--link:focus-visible {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         gap: 12px;
-        padding-bottom: 6px;
+        padding: 2px 4px 10px;
+        margin: 0 -4px;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
     }
     .page-home .partners-showcase-card {
-        flex: 0 0 min(86vw, 320px);
+        flex: 0 0 min(82vw, 300px);
         scroll-snap-align: start;
+        min-height: 0;
+    }
+    .page-home .partners-showcase-blurb {
+        flex: 0 1 auto;
     }
 
     .page-home .section-faq { padding:42px 0; }
