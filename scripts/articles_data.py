@@ -85,7 +85,7 @@ ARTICLES = [
                 <p>A limpeza dos filtros internos deve ser feita pelo menos duas vezes por ano; a revisão completa — gás, serpentinas e inspeção elétrica — deve ser feita por um técnico certificado antes do calor. Em Cascais e na Linha de Sintra, onde há muitos sistemas mais antigos, este ponto é ainda mais relevante.</p>
                 <p><strong>Dica:</strong> peça ao técnico para verificar a unidade exterior. Poeira, folhas e insetos reduzem a dissipação de calor e podem forçar o compressor a trabalhar mais do que o necessário.</p>
                 <p>Filtros sujos podem <strong>aumentar o consumo de energia</strong> e reduzir a eficiência do equipamento. Vale a pena tratar o assunto antes de usar o ar condicionado horas seguidas nos dias mais quentes.</p>
-                <p>Saiba mais no nosso serviço de <a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
+                <p>Saiba mais no serviço especializado de <a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a> através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
 
                 <h2>2. Impermeabilização de Terraços e Varandas</h2>
                 <p>A impermeabilização de terraços é uma das intervenções com melhor relação custo-benefício. As chuvas do inverno criam infiltrações que só se tornam visíveis meses depois — muitas vezes já com calor, quando a dilatação térmica empurra a humidade para o interior.</p>
@@ -251,17 +251,21 @@ ARTICLES = [
             "assistência técnica para o ar condicionado em Lisboa."
         ),
         "related_service_url": f"{BASE_URL}/servico-climatizacao.html",
-        "related_service_label": "Ver serviço de Climatização e Ar Condicionado",
+        "related_service_label": "Ver serviço de Ar Condicionado →",
         "related_intro": "Precisa de instalar, limpar ou fazer manutenção ao equipamento?",
-        "wa_message": (
-            "Olá! Gostaria de pedir um orçamento para instalação ou manutenção de ar condicionado."
-        ),
+        "wa_message": "",
+        "cta_mode": "partner_website",
+        "hide_float_wa": True,
+        "cta_primary_href": "https://airfix.pt/",
+        "cta_primary_label": "Visitar AirFix.pt →",
+        "cta_secondary_href": f"{BASE_URL}/servico-climatizacao.html",
+        "cta_secondary_label": "Ver serviço de Ar Condicionado →",
         "cta_h3": "Precisa de ar condicionado ou de uma revisão?",
         "cta_p": (
-            "Fale connosco pelo WhatsApp para instalação, limpeza ou manutenção de "
-            "ar condicionado em Lisboa, Cascais, Almada e Setúbal."
+            "Serviço especializado de climatização realizado através da AirFix.pt, "
+            "parceiro FAZDETUDO.PT."
         ),
-        "cta_button": "Pedir orçamento para ar condicionado",
+        "cta_button": "Visitar AirFix.pt →",
         "body_html": f"""
                 <p>O ar condicionado é hoje parte do conforto de muitas casas e escritórios na "
                 "região de Lisboa — no calor do verão e também no apoio ao aquecimento em dias "
@@ -292,8 +296,8 @@ ARTICLES = [
                 "modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em "
                 "escritórios com pouca exposição solar.</p>
                 <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro "
-                "pode dar mais margem de agenda. Muitas empresas — incluindo a FAZDETUDO.PT — têm "
-                "disponibilidade mais flexível fora da época alta.</p>
+                "pode dar mais margem de agenda. Fora da época alta costuma existir maior "
+                "disponibilidade para agendar instalações e manutenção.</p>
 
                 <h2>Tipos de Split para Casas e Escritórios em Lisboa</h2>
                 <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na "
@@ -467,7 +471,10 @@ ARTICLES = [
                 </ul>
 
                 <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "
-                "Fale connosco pelo WhatsApp e peça uma avaliação sem compromisso.</p>
+                "O serviço especializado é realizado através da "
+                '<a href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">AirFix.pt</a>, '
+                "parceiro FAZDETUDO.PT. Também pode consultar a página de "
+                f'<a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
         """,
         "faq": [
             {
@@ -529,10 +536,10 @@ ARTICLES = [
                 ),
             },
             {
-                "q": "Fazem instalação e manutenção fora de Lisboa?",
+                "q": "A AirFix.pt presta serviços fora de Lisboa?",
                 "a": (
-                    "Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e "
-                    "arredores. Contacte-nos para confirmar a sua zona."
+                    "O serviço especializado é realizado através da AirFix.pt. "
+                    "Consulte a disponibilidade para a sua zona."
                 ),
             },
         ],

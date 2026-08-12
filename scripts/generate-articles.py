@@ -54,7 +54,8 @@ def article_url(slug: str) -> str:
 
 
 def _common_parts(*, page_title: str, meta_description: str, canonical: str,
-                  og_title: str, og_image: str, json_ld: str, faq_json_ld: str = "") -> dict:
+                  og_title: str, og_image: str, json_ld: str, faq_json_ld: str = "",
+                  hide_float_wa: bool = False) -> dict:
     ui = UI[LANG]
     head = render_head(
         page_title=page_title,
@@ -76,16 +77,57 @@ def _common_parts(*, page_title: str, meta_description: str, canonical: str,
         back_label=ui["back"],
     )
     footer = render_footer_service(footer_text=ui["footer"])
-    wa_widget = render_wa_widget(
-        asset_prefix=ASSET_PREFIX,
-        wa_online=ui["wa_online"],
-        wa_greeting=ui["wa_greeting"],
-        wa_placeholder=ui["wa_placeholder"],
-        wa_close=ui["wa_close"],
-        wa_send=ui["wa_send"],
-        wa_float_label=ui["wa_float_label"],
-    )
+    wa_widget = ""
+    if not hide_float_wa:
+        wa_widget = render_wa_widget(
+            asset_prefix=ASSET_PREFIX,
+            wa_online=ui["wa_online"],
+            wa_greeting=ui["wa_greeting"],
+            wa_placeholder=ui["wa_placeholder"],
+            wa_close=ui["wa_close"],
+            wa_send=ui["wa_send"],
+            wa_float_label=ui["wa_float_label"],
+        )
     return {"HEAD": head, "HEADER_SERVICE": header, "FOOTER": footer, "WA_WIDGET": wa_widget}
+
+
+def _default_cta_actions(*, wa_href: str, wa_label: str) -> str:
+    return (
+        f'                    <a href="{wa_href}" class="btn btn-primary btn-lg" '
+        f'target="_blank" rel="noopener noreferrer">\n'
+        f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {wa_label}\n'
+        f"                    </a>\n"
+        f'                    <a href="{tel_href()}" class="btn btn-outline btn-lg service-cta-call">\n'
+        f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {UI[LANG]["cta_call"]}\n'
+        f"                    </a>"
+    )
+
+
+def _cta_actions_for_article(article: dict) -> str:
+    if article.get("cta_mode") == "partner_website":
+        primary_href = article["cta_primary_href"]
+        primary_label = article["cta_primary_label"]
+        actions = (
+            f'                    <a href="{primary_href}" class="btn btn-primary btn-lg" '
+            f'target="_blank" rel="noopener noreferrer">\n'
+            f'                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> '
+            f"{primary_label}\n"
+            f"                    </a>"
+        )
+        secondary_href = article.get("cta_secondary_href")
+        secondary_label = article.get("cta_secondary_label")
+        if secondary_href and secondary_label:
+            actions += (
+                f'\n                    <a href="{secondary_href}" class="btn btn-outline btn-lg">\n'
+                f"                        {secondary_label}\n"
+                f"                    </a>"
+            )
+        return actions
+
+    return _default_cta_actions(
+        wa_href=wa_href_for_message(article.get("wa_message") or "Olá! Gostaria de pedir um orçamento."),
+        wa_label=article["cta_button"],
+    )
 
 
 def _faq_section_html(faq: list[dict]) -> str:
@@ -148,6 +190,7 @@ def render_article(article: dict) -> str:
         og_image=article.get("og_image", OG_IMAGE),
         json_ld=_article_json_ld(article, canonical),
         faq_json_ld=_faq_json_ld(article.get("faq", [])),
+        hide_float_wa=bool(article.get("hide_float_wa")),
     )
 
     meta_line = (
@@ -184,10 +227,7 @@ def render_article(article: dict) -> str:
             "RELATED_BLOCK": related_block,
             "CTA_H3": article["cta_h3"],
             "CTA_P": article["cta_p"],
-            "CTA_WA": article["cta_button"],
-            "CTA_CALL": UI[LANG]["cta_call"],
-            "WA_HREF": wa_href_for_message(article["wa_message"]),
-            "TEL_HREF": tel_href(),
+            "CTA_ACTIONS": _cta_actions_for_article(article),
         },
     )
 
@@ -257,10 +297,10 @@ def render_index() -> str:
                 "Fale com a equipa da FAZDETUDO.PT para um orçamento gratuito na "
                 "Grande Lisboa e Margem Sul."
             ),
-            "CTA_WA": "Pedir orçamento gratuito",
-            "CTA_CALL": UI[LANG]["cta_call"],
-            "WA_HREF": wa_href_for_message("Olá! Gostaria de pedir um orçamento."),
-            "TEL_HREF": tel_href(),
+            "CTA_ACTIONS": _default_cta_actions(
+                wa_href=wa_href_for_message("Olá! Gostaria de pedir um orçamento."),
+                wa_label="Pedir orçamento gratuito",
+            ),
         },
     )
 

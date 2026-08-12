@@ -1,7 +1,7 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-08-12 23:26 UTC
+Atualizado: 2026-08-12 23:37 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
 Ficheiros: 263
 ================================================================================
@@ -92,12 +92,7 @@ FILE: scripts/templates/article.html
                 <h3>{{CTA_H3}}</h3>
                 <p>{{CTA_P}}</p>
                 <div class="service-cta-box-actions">
-                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {{CTA_WA}}
-                    </a>
-                    <a href="{{TEL_HREF}}" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {{CTA_CALL}}
-                    </a>
+{{CTA_ACTIONS}}
                 </div>
                     </div>
                 </aside>
@@ -809,7 +804,7 @@ ARTICLES = [
                 <p>A limpeza dos filtros internos deve ser feita pelo menos duas vezes por ano; a revisão completa — gás, serpentinas e inspeção elétrica — deve ser feita por um técnico certificado antes do calor. Em Cascais e na Linha de Sintra, onde há muitos sistemas mais antigos, este ponto é ainda mais relevante.</p>
                 <p><strong>Dica:</strong> peça ao técnico para verificar a unidade exterior. Poeira, folhas e insetos reduzem a dissipação de calor e podem forçar o compressor a trabalhar mais do que o necessário.</p>
                 <p>Filtros sujos podem <strong>aumentar o consumo de energia</strong> e reduzir a eficiência do equipamento. Vale a pena tratar o assunto antes de usar o ar condicionado horas seguidas nos dias mais quentes.</p>
-                <p>Saiba mais no nosso serviço de <a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
+                <p>Saiba mais no serviço especializado de <a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a> através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
 
                 <h2>2. Impermeabilização de Terraços e Varandas</h2>
                 <p>A impermeabilização de terraços é uma das intervenções com melhor relação custo-benefício. As chuvas do inverno criam infiltrações que só se tornam visíveis meses depois — muitas vezes já com calor, quando a dilatação térmica empurra a humidade para o interior.</p>
@@ -975,17 +970,21 @@ ARTICLES = [
             "assistência técnica para o ar condicionado em Lisboa."
         ),
         "related_service_url": f"{BASE_URL}/servico-climatizacao.html",
-        "related_service_label": "Ver serviço de Climatização e Ar Condicionado",
+        "related_service_label": "Ver serviço de Ar Condicionado →",
         "related_intro": "Precisa de instalar, limpar ou fazer manutenção ao equipamento?",
-        "wa_message": (
-            "Olá! Gostaria de pedir um orçamento para instalação ou manutenção de ar condicionado."
-        ),
+        "wa_message": "",
+        "cta_mode": "partner_website",
+        "hide_float_wa": True,
+        "cta_primary_href": "https://airfix.pt/",
+        "cta_primary_label": "Visitar AirFix.pt →",
+        "cta_secondary_href": f"{BASE_URL}/servico-climatizacao.html",
+        "cta_secondary_label": "Ver serviço de Ar Condicionado →",
         "cta_h3": "Precisa de ar condicionado ou de uma revisão?",
         "cta_p": (
-            "Fale connosco pelo WhatsApp para instalação, limpeza ou manutenção de "
-            "ar condicionado em Lisboa, Cascais, Almada e Setúbal."
+            "Serviço especializado de climatização realizado através da AirFix.pt, "
+            "parceiro FAZDETUDO.PT."
         ),
-        "cta_button": "Pedir orçamento para ar condicionado",
+        "cta_button": "Visitar AirFix.pt →",
         "body_html": f"""
                 <p>O ar condicionado é hoje parte do conforto de muitas casas e escritórios na "
                 "região de Lisboa — no calor do verão e também no apoio ao aquecimento em dias "
@@ -1016,8 +1015,8 @@ ARTICLES = [
                 "modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em "
                 "escritórios com pouca exposição solar.</p>
                 <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro "
-                "pode dar mais margem de agenda. Muitas empresas — incluindo a FAZDETUDO.PT — têm "
-                "disponibilidade mais flexível fora da época alta.</p>
+                "pode dar mais margem de agenda. Fora da época alta costuma existir maior "
+                "disponibilidade para agendar instalações e manutenção.</p>
 
                 <h2>Tipos de Split para Casas e Escritórios em Lisboa</h2>
                 <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na "
@@ -1191,7 +1190,10 @@ ARTICLES = [
                 </ul>
 
                 <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "
-                "Fale connosco pelo WhatsApp e peça uma avaliação sem compromisso.</p>
+                "O serviço especializado é realizado através da "
+                '<a href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">AirFix.pt</a>, '
+                "parceiro FAZDETUDO.PT. Também pode consultar a página de "
+                f'<a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
         """,
         "faq": [
             {
@@ -1253,10 +1255,10 @@ ARTICLES = [
                 ),
             },
             {
-                "q": "Fazem instalação e manutenção fora de Lisboa?",
+                "q": "A AirFix.pt presta serviços fora de Lisboa?",
                 "a": (
-                    "Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e "
-                    "arredores. Contacte-nos para confirmar a sua zona."
+                    "O serviço especializado é realizado através da AirFix.pt. "
+                    "Consulte a disponibilidade para a sua zona."
                 ),
             },
         ],
@@ -1820,7 +1822,8 @@ def article_url(slug: str) -> str:
 
 
 def _common_parts(*, page_title: str, meta_description: str, canonical: str,
-                  og_title: str, og_image: str, json_ld: str, faq_json_ld: str = "") -> dict:
+                  og_title: str, og_image: str, json_ld: str, faq_json_ld: str = "",
+                  hide_float_wa: bool = False) -> dict:
     ui = UI[LANG]
     head = render_head(
         page_title=page_title,
@@ -1842,16 +1845,57 @@ def _common_parts(*, page_title: str, meta_description: str, canonical: str,
         back_label=ui["back"],
     )
     footer = render_footer_service(footer_text=ui["footer"])
-    wa_widget = render_wa_widget(
-        asset_prefix=ASSET_PREFIX,
-        wa_online=ui["wa_online"],
-        wa_greeting=ui["wa_greeting"],
-        wa_placeholder=ui["wa_placeholder"],
-        wa_close=ui["wa_close"],
-        wa_send=ui["wa_send"],
-        wa_float_label=ui["wa_float_label"],
-    )
+    wa_widget = ""
+    if not hide_float_wa:
+        wa_widget = render_wa_widget(
+            asset_prefix=ASSET_PREFIX,
+            wa_online=ui["wa_online"],
+            wa_greeting=ui["wa_greeting"],
+            wa_placeholder=ui["wa_placeholder"],
+            wa_close=ui["wa_close"],
+            wa_send=ui["wa_send"],
+            wa_float_label=ui["wa_float_label"],
+        )
     return {"HEAD": head, "HEADER_SERVICE": header, "FOOTER": footer, "WA_WIDGET": wa_widget}
+
+
+def _default_cta_actions(*, wa_href: str, wa_label: str) -> str:
+    return (
+        f'                    <a href="{wa_href}" class="btn btn-primary btn-lg" '
+        f'target="_blank" rel="noopener noreferrer">\n'
+        f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {wa_label}\n'
+        f"                    </a>\n"
+        f'                    <a href="{tel_href()}" class="btn btn-outline btn-lg service-cta-call">\n'
+        f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {UI[LANG]["cta_call"]}\n'
+        f"                    </a>"
+    )
+
+
+def _cta_actions_for_article(article: dict) -> str:
+    if article.get("cta_mode") == "partner_website":
+        primary_href = article["cta_primary_href"]
+        primary_label = article["cta_primary_label"]
+        actions = (
+            f'                    <a href="{primary_href}" class="btn btn-primary btn-lg" '
+            f'target="_blank" rel="noopener noreferrer">\n'
+            f'                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> '
+            f"{primary_label}\n"
+            f"                    </a>"
+        )
+        secondary_href = article.get("cta_secondary_href")
+        secondary_label = article.get("cta_secondary_label")
+        if secondary_href and secondary_label:
+            actions += (
+                f'\n                    <a href="{secondary_href}" class="btn btn-outline btn-lg">\n'
+                f"                        {secondary_label}\n"
+                f"                    </a>"
+            )
+        return actions
+
+    return _default_cta_actions(
+        wa_href=wa_href_for_message(article.get("wa_message") or "Olá! Gostaria de pedir um orçamento."),
+        wa_label=article["cta_button"],
+    )
 
 
 def _faq_section_html(faq: list[dict]) -> str:
@@ -1914,6 +1958,7 @@ def render_article(article: dict) -> str:
         og_image=article.get("og_image", OG_IMAGE),
         json_ld=_article_json_ld(article, canonical),
         faq_json_ld=_faq_json_ld(article.get("faq", [])),
+        hide_float_wa=bool(article.get("hide_float_wa")),
     )
 
     meta_line = (
@@ -1950,10 +1995,7 @@ def render_article(article: dict) -> str:
             "RELATED_BLOCK": related_block,
             "CTA_H3": article["cta_h3"],
             "CTA_P": article["cta_p"],
-            "CTA_WA": article["cta_button"],
-            "CTA_CALL": UI[LANG]["cta_call"],
-            "WA_HREF": wa_href_for_message(article["wa_message"]),
-            "TEL_HREF": tel_href(),
+            "CTA_ACTIONS": _cta_actions_for_article(article),
         },
     )
 
@@ -2023,10 +2065,10 @@ def render_index() -> str:
                 "Fale com a equipa da FAZDETUDO.PT para um orçamento gratuito na "
                 "Grande Lisboa e Margem Sul."
             ),
-            "CTA_WA": "Pedir orçamento gratuito",
-            "CTA_CALL": UI[LANG]["cta_call"],
-            "WA_HREF": wa_href_for_message("Olá! Gostaria de pedir um orçamento."),
-            "TEL_HREF": tel_href(),
+            "CTA_ACTIONS": _default_cta_actions(
+                wa_href=wa_href_for_message("Olá! Gostaria de pedir um orçamento."),
+                wa_label="Pedir orçamento gratuito",
+            ),
         },
     )
 
@@ -10940,7 +10982,7 @@ FILE: artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html
                 <p>A limpeza dos filtros internos deve ser feita pelo menos duas vezes por ano; a revisão completa — gás, serpentinas e inspeção elétrica — deve ser feita por um técnico certificado antes do calor. Em Cascais e na Linha de Sintra, onde há muitos sistemas mais antigos, este ponto é ainda mais relevante.</p>
                 <p><strong>Dica:</strong> peça ao técnico para verificar a unidade exterior. Poeira, folhas e insetos reduzem a dissipação de calor e podem forçar o compressor a trabalhar mais do que o necessário.</p>
                 <p>Filtros sujos podem <strong>aumentar o consumo de energia</strong> e reduzir a eficiência do equipamento. Vale a pena tratar o assunto antes de usar o ar condicionado horas seguidas nos dias mais quentes.</p>
-                <p>Saiba mais no nosso serviço de <a href="https://www.fazdetudo.pt/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
+                <p>Saiba mais no serviço especializado de <a href="https://www.fazdetudo.pt/servico-climatizacao.html">climatização e ar condicionado</a> através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
 
                 <h2>2. Impermeabilização de Terraços e Varandas</h2>
                 <p>A impermeabilização de terraços é uma das intervenções com melhor relação custo-benefício. As chuvas do inverno criam infiltrações que só se tornam visíveis meses depois — muitas vezes já com calor, quando a dilatação térmica empurra a humidade para o interior.</p>
@@ -11225,10 +11267,10 @@ FILE: artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
     },
     {
       "@type": "Question",
-      "name": "Fazem instalação e manutenção fora de Lisboa?",
+      "name": "A AirFix.pt presta serviços fora de Lisboa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e arredores. Contacte-nos para confirmar a sua zona."
+        "text": "O serviço especializado é realizado através da AirFix.pt. Consulte a disponibilidade para a sua zona."
       }
     }
   ]
@@ -11311,8 +11353,8 @@ FILE: artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
                 "modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em "
                 "escritórios com pouca exposição solar.</p>
                 <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro "
-                "pode dar mais margem de agenda. Muitas empresas — incluindo a FAZDETUDO.PT — têm "
-                "disponibilidade mais flexível fora da época alta.</p>
+                "pode dar mais margem de agenda. Fora da época alta costuma existir maior "
+                "disponibilidade para agendar instalações e manutenção.</p>
 
                 <h2>Tipos de Split para Casas e Escritórios em Lisboa</h2>
                 <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na "
@@ -11486,7 +11528,10 @@ FILE: artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
                 </ul>
 
                 <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "
-                "Fale connosco pelo WhatsApp e peça uma avaliação sem compromisso.</p>
+                "O serviço especializado é realizado através da "
+                '<a href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">AirFix.pt</a>, '
+                "parceiro FAZDETUDO.PT. Também pode consultar a página de "
+                f'<a href="https://www.fazdetudo.pt/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
                 <h2>Perguntas frequentes</h2>
                 <h3>Qual é o melhor mês para instalar ar condicionado em Lisboa?</h3>
                 <p>Abril costuma ser um bom mês: a procura ainda não está no pico, há disponibilidade de técnicos e as temperaturas permitem testar o equipamento antes do calor intenso. Março e maio também são opções sólidas.</p>
@@ -11502,24 +11547,24 @@ FILE: artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
                 <p>A proximidade ao mar em Cascais e na faixa costeira de Setúbal favorece a corrosão das aletas exteriores. Convém equipamentos com proteção adequada e revisões mais atentas à unidade exterior.</p>
                 <h3>Vale a pena comprar um split com maior potência do que o necessário?</h3>
                 <p>Em geral, não. Um split sobredimensionado pode ligar e desligar com demasiada frequência, o que pode aumentar o desgaste e o consumo sem melhorar o conforto de forma proporcional.</p>
-                <h3>Fazem instalação e manutenção fora de Lisboa?</h3>
-                <p>Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e arredores. Contacte-nos para confirmar a sua zona.</p>
+                <h3>A AirFix.pt presta serviços fora de Lisboa?</h3>
+                <p>O serviço especializado é realizado através da AirFix.pt. Consulte a disponibilidade para a sua zona.</p>
                     </div>
                     <div class="article-related">
                         <p>Precisa de instalar, limpar ou fazer manutenção ao equipamento?</p>
-                        <a href="https://www.fazdetudo.pt/servico-climatizacao.html" class="btn btn-outline">Ver serviço de Climatização e Ar Condicionado</a>
+                        <a href="https://www.fazdetudo.pt/servico-climatizacao.html" class="btn btn-outline">Ver serviço de Ar Condicionado →</a>
                     </div>
                 </div>
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de ar condicionado ou de uma revisão?</h3>
-                <p>Fale connosco pelo WhatsApp para instalação, limpeza ou manutenção de ar condicionado em Lisboa, Cascais, Almada e Setúbal.</p>
+                <p>Serviço especializado de climatização realizado através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20instala%C3%A7%C3%A3o%20ou%20manuten%C3%A7%C3%A3o%20de%20ar%20condicionado." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Pedir orçamento para ar condicionado
+                    <a href="https://airfix.pt/" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Visitar AirFix.pt →
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar: 932 504 112
+                    <a href="https://www.fazdetudo.pt/servico-climatizacao.html" class="btn btn-outline btn-lg">
+                        Ver serviço de Ar Condicionado →
                     </a>
                 </div>
                     </div>
@@ -11534,38 +11579,6 @@ FILE: artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
         </div>
     </footer>
 
-    <!-- WhatsApp Chat Widget -->
-    <div class="wa-widget" id="wa-widget">
-        <div class="wa-chat" id="wa-chat">
-            <div class="wa-chat-header">
-                <img src="../logo.webp" alt="FAZDETUDO.PT" class="wa-chat-avatar" width="40" height="40" loading="lazy" decoding="async">
-                <div class="wa-chat-info">
-                    <strong>FAZDETUDO.PT</strong>
-                    <span>Online</span>
-                </div>
-                <button type="button" class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
-                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="wa-chat-body">
-                <div class="wa-chat-bubble" id="wa-chat-bubble">
-                    <p id="wa-greeting">Como posso ajudar?</p>
-                    <span class="wa-chat-time" id="wa-chat-time" aria-hidden="true"></span>
-                </div>
-            </div>
-            <div class="wa-chat-footer">
-                <label class="visually-hidden" for="wa-chat-input">Escreva uma mensagem...</label>
-                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
-                <button type="button" class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
-                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-        <button type="button" class="whatsapp-float" id="whatsapp-float" aria-label="Contactar via WhatsApp">
-            <i class="fa-brands fa-whatsapp" id="wa-icon-open" aria-hidden="true"></i>
-            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close" aria-hidden="true"></i>
-        </button>
-    </div>
 
 
     <script src="../script.js" defer></script>
@@ -12335,7 +12348,7 @@ FILE: dist/artigos/10-reparacoes-em-casa-antes-do-verao-lisboa.html
                 <p>A limpeza dos filtros internos deve ser feita pelo menos duas vezes por ano; a revisão completa — gás, serpentinas e inspeção elétrica — deve ser feita por um técnico certificado antes do calor. Em Cascais e na Linha de Sintra, onde há muitos sistemas mais antigos, este ponto é ainda mais relevante.</p>
                 <p><strong>Dica:</strong> peça ao técnico para verificar a unidade exterior. Poeira, folhas e insetos reduzem a dissipação de calor e podem forçar o compressor a trabalhar mais do que o necessário.</p>
                 <p>Filtros sujos podem <strong>aumentar o consumo de energia</strong> e reduzir a eficiência do equipamento. Vale a pena tratar o assunto antes de usar o ar condicionado horas seguidas nos dias mais quentes.</p>
-                <p>Saiba mais no nosso serviço de <a href="https://www.fazdetudo.pt/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
+                <p>Saiba mais no serviço especializado de <a href="https://www.fazdetudo.pt/servico-climatizacao.html">climatização e ar condicionado</a> através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
 
                 <h2>2. Impermeabilização de Terraços e Varandas</h2>
                 <p>A impermeabilização de terraços é uma das intervenções com melhor relação custo-benefício. As chuvas do inverno criam infiltrações que só se tornam visíveis meses depois — muitas vezes já com calor, quando a dilatação térmica empurra a humidade para o interior.</p>
@@ -12620,10 +12633,10 @@ FILE: dist/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
     },
     {
       "@type": "Question",
-      "name": "Fazem instalação e manutenção fora de Lisboa?",
+      "name": "A AirFix.pt presta serviços fora de Lisboa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e arredores. Contacte-nos para confirmar a sua zona."
+        "text": "O serviço especializado é realizado através da AirFix.pt. Consulte a disponibilidade para a sua zona."
       }
     }
   ]
@@ -12706,8 +12719,8 @@ FILE: dist/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
                 "modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em "
                 "escritórios com pouca exposição solar.</p>
                 <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro "
-                "pode dar mais margem de agenda. Muitas empresas — incluindo a FAZDETUDO.PT — têm "
-                "disponibilidade mais flexível fora da época alta.</p>
+                "pode dar mais margem de agenda. Fora da época alta costuma existir maior "
+                "disponibilidade para agendar instalações e manutenção.</p>
 
                 <h2>Tipos de Split para Casas e Escritórios em Lisboa</h2>
                 <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na "
@@ -12881,7 +12894,10 @@ FILE: dist/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
                 </ul>
 
                 <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "
-                "Fale connosco pelo WhatsApp e peça uma avaliação sem compromisso.</p>
+                "O serviço especializado é realizado através da "
+                '<a href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">AirFix.pt</a>, '
+                "parceiro FAZDETUDO.PT. Também pode consultar a página de "
+                f'<a href="https://www.fazdetudo.pt/servico-climatizacao.html">climatização e ar condicionado</a>.</p>
                 <h2>Perguntas frequentes</h2>
                 <h3>Qual é o melhor mês para instalar ar condicionado em Lisboa?</h3>
                 <p>Abril costuma ser um bom mês: a procura ainda não está no pico, há disponibilidade de técnicos e as temperaturas permitem testar o equipamento antes do calor intenso. Março e maio também são opções sólidas.</p>
@@ -12897,24 +12913,24 @@ FILE: dist/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
                 <p>A proximidade ao mar em Cascais e na faixa costeira de Setúbal favorece a corrosão das aletas exteriores. Convém equipamentos com proteção adequada e revisões mais atentas à unidade exterior.</p>
                 <h3>Vale a pena comprar um split com maior potência do que o necessário?</h3>
                 <p>Em geral, não. Um split sobredimensionado pode ligar e desligar com demasiada frequência, o que pode aumentar o desgaste e o consumo sem melhorar o conforto de forma proporcional.</p>
-                <h3>Fazem instalação e manutenção fora de Lisboa?</h3>
-                <p>Sim. Atendemos a Grande Lisboa e Margem Sul — Cascais, Almada, Setúbal e arredores. Contacte-nos para confirmar a sua zona.</p>
+                <h3>A AirFix.pt presta serviços fora de Lisboa?</h3>
+                <p>O serviço especializado é realizado através da AirFix.pt. Consulte a disponibilidade para a sua zona.</p>
                     </div>
                     <div class="article-related">
                         <p>Precisa de instalar, limpar ou fazer manutenção ao equipamento?</p>
-                        <a href="https://www.fazdetudo.pt/servico-climatizacao.html" class="btn btn-outline">Ver serviço de Climatização e Ar Condicionado</a>
+                        <a href="https://www.fazdetudo.pt/servico-climatizacao.html" class="btn btn-outline">Ver serviço de Ar Condicionado →</a>
                     </div>
                 </div>
                 <aside class="service-sidebar">
                     <div class="service-cta-box">
                 <h3>Precisa de ar condicionado ou de uma revisão?</h3>
-                <p>Fale connosco pelo WhatsApp para instalação, limpeza ou manutenção de ar condicionado em Lisboa, Cascais, Almada e Setúbal.</p>
+                <p>Serviço especializado de climatização realizado através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
                 <div class="service-cta-box-actions">
-                    <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20instala%C3%A7%C3%A3o%20ou%20manuten%C3%A7%C3%A3o%20de%20ar%20condicionado." class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Pedir orçamento para ar condicionado
+                    <a href="https://airfix.pt/" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Visitar AirFix.pt →
                     </a>
-                    <a href="tel:+351932504112" class="btn btn-outline btn-lg service-cta-call">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar: 932 504 112
+                    <a href="https://www.fazdetudo.pt/servico-climatizacao.html" class="btn btn-outline btn-lg">
+                        Ver serviço de Ar Condicionado →
                     </a>
                 </div>
                     </div>
@@ -12929,38 +12945,6 @@ FILE: dist/artigos/ar-condicionado-lisboa-instalar-limpar-manter-split.html
         </div>
     </footer>
 
-    <!-- WhatsApp Chat Widget -->
-    <div class="wa-widget" id="wa-widget">
-        <div class="wa-chat" id="wa-chat">
-            <div class="wa-chat-header">
-                <img src="../logo.webp" alt="FAZDETUDO.PT" class="wa-chat-avatar" width="40" height="40" loading="lazy" decoding="async">
-                <div class="wa-chat-info">
-                    <strong>FAZDETUDO.PT</strong>
-                    <span>Online</span>
-                </div>
-                <button type="button" class="wa-chat-close" id="wa-chat-close" aria-label="Fechar chat">
-                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="wa-chat-body">
-                <div class="wa-chat-bubble" id="wa-chat-bubble">
-                    <p id="wa-greeting">Como posso ajudar?</p>
-                    <span class="wa-chat-time" id="wa-chat-time" aria-hidden="true"></span>
-                </div>
-            </div>
-            <div class="wa-chat-footer">
-                <label class="visually-hidden" for="wa-chat-input">Escreva uma mensagem...</label>
-                <input type="text" class="wa-chat-input" id="wa-chat-input" placeholder="Escreva uma mensagem..." autocomplete="off">
-                <button type="button" class="wa-chat-send" id="wa-chat-send" aria-label="Enviar mensagem">
-                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-        <button type="button" class="whatsapp-float" id="whatsapp-float" aria-label="Contactar via WhatsApp">
-            <i class="fa-brands fa-whatsapp" id="wa-icon-open" aria-hidden="true"></i>
-            <i class="fa-solid fa-xmark wa-icon-close" id="wa-icon-close" aria-hidden="true"></i>
-        </button>
-    </div>
 
 
     <script src="../script.js" defer></script>
