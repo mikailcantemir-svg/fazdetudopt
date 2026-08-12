@@ -15,21 +15,62 @@ from slug_registry import (
     render_hreflang_tags,
 )
 
-ZONES_LI = """
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Lisboa</strong> (Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Loures e Odivelas</strong> (Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Sintra e Amadora</strong> (Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Cascais e Oeiras</strong> (Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Vila Franca de Xira</strong> (Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Margem Sul</strong> (Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete)</li>
-                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>"""
+def _zone_li(strong: str, detail: str) -> str:
+    return (
+        f'                    <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> '
+        f'<strong>{strong}</strong> ({detail})</li>'
+    )
+
+
+ZONES_LI_BY_LANG = {
+    "pt": "\n".join([
+        _zone_li("Lisboa", "Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações"),
+        _zone_li("Loures e Odivelas", "Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas"),
+        _zone_li("Sintra e Amadora", "Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira"),
+        _zone_li("Cascais e Oeiras", "Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana"),
+        _zone_li("Vila Franca de Xira", "Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo"),
+        _zone_li("Margem Sul", "Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete"),
+        _zone_li("Setúbal e Sesimbra", "Azeitão, Palmela, Quinta do Anjo"),
+    ]),
+    "en": "\n".join([
+        _zone_li("Lisbon", "Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações"),
+        _zone_li("Loures and Odivelas", "Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas"),
+        _zone_li("Sintra and Amadora", "Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira"),
+        _zone_li("Cascais and Oeiras", "Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana"),
+        _zone_li("Vila Franca de Xira", "Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo"),
+        _zone_li("South Bank (Margem Sul)", "Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete"),
+        _zone_li("Setúbal and Sesimbra", "Azeitão, Palmela, Quinta do Anjo"),
+    ]),
+    "es": "\n".join([
+        _zone_li("Lisboa", "Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações"),
+        _zone_li("Loures y Odivelas", "Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas"),
+        _zone_li("Sintra y Amadora", "Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira"),
+        _zone_li("Cascais y Oeiras", "Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana"),
+        _zone_li("Vila Franca de Xira", "Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo"),
+        _zone_li("Margen Sur", "Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete"),
+        _zone_li("Setúbal y Sesimbra", "Azeitão, Palmela, Quinta do Anjo"),
+    ]),
+    "fr": "\n".join([
+        _zone_li("Lisbonne", "Arroios, Benfica, Campo de Ourique, Alvalade, Lumiar, Belém, Parque das Nações"),
+        _zone_li("Loures et Odivelas", "Sacavém, Moscavide, Camarate, Santa Iria de Azóia, Bucelas"),
+        _zone_li("Sintra et Amadora", "Queluz, Agualva-Cacém, Rio de Mouro, Mem Martins, Massamá, Mafra, Ericeira"),
+        _zone_li("Cascais et Oeiras", "Estoril, Carcavelos, Parede, Carnaxide, Algés, Paço de Arcos, São Domingos de Rana"),
+        _zone_li("Vila Franca de Xira", "Alverca, Póvoa de Santa Iria, Alhandra, Castanheira do Ribatejo"),
+        _zone_li("Rive Sud (Margem Sul)", "Almada, Costa da Caparica, Seixal, Amora, Corroios, Barreiro, Moita, Montijo, Alcochete"),
+        _zone_li("Setúbal et Sesimbra", "Azeitão, Palmela, Quinta do Anjo"),
+    ]),
+}
+
+# Compat: corpos PT ricos e código legado
+ZONES_LI = ZONES_LI_BY_LANG["pt"]
 
 UI = {
     "pt": {
-        "lead": "Serviço profissional, rápido e com garantia de satisfação na Grande Lisboa, Cascais, Margem Sul e Setúbal.",
+        "lead": "Serviço profissional e atendimento rápido na Grande Lisboa e Margem Sul.",
         "h2_what": "O que fazemos nesta área:",
-        "h2_zones": "Zonas de Atendimento Rápido",
-        "zones_p": "Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:",
+        "h2_zones": "Zonas de Atendimento",
+        "zones_p": "Prestamos serviços nas seguintes zonas:",
+        "skip_link": "Saltar para o conteúdo",
         "back": "Voltar ao Início",
         "cta_h3": "Precisa de assistência ou quer um orçamento gratuito?",
         "cta_p": "Clique abaixo para falar diretamente com o nosso técnico especialista em {service}.",
@@ -47,10 +88,11 @@ UI = {
         "og_tpl": "{name} | FAZDETUDO.PT",
     },
     "en": {
-        "lead": "Professional, fast service with satisfaction guarantee across Greater Lisbon, Cascais, South Bank and Setúbal.",
+        "lead": "Professional service and responsive support across Greater Lisbon and the South Bank.",
         "h2_what": "What we do in this area:",
-        "h2_zones": "Fast Service Areas",
-        "zones_p": "We reach your door quickly in the following locations:",
+        "h2_zones": "Service Areas",
+        "zones_p": "We provide services across:",
+        "skip_link": "Skip to content",
         "back": "Back to Home",
         "cta_h3": "Need help or a free quote?",
         "cta_p": "Click below to speak directly with our {service} specialist.",
@@ -68,10 +110,11 @@ UI = {
         "og_tpl": "{name} | FAZDETUDO.PT",
     },
     "es": {
-        "lead": "Servicio profesional, rápido y con garantía de satisfacción en la Gran Lisboa, Cascais, Margen Sur y Setúbal.",
+        "lead": "Servicio profesional y atención rápida en la Gran Lisboa y Margen Sur.",
         "h2_what": "Qué hacemos en esta área:",
-        "h2_zones": "Zonas de Servicio Rápido",
-        "zones_p": "Nos desplazamos rápidamente a su puerta en las siguientes localidades:",
+        "h2_zones": "Zonas de Servicio",
+        "zones_p": "Prestamos servicio en las siguientes zonas:",
+        "skip_link": "Saltar al contenido",
         "back": "Volver al Inicio",
         "cta_h3": "¿Necesita ayuda o un presupuesto gratis?",
         "cta_p": "Haga clic abajo para hablar directamente con nuestro especialista en {service}.",
@@ -89,10 +132,11 @@ UI = {
         "og_tpl": "{name} | FAZDETUDO.PT",
     },
     "fr": {
-        "lead": "Service professionnel, rapide et satisfaction garantie dans le Grand Lisbonne, Cascais, Rive Sud et Setúbal.",
+        "lead": "Service professionnel et réponse rapide dans le Grand Lisbonne et la Rive Sud.",
         "h2_what": "Ce que nous faisons dans ce domaine :",
-        "h2_zones": "Zones d'intervention rapide",
-        "zones_p": "Nous nous déplaçons rapidement chez vous dans les localités suivantes :",
+        "h2_zones": "Zones d'intervention",
+        "zones_p": "Nous intervenons dans les zones suivantes :",
+        "skip_link": "Aller au contenu",
         "back": "Retour à l'accueil",
         "cta_h3": "Besoin d'aide ou d'un devis gratuit ?",
         "cta_p": "Cliquez ci-dessous pour parler directement à notre spécialiste {service}.",
@@ -118,9 +162,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Remodelações e Obras",
             "h1": "Remodelações, Obras e Construção em Lisboa e Margem Sul",
             "page_title": "Remodelações, Obras e Construção em Lisboa | FAZDETUDO.PT",
-            "desc": "Remodelações com equipa completa.",
+            "desc": "Remodelações e obras através de parceiro especializado.",
             "wa": "Olá! Gostaria de pedir um orçamento para remodelações.",
-            "intro": "A <strong>FAZDETUDO.PT</strong> coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave.",
+            "intro": "Serviço disponibilizado através de parceiro <strong>FAZDETUDO.PT</strong> especializado em obras e remodelações na Grande Lisboa e Margem Sul.",
             "features": [
                 "Remodelação completa de cozinhas e casas de banho.",
                 "Substituição de pavimentos e revestimentos.",
@@ -132,9 +176,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Renovations & Construction",
             "h1": "Renovations, Building Work and Construction in Lisbon",
             "page_title": "Renovations and Construction in Lisbon | FAZDETUDO.PT",
-            "desc": "Full renovation team with clear quotes.",
+            "desc": "Renovations and building work through a specialist partner.",
             "wa": "Hello! I would like a quote for renovations.",
-            "intro": "<strong>FAZDETUDO.PT</strong> coordinates <strong>renovations across Greater Lisbon and the South Bank</strong> with a single point of contact from quote to handover.",
+            "intro": "Service provided through a <strong>FAZDETUDO.PT</strong> partner specialised in construction and renovations across Greater Lisbon and the South Bank.",
             "features": [
                 "Complete kitchen and bathroom renovations.",
                 "Flooring and wall finish replacement.",
@@ -146,9 +190,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Reformas y Obras",
             "h1": "Reformas, Obras y Construcción en Lisboa y Margen Sur",
             "page_title": "Reformas, Obras y Construcción en Lisboa | FAZDETUDO.PT",
-            "desc": "Reformas integrales con equipo completo y presupuesto claro.",
+            "desc": "Reformas y obras a través de colaborador especializado.",
             "wa": "¡Hola! Me gustaría un presupuesto para reformas.",
-            "intro": "<strong>FAZDETUDO.PT</strong> coordina <strong>reformas en la Gran Lisboa y Margen Sur</strong> con un único interlocutor, del presupuesto a la entrega.",
+            "intro": "Servicio disponible a través de un colaborador <strong>FAZDETUDO.PT</strong> especializado en obras y reformas en la Gran Lisboa y Margen Sur.",
             "features": [
                 "Reforma integral de cocinas y baños.",
                 "Sustitución de suelos y revestimientos.",
@@ -160,9 +204,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Rénovations et Travaux",
             "h1": "Rénovations, Travaux et Construction à Lisbonne",
             "page_title": "Rénovations et Travaux à Lisbonne | FAZDETUDO.PT",
-            "desc": "Rénovations avec équipe complète.",
+            "desc": "Rénovations et travaux via un partenaire spécialisé.",
             "wa": "Bonjour ! Je souhaite un devis pour des rénovations.",
-            "intro": "<strong>FAZDETUDO.PT</strong> coordonne les <strong>rénovations dans le Grand Lisbonne et la Rive Sud</strong> avec un seul interlocuteur, du devis à la livraison.",
+            "intro": "Service proposé via un partenaire <strong>FAZDETUDO.PT</strong> spécialisé en travaux et rénovations dans le Grand Lisbonne et la Rive Sud.",
             "features": [
                 "Rénovation complète de cuisines et salles de bains.",
                 "Remplacement de sols et revêtements.",
@@ -178,7 +222,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "page_title": "Recuperação de Casas Antigas e Degradadas | FAZDETUDO.PT",
             "desc": "Recuperação integral de imóveis degradados.",
             "wa": "Olá! Gostaria de pedir um orçamento para recuperação de casa.",
-            "intro": "Recuperação de <strong>casas devolutas, herdadas ou degradadas</strong> na Grande Lisboa e Margem Sul com prazo fechado.",
+            "intro": "Serviço disponibilizado através de parceiro <strong>FAZDETUDO.PT</strong> especializado na recuperação de <strong>casas devolutas, herdadas ou degradadas</strong> na Grande Lisboa e Margem Sul.",
             "features": [
                 "Avaliação completa do imóvel e patologias.",
                 "Tratamento de humidades e infiltrações.",
@@ -191,7 +235,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "h1": "Restoration of Old, Vacant and Run-Down Homes",
             "desc": "Full restoration of old and run-down properties, ready to live in or rent.",
             "wa": "Hello! I would like a quote for home restoration.",
-            "intro": "We restore <strong>vacant, inherited or run-down homes</strong> across Greater Lisbon and the South Bank with a fixed timeline.",
+            "intro": "Service provided through a <strong>FAZDETUDO.PT</strong> partner specialised in restoring <strong>vacant, inherited or run-down homes</strong> across Greater Lisbon and the South Bank.",
             "features": [
                 "Full property assessment and defect report.",
                 "Damp treatment and leak repair.",
@@ -205,7 +249,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "page_title": "Recuperación de Casas Antiguas y Degradadas | FAZDETUDO.PT",
             "desc": "Recuperación integral de casas deterioradas, listas para habitar o alquilar.",
             "wa": "¡Hola! Me gustaría un presupuesto para recuperar una casa.",
-            "intro": "Recuperamos <strong>casas vacías, heredadas o deterioradas</strong> en la Gran Lisboa y Margen Sur con plazo cerrado.",
+            "intro": "Servicio disponible a través de un colaborador <strong>FAZDETUDO.PT</strong> especializado en recuperar <strong>casas vacías, heredadas o deterioradas</strong> en la Gran Lisboa y Margen Sur.",
             "features": [
                 "Evaluación completa del inmueble.",
                 "Tratamiento de humedades e infiltraciones.",
@@ -219,7 +263,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "page_title": "Réhabilitation de Maisons Anciennes | FAZDETUDO.PT",
             "desc": "Récupération complète de biens dégradés.",
             "wa": "Bonjour ! Je souhaite un devis pour rénover une maison.",
-            "intro": "Nous réhabilitons les <strong>maisons vacantes, héritées ou dégradées</strong> dans le Grand Lisbonne avec délai fixe.",
+            "intro": "Service proposé via un partenaire <strong>FAZDETUDO.PT</strong> spécialisé dans la restauration de <strong>maisons vacantes, héritées ou dégradées</strong> dans le Grand Lisbonne et la Rive Sud.",
             "features": [
                 "Diagnostic complet du bien.",
                 "Traitement des humidités et infiltrations.",
@@ -285,64 +329,6 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             ],
         },
     },
-    "servico-pintura-fachadas-alpinismo.html": {
-        "pt": {
-            "name": "Pintura de Fachadas em Alpinismo",
-            "h1": "Pintura de Fachadas e Prédios em Alpinismo Industrial",
-            "page_title": "Pintura de Fachadas em Alpinismo | FAZDETUDO.PT",
-            "desc": "Fachadas com alpinismo industrial, sem andaimes.",
-            "wa": "Olá! Gostaria de um orçamento para pintura de fachadas em alpinismo.",
-            "intro": "Reabilitação de fachadas com <strong>alpinismo industrial (trabalho em cordas)</strong> em Lisboa, Cascais e Margem Sul.",
-            "features": [
-                "Lavagem de alta pressão e tratamento de fissuras.",
-                "Repintura completa sem andaimes tradicionais.",
-                "Poupança significativa face a estruturas fixas.",
-                "Trabalho certificado em altura com EPI completo.",
-            ],
-        },
-        "en": {
-            "name": "Facade Painting (Rope Access)",
-            "h1": "Facade and Building Painting with Industrial Rope Access",
-            "page_title": "Facade Painting by Rope Access | FAZDETUDO.PT",
-            "desc": "Facade work by rope access, no scaffolding.",
-            "wa": "Hello! I would like a quote for rope-access facade painting.",
-            "intro": "Facade refurbishment using <strong>industrial rope access</strong> across Lisbon, Cascais and the South Bank.",
-            "features": [
-                "High-pressure washing and crack treatment.",
-                "Full repainting without traditional scaffolding.",
-                "Significant savings versus fixed structures.",
-                "Certified height work with full PPE.",
-            ],
-        },
-        "es": {
-            "name": "Pintura de Fachadas (Alpinismo)",
-            "h1": "Pintura de Fachadas y Edificios con Alpinismo Industrial",
-            "page_title": "Pintura de Fachadas con Alpinismo | FAZDETUDO.PT",
-            "desc": "Fachadas con alpinismo, sin andamios.",
-            "wa": "¡Hola! Me gustaría un presupuesto para pintura de fachadas.",
-            "intro": "Rehabilitación de fachadas con <strong>alpinismo industrial</strong> en Lisboa, Cascais y Margen Sur.",
-            "features": [
-                "Lavado a alta presión y tratamiento de fisuras.",
-                "Repintura completa sin andamios tradicionales.",
-                "Ahorro significativo frente a estructuras fijas.",
-                "Trabajo certificado en altura con EPI completo.",
-            ],
-        },
-        "fr": {
-            "name": "Peinture de Façades (Alpinisme)",
-            "h1": "Peinture de Façades et Immeubles par Alpinisme Industriel",
-            "page_title": "Peinture de Façades par Alpinisme | FAZDETUDO.PT",
-            "desc": "Façades en cordes, sans échafaudage.",
-            "wa": "Bonjour ! Je souhaite un devis pour peinture de façade.",
-            "intro": "Réhabilitation de façades par <strong>alpinisme industriel</strong> à Lisbonne, Cascais et Rive Sud.",
-            "features": [
-                "Nettoyage haute pression et traitement des fissures.",
-                "Repeinture complète sans échafaudage traditionnel.",
-                "Économies importantes par rapport aux structures fixes.",
-                "Travail en hauteur certifié avec EPI complet.",
-            ],
-        },
-    },
     "servico-canalizacoes.html": {
         "pt": {
             "name": "Canalizações",
@@ -400,7 +386,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
     "servico-electricidade.html": {
         "pt": {
             "name": "Electricidade",
-            "h1": "Eletricista Certificado para Casa e Negócio",
+            "h1": "Serviços de Electricidade para Casa e Negócio",
             "desc": "Avarias, tomadas, iluminação e quadros eléctricos.",
             "wa": "Olá! Gostaria de pedir um orçamento para electricidade.",
             "intro": "Especialistas em <strong>electricidade em Lisboa, Margem Sul e Cascais</strong> com orçamento claro.",
@@ -413,8 +399,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         },
         "en": {
             "name": "Electrical",
-            "h1": "Certified Electrician for Home and Business",
-            "desc": "Faults, sockets, lighting, fuse boards and rewiring by a certified electrician.",
+            "h1": "Electrical Services for Home and Business",
+            "desc": "Faults, sockets, lighting, fuse boards and rewiring for homes and businesses.",
             "wa": "Hello! I would like a quote for electrical work.",
             "intro": "Specialists in <strong>electrical services across Greater Lisbon, South Bank and Cascais</strong>.",
             "features": [
@@ -426,7 +412,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         },
         "es": {
             "name": "Electricidad",
-            "h1": "Electricista Certificado para Hogar y Negocio",
+            "h1": "Servicios de Electricidad para Hogar y Negocio",
             "desc": "Averías, enchufes, iluminación y cuadros.",
             "wa": "¡Hola! Me gustaría un presupuesto para electricidad.",
             "intro": "Especialistas en <strong>electricidad en la Gran Lisboa, Margen Sur y Cascais</strong>.",
@@ -439,8 +425,8 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         },
         "fr": {
             "name": "Électricité",
-            "h1": "Électricien Certifié pour Maison et Entreprise",
-            "page_title": "Électricien Certifié Maison et Entreprise | FAZDETUDO.PT",
+            "h1": "Services d'Électricité pour Maison et Entreprise",
+            "page_title": "Services d'Électricité Maison et Entreprise | FAZDETUDO.PT",
             "desc": "Pannes, prises, éclairage, tableaux et mise aux normes par un électricien.",
             "wa": "Bonjour ! Je souhaite un devis pour l'électricité.",
             "intro": "Spécialistes <strong>électricité Grand Lisbonne, Rive Sud et Cascais</strong>.",
@@ -510,9 +496,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Reparações Gerais",
             "h1": "Reparações Gerais e Faz-Tudo ao Domicílio",
-            "desc": "Handyman para várias tarefas numa visita.",
+            "desc": "Faz de tudo para várias tarefas numa visita.",
             "wa": "Olá! Gostaria de pedir um orçamento para reparações gerais.",
-            "intro": "O seu <strong>handyman de confiança na Grande Lisboa e Margem Sul</strong> — uma visita, vários arranjos.",
+            "intro": "O seu <strong>faz de tudo de confiança na Grande Lisboa e Margem Sul</strong> — uma visita, vários arranjos.",
             "features": [
                 "Fixação de TVs, estantes e espelhos.",
                 "Montagem de móveis e cortinados.",
@@ -621,9 +607,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "pt": {
             "name": "Limpezas",
             "h1": "Limpezas Domésticas e Pós-Obra Profissionais",
-            "desc": "Limpeza doméstica, pós-obra e comercial, com produtos próprios e equipa experiente.",
+            "desc": "Limpeza doméstica, pós-obra e comercial através de parceira FAZDETUDO.PT.",
             "wa": "Olá! Gostaria de pedir um orçamento para limpezas.",
-            "intro": "<strong>Limpezas profissionais na Grande Lisboa e Margem Sul</strong> para casa, escritório e pós-obra.",
+            "intro": "Serviço realizado por parceira <strong>FAZDETUDO.PT</strong>. <strong>Limpezas profissionais</strong> para casa, escritório e pós-obra na Margem Sul e Azeitão.",
             "features": [
                 "Limpeza profunda de apartamentos e moradias.",
                 "Limpeza pós-obra com remoção de pó.",
@@ -634,9 +620,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "en": {
             "name": "Cleaning",
             "h1": "Domestic and Post-Construction Cleaning",
-            "desc": "Home, post-construction and commercial cleaning with our own products and trained team.",
+            "desc": "Home, post-construction and commercial cleaning through a FAZDETUDO.PT partner.",
             "wa": "Hello! I would like a quote for cleaning.",
-            "intro": "<strong>Professional cleaning across Greater Lisbon and the South Bank</strong> for homes, offices and post-build.",
+            "intro": "Service provided by a <strong>FAZDETUDO.PT</strong> partner. <strong>Professional cleaning</strong> for homes, offices and post-build on the South Bank and in Azeitão.",
             "features": [
                 "Deep cleaning for flats and houses.",
                 "Post-construction dust and debris removal.",
@@ -648,9 +634,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Limpieza",
             "h1": "Limpiezas Domésticas y Post-Obra Profesionales",
             "page_title": "Limpiezas Domésticas y Post-Obra | FAZDETUDO.PT",
-            "desc": "Limpieza doméstica, post-obra y comercial con productos propios y equipo experto.",
+            "desc": "Limpieza doméstica, post-obra y comercial a través de colaboradora FAZDETUDO.PT.",
             "wa": "¡Hola! Me gustaría un presupuesto para limpieza.",
-            "intro": "<strong>Limpieza profesional en la Gran Lisboa y Margen Sur</strong> para hogar, oficina y post-obra.",
+            "intro": "Servicio realizado por colaboradora <strong>FAZDETUDO.PT</strong>. <strong>Limpieza profesional</strong> para hogar, oficina y post-obra en Margen Sur y Azeitão.",
             "features": [
                 "Limpieza profunda de pisos y casas.",
                 "Limpieza post-obra y eliminación de polvo.",
@@ -661,9 +647,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
         "fr": {
             "name": "Nettoyage",
             "h1": "Nettoyage Domestique et Après-Travaux",
-            "desc": "Nettoyage maison, après-travaux et bureaux, avec nos produits et équipe formée.",
+            "desc": "Nettoyage maison, après-travaux et bureaux via une partenaire FAZDETUDO.PT.",
             "wa": "Bonjour ! Je souhaite un devis pour nettoyage.",
-            "intro": "<strong>Nettoyage professionnel Grand Lisbonne et Rive Sud</strong> pour maison, bureau et fin de chantier.",
+            "intro": "Service réalisé par une partenaire <strong>FAZDETUDO.PT</strong>. <strong>Nettoyage professionnel</strong> pour maison, bureau et fin de chantier sur la Rive Sud et à Azeitão.",
             "features": [
                 "Nettoyage en profondeur appartements et maisons.",
                 "Nettoyage après travaux et poussières.",
@@ -723,63 +709,6 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
                 "Élagage arbres et arbustes.",
                 "Nettoyage de terrains et jardins.",
                 "Installation et réparation arrosage.",
-            ],
-        },
-    },
-    "servico-mudancas.html": {
-        "pt": {
-            "name": "Mudanças",
-            "h1": "Mudanças Residenciais e Comerciais com Embalagem",
-            "page_title": "Mudanças Residenciais e Comerciais | FAZDETUDO.PT",
-            "desc": "Transporte, embalagem, desmontagem e montagem de móveis em mudanças locais.",
-            "wa": "Olá! Gostaria de pedir um orçamento para mudanças.",
-            "intro": "<strong>Mudanças na Grande Lisboa e Margem Sul</strong> com embalagem e montagem no destino.",
-            "features": [
-                "Mudanças completas ou parciais.",
-                "Embalagem de frágeis e louças.",
-                "Desmontagem e remontagem de móveis.",
-                "Orçamento fechado por volume ou hora.",
-            ],
-        },
-        "en": {
-            "name": "Moving",
-            "h1": "Residential and Commercial Moving with Packing",
-            "page_title": "Residential and Commercial Moving | FAZDETUDO.PT",
-            "desc": "Transport, packing of fragile items, furniture disassembly and reassembly for local moves.",
-            "wa": "Hello! I would like a quote for moving.",
-            "intro": "<strong>Moving services across Greater Lisbon and the South Bank</strong> with packing and reassembly.",
-            "features": [
-                "Full or partial home moves.",
-                "Packing fragile items and tableware.",
-                "Furniture disassembly and reassembly.",
-                "Fixed quotes by volume or hourly rate.",
-            ],
-        },
-        "es": {
-            "name": "Mudanzas",
-            "h1": "Mudanzas Residenciales y Comerciales con Embalaje",
-            "page_title": "Mudanzas Residenciales y Comerciales | FAZDETUDO.PT",
-            "desc": "Transporte, embalaje, desmontaje y montaje de muebles en mudanzas locales.",
-            "wa": "¡Hola! Me gustaría un presupuesto para mudanzas.",
-            "intro": "<strong>Mudanzas en la Gran Lisboa y Margen Sur</strong> con embalaje y montaje.",
-            "features": [
-                "Mudanzas completas o parciales.",
-                "Embalaje de frágiles y vajilla.",
-                "Desmontaje y montaje de muebles.",
-                "Presupuesto cerrado por volumen u hora.",
-            ],
-        },
-        "fr": {
-            "name": "Déménagements",
-            "h1": "Déménagements Résidentiels et Commerciaux",
-            "desc": "Transport, emballage des fragiles, démontage et remontage de meubles en local.",
-            "wa": "Bonjour ! Je souhaite un devis pour déménagement.",
-            "intro": "<strong>Déménagements Grand Lisbonne et Rive Sud</strong> avec emballage et remontage.",
-            "features": [
-                "Déménagements complets ou partiels.",
-                "Emballage objets fragiles et vaisselle.",
-                "Démontage et remontage meubles.",
-                "Devis forfaitaire au volume ou à l'heure.",
             ],
         },
     },
@@ -896,9 +825,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Climatização",
             "h1": "Instalação e Reparação de Ar Condicionado (AVAC)",
             "page_title": "Ar Condicionado e Climatização (AVAC) | FAZDETUDO.PT",
-            "desc": "Instalação, manutenção e reparação AVAC.",
+            "desc": "Instalação, manutenção e reparação AVAC através da AirFix.pt.",
             "wa": "Olá! Gostaria de pedir um orçamento para climatização.",
-            "intro": "<strong>Climatização e ar condicionado na Grande Lisboa e Margem Sul</strong> o ano inteiro.",
+            "intro": "Serviço especializado realizado através da <strong>AirFix.pt</strong>, parceiro <strong>FAZDETUDO.PT</strong> — instalação, limpeza e manutenção de ar condicionado na Grande Lisboa e Margem Sul.",
             "features": [
                 "Instalação de splits e multisplit.",
                 "Carga de gás e limpeza de filtros.",
@@ -910,9 +839,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Air Conditioning",
             "h1": "Air Conditioning Installation and Repair (HVAC)",
             "page_title": "Air Conditioning and HVAC Repair | FAZDETUDO.PT",
-            "desc": "AC installation, gas recharge, filter cleaning, leak and breakdown repair.",
+            "desc": "AC installation, cleaning and HVAC maintenance via AirFix.pt.",
             "wa": "Hello! I would like a quote for air conditioning.",
-            "intro": "<strong>HVAC and air conditioning across Greater Lisbon and the South Bank</strong> year-round.",
+            "intro": "Specialist service provided through <strong>AirFix.pt</strong>, a <strong>FAZDETUDO.PT</strong> partner — air conditioning installation, cleaning and maintenance across Greater Lisbon and the South Bank.",
             "features": [
                 "Split and multi-split installation.",
                 "Gas recharge and filter cleaning.",
@@ -926,7 +855,7 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "page_title": "Aire Acondicionado y Climatización | FAZDETUDO.PT",
             "desc": "Instalación, mantenimiento y reparación.",
             "wa": "¡Hola! Me gustaría un presupuesto para climatización.",
-            "intro": "<strong>Climatización en la Gran Lisboa y Margen Sur</strong> todo el año.",
+            "intro": "Servicio especializado realizado a través de <strong>AirFix.pt</strong>, colaborador <strong>FAZDETUDO.PT</strong> — instalación, limpieza y mantenimiento de aire acondicionado en la Gran Lisboa y Margen Sur.",
             "features": [
                 "Instalación de splits y multisplit.",
                 "Carga de gas y limpieza de filtros.",
@@ -938,9 +867,9 @@ SERVICE_COPY: dict[str, dict[str, dict]] = {
             "name": "Climatisation",
             "h1": "Installation et Réparation Climatisation (CVC)",
             "page_title": "Climatisation et Réparation (CVC) | FAZDETUDO.PT",
-            "desc": "Installation de climatiseurs, recharge de gaz, nettoyage de filtres et dépannage.",
+            "desc": "Installation, nettoyage et entretien CVC via AirFix.pt.",
             "wa": "Bonjour ! Je souhaite un devis pour climatisation.",
-            "intro": "<strong>Climatisation Grand Lisbonne et Rive Sud</strong> toute l'année.",
+            "intro": "Service spécialisé réalisé via <strong>AirFix.pt</strong>, partenaire <strong>FAZDETUDO.PT</strong> — installation, nettoyage et entretien de climatisation dans le Grand Lisbonne et la Rive Sud.",
             "features": [
                 "Installation splits et multisplits.",
                 "Recharge gaz et nettoyage filtres.",
@@ -1183,6 +1112,7 @@ def build_body_html(slug: str, lang: str) -> str:
     items = "\n".join(
         f"                    <li>{feat}</li>" for feat in copy["features"]
     )
+    zones = ZONES_LI_BY_LANG.get(lang, ZONES_LI_BY_LANG["pt"])
     return f"""
                 <p>{copy["intro"]}</p>
                 <h2>{ui["h2_what"]}</h2>
@@ -1191,5 +1121,5 @@ def build_body_html(slug: str, lang: str) -> str:
                 </ul>
                 <h2>{ui["h2_zones"]}</h2>
                 <p>{ui["zones_p"]}</p>
-                <ul class="service-zones-grid">{ZONES_LI}
+                <ul class="service-zones-grid">{zones}
                 </ul>"""

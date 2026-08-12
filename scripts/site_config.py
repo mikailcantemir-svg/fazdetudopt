@@ -40,10 +40,30 @@ WA_MESSAGE: dict[str, str] = {
 # Homepage CTAs + chat widget (direct handyman quote). Service pages keep WA_MESSAGE;
 # /parceiros/ empty-state and recruit keep their own messages.
 HOME_WA_MESSAGE: dict[str, str] = {
-    "pt": "Olá! Gostaria de pedir um orçamento para um serviço de handyman/reparação.",
+    "pt": "Olá! Gostaria de pedir um orçamento para um serviço de faz de tudo/reparação.",
     "en": "Hello! I would like to request a quote for a handyman or home repair service.",
     "es": "¡Hola! Me gustaría solicitar un presupuesto para un servicio de handyman o reparación.",
     "fr": "Bonjour ! Je souhaite demander un devis pour un service de handyman ou de réparation à domicile.",
+}
+
+# Compact “quick repair” strip on homepage (photos + timing request).
+QUICK_REPAIR_WA_MESSAGE: dict[str, str] = {
+    "pt": (
+        "Olá! Preciso de uma reparação rápida. Vou enviar algumas fotografias e "
+        "indicar a localização e quando preciso que fique resolvido."
+    ),
+    "en": (
+        "Hello! I need a quick repair. I’ll send a few photos and tell you the "
+        "location and when I need it done."
+    ),
+    "es": (
+        "¡Hola! Necesito una reparación rápida. Enviaré algunas fotografías e "
+        "indicaré la ubicación y cuándo necesito que quede resuelto."
+    ),
+    "fr": (
+        "Bonjour ! J’ai besoin d’une réparation rapide. Je vais envoyer quelques "
+        "photos et indiquer le lieu et quand j’ai besoin que ce soit terminé."
+    ),
 }
 
 
@@ -62,6 +82,11 @@ def wa_href(lang: str = "pt") -> str:
 
 def wa_href_home(lang: str = "pt") -> str:
     msg = HOME_WA_MESSAGE.get(lang, HOME_WA_MESSAGE["pt"])
+    return wa_href_for_message(msg)
+
+
+def wa_href_quick_repair(lang: str = "pt") -> str:
+    msg = QUICK_REPAIR_WA_MESSAGE.get(lang, QUICK_REPAIR_WA_MESSAGE["pt"])
     return wa_href_for_message(msg)
 
 

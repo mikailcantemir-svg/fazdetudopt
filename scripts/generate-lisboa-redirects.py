@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # Fonte única — manter sincronizado com sitemap / slugs servico-*
 REDIRECTS: dict[str, str] = {
     "pinturas-lisboa.html": "servico-pinturas.html",
-    "pintura-fachadas-alpinismo-lisboa.html": "servico-pintura-fachadas-alpinismo.html",
+    "pintura-fachadas-alpinismo-lisboa.html": "servico-pinturas.html",
     "canalizacoes-lisboa.html": "servico-canalizacoes.html",
     "eletricidade-lisboa.html": "servico-electricidade.html",
     "carpintaria-lisboa.html": "servico-carpintaria.html",
@@ -28,7 +28,7 @@ REDIRECTS: dict[str, str] = {
     "manutencao-lisboa.html": "servico-manutencao.html",
     "limpezas-lisboa.html": "servico-limpezas.html",
     "jardinagem-lisboa.html": "servico-jardinagem.html",
-    "mudancas-lisboa.html": "servico-mudancas.html",
+    "mudancas-lisboa.html": "/",
     "informatica-lisboa.html": "servico-informatica.html",
     "serralharia-lisboa.html": "servico-serralharia.html",
     "climatizacao-lisboa.html": "servico-climatizacao.html",
@@ -38,25 +38,58 @@ REDIRECTS: dict[str, str] = {
     "manutencao-piscinas-lisboa.html": "servico-piscinas.html",
 }
 
+# Páginas de serviço retiradas → destino SEO (ficheiro relativo ou "" = homepage)
+RETIRED_SERVICE_REDIRECTS: dict[str, str] = {
+    "servico-pintura-fachadas-alpinismo.html": "servico-pinturas.html",
+    "servico-mudancas.html": "",
+}
+
+
+def _retired_href(target: str, lang: str = "pt") -> str:
+    if not target:
+        return "/" if lang == "pt" else f"/{lang}/"
+    if lang == "pt":
+        return f"/{target}"
+    return f"/{lang}/{target}"
+
 
 def redirect_html(target: str) -> str:
     """Um único mecanismo client-side (meta refresh); fallback <a> sem JS."""
-    canonical = f"https://www.fazdetudo.pt/{target}"
+    href = target if target.startswith(("http://", "https://", "/")) else f"/{target}"
+    canonical = href if href.startswith("http") else f"https://www.fazdetudo.pt{href}"
     return f"""<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, follow">
-    <meta http-equiv="refresh" content="0; url={target}">
+    <meta http-equiv="refresh" content="0; url={href}">
     <link rel="canonical" href="{canonical}">
     <title>Redirecionamento | FAZDETUDO.PT</title>
 </head>
 <body>
-    <p>Esta página foi movida. <a href="{target}">Continuar para o novo endereço</a>.</p>
+    <p>Esta página foi movida. <a href="{href}">Continuar para o novo endereço</a>.</p>
 </body>
 </html>
 """
+
+
+def write_retired_service_redirects(root: Path | None = None) -> list[str]:
+    """Soft redirects for retired servico-*.html paths (PT + en/es/fr)."""
+    root = root or ROOT
+    written = []
+    for old, target in RETIRED_SERVICE_REDIRECTS.items():
+        pt_href = _retired_href(target, "pt")
+        path = root / old
+        path.write_text(redirect_html(pt_href), encoding="utf-8")
+        written.append(f"{old} -> {pt_href}")
+        for lang in ("en", "es", "fr"):
+            lang_href = _retired_href(target, lang)
+            lang_path = root / lang / old
+            lang_path.parent.mkdir(parents=True, exist_ok=True)
+            lang_path.write_text(redirect_html(lang_href), encoding="utf-8")
+            written.append(f"{lang}/{old} -> {lang_href}")
+    return written
 
 
 def htaccess_content() -> str:
@@ -67,7 +100,13 @@ def htaccess_content() -> str:
         "",
     ]
     for old in sorted(REDIRECTS):
-        lines.append(f"Redirect 301 /{old} /{REDIRECTS[old]}")
+        dest = REDIRECTS[old]
+        dest_path = dest if dest.startswith("/") else f"/{dest}"
+        lines.append(f"Redirect 301 /{old} {dest_path}")
+    for old, target in sorted(RETIRED_SERVICE_REDIRECTS.items()):
+        lines.append(f"Redirect 301 /{old} {_retired_href(target, 'pt')}")
+        for lang in ("en", "es", "fr"):
+            lines.append(f"Redirect 301 /{lang}/{old} {_retired_href(target, lang)}")
     lines.append("")
     return "\n".join(lines)
 
@@ -79,6 +118,7 @@ def write_redirect_pages(root: Path | None = None) -> list[str]:
         path = root / old
         path.write_text(redirect_html(target), encoding="utf-8")
         written.append(f"{old} -> {target}")
+    written.extend(write_retired_service_redirects(root))
     return written
 
 
@@ -93,7 +133,7 @@ def main() -> None:
     for line in write_redirect_pages():
         print(line)
     htaccess_path = write_htaccess()
-    print(f"\nWrote {htaccess_path.relative_to(ROOT)} ({len(REDIRECTS)} rules)")
+    print(f"\nWrote {htaccess_path.relative_to(ROOT)} ({len(REDIRECTS)} Lisboa + {len(RETIRED_SERVICE_REDIRECTS)} retired)")
 
 
 if __name__ == "__main__":

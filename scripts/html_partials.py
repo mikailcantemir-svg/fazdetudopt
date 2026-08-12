@@ -88,7 +88,7 @@ def render_header_home(
     wa_href: str | None = None,
     lang: str = "pt",
     nav_aria: str = "Navegação principal",
-    logo_alt: str = "FAZDETUDO.PT - Serviços de handyman em Lisboa",
+    logo_alt: str = "FAZDETUDO.PT - Handyman e faz-tudo em Lisboa",
     menu_aria: str = "Abrir menu",
 ) -> str:
     return render_partial(

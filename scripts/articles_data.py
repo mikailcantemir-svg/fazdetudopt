@@ -117,7 +117,7 @@ ARTICLES = [
 
                 <h2>5. Revisão da Instalação Elétrica</h2>
                 <p>O verão aumenta a carga: ar condicionado, ventoinhas, frigoríficos, bombas de piscina e iluminação exterior. Em apartamentos antigos de Lisboa, o quadro elétrico pode não estar dimensionado para esta sobrecarga.</p>
-                <p>Disjuntores que disparam com frequência indicam sobrecarga ou falha de isolamento. Uma verificação por <a href="{BASE_URL}/servico-electricidade.html">eletricista certificado</a> inclui o quadro, resistências de isolamento e ligação à terra — muitas vezes ausente em habitações antigas.</p>
+                <p>Disjuntores que disparam com frequência indicam sobrecarga ou falha de isolamento. Uma verificação pelo serviço de <a href="{BASE_URL}/servico-electricidade.html">electricidade</a> inclui o quadro, resistências de isolamento e ligação à terra — muitas vezes ausente em habitações antigas.</p>
 
                 <h2>6. Manutenção da Piscina</h2>
                 <p>Abril e maio são os meses certos para abrir a piscina: pH, cloro, bomba de filtração, revestimento e filtro de areia. Uma piscina mal tratada no inverno chega à primavera com água verde, algas ou fissuras que exigem intervenção mais pesada.</p>
@@ -267,9 +267,9 @@ ARTICLES = [
                 "região de Lisboa — no calor do verão e também no apoio ao aquecimento em dias "
                 "mais frios. Para tirar o melhor partido do equipamento e evitar surpresas, "
                 "convém planear bem a <strong>instalação</strong>, manter a <strong>limpeza</strong> "
-                "e não adiar a <strong>manutenção</strong>. Se precisar de apoio, a nossa equipa de "
+                "e não adiar a <strong>manutenção</strong>. Se precisar de apoio, o serviço de "
                 f'<a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a> '
-                "pode avaliar o seu caso.</p>
+                "está disponível através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
 
                 <h2>Primavera: A Janela Ideal para Instalação</h2>
                 <figure class="article-figure">
@@ -461,9 +461,9 @@ ARTICLES = [
                     "desgaste.</li>
                     <li><strong>Ignorar a drenagem.</strong> O condensado da unidade interior deve "
                     "escoar corretamente; tubagens entupidas ou mal inclinadas causam gotejamentos "
-                    "e humidade nas paredes — situações que a nossa equipa de "
+                    "e humidade nas paredes — situações em que o serviço de "
                     f'<a href="{BASE_URL}/servico-reparacoes-gerais.html">reparações gerais</a> '
-                    "também pode ajudar a resolver.</li>
+                    "também pode ajudar.</li>
                 </ul>
 
                 <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "

@@ -24,7 +24,7 @@ LANG_HTML = {
 }
 
 HREFLANG_CODES: dict[str, tuple[str, ...]] = {
-    "pt": ("pt-PT", "pt"),
+    "pt": ("pt-PT",),
     "en": ("en",),
     "es": ("es",),
     "fr": ("fr",),
@@ -51,9 +51,7 @@ SERVICE_IDS: tuple[str, ...] = (
     "carpintaria",
     "reparacoes-gerais",
     "manutencao",
-    "pintura-fachadas-alpinismo",
     "jardinagem",
-    "mudancas",
     "informatica",
     "serralharia",
     "climatizacao",

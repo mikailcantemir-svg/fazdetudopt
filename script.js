@@ -97,9 +97,7 @@
         'servico-carpintaria.html',
         'servico-reparacoes-gerais.html',
         'servico-manutencao.html',
-        'servico-pintura-fachadas-alpinismo.html',
         'servico-jardinagem.html',
-        'servico-mudancas.html',
         'servico-informatica.html',
         'servico-serralharia.html',
         'servico-climatizacao.html',
@@ -197,27 +195,27 @@
             hero_btn_help: 'Preciso de ajuda',
             hero_btn_quote: 'Pedir orçamento por WhatsApp',
             hero_btn_call: 'Ligar agora',
-            hero_eyebrow: 'HANDYMAN · GRANDE LISBOA E MARGEM SUL',
+            hero_eyebrow: 'HANDYMAN · LISBOA E MARGEM SUL',
             hero_title_line1: 'Handyman e reparações',
-            hero_title_line2: 'para a sua casa.',
+            hero_title_line2: 'ao domicílio.',
             header_quote: 'Pedir orçamento',
             trust_google: '5.0 Google',
             trust_quote: 'Orçamento gratuito',
             trust_area: 'Grande Lisboa e Margem Sul',
-            trust_langs: 'PT · EN · ES · RO',
+            trust_langs: 'Falamos Português · English · Español',
             services_see_all: 'Ver todos os serviços',
             services_see_less: 'Ver menos serviços',
             advantages_title_line1: 'Um contacto.',
             advantages_title_line2: 'Várias soluções.',
-            advantages_text: 'Tratamos pequenas reparações, manutenção do dia a dia e trabalhos maiores.',
-            partners_teaser_title: 'Precisa de um serviço especializado?',
-            partners_teaser_text: 'Para alguns serviços trabalhamos com profissionais parceiros selecionados.',
-            partners_teaser_cta: 'Ver todos os parceiros',
+            advantages_text: 'Tratamos diretamente pequenas reparações, montagens e manutenção. Para trabalhos especializados, contamos com parceiros.',
+            partners_teaser_title: 'Serviços especializados com parceiros',
+            partners_teaser_text: 'Para trabalhos que exigem outras especialidades, contamos com profissionais parceiros que pode contactar diretamente.',
+            partners_teaser_cta: 'Ver todos os parceiros →',
             footer_company: 'Empresa',
             hero_reviews_rating: '★★★★★ 5.0 no Google',
-            hero_reviews_suffix: 'Atendimento em Português · English · Español · Română',
-            services_title: 'Serviços de Handyman',
-            services_subtitle: 'Reparações, montagens, manutenção e pequenos trabalhos realizados com atendimento direto na Grande Lisboa e Margem Sul.',
+            hero_reviews_suffix: 'Falamos Português · English · Español',
+            services_title: 'Serviços FAZDETUDO.PT',
+            services_subtitle: 'Handyman, pequenas reparações, montagens e manutenção realizadas diretamente pela nossa equipa.',
             /* SYNC: Ordem = index.html → #services .services-modern-grid */
             services: [
                 { name: 'Remodelações e Obras', description: 'Remodelação de cozinhas e casas de banho, construção de novas divisões, ampliações e obras estruturais. Do projeto à entrega da chave.' },
@@ -229,9 +227,7 @@
                 { name: 'Carpintaria', description: 'Montagem de móveis, reparação de portas, janelas e trabalhos em madeira.' },
                 { name: 'Reparações Gerais', description: 'Pequenas e grandes reparações para manter a sua casa em perfeitas condições.' },
                 { name: 'Manutenção', description: 'Serviços de manutenção preventiva, reparações gerais e lavagem de alta pressão de telhados, pátios e fachadas.' },
-                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura e reabilitação de fachadas e prédios com recurso a alpinismo industrial. Mais rápido, económico e sem necessidade de andaimes.' },
                 { name: 'Jardinagem', description: 'Manutenção de jardins, poda de árvores e sistemas de rega.' },
-                { name: 'Mudanças', description: 'Mudanças residenciais e comerciais. Transporte, embalagem e montagem.' },
                 { name: 'Informática', description: 'Reparação de computadores, redes Wi-Fi e smart home.' },
                 { name: 'Serralharia', description: 'Substituição e reparação de fechaduras, abertura de portas urgente, portões, grades e alumínios.' },
                 { name: 'Climatização', description: 'Instalação, manutenção e reparação de ar condicionado e aquecimento.' },
@@ -243,14 +239,14 @@
             advantages: [
                 { name: 'Orçamento grátis', description: 'Orçamento sem compromisso para planear o seu projeto com tranquilidade.' },
                 { name: 'Atendimento na Grande Lisboa e Margem Sul', description: 'Deslocamo-nos à sua casa ou empresa em Lisboa, Cascais, Almada, Setúbal e arredores.' },
-                { name: 'Equipa polivalente', description: 'Um único contacto para reparações, manutenção e obras especializadas.' },
+                { name: 'Um contacto, várias soluções', description: 'Um contacto para pequenas reparações e uma rede de parceiros para serviços especializados.' },
                 { name: 'Trabalho limpo e organizado', description: 'Protegemos o espaço e deixamos tudo arrumado no final.' },
-                { name: 'Soluções para pequenas reparações e obras maiores', description: 'Do detalhe ao projeto completo, com a mesma dedicação.' },
+                { name: 'Reparações diretas e serviços com parceiros', description: 'Tratamos diretamente pequenas reparações, montagens e manutenção; para trabalhos especializados, contamos com parceiros.' },
                 { name: 'Contacto rápido por WhatsApp', description: 'Resposta ágil para marcar visitas e pedidos de orçamento.' }
             ],
             testimonials_title: 'O que dizem os nossos clientes',
             recent_work_title: 'Veja alguns dos nossos trabalhos',
-            recent_work_subtitle: 'Veja alguns dos trabalhos de reparação, montagem, manutenção e remodelação realizados pela FAZDETUDO.PT.',
+            recent_work_subtitle: 'Veja alguns trabalhos de reparação, montagem, manutenção e serviços especializados realizados diretamente ou através da nossa rede de parceiros.',
             recent_work_zone: 'Zona',
             recent_work_service: 'Serviço',
             recent_work_link: 'Ver trabalho',
@@ -279,7 +275,7 @@
             contact_cta: 'Pedir orçamento por WhatsApp',
             social_cta: 'Siga-nos e veja os nossos trabalhos',
             footer_rights: 'FAZDETUDO.PT. Todos os direitos reservados.',
-            wa_message: 'Olá! Gostaria de pedir um orçamento para um serviço de handyman/reparação.',
+            wa_message: 'Olá! Gostaria de pedir um orçamento para um serviço de faz de tudo/reparação.',
             wa_greeting: 'Como posso ajudar?',
             wa_placeholder: 'Escreva uma mensagem...'
         },
@@ -301,20 +297,20 @@
             trust_google: '5.0 Google',
             trust_quote: 'Free quote',
             trust_area: 'Greater Lisbon & South Bank',
-            trust_langs: 'PT · EN · ES · RO',
+            trust_langs: 'We speak Portuguese · English · Spanish',
             services_see_all: 'View all services',
             services_see_less: 'Show fewer services',
             advantages_title_line1: 'One contact.',
             advantages_title_line2: 'Multiple solutions.',
-            advantages_text: 'We handle small repairs, day-to-day maintenance and larger jobs.',
-            partners_teaser_title: 'Need a specialist service?',
-            partners_teaser_text: 'For some services we work with selected partner professionals.',
-            partners_teaser_cta: 'View all partners',
+            advantages_text: 'We handle small repairs, assembly and maintenance directly. For specialist jobs, we work with partners.',
+            partners_teaser_title: 'Specialist services with partners',
+            partners_teaser_text: 'For jobs that need other specialities, we work with partner professionals you can contact directly.',
+            partners_teaser_cta: 'View all partners →',
             footer_company: 'Company',
             hero_reviews_rating: '★★★★★ 5.0 on Google',
-            hero_reviews_suffix: 'Service in Portuguese · English · Español · Română',
-            services_title: 'Handyman Services',
-            services_subtitle: 'Repairs, assembly, maintenance and small jobs with direct service across Greater Lisbon and the South Bank.',
+            hero_reviews_suffix: 'We speak Portuguese · English · Spanish',
+            services_title: 'FAZDETUDO.PT Services',
+            services_subtitle: 'Handyman work, small repairs, assembly and maintenance carried out directly by our team.',
             services: [
                 { name: 'Renovations & Construction', description: 'Kitchen and bathroom renovations, building new rooms, extensions and structural works. From design to handover.' },
                 { name: 'Home Restoration', description: 'Complete restoration of vacant, inherited or run-down houses. From structure to finishes, we bring your property back to life.' },
@@ -325,9 +321,7 @@
                 { name: 'Carpentry', description: 'Furniture assembly, door and window repair, woodwork.' },
                 { name: 'General Repairs', description: 'Small and large repairs to keep your home in perfect condition.' },
                 { name: 'Maintenance', description: 'Preventive maintenance services for properties and condominiums.' },
-                { name: 'Facade Painting (Rope Access)', description: 'Painting and refurbishment of facades and buildings using industrial rope access. Faster, more economical and no scaffolding required.' },
                 { name: 'Gardening', description: 'Garden maintenance, tree pruning and irrigation systems.' },
-                { name: 'Moving', description: 'Residential and commercial moving. Transport, packing and assembly.' },
                 { name: 'IT Services', description: 'Computer repair, Wi-Fi networks and smart home.' },
                 { name: 'Locksmithing', description: 'Locks, gates, grilles, aluminium and emergency door opening.' },
                 { name: 'Air Conditioning', description: 'Installation, maintenance and repair of air conditioning and heating.' },
@@ -339,14 +333,14 @@
             advantages: [
                 { name: 'Free quote', description: 'No-obligation quote so you can plan your project with confidence.' },
                 { name: 'Coverage in Greater Lisbon and South Bank', description: 'We come to your home or business in Lisbon, Cascais, Almada, Setúbal and surrounding areas.' },
-                { name: 'Versatile team', description: 'One point of contact for repairs, maintenance and specialist works.' },
+                { name: 'One contact, multiple solutions', description: 'One contact for small repairs and a partner network for specialist services.' },
                 { name: 'Clean, organised work', description: 'We protect your space and leave everything tidy when we finish.' },
-                { name: 'Small repairs and larger projects', description: 'From quick fixes to full projects, with the same care throughout.' },
+                { name: 'Direct repairs and partner services', description: 'We handle small repairs, assembly and maintenance directly; for specialist jobs, we work with partners.' },
                 { name: 'Fast contact via WhatsApp', description: 'Quick replies to schedule visits and request quotes.' }
             ],
             testimonials_title: 'What our clients say',
             recent_work_title: 'See some of our recent work',
-            recent_work_subtitle: 'See some of the repair, assembly, maintenance and renovation jobs carried out by FAZDETUDO.PT.',
+            recent_work_subtitle: 'See repair, assembly, maintenance and specialist jobs carried out directly or through our partner network.',
             recent_work_zone: 'Area',
             recent_work_service: 'Service',
             recent_work_link: 'View work',
@@ -397,20 +391,20 @@
             trust_google: '5.0 Google',
             trust_quote: 'Presupuesto gratuito',
             trust_area: 'Gran Lisboa y Margen Sur',
-            trust_langs: 'PT · EN · ES · RO',
+            trust_langs: 'Hablamos Portugués · Inglés · Español',
             services_see_all: 'Ver todos los servicios',
             services_see_less: 'Ver menos servicios',
             advantages_title_line1: 'Un contacto.',
             advantages_title_line2: 'Varias soluciones.',
-            advantages_text: 'Nos ocupamos de pequeñas reparaciones, mantenimiento diario y trabajos mayores.',
-            partners_teaser_title: '¿Necesita un servicio especializado?',
-            partners_teaser_text: 'Para algunos servicios trabajamos con profesionales colaboradores seleccionados.',
-            partners_teaser_cta: 'Ver todos los colaboradores',
+            advantages_text: 'Atendemos directamente pequeñas reparaciones, montajes y mantenimiento. Para trabajos especializados, contamos con colaboradores.',
+            partners_teaser_title: 'Servicios especializados con colaboradores',
+            partners_teaser_text: 'Para trabajos que requieren otras especialidades, contamos con profesionales colaboradores a los que puede contactar directamente.',
+            partners_teaser_cta: 'Ver todos los colaboradores →',
             footer_company: 'Empresa',
             hero_reviews_rating: '★★★★★ 5.0 en Google',
-            hero_reviews_suffix: 'Atención en Português · English · Español · Română',
-            services_title: 'Servicios de Manitas',
-            services_subtitle: 'Reparaciones, montajes, mantenimiento y pequeños trabajos con atención directa en la Gran Lisboa y Margen Sur.',
+            hero_reviews_suffix: 'Hablamos Portugués · Inglés · Español',
+            services_title: 'Servicios FAZDETUDO.PT',
+            services_subtitle: 'Manitas, pequeñas reparaciones, montajes y mantenimiento realizados directamente por nuestro equipo.',
             services: [
                 { name: 'Reformas y Obras', description: 'Reforma de cocinas y baños, construcción de nuevas estancias, ampliaciones y obras estructurales. Del proyecto a la entrega.' },
                 { name: 'Recuperar Casa', description: 'Recuperación completa de casas vacías, heredadas o deterioradas. De la estructura a los acabados, devolvemos vida y habitabilidad a su inmueble.' },
@@ -421,9 +415,7 @@
                 { name: 'Carpintería', description: 'Montaje de muebles, reparación de puertas, ventanas y trabajos en madera.' },
                 { name: 'Reparaciones generales', description: 'Pequeñas y grandes reparaciones para mantener su casa en perfectas condiciones.' },
                 { name: 'Mantenimiento', description: 'Servicios de mantenimiento preventivo para propiedades y comunidades.' },
-                { name: 'Pintura de Fachadas (Alpinismo)', description: 'Pintura y rehabilitación de fachadas y edificios con alpinismo industrial. Más rápido, económico y sin necesidad de andamios.' },
                 { name: 'Jardinería', description: 'Mantenimiento de jardines, poda de árboles y sistemas de riego.' },
-                { name: 'Mudanzas', description: 'Mudanzas residenciales y comerciales. Transporte, embalaje y montaje.' },
                 { name: 'Informática', description: 'Reparación de ordenadores, redes Wi-Fi y smart home.' },
                 { name: 'Cerrajería', description: 'Cerraduras, portones, rejas, aluminio y apertura urgente de puertas.' },
                 { name: 'Climatización', description: 'Instalación, mantenimiento y reparación de aire acondicionado y calefacción.' },
@@ -435,14 +427,14 @@
             advantages: [
                 { name: 'Presupuesto gratis', description: 'Presupuesto sin compromiso para planificar su proyecto con tranquilidad.' },
                 { name: 'Servicio en la Gran Lisboa y Margen Sur', description: 'Nos desplazamos a su hogar o empresa en Lisboa, Cascais, Almada, Setúbal y alrededores.' },
-                { name: 'Equipo polivalente', description: 'Un solo contacto para reparaciones, mantenimiento y obras especializadas.' },
+                { name: 'Un contacto, varias soluciones', description: 'Un contacto para pequeñas reparaciones y una red de colaboradores para servicios especializados.' },
                 { name: 'Trabajo limpio y organizado', description: 'Protegemos el espacio y lo dejamos todo recogido al terminar.' },
-                { name: 'Pequeñas reparaciones y obras mayores', description: 'Del detalle al proyecto completo, con la misma dedicación.' },
+                { name: 'Reparaciones directas y servicios con colaboradores', description: 'Atendemos directamente pequeñas reparaciones, montajes y mantenimiento; para trabajos especializados, contamos con colaboradores.' },
                 { name: 'Contacto rápido por WhatsApp', description: 'Respuesta ágil para visitas y solicitudes de presupuesto.' }
             ],
             testimonials_title: 'Lo que dicen nuestros clientes',
             recent_work_title: 'Vea algunos de nuestros trabajos',
-            recent_work_subtitle: 'Vea algunos de los trabajos de reparación, montaje, mantenimiento y reforma realizados por FAZDETUDO.PT.',
+            recent_work_subtitle: 'Vea trabajos de reparación, montaje, mantenimiento y servicios especializados realizados directamente o a través de nuestra red de colaboradores.',
             recent_work_zone: 'Zona',
             recent_work_service: 'Servicio',
             recent_work_link: 'Ver trabajo',
@@ -493,20 +485,20 @@
             trust_google: '5.0 Google',
             trust_quote: 'Devis gratuit',
             trust_area: 'Grand Lisbonne et Rive Sud',
-            trust_langs: 'PT · EN · ES · RO',
+            trust_langs: 'Nous parlons portugais · anglais · espagnol',
             services_see_all: 'Voir tous les services',
             services_see_less: 'Voir moins de services',
             advantages_title_line1: 'Un contact.',
             advantages_title_line2: 'Plusieurs solutions.',
-            advantages_text: 'Nous prenons en charge petites réparations, entretien quotidien et travaux plus importants.',
-            partners_teaser_title: 'Besoin d\'un service spécialisé ?',
-            partners_teaser_text: 'Pour certains services, nous travaillons avec des professionnels partenaires sélectionnés.',
-            partners_teaser_cta: 'Voir tous les partenaires',
+            advantages_text: 'Nous traitons directement petites réparations, montage et entretien. Pour les travaux spécialisés, nous comptons sur des partenaires.',
+            partners_teaser_title: 'Services spécialisés avec partenaires'un service spécialisé ?',
+            partners_teaser_text: 'Pour les travaux qui demandent d\'autres spécialités, nous comptons sur des professionnels partenaires que vous pouvez contacter directement.',
+            partners_teaser_cta: 'Voir tous les partenaires →',
             footer_company: 'Entreprise',
             hero_reviews_rating: '★★★★★ 5.0 sur Google',
-            hero_reviews_suffix: 'Service en Portugais · English · Español · Română',
-            services_title: 'Services de Bricolage',
-            services_subtitle: 'Réparations, montage, entretien et petits travaux avec un service direct dans le Grand Lisbonne et la Rive Sud.',
+            hero_reviews_suffix: 'Nous parlons portugais · anglais · espagnol',
+            services_title: 'Services FAZDETUDO.PT',
+            services_subtitle: 'Handyman, petites réparations, montage et entretien réalisés directement par notre équipe.',
             services: [
                 { name: 'Rénovations et Travaux', description: 'Rénovation de cuisines et salles de bains, construction de nouvelles pièces, extensions et gros œuvre. Du projet à la livraison.' },
                 { name: 'Rénover une Maison', description: 'Récupération complète de maisons vacantes, héritées ou dégradées. De la structure aux finitions, nous redonnons vie à votre bien.' },
@@ -517,9 +509,7 @@
                 { name: 'Menuiserie', description: 'Montage de meubles, réparation de portes, fenêtres et travaux en bois.' },
                 { name: 'Réparations générales', description: 'Petites et grandes réparations pour maintenir votre maison en parfait état.' },
                 { name: 'Entretien', description: 'Services d\'entretien préventif pour propriétés et copropriétés.' },
-                { name: 'Peinture de Façades (Alpinisme)', description: 'Peinture et réhabilitation de façades et immeubles par alpinisme industriel. Plus rapide, économique et sans échafaudage.' },
                 { name: 'Jardinage', description: 'Entretien de jardins, taille d\'arbres et systèmes d\'irrigation.' },
-                { name: 'Déménagements', description: 'Déménagements résidentiels et commerciaux. Transport, emballage et montage.' },
                 { name: 'Informatique', description: 'Réparation d\'ordinateurs, réseaux Wi-Fi et maison intelligente.' },
                 { name: 'Serrurerie', description: 'Serrures, portails, grilles, aluminium et ouverture de portes urgente.' },
                 { name: 'Climatisation', description: 'Installation, entretien et réparation de climatisation et chauffage.' },
@@ -531,14 +521,14 @@
             advantages: [
                 { name: 'Devis gratuit', description: 'Devis sans engagement pour planifier votre projet en toute sérénité.' },
                 { name: 'Intervention Grand Lisbonne et Rive Sud', description: 'Nous nous déplaçons chez vous à Lisbonne, Cascais, Almada, Setúbal et environs.' },
-                { name: 'Équipe polyvalente', description: 'Un seul interlocuteur pour réparations, entretien et travaux spécialisés.' },
+                { name: 'Un contact, plusieurs solutions', description: 'Un contact pour les petites réparations et un réseau de partenaires pour les services spécialisés.' },
                 { name: 'Travail propre et soigné', description: 'Nous protégeons les lieux et laissons tout rangé à la fin.' },
-                { name: 'Petites réparations et grands travaux', description: 'Du détail au projet complet, avec le même sérieux.' },
+                { name: 'Réparations directes et services partenaires', description: 'Nous traitons directement petites réparations, montage et entretien ; pour les travaux spécialisés, nous comptons sur des partenaires.' },
                 { name: 'Contact rapide par WhatsApp', description: 'Réponse rapide pour planifier des visites et demander un devis.' }
             ],
             testimonials_title: 'Ce que disent nos clients',
             recent_work_title: 'Découvrez quelques-unes de nos réalisations',
-            recent_work_subtitle: 'Découvrez quelques travaux de réparation, montage, entretien et rénovation réalisés par FAZDETUDO.PT.',
+            recent_work_subtitle: 'Découvrez des travaux de réparation, montage, entretien et services spécialisés réalisés directement ou via notre réseau de partenaires.',
             recent_work_zone: 'Zone',
             recent_work_service: 'Service',
             recent_work_link: 'Voir le travail',
@@ -623,8 +613,18 @@
 
         reviewsSwiper = new Swiper(el, {
             slidesPerView: 1,
-            spaceBetween: 30,
+            spaceBetween: 18,
             loop: true,
+            breakpoints: {
+                769: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                },
+                1100: {
+                    slidesPerView: 3,
+                    spaceBetween: 22
+                }
+            },
             navigation: {
                 nextEl: '.reviews-swiper-next',
                 prevEl: '.reviews-swiper-prev'
@@ -1168,6 +1168,16 @@
 
         const cards = [...grid.querySelectorAll('[data-partner-category]')];
 
+        function cardCategories(card) {
+            const multi = (card.getAttribute('data-partner-categories') || '')
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+            if (multi.length) return multi;
+            const single = card.getAttribute('data-partner-category');
+            return single ? [single] : [];
+        }
+
         function applyFilter(opts) {
             const scrollOnMobile = opts && opts.scrollOnMobile;
             const value = select.value || '';
@@ -1181,7 +1191,7 @@
 
             let visible = 0;
             cards.forEach((card) => {
-                const match = card.getAttribute('data-partner-category') === value;
+                const match = cardCategories(card).includes(value);
                 card.hidden = !match;
                 if (match) visible += 1;
             });
@@ -1207,6 +1217,16 @@
 
         const cards = [...list.querySelectorAll('[data-partner-category]')];
 
+        function cardCategories(card) {
+            const multi = (card.getAttribute('data-partner-categories') || '')
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+            if (multi.length) return multi;
+            const single = card.getAttribute('data-partner-category');
+            return single ? [single] : [];
+        }
+
         function matchesZone(card, zone) {
             if (!zone) return true;
             const zones = (card.getAttribute('data-partner-zones') || '')
@@ -1223,7 +1243,7 @@
             let visible = 0;
 
             cards.forEach((card) => {
-                const serviceOk = !service || card.getAttribute('data-partner-category') === service;
+                const serviceOk = !service || cardCategories(card).includes(service);
                 const zoneOk = matchesZone(card, zone);
                 const match = serviceOk && zoneOk;
                 card.hidden = !match;
@@ -1275,6 +1295,33 @@
             });
         });
     }
+
+    function setupWorkMore() {
+        const toggle = document.getElementById('work-more-toggle');
+        const grid = document.getElementById('recent-work-grid');
+        if (!toggle || !grid) return;
+        const moreCards = grid.querySelectorAll('.recent-work-card--more');
+        if (!moreCards.length) {
+            toggle.hidden = true;
+            return;
+        }
+        const label = toggle.querySelector('span');
+        const openText = toggle.getAttribute('data-open-label') || (label && label.textContent) || '';
+        const lessText = toggle.getAttribute('data-close-label') || openText;
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            if (expanded) {
+                moreCards.forEach((card) => card.setAttribute('hidden', ''));
+                toggle.setAttribute('aria-expanded', 'false');
+                if (label) label.textContent = openText;
+            } else {
+                moreCards.forEach((card) => card.removeAttribute('hidden'));
+                toggle.setAttribute('aria-expanded', 'true');
+                if (label) label.textContent = lessText;
+            }
+        });
+    }
+
     function init() {
         applyLanguage(detectPageLang());
         setupFAQListeners();
@@ -1284,6 +1331,7 @@
         setupWorkCarousels();
         setupWorkLightbox();
         setupWorkRail();
+        setupWorkMore();
         setupPartnerDirectory();
         setupPartnersPageDirectory();
         setupServicesMore();

@@ -12,8 +12,10 @@ Badge rules:
   - If featured: also show "Em destaque".
 
 Optional fields:
-  location  → i18n display string for the card
-  zones     → list of zone ids (a partner may cover several)
+  location    → i18n display string for the card
+  zones       → list of zone ids (a partner may cover several)
+  categories  → optional list of category ids for multi-category filters
+                (falls back to [category] when omitted)
 
 Add a partner:
   1. Ensure category in PARTNER_CATEGORIES (+ FILTER_CATEGORY_IDS / PAGE_FILTER_CATEGORY_IDS).
@@ -78,6 +80,24 @@ PARTNER_CATEGORIES: dict[str, dict[str, str]] = {
         "es": "Instalación de TV en Pared",
         "fr": "Installation de TV au Mur",
     },
+    "obras-gerais": {
+        "pt": "Obras Gerais",
+        "en": "General Construction Works",
+        "es": "Obras Generales",
+        "fr": "Travaux Généraux",
+    },
+    "recuperacao-casa": {
+        "pt": "Recuperação de Casas",
+        "en": "Home Restoration",
+        "es": "Rehabilitación de Viviendas",
+        "fr": "Rénovation de Maisons",
+    },
+    "remodelacoes-gerais": {
+        "pt": "Remodelações Gerais",
+        "en": "General Renovations",
+        "es": "Reformas Generales",
+        "fr": "Rénovations Générales",
+    },
 }
 
 # Homepage quick filter (only categories with partners today)
@@ -94,6 +114,9 @@ PAGE_FILTER_CATEGORY_IDS = (
     "carpintaria",
     "jardinagem",
     "piscinas",
+    "obras-gerais",
+    "recuperacao-casa",
+    "remodelacoes-gerais",
 )
 
 PARTNER_ZONES: dict[str, dict[str, str]] = {
@@ -619,6 +642,15 @@ def partner_zone_ids(partner: dict) -> list[str]:
     return [z for z in zones if z in PARTNER_ZONES]
 
 
+def partner_category_ids(partner: dict) -> list[str]:
+    """Return category ids used for filtering (multi-category aware)."""
+    categories = partner.get("categories")
+    if categories:
+        return [c for c in categories if c in PARTNER_CATEGORIES]
+    category = partner.get("category")
+    return [category] if category in PARTNER_CATEGORIES else []
+
+
 # type: "external" | "direct_contact"
 RECOMMENDED_PARTNERS: list[dict] = [
     {
@@ -788,6 +820,77 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "primary_cta": "Visiter WallFixTV.pt",
                 "secondary_cta": "Voir les services associés",
                 "visit_aria": "Visiter WallFixTV.pt",
+            },
+        },
+    },
+    {
+        "id": "valeriu-cantemir",
+        "active": True,
+        "category": "remodelacoes-gerais",
+        "categories": [
+            "obras-gerais",
+            "recuperacao-casa",
+            "remodelacoes-gerais",
+        ],
+        "type": "direct_contact",
+        "name": "Valeriu Cantemir",
+        "recommended": False,
+        "featured": False,
+        "phone_display": "964 400 960",
+        "tel_href": "tel:+351964400960",
+        "service_slug": "servico-remodelacoes.html",
+        "location": {
+            "pt": "Lisboa · Margem Sul · Azeitão",
+            "en": "Lisbon · South Bank · Azeitão",
+            "es": "Lisboa · Margen Sur · Azeitão",
+            "fr": "Lisbonne · Rive Sud · Azeitão",
+        },
+        "zones": [
+            "lisboa",
+            "margem-sul",
+            "azeitao",
+        ],
+        "copy": {
+            "pt": {
+                "role": (
+                    "Obras gerais, recuperação de casas e remodelações · contacto direto"
+                ),
+                "call": "Ligar",
+                "secondary_cta": "Ver remodelações",
+                "call_aria": (
+                    "Ligar diretamente para Valeriu Cantemir, parceiro de obras "
+                    "e remodelações"
+                ),
+            },
+            "en": {
+                "role": (
+                    "General construction, home restoration and renovations · direct contact"
+                ),
+                "call": "Call",
+                "secondary_cta": "View renovations",
+                "call_aria": (
+                    "Call Valeriu Cantemir directly, construction and renovations partner"
+                ),
+            },
+            "es": {
+                "role": (
+                    "Obras generales, rehabilitación de viviendas y reformas · contacto directo"
+                ),
+                "call": "Llamar",
+                "secondary_cta": "Ver reformas",
+                "call_aria": (
+                    "Llamar directamente a Valeriu Cantemir, colaborador de obras y reformas"
+                ),
+            },
+            "fr": {
+                "role": (
+                    "Travaux généraux, rénovation de maisons et remodelage · contact direct"
+                ),
+                "call": "Appeler",
+                "secondary_cta": "Voir les rénovations",
+                "call_aria": (
+                    "Appeler directement Valeriu Cantemir, partenaire travaux et rénovations"
+                ),
             },
         },
     },

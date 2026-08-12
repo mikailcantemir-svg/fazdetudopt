@@ -12,8 +12,8 @@ ZONES_LI = """
                     <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <strong>Setúbal e Sesimbra</strong> (Azeitão, Palmela, Quinta do Anjo)</li>"""
 
 ZONES_BLOCK = """
-                <h2>Zonas de Atendimento Rápido</h2>
-                <p>Deslocamo-nos rapidamente até à sua porta nas seguintes localizações:</p>
+                <h2>Zonas de Atendimento</h2>
+                <p>Prestamos serviços nas seguintes zonas:</p>
                 <ul class="service-zones-grid">""" + ZONES_LI + """
                 </ul>"""
 
@@ -35,19 +35,6 @@ SERVICE_BODIES = {
                     <li>Conselho técnico sobre cores, acabamentos mate ou acetinado e soluções anti-bolor em zonas húmidas.</li>
                     <li>Pequenas reparações de gesso cartonado e rachaduras antes do acabamento final.</li>
                     <li>Entrega limpa do espaço e remoção responsável de resíduos de obra.</li>
-                </ul>""" + ZONES_BLOCK,
-
-    "servico-pintura-fachadas-alpinismo.html": """
-                <p>Reabilitamos fachadas de edifícios em <strong>Lisboa, Cascais, Estoril e Margem Sul</strong> com <strong>alpinismo industrial (trabalho em cordas)</strong>. A FAZDETUDO.PT elimina a necessidade de andaimes caros, reduz o tempo de obra e garante acesso seguro a todos os pontos da fachada — ideal para condomínios, moradias e imóveis expostos à maresia.</p>
-                <h2>O que fazemos nesta área:</h2>
-                <ul>
-                    <li>Lavagem de alta pressão e descontaminação de fachadas antes da pintura.</li>
-                    <li>Tratamento de fissuras, rebocos degradados e zonas com infiltrações visíveis.</li>
-                    <li>Aplicação de primários, impermeabilizantes e tintas elásticas para exteriores.</li>
-                    <li>Repintura completa de prédios em altura sem montagem de andaimes tradicionais.</li>
-                    <li>Reparação pontual de silhares, remates e peitoris com acesso por cordas.</li>
-                    <li>Trabalho certificado em altura com equipamento de proteção individual (EPI) completo.</li>
-                    <li>Relatório fotográfico e orçamento detalhado para administrações de condomínio.</li>
                 </ul>""" + ZONES_BLOCK,
 
     "servico-canalizacoes.html": """
@@ -90,7 +77,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-reparacoes-gerais.html": """
-                <p>O seu <strong>handyman de confiança na Grande Lisboa e Margem Sul</strong> para resolver a lista de tarefas que adia há meses. A FAZDETUDO.PT combina rapidez, ferramentas adequadas e soluções definitivas em Lisboa, Cascais, Almada e Setúbal — uma visita, vários arranjos resolvidos.</p>
+                <p>O seu <strong>faz de tudo de confiança na Grande Lisboa e Margem Sul</strong> para resolver a lista de tarefas que adia há meses. A FAZDETUDO.PT combina rapidez, ferramentas adequadas e soluções definitivas em Lisboa, Cascais, Almada e Setúbal — uma visita, vários arranjos resolvidos.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Fixação de suportes de TV, estantes, espelhos e quadros em qualquer tipo de parede.</li>
@@ -116,7 +103,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-limpezas.html": """
-                <p>Ambientes limpos transmitem confiança e bem-estar. Prestamos <strong>serviços de limpeza profissional na Grande Lisboa e Margem Sul</strong> para casas, escritórios, lojas e condomínios em Lisboa, Cascais, Oeiras, Almada e Setúbal — com produtos adequados a cada superfície.</p>
+                <p>Serviço realizado por parceira <strong>FAZDETUDO.PT</strong>. <strong>Limpezas profissionais</strong> para casa, escritório e pós-obra na Margem Sul e Azeitão — e zonas próximas, consoante disponibilidade.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Limpeza profunda de apartamentos e moradias (cozinhas, casas de banho, divisões).</li>
@@ -125,7 +112,7 @@ SERVICE_BODIES = {
                     <li>Limpeza de vidros interiores e exteriores acessíveis e varandas.</li>
                     <li>Desinfeção de casas de banho, cozinhas e zonas de elevada utilização.</li>
                     <li>Limpeza de garagens, arrecadações e áreas comuns de condomínios.</li>
-                    <li>Planos de limpeza semanal, quinzenal ou pontual com equipa experiente.</li>
+                    <li>Planos de limpeza semanal, quinzenal ou pontual.</li>
                 </ul>""" + ZONES_BLOCK,
 
     "servico-jardinagem.html": """
@@ -139,19 +126,6 @@ SERVICE_BODIES = {
                     <li>Remoção de ervas daninhas e revitalização de canteiros.</li>
                     <li>Manutenção de jardins em moradias, condomínios e espaços comerciais.</li>
                     <li>Planos sazonais de manutenção com visitas regulares acordadas.</li>
-                </ul>""" + ZONES_BLOCK,
-
-    "servico-mudancas.html": """
-                <p>Uma mudança bem planead reduz stress e danos. A FAZDETUDO.PT realiza <strong>mudanças residenciais e comerciais na Grande Lisboa e Margem Sul</strong> com embalagem cuidada, transporte seguro e montagem no destino — Lisboa, Cascais, Sintra, Almada, Seixal e Setúbal.</p>
-                <h2>O que fazemos nesta área:</h2>
-                <ul>
-                    <li>Mudanças completas T2, T3, moradias e escritórios com equipa dedicada.</li>
-                    <li>Embalagem de frágeis, louças, espelhos e equipamento eletrónico.</li>
-                    <li>Desmontagem e remontagem de camas, roupeiros, mesas e estantes.</li>
-                    <li>Transporte com proteção de colchões, estofos e móveis volumosos.</li>
-                    <li>Mudanças parciais: só cozinha, só quartos ou armazém para garagem.</li>
-                    <li>Apoio no agendamento de elevador e proteção de áreas comuns do prédio.</li>
-                    <li>Orçamento fechado por volume ou por hora, conforme a sua necessidade.</li>
                 </ul>""" + ZONES_BLOCK,
 
     "servico-informatica.html": """
@@ -177,11 +151,11 @@ SERVICE_BODIES = {
                     <li>Reparação de portões de garagem, motores e sistemas de corrida.</li>
                     <li>Substituição e afinação de fechaduras de armários e escritórios.</li>
                     <li>Instalação de correntes, trancas de segurança e olhais reforçados.</li>
-                    <li>Atendimento urgente 24h para situações de porta fechada com chave no interior.</li>
+                    <li>Resposta rápida para situações de porta fechada com chave no interior, sujeita a disponibilidade.</li>
                 </ul>""" + ZONES_BLOCK,
 
     "servico-climatizacao.html": """
-                <p>O conforto térmico no verão e no inverno passa por um sistema AVAC bem instalado e mantido. A FAZDETUDO.PT é especialista em <strong>climatização e ar condicionado na Grande Lisboa e Margem Sul</strong> — splits, multisplit e manutenção em Lisboa, Cascais, Sintra, Almada e Setúbal.</p>
+                <p>O conforto térmico no verão e no inverno passa por um sistema AVAC bem instalado e mantido. Serviço especializado realizado através da <strong>AirFix.pt</strong>, parceiro <strong>FAZDETUDO.PT</strong> — instalação, limpeza e manutenção de ar condicionado na Grande Lisboa e Margem Sul.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Instalação de ar condicionado split e multisplit com linhas frigoríficas discretas.</li>
@@ -194,7 +168,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-remodelacoes.html": """
-                <p>Renovar a cozinha ou a casa de banho transforma o dia a dia. A FAZDETUDO.PT coordena <strong>remodelações na Grande Lisboa e Margem Sul</strong> com um único interlocutor — do orçamento à entrega da chave — em Lisboa, Cascais, Oeiras, Almada e Setúbal.</p>
+                <p>Renovar a cozinha ou a casa de banho transforma o dia a dia. Serviço disponibilizado através de parceiro <strong>FAZDETUDO.PT</strong> especializado em obras e remodelações na Grande Lisboa e Margem Sul — Lisboa, Cascais, Oeiras, Almada e Setúbal.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Remodelação completa de cozinhas: layout, móveis, bancadas e ligações.</li>
@@ -207,7 +181,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-recuperar-casa.html": """
-                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. A FAZDETUDO.PT recupera o imóvel de ponta a ponta — estrutura, instalações e acabamentos — na Grande Lisboa e Margem Sul, com um único interlocutor e prazo fechado.</p>
+                <p>Devolver vida a uma casa devoluta, herdada ou muito degradada exige método e coordenação. Serviço disponibilizado através de parceiro <strong>FAZDETUDO.PT</strong> especializado em recuperação de imóveis na Grande Lisboa e Margem Sul.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Avaliação do estado geral do imóvel: estrutura, coberturas, humidades e instalações.</li>
@@ -222,7 +196,7 @@ SERVICE_BODIES = {
                 </ul>""" + ZONES_BLOCK,
 
     "servico-estores-persianas.html": """
-                <p>Estores presos, fitas partidas ou motores silenciosos são problemas frequentes em apartamentos da linha de Cascais e em Lisboa. A FAZDETUDO.PT repara e instala <strong>estores, persianas e mosquiteiras na Grande Lisboa e Margem Sul</strong> com peças adequadas e garantia de funcionamento.</p>
+                <p>Estores presos, fitas partidas ou motores silenciosos são problemas frequentes em apartamentos da linha de Cascais e em Lisboa. A FAZDETUDO.PT repara e instala <strong>estores, persianas e mosquiteiras na Grande Lisboa e Margem Sul</strong> com peças adequadas e funcionamento testado.</p>
                 <h2>O que fazemos nesta área:</h2>
                 <ul>
                     <li>Substituição de fitas, lâminas e mecanismos de estores manuais.</li>

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""Regenerate sitemap.xml with today's date as lastmod (PT + en/es/fr service pages)."""
+"""Regenerate sitemap.xml (PT + en/es/fr service pages). No artificial lastmod."""
 
-from datetime import date
 from pathlib import Path
 import sys
 
@@ -15,8 +14,6 @@ try:
     from articles_data import ARTICLES, ARTICLES_INDEX
 except ImportError:
     ARTICLES, ARTICLES_INDEX = [], None
-
-TODAY = date.today().isoformat()
 
 URLS = [
     ("/", "weekly", "1.0"),
@@ -47,20 +44,19 @@ def main():
             entries.append(url_entry(f"/artigos/{article['slug']}", "monthly", "0.7"))
 
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<!-- Atualizar lastmod: python scripts/generate-sitemap.py -->
+<!-- Gerar: python scripts/generate-sitemap.py -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {chr(10).join(entries)}
 </urlset>
 """
     out = ROOT / "sitemap.xml"
     out.write_text(xml, encoding="utf-8")
-    print(f"Wrote {out} with {len(entries)} URLs, lastmod={TODAY}")
+    print(f"Wrote {out} with {len(entries)} URLs (no lastmod)")
 
 
 def url_entry(path: str, freq: str, priority: str) -> str:
     return f"""    <url>
         <loc>{BASE_URL}{path}</loc>
-        <lastmod>{TODAY}</lastmod>
         <changefreq>{freq}</changefreq>
         <priority>{priority}</priority>
     </url>"""

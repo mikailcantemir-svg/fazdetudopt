@@ -71,19 +71,19 @@ def render_lang_switcher(
 
 HOME_META = {
     "pt": {
-        "title": "Handyman e Reparações ao Domicílio | FAZDETUDO.PT",
+        "title": "Handyman e Faz-Tudo em Lisboa | Reparações ao Domicílio",
         "description": (
-            "Serviços de handyman, pequenas reparações, montagens e manutenção ao "
-            "domicílio na Grande Lisboa e Margem Sul. Peça orçamento por WhatsApp."
+            "Handyman e faz-tudo para pequenas reparações, montagens e manutenção em "
+            "Lisboa e Margem Sul. Envie fotos e peça orçamento por WhatsApp."
         ),
         "og_title": "FAZDETUDO.PT | Handyman e Reparações ao Domicílio",
         "json_desc": (
-            "Serviços de handyman, pequenas reparações, montagens e manutenção ao "
-            "domicílio na Grande Lisboa, Margem Sul e Setúbal."
+            "Handyman e faz-tudo para pequenas reparações, montagens e manutenção ao "
+            "domicílio em Lisboa e Margem Sul."
         ),
         "nav_aria": "Navegação principal",
-        "logo_alt": "FAZDETUDO.PT - Serviços de handyman em Lisboa",
-        "section_logo_alt": "Profissional faz tudo",
+        "logo_alt": "FAZDETUDO.PT - Handyman e faz-tudo em Lisboa",
+        "section_logo_alt": "Profissional handyman",
         "menu_aria": "Abrir menu",
         "review_prev": "Crítica anterior",
         "review_next": "Crítica seguinte",
@@ -91,18 +91,19 @@ HOME_META = {
         "wa_send": "Enviar mensagem",
         "wa_float": "Contactar via WhatsApp",
         "float_call": "Ligar agora",
-        "address": "Grande Lisboa e Margem Sul, Portugal",
+        "address": "Lisboa e Margem Sul, Portugal",
+        "skip_link": "Saltar para o conteúdo",
     },
     "en": {
-        "title": "Handyman and Home Repair Services | FAZDETUDO.PT",
+        "title": "Handyman and Home Repairs in Lisbon | FAZDETUDO.PT",
         "description": (
-            "Handyman services, small repairs, assembly and home maintenance in "
-            "Greater Lisbon and the South Bank. Request a quote on WhatsApp."
+            "Handyman for small repairs, assembly and home maintenance in Lisbon and "
+            "the South Bank. Send photos and request a quote on WhatsApp."
         ),
         "og_title": "FAZDETUDO.PT | Handyman and Home Repairs",
         "json_desc": (
-            "Handyman services, small repairs, assembly and home maintenance across "
-            "Greater Lisbon, the South Bank and Setúbal."
+            "Handyman services for small repairs, assembly and home maintenance in "
+            "Lisbon and the South Bank."
         ),
         "nav_aria": "Main navigation",
         "logo_alt": "FAZDETUDO.PT - Handyman services in Lisbon",
@@ -114,18 +115,19 @@ HOME_META = {
         "wa_send": "Send message",
         "wa_float": "Contact via WhatsApp",
         "float_call": "Call now",
-        "address": "Greater Lisbon and South Bank, Portugal",
+        "address": "Lisbon and South Bank, Portugal",
+        "skip_link": "Skip to content",
     },
     "es": {
-        "title": "Manitas y Reparaciones a Domicilio | FAZDETUDO.PT",
+        "title": "Manitas y Reparaciones a Domicilio en Lisboa | FAZDETUDO.PT",
         "description": (
-            "Servicios de manitas, pequeñas reparaciones, montajes y mantenimiento a "
-            "domicilio en la Gran Lisboa y Margen Sur. Pida presupuesto por WhatsApp."
+            "Manitas para pequeñas reparaciones, montajes y mantenimiento en Lisboa y "
+            "Margen Sur. Envíe fotos y pida presupuesto por WhatsApp."
         ),
         "og_title": "FAZDETUDO.PT | Manitas y Reparaciones a Domicilio",
         "json_desc": (
-            "Servicios de manitas, pequeñas reparaciones, montajes y mantenimiento a "
-            "domicilio en la Gran Lisboa, Margen Sur y Setúbal."
+            "Servicios de manitas para pequeñas reparaciones, montajes y mantenimiento "
+            "en Lisboa y Margen Sur."
         ),
         "nav_aria": "Navegación principal",
         "logo_alt": "FAZDETUDO.PT - Servicios en Lisboa",
@@ -137,22 +139,23 @@ HOME_META = {
         "wa_send": "Enviar mensaje",
         "wa_float": "Contactar por WhatsApp",
         "float_call": "Llamar ahora",
-        "address": "Gran Lisboa y Margen Sur, Portugal",
+        "address": "Lisboa y Margen Sur, Portugal",
+        "skip_link": "Saltar al contenido",
     },
     "fr": {
-        "title": "Bricolage et Réparations à Domicile | FAZDETUDO.PT",
+        "title": "Handyman et Réparations à Domicile à Lisbonne | FAZDETUDO.PT",
         "description": (
-            "Services de bricolage, petites réparations, montage et entretien à "
-            "domicile dans le Grand Lisbonne et la Rive Sud. Demandez un devis sur WhatsApp."
+            "Handyman pour petites réparations, montage et entretien à Lisbonne et "
+            "sur la Rive Sud. Envoyez des photos et demandez un devis sur WhatsApp."
         ),
-        "og_title": "FAZDETUDO.PT | Bricolage et Réparations à Domicile",
+        "og_title": "FAZDETUDO.PT | Handyman et Réparations à Domicile",
         "json_desc": (
-            "Services de bricolage, petites réparations, montage et entretien à "
-            "domicile dans le Grand Lisbonne, la Rive Sud et Setúbal."
+            "Services de handyman pour petites réparations, montage et entretien à "
+            "Lisbonne et sur la Rive Sud."
         ),
         "nav_aria": "Navigation principale",
         "logo_alt": "FAZDETUDO.PT - Services à Lisbonne",
-        "section_logo_alt": "Professionnel bricolage",
+        "section_logo_alt": "Professionnel handyman",
         "menu_aria": "Ouvrir le menu",
         "review_prev": "Avis précédent",
         "review_next": "Avis suivant",
@@ -160,7 +163,8 @@ HOME_META = {
         "wa_send": "Envoyer le message",
         "wa_float": "Contacter via WhatsApp",
         "float_call": "Appeler maintenant",
-        "address": "Grand Lisbonne et Rive Sud, Portugal",
+        "address": "Lisbonne et Rive Sud, Portugal",
+        "skip_link": "Aller au contenu",
     },
 }
 
@@ -181,14 +185,17 @@ HOME_UI = {
         "hero_title_accent": "Reparações",
         "hero_title_suffix": "ao Domicílio",
         "hero_language_label": "Atendimento em:",
-        "services_kicker": "O QUE FAZEMOS",
+        "hero_language_aria": "Idiomas de atendimento",
+        "hero_reviews_suffix": "Falamos Português · English · Español",
+        "trust_langs": "Falamos Português · English · Español",
+        "services_kicker": "SERVIÇOS DIRETOS",
         "recent_work_kicker": "TRABALHOS REALIZADOS",
         "partners_compact_title": "SERVIÇOS ESPECIALIZADOS",
         "cta_response_label": "Resposta rápida",
-        "hero_eyebrow": "HANDYMAN · GRANDE LISBOA E MARGEM SUL",
+        "hero_eyebrow": "HANDYMAN · LISBOA E MARGEM SUL",
         "hero_title": "Handyman e Reparações ao Domicílio",
         "hero_title_line1": "Handyman e reparações",
-        "hero_title_line2": "para a sua casa.",
+        "hero_title_line2": "ao domicílio.",
         "footer_tagline": "Handyman, reparações e manutenção ao domicílio.",
         "hero_subtitle": (
             "Pequenas reparações, montagens, manutenção e trabalhos em casa. "
@@ -199,34 +206,44 @@ HOME_UI = {
         "hero_btn_quote": "Pedir orçamento por WhatsApp",
         "hero_btn_call": "Ligar agora",
         "hero_reviews_rating": "★★★★★ 5.0 no Google",
-        "hero_reviews_suffix": "PT · EN · ES · RO",
         "trust_google": "5.0 Google",
         "trust_quote": "Orçamento gratuito",
         "trust_area": "Grande Lisboa e Margem Sul",
-        "trust_langs": "PT · EN · ES · RO",
-        "services_title": "Serviços de Handyman",
+        "services_title": "Serviços FAZDETUDO.PT",
         "services_subtitle": (
-            "Reparações, montagens, manutenção e pequenos trabalhos com "
-            "atendimento direto na Grande Lisboa e Margem Sul."
+            "Handyman, pequenas reparações, montagens e manutenção realizadas "
+            "diretamente pela nossa equipa."
         ),
         "services_see_all": "Ver todos os serviços",
         "services_see_less": "Ver menos serviços",
+        "services_partner_hint": "Serviço com parceiro →",
+        "quick_repair_title": "Precisa de uma reparação rápida?",
+        "quick_repair_text": (
+            "Parede suja ou danificada, móvel partido, puxador solto, prateleira "
+            "caída ou outro pequeno problema? Envie-nos fotografias e diga-nos "
+            "quando precisa do trabalho concluído."
+        ),
+        "quick_repair_cta": "Enviar fotos por WhatsApp",
+        "quick_repair_tags": "Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações",
+        "quick_repair_note": "Disponibilidade no próprio dia quando possível.",
         "advantages_title": "Porquê escolher-nos?",
         "advantages_title_line1": "Um contacto.",
         "advantages_title_line2": "Várias soluções.",
         "advantages_text": (
-            "Tratamos pequenas reparações, manutenção do dia a dia e trabalhos "
-            "maiores — com o mesmo cuidado e um único ponto de contacto."
+            "Tratamos diretamente pequenas reparações, montagens e manutenção. "
+            "Para trabalhos especializados, contamos com parceiros."
         ),
         "testimonials_title": "O que dizem os nossos clientes",
-        "recent_work_title": "Veja alguns dos nossos trabalhos",
+        "recent_work_title": "Trabalhos realizados",
         "recent_work_subtitle": (
-            "Veja alguns dos trabalhos de reparação, montagem, manutenção e "
-            "remodelação realizados pela FAZDETUDO.PT."
+            "Veja alguns trabalhos de reparação, montagem, manutenção e serviços "
+            "especializados realizados diretamente ou através da nossa rede de parceiros."
         ),
         "recent_work_zone": "Zona",
         "recent_work_service": "Serviço",
         "recent_work_link": "Ver trabalho",
+        "recent_work_see_more": "Ver mais trabalhos",
+        "recent_work_see_less": "Ver menos trabalhos",
         "work_lightbox_close": "Fechar",
         "work_lightbox_dialog": "Visualização do trabalho",
         "work_lightbox_open_image": "Ver imagem em tamanho maior",
@@ -234,18 +251,24 @@ HOME_UI = {
         "work_video_badge": "Vídeo",
         "work_lightbox_prev": "Imagem anterior",
         "work_lightbox_next": "Imagem seguinte",
-        "view_google_reviews": "Ver avaliações no Google",
+        "trust_response": "Resposta rápida",
+        "view_google_reviews": "Ver avaliações no Google →",
         "reviews_google_label": "Google",
         "google_review_source": "Crítica de Google",
         "faq_title": "Perguntas Frequentes",
-        "partners_teaser_title": "Precisa de um serviço especializado?",
+        "partners_teaser_title": "Serviços especializados com parceiros",
         "partners_teaser_text": (
-            "Para alguns serviços trabalhamos com profissionais parceiros "
-            "selecionados."
+            "Para trabalhos que exigem outras especialidades, contamos com "
+            "profissionais parceiros que pode contactar diretamente."
         ),
-        "partners_teaser_cta": "Ver todos os parceiros",
-        "partners_teaser_visit": "Visitar",
-        "partners_teaser_contact": "Contactar",
+        "partners_teaser_badge": "Parceiro FAZDETUDO.PT",
+        "partners_teaser_badge_f": "Parceira FAZDETUDO.PT",
+        "partners_teaser_note": "Serviço realizado por parceiro FAZDETUDO.PT.",
+        "partners_teaser_note_f": "Serviço realizado por parceira FAZDETUDO.PT.",
+        "partners_teaser_cta": "Ver todos os parceiros →",
+        "partners_teaser_visit": "Visitar →",
+        "partners_teaser_contact": "Contactar →",
+        "partners_teaser_call": "Ligar →",
         "partners_teaser_category_badge": "Parceiro nesta categoria",
         "contact_title": "Tem trabalhos para fazer em casa?",
         "contact_subtitle": (
@@ -284,7 +307,8 @@ HOME_UI = {
         "hero_title_accent": "Home Repairs",
         "hero_title_suffix": "at Your Doorstep",
         "hero_language_label": "Service in:",
-        "services_kicker": "WHAT WE DO",
+        "hero_language_aria": "Languages we speak",
+        "services_kicker": "DIRECT SERVICES",
         "recent_work_kicker": "RECENT WORK",
         "partners_compact_title": "SPECIALIST SERVICES",
         "cta_response_label": "Fast response",
@@ -302,34 +326,46 @@ HOME_UI = {
         "hero_btn_quote": "Request a quote on WhatsApp",
         "hero_btn_call": "Call now",
         "hero_reviews_rating": "★★★★★ 5.0 on Google",
-        "hero_reviews_suffix": "PT · EN · ES · RO",
+        "hero_reviews_suffix": "We speak Portuguese · English · Spanish",
         "trust_google": "5.0 Google",
         "trust_quote": "Free quote",
         "trust_area": "Greater Lisbon & South Bank",
-        "trust_langs": "PT · EN · ES · RO",
-        "services_title": "Handyman Services",
+        "trust_langs": "We speak Portuguese · English · Spanish",
+        "services_title": "FAZDETUDO.PT Services",
         "services_subtitle": (
-            "Repairs, assembly, maintenance and small jobs with direct service "
-            "across Greater Lisbon and the South Bank."
+            "Handyman work, small repairs, assembly and maintenance carried out "
+            "directly by our team."
         ),
         "services_see_all": "View all services",
         "services_see_less": "Show fewer services",
+        "services_partner_hint": "Partner service →",
+        "quick_repair_title": "Need a quick repair?",
+        "quick_repair_text": (
+            "A dirty or damaged wall, broken furniture, a loose handle, a fallen "
+            "shelf or another small problem? Send us photos and tell us when you "
+            "need the work finished."
+        ),
+        "quick_repair_cta": "Send photos on WhatsApp",
+        "quick_repair_tags": "Airbnb · Short-term rentals · Landlords · Moves · Small repairs",
+        "quick_repair_note": "Same-day availability when possible.",
         "advantages_title": "Why choose us?",
         "advantages_title_line1": "One contact.",
         "advantages_title_line2": "Multiple solutions.",
         "advantages_text": (
-            "We handle small repairs, day-to-day maintenance and larger jobs — "
-            "with the same care and a single point of contact."
+            "We handle small repairs, assembly and maintenance directly. "
+            "For specialist jobs, we work with partners."
         ),
         "testimonials_title": "What our clients say",
         "recent_work_title": "See some of our recent work",
         "recent_work_subtitle": (
-            "See some of the repair, assembly, maintenance and renovation jobs "
-            "carried out by FAZDETUDO.PT."
+            "See repair, assembly, maintenance and specialist jobs carried out "
+            "directly or through our partner network."
         ),
         "recent_work_zone": "Area",
         "recent_work_service": "Service",
         "recent_work_link": "View work",
+        "recent_work_see_more": "See more work",
+        "recent_work_see_less": "See less work",
         "work_lightbox_close": "Close",
         "work_lightbox_dialog": "Work preview",
         "work_lightbox_open_image": "View larger image",
@@ -337,17 +373,24 @@ HOME_UI = {
         "work_video_badge": "Video",
         "work_lightbox_prev": "Previous image",
         "work_lightbox_next": "Next image",
-        "view_google_reviews": "View reviews on Google",
+        "trust_response": "Fast response",
+        "view_google_reviews": "View reviews on Google →",
         "reviews_google_label": "Google",
         "google_review_source": "Google review",
         "faq_title": "Frequently Asked Questions",
-        "partners_teaser_title": "Need a specialist service?",
+        "partners_teaser_title": "Specialist services with partners",
         "partners_teaser_text": (
-            "For some services we work with selected partner professionals."
+            "For jobs that need other specialities, we work with partner "
+            "professionals you can contact directly."
         ),
-        "partners_teaser_cta": "View all partners",
-        "partners_teaser_visit": "Visit",
-        "partners_teaser_contact": "Contact",
+        "partners_teaser_badge": "FAZDETUDO.PT partner",
+        "partners_teaser_badge_f": "FAZDETUDO.PT partner",
+        "partners_teaser_note": "Service provided by a FAZDETUDO.PT partner.",
+        "partners_teaser_note_f": "Service provided by a FAZDETUDO.PT partner.",
+        "partners_teaser_cta": "View all partners →",
+        "partners_teaser_visit": "Visit →",
+        "partners_teaser_contact": "Contact →",
+        "partners_teaser_call": "Call →",
         "partners_teaser_category_badge": "Partner in this category",
         "contact_title": "Have jobs to do at home?",
         "contact_subtitle": (
@@ -386,7 +429,8 @@ HOME_UI = {
         "hero_title_accent": "Reparaciones",
         "hero_title_suffix": "a Domicilio",
         "hero_language_label": "Atención en:",
-        "services_kicker": "QUÉ HACEMOS",
+        "hero_language_aria": "Idiomas de atención",
+        "services_kicker": "SERVICIOS DIRECTOS",
         "recent_work_kicker": "TRABAJOS REALIZADOS",
         "partners_compact_title": "SERVICIOS ESPECIALIZADOS",
         "cta_response_label": "Respuesta rápida",
@@ -404,34 +448,46 @@ HOME_UI = {
         "hero_btn_quote": "Pedir presupuesto por WhatsApp",
         "hero_btn_call": "Llamar ahora",
         "hero_reviews_rating": "★★★★★ 5.0 en Google",
-        "hero_reviews_suffix": "PT · EN · ES · RO",
+        "hero_reviews_suffix": "Hablamos Portugués · Inglés · Español",
         "trust_google": "5.0 Google",
         "trust_quote": "Presupuesto gratuito",
         "trust_area": "Gran Lisboa y Margen Sur",
-        "trust_langs": "PT · EN · ES · RO",
-        "services_title": "Servicios de Manitas",
+        "trust_langs": "Hablamos Portugués · Inglés · Español",
+        "services_title": "Servicios FAZDETUDO.PT",
         "services_subtitle": (
-            "Reparaciones, montajes, mantenimiento y pequeños trabajos con "
-            "atención directa en la Gran Lisboa y Margen Sur."
+            "Manitas, pequeñas reparaciones, montajes y mantenimiento realizados "
+            "directamente por nuestro equipo."
         ),
         "services_see_all": "Ver todos los servicios",
         "services_see_less": "Ver menos servicios",
+        "services_partner_hint": "Servicio con colaborador →",
+        "quick_repair_title": "¿Necesita una reparación rápida?",
+        "quick_repair_text": (
+            "¿Pared sucia o dañada, mueble roto, tirador suelto, estantería caída "
+            "u otro pequeño problema? Envíenos fotografías y díganos cuándo "
+            "necesita que el trabajo quede terminado."
+        ),
+        "quick_repair_cta": "Enviar fotos por WhatsApp",
+        "quick_repair_tags": "Airbnb · Alojamiento local · Propietarios · Mudanzas · Pequeñas reparaciones",
+        "quick_repair_note": "Disponibilidad el mismo día cuando sea posible.",
         "advantages_title": "¿Por qué elegirnos?",
         "advantages_title_line1": "Un contacto.",
         "advantages_title_line2": "Varias soluciones.",
         "advantages_text": (
-            "Nos ocupamos de pequeñas reparaciones, mantenimiento diario y "
-            "trabajos mayores — con el mismo cuidado y un único punto de contacto."
+            "Atendemos directamente pequeñas reparaciones, montajes y mantenimiento. "
+            "Para trabajos especializados, contamos con colaboradores."
         ),
         "testimonials_title": "Lo que dicen nuestros clientes",
         "recent_work_title": "Vea algunos de nuestros trabajos",
         "recent_work_subtitle": (
-            "Vea algunos de los trabajos de reparación, montaje, mantenimiento y "
-            "reforma realizados por FAZDETUDO.PT."
+            "Vea trabajos de reparación, montaje, mantenimiento y servicios "
+            "especializados realizados directamente o a través de nuestra red de colaboradores."
         ),
         "recent_work_zone": "Zona",
         "recent_work_service": "Servicio",
         "recent_work_link": "Ver trabajo",
+        "recent_work_see_more": "Ver más trabajos",
+        "recent_work_see_less": "Ver menos trabajos",
         "work_lightbox_close": "Cerrar",
         "work_lightbox_dialog": "Vista del trabajo",
         "work_lightbox_open_image": "Ver imagen ampliada",
@@ -439,18 +495,24 @@ HOME_UI = {
         "work_video_badge": "Vídeo",
         "work_lightbox_prev": "Imagen anterior",
         "work_lightbox_next": "Imagen siguiente",
-        "view_google_reviews": "Ver reseñas en Google",
+        "trust_response": "Respuesta rápida",
+        "view_google_reviews": "Ver reseñas en Google →",
         "reviews_google_label": "Google",
         "google_review_source": "Reseña de Google",
         "faq_title": "Preguntas Frecuentes",
-        "partners_teaser_title": "¿Necesita un servicio especializado?",
+        "partners_teaser_title": "Servicios especializados con colaboradores",
         "partners_teaser_text": (
-            "Para algunos servicios trabajamos con profesionales colaboradores "
-            "seleccionados."
+            "Para trabajos que requieren otras especialidades, contamos con "
+            "profesionales colaboradores a los que puede contactar directamente."
         ),
-        "partners_teaser_cta": "Ver todos los colaboradores",
-        "partners_teaser_visit": "Visitar",
-        "partners_teaser_contact": "Contactar",
+        "partners_teaser_badge": "Colaborador FAZDETUDO.PT",
+        "partners_teaser_badge_f": "Colaboradora FAZDETUDO.PT",
+        "partners_teaser_note": "Servicio realizado por colaborador FAZDETUDO.PT.",
+        "partners_teaser_note_f": "Servicio realizado por colaboradora FAZDETUDO.PT.",
+        "partners_teaser_cta": "Ver todos los colaboradores →",
+        "partners_teaser_visit": "Visitar →",
+        "partners_teaser_contact": "Contactar →",
+        "partners_teaser_call": "Llamar →",
         "partners_teaser_category_badge": "Colaborador en esta categoría",
         "contact_title": "¿Tiene trabajos que hacer en casa?",
         "contact_subtitle": (
@@ -489,7 +551,8 @@ HOME_UI = {
         "hero_title_accent": "Réparations",
         "hero_title_suffix": "à Domicile",
         "hero_language_label": "Service en :",
-        "services_kicker": "NOS SERVICES",
+        "hero_language_aria": "Langues parlées",
+        "services_kicker": "SERVICES DIRECTS",
         "recent_work_kicker": "RÉALISATIONS",
         "partners_compact_title": "SERVICES SPÉCIALISÉS",
         "cta_response_label": "Réponse rapide",
@@ -507,34 +570,46 @@ HOME_UI = {
         "hero_btn_quote": "Demander un devis sur WhatsApp",
         "hero_btn_call": "Appeler maintenant",
         "hero_reviews_rating": "★★★★★ 5.0 sur Google",
-        "hero_reviews_suffix": "PT · EN · ES · RO",
+        "hero_reviews_suffix": "Nous parlons portugais · anglais · espagnol",
         "trust_google": "5.0 Google",
         "trust_quote": "Devis gratuit",
         "trust_area": "Grand Lisbonne et Rive Sud",
-        "trust_langs": "PT · EN · ES · RO",
-        "services_title": "Services de Bricolage",
+        "trust_langs": "Nous parlons portugais · anglais · espagnol",
+        "services_title": "Services FAZDETUDO.PT",
         "services_subtitle": (
-            "Réparations, montage, entretien et petits travaux avec un service "
-            "direct dans le Grand Lisbonne et la Rive Sud."
+            "Handyman, petites réparations, montage et entretien réalisés "
+            "directement par notre équipe."
         ),
         "services_see_all": "Voir tous les services",
         "services_see_less": "Voir moins de services",
+        "services_partner_hint": "Service avec partenaire →",
+        "quick_repair_title": "Besoin d’une réparation rapide ?",
+        "quick_repair_text": (
+            "Mur sale ou abîmé, meuble cassé, poignée desserrée, étagère tombée "
+            "ou un autre petit problème ? Envoyez-nous des photos et indiquez "
+            "quand vous avez besoin que le travail soit terminé."
+        ),
+        "quick_repair_cta": "Envoyer des photos sur WhatsApp",
+        "quick_repair_tags": "Airbnb · Location courte durée · Propriétaires · Déménagements · Petites réparations",
+        "quick_repair_note": "Disponibilité le jour même lorsque c’est possible.",
         "advantages_title": "Pourquoi nous choisir ?",
         "advantages_title_line1": "Un contact.",
         "advantages_title_line2": "Plusieurs solutions.",
         "advantages_text": (
-            "Nous prenons en charge petites réparations, entretien quotidien et "
-            "travaux plus importants — avec le même soin et un seul interlocuteur."
+            "Nous traitons directement petites réparations, montage et entretien. "
+            "Pour les travaux spécialisés, nous comptons sur des partenaires."
         ),
         "testimonials_title": "Ce que disent nos clients",
         "recent_work_title": "Travaux réalisés",
         "recent_work_subtitle": (
-            "Découvrez quelques travaux de réparation, montage, entretien et "
-            "rénovation réalisés par FAZDETUDO.PT."
+            "Découvrez des travaux de réparation, montage, entretien et services "
+            "spécialisés réalisés directement ou via notre réseau de partenaires."
         ),
         "recent_work_zone": "Zone",
         "recent_work_service": "Service",
         "recent_work_link": "Voir le travail",
+        "recent_work_see_more": "Voir plus de travaux",
+        "recent_work_see_less": "Voir moins de travaux",
         "work_lightbox_close": "Fermer",
         "work_lightbox_dialog": "Aperçu du travail",
         "work_lightbox_open_image": "Voir l'image en grand",
@@ -542,18 +617,24 @@ HOME_UI = {
         "work_video_badge": "Vidéo",
         "work_lightbox_prev": "Image précédente",
         "work_lightbox_next": "Image suivante",
-        "view_google_reviews": "Voir les avis sur Google",
+        "trust_response": "Réponse rapide",
+        "view_google_reviews": "Voir les avis sur Google →",
         "reviews_google_label": "Google",
         "google_review_source": "Avis Google",
         "faq_title": "Questions Fréquentes",
-        "partners_teaser_title": "Besoin d'un service spécialisé ?",
+        "partners_teaser_title": "Services spécialisés avec partenaires",
         "partners_teaser_text": (
-            "Pour certains services, nous travaillons avec des professionnels "
-            "partenaires sélectionnés."
+            "Pour les travaux qui demandent d'autres spécialités, nous comptons "
+            "sur des professionnels partenaires que vous pouvez contacter directement."
         ),
-        "partners_teaser_cta": "Voir tous les partenaires",
-        "partners_teaser_visit": "Visiter",
-        "partners_teaser_contact": "Contacter",
+        "partners_teaser_badge": "Partenaire FAZDETUDO.PT",
+        "partners_teaser_badge_f": "Partenaire FAZDETUDO.PT",
+        "partners_teaser_note": "Service réalisé par un partenaire FAZDETUDO.PT.",
+        "partners_teaser_note_f": "Service réalisé par une partenaire FAZDETUDO.PT.",
+        "partners_teaser_cta": "Voir tous les partenaires →",
+        "partners_teaser_visit": "Visiter →",
+        "partners_teaser_contact": "Contacter →",
+        "partners_teaser_call": "Appeler →",
         "partners_teaser_category_badge": "Partenaire dans cette catégorie",
         "contact_title": "Des travaux à faire chez vous ?",
         "contact_subtitle": (
@@ -586,39 +667,43 @@ HOME_FEATURED_SERVICE_SLUGS = [
     "servico-pinturas.html",
     "servico-canalizacoes.html",
     "servico-electricidade.html",
-    "servico-climatizacao.html",
-    "servico-limpezas.html",
     "servico-manutencao.html",
+    "servico-serralharia.html",
+    "servico-estores-persianas.html",
 ]
+
+# Shown in the services grid with a discreet partner hint (not direct FAZDETUDO work).
+PARTNER_SERVICE_SLUGS = frozenset({
+    "servico-limpezas.html",
+    "servico-remodelacoes.html",
+    "servico-recuperar-casa.html",
+    "servico-climatizacao.html",
+})
 
 WHY_US_POINTS = {
     "pt": [
-        "Orçamento sem compromisso",
-        "Grande Lisboa e Margem Sul",
-        "Trabalho limpo e organizado",
-        "Pequenas reparações e trabalhos maiores",
-        "Contacto rápido por WhatsApp",
+        ("file-invoice", "Orçamento sem compromisso"),
+        ("broom", "Trabalho limpo e organizado"),
+        ("screwdriver-wrench", "Reparações diretas e rede de parceiros"),
+        ("whatsapp", "Contacto rápido por WhatsApp"),
     ],
     "en": [
-        "No-obligation quote",
-        "Greater Lisbon and South Bank",
-        "Clean, organised work",
-        "Small repairs and larger jobs",
-        "Fast contact via WhatsApp",
+        ("file-invoice", "No-obligation quote"),
+        ("broom", "Clean, organised work"),
+        ("screwdriver-wrench", "Direct repairs and partner network"),
+        ("whatsapp", "Fast contact via WhatsApp"),
     ],
     "es": [
-        "Presupuesto sin compromiso",
-        "Gran Lisboa y Margen Sur",
-        "Trabajo limpio y organizado",
-        "Pequeñas reparaciones y trabajos mayores",
-        "Contacto rápido por WhatsApp",
+        ("file-invoice", "Presupuesto sin compromiso"),
+        ("broom", "Trabajo limpio y organizado"),
+        ("screwdriver-wrench", "Reparaciones directas y red de colaboradores"),
+        ("whatsapp", "Contacto rápido por WhatsApp"),
     ],
     "fr": [
-        "Devis sans engagement",
-        "Grand Lisbonne et Rive Sud",
-        "Travail propre et soigné",
-        "Petites réparations et travaux plus importants",
-        "Contact rapide via WhatsApp",
+        ("file-invoice", "Devis sans engagement"),
+        ("broom", "Travail propre et soigné"),
+        ("screwdriver-wrench", "Réparations directes et réseau de partenaires"),
+        ("whatsapp", "Contact rapide via WhatsApp"),
     ],
 }
 
@@ -653,10 +738,22 @@ ADVANTAGES = [
     },
     {
         "icon": "users",
-        "pt": ("Equipa polivalente", "Um único contacto para reparações, manutenção e obras especializadas."),
-        "en": ("Versatile team", "One point of contact for repairs, maintenance and specialist works."),
-        "es": ("Equipo polivalente", "Un solo contacto para reparaciones, mantenimiento y obras especializadas."),
-        "fr": ("Équipe polyvalente", "Un seul interlocuteur pour réparations, entretien et travaux spécialisés."),
+        "pt": (
+            "Um contacto, várias soluções",
+            "Um contacto para pequenas reparações e uma rede de parceiros para serviços especializados.",
+        ),
+        "en": (
+            "One contact, multiple solutions",
+            "One contact for small repairs and a partner network for specialist services.",
+        ),
+        "es": (
+            "Un contacto, varias soluciones",
+            "Un contacto para pequeñas reparaciones y una red de colaboradores para servicios especializados.",
+        ),
+        "fr": (
+            "Un contact, plusieurs solutions",
+            "Un contact pour les petites réparations et un réseau de partenaires pour les services spécialisés.",
+        ),
     },
     {
         "icon": "broom",
@@ -668,20 +765,20 @@ ADVANTAGES = [
     {
         "icon": "screwdriver-wrench",
         "pt": (
-            "Soluções para pequenas reparações e obras maiores",
-            "Do detalhe ao projeto completo, com a mesma dedicação.",
+            "Reparações diretas e serviços com parceiros",
+            "Tratamos diretamente pequenas reparações, montagens e manutenção; para trabalhos especializados, contamos com parceiros.",
         ),
         "en": (
-            "Small repairs and larger projects",
-            "From quick fixes to full projects, with the same care throughout.",
+            "Direct repairs and partner services",
+            "We handle small repairs, assembly and maintenance directly; for specialist jobs, we work with partners.",
         ),
         "es": (
-            "Pequeñas reparaciones y obras mayores",
-            "Del detalle al proyecto completo, con la misma dedicación.",
+            "Reparaciones directas y servicios con colaboradores",
+            "Atendemos directamente pequeñas reparaciones, montajes y mantenimiento; para trabajos especializados, contamos con colaboradores.",
         ),
         "fr": (
-            "Petites réparations et grands travaux",
-            "Du détail au projet complet, avec le même sérieux.",
+            "Réparations directes et services partenaires",
+            "Nous traitons directement petites réparations, montage et entretien ; pour les travaux spécialisés, nous comptons sur des partenaires.",
         ),
     },
     {
@@ -1703,16 +1800,6 @@ SERVICE_CARDS = [
         "fr": ("Entretien", "Plans préventifs pour copropriétés, toitures, gouttières et nettoyage haute pression."),
     },
     {
-        "slug": "servico-pintura-fachadas-alpinismo.html",
-        "icon": "building",
-        "featured": False,
-        "badge": None,
-        "pt": ("Pintura em Alpinismo", "Reabilitação de fachadas em altura com trabalho em cordas. Sem andaimes, mais rápido e económico."),
-        "en": ("Rope-Access Facade Painting", "High-rise facade refurbishment with industrial rope access. No scaffolding, faster and more economical."),
-        "es": ("Pintura en Alpinismo", "Rehabilitación de fachadas en altura con cuerdas. Sin andamios, más rápido y económico."),
-        "fr": ("Peinture en Cordes", "Réhabilitation de façades en hauteur par cordes. Sans échafaudage, plus rapide et économique."),
-    },
-    {
         "slug": "servico-jardinagem.html",
         "icon": "seedling",
         "featured": False,
@@ -1721,16 +1808,6 @@ SERVICE_CARDS = [
         "en": ("Gardening", "Garden maintenance, lawn mowing, tree pruning, plot clearance and irrigation repair."),
         "es": ("Jardinería", "Mantenimiento de jardines, césped, poda, limpieza de terrenos y riego."),
         "fr": ("Jardinage", "Entretien de jardins, tonte, taille, nettoyage de terrains et arrosage."),
-    },
-    {
-        "slug": "servico-mudancas.html",
-        "icon": "truck-fast",
-        "featured": False,
-        "badge": None,
-        "pt": ("Mudanças", "Mudanças residenciais e comerciais com transporte seguro, embalagem cuidada e desmontagem de móveis."),
-        "en": ("Moving", "Residential and commercial moves with safe transport, careful packing and furniture disassembly."),
-        "es": ("Mudanzas", "Mudanzas residenciales y comerciales con transporte seguro, embalaje y montaje."),
-        "fr": ("Déménagements", "Déménagements résidentiels et commerciaux avec transport sécurisé et emballage."),
     },
     {
         "slug": "servico-informatica.html",
@@ -1797,7 +1874,7 @@ SERVICE_CARDS = [
 HANDYMAN = {
     "pt": {
         "badge": "Serviço do Dia a Dia",
-        "title": "O que faz um Handyman Profissional?",
+        "title": "O que faz um faz de tudo profissional?",
         "subtitle": "Não gaste o seu fim de semana com ferramentas. Nós resolvemos a sua lista de pequenos arranjos pendentes com rapidez e eficácia.",
         "cta": "Ver Todos os Detalhes de Reparações",
         "boxes": [

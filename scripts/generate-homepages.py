@@ -30,6 +30,7 @@ from home_page_i18n import (  # noqa: E402
     HOME_UI,
     LANGS,
     PARTNER_RECRUIT,
+    PARTNER_SERVICE_SLUGS,
     RECENT_WORK,
     SERVICE_CARDS,
     TESTIMONIAL_CARDS,
@@ -71,6 +72,7 @@ from site_config import (  # noqa: E402
     tel_href,
     wa_href_for_message,
     wa_href_home,
+    wa_href_quick_repair,
     HOME_WA_MESSAGE,
 )
 from template_engine import render_template  # noqa: E402
@@ -133,14 +135,45 @@ def _render_stars(rating: int = 5) -> str:
 
 def build_advantages_grid(lang: str) -> str:
     blocks = []
-    for point in WHY_US_POINTS.get(lang, WHY_US_POINTS["pt"]):
+    for icon, point in WHY_US_POINTS.get(lang, WHY_US_POINTS["pt"]):
+        icon_class = "fa-brands" if icon == "whatsapp" else "fa-solid"
         blocks.append(
-            f"""                <li class="why-list-item fade-in">
-                    <span class="why-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
-                    <span>{html.escape(point)}</span>
+            f"""                <li class="why-card fade-in">
+                    <span class="why-card-icon" aria-hidden="true"><i class="{icon_class} fa-{icon}"></i></span>
+                    <span class="why-card-text">{html.escape(point)}</span>
                 </li>"""
         )
     return "\n".join(blocks)
+
+
+def build_trust_strip(lang: str) -> str:
+    ui = HOME_UI[lang]
+    href = html.escape(GOOGLE_REVIEWS_URL, quote=True)
+    stars = _render_stars(5)
+    return f"""    <section class="trust-strip" aria-label="Confiança">
+        <div class="container">
+            <ul class="trust-strip-list">
+                <li class="trust-strip-item">
+                    <a href="{href}" class="trust-strip-link" target="_blank" rel="noopener noreferrer">
+                        <span class="trust-strip-stars" aria-hidden="true">{stars}</span>
+                        <span>5.0 Google</span>
+                    </a>
+                </li>
+                <li class="trust-strip-item">
+                    <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+                    <span data-i18n="trust_quote">{html.escape(ui['trust_quote'])}</span>
+                </li>
+                <li class="trust-strip-item">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    <span data-i18n="trust_response">{html.escape(ui.get('trust_response', ui.get('cta_response_label', '')))}</span>
+                </li>
+                <li class="trust-strip-item">
+                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    <span data-i18n="trust_area">{html.escape(ui['trust_area'])}</span>
+                </li>
+            </ul>
+        </div>
+    </section>"""
 
 
 def build_testimonials_summary(lang: str) -> str:
@@ -483,8 +516,10 @@ def build_recent_work_section(lang: str) -> str:
         href = f"{prefix}{item['slug']}"
         gallery_class = " recent-work-media-wrap--gallery" if use_carousel else ""
         featured = " recent-work-card--featured" if idx == 0 else ""
+        more_attrs = ' hidden' if idx >= 6 else ""
+        more_class = " recent-work-card--more" if idx >= 6 else ""
         cards.append(
-            f"""                <article class="recent-work-card{featured} fade-in">
+            f"""                <article class="recent-work-card{featured}{more_class} fade-in"{more_attrs}>
                     <div class="recent-work-media-wrap{gallery_class}">
 {media}
                     </div>
@@ -496,19 +531,24 @@ def build_recent_work_section(lang: str) -> str:
                 </article>"""
         )
     grid = "\n\n".join(cards)
+    more_btn = ""
+    if len(RECENT_WORK) > 6:
+        more_btn = f"""            <div class="work-more-wrap">
+                <button type="button" class="work-more-toggle" id="work-more-toggle" aria-expanded="false" data-open-label="{html.escape(ui['recent_work_see_more'], quote=True)}" data-close-label="{html.escape(ui['recent_work_see_less'], quote=True)}">
+                    <span>{html.escape(ui['recent_work_see_more'])}</span>
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>"""
     return f"""    <section class="section section-work" id="recent-work">
         <div class="container">
             <div class="section-header section-header--center">
                 <p class="section-kicker">{html.escape(ui["recent_work_kicker"])}</p>
                 <h2 class="section-title" data-i18n="recent_work_title">{html.escape(ui["recent_work_title"])}</h2>
             </div>
-            <div class="work-rail-shell">
-                <button type="button" class="work-rail-btn work-rail-btn--prev" data-work-rail-dir="-1" aria-label="{html.escape(ui['work_lightbox_prev'], quote=True)}"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-                <div class="recent-work-grid recent-work-grid--portfolio" id="recent-work-grid">
+            <div class="recent-work-grid recent-work-grid--showcase" id="recent-work-grid">
 {grid}
-                </div>
-                <button type="button" class="work-rail-btn work-rail-btn--next" data-work-rail-dir="1" aria-label="{html.escape(ui['work_lightbox_next'], quote=True)}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
             </div>
+{more_btn}
         </div>
     </section>"""
 
@@ -520,6 +560,182 @@ def build_testimonials_footer(lang: str) -> str:
                     <span data-i18n="view_google_reviews">{html.escape(label)}</span>
                 </a>
             </div>"""
+
+
+def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
+    """Strong partners showcase placed after direct services on the homepage."""
+    ui = HOME_UI[lang]
+    cards: list[str] = []
+
+    home_blurbs = {
+        "airfix": {
+            "pt": "Instalação, manutenção, limpeza e assistência técnica de ar condicionado.",
+            "en": "Air conditioning installation, maintenance, cleaning and technical support.",
+            "es": "Instalación, mantenimiento, limpieza y asistencia técnica de aire acondicionado.",
+            "fr": "Installation, entretien, nettoyage et assistance technique en climatisation.",
+        },
+        "wallfixtv": {
+            "pt": "Instalação profissional de televisões, suportes e organização de cabos.",
+            "en": "Professional TV mounting, brackets and cable management.",
+            "es": "Instalación profesional de televisores, soportes y organización de cables.",
+            "fr": "Installation professionnelle de téléviseurs, supports et gestion des câbles.",
+        },
+        "caterina": {
+            "pt": "Limpezas domésticas, pós-obra, escritórios e condomínios.",
+            "en": "Home, post-renovation, office and condominium cleaning.",
+            "es": "Limpiezas domésticas, post-obra, oficinas y comunidades.",
+            "fr": "Nettoyage domestique, après-travaux, bureaux et copropriétés.",
+        },
+        "valeriu-cantemir": {
+            "pt": "Obras gerais, recuperação de casas e remodelações.",
+            "en": "General construction, home restoration and renovations.",
+            "es": "Obras generales, rehabilitación de viviendas y reformas.",
+            "fr": "Travaux généraux, rénovation de maisons et remodelage.",
+        },
+    }
+    valeriu_extra = {
+        "pt": "Obras Gerais · Recuperação de Casas · Remodelações Gerais",
+        "en": "General Construction · Home Restoration · General Renovations",
+        "es": "Obras Generales · Rehabilitación de Viviendas · Reformas Generales",
+        "fr": "Travaux Généraux · Rénovation de Maisons · Remodelage Général",
+    }
+    visit_cta = {
+        "airfix": {
+            "pt": "Visitar AirFix.pt →",
+            "en": "Visit AirFix.pt →",
+            "es": "Visitar AirFix.pt →",
+            "fr": "Visiter AirFix.pt →",
+        },
+        "wallfixtv": {
+            "pt": "Visitar WallFixTV.pt →",
+            "en": "Visit WallFixTV.pt →",
+            "es": "Visitar WallFixTV.pt →",
+            "fr": "Visiter WallFixTV.pt →",
+        },
+    }
+
+    for p in active_partners():
+        name = html.escape(p["name"])
+        cat = html.escape(PARTNER_CATEGORIES[p["category"]][lang])
+        blurb = html.escape(home_blurbs.get(p["id"], {}).get(lang, ""))
+        badge = ui["partners_teaser_badge_f"] if p.get("feminine") else ui["partners_teaser_badge"]
+        note = ui["partners_teaser_note_f"] if p.get("feminine") else ui["partners_teaser_note"]
+        show_note = p["id"] in {"caterina", "valeriu-cantemir"}
+
+        logo = p.get("logo")
+        if logo:
+            media = (
+                f'<div class="partners-showcase-media">'
+                f'<img src="{html.escape(prefix + logo, quote=True)}" alt="" width="56" height="56" loading="lazy"></div>'
+            )
+        elif p.get("photo"):
+            media = (
+                f'<div class="partners-showcase-media partners-showcase-media--photo">'
+                f'<img src="{html.escape(prefix + p["photo"], quote=True)}" alt="" width="56" height="56" loading="lazy"></div>'
+            )
+        else:
+            icon = "tv" if p["id"] == "wallfixtv" else "helmet-safety"
+            media = (
+                f'<div class="partners-showcase-media partners-showcase-media--icon" aria-hidden="true">'
+                f'<i class="fa-solid fa-{icon}"></i></div>'
+            )
+
+        extra_cats = ""
+        if p["id"] == "valeriu-cantemir":
+            extra_cats = (
+                f'<p class="partners-showcase-extra">{html.escape(valeriu_extra[lang])}</p>'
+            )
+
+        location_html = ""
+        if p.get("location"):
+            loc = p["location"].get(lang) or p["location"].get("pt")
+            if loc:
+                location_html = (
+                    f'<p class="partners-showcase-location">'
+                    f'<i class="fa-solid fa-location-dot" aria-hidden="true"></i> '
+                    f"{html.escape(loc)}</p>"
+                )
+
+        phone_html = ""
+        if p.get("phone_display"):
+            phone_html = (
+                f'<p class="partners-showcase-phone">{html.escape(p["phone_display"])}</p>'
+            )
+
+        actions: list[str] = []
+        if p["type"] == "external":
+            href = html.escape(p["website"], quote=True)
+            cta = html.escape(visit_cta.get(p["id"], {}).get(lang, ui["partners_teaser_visit"]))
+            actions.append(
+                f'<a class="partners-showcase-cta partners-showcase-cta--primary" '
+                f'href="{href}" target="_blank" rel="noopener noreferrer">{cta}</a>'
+            )
+        elif p.get("tel_href") and not p.get("whatsapp_href"):
+            actions.append(
+                f'<a class="partners-showcase-cta partners-showcase-cta--call" '
+                f'href="{html.escape(p["tel_href"], quote=True)}">'
+                f'{html.escape(ui["partners_teaser_call"])}</a>'
+            )
+        else:
+            if p.get("tel_href"):
+                actions.append(
+                    f'<a class="partners-showcase-cta partners-showcase-cta--call" '
+                    f'href="{html.escape(p["tel_href"], quote=True)}">'
+                    f'<i class="fa-solid fa-phone" aria-hidden="true"></i> '
+                    f'{html.escape(p["copy"][lang]["call"])}</a>'
+                )
+            if p.get("whatsapp_href"):
+                actions.append(
+                    f'<a class="partners-showcase-cta partners-showcase-cta--whatsapp" '
+                    f'href="{html.escape(p["whatsapp_href"], quote=True)}" '
+                    f'target="_blank" rel="noopener noreferrer">'
+                    f'<i class="fa-brands fa-whatsapp" aria-hidden="true"></i> '
+                    f'{html.escape(p["copy"][lang].get("whatsapp", "WhatsApp"))}</a>'
+                )
+
+        note_html = (
+            f'<p class="partners-showcase-note">{html.escape(note)}</p>' if show_note else ""
+        )
+        body_parts = [
+            f'<h3 class="partners-showcase-name">{name}</h3>',
+            extra_cats,
+            f'<p class="partners-showcase-blurb">{blurb}</p>',
+            location_html,
+            phone_html,
+            note_html,
+        ]
+        body_html = "\n                    ".join(part for part in body_parts if part)
+        cards.append(
+            f"""                <article class="partners-showcase-card fade-in">
+                    <div class="partners-showcase-top">
+                        {media}
+                        <div class="partners-showcase-meta">
+                            <span class="partners-showcase-badge">{html.escape(badge)}</span>
+                            <span class="partners-showcase-category">{cat}</span>
+                        </div>
+                    </div>
+                    {body_html}
+                    <div class="partners-showcase-actions">
+                        {" ".join(actions)}
+                    </div>
+                </article>"""
+        )
+
+    href_all = html.escape(institutional_href("parceiros", lang), quote=True)
+    return f"""    <section class="section section-partners-home" id="parceiros-recomendados">
+        <div class="container">
+            <div class="section-header section-header--center">
+                <h2 class="section-title" data-i18n="partners_teaser_title">{html.escape(ui['partners_teaser_title'])}</h2>
+                <p class="section-subtitle" data-i18n="partners_teaser_text">{html.escape(ui['partners_teaser_text'])}</p>
+            </div>
+            <div class="partners-showcase-grid">
+{chr(10).join(cards)}
+            </div>
+            <div class="partners-home-footer">
+                <a href="{href_all}" class="text-link partners-teaser-cta"><span data-i18n="partners_teaser_cta">{html.escape(ui['partners_teaser_cta'])}</span></a>
+            </div>
+        </div>
+    </section>"""
 
 
 def build_footer_services(lang: str) -> str:
@@ -552,10 +768,19 @@ def faq_json_ld(lang: str) -> str:
 
 def json_ld(lang: str) -> str:
     meta = HOME_META[lang]
+    from site_config import (
+        FACEBOOK_URL,
+        GOOGLE_REVIEWS_URL,
+        INSTAGRAM_URL,
+        PRIMARY_OFFICE_STREET_LINE1,
+        PRIMARY_OFFICE_STREET_LINE2,
+    )
+
+    postal = PRIMARY_OFFICE_STREET_LINE2.split()[0]
     business = {
         "@type": "HomeAndConstructionBusiness",
         "name": "FAZDETUDO.PT",
-        "url": home_url(lang).rstrip("/"),
+        "url": home_url(lang).rstrip("/") or "https://www.fazdetudo.pt",
         "logo": "https://www.fazdetudo.pt/logo.webp",
         "image": "https://www.fazdetudo.pt/logo.webp",
         "description": meta["json_desc"],
@@ -563,8 +788,9 @@ def json_ld(lang: str) -> str:
         "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Lisboa",
-            "addressRegion": "Grande Lisboa e Margem Sul",
+            "streetAddress": PRIMARY_OFFICE_STREET_LINE1,
+            "addressLocality": "Pontinha",
+            "postalCode": postal,
             "addressCountry": "PT",
         },
         "areaServed": [
@@ -575,6 +801,11 @@ def json_ld(lang: str) -> str:
             {"@type": "AdministrativeArea", "name": "Almada"},
             {"@type": "AdministrativeArea", "name": "Setúbal"},
             {"@type": "AdministrativeArea", "name": "Azeitão"},
+        ],
+        "sameAs": [
+            FACEBOOK_URL,
+            INSTAGRAM_URL,
+            GOOGLE_REVIEWS_URL,
         ],
     }
     data = {
@@ -591,93 +822,25 @@ def build_service_cards(lang: str, prefix: str = "", *, more: bool = False) -> s
         cards = [card for card in SERVICE_CARDS if card["slug"] not in featured_set]
     else:
         cards = [by_slug[slug] for slug in HOME_FEATURED_SERVICE_SLUGS if slug in by_slug]
+    hint = HOME_UI[lang].get("services_partner_hint", "")
     blocks = []
     for card in cards:
         title, desc = card[lang]
+        is_partner = card["slug"] in PARTNER_SERVICE_SLUGS
+        partner_cls = " service-showcase-card--partner" if is_partner else ""
+        partner_hint = (
+            f'\n                    <span class="service-showcase-partner-hint">'
+            f"{html.escape(hint)}</span>"
+            if is_partner and hint
+            else ""
+        )
         blocks.append(
-            f"""                <a href="{prefix}{card['slug']}" class="service-showcase-card fade-in" aria-label="{html.escape(title, quote=True)} — {html.escape(desc, quote=True)}">
+            f"""                <a href="{prefix}{card['slug']}" class="service-showcase-card fade-in{partner_cls}" aria-label="{html.escape(title, quote=True)} — {html.escape(desc, quote=True)}">
                     <span class="service-showcase-icon" aria-hidden="true"><i class="fa-solid fa-{card['icon']}"></i></span>
-                    <span class="service-showcase-title">{html.escape(title)}</span>
+                    <span class="service-showcase-title">{html.escape(title)}</span>{partner_hint}
                 </a>"""
         )
     return "\n\n".join(blocks)
-
-
-def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
-    """Compact partner list — one highlighted partner per category (proof band)."""
-    ui = HOME_UI[lang]
-    groups: dict[str, list[str]] = {}
-    order: list[str] = []
-    badge = html.escape(ui.get("partners_teaser_category_badge", "Parceiro nesta categoria"))
-    for p in active_partners():
-        cat_id = p["category"]
-        if cat_id not in groups:
-            groups[cat_id] = []
-            order.append(cat_id)
-        cat = PARTNER_CATEGORIES[cat_id][lang]
-        name = html.escape(p["name"])
-        meta_bits = [html.escape(cat)]
-        if p.get("location"):
-            loc = p["location"].get(lang) or p["location"].get("pt")
-            if loc:
-                meta_bits.append(html.escape(loc))
-        specialty = " · ".join(meta_bits)
-        if p["type"] == "external":
-            href = html.escape(p["website"], quote=True)
-            cta = html.escape(ui["partners_teaser_visit"])
-            target = ' target="_blank" rel="noopener noreferrer"'
-        else:
-            href = html.escape(p.get("tel_href") or p.get("whatsapp_href") or "#", quote=True)
-            cta = html.escape(ui["partners_teaser_contact"])
-            target = ""
-        logo = p.get("logo")
-        if logo:
-            media = (
-                f'<span class="partners-mini-media">'
-                f'<img src="{html.escape(prefix + logo, quote=True)}" alt="" width="36" height="36" loading="lazy"></span>'
-            )
-        elif p.get("photo"):
-            media = (
-                f'<span class="partners-mini-media partners-mini-media--photo">'
-                f'<img src="{html.escape(prefix + p["photo"], quote=True)}" alt="" width="36" height="36" loading="lazy"></span>'
-            )
-        else:
-            icon = "tv" if p["id"] == "wallfixtv" else "handshake"
-            media = (
-                f'<span class="partners-mini-media partners-mini-media--icon" aria-hidden="true">'
-                f'<i class="fa-solid fa-{icon}"></i></span>'
-            )
-        groups[cat_id].append(
-            f"""                    <a class="partners-mini-card partners-mini-card--category fade-in" href="{href}"{target}>
-                        {media}
-                        <span class="partners-mini-copy">
-                            <span class="partners-mini-badge">{badge}</span>
-                            <span class="partners-mini-name">{name}</span>
-                            <span class="partners-mini-specialty">{specialty}</span>
-                        </span>
-                        <span class="partners-mini-cta">{cta} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
-                    </a>"""
-        )
-
-    group_blocks = []
-    for cat_id in order:
-        cat_label = html.escape(PARTNER_CATEGORIES[cat_id][lang])
-        cards = "\n".join(groups[cat_id])
-        group_blocks.append(
-            f"""                <div class="partners-cat-group">
-                    <p class="partners-cat-label">{cat_label}</p>
-{cards}
-                </div>"""
-        )
-
-    href_all = html.escape(institutional_href("parceiros", lang), quote=True)
-    return f"""            <div class="proof-column proof-partners" id="parceiros-recomendados">
-                <p class="proof-heading">{html.escape(ui['partners_compact_title'])}</p>
-                <div class="partners-teaser-groups">
-{chr(10).join(group_blocks)}
-                </div>
-                <a href="{href_all}" class="text-link partners-teaser-cta"><span data-i18n="partners_teaser_cta">{html.escape(ui['partners_teaser_cta'])}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-            </div>"""
 
 
 def build_hvac_partner_block(lang: str, prefix: str) -> str:
@@ -947,6 +1110,7 @@ def render_homepage(lang: str) -> str:
             "HVAC_PARTNER_BLOCK": build_hvac_partner_block(lang, prefix),
             "PARTNERS_TEASER_SECTION": build_partners_teaser_section(lang, prefix),
             "RECENT_WORK_SECTION": build_recent_work_section(lang),
+            "TRUST_STRIP": build_trust_strip(lang),
             "WORK_LIGHTBOX": build_work_lightbox_markup(lang),
             "ADVANTAGES_GRID": build_advantages_grid(lang),
             "TESTIMONIALS_SUMMARY": build_testimonials_summary(lang),
@@ -954,14 +1118,17 @@ def render_homepage(lang: str) -> str:
             "TESTIMONIALS_FOOTER": build_testimonials_footer(lang),
             "FAQ_LIST": build_faq_list(lang),
             "WA_HREF": wa_href_home(lang),
+            "WA_HREF_QUICK_REPAIR": wa_href_quick_repair(lang),
             "WA_MESSAGE_ATTR": wa_message_attr,
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
             "GOOGLE_REVIEWS_URL": GOOGLE_REVIEWS_URL,
+            "SKIP_LINK": meta["skip_link"],
             "HERO_TITLE_PREFIX": ui["hero_title_prefix"],
             "HERO_TITLE_ACCENT": ui["hero_title_accent"],
             "HERO_TITLE_SUFFIX": ui["hero_title_suffix"],
             "HERO_LANGUAGE_LABEL": ui["hero_language_label"],
+            "HERO_LANGUAGE_ARIA": ui.get("hero_language_aria", ui["hero_language_label"]),
             "SERVICES_KICKER": ui["services_kicker"],
             "CTA_RESPONSE_LABEL": ui["cta_response_label"],
             "PRIMARY_OFFICE_STREET_LINE1": PRIMARY_OFFICE_STREET_LINE1,

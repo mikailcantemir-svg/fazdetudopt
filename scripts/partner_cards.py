@@ -9,6 +9,7 @@ from recommended_partners import (
     PARTNER_CATEGORIES,
     PARTNER_STATUS_LABELS,
     partner_badge_keys,
+    partner_category_ids,
     partner_zone_ids,
 )
 from slug_registry import service_page_href
@@ -25,6 +26,9 @@ def build_partner_directory_card(
     """Render one partner card (homepage directory or /parceiros/ listing)."""
     copy = partner["copy"][lang]
     category_id = partner["category"]
+    category_ids = partner_category_ids(partner) or (
+        [category_id] if category_id in PARTNER_CATEGORIES else []
+    )
     category_label = PARTNER_CATEGORIES[category_id][lang]
     name = html.escape(partner["name"])
     cat_esc = html.escape(category_label)
@@ -45,6 +49,7 @@ def build_partner_directory_card(
 
     zones = partner_zone_ids(partner)
     zones_attr = html.escape(" ".join(zones), quote=True)
+    categories_attr = html.escape(" ".join(category_ids), quote=True)
 
     badges_html = []
     for key in partner_badge_keys(partner):
@@ -59,6 +64,13 @@ def build_partner_directory_card(
     hidden_attr = " hidden" if hidden else ""
     service_href = html.escape(
         service_page_href(partner["service_slug"], lang), quote=True
+    )
+    data_attrs = (
+        f'data-partner-category="{html.escape(category_id)}" '
+        f'data-partner-categories="{categories_attr}" '
+        f'data-partner-zones="{zones_attr}" '
+        f'data-partner-id="{html.escape(partner["id"])}" '
+        f'data-partner-status="{html.escape(status_attr)}"'
     )
 
     location_html = ""
@@ -86,7 +98,7 @@ def build_partner_directory_card(
                 '<div class="partner-dir-media partner-dir-media--icon" aria-hidden="true">'
                 '<i class="fa-solid fa-tv"></i></div>'
             )
-        return f"""                <article class="{card_class}" data-partner-category="{html.escape(category_id)}" data-partner-zones="{zones_attr}" data-partner-id="{html.escape(partner["id"])}" data-partner-status="{html.escape(status_attr)}"{hidden_attr}>
+        return f"""                <article class="{card_class}" {data_attrs}{hidden_attr}>
                     {media_html}
                     <div class="partner-dir-body">
                         <div class="partner-dir-meta">
@@ -102,13 +114,35 @@ def build_partner_directory_card(
                     </div>
                 </article>"""
 
-    photo_src = html.escape(f'{prefix}{partner["photo"]}', quote=True)
+    photo = partner.get("photo")
+    if photo:
+        photo_src = html.escape(f"{prefix}{photo}", quote=True)
+        media_html = (
+            f'<div class="partner-dir-media partner-dir-media--photo">'
+            f'<img src="{photo_src}" alt="{name}" width="96" height="96" '
+            f'loading="lazy" decoding="async"></div>'
+        )
+    else:
+        media_html = (
+            '<div class="partner-dir-media partner-dir-media--icon '
+            'partner-dir-media--fallback" aria-hidden="true">'
+            '<i class="fa-solid fa-helmet-safety"></i></div>'
+        )
+
     tel_href_val = html.escape(partner["tel_href"], quote=True)
-    wa_href_val = html.escape(partner["whatsapp_href"], quote=True)
-    return f"""                <article class="{card_class}" data-partner-category="{html.escape(category_id)}" data-partner-zones="{zones_attr}" data-partner-id="{html.escape(partner["id"])}" data-partner-status="{html.escape(status_attr)}"{hidden_attr}>
-                    <div class="partner-dir-media partner-dir-media--photo">
-                        <img src="{photo_src}" alt="{name}" width="96" height="96" loading="lazy" decoding="async">
-                    </div>
+    wa_href = partner.get("whatsapp_href")
+    wa_btn = ""
+    if wa_href:
+        wa_href_val = html.escape(wa_href, quote=True)
+        wa_label = html.escape(copy.get("whatsapp", "WhatsApp"))
+        wa_aria = html.escape(copy.get("wa_aria", wa_label))
+        wa_btn = f"""
+                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="{wa_href_val}" target="_blank" rel="noopener noreferrer" aria-label="{wa_aria}">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                <span>{wa_label}</span>
+                            </a>"""
+    return f"""                <article class="{card_class}" {data_attrs}{hidden_attr}>
+                    {media_html}
                     <div class="partner-dir-body">
                         <div class="partner-dir-meta">
                             {badges_block}
@@ -121,11 +155,7 @@ def build_partner_directory_card(
                             <a class="partner-dir-btn partner-dir-btn--call" href="{tel_href_val}" aria-label="{html.escape(copy["call_aria"])}">
                                 <i class="fa-solid fa-phone" aria-hidden="true"></i>
                                 <span>{html.escape(copy["call"])}</span>
-                            </a>
-                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="{wa_href_val}" target="_blank" rel="noopener noreferrer" aria-label="{html.escape(copy["wa_aria"])}">
-                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                                <span>{html.escape(copy["whatsapp"])}</span>
-                            </a>
+                            </a>{wa_btn}
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="{service_href}">{html.escape(copy["secondary_cta"])}</a>
                         </div>
                     </div>
