@@ -76,6 +76,18 @@ UI = {
         "cta_p": "Clique abaixo para falar diretamente com o nosso técnico especialista em {service}.",
         "cta_wa": "Orçamento por WhatsApp",
         "cta_call": "Ligar: 932 504 112",
+        "partners_kicker": "PROFISSIONAIS DISPONÍVEIS",
+        "partners_title": "Profissionais para este serviço",
+        "partners_text": (
+            "Este serviço é realizado por parceiros FAZDETUDO.PT. Consulte os profissionais "
+            "disponíveis e contacte diretamente quem preferir."
+        ),
+        "partners_sidebar_h3": "Profissionais disponíveis",
+        "partners_sidebar_p": (
+            "Veja abaixo os parceiros disponíveis para este serviço e contacte diretamente "
+            "quem preferir."
+        ),
+        "partners_sidebar_btn": "Ver profissionais ↓",
         "footer": "© 2026 FAZDETUDO.PT. Todos os direitos reservados. Especialistas em Reparações ao Domicílio.",
         "wa_greeting": "Como posso ajudar?",
         "wa_placeholder": "Escreva uma mensagem...",
@@ -98,6 +110,17 @@ UI = {
         "cta_p": "Click below to speak directly with our {service} specialist.",
         "cta_wa": "Quote via WhatsApp",
         "cta_call": "Call: 932 504 112",
+        "partners_kicker": "AVAILABLE PROFESSIONALS",
+        "partners_title": "Professionals for this service",
+        "partners_text": (
+            "This service is provided by FAZDETUDO.PT partners. View the available "
+            "professionals and contact the one you prefer directly."
+        ),
+        "partners_sidebar_h3": "Available professionals",
+        "partners_sidebar_p": (
+            "See the partners available for this service below and contact the one you prefer directly."
+        ),
+        "partners_sidebar_btn": "View professionals ↓",
         "footer": "© 2026 FAZDETUDO.PT. All rights reserved. Home repair specialists.",
         "wa_greeting": "How can I help you?",
         "wa_placeholder": "Type a message...",
@@ -120,6 +143,18 @@ UI = {
         "cta_p": "Haga clic abajo para hablar directamente con nuestro especialista en {service}.",
         "cta_wa": "Presupuesto por WhatsApp",
         "cta_call": "Llamar: 932 504 112",
+        "partners_kicker": "PROFESIONALES DISPONIBLES",
+        "partners_title": "Profesionales para este servicio",
+        "partners_text": (
+            "Este servicio es realizado por colaboradores FAZDETUDO.PT. Consulte los "
+            "profesionales disponibles y contacte directamente con quien prefiera."
+        ),
+        "partners_sidebar_h3": "Profesionales disponibles",
+        "partners_sidebar_p": (
+            "Vea abajo los colaboradores disponibles para este servicio y contacte "
+            "directamente con quien prefiera."
+        ),
+        "partners_sidebar_btn": "Ver profesionales ↓",
         "footer": "© 2026 FAZDETUDO.PT. Todos los derechos reservados. Especialistas en reparaciones a domicilio.",
         "wa_greeting": "¿Cómo puedo ayudarle?",
         "wa_placeholder": "Escriba un mensaje...",
@@ -142,6 +177,18 @@ UI = {
         "cta_p": "Cliquez ci-dessous pour parler directement à notre spécialiste {service}.",
         "cta_wa": "Devis par WhatsApp",
         "cta_call": "Appeler : 932 504 112",
+        "partners_kicker": "PROFESSIONNELS DISPONIBLES",
+        "partners_title": "Professionnels pour ce service",
+        "partners_text": (
+            "Ce service est proposé par des partenaires FAZDETUDO.PT. Consultez les "
+            "professionnels disponibles et contactez directement celui que vous préférez."
+        ),
+        "partners_sidebar_h3": "Professionnels disponibles",
+        "partners_sidebar_p": (
+            "Consultez ci-dessous les partenaires disponibles pour ce service et "
+            "contactez directement celui que vous préférez."
+        ),
+        "partners_sidebar_btn": "Voir les professionnels ↓",
         "footer": "© 2026 FAZDETUDO.PT. Tous droits réservés. Spécialistes en réparations à domicile.",
         "wa_greeting": "Comment puis-je vous aider ?",
         "wa_placeholder": "Écrivez un message...",

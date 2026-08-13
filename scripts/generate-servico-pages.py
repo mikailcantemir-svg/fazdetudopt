@@ -45,7 +45,11 @@ from slug_registry import (  # noqa: E402
     render_hreflang_tags_for_service,
     service_id_from_slug,
 )
-from recommended_partners import get_partner  # noqa: E402
+from recommended_partners import (  # noqa: E402
+    partners_for_service,
+    partner_schema_entity,
+)
+from partner_cards import build_partner_sidebar_card  # noqa: E402
 from site_config import (  # noqa: E402
     BASE_URL,
     OG_IMAGE,
@@ -64,163 +68,15 @@ OG_LOCALE = {
     "fr": "fr_FR",
 }
 
-# Sidebar CTA overrides for services executed by partners (not FAZDETUDO.PT).
-PARTNER_SERVICE_CTA = {
-    "servico-limpezas.html": {
-        "partner_id": "caterina",
-        "mode": "phone_whatsapp",
-        "schema_provider": {
-            "@type": "Person",
-            "name": "Caterina",
-            "telephone": "+351963212185",
-        },
-        "pt": {
-            "text": (
-                "Serviço realizado por parceira FAZDETUDO.PT. "
-                "Contacte a Caterina diretamente para combinar disponibilidade."
-            ),
-            "call": "Ligar · 963 212 185",
-            "whatsapp": "WhatsApp · 963 212 185",
-        },
-        "en": {
-            "text": (
-                "Service provided by a FAZDETUDO.PT partner. "
-                "Contact Caterina directly to arrange availability."
-            ),
-            "call": "Call · 963 212 185",
-            "whatsapp": "WhatsApp · 963 212 185",
-        },
-        "es": {
-            "text": (
-                "Servicio realizado por colaboradora FAZDETUDO.PT. "
-                "Contacte a Caterina directamente para concertar disponibilidad."
-            ),
-            "call": "Llamar · 963 212 185",
-            "whatsapp": "WhatsApp · 963 212 185",
-        },
-        "fr": {
-            "text": (
-                "Service réalisé par une partenaire FAZDETUDO.PT. "
-                "Contactez Caterina directement pour convenir des disponibilités."
-            ),
-            "call": "Appeler · 963 212 185",
-            "whatsapp": "WhatsApp · 963 212 185",
-        },
-    },
-    "servico-remodelacoes.html": {
-        "partner_id": "valeriu-cantemir",
-        "mode": "phone_only",
-        "schema_provider": {
-            "@type": "Person",
-            "name": "Valeriu Cantemir",
-            "telephone": "+351964400960",
-        },
-        "pt": {
-            "text": (
-                "Serviço disponibilizado através de parceiro FAZDETUDO.PT "
-                "especializado em obras e remodelações. Ligue para Valeriu Cantemir."
-            ),
-            "call": "Ligar · 964 400 960",
-        },
-        "en": {
-            "text": (
-                "Service provided through a FAZDETUDO.PT partner specialised "
-                "in construction and renovations. Call Valeriu Cantemir."
-            ),
-            "call": "Call · 964 400 960",
-        },
-        "es": {
-            "text": (
-                "Servicio disponible a través de colaborador FAZDETUDO.PT "
-                "especializado en obras y reformas. Llame a Valeriu Cantemir."
-            ),
-            "call": "Llamar · 964 400 960",
-        },
-        "fr": {
-            "text": (
-                "Service proposé via un partenaire FAZDETUDO.PT spécialisé "
-                "en travaux et rénovations. Appelez Valeriu Cantemir."
-            ),
-            "call": "Appeler · 964 400 960",
-        },
-    },
-    "servico-recuperar-casa.html": {
-        "partner_id": "valeriu-cantemir",
-        "mode": "phone_only",
-        "schema_provider": {
-            "@type": "Person",
-            "name": "Valeriu Cantemir",
-            "telephone": "+351964400960",
-        },
-        "pt": {
-            "text": (
-                "Serviço disponibilizado através de parceiro FAZDETUDO.PT "
-                "especializado em obras e remodelações. Ligue para Valeriu Cantemir."
-            ),
-            "call": "Ligar · 964 400 960",
-        },
-        "en": {
-            "text": (
-                "Service provided through a FAZDETUDO.PT partner specialised "
-                "in construction and renovations. Call Valeriu Cantemir."
-            ),
-            "call": "Call · 964 400 960",
-        },
-        "es": {
-            "text": (
-                "Servicio disponible a través de colaborador FAZDETUDO.PT "
-                "especializado en obras y reformas. Llame a Valeriu Cantemir."
-            ),
-            "call": "Llamar · 964 400 960",
-        },
-        "fr": {
-            "text": (
-                "Service proposé via un partenaire FAZDETUDO.PT spécialisé "
-                "en travaux et rénovations. Appelez Valeriu Cantemir."
-            ),
-            "call": "Appeler · 964 400 960",
-        },
-    },
-    "servico-climatizacao.html": {
-        "partner_id": "airfix",
-        "mode": "website",
-        "schema_provider": {
-            "@type": "Organization",
-            "name": "AirFix.pt",
-            "url": "https://airfix.pt/",
-        },
-        "pt": {
-            "text": (
-                "Serviço especializado realizado através da AirFix.pt, "
-                "parceiro FAZDETUDO.PT."
-            ),
-            "visit": "Visitar AirFix.pt",
-        },
-        "en": {
-            "text": (
-                "Specialist service provided through AirFix.pt, "
-                "a FAZDETUDO.PT partner."
-            ),
-            "visit": "Visit AirFix.pt",
-        },
-        "es": {
-            "text": (
-                "Servicio especializado realizado a través de AirFix.pt, "
-                "colaborador FAZDETUDO.PT."
-            ),
-            "visit": "Visitar AirFix.pt",
-        },
-        "fr": {
-            "text": (
-                "Service spécialisé réalisé via AirFix.pt, "
-                "partenaire FAZDETUDO.PT."
-            ),
-            "visit": "Visiter AirFix.pt",
-        },
-    },
-}
-
 LANG_DIRS = ("en", "es", "fr")
+
+_ZONE_H2_MARKERS = (
+    "<h2>Zonas de Atendimento</h2>",
+    "<h2>Zonas de Atendimento na Grande Lisboa e Setúbal:</h2>",
+    "<h2>Service Areas</h2>",
+    "<h2>Zonas de Servicio</h2>",
+    "<h2>Zones d'intervention</h2>",
+)
 
 
 def _default_provider() -> dict:
@@ -243,13 +99,14 @@ def _default_provider() -> dict:
 
 def json_ld(slug: str, lang: str) -> str:
     meta = localized_meta(slug, lang)
-    override = PARTNER_SERVICE_CTA.get(slug)
-    if override and override.get("schema_provider"):
-        provider = dict(override["schema_provider"])
+    partners = partners_for_service(slug)
+    brand = None
+    if partners:
+        entities = [partner_schema_entity(p) for p in partners]
+        provider = entities[0] if len(entities) == 1 else entities
         brand = {"@type": "Brand", "name": "FAZDETUDO.PT", "url": BASE_URL}
     else:
         provider = _default_provider()
-        brand = None
     data = {
         "@context": "https://schema.org",
         "@type": "Service",
@@ -281,79 +138,85 @@ def get_body_html(slug: str, lang: str) -> str:
     return build_body_html(slug, lang).strip()
 
 
+def split_body_at_zones(body: str, lang: str) -> tuple[str, str]:
+    """Split service body so partners can sit before zones on mobile."""
+    markers = list(_ZONE_H2_MARKERS)
+    ui_marker = f'<h2>{UI[lang]["h2_zones"]}</h2>'
+    if ui_marker not in markers:
+        markers.insert(0, ui_marker)
+
+    for marker in markers:
+        idx = body.find(marker)
+        if idx != -1:
+            return body[:idx].rstrip(), body[idx:].lstrip()
+    return body, ""
+
+
+def build_sidebar_partners_html(slug: str, lang: str, prefix: str) -> str:
+    partners = partners_for_service(slug)
+    if not partners:
+        return ""
+    cards = "\n".join(
+        build_partner_sidebar_card(partner, lang, prefix) for partner in partners
+    )
+    return f"""                <div class="service-sidebar-partners" id="service-partners">
+{cards}
+                </div>"""
+
+
 def render_page(slug: str, lang: str) -> str:
     service_id = service_id_from_slug(slug)
     meta = localized_meta(slug, lang)
     ui = UI[lang]
     prefix = asset_prefix(lang)
     canonical = page_url(slug, lang)
+    partners = partners_for_service(slug)
+    body = get_body_html(slug, lang)
+
     cta_p = ui["cta_p"].format(service=meta["service_name"])
+    cta_h3 = ui["cta_h3"]
     cta_call = ui["cta_call"]
     cta_wa = ui["cta_wa"]
     call_href = tel_href()
     wa_link = wa_href_for_message(meta["wa_message"])
-    show_wa = True
     hide_float_wa = False
+    layout_mod = ""
+    cta_box_mod = ""
+    sidebar_partners = ""
+    body_before = body
+    body_after = ""
 
-    override = PARTNER_SERVICE_CTA.get(slug)
-    cta_actions = ""
-    if override:
-        partner = get_partner(override["partner_id"])
-        copy = override[lang]
-        cta_p = copy["text"]
+    if partners:
         hide_float_wa = True
-        mode = override["mode"]
-        if mode == "phone_only":
-            show_wa = False
-            cta_call = copy["call"]
-            call_href = partner["tel_href"] if partner else call_href
-            cta_actions = (
-                f'                    <a href="{call_href}" class="btn btn-primary btn-lg service-cta-call">\n'
-                f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {cta_call}\n'
-                f"                    </a>"
-            )
-        elif mode == "website":
-            show_wa = False
-            visit = copy["visit"]
-            site = partner.get("website", "https://airfix.pt/") if partner else "https://airfix.pt/"
-            cta_actions = (
-                f'                    <a href="{site}" class="btn btn-primary btn-lg" '
-                f'target="_blank" rel="noopener noreferrer">\n'
-                f'                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> {visit}\n'
-                f"                    </a>"
-            )
-        else:
-            cta_call = copy["call"]
-            call_href = partner["tel_href"] if partner else call_href
-            cta_wa = copy["whatsapp"]
-            wa_link = partner.get("whatsapp_href", wa_link) if partner else wa_link
-            cta_actions = (
-                f'                    <a href="{wa_link}" class="btn btn-primary btn-lg" '
-                f'target="_blank" rel="noopener noreferrer">\n'
-                f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {cta_wa}\n'
-                f"                    </a>\n"
-                f'                    <a href="{call_href}" class="btn btn-outline btn-lg service-cta-call">\n'
-                f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {cta_call}\n'
-                f"                    </a>"
-            )
+        layout_mod = "service-layout--partners"
+        cta_box_mod = "service-cta-box--partners"
+        cta_h3 = ui["partners_sidebar_h3"]
+        cta_p = ui["partners_sidebar_p"]
+        sidebar_partners = build_sidebar_partners_html(slug, lang, prefix)
+        body_before, body_after = split_body_at_zones(body, lang)
+        cta_actions_block = ""
+    else:
+        cta_actions_block = (
+            '                <div class="service-cta-box-actions">\n'
+            f'                    <a href="{wa_link}" class="btn btn-primary btn-lg" '
+            f'target="_blank" rel="noopener noreferrer">\n'
+            f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {cta_wa}\n'
+            f"                    </a>\n"
+            f'                    <a href="{call_href}" class="btn btn-outline btn-lg service-cta-call">\n'
+            f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {cta_call}\n'
+            f"                    </a>\n"
+            "                </div>"
+        )
 
-    if not cta_actions:
-        if show_wa:
-            cta_actions = (
-                f'                    <a href="{wa_link}" class="btn btn-primary btn-lg" '
-                f'target="_blank" rel="noopener noreferrer">\n'
-                f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {cta_wa}\n'
-                f"                    </a>\n"
-                f'                    <a href="{call_href}" class="btn btn-outline btn-lg service-cta-call">\n'
-                f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {cta_call}\n'
-                f"                    </a>"
-            )
-        else:
-            cta_actions = (
-                f'                    <a href="{call_href}" class="btn btn-primary btn-lg service-cta-call">\n'
-                f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {cta_call}\n'
-                f"                    </a>"
-            )
+    body_after_block = ""
+    if body_after.strip():
+        body_after_block = (
+            '                <div class="service-main-col service-main-col--bottom">\n'
+            '                    <div class="service-rich-text">\n'
+            f"{body_after}\n"
+            "                    </div>\n"
+            "                </div>"
+        )
 
     head = render_head(
         page_title=meta["page_title"],
@@ -397,10 +260,14 @@ def render_page(slug: str, lang: str) -> str:
             "ASSET_PREFIX": prefix,
             "H1_TITLE": meta["h1"],
             "LEAD_TEXT": ui["lead"],
-            "BODY_HTML": get_body_html(slug, lang),
-            "CTA_H3": ui["cta_h3"],
+            "LAYOUT_MOD": layout_mod,
+            "CTA_BOX_MOD": cta_box_mod,
+            "BODY_BEFORE": body_before,
+            "BODY_AFTER_BLOCK": body_after_block,
+            "SIDEBAR_PARTNERS": sidebar_partners,
+            "CTA_H3": cta_h3,
             "CTA_P": cta_p,
-            "CTA_ACTIONS": cta_actions,
+            "CTA_ACTIONS_BLOCK": cta_actions_block,
         },
     )
     return html

@@ -15,21 +15,21 @@
                 <p class="service-article-lead">{{LEAD_TEXT}}</p>
             </header>
 
-            <div class="service-layout">
-                <div class="service-main-col">
+            <div class="service-layout {{LAYOUT_MOD}}">
+                <div class="service-main-col service-main-col--top">
                     <div class="service-rich-text">
-                {{BODY_HTML}}
+{{BODY_BEFORE}}
                     </div>
                 </div>
                 <aside class="service-sidebar">
-                    <div class="service-cta-box">
+                    <div class="service-cta-box {{CTA_BOX_MOD}}">
                 <h3>{{CTA_H3}}</h3>
                 <p>{{CTA_P}}</p>
-                <div class="service-cta-box-actions">
-{{CTA_ACTIONS}}
-                </div>
+{{SIDEBAR_PARTNERS}}
+{{CTA_ACTIONS_BLOCK}}
                     </div>
                 </aside>
+{{BODY_AFTER_BLOCK}}
             </div>
         </article>
     </main>

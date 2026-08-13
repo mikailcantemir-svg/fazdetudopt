@@ -3825,11 +3825,33 @@ html.js-fade .fade-in.visible {
 .service-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    grid-template-areas:
+        "top sidebar"
+        "bottom sidebar";
     gap: 32px;
     align-items: start;
 }
 
+.service-layout--partners {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 380px);
+}
+
+.service-main-col--top {
+    grid-area: top;
+    min-width: 0;
+}
+
+.service-main-col--bottom {
+    grid-area: bottom;
+    min-width: 0;
+}
+
+.service-main-col--bottom:has(.service-rich-text:empty) {
+    display: none;
+}
+
 .service-sidebar {
+    grid-area: sidebar;
     position: sticky;
     top: 100px;
 }
@@ -3895,6 +3917,144 @@ html.js-fade .fade-in.visible {
     justify-content: center;
 }
 
+.service-cta-box-actions:empty {
+    display: none;
+}
+
+.service-cta-box--partners {
+    text-align: left;
+    margin-top: 0;
+    padding: 22px;
+}
+
+.service-cta-box--partners > h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+
+.service-cta-box--partners > p {
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.service-sidebar-partners {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.partner-sidebar-card {
+    background: #fff;
+    border: 1px solid rgba(26, 43, 73, 0.1);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+}
+
+.partner-sidebar-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.partner-sidebar-media {
+    flex: 0 0 auto;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e8ecf1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-sidebar-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.partner-sidebar-media--photo {
+    border-radius: 50%;
+}
+
+.partner-sidebar-media--photo img {
+    object-fit: cover;
+}
+
+.partner-sidebar-media--icon {
+    color: var(--secondary-color);
+    background: rgba(var(--primary-rgb), 0.08);
+    font-size: 1.2rem;
+}
+
+.partner-sidebar-meta {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.partner-sidebar-meta .partner-dir-badge {
+    display: inline-flex;
+    margin: 0 0 4px;
+    font-size: 0.68rem;
+    padding: 3px 8px;
+}
+
+.partner-sidebar-name {
+    margin: 0 0 2px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    line-height: 1.2;
+}
+
+.partner-sidebar-category,
+.partner-sidebar-blurb,
+.partner-sidebar-location {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.35;
+}
+
+.partner-sidebar-location {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.partner-sidebar-location i {
+    color: var(--primary-color);
+    font-size: 0.75rem;
+}
+
+.partner-sidebar-phone {
+    margin: 8px 0 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    white-space: nowrap;
+}
+
+.partner-sidebar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.partner-sidebar-actions .partner-dir-btn {
+    flex: 1 1 auto;
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 0.84rem;
+    justify-content: center;
+}
+
 .service-cta-call {
     background: #ffffff;
     color: var(--secondary-color);
@@ -3912,6 +4072,8 @@ html.js-fade .fade-in.visible {
     color: #fff;
 }
 
+/* Service-page partner profiles live in the sidebar (see .partner-sidebar-*). */
+
 .service-page-footer--brand {
     padding: 40px 0;
     background: var(--secondary-color);
@@ -3923,8 +4085,13 @@ html.js-fade .fade-in.visible {
 }
 
 @media (max-width: 900px) {
-    .service-layout {
+    .service-layout,
+    .service-layout--partners {
         grid-template-columns: 1fr;
+        grid-template-areas:
+            "top"
+            "sidebar"
+            "bottom";
     }
 
     .service-sidebar {
@@ -3933,6 +4100,10 @@ html.js-fade .fade-in.visible {
 
     .service-hero {
         padding: 32px 24px;
+    }
+
+    .service-cta-box--partners {
+        margin-top: 8px;
     }
 }
 

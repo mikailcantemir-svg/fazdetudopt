@@ -657,6 +657,59 @@ def partner_category_ids(partner: dict) -> list[str]:
     return [category] if category in PARTNER_CATEGORIES else []
 
 
+# Page slug → partner category ids (source of truth for service-page partner sections).
+# Do NOT derive this from partner["service_slug"] — specialised categories stay explicit.
+SERVICE_PARTNER_CATEGORIES: dict[str, list[str]] = {
+    "servico-limpezas.html": ["limpezas"],
+    "servico-climatizacao.html": ["avac"],
+    "servico-remodelacoes.html": ["remodelacoes-gerais", "obras-gerais"],
+    "servico-recuperar-casa.html": ["recuperacao-casa", "obras-gerais"],
+}
+
+
+def partners_for_service(slug: str) -> list[dict]:
+    """Active partners matching any category mapped to this service page.
+
+    Preserves RECOMMENDED_PARTNERS order and never returns duplicates.
+    """
+    category_ids = set(SERVICE_PARTNER_CATEGORIES.get(slug, []))
+    if not category_ids:
+        return []
+
+    matched: list[dict] = []
+    seen: set[str] = set()
+    for partner in active_partners():
+        partner_id = partner.get("id")
+        if not partner_id or partner_id in seen:
+            continue
+        if category_ids.intersection(partner_category_ids(partner)):
+            matched.append(partner)
+            seen.add(partner_id)
+    return matched
+
+
+def partner_schema_entity(partner: dict) -> dict:
+    """Build a Schema.org Person/Organization node from partner data only."""
+    if partner.get("type") == "external":
+        entity: dict = {
+            "@type": "Organization",
+            "name": partner["name"],
+        }
+        website = partner.get("website")
+        if website:
+            entity["url"] = website
+        return entity
+
+    entity = {
+        "@type": "Person",
+        "name": partner["name"],
+    }
+    tel_href = partner.get("tel_href") or ""
+    if tel_href.startswith("tel:"):
+        entity["telephone"] = tel_href[4:]
+    return entity
+
+
 # type: "external" | "direct_contact"
 RECOMMENDED_PARTNERS: list[dict] = [
     {
@@ -779,41 +832,57 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "icon": "broom",
         "phone_display": "963 014 604",
         "tel_href": "tel:+351963014604",
+        "whatsapp_href": "https://wa.me/351963014604",
         "service_slug": "servico-limpezas.html",
-        # Zones not confirmed yet — do not invent coverage.
-        "zones": [],
+        "location": {
+            "pt": "Grande Lisboa",
+            "en": "Greater Lisbon",
+            "es": "Gran Lisboa",
+            "fr": "Grand Lisbonne",
+        },
+        "zones": [
+            "grande-lisboa",
+        ],
         "copy": {
             "pt": {
                 "role": "Serviços de limpeza · contacto direto",
                 "call": "Ligar",
+                "whatsapp": "WhatsApp",
                 "secondary_cta": "Ver limpezas",
                 "call_aria": (
                     "Ligar diretamente para Maria, parceira de serviços de limpeza"
                 ),
+                "wa_aria": "Contactar Maria por WhatsApp",
             },
             "en": {
                 "role": "Cleaning services · direct contact",
                 "call": "Call",
+                "whatsapp": "WhatsApp",
                 "secondary_cta": "View cleaning services",
                 "call_aria": (
                     "Call Maria directly, cleaning services partner"
                 ),
+                "wa_aria": "Contact Maria on WhatsApp",
             },
             "es": {
                 "role": "Servicios de limpieza · contacto directo",
                 "call": "Llamar",
+                "whatsapp": "WhatsApp",
                 "secondary_cta": "Ver servicios de limpieza",
                 "call_aria": (
                     "Llamar directamente a Maria, colaboradora de servicios de limpieza"
                 ),
+                "wa_aria": "Contactar a Maria por WhatsApp",
             },
             "fr": {
                 "role": "Services de nettoyage · contact direct",
                 "call": "Appeler",
+                "whatsapp": "WhatsApp",
                 "secondary_cta": "Voir les services de nettoyage",
                 "call_aria": (
                     "Appeler directement Maria, partenaire de services de nettoyage"
                 ),
+                "wa_aria": "Contacter Maria sur WhatsApp",
             },
         },
     },
@@ -893,7 +962,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
             "remodelacoes-gerais",
         ],
         "type": "direct_contact",
-        "name": "Valeriu Cantemir",
+        "name": "Valeriu",
         "recommended": False,
         "featured": False,
         "phone_display": "964 400 960",
@@ -918,7 +987,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "call": "Ligar",
                 "secondary_cta": "Ver remodelações",
                 "call_aria": (
-                    "Ligar diretamente para Valeriu Cantemir, parceiro de obras "
+                    "Ligar diretamente para Valeriu, parceiro de obras "
                     "e remodelações"
                 ),
             },
@@ -929,7 +998,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "call": "Call",
                 "secondary_cta": "View renovations",
                 "call_aria": (
-                    "Call Valeriu Cantemir directly, construction and renovations partner"
+                    "Call Valeriu directly, construction and renovations partner"
                 ),
             },
             "es": {
@@ -939,7 +1008,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "call": "Llamar",
                 "secondary_cta": "Ver reformas",
                 "call_aria": (
-                    "Llamar directamente a Valeriu Cantemir, colaborador de obras y reformas"
+                    "Llamar directamente a Valeriu, colaborador de obras y reformas"
                 ),
             },
             "fr": {
@@ -949,7 +1018,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "call": "Appeler",
                 "secondary_cta": "Voir les rénovations",
                 "call_aria": (
-                    "Appeler directement Valeriu Cantemir, partenaire travaux et rénovations"
+                    "Appeler directement Valeriu, partenaire travaux et rénovations"
                 ),
             },
         },
