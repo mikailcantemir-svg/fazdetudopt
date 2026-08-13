@@ -100,8 +100,15 @@ PARTNER_CATEGORIES: dict[str, dict[str, str]] = {
     },
 }
 
-# Homepage quick filter (only categories with partners today)
-FILTER_CATEGORY_IDS = ("avac", "limpezas")
+# Homepage partner finder — ordered subset; runtime filters to categories with partners.
+FILTER_CATEGORY_IDS = (
+    "avac",
+    "limpezas",
+    "instalacao-tv",
+    "obras-gerais",
+    "recuperacao-casa",
+    "remodelacoes-gerais",
+)
 
 # Full partners page — all service filters prepared for growth
 PAGE_FILTER_CATEGORY_IDS = (
@@ -209,41 +216,102 @@ PARTNER_STATUS_LABELS = {
 
 PARTNER_DIRECTORY_UI = {
     "pt": {
-        "title": "Que profissional procura?",
-        "subtitle": "Escolha o serviço e encontre profissionais disponíveis para contacto direto.",
-        "select_label": "Selecione um serviço",
-        "select_placeholder": "Selecione um serviço",
-        "select_aria": "Selecionar um serviço para ver profissionais",
+        "kicker": "SERVIÇOS ESPECIALIZADOS",
+        "title": "Procura um serviço especializado?",
+        "subtitle": (
+            "Escolha o serviço de que precisa e veja imediatamente os profissionais disponíveis."
+        ),
+        "handyman_note": "Para pequenas reparações e handyman, fale diretamente connosco.",
+        "handyman_cta": "Pedir orçamento por WhatsApp →",
+        "handyman_aria": "Pedir orçamento handyman por WhatsApp à FAZDETUDO.PT",
+        "select_label": "Que serviço procura?",
+        "select_placeholder": "Que serviço procura?",
+        "select_aria": "Selecionar um serviço para ver parceiros disponíveis",
+        "services_available": "Serviços disponíveis",
+        "back_services": "Ver todos os serviços",
+        "count_one": "1 profissional disponível",
+        "count_many": "{n} profissionais disponíveis",
+        "results_aria": "Resultados de parceiros",
         "empty": "Ainda não há parceiros nesta categoria. Em breve teremos novidades.",
-        "results_aria": "Profissionais disponíveis",
+        "cta_all": "Ver todos os parceiros →",
     },
     "en": {
-        "title": "Which professional do you need?",
-        "subtitle": "Choose a service and find professionals available for direct contact.",
-        "select_label": "Select a service",
-        "select_placeholder": "Select a service",
-        "select_aria": "Select a service to see professionals",
+        "kicker": "SPECIALIST SERVICES",
+        "title": "Looking for a specialist service?",
+        "subtitle": (
+            "Choose the service you need and see available professionals immediately."
+        ),
+        "handyman_note": "For small repairs and handyman jobs, contact us directly.",
+        "handyman_cta": "Request a quote on WhatsApp →",
+        "handyman_aria": "Request a handyman quote on WhatsApp from FAZDETUDO.PT",
+        "select_label": "What service do you need?",
+        "select_placeholder": "What service do you need?",
+        "select_aria": "Select a service to see available partners",
+        "services_available": "Available services",
+        "back_services": "View all services",
+        "count_one": "1 professional available",
+        "count_many": "{n} professionals available",
+        "results_aria": "Partner results",
         "empty": "No partners in this category yet. More coming soon.",
-        "results_aria": "Available professionals",
+        "cta_all": "View all partners →",
     },
     "es": {
-        "title": "¿Qué profesional busca?",
-        "subtitle": "Elija el servicio y encuentre profesionales disponibles para contacto directo.",
-        "select_label": "Seleccione un servicio",
-        "select_placeholder": "Seleccione un servicio",
-        "select_aria": "Seleccionar un servicio para ver profesionales",
+        "kicker": "SERVICIOS ESPECIALIZADOS",
+        "title": "¿Busca un servicio especializado?",
+        "subtitle": (
+            "Elija el servicio que necesita y vea de inmediato los profesionales disponibles."
+        ),
+        "handyman_note": "Para pequeñas reparaciones y handyman, hable directamente con nosotros.",
+        "handyman_cta": "Pedir presupuesto por WhatsApp →",
+        "handyman_aria": "Pedir presupuesto handyman por WhatsApp a FAZDETUDO.PT",
+        "select_label": "¿Qué servicio busca?",
+        "select_placeholder": "¿Qué servicio busca?",
+        "select_aria": "Seleccionar un servicio para ver colaboradores disponibles",
+        "services_available": "Servicios disponibles",
+        "back_services": "Ver todos los servicios",
+        "count_one": "1 profesional disponible",
+        "count_many": "{n} profesionales disponibles",
+        "results_aria": "Resultados de colaboradores",
         "empty": "Aún no hay colaboradores en esta categoría. Pronto habrá novedades.",
-        "results_aria": "Profesionales disponibles",
+        "cta_all": "Ver todos los colaboradores →",
     },
     "fr": {
-        "title": "Quel professionnel recherchez-vous ?",
-        "subtitle": "Choisissez le service et trouvez des professionnels disponibles pour un contact direct.",
-        "select_label": "Sélectionnez un service",
-        "select_placeholder": "Sélectionnez un service",
-        "select_aria": "Sélectionner un service pour voir les professionnels",
+        "kicker": "SERVICES SPÉCIALISÉS",
+        "title": "Vous recherchez un service spécialisé ?",
+        "subtitle": (
+            "Choisissez le service dont vous avez besoin et consultez immédiatement "
+            "les professionnels disponibles."
+        ),
+        "handyman_note": "Pour les petites réparations et le handyman, contactez-nous directement.",
+        "handyman_cta": "Demander un devis sur WhatsApp →",
+        "handyman_aria": "Demander un devis handyman sur WhatsApp à FAZDETUDO.PT",
+        "select_label": "Quel service recherchez-vous ?",
+        "select_placeholder": "Quel service recherchez-vous ?",
+        "select_aria": "Sélectionner un service pour voir les partenaires disponibles",
+        "services_available": "Services disponibles",
+        "back_services": "Voir tous les services",
+        "count_one": "1 professionnel disponible",
+        "count_many": "{n} professionnels disponibles",
+        "results_aria": "Résultats des partenaires",
         "empty": "Pas encore de partenaires dans cette catégorie. Bientôt de nouvelles options.",
-        "results_aria": "Professionnels disponibles",
+        "cta_all": "Voir tous les partenaires →",
     },
+}
+
+# Font Awesome icons for homepage category tiles (no marketplace imagery).
+PARTNER_CATEGORY_ICONS: dict[str, str] = {
+    "avac": "snowflake",
+    "limpezas": "broom",
+    "instalacao-tv": "tv",
+    "obras-gerais": "helmet-safety",
+    "recuperacao-casa": "house",
+    "remodelacoes-gerais": "paint-roller",
+    "pinturas": "paint-roller",
+    "canalizacoes": "faucet",
+    "electricidade": "bolt",
+    "carpintaria": "hammer",
+    "jardinagem": "leaf",
+    "piscinas": "water",
 }
 
 PARTNERS_PAGE_META = {
@@ -657,6 +725,20 @@ def partner_category_ids(partner: dict) -> list[str]:
     return [category] if category in PARTNER_CATEGORIES else []
 
 
+def homepage_filter_category_ids() -> tuple[str, ...]:
+    """Category options for the homepage finder (only categories with active partners)."""
+    used: set[str] = set()
+    for partner in active_partners():
+        used.update(partner_category_ids(partner))
+    preferred = [cid for cid in FILTER_CATEGORY_IDS if cid in used]
+    extras = [
+        cid
+        for cid in PAGE_FILTER_CATEGORY_IDS
+        if cid in used and cid not in preferred
+    ]
+    return tuple(preferred + extras)
+
+
 # Page slug → partner category ids (source of truth for service-page partner sections).
 # Do NOT derive this from partner["service_slug"] — specialised categories stay explicit.
 SERVICE_PARTNER_CATEGORIES: dict[str, list[str]] = {
@@ -894,8 +976,8 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "name": "WallFixTV.pt",
         "recommended": True,
         "featured": False,
-        # No official logo asset in repo yet — card uses icon fallback.
-        "logo": None,
+        "logo": "assets/partners/wallfixtv-logo.png",
+        "logo_wide": True,
         "website": "https://www.wallfixtv.pt/",
         "service_slug": "servico-reparacoes-gerais.html",
         "location": {

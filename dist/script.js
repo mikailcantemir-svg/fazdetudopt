@@ -1197,9 +1197,20 @@
         const grid = document.getElementById('partner-directory-grid');
         const results = document.getElementById('partner-directory-results');
         const empty = document.getElementById('partner-directory-empty');
+        const browse = document.getElementById('partner-finder-browse');
+        const resultsTitle = document.getElementById('partner-directory-results-title');
+        const resultsCount = document.getElementById('partner-directory-results-count');
+        const backBtn = document.getElementById('partner-finder-back');
+        const catButtons = [...document.querySelectorAll('.partner-finder-cat')];
         if (!select || !grid || !results) return;
 
         const cards = [...grid.querySelectorAll('[data-partner-category]')];
+        const countOne = resultsCount
+            ? (resultsCount.getAttribute('data-count-one') || '1')
+            : '1';
+        const countManyTpl = resultsCount
+            ? (resultsCount.getAttribute('data-count-many') || '{n}')
+            : '{n}';
 
         function cardCategories(card) {
             const multi = (card.getAttribute('data-partner-categories') || '')
@@ -1211,26 +1222,53 @@
             return single ? [single] : [];
         }
 
+        function formatCount(n) {
+            if (n === 1) return countOne;
+            return countManyTpl.replace('{n}', String(n));
+        }
+
+        function setSelectValue(value, opts) {
+            if (select.value === value) {
+                applyFilter(opts);
+                return;
+            }
+            select.value = value;
+            applyFilter(opts);
+        }
+
         function applyFilter(opts) {
             const scrollOnMobile = opts && opts.scrollOnMobile;
             const value = select.value || '';
-
-            if (!value) {
-                cards.forEach((card) => { card.hidden = true; });
-                if (empty) empty.hidden = true;
-                results.hidden = true;
-                return;
-            }
-
             let visible = 0;
+
             cards.forEach((card) => {
-                const match = cardCategories(card).includes(value);
+                const match = !!value && cardCategories(card).includes(value);
                 card.hidden = !match;
                 if (match) visible += 1;
             });
 
+            catButtons.forEach((btn) => {
+                const active = value && btn.getAttribute('data-category') === value;
+                btn.classList.toggle('is-active', !!active);
+                btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+
+            if (!value) {
+                if (browse) browse.hidden = false;
+                results.hidden = true;
+                if (empty) empty.hidden = true;
+                return;
+            }
+
+            if (browse) browse.hidden = true;
             results.hidden = false;
             if (empty) empty.hidden = visible > 0;
+
+            const selected = select.options[select.selectedIndex];
+            const label = selected ? selected.textContent.trim() : '';
+            if (resultsTitle) resultsTitle.textContent = label;
+            if (resultsCount) resultsCount.textContent = formatCount(visible);
+            grid.classList.toggle('partner-finder-results-grid--single', visible === 1);
 
             if (scrollOnMobile && window.matchMedia('(max-width: 768px)').matches) {
                 results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1238,6 +1276,18 @@
         }
 
         select.addEventListener('change', () => applyFilter({ scrollOnMobile: true }));
+
+        catButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const cat = btn.getAttribute('data-category') || '';
+                setSelectValue(cat, { scrollOnMobile: true });
+            });
+        });
+
+        if (backBtn) {
+            backBtn.addEventListener('click', () => setSelectValue('', {}));
+        }
+
         applyFilter();
     }
 

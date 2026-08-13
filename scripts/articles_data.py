@@ -31,8 +31,262 @@ ARTICLES_INDEX = {
 IMG_VERAO = "../images/artigos/reparacoes-verao-lisboa"
 IMG_AC = "../images/artigos/ar-condicionado"
 IMG_HANDY = "../images/artigos/preco-handyman-lisboa"
+IMG_LIMPEZA = "../images/artigos"
 
 ARTICLES = [
+    {
+        "slug": "empregada-de-limpeza-lisboa-servicos-limpeza.html",
+        "category": "Guias de Limpezas",
+        "published": "2026-08-13",
+        "updated": "2026-08-13",
+        "h1": "Empregada de Limpeza em Lisboa: Como Encontrar o Serviço Certo",
+        "page_title": "Empregada de Limpeza em Lisboa | Limpezas Domésticas",
+        "meta_description": (
+            "Procura empregada de limpeza em Lisboa? Saiba o que avaliar num serviço "
+            "de limpeza doméstica, pós-obra ou regular e encontre profissionais disponíveis."
+        ),
+        "og_title": "Empregada de Limpeza em Lisboa: Como Encontrar o Serviço Certo",
+        "og_image": f"{BASE_URL}/images/artigos/empregada-limpeza-lisboa.webp",
+        "lead": (
+            "Encontrar uma empregada de limpeza em Lisboa pode parecer simples, mas as "
+            "necessidades variam muito de casa para casa. Há quem procure uma limpeza "
+            "pontual, quem precise de apoio semanal e quem necessite de uma limpeza "
+            "profunda ou pós-obra. Através da rede de parceiros FAZDETUDO.PT pode "
+            "consultar profissionais disponíveis e contactá-los diretamente."
+        ),
+        "excerpt": (
+            "Guia prático para escolher limpeza doméstica, profunda ou pós-obra em Lisboa, "
+            "Grande Lisboa e Margem Sul, com profissionais parceiros para contacto direto."
+        ),
+        "related_service_url": f"{BASE_URL}/servico-limpezas.html",
+        "related_service_label": "Ver profissionais de limpeza disponíveis →",
+        "related_intro": "Quer consultar as profissionais de limpeza disponíveis?",
+        "hide_float_wa": True,
+        "cta_mode": "dual_internal",
+        "cta_primary_href": f"{BASE_URL}/servico-limpezas.html",
+        "cta_primary_label": "Ver profissionais de limpeza disponíveis →",
+        "cta_secondary_href": f"{BASE_URL}/parceiros/",
+        "cta_secondary_label": "Ver todos os parceiros →",
+        "cta_h3": "Quer contactar uma profissional de limpeza?",
+        "cta_p": (
+            "Na página de limpezas pode ver as profissionais disponíveis e falar "
+            "diretamente consigo por telefone ou WhatsApp."
+        ),
+        "cta_button": "Ver profissionais de limpeza disponíveis →",
+        "partner_category": "limpezas",
+        "partner_section_title": (
+            "Profissionais de limpeza disponíveis através da FAZDETUDO.PT"
+        ),
+        "partner_section_intro": (
+            "A FAZDETUDO.PT disponibiliza uma rede de parceiros independentes para serviços "
+            "especializados. Nas limpezas, pode consultar os profissionais disponíveis e "
+            "contactá-los diretamente."
+        ),
+        "body_html": f"""
+                <p>Encontrar uma <strong>empregada de limpeza em Lisboa</strong> pode parecer "
+                "simples, mas as necessidades variam muito de casa para casa. Há quem procure "
+                "uma limpeza pontual antes de entregar um apartamento, quem precise de ajuda "
+                "semanal e quem necessite de uma limpeza profunda ou pós-obra.</p>
+                <p>Mais importante do que escolher apenas pelo preço é perceber que tipo de "
+                "limpeza precisa, qual a frequência, que zonas devem ser tratadas e se o "
+                "profissional trabalha na sua área.</p>
+                <p>Através da rede de <a href="{BASE_URL}/parceiros/">parceiros FAZDETUDO.PT</a> "
+                "pode consultar <a href="{BASE_URL}/servico-limpezas.html">profissionais de "
+                "limpeza disponíveis</a> e contactá-los diretamente. A FAZDETUDO.PT não executa "
+                "estes serviços de limpeza — apresenta profissionais independentes da rede.</p>
+
+                <figure class="article-figure">
+                    <img src="{IMG_LIMPEZA}/empregada-limpeza-lisboa.webp"
+                         alt="Empregada de limpeza a realizar limpeza doméstica num apartamento em Lisboa"
+                         width="1536" height="1024" loading="eager" decoding="async">
+                    <figcaption>Uma limpeza bem planeada começa por definir o tipo de serviço, a frequência e as zonas prioritárias.</figcaption>
+                </figure>
+
+                <h2>Que serviços pode fazer uma empregada de limpeza?</h2>
+                <p>Uma <strong>limpeza doméstica</strong> pode cobrir a manutenção do dia a dia "
+                "ou uma intervenção mais completa, conforme o que for combinado. Em muitos "
+                "pedidos na Grande Lisboa, o serviço inclui:</p>
+                <ul>
+                    <li>limpeza regular de casas, apartamentos e moradias;</li>
+                    <li>cozinhas, casas de banho, quartos e salas;</li>
+                    <li>remoção de pó, aspiração e lavagem de pavimentos;</li>
+                    <li>vidros acessíveis, quando combinado;</li>
+                    <li>organização ligeira, apenas se previamente acordada.</li>
+                </ul>
+                <p>Nem todos os pedidos incluem os mesmos trabalhos. Por isso, convém confirmar "
+                "com a profissional o que está incluído antes de marcar a visita — "
+                "especialmente se precisar de armários interiores, varandas, roupa ou outras "
+                "tarefas específicas.</p>
+
+                <h2>Limpeza regular ou limpeza profunda: qual escolher?</h2>
+                <p>A <strong>limpeza regular</strong> serve sobretudo para manter a casa "
+                "apresentável com frequência: pó, chão, casas de banho, cozinha e zonas de uso "
+                "diário. É a opção mais comum para quem quer apoio semanal ou quinzenal.</p>
+                <p>A <strong>limpeza profunda</strong> vai mais longe. Costuma incluir zonas "
+                "menos tratadas no dia a dia, com maior acumulação de sujidade: rodapés, "
+                "cantos, superfícies detalhadas, cozinha e casas de banho com mais atenção, "
+                "e outras áreas que uma manutenção rápida normalmente não cobre.</p>
+                <p>Se a casa está razoavelmente cuidada e precisa de continuidade, a limpeza "
+                "regular costuma chegar. Se há acumulação, mudança de casa ou muito tempo "
+                "sem limpeza completa, uma limpeza profunda pode ser o ponto de partida "
+                "antes de entrar num ritmo regular.</p>
+
+                <h2>Limpeza pós-obra</h2>
+                <p>A <strong>limpeza pós-obra</strong> é diferente de uma limpeza doméstica "
+                "normal. Depois de pinturas, remodelações ou pequenas obras, é comum "
+                "encontrar pó fino, resíduos, marcas em superfícies, vidros e pavimentos "
+                "que exigem mais tempo e outro tipo de abordagem.</p>
+                <p>Pode envolver limpeza de pó, remoção de resíduos leves, tratamento de "
+                "vidros, pavimentos, armários e outras superfícies — sempre conforme o "
+                "estado do imóvel e o que for combinado com a profissional.</p>
+                <p>Não se trata, tipicamente, de remoção de resíduos de construção "
+                "especializados ou trabalhos técnicos fora do âmbito de limpeza. Se a "
+                "obra deixou entulho volumoso ou materiais perigosos, isso deve ser "
+                "esclarecido à parte.</p>
+
+                <h2>Quanto tempo demora uma limpeza?</h2>
+                <p>Não existe um tempo único para todas as casas. A duração depende de "
+                "vários fatores:</p>
+                <ul>
+                    <li>dimensão do imóvel e número de divisões;</li>
+                    <li>estado geral da casa;</li>
+                    <li>tipo de limpeza (regular, profunda ou pós-obra);</li>
+                    <li>frequência pretendida;</li>
+                    <li>existência de animais;</li>
+                    <li>vidros, cozinha e casas de banho com mais detalhe.</li>
+                </ul>
+                <p>Um conselho útil: envie fotografias e explique previamente o que "
+                "pretende. Isso ajuda a profissional a avaliar melhor o trabalho e a "
+                "disponibilidade antes de confirmar a visita.</p>
+
+                <h2>O que perguntar antes de contratar uma empregada de limpeza?</h2>
+                <p>Antes de avançar, estas perguntas ajudam a evitar mal-entendidos:</p>
+                <ol>
+                    <li>Em que zonas trabalha?</li>
+                    <li>Faz serviços pontuais ou regulares?</li>
+                    <li>Que trabalhos estão incluídos?</li>
+                    <li>Os produtos são fornecidos pelo cliente ou pela profissional?</li>
+                    <li>Quanto tempo estima para o serviço?</li>
+                    <li>Trabalha sozinha ou acompanhada?</li>
+                    <li>Tem disponibilidade no dia pretendido?</li>
+                    <li>Como é feito o pagamento?</li>
+                </ol>
+                <p>As respostas variam de profissional para profissional. Confirme "
+                "sempre diretamente consigo.</p>
+
+                <h2>Empregada de limpeza na Grande Lisboa</h2>
+                <p>Muitas famílias e senhorios na <strong>Grande Lisboa</strong> procuram "
+                "apoio para limpeza de apartamentos e moradias, sobretudo em zonas como "
+                "Lisboa, Oeiras, Cascais, Sintra, Amadora, Odivelas ou Loures. As "
+                "necessidades mudam: há quem queira manutenção semanal, quem prepare um "
+                "imóvel para visita ou quem precise de limpeza após obras.</p>
+                <p>O mais importante é escolher uma profissional que trabalhe na sua "
+                "área e que responda ao tipo de limpeza que realmente precisa. Na "
+                "página de <a href="{BASE_URL}/servico-limpezas.html">serviços de "
+                "limpeza</a> pode ver quem está disponível para contacto direto.</p>
+
+                <h2>Limpezas na Margem Sul e Azeitão</h2>
+                <p>Também existem profissionais parceiros que trabalham na "
+                "<strong>Margem Sul</strong>, incluindo zonas como Almada, Seixal, "
+                "Barreiro e Azeitão. A cobertura exata de cada profissional deve ser "
+                "confirmada no contacto — a disponibilidade pode variar consoante o "
+                "dia, a distância e o tipo de serviço.</p>
+                <p>Se vive na Margem Sul, indique a localidade logo no primeiro "
+                "contacto. Isso acelera a resposta e evita deslocações desnecessárias.</p>
+
+                {{{{PARTNER_SECTION}}}}
+
+                <p>Depois de falar com a profissional, pode também voltar à página de "
+                "<a href="{BASE_URL}/servico-limpezas.html">limpezas domésticas</a> "
+                "sempre que precisar de consultar novamente os contactos disponíveis.</p>
+
+                <h2>Quanto custa uma empregada de limpeza em Lisboa?</h2>
+                <p>O preço de um serviço de limpeza pode variar consoante a duração, "
+                "dimensão do imóvel, frequência e tipo de trabalho. Uma limpeza "
+                "regular de manutenção não tem as mesmas necessidades de uma limpeza "
+                "profunda ou pós-obra.</p>
+                <p>Para receber uma indicação mais adequada, explique à profissional "
+                "quantas divisões existem, que tipo de limpeza pretende e, quando "
+                "possível, envie fotografias.</p>
+
+                <h2>Limpeza semanal, quinzenal ou pontual?</h2>
+                <p><strong>Semanal:</strong> adequada para quem quer manutenção "
+                "contínua da casa, com menos acumulação entre visitas.</p>
+                <p><strong>Quinzenal:</strong> útil para casas que precisam de apoio "
+                "regular, mas com menor frequência.</p>
+                <p><strong>Pontual:</strong> frequente em mudanças, visitas, "
+                "preparação de imóvel, limpeza profunda, Airbnb ou entrada e saída "
+                "de inquilinos.</p>
+                <p>Se gere um alojamento ou recebe hóspedes com regularidade, a "
+                "limpeza pontual entre estadias pode ser tão importante como a "
+                "manutenção semanal de uma habitação própria.</p>
+
+                <h2>Limpeza para Airbnb e Alojamento Local</h2>
+                <p>Nos alojamentos locais, o tempo entre hóspedes é curto e a "
+                "apresentação do imóvel conta. Em muitos casos, o foco está nas "
+                "casas de banho, na cozinha e no aspeto geral da casa.</p>
+                <p>Trabalhos como tratamento de roupa ou reposição de consumíveis "
+                "só devem ser considerados se forem previamente acordados. Confirme "
+                "diretamente com a profissional quais os serviços disponíveis para "
+                "Airbnb ou Alojamento Local.</p>
+
+                <p>Para pequenas reparações, montagens e trabalhos de handyman, "
+                "consulte também os <a href="{BASE_URL}/">serviços FAZDETUDO.PT</a>. "
+                "Assim separa claramente o contacto direto de handyman dos "
+                "<a href="{BASE_URL}/servico-limpezas.html">serviços de limpeza</a> "
+                "realizados por profissionais parceiros.</p>
+""",
+        "faq": [
+            {
+                "q": "Como encontrar uma empregada de limpeza em Lisboa?",
+                "a": (
+                    "Defina o tipo de limpeza (regular, profunda ou pós-obra), a frequência "
+                    "e a zona. Depois consulte os profissionais disponíveis na página de "
+                    "Limpezas da FAZDETUDO.PT e contacte diretamente a profissional que "
+                    "melhor corresponde ao que precisa."
+                ),
+            },
+            {
+                "q": "Posso contratar apenas uma limpeza pontual?",
+                "a": (
+                    "Sim. Muitos pedidos são pontuais — por exemplo, antes de uma visita, "
+                    "numa mudança ou após obras. Confirme sempre a disponibilidade e o "
+                    "âmbito do serviço com a profissional."
+                ),
+            },
+            {
+                "q": "Há profissionais para limpeza pós-obra?",
+                "a": (
+                    "Pode existir disponibilidade para limpeza pós-obra, mas o trabalho "
+                    "depende do estado do imóvel e do que for combinado. Explique o "
+                    "contexto e envie fotografias para uma avaliação mais clara."
+                ),
+            },
+            {
+                "q": "Posso pedir limpeza semanal?",
+                "a": (
+                    "Sim, a limpeza semanal é uma das opções mais procuradas para "
+                    "manutenção contínua. A disponibilidade deve ser confirmada "
+                    "diretamente com a profissional."
+                ),
+            },
+            {
+                "q": "A FAZDETUDO.PT realiza diretamente o serviço de limpeza?",
+                "a": (
+                    "Não. Os serviços de limpeza apresentados nesta página são realizados "
+                    "por profissionais parceiros independentes da rede FAZDETUDO.PT, que "
+                    "pode contactar diretamente."
+                ),
+            },
+            {
+                "q": "Como contactar uma profissional?",
+                "a": (
+                    "Na página de Limpezas pode consultar os profissionais disponíveis e "
+                    "utilizar diretamente os botões de telefone ou WhatsApp."
+                ),
+            },
+        ],
+    },
     {
         "slug": "10-reparacoes-em-casa-antes-do-verao-lisboa.html",
         "category": "Guias de Manutenção",

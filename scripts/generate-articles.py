@@ -124,10 +124,87 @@ def _cta_actions_for_article(article: dict) -> str:
             )
         return actions
 
+    if article.get("cta_mode") == "dual_internal":
+        primary_href = article["cta_primary_href"]
+        primary_label = article["cta_primary_label"]
+        actions = (
+            f'                    <a href="{html.escape(primary_href, quote=True)}" '
+            f'class="btn btn-primary btn-lg">\n'
+            f"                        {html.escape(primary_label)}\n"
+            f"                    </a>"
+        )
+        secondary_href = article.get("cta_secondary_href")
+        secondary_label = article.get("cta_secondary_label")
+        if secondary_href and secondary_label:
+            actions += (
+                f'\n                    <a href="{html.escape(secondary_href, quote=True)}" '
+                f'class="btn btn-outline btn-lg">\n'
+                f"                        {html.escape(secondary_label)}\n"
+                f"                    </a>"
+            )
+        return actions
+
     return _default_cta_actions(
         wa_href=wa_href_for_message(article.get("wa_message") or "Olá! Gostaria de pedir um orçamento."),
         wa_label=article["cta_button"],
     )
+
+
+def _partner_section_html(article: dict) -> str:
+    """Build partner cards from recommended_partners for article.partner_category."""
+    category = article.get("partner_category")
+    if not category:
+        return ""
+
+    from partner_cards import build_partner_directory_card
+    from recommended_partners import (
+        PARTNER_CATEGORIES,
+        active_partners,
+        partner_category_ids,
+    )
+
+    partners = [
+        p for p in active_partners() if category in partner_category_ids(p)
+    ]
+    if not partners:
+        return ""
+
+    title = article.get("partner_section_title") or (
+        f'Profissionais de {PARTNER_CATEGORIES.get(category, {}).get("pt", "serviço")} '
+        "disponíveis através da FAZDETUDO.PT"
+    )
+    intro = article.get("partner_section_intro") or (
+        "A FAZDETUDO.PT disponibiliza uma rede de parceiros independentes para serviços "
+        "especializados. Consulte os profissionais disponíveis e contacte-os diretamente."
+    )
+
+    cards = "\n".join(
+        build_partner_directory_card(
+            partner,
+            LANG,
+            ASSET_PREFIX,
+            hidden=False,
+            extra_class="article-partner-card",
+            show_secondary_cta=False,
+        )
+        for partner in partners
+    )
+    return (
+        f"\n                <h2>{html.escape(title)}</h2>\n"
+        f"                <p>{intro}</p>\n"
+        f'                <div class="article-partner-grid">\n'
+        f"{cards}\n"
+        f"                </div>\n"
+    )
+
+
+def _expand_body_html(article: dict) -> str:
+    body = article["body_html"]
+    if "{{PARTNER_SECTION}}" in body:
+        body = body.replace("{{PARTNER_SECTION}}", _partner_section_html(article))
+    elif article.get("partner_category"):
+        body = body.rstrip() + _partner_section_html(article)
+    return body
 
 
 def _faq_section_html(faq: list[dict]) -> str:
@@ -197,7 +274,7 @@ def render_article(article: dict) -> str:
         f'<p class="article-meta">{html.escape(article["category"])} · '
         f'Atualizado em {_format_date_pt(article["updated"])}</p>'
     )
-    body = article["body_html"].rstrip() + _faq_section_html(article.get("faq", []))
+    body = _expand_body_html(article).rstrip() + _faq_section_html(article.get("faq", []))
 
     related_block = ""
     if article.get("related_service_url"):

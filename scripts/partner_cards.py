@@ -100,8 +100,9 @@ def build_partner_directory_card(
         logo = partner.get("logo")
         if logo:
             logo_src = html.escape(f"{prefix}{logo}", quote=True)
+            wide = " partner-dir-media--wide" if partner.get("logo_wide") else ""
             media_html = (
-                f'<div class="partner-dir-media">'
+                f'<div class="partner-dir-media{wide}">'
                 f'<img src="{logo_src}" alt="{name}" width="72" height="72" '
                 f'loading="lazy" decoding="async"></div>'
             )
@@ -234,8 +235,9 @@ def build_partner_sidebar_card(
         logo = partner.get("logo")
         if logo:
             logo_src = html.escape(f"{prefix}{logo}", quote=True)
+            wide = " partner-sidebar-media--wide" if partner.get("logo_wide") else ""
             media_html = (
-                f'<div class="partner-sidebar-media">'
+                f'<div class="partner-sidebar-media{wide}">'
                 f'<img src="{logo_src}" alt="" width="56" height="56" '
                 f'loading="lazy" decoding="async"></div>'
             )

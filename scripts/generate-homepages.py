@@ -47,12 +47,14 @@ from html_partials import (  # noqa: E402
 )
 from partner_cards import build_partner_directory_card  # noqa: E402
 from recommended_partners import (  # noqa: E402
-    FILTER_CATEGORY_IDS,
     HOW_IT_WORKS,
     PARTNER_CATEGORIES,
+    PARTNER_CATEGORY_ICONS,
     PARTNER_DIRECTORY_UI,
     active_partners,
     get_partner,
+    homepage_filter_category_ids,
+    partner_category_ids,
 )
 from slug_registry import (  # noqa: E402
     LANG_HTML,
@@ -563,181 +565,115 @@ def build_testimonials_footer(lang: str) -> str:
 
 
 def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
-    """Strong partners showcase placed after direct services on the homepage."""
-    ui = HOME_UI[lang]
-    cards: list[str] = []
-
-    home_blurbs = {
-        "airfix": {
-            "pt": "Instalação, manutenção, limpeza e assistência técnica de ar condicionado.",
-            "en": "Air conditioning installation, maintenance, cleaning and technical support.",
-            "es": "Instalación, mantenimiento, limpieza y asistencia técnica de aire acondicionado.",
-            "fr": "Installation, entretien, nettoyage et assistance technique en climatisation.",
-        },
-        "wallfixtv": {
-            "pt": "Instalação profissional de televisões, suportes e organização de cabos.",
-            "en": "Professional TV mounting, brackets and cable management.",
-            "es": "Instalación profesional de televisores, soportes y organización de cables.",
-            "fr": "Installation professionnelle de téléviseurs, supports et gestion des câbles.",
-        },
-        "caterina": {
-            "pt": "Limpezas domésticas, pós-obra, escritórios e condomínios.",
-            "en": "Home, post-renovation, office and condominium cleaning.",
-            "es": "Limpiezas domésticas, post-obra, oficinas y comunidades.",
-            "fr": "Nettoyage domestique, après-travaux, bureaux et copropriétés.",
-        },
-        "valeriu-cantemir": {
-            "pt": "Obras gerais, recuperação de casas e remodelações.",
-            "en": "General construction, home restoration and renovations.",
-            "es": "Obras generales, rehabilitación de viviendas y reformas.",
-            "fr": "Travaux généraux, rénovation de maisons et remodelage.",
-        },
-    }
-    valeriu_extra = {
-        "pt": "",
-        "en": "",
-        "es": "",
-        "fr": "",
-    }
-    visit_cta = {
-        "airfix": {
-            "pt": "Visitar AirFix.pt →",
-            "en": "Visit AirFix.pt →",
-            "es": "Visitar AirFix.pt →",
-            "fr": "Visiter AirFix.pt →",
-        },
-        "wallfixtv": {
-            "pt": "Visitar WallFixTV.pt →",
-            "en": "Visit WallFixTV.pt →",
-            "es": "Visitar WallFixTV.pt →",
-            "fr": "Visiter WallFixTV.pt →",
-        },
-    }
-
-    for p in active_partners():
-        if p.get("home_showcase") is False:
-            continue
-        name = html.escape(p["name"])
-        cat = html.escape(PARTNER_CATEGORIES[p["category"]][lang])
-        blurb = html.escape(home_blurbs.get(p["id"], {}).get(lang, ""))
-        badge = ui["partners_teaser_badge_f"] if p.get("feminine") else ui["partners_teaser_badge"]
-        note = ui["partners_teaser_note_f"] if p.get("feminine") else ui["partners_teaser_note"]
-        show_note = p["id"] in {"caterina", "valeriu-cantemir"}
-
-        logo = p.get("logo")
-        if logo:
-            media = (
-                f'<div class="partners-showcase-media">'
-                f'<img src="{html.escape(prefix + logo, quote=True)}" alt="" width="56" height="56" loading="lazy"></div>'
-            )
-        elif p.get("photo"):
-            media = (
-                f'<div class="partners-showcase-media partners-showcase-media--photo">'
-                f'<img src="{html.escape(prefix + p["photo"], quote=True)}" alt="" width="56" height="56" loading="lazy"></div>'
-            )
-        else:
-            icon = "tv" if p["id"] == "wallfixtv" else "helmet-safety"
-            media = (
-                f'<div class="partners-showcase-media partners-showcase-media--icon" aria-hidden="true">'
-                f'<i class="fa-solid fa-{icon}"></i></div>'
-            )
-
-        extra_cats = ""
-        if p["id"] == "valeriu-cantemir" and valeriu_extra.get(lang):
-            extra_cats = (
-                f'<p class="partners-showcase-extra">{html.escape(valeriu_extra[lang])}</p>'
-            )
-
-        location_html = ""
-        if p.get("location"):
-            loc = p["location"].get(lang) or p["location"].get("pt")
-            if loc:
-                location_html = (
-                    f'<p class="partners-showcase-location">'
-                    f'<i class="fa-solid fa-location-dot" aria-hidden="true"></i> '
-                    f"{html.escape(loc)}</p>"
-                )
-
-        phone_html = ""
-        if p.get("phone_display"):
-            phone_html = (
-                f'<p class="partners-showcase-phone">{html.escape(p["phone_display"])}</p>'
-            )
-
-        actions: list[str] = []
-        if p["type"] == "external":
-            href = html.escape(p["website"], quote=True)
-            cta = html.escape(visit_cta.get(p["id"], {}).get(lang, ui["partners_teaser_visit"]))
-            actions.append(
-                f'<a class="partners-showcase-cta partners-showcase-cta--primary" '
-                f'href="{href}" target="_blank" rel="noopener noreferrer">{cta}</a>'
-            )
-        elif p.get("tel_href") and not p.get("whatsapp_href"):
-            actions.append(
-                f'<a class="partners-showcase-cta partners-showcase-cta--call" '
-                f'href="{html.escape(p["tel_href"], quote=True)}">'
-                f'{html.escape(ui["partners_teaser_call"])}</a>'
-            )
-        else:
-            if p.get("tel_href"):
-                actions.append(
-                    f'<a class="partners-showcase-cta partners-showcase-cta--call" '
-                    f'href="{html.escape(p["tel_href"], quote=True)}">'
-                    f'<i class="fa-solid fa-phone" aria-hidden="true"></i> '
-                    f'{html.escape(p["copy"][lang]["call"])}</a>'
-                )
-            if p.get("whatsapp_href"):
-                actions.append(
-                    f'<a class="partners-showcase-cta partners-showcase-cta--whatsapp" '
-                    f'href="{html.escape(p["whatsapp_href"], quote=True)}" '
-                    f'target="_blank" rel="noopener noreferrer">'
-                    f'<i class="fa-brands fa-whatsapp" aria-hidden="true"></i> '
-                    f'{html.escape(p["copy"][lang].get("whatsapp", "WhatsApp"))}</a>'
-                )
-
-        note_html = (
-            f'<p class="partners-showcase-note">{html.escape(note)}</p>' if show_note else ""
-        )
-        body_parts = [
-            f'<h3 class="partners-showcase-name">{name}</h3>',
-            extra_cats,
-            f'<p class="partners-showcase-blurb">{blurb}</p>',
-            location_html,
-            phone_html,
-            note_html,
-        ]
-        body_html = "\n                    ".join(part for part in body_parts if part)
-        cards.append(
-            f"""                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        {media}
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">{html.escape(badge)}</span>
-                            <span class="partners-showcase-category">{cat}</span>
-                        </div>
-                    </div>
-                    {body_html}
-                    <div class="partners-showcase-actions">
-                        {" ".join(actions)}
-                    </div>
-                </article>"""
-        )
-
+    """Homepage partner finder: category browse → partner results."""
+    ui = PARTNER_DIRECTORY_UI[lang]
+    wa_href = html.escape(wa_href_home(lang), quote=True)
     href_all = html.escape(institutional_href("parceiros", lang), quote=True)
-    return f"""    <section class="section section-partners-home" id="parceiros-recomendados">
-        <div class="container">
-            <div class="section-header section-header--center">
-                <h2 class="section-title" data-i18n="partners_teaser_title">{html.escape(ui['partners_teaser_title'])}</h2>
-                <p class="section-subtitle" data-i18n="partners_teaser_text">{html.escape(ui['partners_teaser_text'])}</p>
+
+    category_ids = homepage_filter_category_ids()
+    partners = active_partners()
+
+    # Count active partners per category (source of truth).
+    counts: dict[str, int] = {cid: 0 for cid in category_ids}
+    for partner in partners:
+        for cid in partner_category_ids(partner):
+            if cid in counts:
+                counts[cid] += 1
+
+    options = [
+        f'                            <option value="" selected>{html.escape(ui["select_placeholder"])}</option>'
+    ]
+    for cat_id in category_ids:
+        label = PARTNER_CATEGORIES[cat_id][lang]
+        options.append(
+            f'                            <option value="{html.escape(cat_id)}" '
+            f'data-count="{counts[cat_id]}">{html.escape(label)}</option>'
+        )
+
+    cat_tiles: list[str] = []
+    for cat_id in category_ids:
+        label = PARTNER_CATEGORIES[cat_id][lang]
+        icon = PARTNER_CATEGORY_ICONS.get(cat_id, "screwdriver-wrench")
+        n = counts[cat_id]
+        if n == 1:
+            count_label = ui["count_one"]
+        else:
+            count_label = ui["count_many"].format(n=n)
+        cat_tiles.append(
+            f"""                <button type="button" class="partner-finder-cat" data-category="{html.escape(cat_id)}" data-count="{n}" data-label="{html.escape(label, quote=True)}">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-{html.escape(icon)}"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">{html.escape(label)}</span>
+                        <span class="partner-finder-cat-count">{html.escape(count_label)}</span>
+                    </span>
+                </button>"""
+        )
+
+    card_blocks = [
+        build_partner_directory_card(
+            partner,
+            lang,
+            prefix,
+            hidden=True,
+            extra_class="partner-dir-card--finder",
+            show_secondary_cta=False,
+        )
+        for partner in partners
+    ]
+
+    return f"""    <section class="section partner-finder-section" id="parceiros-recomendados" aria-labelledby="partner-finder-title">
+        <div class="container partner-finder-container">
+            <div class="section-header section-header--center partner-finder-header">
+                <p class="section-kicker">{html.escape(ui["kicker"])}</p>
+                <h2 class="section-title" id="partner-finder-title">{html.escape(ui["title"])}</h2>
+                <p class="section-subtitle">{html.escape(ui["subtitle"])}</p>
             </div>
-            <div class="partners-showcase-grid">
-{chr(10).join(cards)}
+
+            <div class="partner-finder-search">
+                <label class="partner-finder-select-wrap" for="partner-category-select">
+                    <span class="visually-hidden">{html.escape(ui["select_label"])}</span>
+                    <span class="partner-finder-select-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <select id="partner-category-select" name="category" aria-label="{html.escape(ui["select_aria"], quote=True)}">
+{chr(10).join(options)}
+                    </select>
+                </label>
             </div>
-            <div class="partners-home-footer">
-                <a href="{href_all}" class="text-link partners-teaser-cta"><span data-i18n="partners_teaser_cta">{html.escape(ui['partners_teaser_cta'])}</span></a>
+
+            <p class="partner-finder-handyman-note">
+                <span>{html.escape(ui["handyman_note"])}</span>
+                <a href="{wa_href}" class="partner-finder-handyman-link" aria-label="{html.escape(ui["handyman_aria"], quote=True)}">{html.escape(ui["handyman_cta"])}</a>
+            </p>
+
+            <div class="partner-finder-browse" id="partner-finder-browse">
+                <h3 class="partner-finder-browse-title">{html.escape(ui["services_available"])}</h3>
+                <div class="partner-finder-cats" id="partner-finder-cats" role="list">
+{chr(10).join(cat_tiles)}
+                </div>
+            </div>
+
+            <div class="partner-finder-results" id="partner-directory-results" hidden aria-live="polite" aria-label="{html.escape(ui["results_aria"], quote=True)}">
+                <button type="button" class="partner-finder-back" id="partner-finder-back">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    <span>{html.escape(ui["back_services"])}</span>
+                </button>
+                <div class="partner-finder-results-heading">
+                    <h3 class="partner-finder-results-title" id="partner-directory-results-title"></h3>
+                    <p class="partner-finder-results-count" id="partner-directory-results-count"
+                       data-count-one="{html.escape(ui["count_one"], quote=True)}"
+                       data-count-many="{html.escape(ui["count_many"], quote=True)}"></p>
+                </div>
+                <div class="partner-finder-results-grid" id="partner-directory-grid">
+{chr(10).join(card_blocks)}
+                </div>
+                <p class="partner-directory-empty" id="partner-directory-empty" hidden>{html.escape(ui["empty"])}</p>
+            </div>
+
+            <div class="partner-finder-footer">
+                <a href="{href_all}" class="text-link partners-teaser-cta">{html.escape(ui["cta_all"])}</a>
             </div>
         </div>
     </section>"""
+
 
 
 def build_footer_services(lang: str) -> str:

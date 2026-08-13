@@ -369,79 +369,180 @@
         </div>
     </section>
 
-    <section class="section section-partners-home" id="parceiros-recomendados">
-        <div class="container">
-            <div class="section-header section-header--center">
-                <h2 class="section-title" data-i18n="partners_teaser_title">Services spécialisés avec partenaires</h2>
-                <p class="section-subtitle" data-i18n="partners_teaser_text">Pour les travaux qui demandent d'autres spécialités, nous comptons sur des professionnels partenaires que vous pouvez contacter directement.</p>
+    <section class="section partner-finder-section" id="parceiros-recomendados" aria-labelledby="partner-finder-title">
+        <div class="container partner-finder-container">
+            <div class="section-header section-header--center partner-finder-header">
+                <p class="section-kicker">SERVICES SPÉCIALISÉS</p>
+                <h2 class="section-title" id="partner-finder-title">Vous recherchez un service spécialisé ?</h2>
+                <p class="section-subtitle">Choisissez le service dont vous avez besoin et consultez immédiatement les professionnels disponibles.</p>
             </div>
-            <div class="partners-showcase-grid">
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media"><img src="../assets/partners/airfix-icon.png" alt="" width="56" height="56" loading="lazy"></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Partenaire FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Climatisation / CVC</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">AirFix.pt</h3>
-                    <p class="partners-showcase-blurb">Installation, entretien, nettoyage et assistance technique en climatisation.</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--primary" href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">Visiter AirFix.pt →</a>
-                    </div>
-                </article>
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media partners-showcase-media--photo"><img src="../assets/partners/caterina.jpg" alt="" width="56" height="56" loading="lazy"></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Partenaire FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Ménage</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">Caterina</h3>
-                    <p class="partners-showcase-blurb">Nettoyage domestique, après-travaux, bureaux et copropriétés.</p>
-                    <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Rive Sud · Azeitão</p>
-                    <p class="partners-showcase-phone">963 212 185</p>
-                    <p class="partners-showcase-note">Service réalisé par une partenaire FAZDETUDO.PT.</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--call" href="tel:+351963212185"><i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler</a> <a class="partners-showcase-cta partners-showcase-cta--whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-                    </div>
-                </article>
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media partners-showcase-media--icon" aria-hidden="true"><i class="fa-solid fa-tv" aria-hidden="true"></i></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Partenaire FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Installation de TV au Mur</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">WallFixTV.pt</h3>
-                    <p class="partners-showcase-blurb">Installation professionnelle de téléviseurs, supports et gestion des câbles.</p>
-                    <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Grand Lisbonne · Rive Sud</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--primary" href="https://www.wallfixtv.pt/" target="_blank" rel="noopener noreferrer">Visiter WallFixTV.pt →</a>
-                    </div>
-                </article>
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media partners-showcase-media--icon" aria-hidden="true"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Partenaire FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Rénovations Générales</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">Valeriu</h3>
-                    <p class="partners-showcase-blurb">Travaux généraux, rénovation de maisons et remodelage.</p>
-                    <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisbonne · Rive Sud · Azeitão</p>
-                    <p class="partners-showcase-phone">964 400 960</p>
-                    <p class="partners-showcase-note">Service réalisé par un partenaire FAZDETUDO.PT.</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--call" href="tel:+351964400960">Appeler →</a>
-                    </div>
-                </article>
+
+            <div class="partner-finder-search">
+                <label class="partner-finder-select-wrap" for="partner-category-select">
+                    <span class="visually-hidden">Quel service recherchez-vous ?</span>
+                    <span class="partner-finder-select-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+                    <select id="partner-category-select" name="category" aria-label="Sélectionner un service pour voir les partenaires disponibles">
+                            <option value="" selected>Quel service recherchez-vous ?</option>
+                            <option value="avac" data-count="1">Climatisation / CVC</option>
+                            <option value="limpezas" data-count="2">Ménage</option>
+                            <option value="instalacao-tv" data-count="1">Installation de TV au Mur</option>
+                            <option value="obras-gerais" data-count="1">Travaux Généraux</option>
+                            <option value="recuperacao-casa" data-count="1">Rénovation de Maisons</option>
+                            <option value="remodelacoes-gerais" data-count="1">Rénovations Générales</option>
+                    </select>
+                </label>
             </div>
-            <div class="partners-home-footer">
-                <a href="/fr/parceiros/" class="text-link partners-teaser-cta"><span data-i18n="partners_teaser_cta">Voir tous les partenaires →</span></a>
+
+            <p class="partner-finder-handyman-note">
+                <span>Pour les petites réparations et le handyman, contactez-nous directement.</span>
+                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20Je%20souhaite%20demander%20un%20devis%20pour%20un%20service%20de%20handyman%20ou%20de%20r%C3%A9paration%20%C3%A0%20domicile." class="partner-finder-handyman-link" aria-label="Demander un devis handyman sur WhatsApp à FAZDETUDO.PT">Demander un devis sur WhatsApp →</a>
+            </p>
+
+            <div class="partner-finder-browse" id="partner-finder-browse">
+                <h3 class="partner-finder-browse-title">Services disponibles</h3>
+                <div class="partner-finder-cats" id="partner-finder-cats" role="list">
+                <button type="button" class="partner-finder-cat" data-category="avac" data-count="1" data-label="Climatisation / CVC">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Climatisation / CVC</span>
+                        <span class="partner-finder-cat-count">1 professionnel disponible</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="limpezas" data-count="2" data-label="Ménage">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-broom" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Ménage</span>
+                        <span class="partner-finder-cat-count">2 professionnels disponibles</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="instalacao-tv" data-count="1" data-label="Installation de TV au Mur">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-tv" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Installation de TV au Mur</span>
+                        <span class="partner-finder-cat-count">1 professionnel disponible</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="obras-gerais" data-count="1" data-label="Travaux Généraux">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Travaux Généraux</span>
+                        <span class="partner-finder-cat-count">1 professionnel disponible</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="recuperacao-casa" data-count="1" data-label="Rénovation de Maisons">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Rénovation de Maisons</span>
+                        <span class="partner-finder-cat-count">1 professionnel disponible</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="remodelacoes-gerais" data-count="1" data-label="Rénovations Générales">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Rénovations Générales</span>
+                        <span class="partner-finder-cat-count">1 professionnel disponible</span>
+                    </span>
+                </button>
+                </div>
+            </div>
+
+            <div class="partner-finder-results" id="partner-directory-results" hidden aria-live="polite" aria-label="Résultats des partenaires">
+                <button type="button" class="partner-finder-back" id="partner-finder-back">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    <span>Voir tous les services</span>
+                </button>
+                <div class="partner-finder-results-heading">
+                    <h3 class="partner-finder-results-title" id="partner-directory-results-title"></h3>
+                    <p class="partner-finder-results-count" id="partner-directory-results-count"
+                       data-count-one="1 professionnel disponible"
+                       data-count-many="{n} professionnels disponibles"></p>
+                </div>
+                <div class="partner-finder-results-grid" id="partner-directory-grid">
+                <article class="partner-dir-card partner-dir-card--external partner-dir-card--finder" data-partner-category="avac" data-partner-categories="avac" data-partner-zones="" data-partner-id="airfix" data-partner-status="recommended" hidden>
+                    <div class="partner-dir-media"><img src="../assets/partners/airfix-icon.png" alt="AirFix.pt" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--recommended">Partenaire recommandé</span>
+                            <span class="partner-dir-category">Climatisation / CVC</span>
+                        </div>
+                        <h3 class="partner-dir-name">AirFix.pt</h3>
+                        <p class="partner-dir-blurb">Installation, entretien, nettoyage et assistance technique en climatisation.</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--primary" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visiter AirFix.pt">Visiter AirFix.pt</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partner-dir-card--finder" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="margem-sul azeitao" data-partner-id="caterina" data-partner-status="recommended" hidden>
+                    <div class="partner-dir-media partner-dir-media--photo"><img src="../assets/partners/caterina.jpg" alt="Caterina" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--recommended">Partenaire recommandée</span>
+                            <span class="partner-dir-category">Ménage</span>
+                        </div>
+                        <h3 class="partner-dir-name">Caterina</h3>
+                        <p class="partner-dir-role">Professionnelle du ménage · contact direct</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Rive Sud · Azeitão</p>
+                        <p class="partner-dir-phone">963 212 185</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963212185" aria-label="Appeler directement Caterina, partenaire ménage recommandée"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler</span></a>
+                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contacter Caterina sur WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partner-dir-card--finder" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="grande-lisboa" data-partner-id="maria-limpezas" data-partner-status="partner" hidden>
+                    <div class="partner-dir-media"><img src="../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Partenaire FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Ménage</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Services de nettoyage · contact direct</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Grand Lisbonne</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Appeler directement Maria, partenaire de services de nettoyage"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler</span></a>
+                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="https://wa.me/351963014604" target="_blank" rel="noopener noreferrer" aria-label="Contacter Maria sur WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--external partner-dir-card--finder" data-partner-category="instalacao-tv" data-partner-categories="instalacao-tv" data-partner-zones="grande-lisboa lisboa cascais-oeiras sintra margem-sul azeitao setubal" data-partner-id="wallfixtv" data-partner-status="recommended" hidden>
+                    <div class="partner-dir-media partner-dir-media--wide"><img src="../assets/partners/wallfixtv-logo.png" alt="WallFixTV.pt" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--recommended">Partenaire recommandé</span>
+                            <span class="partner-dir-category">Installation de TV au Mur</span>
+                        </div>
+                        <h3 class="partner-dir-name">WallFixTV.pt</h3>
+                        <p class="partner-dir-blurb">Installation professionnelle de téléviseurs au mur avec nivellement précis, fixations adaptées, pose du support et organisation des câbles.</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Grand Lisbonne · Rive Sud</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--primary" href="https://www.wallfixtv.pt/" target="_blank" rel="noopener" aria-label="Visiter WallFixTV.pt">Visiter WallFixTV.pt</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partner-dir-card--finder" data-partner-category="remodelacoes-gerais" data-partner-categories="obras-gerais recuperacao-casa remodelacoes-gerais" data-partner-zones="lisboa margem-sul azeitao" data-partner-id="valeriu-cantemir" data-partner-status="partner" hidden>
+                    <div class="partner-dir-media partner-dir-media--icon partner-dir-media--fallback" aria-hidden="true"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Partenaire FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Rénovations Générales</span>
+                        </div>
+                        <h3 class="partner-dir-name">Valeriu</h3>
+                        <p class="partner-dir-role">Travaux généraux, rénovation de maisons et remodelage · contact direct</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisbonne · Rive Sud · Azeitão</p>
+                        <p class="partner-dir-phone">964 400 960</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351964400960" aria-label="Appeler directement Valeriu, partenaire travaux et rénovations"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Appeler</span></a>
+                        </div>
+                    </div>
+                </article>
+                </div>
+                <p class="partner-directory-empty" id="partner-directory-empty" hidden>Pas encore de partenaires dans cette catégorie. Bientôt de nouvelles options.</p>
+            </div>
+
+            <div class="partner-finder-footer">
+                <a href="/fr/parceiros/" class="text-link partners-teaser-cta">Voir tous les partenaires →</a>
             </div>
         </div>
     </section>

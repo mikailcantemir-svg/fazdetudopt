@@ -369,79 +369,180 @@
         </div>
     </section>
 
-    <section class="section section-partners-home" id="parceiros-recomendados">
-        <div class="container">
-            <div class="section-header section-header--center">
-                <h2 class="section-title" data-i18n="partners_teaser_title">Serviços especializados com parceiros</h2>
-                <p class="section-subtitle" data-i18n="partners_teaser_text">Para trabalhos que exigem outras especialidades, contamos com profissionais parceiros que pode contactar diretamente.</p>
+    <section class="section partner-finder-section" id="parceiros-recomendados" aria-labelledby="partner-finder-title">
+        <div class="container partner-finder-container">
+            <div class="section-header section-header--center partner-finder-header">
+                <p class="section-kicker">SERVIÇOS ESPECIALIZADOS</p>
+                <h2 class="section-title" id="partner-finder-title">Procura um serviço especializado?</h2>
+                <p class="section-subtitle">Escolha o serviço de que precisa e veja imediatamente os profissionais disponíveis.</p>
             </div>
-            <div class="partners-showcase-grid">
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media"><img src="assets/partners/airfix-icon.png" alt="" width="56" height="56" loading="lazy"></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Parceiro FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Ar Condicionado / AVAC</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">AirFix.pt</h3>
-                    <p class="partners-showcase-blurb">Instalação, manutenção, limpeza e assistência técnica de ar condicionado.</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--primary" href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">Visitar AirFix.pt →</a>
-                    </div>
-                </article>
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media partners-showcase-media--photo"><img src="assets/partners/caterina.jpg" alt="" width="56" height="56" loading="lazy"></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Parceira FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Limpezas</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">Caterina</h3>
-                    <p class="partners-showcase-blurb">Limpezas domésticas, pós-obra, escritórios e condomínios.</p>
-                    <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Margem Sul · Azeitão</p>
-                    <p class="partners-showcase-phone">963 212 185</p>
-                    <p class="partners-showcase-note">Serviço realizado por parceira FAZDETUDO.PT.</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--call" href="tel:+351963212185"><i class="fa-solid fa-phone" aria-hidden="true"></i> Ligar</a> <a class="partners-showcase-cta partners-showcase-cta--whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-                    </div>
-                </article>
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media partners-showcase-media--icon" aria-hidden="true"><i class="fa-solid fa-tv" aria-hidden="true"></i></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Parceiro FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Instalação de TV na Parede</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">WallFixTV.pt</h3>
-                    <p class="partners-showcase-blurb">Instalação profissional de televisões, suportes e organização de cabos.</p>
-                    <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Grande Lisboa · Margem Sul</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--primary" href="https://www.wallfixtv.pt/" target="_blank" rel="noopener noreferrer">Visitar WallFixTV.pt →</a>
-                    </div>
-                </article>
-                <article class="partners-showcase-card fade-in">
-                    <div class="partners-showcase-top">
-                        <div class="partners-showcase-media partners-showcase-media--icon" aria-hidden="true"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></div>
-                        <div class="partners-showcase-meta">
-                            <span class="partners-showcase-badge">Parceiro FAZDETUDO.PT</span>
-                            <span class="partners-showcase-category">Remodelações Gerais</span>
-                        </div>
-                    </div>
-                    <h3 class="partners-showcase-name">Valeriu</h3>
-                    <p class="partners-showcase-blurb">Obras gerais, recuperação de casas e remodelações.</p>
-                    <p class="partners-showcase-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisboa · Margem Sul · Azeitão</p>
-                    <p class="partners-showcase-phone">964 400 960</p>
-                    <p class="partners-showcase-note">Serviço realizado por parceiro FAZDETUDO.PT.</p>
-                    <div class="partners-showcase-actions">
-                        <a class="partners-showcase-cta partners-showcase-cta--call" href="tel:+351964400960">Ligar →</a>
-                    </div>
-                </article>
+
+            <div class="partner-finder-search">
+                <label class="partner-finder-select-wrap" for="partner-category-select">
+                    <span class="visually-hidden">Que serviço procura?</span>
+                    <span class="partner-finder-select-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span>
+                    <select id="partner-category-select" name="category" aria-label="Selecionar um serviço para ver parceiros disponíveis">
+                            <option value="" selected>Que serviço procura?</option>
+                            <option value="avac" data-count="1">Ar Condicionado / AVAC</option>
+                            <option value="limpezas" data-count="2">Limpezas</option>
+                            <option value="instalacao-tv" data-count="1">Instalação de TV na Parede</option>
+                            <option value="obras-gerais" data-count="1">Obras Gerais</option>
+                            <option value="recuperacao-casa" data-count="1">Recuperação de Casas</option>
+                            <option value="remodelacoes-gerais" data-count="1">Remodelações Gerais</option>
+                    </select>
+                </label>
             </div>
-            <div class="partners-home-footer">
-                <a href="/parceiros/" class="text-link partners-teaser-cta"><span data-i18n="partners_teaser_cta">Ver todos os parceiros →</span></a>
+
+            <p class="partner-finder-handyman-note">
+                <span>Para pequenas reparações e handyman, fale diretamente connosco.</span>
+                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20para%20um%20servi%C3%A7o%20de%20faz%20de%20tudo/repara%C3%A7%C3%A3o." class="partner-finder-handyman-link" aria-label="Pedir orçamento handyman por WhatsApp à FAZDETUDO.PT">Pedir orçamento por WhatsApp →</a>
+            </p>
+
+            <div class="partner-finder-browse" id="partner-finder-browse">
+                <h3 class="partner-finder-browse-title">Serviços disponíveis</h3>
+                <div class="partner-finder-cats" id="partner-finder-cats" role="list">
+                <button type="button" class="partner-finder-cat" data-category="avac" data-count="1" data-label="Ar Condicionado / AVAC">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Ar Condicionado / AVAC</span>
+                        <span class="partner-finder-cat-count">1 profissional disponível</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="limpezas" data-count="2" data-label="Limpezas">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-broom" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Limpezas</span>
+                        <span class="partner-finder-cat-count">2 profissionais disponíveis</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="instalacao-tv" data-count="1" data-label="Instalação de TV na Parede">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-tv" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Instalação de TV na Parede</span>
+                        <span class="partner-finder-cat-count">1 profissional disponível</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="obras-gerais" data-count="1" data-label="Obras Gerais">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Obras Gerais</span>
+                        <span class="partner-finder-cat-count">1 profissional disponível</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="recuperacao-casa" data-count="1" data-label="Recuperação de Casas">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Recuperação de Casas</span>
+                        <span class="partner-finder-cat-count">1 profissional disponível</span>
+                    </span>
+                </button>
+                <button type="button" class="partner-finder-cat" data-category="remodelacoes-gerais" data-count="1" data-label="Remodelações Gerais">
+                    <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></span>
+                    <span class="partner-finder-cat-body">
+                        <span class="partner-finder-cat-name">Remodelações Gerais</span>
+                        <span class="partner-finder-cat-count">1 profissional disponível</span>
+                    </span>
+                </button>
+                </div>
+            </div>
+
+            <div class="partner-finder-results" id="partner-directory-results" hidden aria-live="polite" aria-label="Resultados de parceiros">
+                <button type="button" class="partner-finder-back" id="partner-finder-back">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    <span>Ver todos os serviços</span>
+                </button>
+                <div class="partner-finder-results-heading">
+                    <h3 class="partner-finder-results-title" id="partner-directory-results-title"></h3>
+                    <p class="partner-finder-results-count" id="partner-directory-results-count"
+                       data-count-one="1 profissional disponível"
+                       data-count-many="{n} profissionais disponíveis"></p>
+                </div>
+                <div class="partner-finder-results-grid" id="partner-directory-grid">
+                <article class="partner-dir-card partner-dir-card--external partner-dir-card--finder" data-partner-category="avac" data-partner-categories="avac" data-partner-zones="" data-partner-id="airfix" data-partner-status="recommended" hidden>
+                    <div class="partner-dir-media"><img src="assets/partners/airfix-icon.png" alt="AirFix.pt" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--recommended">Parceiro recomendado</span>
+                            <span class="partner-dir-category">Ar Condicionado / AVAC</span>
+                        </div>
+                        <h3 class="partner-dir-name">AirFix.pt</h3>
+                        <p class="partner-dir-blurb">Instalação, manutenção, limpeza e assistência técnica de ar condicionado.</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--primary" href="https://airfix.pt/" target="_blank" rel="noopener" aria-label="Visitar AirFix.pt">Visitar AirFix.pt</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partner-dir-card--finder" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="margem-sul azeitao" data-partner-id="caterina" data-partner-status="recommended" hidden>
+                    <div class="partner-dir-media partner-dir-media--photo"><img src="assets/partners/caterina.jpg" alt="Caterina" width="96" height="96" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--recommended">Parceira recomendada</span>
+                            <span class="partner-dir-category">Limpezas</span>
+                        </div>
+                        <h3 class="partner-dir-name">Caterina</h3>
+                        <p class="partner-dir-role">Empregada de limpeza · contacto direto</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Margem Sul · Azeitão</p>
+                        <p class="partner-dir-phone">963 212 185</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963212185" aria-label="Ligar diretamente para Caterina, parceira de limpezas"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar</span></a>
+                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="https://wa.me/351963212185" target="_blank" rel="noopener noreferrer" aria-label="Contactar Caterina por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partner-dir-card--finder" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="grande-lisboa" data-partner-id="maria-limpezas" data-partner-status="partner" hidden>
+                    <div class="partner-dir-media"><img src="assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Parceira FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Limpezas</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Serviços de limpeza · contacto direto</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Grande Lisboa</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Ligar diretamente para Maria, parceira de serviços de limpeza"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar</span></a>
+                            <a class="partner-dir-btn partner-dir-btn--whatsapp" href="https://wa.me/351963014604" target="_blank" rel="noopener noreferrer" aria-label="Contactar Maria por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--external partner-dir-card--finder" data-partner-category="instalacao-tv" data-partner-categories="instalacao-tv" data-partner-zones="grande-lisboa lisboa cascais-oeiras sintra margem-sul azeitao setubal" data-partner-id="wallfixtv" data-partner-status="recommended" hidden>
+                    <div class="partner-dir-media partner-dir-media--wide"><img src="assets/partners/wallfixtv-logo.png" alt="WallFixTV.pt" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--recommended">Parceiro recomendado</span>
+                            <span class="partner-dir-category">Instalação de TV na Parede</span>
+                        </div>
+                        <h3 class="partner-dir-name">WallFixTV.pt</h3>
+                        <p class="partner-dir-blurb">Instalação profissional de televisões na parede, com nivelamento, fixação adequada, montagem de suportes e organização de cabos.</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Grande Lisboa · Margem Sul</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--primary" href="https://www.wallfixtv.pt/" target="_blank" rel="noopener" aria-label="Visitar WallFixTV.pt">Visitar WallFixTV.pt</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partner-dir-card--finder" data-partner-category="remodelacoes-gerais" data-partner-categories="obras-gerais recuperacao-casa remodelacoes-gerais" data-partner-zones="lisboa margem-sul azeitao" data-partner-id="valeriu-cantemir" data-partner-status="partner" hidden>
+                    <div class="partner-dir-media partner-dir-media--icon partner-dir-media--fallback" aria-hidden="true"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Parceiro FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Remodelações Gerais</span>
+                        </div>
+                        <h3 class="partner-dir-name">Valeriu</h3>
+                        <p class="partner-dir-role">Obras gerais, recuperação de casas e remodelações · contacto direto</p>
+                        <p class="partner-dir-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lisboa · Margem Sul · Azeitão</p>
+                        <p class="partner-dir-phone">964 400 960</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351964400960" aria-label="Ligar diretamente para Valeriu, parceiro de obras e remodelações"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Ligar</span></a>
+                        </div>
+                    </div>
+                </article>
+                </div>
+                <p class="partner-directory-empty" id="partner-directory-empty" hidden>Ainda não há parceiros nesta categoria. Em breve teremos novidades.</p>
+            </div>
+
+            <div class="partner-finder-footer">
+                <a href="/parceiros/" class="text-link partners-teaser-cta">Ver todos os parceiros →</a>
             </div>
         </div>
     </section>
