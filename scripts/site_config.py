@@ -51,23 +51,52 @@ HOME_WA_MESSAGE: dict[str, str] = {
     "fr": "Bonjour ! Je souhaite demander un devis pour un service de handyman ou de réparation à domicile.",
 }
 
-# Compact “quick repair” strip on homepage (photos + timing request).
+# Homepage SOS / urgent repair strip (photos + location + timing).
+# Honest urgency — never promise 24h / guaranteed same-day response.
 QUICK_REPAIR_WA_MESSAGE: dict[str, str] = {
     "pt": (
-        "Olá! Preciso de uma reparação rápida. Vou enviar algumas fotografias e "
-        "indicar a localização e quando preciso que fique resolvido."
+        "Olá! Preciso de uma reparação urgente.\n"
+        "\n"
+        "Vou enviar algumas fotografias.\n"
+        "\n"
+        "Localização:\n"
+        "Problema:\n"
+        "Quando preciso que fique resolvido:\n"
+        "\n"
+        "Obrigado."
     ),
     "en": (
-        "Hello! I need a quick repair. I’ll send a few photos and tell you the "
-        "location and when I need it done."
+        "Hello! I need an urgent repair.\n"
+        "\n"
+        "I will send a few photos.\n"
+        "\n"
+        "Location:\n"
+        "Problem:\n"
+        "When I need it done:\n"
+        "\n"
+        "Thank you."
     ),
     "es": (
-        "¡Hola! Necesito una reparación rápida. Enviaré algunas fotografías e "
-        "indicaré la ubicación y cuándo necesito que quede resuelto."
+        "¡Hola! Necesito una reparación urgente.\n"
+        "\n"
+        "Voy a enviar algunas fotografías.\n"
+        "\n"
+        "Ubicación:\n"
+        "Problema:\n"
+        "Cuándo necesito que quede resuelto:\n"
+        "\n"
+        "Gracias."
     ),
     "fr": (
-        "Bonjour ! J’ai besoin d’une réparation rapide. Je vais envoyer quelques "
-        "photos et indiquer le lieu et quand j’ai besoin que ce soit terminé."
+        "Bonjour ! J’ai besoin d’une réparation urgente.\n"
+        "\n"
+        "Je vais envoyer quelques photos.\n"
+        "\n"
+        "Lieu :\n"
+        "Problème :\n"
+        "Quand j’ai besoin que ce soit terminé :\n"
+        "\n"
+        "Merci."
     ),
 }
 

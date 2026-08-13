@@ -5359,12 +5359,15 @@ html.js-fade .fade-in.visible {
 }
 .page-home .hero-language { display:inline-flex; align-items:center; gap:4px; font-weight:700; }
 
-/* Quick repair strip */
+/* Quick repair / SOS strip */
 .page-home .quick-repair {
     background: var(--home-navy);
     color: #fff;
-    padding: 18px 0;
+    padding: 22px 0;
     border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.page-home .quick-repair--sos {
+    box-shadow: inset 0 1px 0 rgba(245,102,33,.18);
 }
 .page-home .quick-repair-inner {
     display: grid;
@@ -5373,21 +5376,45 @@ html.js-fade .fade-in.visible {
     align-items: center;
 }
 .page-home .quick-repair-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     background: rgba(245,102,33,.16);
+    border: 1px solid rgba(245,102,33,.28);
     color: var(--home-orange);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     flex: 0 0 auto;
 }
+.page-home .quick-repair-sos-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--home-orange);
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
 .page-home .quick-repair-copy { min-width: 0; }
-.page-home .quick-repair-title {
+.page-home .quick-repair-kicker {
     margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--home-orange);
+}
+.page-home .quick-repair-title {
+    margin: 0 0 8px;
     font-family: 'Manrope','Inter',sans-serif;
-    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    font-size: clamp(1.2rem, 1.7vw, 1.55rem);
     line-height: 1.2;
     font-weight: 800;
     letter-spacing: -.02em;
@@ -5395,7 +5422,7 @@ html.js-fade .fade-in.visible {
 }
 .page-home .quick-repair-text {
     margin: 0 0 8px;
-    max-width: 62ch;
+    max-width: 64ch;
     font-size: .92rem;
     line-height: 1.45;
     color: rgba(255,255,255,.88);
@@ -6152,14 +6179,18 @@ html.js-fade .page-home .fade-in.visible {
     .page-home .hero-language-proof { gap:8px; }
     .page-home .hero-language-label { width:auto; }
 
-    .page-home .quick-repair { padding: 20px 0 28px; }
+    .page-home .quick-repair { padding: 22px 0 28px; }
     .page-home .quick-repair-inner {
         grid-template-columns: 1fr;
         gap: 12px;
         text-align: left;
     }
     .page-home .quick-repair-icon { display: none; }
-    .page-home .quick-repair-title { font-size: 1.28rem; margin-bottom: 8px; }
+    .page-home .quick-repair-kicker {
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+    }
+    .page-home .quick-repair-title { font-size: 1.3rem; margin-bottom: 8px; }
     .page-home .quick-repair-text {
         font-size: .9rem;
         margin-bottom: 10px;
@@ -6177,8 +6208,14 @@ html.js-fade .page-home .fade-in.visible {
         max-width: none;
         gap: 10px;
         padding-bottom: 8px;
+        padding-right: 64px; /* keep note clear of WhatsApp float */
+        box-sizing: border-box;
     }
-    .page-home .quick-repair-note { font-size: .76rem; text-align: left; }
+    .page-home .quick-repair-note {
+        font-size: .76rem;
+        text-align: left;
+        overflow-wrap: anywhere;
+    }
     .page-home .quick-repair-cta { width: 100%; white-space: normal; justify-content: center; }
 
     .page-home .section { padding:46px 0; }

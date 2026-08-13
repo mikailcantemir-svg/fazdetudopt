@@ -217,15 +217,20 @@ HOME_UI = {
         "services_see_all": "Ver todos os serviços",
         "services_see_less": "Ver menos serviços",
         "services_partner_hint": "Serviço com parceiro →",
-        "quick_repair_title": "Precisa de uma reparação rápida?",
+        "quick_repair_kicker": "SOS REPARAÇÕES",
+        "quick_repair_title": "Precisa de uma reparação urgente?",
         "quick_repair_text": (
-            "Parede suja ou danificada, móvel partido, puxador solto, prateleira "
-            "caída ou outro pequeno problema? Envie-nos fotografias e diga-nos "
-            "quando precisa do trabalho concluído."
+            "Parede danificada, móvel partido, puxador solto, prateleira caída ou "
+            "outro problema que precisa de ser resolvido rapidamente? Envie-nos "
+            "fotografias, a localização e diga quando precisa do trabalho concluído."
         ),
         "quick_repair_cta": "Enviar fotos por WhatsApp",
-        "quick_repair_tags": "Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações",
-        "quick_repair_note": "Disponibilidade no próprio dia quando possível.",
+        "quick_repair_tags": (
+            "Airbnb · Alojamento Local · Senhorios · Mudanças · Reparações urgentes"
+        ),
+        "quick_repair_note": (
+            "Atendimento no próprio dia quando houver disponibilidade."
+        ),
         "advantages_title": "Porquê escolher-nos?",
         "advantages_title_line1": "Um contacto.",
         "advantages_title_line2": "Várias soluções.",
@@ -339,15 +344,18 @@ HOME_UI = {
         "services_see_all": "View all services",
         "services_see_less": "Show fewer services",
         "services_partner_hint": "Partner service →",
-        "quick_repair_title": "Need a quick repair?",
+        "quick_repair_kicker": "SOS REPAIRS",
+        "quick_repair_title": "Need an urgent repair?",
         "quick_repair_text": (
-            "A dirty or damaged wall, broken furniture, a loose handle, a fallen "
-            "shelf or another small problem? Send us photos and tell us when you "
-            "need the work finished."
+            "Damaged wall, broken furniture, loose handle, fallen shelf or another "
+            "problem that needs to be fixed quickly? Send us photos, your location "
+            "and tell us when you need the work completed."
         ),
         "quick_repair_cta": "Send photos on WhatsApp",
-        "quick_repair_tags": "Airbnb · Short-term rentals · Landlords · Moves · Small repairs",
-        "quick_repair_note": "Same-day availability when possible.",
+        "quick_repair_tags": (
+            "Airbnb · Short-term rentals · Landlords · Moves · Urgent repairs"
+        ),
+        "quick_repair_note": "Same-day service when availability allows.",
         "advantages_title": "Why choose us?",
         "advantages_title_line1": "One contact.",
         "advantages_title_line2": "Multiple solutions.",
@@ -461,15 +469,20 @@ HOME_UI = {
         "services_see_all": "Ver todos los servicios",
         "services_see_less": "Ver menos servicios",
         "services_partner_hint": "Servicio con colaborador →",
-        "quick_repair_title": "¿Necesita una reparación rápida?",
+        "quick_repair_kicker": "REPARACIONES SOS",
+        "quick_repair_title": "¿Necesita una reparación urgente?",
         "quick_repair_text": (
-            "¿Pared sucia o dañada, mueble roto, tirador suelto, estantería caída "
-            "u otro pequeño problema? Envíenos fotografías y díganos cuándo "
-            "necesita que el trabajo quede terminado."
+            "¿Pared dañada, mueble roto, tirador suelto, estantería caída u otro "
+            "problema que necesita resolverse rápidamente? Envíenos fotografías, "
+            "la ubicación y diga cuándo necesita que el trabajo quede terminado."
         ),
         "quick_repair_cta": "Enviar fotos por WhatsApp",
-        "quick_repair_tags": "Airbnb · Alojamiento local · Propietarios · Mudanzas · Pequeñas reparaciones",
-        "quick_repair_note": "Disponibilidad el mismo día cuando sea posible.",
+        "quick_repair_tags": (
+            "Airbnb · Alojamiento local · Propietarios · Mudanzas · Reparaciones urgentes"
+        ),
+        "quick_repair_note": (
+            "Atención el mismo día cuando haya disponibilidad."
+        ),
         "advantages_title": "¿Por qué elegirnos?",
         "advantages_title_line1": "Un contacto.",
         "advantages_title_line2": "Varias soluciones.",
@@ -583,15 +596,19 @@ HOME_UI = {
         "services_see_all": "Voir tous les services",
         "services_see_less": "Voir moins de services",
         "services_partner_hint": "Service avec partenaire →",
-        "quick_repair_title": "Besoin d’une réparation rapide ?",
+        "quick_repair_kicker": "RÉPARATIONS SOS",
+        "quick_repair_title": "Besoin d’une réparation urgente ?",
         "quick_repair_text": (
-            "Mur sale ou abîmé, meuble cassé, poignée desserrée, étagère tombée "
-            "ou un autre petit problème ? Envoyez-nous des photos et indiquez "
-            "quand vous avez besoin que le travail soit terminé."
+            "Mur abîmé, meuble cassé, poignée desserrée, étagère tombée ou un autre "
+            "problème à résoudre rapidement ? Envoyez-nous des photos, le lieu et "
+            "indiquez quand vous avez besoin que le travail soit terminé."
         ),
-        "quick_repair_cta": "Envoyer des photos sur WhatsApp",
-        "quick_repair_tags": "Airbnb · Location courte durée · Propriétaires · Déménagements · Petites réparations",
-        "quick_repair_note": "Disponibilité le jour même lorsque c’est possible.",
+        "quick_repair_cta": "Envoyer des photos par WhatsApp",
+        "quick_repair_tags": (
+            "Airbnb · Location courte durée · Propriétaires · Déménagements · "
+            "Réparations urgentes"
+        ),
+        "quick_repair_note": "Intervention le jour même selon disponibilité.",
         "advantages_title": "Pourquoi nous choisir ?",
         "advantages_title_line1": "Un contact.",
         "advantages_title_line2": "Plusieurs solutions.",

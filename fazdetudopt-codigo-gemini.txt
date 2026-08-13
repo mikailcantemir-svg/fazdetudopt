@@ -1,7 +1,7 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Projeto: FAZDETUDO.PT
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-08-13 20:49 UTC
+Atualizado: 2026-08-13 20:57 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
 Ficheiros: 311
 ================================================================================
@@ -167,15 +167,17 @@ FILE: scripts/templates/home.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Precisa de uma reparação rápida?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">Parede suja ou danificada, móvel partido, puxador solto, prateleira caída ou outro pequeno problema? Envie-nos fotografias e diga-nos quando precisa do trabalho concluído.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">SOS REPARAÇÕES</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Precisa de uma reparação urgente?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Parede danificada, móvel partido, puxador solto, prateleira caída ou outro problema que precisa de ser resolvido rapidamente? Envie-nos fotografias, a localização e diga quando precisa do trabalho concluído.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Reparações urgentes</p>
             </div>
             <div class="quick-repair-action">
                 <a href="{{WA_HREF_QUICK_REPAIR}}" class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
@@ -183,7 +185,7 @@ FILE: scripts/templates/home.html
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Enviar fotos por WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilidade no próprio dia quando possível.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Atendimento no próprio dia quando houver disponibilidade.</p>
             </div>
         </div>
     </section>
@@ -5451,15 +5453,20 @@ HOME_UI = {
         "services_see_all": "Ver todos os serviços",
         "services_see_less": "Ver menos serviços",
         "services_partner_hint": "Serviço com parceiro →",
-        "quick_repair_title": "Precisa de uma reparação rápida?",
+        "quick_repair_kicker": "SOS REPARAÇÕES",
+        "quick_repair_title": "Precisa de uma reparação urgente?",
         "quick_repair_text": (
-            "Parede suja ou danificada, móvel partido, puxador solto, prateleira "
-            "caída ou outro pequeno problema? Envie-nos fotografias e diga-nos "
-            "quando precisa do trabalho concluído."
+            "Parede danificada, móvel partido, puxador solto, prateleira caída ou "
+            "outro problema que precisa de ser resolvido rapidamente? Envie-nos "
+            "fotografias, a localização e diga quando precisa do trabalho concluído."
         ),
         "quick_repair_cta": "Enviar fotos por WhatsApp",
-        "quick_repair_tags": "Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações",
-        "quick_repair_note": "Disponibilidade no próprio dia quando possível.",
+        "quick_repair_tags": (
+            "Airbnb · Alojamento Local · Senhorios · Mudanças · Reparações urgentes"
+        ),
+        "quick_repair_note": (
+            "Atendimento no próprio dia quando houver disponibilidade."
+        ),
         "advantages_title": "Porquê escolher-nos?",
         "advantages_title_line1": "Um contacto.",
         "advantages_title_line2": "Várias soluções.",
@@ -5573,15 +5580,18 @@ HOME_UI = {
         "services_see_all": "View all services",
         "services_see_less": "Show fewer services",
         "services_partner_hint": "Partner service →",
-        "quick_repair_title": "Need a quick repair?",
+        "quick_repair_kicker": "SOS REPAIRS",
+        "quick_repair_title": "Need an urgent repair?",
         "quick_repair_text": (
-            "A dirty or damaged wall, broken furniture, a loose handle, a fallen "
-            "shelf or another small problem? Send us photos and tell us when you "
-            "need the work finished."
+            "Damaged wall, broken furniture, loose handle, fallen shelf or another "
+            "problem that needs to be fixed quickly? Send us photos, your location "
+            "and tell us when you need the work completed."
         ),
         "quick_repair_cta": "Send photos on WhatsApp",
-        "quick_repair_tags": "Airbnb · Short-term rentals · Landlords · Moves · Small repairs",
-        "quick_repair_note": "Same-day availability when possible.",
+        "quick_repair_tags": (
+            "Airbnb · Short-term rentals · Landlords · Moves · Urgent repairs"
+        ),
+        "quick_repair_note": "Same-day service when availability allows.",
         "advantages_title": "Why choose us?",
         "advantages_title_line1": "One contact.",
         "advantages_title_line2": "Multiple solutions.",
@@ -5695,15 +5705,20 @@ HOME_UI = {
         "services_see_all": "Ver todos los servicios",
         "services_see_less": "Ver menos servicios",
         "services_partner_hint": "Servicio con colaborador →",
-        "quick_repair_title": "¿Necesita una reparación rápida?",
+        "quick_repair_kicker": "REPARACIONES SOS",
+        "quick_repair_title": "¿Necesita una reparación urgente?",
         "quick_repair_text": (
-            "¿Pared sucia o dañada, mueble roto, tirador suelto, estantería caída "
-            "u otro pequeño problema? Envíenos fotografías y díganos cuándo "
-            "necesita que el trabajo quede terminado."
+            "¿Pared dañada, mueble roto, tirador suelto, estantería caída u otro "
+            "problema que necesita resolverse rápidamente? Envíenos fotografías, "
+            "la ubicación y diga cuándo necesita que el trabajo quede terminado."
         ),
         "quick_repair_cta": "Enviar fotos por WhatsApp",
-        "quick_repair_tags": "Airbnb · Alojamiento local · Propietarios · Mudanzas · Pequeñas reparaciones",
-        "quick_repair_note": "Disponibilidad el mismo día cuando sea posible.",
+        "quick_repair_tags": (
+            "Airbnb · Alojamiento local · Propietarios · Mudanzas · Reparaciones urgentes"
+        ),
+        "quick_repair_note": (
+            "Atención el mismo día cuando haya disponibilidad."
+        ),
         "advantages_title": "¿Por qué elegirnos?",
         "advantages_title_line1": "Un contacto.",
         "advantages_title_line2": "Varias soluciones.",
@@ -5817,15 +5832,19 @@ HOME_UI = {
         "services_see_all": "Voir tous les services",
         "services_see_less": "Voir moins de services",
         "services_partner_hint": "Service avec partenaire →",
-        "quick_repair_title": "Besoin d’une réparation rapide ?",
+        "quick_repair_kicker": "RÉPARATIONS SOS",
+        "quick_repair_title": "Besoin d’une réparation urgente ?",
         "quick_repair_text": (
-            "Mur sale ou abîmé, meuble cassé, poignée desserrée, étagère tombée "
-            "ou un autre petit problème ? Envoyez-nous des photos et indiquez "
-            "quand vous avez besoin que le travail soit terminé."
+            "Mur abîmé, meuble cassé, poignée desserrée, étagère tombée ou un autre "
+            "problème à résoudre rapidement ? Envoyez-nous des photos, le lieu et "
+            "indiquez quand vous avez besoin que le travail soit terminé."
         ),
-        "quick_repair_cta": "Envoyer des photos sur WhatsApp",
-        "quick_repair_tags": "Airbnb · Location courte durée · Propriétaires · Déménagements · Petites réparations",
-        "quick_repair_note": "Disponibilité le jour même lorsque c’est possible.",
+        "quick_repair_cta": "Envoyer des photos par WhatsApp",
+        "quick_repair_tags": (
+            "Airbnb · Location courte durée · Propriétaires · Déménagements · "
+            "Réparations urgentes"
+        ),
+        "quick_repair_note": "Intervention le jour même selon disponibilité.",
         "advantages_title": "Pourquoi nous choisir ?",
         "advantages_title_line1": "Un contact.",
         "advantages_title_line2": "Plusieurs solutions.",
@@ -12600,23 +12619,52 @@ HOME_WA_MESSAGE: dict[str, str] = {
     "fr": "Bonjour ! Je souhaite demander un devis pour un service de handyman ou de réparation à domicile.",
 }
 
-# Compact “quick repair” strip on homepage (photos + timing request).
+# Homepage SOS / urgent repair strip (photos + location + timing).
+# Honest urgency — never promise 24h / guaranteed same-day response.
 QUICK_REPAIR_WA_MESSAGE: dict[str, str] = {
     "pt": (
-        "Olá! Preciso de uma reparação rápida. Vou enviar algumas fotografias e "
-        "indicar a localização e quando preciso que fique resolvido."
+        "Olá! Preciso de uma reparação urgente.\n"
+        "\n"
+        "Vou enviar algumas fotografias.\n"
+        "\n"
+        "Localização:\n"
+        "Problema:\n"
+        "Quando preciso que fique resolvido:\n"
+        "\n"
+        "Obrigado."
     ),
     "en": (
-        "Hello! I need a quick repair. I’ll send a few photos and tell you the "
-        "location and when I need it done."
+        "Hello! I need an urgent repair.\n"
+        "\n"
+        "I will send a few photos.\n"
+        "\n"
+        "Location:\n"
+        "Problem:\n"
+        "When I need it done:\n"
+        "\n"
+        "Thank you."
     ),
     "es": (
-        "¡Hola! Necesito una reparación rápida. Enviaré algunas fotografías e "
-        "indicaré la ubicación y cuándo necesito que quede resuelto."
+        "¡Hola! Necesito una reparación urgente.\n"
+        "\n"
+        "Voy a enviar algunas fotografías.\n"
+        "\n"
+        "Ubicación:\n"
+        "Problema:\n"
+        "Cuándo necesito que quede resuelto:\n"
+        "\n"
+        "Gracias."
     ),
     "fr": (
-        "Bonjour ! J’ai besoin d’une réparation rapide. Je vais envoyer quelques "
-        "photos et indiquer le lieu et quand j’ai besoin que ce soit terminé."
+        "Bonjour ! J’ai besoin d’une réparation urgente.\n"
+        "\n"
+        "Je vais envoyer quelques photos.\n"
+        "\n"
+        "Lieu :\n"
+        "Problème :\n"
+        "Quand j’ai besoin que ce soit terminé :\n"
+        "\n"
+        "Merci."
     ),
 }
 
@@ -17280,23 +17328,25 @@ FILE: dist/en/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Need a quick repair?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">A dirty or damaged wall, broken furniture, a loose handle, a fallen shelf or another small problem? Send us photos and tell us when you need the work finished.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Short-term rentals · Landlords · Moves · Small repairs</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">SOS REPAIRS</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Need an urgent repair?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Damaged wall, broken furniture, loose handle, fallen shelf or another problem that needs to be fixed quickly? Send us photos, your location and tell us when you need the work completed.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Short-term rentals · Landlords · Moves · Urgent repairs</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=Hello%21%20I%20need%20a%20quick%20repair.%20I%E2%80%99ll%20send%20a%20few%20photos%20and%20tell%20you%20the%20location%20and%20when%20I%20need%20it%20done." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=Hello%21%20I%20need%20an%20urgent%20repair.%0A%0AI%20will%20send%20a%20few%20photos.%0A%0ALocation%3A%0AProblem%3A%0AWhen%20I%20need%20it%20done%3A%0A%0AThank%20you." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Send photos on WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Same-day availability when possible.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Same-day service when availability allows.</p>
             </div>
         </div>
     </section>
@@ -23993,23 +24043,25 @@ FILE: dist/es/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">¿Necesita una reparación rápida?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">¿Pared sucia o dañada, mueble roto, tirador suelto, estantería caída u otro pequeño problema? Envíenos fotografías y díganos cuándo necesita que el trabajo quede terminado.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamiento local · Propietarios · Mudanzas · Pequeñas reparaciones</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">REPARACIONES SOS</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">¿Necesita una reparación urgente?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">¿Pared dañada, mueble roto, tirador suelto, estantería caída u otro problema que necesita resolverse rápidamente? Envíenos fotografías, la ubicación y diga cuándo necesita que el trabajo quede terminado.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamiento local · Propietarios · Mudanzas · Reparaciones urgentes</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Necesito%20una%20reparaci%C3%B3n%20r%C3%A1pida.%20Enviar%C3%A9%20algunas%20fotograf%C3%ADas%20e%20indicar%C3%A9%20la%20ubicaci%C3%B3n%20y%20cu%C3%A1ndo%20necesito%20que%20quede%20resuelto." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Necesito%20una%20reparaci%C3%B3n%20urgente.%0A%0AVoy%20a%20enviar%20algunas%20fotograf%C3%ADas.%0A%0AUbicaci%C3%B3n%3A%0AProblema%3A%0ACu%C3%A1ndo%20necesito%20que%20quede%20resuelto%3A%0A%0AGracias." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Enviar fotos por WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilidad el mismo día cuando sea posible.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Atención el mismo día cuando haya disponibilidad.</p>
             </div>
         </div>
     </section>
@@ -30706,23 +30758,25 @@ FILE: dist/fr/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Besoin d’une réparation rapide ?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">Mur sale ou abîmé, meuble cassé, poignée desserrée, étagère tombée ou un autre petit problème ? Envoyez-nous des photos et indiquez quand vous avez besoin que le travail soit terminé.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Location courte durée · Propriétaires · Déménagements · Petites réparations</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">RÉPARATIONS SOS</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Besoin d’une réparation urgente ?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Mur abîmé, meuble cassé, poignée desserrée, étagère tombée ou un autre problème à résoudre rapidement ? Envoyez-nous des photos, le lieu et indiquez quand vous avez besoin que le travail soit terminé.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Location courte durée · Propriétaires · Déménagements · Réparations urgentes</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20J%E2%80%99ai%20besoin%20d%E2%80%99une%20r%C3%A9paration%20rapide.%20Je%20vais%20envoyer%20quelques%20photos%20et%20indiquer%20le%20lieu%20et%20quand%20j%E2%80%99ai%20besoin%20que%20ce%20soit%20termin%C3%A9." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20J%E2%80%99ai%20besoin%20d%E2%80%99une%20r%C3%A9paration%20urgente.%0A%0AJe%20vais%20envoyer%20quelques%20photos.%0A%0ALieu%20%3A%0AProbl%C3%A8me%20%3A%0AQuand%20j%E2%80%99ai%20besoin%20que%20ce%20soit%20termin%C3%A9%20%3A%0A%0AMerci." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="quick_repair_cta">Envoyer des photos sur WhatsApp</span>
+                    <span data-i18n="quick_repair_cta">Envoyer des photos par WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilité le jour même lorsque c’est possible.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Intervention le jour même selon disponibilité.</p>
             </div>
         </div>
     </section>
@@ -37419,23 +37473,25 @@ FILE: dist/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Precisa de uma reparação rápida?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">Parede suja ou danificada, móvel partido, puxador solto, prateleira caída ou outro pequeno problema? Envie-nos fotografias e diga-nos quando precisa do trabalho concluído.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">SOS REPARAÇÕES</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Precisa de uma reparação urgente?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Parede danificada, móvel partido, puxador solto, prateleira caída ou outro problema que precisa de ser resolvido rapidamente? Envie-nos fotografias, a localização e diga quando precisa do trabalho concluído.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Reparações urgentes</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Preciso%20de%20uma%20repara%C3%A7%C3%A3o%20r%C3%A1pida.%20Vou%20enviar%20algumas%20fotografias%20e%20indicar%20a%20localiza%C3%A7%C3%A3o%20e%20quando%20preciso%20que%20fique%20resolvido." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Preciso%20de%20uma%20repara%C3%A7%C3%A3o%20urgente.%0A%0AVou%20enviar%20algumas%20fotografias.%0A%0ALocaliza%C3%A7%C3%A3o%3A%0AProblema%3A%0AQuando%20preciso%20que%20fique%20resolvido%3A%0A%0AObrigado." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Enviar fotos por WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilidade no próprio dia quando possível.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Atendimento no próprio dia quando houver disponibilidade.</p>
             </div>
         </div>
     </section>
@@ -51658,12 +51714,15 @@ html.js-fade .fade-in.visible {
 }
 .page-home .hero-language { display:inline-flex; align-items:center; gap:4px; font-weight:700; }
 
-/* Quick repair strip */
+/* Quick repair / SOS strip */
 .page-home .quick-repair {
     background: var(--home-navy);
     color: #fff;
-    padding: 18px 0;
+    padding: 22px 0;
     border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.page-home .quick-repair--sos {
+    box-shadow: inset 0 1px 0 rgba(245,102,33,.18);
 }
 .page-home .quick-repair-inner {
     display: grid;
@@ -51672,21 +51731,45 @@ html.js-fade .fade-in.visible {
     align-items: center;
 }
 .page-home .quick-repair-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     background: rgba(245,102,33,.16);
+    border: 1px solid rgba(245,102,33,.28);
     color: var(--home-orange);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     flex: 0 0 auto;
 }
+.page-home .quick-repair-sos-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--home-orange);
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
 .page-home .quick-repair-copy { min-width: 0; }
-.page-home .quick-repair-title {
+.page-home .quick-repair-kicker {
     margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--home-orange);
+}
+.page-home .quick-repair-title {
+    margin: 0 0 8px;
     font-family: 'Manrope','Inter',sans-serif;
-    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    font-size: clamp(1.2rem, 1.7vw, 1.55rem);
     line-height: 1.2;
     font-weight: 800;
     letter-spacing: -.02em;
@@ -51694,7 +51777,7 @@ html.js-fade .fade-in.visible {
 }
 .page-home .quick-repair-text {
     margin: 0 0 8px;
-    max-width: 62ch;
+    max-width: 64ch;
     font-size: .92rem;
     line-height: 1.45;
     color: rgba(255,255,255,.88);
@@ -52451,14 +52534,18 @@ html.js-fade .page-home .fade-in.visible {
     .page-home .hero-language-proof { gap:8px; }
     .page-home .hero-language-label { width:auto; }
 
-    .page-home .quick-repair { padding: 20px 0 28px; }
+    .page-home .quick-repair { padding: 22px 0 28px; }
     .page-home .quick-repair-inner {
         grid-template-columns: 1fr;
         gap: 12px;
         text-align: left;
     }
     .page-home .quick-repair-icon { display: none; }
-    .page-home .quick-repair-title { font-size: 1.28rem; margin-bottom: 8px; }
+    .page-home .quick-repair-kicker {
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+    }
+    .page-home .quick-repair-title { font-size: 1.3rem; margin-bottom: 8px; }
     .page-home .quick-repair-text {
         font-size: .9rem;
         margin-bottom: 10px;
@@ -52869,23 +52956,25 @@ FILE: en/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Need a quick repair?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">A dirty or damaged wall, broken furniture, a loose handle, a fallen shelf or another small problem? Send us photos and tell us when you need the work finished.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Short-term rentals · Landlords · Moves · Small repairs</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">SOS REPAIRS</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Need an urgent repair?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Damaged wall, broken furniture, loose handle, fallen shelf or another problem that needs to be fixed quickly? Send us photos, your location and tell us when you need the work completed.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Short-term rentals · Landlords · Moves · Urgent repairs</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=Hello%21%20I%20need%20a%20quick%20repair.%20I%E2%80%99ll%20send%20a%20few%20photos%20and%20tell%20you%20the%20location%20and%20when%20I%20need%20it%20done." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=Hello%21%20I%20need%20an%20urgent%20repair.%0A%0AI%20will%20send%20a%20few%20photos.%0A%0ALocation%3A%0AProblem%3A%0AWhen%20I%20need%20it%20done%3A%0A%0AThank%20you." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Send photos on WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Same-day availability when possible.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Same-day service when availability allows.</p>
             </div>
         </div>
     </section>
@@ -59582,23 +59671,25 @@ FILE: es/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">¿Necesita una reparación rápida?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">¿Pared sucia o dañada, mueble roto, tirador suelto, estantería caída u otro pequeño problema? Envíenos fotografías y díganos cuándo necesita que el trabajo quede terminado.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamiento local · Propietarios · Mudanzas · Pequeñas reparaciones</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">REPARACIONES SOS</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">¿Necesita una reparación urgente?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">¿Pared dañada, mueble roto, tirador suelto, estantería caída u otro problema que necesita resolverse rápidamente? Envíenos fotografías, la ubicación y diga cuándo necesita que el trabajo quede terminado.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamiento local · Propietarios · Mudanzas · Reparaciones urgentes</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Necesito%20una%20reparaci%C3%B3n%20r%C3%A1pida.%20Enviar%C3%A9%20algunas%20fotograf%C3%ADas%20e%20indicar%C3%A9%20la%20ubicaci%C3%B3n%20y%20cu%C3%A1ndo%20necesito%20que%20quede%20resuelto." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=%C2%A1Hola%21%20Necesito%20una%20reparaci%C3%B3n%20urgente.%0A%0AVoy%20a%20enviar%20algunas%20fotograf%C3%ADas.%0A%0AUbicaci%C3%B3n%3A%0AProblema%3A%0ACu%C3%A1ndo%20necesito%20que%20quede%20resuelto%3A%0A%0AGracias." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Enviar fotos por WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilidad el mismo día cuando sea posible.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Atención el mismo día cuando haya disponibilidad.</p>
             </div>
         </div>
     </section>
@@ -66295,23 +66386,25 @@ FILE: fr/index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Besoin d’une réparation rapide ?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">Mur sale ou abîmé, meuble cassé, poignée desserrée, étagère tombée ou un autre petit problème ? Envoyez-nous des photos et indiquez quand vous avez besoin que le travail soit terminé.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Location courte durée · Propriétaires · Déménagements · Petites réparations</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">RÉPARATIONS SOS</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Besoin d’une réparation urgente ?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Mur abîmé, meuble cassé, poignée desserrée, étagère tombée ou un autre problème à résoudre rapidement ? Envoyez-nous des photos, le lieu et indiquez quand vous avez besoin que le travail soit terminé.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Location courte durée · Propriétaires · Déménagements · Réparations urgentes</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20J%E2%80%99ai%20besoin%20d%E2%80%99une%20r%C3%A9paration%20rapide.%20Je%20vais%20envoyer%20quelques%20photos%20et%20indiquer%20le%20lieu%20et%20quand%20j%E2%80%99ai%20besoin%20que%20ce%20soit%20termin%C3%A9." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=Bonjour%20%21%20J%E2%80%99ai%20besoin%20d%E2%80%99une%20r%C3%A9paration%20urgente.%0A%0AJe%20vais%20envoyer%20quelques%20photos.%0A%0ALieu%20%3A%0AProbl%C3%A8me%20%3A%0AQuand%20j%E2%80%99ai%20besoin%20que%20ce%20soit%20termin%C3%A9%20%3A%0A%0AMerci." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                    <span data-i18n="quick_repair_cta">Envoyer des photos sur WhatsApp</span>
+                    <span data-i18n="quick_repair_cta">Envoyer des photos par WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilité le jour même lorsque c’est possible.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Intervention le jour même selon disponibilité.</p>
             </div>
         </div>
     </section>
@@ -73008,23 +73101,25 @@ FILE: index.html
         </div>
     </section>
 
-    <section class="quick-repair" id="reparacao-rapida" aria-labelledby="quick-repair-title">
+    <section class="quick-repair quick-repair--sos" id="reparacao-rapida" aria-labelledby="quick-repair-title">
         <div class="container quick-repair-inner">
             <div class="quick-repair-icon" aria-hidden="true">
+                <span class="quick-repair-sos-badge">SOS</span>
                 <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
             </div>
             <div class="quick-repair-copy">
-                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Precisa de uma reparação rápida?</h2>
-                <p class="quick-repair-text" data-i18n="quick_repair_text">Parede suja ou danificada, móvel partido, puxador solto, prateleira caída ou outro pequeno problema? Envie-nos fotografias e diga-nos quando precisa do trabalho concluído.</p>
-                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações</p>
+                <p class="quick-repair-kicker" data-i18n="quick_repair_kicker">SOS REPARAÇÕES</p>
+                <h2 class="quick-repair-title" id="quick-repair-title" data-i18n="quick_repair_title">Precisa de uma reparação urgente?</h2>
+                <p class="quick-repair-text" data-i18n="quick_repair_text">Parede danificada, móvel partido, puxador solto, prateleira caída ou outro problema que precisa de ser resolvido rapidamente? Envie-nos fotografias, a localização e diga quando precisa do trabalho concluído.</p>
+                <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Reparações urgentes</p>
             </div>
             <div class="quick-repair-action">
-                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Preciso%20de%20uma%20repara%C3%A7%C3%A3o%20r%C3%A1pida.%20Vou%20enviar%20algumas%20fotografias%20e%20indicar%20a%20localiza%C3%A7%C3%A3o%20e%20quando%20preciso%20que%20fique%20resolvido." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/351932504112?text=Ol%C3%A1%21%20Preciso%20de%20uma%20repara%C3%A7%C3%A3o%20urgente.%0A%0AVou%20enviar%20algumas%20fotografias.%0A%0ALocaliza%C3%A7%C3%A3o%3A%0AProblema%3A%0AQuando%20preciso%20que%20fique%20resolvido%3A%0A%0AObrigado." class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
                    data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Enviar fotos por WhatsApp</span>
                 </a>
-                <p class="quick-repair-note" data-i18n="quick_repair_note">Disponibilidade no próprio dia quando possível.</p>
+                <p class="quick-repair-note" data-i18n="quick_repair_note">Atendimento no próprio dia quando houver disponibilidade.</p>
             </div>
         </div>
     </section>
@@ -87247,12 +87342,15 @@ html.js-fade .fade-in.visible {
 }
 .page-home .hero-language { display:inline-flex; align-items:center; gap:4px; font-weight:700; }
 
-/* Quick repair strip */
+/* Quick repair / SOS strip */
 .page-home .quick-repair {
     background: var(--home-navy);
     color: #fff;
-    padding: 18px 0;
+    padding: 22px 0;
     border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.page-home .quick-repair--sos {
+    box-shadow: inset 0 1px 0 rgba(245,102,33,.18);
 }
 .page-home .quick-repair-inner {
     display: grid;
@@ -87261,21 +87359,45 @@ html.js-fade .fade-in.visible {
     align-items: center;
 }
 .page-home .quick-repair-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
     display: grid;
     place-items: center;
     background: rgba(245,102,33,.16);
+    border: 1px solid rgba(245,102,33,.28);
     color: var(--home-orange);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     flex: 0 0 auto;
 }
+.page-home .quick-repair-sos-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--home-orange);
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
 .page-home .quick-repair-copy { min-width: 0; }
-.page-home .quick-repair-title {
+.page-home .quick-repair-kicker {
     margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--home-orange);
+}
+.page-home .quick-repair-title {
+    margin: 0 0 8px;
     font-family: 'Manrope','Inter',sans-serif;
-    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    font-size: clamp(1.2rem, 1.7vw, 1.55rem);
     line-height: 1.2;
     font-weight: 800;
     letter-spacing: -.02em;
@@ -87283,7 +87405,7 @@ html.js-fade .fade-in.visible {
 }
 .page-home .quick-repair-text {
     margin: 0 0 8px;
-    max-width: 62ch;
+    max-width: 64ch;
     font-size: .92rem;
     line-height: 1.45;
     color: rgba(255,255,255,.88);
@@ -88040,14 +88162,18 @@ html.js-fade .page-home .fade-in.visible {
     .page-home .hero-language-proof { gap:8px; }
     .page-home .hero-language-label { width:auto; }
 
-    .page-home .quick-repair { padding: 20px 0 28px; }
+    .page-home .quick-repair { padding: 22px 0 28px; }
     .page-home .quick-repair-inner {
         grid-template-columns: 1fr;
         gap: 12px;
         text-align: left;
     }
     .page-home .quick-repair-icon { display: none; }
-    .page-home .quick-repair-title { font-size: 1.28rem; margin-bottom: 8px; }
+    .page-home .quick-repair-kicker {
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+    }
+    .page-home .quick-repair-title { font-size: 1.3rem; margin-bottom: 8px; }
     .page-home .quick-repair-text {
         font-size: .9rem;
         margin-bottom: 10px;
