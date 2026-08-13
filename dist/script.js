@@ -491,7 +491,7 @@
             advantages_title_line1: 'Un contact.',
             advantages_title_line2: 'Plusieurs solutions.',
             advantages_text: 'Nous traitons directement petites réparations, montage et entretien. Pour les travaux spécialisés, nous comptons sur des partenaires.',
-            partners_teaser_title: 'Services spécialisés avec partenaires'un service spécialisé ?',
+            partners_teaser_title: 'Services spécialisés avec partenaires',
             partners_teaser_text: 'Pour les travaux qui demandent d\'autres spécialités, nous comptons sur des professionnels partenaires que vous pouvez contacter directement.',
             partners_teaser_cta: 'Voir tous les partenaires →',
             footer_company: 'Entreprise',
@@ -928,11 +928,44 @@
     }
 
     function setupScrollAnimations() {
+        const elements = document.querySelectorAll('.fade-in');
+        if (!elements.length) return;
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            elements.forEach(el => el.classList.add('visible'));
+            return;
+        }
+
+        // Opt into hide-until-visible only when animation JS is healthy.
+        document.documentElement.classList.add('js-fade');
+
         const observer = new IntersectionObserver(
-            entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            }
         );
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        elements.forEach(el => {
+            if (el.classList.contains('visible')) return;
+            observer.observe(el);
+        });
+
+        // Fail-safe: never leave conversion content permanently invisible.
+        window.setTimeout(() => {
+            document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+                el.classList.add('visible');
+            });
+        }, 2500);
     }
 
     function setupWorkLightbox() {
@@ -1324,6 +1357,8 @@
 
     function init() {
         applyLanguage(detectPageLang());
+        // Early: static .fade-in must become visible even if later setup throws.
+        setupScrollAnimations();
         setupFAQListeners();
         setupHeader();
         setupLangSwitcher();
@@ -1335,6 +1370,8 @@
         setupPartnerDirectory();
         setupPartnersPageDirectory();
         setupServicesMore();
+        // Again after dynamic renders / carousels that may inject new .fade-in nodes.
+        setupScrollAnimations();
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }

@@ -3357,15 +3357,32 @@ a.reviews-aggregate--link:focus-visible {
 
 /* ===== ANIMATIONS ===== */
 
+/* Progressive enhancement: content stays visible without animation JS.
+   html.js-fade is added only when setupScrollAnimations() runs successfully. */
 .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 1;
+    transform: none;
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.fade-in.visible {
+html.js-fade .fade-in:not(.visible) {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+html.js-fade .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    html.js-fade .fade-in,
+    html.js-fade .fade-in:not(.visible) {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -5197,9 +5214,20 @@ a.reviews-aggregate--link:focus-visible {
 .page-home .footer-social { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); }
 .page-home .footer-bottom { border-top:1px solid rgba(255,255,255,.09); }
 
-/* Motion */
-.page-home .fade-in { opacity:0; transform:translateY(8px); transition:opacity .4s ease,transform .4s ease; }
-.page-home .fade-in.visible { opacity:1; transform:none; }
+/* Motion — same progressive enhancement as global .fade-in */
+.page-home .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity .4s ease, transform .4s ease;
+}
+html.js-fade .page-home .fade-in:not(.visible) {
+    opacity: 0;
+    transform: translateY(8px);
+}
+html.js-fade .page-home .fade-in.visible {
+    opacity: 1;
+    transform: none;
+}
 
 /* Tablet */
 @media (max-width: 1080px) {
@@ -5360,6 +5388,12 @@ a.reviews-aggregate--link:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .page-home .fade-in { opacity:1; transform:none; transition:none; }
+    .page-home .fade-in,
+    html.js-fade .page-home .fade-in,
+    html.js-fade .page-home .fade-in:not(.visible) {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
     .page-home .service-showcase-card,.page-home .btn,.page-home .recent-work-media { transition:none; }
 }
