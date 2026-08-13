@@ -181,6 +181,12 @@ PARTNER_STATUS_LABELS = {
         "es": "Colaborador FAZDETUDO.PT",
         "fr": "Partenaire FAZDETUDO.PT",
     },
+    "partner_f": {
+        "pt": "Parceira FAZDETUDO.PT",
+        "en": "FAZDETUDO.PT partner",
+        "es": "Colaboradora FAZDETUDO.PT",
+        "fr": "Partenaire FAZDETUDO.PT",
+    },
     "recommended": {
         "pt": "Parceiro recomendado",
         "en": "Recommended partner",
@@ -620,7 +626,7 @@ def partner_badge_keys(partner: dict) -> list[str]:
     if partner.get("recommended"):
         keys.append("recommended_f" if partner.get("feminine") else "recommended")
     else:
-        keys.append("partner")
+        keys.append("partner_f" if partner.get("feminine") else "partner")
     if partner.get("featured"):
         keys.append("featured")
     return keys
@@ -754,6 +760,60 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "secondary_cta": "Voir le service",
                 "call_aria": "Appeler directement Caterina, partenaire ménage recommandée",
                 "wa_aria": "Contacter Caterina sur WhatsApp",
+            },
+        },
+    },
+    {
+        "id": "maria-limpezas",
+        "active": True,
+        "category": "limpezas",
+        "categories": ["limpezas"],
+        "type": "direct_contact",
+        "name": "Maria",
+        "recommended": False,
+        "featured": False,
+        "feminine": True,
+        # Keep homepage teaser light — Caterina remains the Limpezas card there.
+        "home_showcase": False,
+        "logo": "assets/partners/maria-limpezas.webp",
+        "icon": "broom",
+        "phone_display": "963 014 604",
+        "tel_href": "tel:+351963014604",
+        "service_slug": "servico-limpezas.html",
+        # Zones not confirmed yet — do not invent coverage.
+        "zones": [],
+        "copy": {
+            "pt": {
+                "role": "Serviços de limpeza · contacto direto",
+                "call": "Ligar",
+                "secondary_cta": "Ver limpezas",
+                "call_aria": (
+                    "Ligar diretamente para Maria, parceira de serviços de limpeza"
+                ),
+            },
+            "en": {
+                "role": "Cleaning services · direct contact",
+                "call": "Call",
+                "secondary_cta": "View cleaning services",
+                "call_aria": (
+                    "Call Maria directly, cleaning services partner"
+                ),
+            },
+            "es": {
+                "role": "Servicios de limpieza · contacto directo",
+                "call": "Llamar",
+                "secondary_cta": "Ver servicios de limpieza",
+                "call_aria": (
+                    "Llamar directamente a Maria, colaboradora de servicios de limpieza"
+                ),
+            },
+            "fr": {
+                "role": "Services de nettoyage · contact direct",
+                "call": "Appeler",
+                "secondary_cta": "Voir les services de nettoyage",
+                "call_aria": (
+                    "Appeler directement Maria, partenaire de services de nettoyage"
+                ),
             },
         },
     },

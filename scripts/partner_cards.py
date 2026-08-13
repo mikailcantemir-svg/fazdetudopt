@@ -115,7 +115,15 @@ def build_partner_directory_card(
                 </article>"""
 
     photo = partner.get("photo")
-    if photo:
+    logo = partner.get("logo")
+    if logo:
+        logo_src = html.escape(f"{prefix}{logo}", quote=True)
+        media_html = (
+            f'<div class="partner-dir-media">'
+            f'<img src="{logo_src}" alt="{name}" width="72" height="72" '
+            f'loading="lazy" decoding="async"></div>'
+        )
+    elif photo:
         photo_src = html.escape(f"{prefix}{photo}", quote=True)
         media_html = (
             f'<div class="partner-dir-media partner-dir-media--photo">'
@@ -123,10 +131,11 @@ def build_partner_directory_card(
             f'loading="lazy" decoding="async"></div>'
         )
     else:
+        icon = html.escape(partner.get("icon") or "helmet-safety")
         media_html = (
             '<div class="partner-dir-media partner-dir-media--icon '
             'partner-dir-media--fallback" aria-hidden="true">'
-            '<i class="fa-solid fa-helmet-safety"></i></div>'
+            f'<i class="fa-solid fa-{icon}"></i></div>'
         )
 
     tel_href_val = html.escape(partner["tel_href"], quote=True)

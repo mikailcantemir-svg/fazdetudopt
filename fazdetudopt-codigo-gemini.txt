@@ -1,7 +1,7 @@
 FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)
 Repositório: https://github.com/mikailcantemir-svg/fazdetudopt
 Gerado automaticamente por scripts/bundle-for-gemini.py
-Atualizado: 2026-08-13 18:33 UTC
+Atualizado: 2026-08-13 18:55 UTC
 Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs
 Ficheiros: 263
 ================================================================================
@@ -2876,6 +2876,8 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
     }
 
     for p in active_partners():
+        if p.get("home_showcase") is False:
+            continue
         name = html.escape(p["name"])
         cat = html.escape(PARTNER_CATEGORIES[p["category"]][lang])
         blurb = html.escape(home_blurbs.get(p["id"], {}).get(lang, ""))
@@ -7438,7 +7440,15 @@ def build_partner_directory_card(
                 </article>"""
 
     photo = partner.get("photo")
-    if photo:
+    logo = partner.get("logo")
+    if logo:
+        logo_src = html.escape(f"{prefix}{logo}", quote=True)
+        media_html = (
+            f'<div class="partner-dir-media">'
+            f'<img src="{logo_src}" alt="{name}" width="72" height="72" '
+            f'loading="lazy" decoding="async"></div>'
+        )
+    elif photo:
         photo_src = html.escape(f"{prefix}{photo}", quote=True)
         media_html = (
             f'<div class="partner-dir-media partner-dir-media--photo">'
@@ -7446,10 +7456,11 @@ def build_partner_directory_card(
             f'loading="lazy" decoding="async"></div>'
         )
     else:
+        icon = html.escape(partner.get("icon") or "helmet-safety")
         media_html = (
             '<div class="partner-dir-media partner-dir-media--icon '
             'partner-dir-media--fallback" aria-hidden="true">'
-            '<i class="fa-solid fa-helmet-safety"></i></div>'
+            f'<i class="fa-solid fa-{icon}"></i></div>'
         )
 
     tel_href_val = html.escape(partner["tel_href"], quote=True)
@@ -7670,6 +7681,12 @@ PARTNER_STATUS_LABELS = {
         "pt": "Parceiro FAZDETUDO.PT",
         "en": "FAZDETUDO.PT partner",
         "es": "Colaborador FAZDETUDO.PT",
+        "fr": "Partenaire FAZDETUDO.PT",
+    },
+    "partner_f": {
+        "pt": "Parceira FAZDETUDO.PT",
+        "en": "FAZDETUDO.PT partner",
+        "es": "Colaboradora FAZDETUDO.PT",
         "fr": "Partenaire FAZDETUDO.PT",
     },
     "recommended": {
@@ -8111,7 +8128,7 @@ def partner_badge_keys(partner: dict) -> list[str]:
     if partner.get("recommended"):
         keys.append("recommended_f" if partner.get("feminine") else "recommended")
     else:
-        keys.append("partner")
+        keys.append("partner_f" if partner.get("feminine") else "partner")
     if partner.get("featured"):
         keys.append("featured")
     return keys
@@ -8245,6 +8262,60 @@ RECOMMENDED_PARTNERS: list[dict] = [
                 "secondary_cta": "Voir le service",
                 "call_aria": "Appeler directement Caterina, partenaire ménage recommandée",
                 "wa_aria": "Contacter Caterina sur WhatsApp",
+            },
+        },
+    },
+    {
+        "id": "maria-limpezas",
+        "active": True,
+        "category": "limpezas",
+        "categories": ["limpezas"],
+        "type": "direct_contact",
+        "name": "Maria",
+        "recommended": False,
+        "featured": False,
+        "feminine": True,
+        # Keep homepage teaser light — Caterina remains the Limpezas card there.
+        "home_showcase": False,
+        "logo": "assets/partners/maria-limpezas.webp",
+        "icon": "broom",
+        "phone_display": "963 014 604",
+        "tel_href": "tel:+351963014604",
+        "service_slug": "servico-limpezas.html",
+        # Zones not confirmed yet — do not invent coverage.
+        "zones": [],
+        "copy": {
+            "pt": {
+                "role": "Serviços de limpeza · contacto direto",
+                "call": "Ligar",
+                "secondary_cta": "Ver limpezas",
+                "call_aria": (
+                    "Ligar diretamente para Maria, parceira de serviços de limpeza"
+                ),
+            },
+            "en": {
+                "role": "Cleaning services · direct contact",
+                "call": "Call",
+                "secondary_cta": "View cleaning services",
+                "call_aria": (
+                    "Call Maria directly, cleaning services partner"
+                ),
+            },
+            "es": {
+                "role": "Servicios de limpieza · contacto directo",
+                "call": "Llamar",
+                "secondary_cta": "Ver servicios de limpieza",
+                "call_aria": (
+                    "Llamar directamente a Maria, colaboradora de servicios de limpieza"
+                ),
+            },
+            "fr": {
+                "role": "Services de nettoyage · contact direct",
+                "call": "Appeler",
+                "secondary_cta": "Voir les services de nettoyage",
+                "call_aria": (
+                    "Appeler directement Maria, partenaire de services de nettoyage"
+                ),
             },
         },
     },
@@ -15564,11 +15635,16 @@ FILE: dist/en/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -15727,6 +15803,25 @@ FILE: dist/en/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/en/servico-limpezas.html">View service</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">FAZDETUDO.PT partner</span>
+                            <span class="partner-dir-category">Cleaning</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Cleaning services · direct contact</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Call Maria directly, cleaning services partner">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Call</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/en/servico-limpezas.html">View cleaning services</a>
                         </div>
                     </div>
                 </article>
@@ -21105,11 +21200,16 @@ FILE: dist/es/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -21268,6 +21368,25 @@ FILE: dist/es/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/es/servico-limpezas.html">Ver servicio</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Colaboradora FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Limpiezas</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Servicios de limpieza · contacto directo</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Llamar directamente a Maria, colaboradora de servicios de limpieza">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Llamar</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/es/servico-limpezas.html">Ver servicios de limpieza</a>
                         </div>
                     </div>
                 </article>
@@ -26646,11 +26765,16 @@ FILE: dist/fr/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -26809,6 +26933,25 @@ FILE: dist/fr/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/fr/servico-limpezas.html">Voir le service</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Partenaire FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Ménage</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Services de nettoyage · contact direct</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Appeler directement Maria, partenaire de services de nettoyage">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Appeler</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/fr/servico-limpezas.html">Voir les services de nettoyage</a>
                         </div>
                     </div>
                 </article>
@@ -32307,11 +32450,16 @@ FILE: dist/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -32470,6 +32618,25 @@ FILE: dist/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/servico-limpezas.html">Ver serviço</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Parceira FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Limpezas</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Serviços de limpeza · contacto direto</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Ligar diretamente para Maria, parceira de serviços de limpeza">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Ligar</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/servico-limpezas.html">Ver limpezas</a>
                         </div>
                     </div>
                 </article>
@@ -38683,6 +38850,7 @@ a.lang-option {
     font-weight: 700;
     color: var(--secondary-color);
     letter-spacing: 0.02em;
+    white-space: nowrap;
 }
 
 .partner-dir-actions {
@@ -42399,10 +42567,11 @@ html.js-fade .fade-in.visible {
 /* =========================================================
    HOMEPAGE — FAZDETUDO.PT HANDYMAN REDESIGN
    Approved visual direction: navy + white + orange, practical and professional.
-   Scoped to .page-home so service/article/partner pages keep their current layout.
+   Tokens + HEADER_HOME styles also apply to .partners-page; page layout stays scoped to .page-home.
    ========================================================= */
 
-.page-home {
+.page-home,
+.partners-page {
     --home-navy: #06182d;
     --home-navy-2: #0c223d;
     --home-orange: #f56621;
@@ -42411,6 +42580,9 @@ html.js-fade .fade-in.visible {
     --home-muted: #647084;
     --home-line: #e5e9ef;
     --home-soft: #f7f8fa;
+}
+
+.page-home {
     background: #fff;
     color: var(--home-ink);
 }
@@ -42483,9 +42655,9 @@ html.js-fade .fade-in.visible {
 }
 .page-home .text-link:hover { text-decoration: underline; }
 
-/* Header */
-.page-home .header,
-.page-home .header.scrolled {
+/* Header — shared by homepage and /parceiros/ (HEADER_HOME) */
+:is(.page-home, .partners-page) .header,
+:is(.page-home, .partners-page) .header.scrolled {
     position: fixed;
     top: 0;
     background: var(--home-navy);
@@ -42494,31 +42666,31 @@ html.js-fade .fade-in.visible {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
-.page-home .header-inner { min-height: 72px; padding: 8px 0; gap: 18px; }
-.page-home .logo { color: #fff; }
-.page-home .logo-img { width: 48px; height: 48px; object-fit: contain; }
-.page-home .logo-text { color: #fff; font-size: 1.06rem; letter-spacing: .02em; }
-.page-home .logo-text em { color: var(--home-orange); }
-.page-home .logo-tagline { color: rgba(255,255,255,.9); font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
-.page-home .nav { gap: 27px; }
-.page-home .nav-link { color: rgba(255,255,255,.92); font-size: .78rem; font-weight: 650; padding: 10px 0; }
-.page-home .nav-link::after { background: var(--home-orange); height: 2px; }
-.page-home .nav-link:hover { color: #fff; }
-.page-home .nav-link--mobile-only { display:none; }
-.page-home .header-actions { gap: 11px; }
-.page-home .header-phone {
+:is(.page-home, .partners-page) .header-inner { min-height: 72px; padding: 8px 0; gap: 18px; }
+:is(.page-home, .partners-page) .logo { color: #fff; }
+:is(.page-home, .partners-page) .logo-img { width: 48px; height: 48px; object-fit: contain; }
+:is(.page-home, .partners-page) .logo-text { color: #fff; font-size: 1.06rem; letter-spacing: .02em; }
+:is(.page-home, .partners-page) .logo-text em { color: var(--home-orange); }
+:is(.page-home, .partners-page) .logo-tagline { color: rgba(255,255,255,.9); font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
+:is(.page-home, .partners-page) .nav { gap: 27px; }
+:is(.page-home, .partners-page) .nav-link { color: rgba(255,255,255,.92); font-size: .78rem; font-weight: 650; padding: 10px 0; }
+:is(.page-home, .partners-page) .nav-link::after { background: var(--home-orange); height: 2px; }
+:is(.page-home, .partners-page) .nav-link:hover { color: #fff; }
+:is(.page-home, .partners-page) .nav-link--mobile-only { display:none; }
+:is(.page-home, .partners-page) .header-actions { gap: 11px; }
+:is(.page-home, .partners-page) .header-phone {
     color:#fff; display:flex; align-items:center; gap:8px; font-size:.88rem; font-weight:800; text-decoration:none; white-space:nowrap;
 }
-.page-home .header-phone i { font-size:.8rem; }
-.page-home .btn-header-quote { min-height: 40px; padding: 0 16px; font-size: .75rem; }
-.page-home .lang-switcher { color:#fff; }
-.page-home .lang-toggle {
+:is(.page-home, .partners-page) .header-phone i { font-size:.8rem; }
+:is(.page-home, .partners-page) .btn-header-quote { min-height: 40px; padding: 0 16px; font-size: .75rem; }
+:is(.page-home, .partners-page) .lang-switcher { color:#fff; }
+:is(.page-home, .partners-page) .lang-toggle {
     color:#fff; background:transparent; border:0; box-shadow:none; min-height:38px; padding:6px 4px; gap:6px;
 }
-.page-home .lang-toggle:hover { background:rgba(255,255,255,.06); }
-.page-home .lang-toggle .lang-chevron { color:rgba(255,255,255,.7); }
-.page-home .lang-dropdown { border-radius:6px; border:1px solid #e1e6ec; box-shadow:0 12px 30px rgba(6,24,45,.16); }
-.page-home .menu-toggle span { background:#fff; }
+:is(.page-home, .partners-page) .lang-toggle:hover { background:rgba(255,255,255,.06); }
+:is(.page-home, .partners-page) .lang-toggle .lang-chevron { color:rgba(255,255,255,.7); }
+:is(.page-home, .partners-page) .lang-dropdown { border-radius:6px; border:1px solid #e1e6ec; box-shadow:0 12px 30px rgba(6,24,45,.16); }
+:is(.page-home, .partners-page) .menu-toggle span { background:#fff; }
 
 /* Hero */
 .page-home .hero {
@@ -43020,8 +43192,8 @@ html.js-fade .page-home .fade-in.visible {
 
 /* Tablet */
 @media (max-width: 1080px) {
-    .page-home .nav { gap:18px; }
-    .page-home .header-phone { display:none; }
+    :is(.page-home, .partners-page) .nav { gap:18px; }
+    :is(.page-home, .partners-page) .header-phone { display:none; }
     .page-home .services-showcase-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
     .page-home .services-showcase-grid--more { grid-template-columns:repeat(4,minmax(0,1fr)); }
     .page-home .recent-work-grid--showcase { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
@@ -43045,17 +43217,18 @@ html.js-fade .page-home .fade-in.visible {
 /* Mobile */
 @media (max-width: 768px) {
     .page-home .container { padding-left:20px; padding-right:20px; }
-    .page-home .header,.page-home .header.scrolled { position:fixed; }
-    .page-home .header-inner { min-height:68px; padding:7px 0; }
-    .page-home .logo-img { width:42px; height:42px; }
-    .page-home .logo-text { font-size:.92rem; }
-    .page-home .logo-tagline { font-size:.68rem; letter-spacing:.07em; }
-    .page-home .nav { background:var(--home-navy); border-top:1px solid rgba(255,255,255,.08); }
-    .page-home .nav-link { color:#fff; }
-    .page-home .nav-link--mobile-only { display:block; }
-    .page-home .btn-header-quote { display:none; }
-    .page-home .header-phone { display:none; }
-    .page-home .lang-switcher { display:none; }
+    :is(.page-home, .partners-page) .header,
+    :is(.page-home, .partners-page) .header.scrolled { position:fixed; }
+    :is(.page-home, .partners-page) .header-inner { min-height:68px; padding:7px 0; }
+    :is(.page-home, .partners-page) .logo-img { width:42px; height:42px; }
+    :is(.page-home, .partners-page) .logo-text { font-size:.92rem; }
+    :is(.page-home, .partners-page) .logo-tagline { font-size:.68rem; letter-spacing:.07em; }
+    :is(.page-home, .partners-page) .nav { background:var(--home-navy); border-top:1px solid rgba(255,255,255,.08); }
+    :is(.page-home, .partners-page) .nav-link { color:#fff; }
+    :is(.page-home, .partners-page) .nav-link--mobile-only { display:block; }
+    :is(.page-home, .partners-page) .btn-header-quote { display:none; }
+    :is(.page-home, .partners-page) .header-phone { display:none; }
+    :is(.page-home, .partners-page) .lang-switcher { display:none; }
 
     .page-home .hero { min-height:700px; padding-top:68px; }
     .page-home .hero-picture { inset:68px 0 0; }
@@ -45250,11 +45423,16 @@ FILE: en/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -45413,6 +45591,25 @@ FILE: en/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/en/servico-limpezas.html">View service</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">FAZDETUDO.PT partner</span>
+                            <span class="partner-dir-category">Cleaning</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Cleaning services · direct contact</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Call Maria directly, cleaning services partner">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Call</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/en/servico-limpezas.html">View cleaning services</a>
                         </div>
                     </div>
                 </article>
@@ -50791,11 +50988,16 @@ FILE: es/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -50954,6 +51156,25 @@ FILE: es/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/es/servico-limpezas.html">Ver servicio</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Colaboradora FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Limpiezas</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Servicios de limpieza · contacto directo</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Llamar directamente a Maria, colaboradora de servicios de limpieza">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Llamar</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/es/servico-limpezas.html">Ver servicios de limpieza</a>
                         </div>
                     </div>
                 </article>
@@ -56332,11 +56553,16 @@ FILE: fr/parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -56495,6 +56721,25 @@ FILE: fr/parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/fr/servico-limpezas.html">Voir le service</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Partenaire FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Ménage</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Services de nettoyage · contact direct</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Appeler directement Maria, partenaire de services de nettoyage">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Appeler</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/fr/servico-limpezas.html">Voir les services de nettoyage</a>
                         </div>
                     </div>
                 </article>
@@ -61993,11 +62238,16 @@ FILE: parceiros/index.html
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "WallFixTV.pt"
+        "name": "Maria"
       },
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "WallFixTV.pt"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "name": "Valeriu Cantemir"
       }
     ]
@@ -62156,6 +62406,25 @@ FILE: parceiros/index.html
                                 <span>WhatsApp</span>
                             </a>
                             <a class="partner-dir-btn partner-dir-btn--secondary" href="/servico-limpezas.html">Ver serviço</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="partner-dir-card partner-dir-card--direct_contact partners-listing-card" data-partner-category="limpezas" data-partner-categories="limpezas" data-partner-zones="" data-partner-id="maria-limpezas" data-partner-status="partner">
+                    <div class="partner-dir-media"><img src="../assets/partners/maria-limpezas.webp" alt="Maria" width="72" height="72" loading="lazy" decoding="async"></div>
+                    <div class="partner-dir-body">
+                        <div class="partner-dir-meta">
+                            <span class="partner-dir-badge partner-dir-badge--partner">Parceira FAZDETUDO.PT</span>
+                            <span class="partner-dir-category">Limpezas</span>
+                        </div>
+                        <h3 class="partner-dir-name">Maria</h3>
+                        <p class="partner-dir-role">Serviços de limpeza · contacto direto</p>
+                        <p class="partner-dir-phone">963 014 604</p>
+                        <div class="partner-dir-actions">
+                            <a class="partner-dir-btn partner-dir-btn--call" href="tel:+351963014604" aria-label="Ligar diretamente para Maria, parceira de serviços de limpeza">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Ligar</span>
+                            </a>
+                            <a class="partner-dir-btn partner-dir-btn--secondary" href="/servico-limpezas.html">Ver limpezas</a>
                         </div>
                     </div>
                 </article>
@@ -68369,6 +68638,7 @@ a.lang-option {
     font-weight: 700;
     color: var(--secondary-color);
     letter-spacing: 0.02em;
+    white-space: nowrap;
 }
 
 .partner-dir-actions {
@@ -72085,10 +72355,11 @@ html.js-fade .fade-in.visible {
 /* =========================================================
    HOMEPAGE — FAZDETUDO.PT HANDYMAN REDESIGN
    Approved visual direction: navy + white + orange, practical and professional.
-   Scoped to .page-home so service/article/partner pages keep their current layout.
+   Tokens + HEADER_HOME styles also apply to .partners-page; page layout stays scoped to .page-home.
    ========================================================= */
 
-.page-home {
+.page-home,
+.partners-page {
     --home-navy: #06182d;
     --home-navy-2: #0c223d;
     --home-orange: #f56621;
@@ -72097,6 +72368,9 @@ html.js-fade .fade-in.visible {
     --home-muted: #647084;
     --home-line: #e5e9ef;
     --home-soft: #f7f8fa;
+}
+
+.page-home {
     background: #fff;
     color: var(--home-ink);
 }
@@ -72169,9 +72443,9 @@ html.js-fade .fade-in.visible {
 }
 .page-home .text-link:hover { text-decoration: underline; }
 
-/* Header */
-.page-home .header,
-.page-home .header.scrolled {
+/* Header — shared by homepage and /parceiros/ (HEADER_HOME) */
+:is(.page-home, .partners-page) .header,
+:is(.page-home, .partners-page) .header.scrolled {
     position: fixed;
     top: 0;
     background: var(--home-navy);
@@ -72180,31 +72454,31 @@ html.js-fade .fade-in.visible {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
-.page-home .header-inner { min-height: 72px; padding: 8px 0; gap: 18px; }
-.page-home .logo { color: #fff; }
-.page-home .logo-img { width: 48px; height: 48px; object-fit: contain; }
-.page-home .logo-text { color: #fff; font-size: 1.06rem; letter-spacing: .02em; }
-.page-home .logo-text em { color: var(--home-orange); }
-.page-home .logo-tagline { color: rgba(255,255,255,.9); font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
-.page-home .nav { gap: 27px; }
-.page-home .nav-link { color: rgba(255,255,255,.92); font-size: .78rem; font-weight: 650; padding: 10px 0; }
-.page-home .nav-link::after { background: var(--home-orange); height: 2px; }
-.page-home .nav-link:hover { color: #fff; }
-.page-home .nav-link--mobile-only { display:none; }
-.page-home .header-actions { gap: 11px; }
-.page-home .header-phone {
+:is(.page-home, .partners-page) .header-inner { min-height: 72px; padding: 8px 0; gap: 18px; }
+:is(.page-home, .partners-page) .logo { color: #fff; }
+:is(.page-home, .partners-page) .logo-img { width: 48px; height: 48px; object-fit: contain; }
+:is(.page-home, .partners-page) .logo-text { color: #fff; font-size: 1.06rem; letter-spacing: .02em; }
+:is(.page-home, .partners-page) .logo-text em { color: var(--home-orange); }
+:is(.page-home, .partners-page) .logo-tagline { color: rgba(255,255,255,.9); font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
+:is(.page-home, .partners-page) .nav { gap: 27px; }
+:is(.page-home, .partners-page) .nav-link { color: rgba(255,255,255,.92); font-size: .78rem; font-weight: 650; padding: 10px 0; }
+:is(.page-home, .partners-page) .nav-link::after { background: var(--home-orange); height: 2px; }
+:is(.page-home, .partners-page) .nav-link:hover { color: #fff; }
+:is(.page-home, .partners-page) .nav-link--mobile-only { display:none; }
+:is(.page-home, .partners-page) .header-actions { gap: 11px; }
+:is(.page-home, .partners-page) .header-phone {
     color:#fff; display:flex; align-items:center; gap:8px; font-size:.88rem; font-weight:800; text-decoration:none; white-space:nowrap;
 }
-.page-home .header-phone i { font-size:.8rem; }
-.page-home .btn-header-quote { min-height: 40px; padding: 0 16px; font-size: .75rem; }
-.page-home .lang-switcher { color:#fff; }
-.page-home .lang-toggle {
+:is(.page-home, .partners-page) .header-phone i { font-size:.8rem; }
+:is(.page-home, .partners-page) .btn-header-quote { min-height: 40px; padding: 0 16px; font-size: .75rem; }
+:is(.page-home, .partners-page) .lang-switcher { color:#fff; }
+:is(.page-home, .partners-page) .lang-toggle {
     color:#fff; background:transparent; border:0; box-shadow:none; min-height:38px; padding:6px 4px; gap:6px;
 }
-.page-home .lang-toggle:hover { background:rgba(255,255,255,.06); }
-.page-home .lang-toggle .lang-chevron { color:rgba(255,255,255,.7); }
-.page-home .lang-dropdown { border-radius:6px; border:1px solid #e1e6ec; box-shadow:0 12px 30px rgba(6,24,45,.16); }
-.page-home .menu-toggle span { background:#fff; }
+:is(.page-home, .partners-page) .lang-toggle:hover { background:rgba(255,255,255,.06); }
+:is(.page-home, .partners-page) .lang-toggle .lang-chevron { color:rgba(255,255,255,.7); }
+:is(.page-home, .partners-page) .lang-dropdown { border-radius:6px; border:1px solid #e1e6ec; box-shadow:0 12px 30px rgba(6,24,45,.16); }
+:is(.page-home, .partners-page) .menu-toggle span { background:#fff; }
 
 /* Hero */
 .page-home .hero {
@@ -72706,8 +72980,8 @@ html.js-fade .page-home .fade-in.visible {
 
 /* Tablet */
 @media (max-width: 1080px) {
-    .page-home .nav { gap:18px; }
-    .page-home .header-phone { display:none; }
+    :is(.page-home, .partners-page) .nav { gap:18px; }
+    :is(.page-home, .partners-page) .header-phone { display:none; }
     .page-home .services-showcase-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
     .page-home .services-showcase-grid--more { grid-template-columns:repeat(4,minmax(0,1fr)); }
     .page-home .recent-work-grid--showcase { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
@@ -72731,17 +73005,18 @@ html.js-fade .page-home .fade-in.visible {
 /* Mobile */
 @media (max-width: 768px) {
     .page-home .container { padding-left:20px; padding-right:20px; }
-    .page-home .header,.page-home .header.scrolled { position:fixed; }
-    .page-home .header-inner { min-height:68px; padding:7px 0; }
-    .page-home .logo-img { width:42px; height:42px; }
-    .page-home .logo-text { font-size:.92rem; }
-    .page-home .logo-tagline { font-size:.68rem; letter-spacing:.07em; }
-    .page-home .nav { background:var(--home-navy); border-top:1px solid rgba(255,255,255,.08); }
-    .page-home .nav-link { color:#fff; }
-    .page-home .nav-link--mobile-only { display:block; }
-    .page-home .btn-header-quote { display:none; }
-    .page-home .header-phone { display:none; }
-    .page-home .lang-switcher { display:none; }
+    :is(.page-home, .partners-page) .header,
+    :is(.page-home, .partners-page) .header.scrolled { position:fixed; }
+    :is(.page-home, .partners-page) .header-inner { min-height:68px; padding:7px 0; }
+    :is(.page-home, .partners-page) .logo-img { width:42px; height:42px; }
+    :is(.page-home, .partners-page) .logo-text { font-size:.92rem; }
+    :is(.page-home, .partners-page) .logo-tagline { font-size:.68rem; letter-spacing:.07em; }
+    :is(.page-home, .partners-page) .nav { background:var(--home-navy); border-top:1px solid rgba(255,255,255,.08); }
+    :is(.page-home, .partners-page) .nav-link { color:#fff; }
+    :is(.page-home, .partners-page) .nav-link--mobile-only { display:block; }
+    :is(.page-home, .partners-page) .btn-header-quote { display:none; }
+    :is(.page-home, .partners-page) .header-phone { display:none; }
+    :is(.page-home, .partners-page) .lang-switcher { display:none; }
 
     .page-home .hero { min-height:700px; padding-top:68px; }
     .page-home .hero-picture { inset:68px 0 0; }

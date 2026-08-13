@@ -615,6 +615,8 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
     }
 
     for p in active_partners():
+        if p.get("home_showcase") is False:
+            continue
         name = html.escape(p["name"])
         cat = html.escape(PARTNER_CATEGORIES[p["category"]][lang])
         blurb = html.escape(home_blurbs.get(p["id"], {}).get(lang, ""))
