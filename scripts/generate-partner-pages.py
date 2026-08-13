@@ -38,6 +38,8 @@ from recommended_partners import (  # noqa: E402
     partner_profile_path,
     partner_profile_seo,
     partner_profile_url,
+    partner_spoken_languages_display,
+    partner_whatsapp_href,
     partners_with_profiles,
 )
 from site_config import BASE_URL, OG_IMAGE  # noqa: E402
@@ -103,10 +105,11 @@ def _actions_html(partner: dict, ui: dict, lang: str) -> str:
             f'<i class="fa-solid fa-phone" aria-hidden="true"></i> '
             f'{html.escape(ui["call"])}</a>'
         )
-    if partner.get("whatsapp_href"):
+    wa_href = partner_whatsapp_href(partner, lang)
+    if wa_href:
         parts.append(
             f'<a class="btn btn-outline btn-lg partner-profile-btn partner-profile-btn--whatsapp" '
-            f'href="{html.escape(partner["whatsapp_href"], quote=True)}" '
+            f'href="{html.escape(wa_href, quote=True)}" '
             f'target="_blank" rel="noopener noreferrer" '
             f'aria-label="{html.escape(copy.get("wa_aria", ui["whatsapp"]), quote=True)}" '
             f'{base_track} data-contact-method="whatsapp">'
@@ -248,6 +251,33 @@ def render_partner_profile(partner: dict, lang: str) -> str:
             f"{html.escape(location_label)}</p>"
         )
 
+    languages_html = ""
+    spoken_items = partner_spoken_languages_display(partner, lang)
+    if spoken_items:
+        lang_parts: list[str] = []
+        for item in spoken_items:
+            lang_parts.append(
+                '<span class="partner-lang">'
+                f'<span class="partner-lang-flag" aria-hidden="true">'
+                f'{html.escape(item["flag"])}</span>'
+                f'<span class="partner-lang-label">{html.escape(item["label"])}</span>'
+                "</span>"
+            )
+        languages_list_html = (
+            '<span class="partner-lang-sep" aria-hidden="true"> · </span>'.join(
+                lang_parts
+            )
+        )
+        languages_html = (
+            '<div class="partner-profile-languages">'
+            f'<p class="partner-profile-languages-label">'
+            f'{html.escape(ui["languages_heading"])}</p>'
+            f'<p class="partner-profile-languages-value">'
+            f'<i class="fa-solid fa-language" aria-hidden="true"></i> '
+            f"{languages_list_html}</p>"
+            "</div>"
+        )
+
     phone_display = partner.get("phone_display") or ""
     phone_html = ""
     if phone_display:
@@ -324,6 +354,7 @@ def render_partner_profile(partner: dict, lang: str) -> str:
             "H1_TITLE": html.escape(seo["h1"]),
             "CATEGORY_LABEL": html.escape(category_label),
             "LOCATION_HTML": location_html,
+            "LANGUAGES_HTML": languages_html,
             "PHONE_HTML": phone_html,
             "ACTIONS_HTML": _actions_html(partner, ui, lang),
             "INTRO_HTML": html.escape(content["intro"]),

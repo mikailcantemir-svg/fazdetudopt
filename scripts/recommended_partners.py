@@ -25,6 +25,8 @@ Add a partner:
 
 from __future__ import annotations
 
+from urllib.parse import quote
+
 from site_config import BASE_URL
 
 PARTNER_CATEGORIES: dict[str, dict[str, str]] = {
@@ -718,6 +720,9 @@ PARTNER_PROFILE_UI = {
         "zone_note": (
             "A zona exacta de deslocação deve ser confirmada diretamente com a profissional."
         ),
+        "languages_heading": "Idiomas de atendimento",
+        "languages_compact_singular": "Atendimento:",
+        "languages_compact_plural": "Atendimento:",
     },
     "en": {
         "profile_cta": "View profile →",
@@ -734,6 +739,9 @@ PARTNER_PROFILE_UI = {
         "zone_note": (
             "The exact travel area should be confirmed directly with the professional."
         ),
+        "languages_heading": "Languages",
+        "languages_compact_singular": "Language:",
+        "languages_compact_plural": "Languages:",
     },
     "es": {
         "profile_cta": "Ver perfil →",
@@ -750,6 +758,9 @@ PARTNER_PROFILE_UI = {
         "zone_note": (
             "La zona exacta de desplazamiento debe confirmarse directamente con la profesional."
         ),
+        "languages_heading": "Idiomas",
+        "languages_compact_singular": "Atención en:",
+        "languages_compact_plural": "Idiomas:",
     },
     "fr": {
         "profile_cta": "Voir le profil →",
@@ -766,7 +777,40 @@ PARTNER_PROFILE_UI = {
         "zone_note": (
             "La zone exacte de déplacement doit être confirmée directement avec la professionnelle."
         ),
+        "languages_heading": "Langues",
+        "languages_compact_singular": "Langue :",
+        "languages_compact_plural": "Langues :",
     },
+}
+
+# Factual spoken-language labels: (code, level) → display name per UI language.
+# level "basic" = honest non-fluent phrasing (never bare "English").
+SPOKEN_LANGUAGE_LABELS: dict[tuple[str, str], dict[str, str]] = {
+    ("pt", "fluent"): {
+        "pt": "Português",
+        "en": "Portuguese",
+        "es": "Portugués",
+        "fr": "Portugais",
+    },
+    ("es", "fluent"): {
+        "pt": "Español",
+        "en": "Spanish",
+        "es": "Español",
+        "fr": "Espagnol",
+    },
+    ("en", "basic"): {
+        "pt": "Inglês básico",
+        "en": "Basic English",
+        "es": "Inglés básico",
+        "fr": "Anglais de base",
+    },
+}
+
+# Visual cue only (aria-hidden in HTML). Text label remains the accessible name.
+SPOKEN_LANGUAGE_FLAGS: dict[str, str] = {
+    "pt": "🇵🇹",
+    "es": "🇪🇸",
+    "en": "🇬🇧",
 }
 
 
@@ -901,6 +945,111 @@ def partners_for_service(slug: str) -> list[dict]:
     return matched
 
 
+def partner_spoken_languages_display(
+    partner: dict, ui_lang: str = "pt"
+) -> list[dict[str, str]]:
+    """Return spoken languages as {code, flag, label} for UI rendering."""
+    spoken = partner.get("spoken_languages") or []
+    items: list[dict[str, str]] = []
+    for item in spoken:
+        code = item.get("code")
+        if not code:
+            continue
+        level = item.get("level") or "fluent"
+        by_ui = SPOKEN_LANGUAGE_LABELS.get((code, level))
+        if not by_ui:
+            raise ValueError(
+                f"Missing SPOKEN_LANGUAGE_LABELS for ({code!r}, {level!r}) "
+                f"on partner {partner.get('id')!r}"
+            )
+        label = by_ui.get(ui_lang) or by_ui.get("pt")
+        if not label:
+            continue
+        flag = SPOKEN_LANGUAGE_FLAGS.get(code)
+        if not flag:
+            raise ValueError(
+                f"Missing SPOKEN_LANGUAGE_FLAGS for {code!r} "
+                f"on partner {partner.get('id')!r}"
+            )
+        items.append({"code": code, "flag": flag, "label": label})
+    return items
+
+
+def partner_spoken_language_labels(partner: dict, ui_lang: str = "pt") -> list[str]:
+    """Return localized spoken-language labels for a partner (empty if unknown)."""
+    return [item["label"] for item in partner_spoken_languages_display(partner, ui_lang)]
+
+
+def partner_languages_compact_prefix(partner: dict, ui_lang: str = "pt") -> str | None:
+    """Label prefix for compact lines, e.g. 'Language:' / 'Languages:'."""
+    items = partner_spoken_languages_display(partner, ui_lang)
+    if not items:
+        return None
+    ui = PARTNER_PROFILE_UI[ui_lang]
+    return (
+        ui["languages_compact_singular"]
+        if len(items) == 1
+        else ui["languages_compact_plural"]
+    )
+
+
+def partner_languages_compact_text(partner: dict, ui_lang: str = "pt") -> str | None:
+    """Compact card/sidebar line, e.g. 'Language: 🇵🇹 Portuguese'."""
+    items = partner_spoken_languages_display(partner, ui_lang)
+    if not items:
+        return None
+    prefix = partner_languages_compact_prefix(partner, ui_lang)
+    joined = " · ".join(f"{item['flag']} {item['label']}" for item in items)
+    return f"{prefix} {joined}"
+
+
+def partner_languages_profile_text(partner: dict, ui_lang: str = "pt") -> str | None:
+    """Profile body list only (heading rendered separately)."""
+    items = partner_spoken_languages_display(partner, ui_lang)
+    if not items:
+        return None
+    return " · ".join(f"{item['flag']} {item['label']}" for item in items)
+
+
+def partner_whatsapp_message_lang(partner: dict, page_lang: str = "pt") -> str | None:
+    """Resolve which message language to use for the partner on this page.
+
+    Uses ``whatsapp_message_language_policy`` when set (page lang → message lang),
+    so e.g. Caterina always gets Portuguese regardless of EN/ES/FR page.
+    """
+    messages = partner.get("whatsapp_message") or {}
+    if not messages:
+        return None
+    policy = partner.get("whatsapp_message_language_policy") or {}
+    if page_lang in policy:
+        chosen = policy[page_lang]
+        if chosen in messages:
+            return chosen
+    if page_lang in messages:
+        return page_lang
+    if "pt" in messages:
+        return "pt"
+    return next(iter(messages), None)
+
+
+def partner_whatsapp_href(partner: dict, lang: str = "pt") -> str | None:
+    """Build WhatsApp deep link with optional localized prefilled message.
+
+    Keeps ``whatsapp_href`` as the bare wa.me base in partner data. Message
+    language follows ``whatsapp_message_language_policy`` / available messages.
+    """
+    base = partner.get("whatsapp_href")
+    if not base:
+        return None
+    messages = partner.get("whatsapp_message") or {}
+    msg_lang = partner_whatsapp_message_lang(partner, lang)
+    message = messages.get(msg_lang) if msg_lang else None
+    if not message:
+        return base
+    base_clean = str(base).split("?", 1)[0]
+    return f"{base_clean}?text={quote(message)}"
+
+
 def partner_schema_entity(partner: dict) -> dict:
     """Build a Schema.org Person/Organization node from partner data only."""
     if partner.get("type") == "external":
@@ -1027,6 +1176,27 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "phone_display": "963 212 185",
         "tel_href": "tel:+351963212185",
         "whatsapp_href": "https://wa.me/351963212185",
+        "spoken_languages": [
+            {"code": "pt", "level": "fluent"},
+        ],
+        "whatsapp_message_language_policy": {
+            "pt": "pt",
+            "en": "pt",
+            "es": "pt",
+            "fr": "pt",
+        },
+        "whatsapp_message": {
+            "pt": (
+                "Olá Caterina! Encontrei o seu contacto através da FAZDETUDO.PT e "
+                "gostaria de pedir informações sobre um serviço de limpeza.\n"
+                "\n"
+                "Localidade:\n"
+                "Tipo de imóvel:\n"
+                "Serviço pretendido:\n"
+                "\n"
+                "Obrigado."
+            ),
+        },
         "service_slug": "servico-limpezas.html",
         "location": {
             "pt": "Margem Sul · Azeitão",
@@ -1133,6 +1303,49 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "phone_display": "963 014 604",
         "tel_href": "tel:+351963014604",
         "whatsapp_href": "https://wa.me/351963014604",
+        "spoken_languages": [
+            {"code": "pt", "level": "fluent"},
+            {"code": "es", "level": "fluent"},
+            {"code": "en", "level": "basic"},
+        ],
+        "whatsapp_message_language_policy": {
+            "pt": "pt",
+            "en": "en",
+            "es": "es",
+            "fr": "en",
+        },
+        "whatsapp_message": {
+            "pt": (
+                "Olá Maria! Encontrei o seu contacto através da FAZDETUDO.PT e "
+                "gostaria de pedir informações sobre um serviço de limpeza.\n"
+                "\n"
+                "Localidade:\n"
+                "Tipo de imóvel:\n"
+                "Serviço pretendido:\n"
+                "\n"
+                "Obrigado."
+            ),
+            "en": (
+                "Hello Maria! I found your contact through FAZDETUDO.PT and I "
+                "would like information about a cleaning service.\n"
+                "\n"
+                "Location:\n"
+                "Type of property:\n"
+                "Service needed:\n"
+                "\n"
+                "Thank you."
+            ),
+            "es": (
+                "¡Hola Maria! Encontré su contacto a través de FAZDETUDO.PT y me "
+                "gustaría pedir información sobre un servicio de limpieza.\n"
+                "\n"
+                "Localidad:\n"
+                "Tipo de inmueble:\n"
+                "Servicio solicitado:\n"
+                "\n"
+                "Gracias."
+            ),
+        },
         "service_slug": "servico-limpezas.html",
         "location": {
             "pt": "Grande Lisboa",
@@ -1371,6 +1584,9 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "featured": False,
         "phone_display": "964 400 960",
         "tel_href": "tel:+351964400960",
+        "spoken_languages": [
+            {"code": "pt", "level": "fluent"},
+        ],
         "service_slug": "servico-remodelacoes.html",
         "location": {
             "pt": "Lisboa · Margem Sul · Azeitão",

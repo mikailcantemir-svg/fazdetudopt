@@ -12,7 +12,10 @@ from recommended_partners import (
     partner_badge_keys,
     partner_category_ids,
     partner_has_profile,
+    partner_languages_compact_prefix,
     partner_profile_href,
+    partner_spoken_languages_display,
+    partner_whatsapp_href,
     partner_zone_ids,
 )
 from slug_registry import service_page_href
@@ -43,6 +46,46 @@ def _infer_source_context(extra_class: str) -> str:
     if "article-partner-card" in classes:
         return "article"
     return "partners_directory"
+
+
+def _spoken_languages_items_html(partner: dict, lang: str) -> str:
+    """Flag + label chips; flags are decorative (aria-hidden)."""
+    items = partner_spoken_languages_display(partner, lang)
+    if not items:
+        return ""
+    parts: list[str] = []
+    for item in items:
+        parts.append(
+            '<span class="partner-lang">'
+            f'<span class="partner-lang-flag" aria-hidden="true">'
+            f'{html.escape(item["flag"])}</span>'
+            f'<span class="partner-lang-label">{html.escape(item["label"])}</span>'
+            "</span>"
+        )
+    return '<span class="partner-lang-sep" aria-hidden="true"> · </span>'.join(parts)
+
+
+def _languages_line_html(
+    partner: dict,
+    lang: str,
+    *,
+    css_class: str,
+) -> str:
+    """Discreet languages line for cards/sidebars; empty when unknown."""
+    items_html = _spoken_languages_items_html(partner, lang)
+    if not items_html:
+        return ""
+    prefix = partner_languages_compact_prefix(partner, lang) or ""
+    prefix_html = (
+        f'<span class="partner-lang-prefix">{html.escape(prefix)}</span> '
+        if prefix
+        else ""
+    )
+    return (
+        f'<p class="{css_class}">'
+        f'<i class="fa-solid fa-language" aria-hidden="true"></i> '
+        f"{prefix_html}{items_html}</p>"
+    )
 
 
 def _profile_action(partner: dict, lang: str, *, source_context: str) -> str:
@@ -161,6 +204,12 @@ def build_partner_directory_card(
                 f'<i class="fa-solid fa-location-dot" aria-hidden="true"></i> '
                 f"{html.escape(loc)}</p>"
             )
+    languages_html = ""
+    languages_line = _languages_line_html(
+        partner, lang, css_class="partner-dir-languages"
+    )
+    if languages_line:
+        languages_html = f"\n                        {languages_line}"
 
     secondary_cta = ""
     if show_secondary_cta:
@@ -219,7 +268,7 @@ def build_partner_directory_card(
                             <span class="partner-dir-category">{cat_esc}</span>
                         </div>
                         <h3 class="partner-dir-name">{name}</h3>
-                        <p class="partner-dir-blurb">{html.escape(copy["blurb"])}</p>{location_html}
+                        <p class="partner-dir-blurb">{html.escape(copy["blurb"])}</p>{location_html}{languages_html}
                         <div class="partner-dir-actions">
                             {actions_html}
                         </div>{profile_footer}
@@ -260,7 +309,7 @@ def build_partner_directory_card(
         f'<i class="fa-solid fa-phone" aria-hidden="true"></i>'
         f'<span>{html.escape(copy["call"])}</span></a>'
     ]
-    wa_href = partner.get("whatsapp_href")
+    wa_href = partner_whatsapp_href(partner, lang)
     if wa_href:
         wa_href_val = html.escape(wa_href, quote=True)
         wa_label = html.escape(copy.get("whatsapp", "WhatsApp"))
@@ -299,7 +348,7 @@ def build_partner_directory_card(
                             <span class="partner-dir-category">{cat_esc}</span>
                         </div>
                         <h3 class="partner-dir-name">{name}</h3>
-                        <p class="partner-dir-role">{html.escape(copy["role"])}</p>{location_html}
+                        <p class="partner-dir-role">{html.escape(copy["role"])}</p>{location_html}{languages_html}
                         <p class="partner-dir-phone">{html.escape(partner["phone_display"])}</p>
                         <div class="partner-dir-actions">
                             {actions_html}
@@ -347,6 +396,9 @@ def build_partner_sidebar_card(
                 f'<i class="fa-solid fa-location-dot" aria-hidden="true"></i> '
                 f"{html.escape(loc)}</p>"
             )
+    languages_html = _languages_line_html(
+        partner, lang, css_class="partner-sidebar-languages"
+    )
 
     if partner["type"] == "external":
         website = html.escape(partner["website"], quote=True)
@@ -392,7 +444,7 @@ def build_partner_sidebar_card(
                                 <p class="partner-sidebar-category">{cat_esc}</p>{profile_block}
                             </div>
                         </div>
-                        {blurb_html}{location_html}
+                        {blurb_html}{location_html}{languages_html}
                         <div class="partner-sidebar-actions">{actions}</div>
                     </article>"""
 
@@ -428,7 +480,8 @@ def build_partner_sidebar_card(
         f'<i class="fa-solid fa-phone" aria-hidden="true"></i>'
         f'<span>{html.escape(copy["call"])}</span></a>'
     ]
-    if partner.get("whatsapp_href"):
+    wa_href = partner_whatsapp_href(partner, lang)
+    if wa_href:
         wa_label = html.escape(copy.get("whatsapp", "WhatsApp"))
         wa_aria = html.escape(copy.get("wa_aria", wa_label))
         wa_track = _partner_track_attrs(
@@ -436,7 +489,7 @@ def build_partner_sidebar_card(
         )
         actions.append(
             f'<a class="partner-dir-btn partner-dir-btn--whatsapp" '
-            f'href="{html.escape(partner["whatsapp_href"], quote=True)}" '
+            f'href="{html.escape(wa_href, quote=True)}" '
             f'target="_blank" rel="noopener noreferrer" aria-label="{wa_aria}" {wa_track}>'
             f'<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
             f'<span>{wa_label}</span></a>'
@@ -463,6 +516,7 @@ def build_partner_sidebar_card(
                             </div>
                         </div>
                         {location_html}
+                        {languages_html}
                         {phone_html}
                         <div class="partner-sidebar-actions">{actions_html}</div>
                     </article>"""

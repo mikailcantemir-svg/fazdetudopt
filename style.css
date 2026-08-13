@@ -902,6 +902,40 @@ a.lang-option {
     font-size: 0.8rem;
 }
 
+.partner-dir-languages {
+    margin: -6px 0 10px;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: #64748b;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.partner-dir-languages i {
+    color: #94a3b8;
+    font-size: 0.78rem;
+    margin-top: 0.15em;
+    flex-shrink: 0;
+}
+
+.partner-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    white-space: nowrap;
+}
+
+.partner-lang-flag {
+    font-style: normal;
+    line-height: 1;
+    font-size: 1.05em;
+}
+
+.partner-lang-sep {
+    margin: 0 0.15em;
+}
+
 .partner-dir-phone {
     margin: 0 0 14px;
     font-size: 1.05rem;
@@ -4060,6 +4094,27 @@ html.js-fade .fade-in.visible {
     font-size: 0.75rem;
 }
 
+.partner-sidebar-languages {
+    margin: 4px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: #64748b;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.partner-sidebar-languages i {
+    color: #94a3b8;
+    font-size: 0.72rem;
+    margin-top: 0.15em;
+    flex-shrink: 0;
+}
+
+.partner-sidebar-languages .partner-lang-flag {
+    font-size: 1em;
+}
+
 .partner-sidebar-phone {
     margin: 8px 0 10px;
     font-size: 1rem;
@@ -4445,6 +4500,42 @@ html.js-fade .fade-in.visible {
 .partner-profile-location i {
     color: var(--primary-color);
     margin-right: 4px;
+}
+
+.partner-profile-languages {
+    margin: 0 0 10px;
+}
+
+.partner-profile-languages-label {
+    margin: 0 0 2px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.partner-profile-languages-value {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #475569;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.partner-profile-languages-value i {
+    color: #94a3b8;
+    margin-top: 0.2em;
+    flex-shrink: 0;
+}
+
+.partner-profile-languages-value {
+    flex-wrap: wrap;
+}
+
+.partner-profile-languages-value .partner-lang-flag {
+    font-size: 1.05em;
 }
 
 .partner-profile-phone {
