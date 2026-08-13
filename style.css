@@ -5363,8 +5363,10 @@ html.js-fade .fade-in.visible {
 .page-home .quick-repair {
     background: var(--home-navy);
     color: #fff;
-    padding: 22px 0;
+    padding: 26px 0;
     border-bottom: 1px solid rgba(255,255,255,.06);
+    overflow-x: clip;
+    overflow-y: visible;
 }
 .page-home .quick-repair--sos {
     box-shadow: inset 0 1px 0 rgba(245,102,33,.18);
@@ -5387,6 +5389,32 @@ html.js-fade .fade-in.visible {
     color: var(--home-orange);
     font-size: 1.2rem;
     flex: 0 0 auto;
+    z-index: 1;
+    overflow: visible;
+    animation: sosPulse 2.4s ease-in-out infinite;
+}
+.page-home .quick-repair-icon > i {
+    position: relative;
+    z-index: 1;
+}
+.page-home .quick-repair-icon::before,
+.page-home .quick-repair-icon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 2px solid rgba(245, 102, 33, 0.4);
+    pointer-events: none;
+    z-index: 0;
+    animation: sosHalo 2.4s ease-out infinite;
+}
+.page-home .quick-repair-icon::after {
+    animation-delay: 1.2s;
+    border-color: rgba(232, 90, 40, 0.32);
+}
+.page-home .quick-repair-icon:hover::before,
+.page-home .quick-repair-icon:hover::after {
+    border-color: rgba(245, 102, 33, 0.58);
 }
 .page-home .quick-repair-sos-badge {
     position: absolute;
@@ -5401,6 +5429,29 @@ html.js-fade .fade-in.visible {
     letter-spacing: 0.06em;
     line-height: 1.2;
     box-shadow: 0 4px 10px rgba(0,0,0,.2);
+    z-index: 2;
+    animation: sosBadgePulse 2.4s ease-in-out infinite;
+}
+@keyframes sosPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+@keyframes sosHalo {
+    0% {
+        transform: scale(1);
+        opacity: 0.45;
+    }
+    75% {
+        opacity: 0.08;
+    }
+    100% {
+        transform: scale(1.48);
+        opacity: 0;
+    }
+}
+@keyframes sosBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 .page-home .quick-repair-copy { min-width: 0; }
 .page-home .quick-repair-kicker {
@@ -6181,11 +6232,34 @@ html.js-fade .page-home .fade-in.visible {
 
     .page-home .quick-repair { padding: 22px 0 28px; }
     .page-home .quick-repair-inner {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 12px 14px;
         text-align: left;
+        align-items: start;
     }
-    .page-home .quick-repair-icon { display: none; }
+    .page-home .quick-repair-icon {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        font-size: 1.05rem;
+        margin-top: 2px;
+    }
+    .page-home .quick-repair-sos-badge {
+        top: -7px;
+        right: -8px;
+        font-size: 0.52rem;
+        padding: 2px 5px;
+    }
+    .page-home .quick-repair-action {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        width: 100%;
+        max-width: none;
+        gap: 10px;
+        padding-bottom: 8px;
+        padding-right: 64px; /* keep note clear of WhatsApp float */
+        box-sizing: border-box;
+    }
     .page-home .quick-repair-kicker {
         font-size: 0.7rem;
         margin-bottom: 8px;
@@ -6201,15 +6275,6 @@ html.js-fade .page-home .fade-in.visible {
         font-size: .72rem;
         overflow-wrap: anywhere;
         max-width: 100%;
-    }
-    .page-home .quick-repair-action {
-        justify-self: stretch;
-        width: 100%;
-        max-width: none;
-        gap: 10px;
-        padding-bottom: 8px;
-        padding-right: 64px; /* keep note clear of WhatsApp float */
-        box-sizing: border-box;
     }
     .page-home .quick-repair-note {
         font-size: .76rem;
@@ -6326,4 +6391,10 @@ html.js-fade .page-home .fade-in.visible {
         transition: none !important;
     }
     .page-home .service-showcase-card,.page-home .btn,.page-home .recent-work-media { transition:none; }
+    .page-home .quick-repair-icon,
+    .page-home .quick-repair-icon::before,
+    .page-home .quick-repair-icon::after,
+    .page-home .quick-repair-sos-badge {
+        animation: none !important;
+    }
 }
