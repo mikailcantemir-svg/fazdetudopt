@@ -75,11 +75,19 @@ def _media_html(partner: dict) -> str:
 def _actions_html(partner: dict, ui: dict) -> str:
     parts: list[str] = []
     copy = partner["copy"][LANG]
+    ctx = "partner_profile"
+    pid = html.escape(partner["id"], quote=True)
+    pcat = html.escape(partner["category"], quote=True)
+    base_track = (
+        f'data-track="partner_contact" data-partner-id="{pid}" '
+        f'data-partner-category="{pcat}" data-source-context="{ctx}"'
+    )
     if partner.get("tel_href"):
         parts.append(
             f'<a class="btn btn-primary btn-lg partner-profile-btn partner-profile-btn--call" '
             f'href="{html.escape(partner["tel_href"], quote=True)}" '
-            f'aria-label="{html.escape(copy.get("call_aria", ui["call"]), quote=True)}">'
+            f'aria-label="{html.escape(copy.get("call_aria", ui["call"]), quote=True)}" '
+            f'{base_track} data-contact-method="phone">'
             f'<i class="fa-solid fa-phone" aria-hidden="true"></i> '
             f'{html.escape(ui["call"])}</a>'
         )
@@ -88,7 +96,8 @@ def _actions_html(partner: dict, ui: dict) -> str:
             f'<a class="btn btn-outline btn-lg partner-profile-btn partner-profile-btn--whatsapp" '
             f'href="{html.escape(partner["whatsapp_href"], quote=True)}" '
             f'target="_blank" rel="noopener noreferrer" '
-            f'aria-label="{html.escape(copy.get("wa_aria", ui["whatsapp"]), quote=True)}">'
+            f'aria-label="{html.escape(copy.get("wa_aria", ui["whatsapp"]), quote=True)}" '
+            f'{base_track} data-contact-method="whatsapp">'
             f'<i class="fa-brands fa-whatsapp" aria-hidden="true"></i> '
             f'{html.escape(ui["whatsapp"])}</a>'
         )
@@ -99,7 +108,8 @@ def _actions_html(partner: dict, ui: dict) -> str:
         parts.append(
             f'<a class="btn btn-primary btn-lg" '
             f'href="{html.escape(partner["website"], quote=True)}" '
-            f'target="_blank" rel="noopener noreferrer">'
+            f'target="_blank" rel="noopener noreferrer" '
+            f'{base_track} data-contact-method="website">'
             f"{html.escape(cta)}</a>"
         )
     return "\n                        ".join(parts)

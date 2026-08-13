@@ -85,6 +85,159 @@
         }
     };
 
+    /* ------------------------------------------------------------------ */
+    /* Analytics (GA4-ready). Safe no-op when gtag / consent / ID missing. */
+    /* ------------------------------------------------------------------ */
+    const Analytics = (() => {
+        const cfg = window.__FAZDETUDO_ANALYTICS__ || {
+            measurementId: '',
+            consentGranted: false,
+        };
+        let gtagLoading = false;
+
+        function measurementId() {
+            return String(cfg.measurementId || '').trim();
+        }
+
+        function isReadyId(id) {
+            return /^G-[A-Z0-9]+$/i.test(id);
+        }
+
+        function trackEvent(name, params) {
+            try {
+                if (typeof window.gtag !== 'function') return;
+                if (!cfg.consentGranted) return;
+                if (!isReadyId(measurementId())) return;
+                const safe = {};
+                if (params && typeof params === 'object') {
+                    Object.keys(params).forEach((key) => {
+                        const val = params[key];
+                        if (val == null || val === '') return;
+                        // Never forward free-text / PII payloads.
+                        if (typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean') {
+                            safe[key] = val;
+                        }
+                    });
+                }
+                window.gtag('event', name, safe);
+            } catch (_err) {
+                /* Analytics must never break conversions. */
+            }
+        }
+
+        function loadGtag() {
+            const id = measurementId();
+            if (!isReadyId(id) || !cfg.consentGranted || gtagLoading) return;
+            if (typeof window.gtag === 'function') return;
+            gtagLoading = true;
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function gtag() {
+                window.dataLayer.push(arguments);
+            };
+            window.gtag('js', new Date());
+            window.gtag('config', id, { anonymize_ip: true });
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+            document.head.appendChild(script);
+        }
+
+        function grantConsent() {
+            cfg.consentGranted = true;
+            window.__FAZDETUDO_ANALYTICS__ = cfg;
+            loadGtag();
+        }
+
+        function revokeConsent() {
+            cfg.consentGranted = false;
+            window.__FAZDETUDO_ANALYTICS__ = cfg;
+        }
+
+        function inferPartnerSource(el) {
+            const explicit = el.getAttribute('data-source-context');
+            if (explicit) return explicit;
+            const card = el.closest('[data-partner-id]');
+            if (!card) return '';
+            if (card.classList.contains('partner-dir-card--finder')) {
+                return 'homepage_partner_finder';
+            }
+            if (card.classList.contains('partners-listing-card')) {
+                return 'partners_directory';
+            }
+            if (card.classList.contains('article-partner-card')) {
+                return 'article';
+            }
+            if (card.classList.contains('partner-sidebar-card')) {
+                return 'service_page';
+            }
+            if (document.body.classList.contains('partner-profile-page')) {
+                return 'partner_profile';
+            }
+            return '';
+        }
+
+        function handleClick(event) {
+            const el = event.target.closest('[data-track]');
+            if (!el) return;
+            const track = el.getAttribute('data-track');
+            if (track === 'partner_contact') {
+                const card = el.closest('[data-partner-id]');
+                trackEvent('partner_contact', {
+                    partner_id:
+                        el.getAttribute('data-partner-id')
+                        || (card && card.getAttribute('data-partner-id'))
+                        || '',
+                    partner_category:
+                        el.getAttribute('data-partner-category')
+                        || (card && card.getAttribute('data-partner-category'))
+                        || '',
+                    contact_method: el.getAttribute('data-contact-method') || '',
+                    source_context: inferPartnerSource(el),
+                });
+                return;
+            }
+            if (track === 'fazdetudo_contact') {
+                trackEvent('fazdetudo_contact', {
+                    contact_method: el.getAttribute('data-contact-method') || '',
+                    source_context: el.getAttribute('data-source-context') || '',
+                });
+                return;
+            }
+            if (track === 'partner_service_select') {
+                const category =
+                    el.getAttribute('data-service-category')
+                    || el.getAttribute('data-category')
+                    || '';
+                if (category) {
+                    trackEvent('partner_service_select', {
+                        service_category: category,
+                    });
+                }
+            }
+        }
+
+        function trackServiceSelect(category) {
+            if (!category) return;
+            trackEvent('partner_service_select', {
+                service_category: category,
+            });
+        }
+
+        function init() {
+            document.addEventListener('click', handleClick, false);
+            // Consent is opt-in. Even with a Measurement ID set, gtag is not loaded
+            // until FazdetudoAnalytics.grantConsent() is called by a future CMP.
+            window.FazdetudoAnalytics = {
+                trackEvent,
+                grantConsent,
+                revokeConsent,
+                trackServiceSelect,
+            };
+        }
+
+        return { init, trackEvent, grantConsent, trackServiceSelect };
+    })();
+
     const ADVANTAGE_ICONS = ['file-invoice', 'location-dot', 'users', 'broom', 'screwdriver-wrench', 'comments'];
 
     const SERVICE_LANDING_SLUGS = [
@@ -808,6 +961,13 @@
         }
 
         function sendMessage() {
+            // Do not send message text / PII to analytics — only the contact intent.
+            if (window.FazdetudoAnalytics) {
+                window.FazdetudoAnalytics.trackEvent('fazdetudo_contact', {
+                    contact_method: 'whatsapp',
+                    source_context: 'floating_widget',
+                });
+            }
             const msg = (input && input.value.trim()) || getWaMessage();
             const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank', 'noopener');
@@ -1275,7 +1435,13 @@
             }
         }
 
-        select.addEventListener('change', () => applyFilter({ scrollOnMobile: true }));
+        select.addEventListener('change', () => {
+            const value = select.value || '';
+            if (value && window.FazdetudoAnalytics) {
+                window.FazdetudoAnalytics.trackServiceSelect(value);
+            }
+            applyFilter({ scrollOnMobile: true });
+        });
 
         catButtons.forEach((btn) => {
             btn.addEventListener('click', () => {
@@ -1406,6 +1572,7 @@
     }
 
     function init() {
+        Analytics.init();
         applyLanguage(detectPageLang());
         // Early: static .fade-in must become visible even if later setup throws.
         setupScrollAnimations();

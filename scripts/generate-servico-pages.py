@@ -199,10 +199,14 @@ def render_page(slug: str, lang: str) -> str:
         cta_actions_block = (
             '                <div class="service-cta-box-actions">\n'
             f'                    <a href="{wa_link}" class="btn btn-primary btn-lg" '
-            f'target="_blank" rel="noopener noreferrer">\n'
+            f'target="_blank" rel="noopener noreferrer" '
+            f'data-track="fazdetudo_contact" data-contact-method="whatsapp" '
+            f'data-source-context="service_page">\n'
             f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {cta_wa}\n'
             f"                    </a>\n"
-            f'                    <a href="{call_href}" class="btn btn-outline btn-lg service-cta-call">\n'
+            f'                    <a href="{call_href}" class="btn btn-outline btn-lg service-cta-call" '
+            f'data-track="fazdetudo_contact" data-contact-method="phone" '
+            f'data-source-context="service_page">\n'
             f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {cta_call}\n'
             f"                    </a>\n"
             "                </div>"

@@ -18,11 +18,13 @@
                 </nav>
                 <div class="header-actions">
 {{LANG_SWITCHER}}
-                    <a href="{{TEL_HREF}}" class="header-phone" id="header-phone">
+                    <a href="{{TEL_HREF}}" class="header-phone" id="header-phone"
+                       data-track="fazdetudo_contact" data-contact-method="phone" data-source-context="header">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         <span>{{PHONE_DISPLAY}}</span>
                     </a>
-                    <a href="{{WA_HREF}}" class="btn btn-primary btn-header-quote" id="header-quote">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-header-quote" id="header-quote"
+                       data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="header">
                         <span data-i18n="header_quote">{{HEADER_QUOTE_LABEL}}</span>
                     </a>
                     <button type="button" class="menu-toggle" id="menu-toggle" aria-label="{{MENU_ARIA}}">

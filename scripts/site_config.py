@@ -19,6 +19,11 @@ SECOND_OFFICE_STREET_LINE1 = "R. Ana de Castro Osório"
 SECOND_OFFICE_STREET_LINE2 = "2925-060 São Lourenço"
 BRAND_NAME = "FAZDETUDO.PT"
 
+# Google Analytics 4 Measurement ID (e.g. "G-XXXXXXXX").
+# Empty = analytics loader stays dormant (no gtag / no network calls).
+# Even when set, loading still requires explicit consent via FazdetudoAnalytics.grantConsent().
+GA4_MEASUREMENT_ID = ""
+
 GOOGLE_REVIEWS_URL = "https://share.google/We1LViOoXucwIwBQl"
 
 FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61571666972567"

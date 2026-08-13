@@ -600,7 +600,7 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
         else:
             count_label = ui["count_many"].format(n=n)
         cat_tiles.append(
-            f"""                <button type="button" class="partner-finder-cat" data-category="{html.escape(cat_id)}" data-count="{n}" data-label="{html.escape(label, quote=True)}">
+            f"""                <button type="button" class="partner-finder-cat" data-category="{html.escape(cat_id)}" data-count="{n}" data-label="{html.escape(label, quote=True)}" data-track="partner_service_select" data-service-category="{html.escape(cat_id, quote=True)}">
                     <span class="partner-finder-cat-icon" aria-hidden="true"><i class="fa-solid fa-{html.escape(icon)}"></i></span>
                     <span class="partner-finder-cat-body">
                         <span class="partner-finder-cat-name">{html.escape(label)}</span>
@@ -617,6 +617,7 @@ def build_partners_teaser_section(lang: str, prefix: str = "") -> str:
             hidden=True,
             extra_class="partner-dir-card--finder",
             show_secondary_cta=False,
+            source_context="homepage_partner_finder",
         )
         for partner in partners
     ]
@@ -798,7 +799,9 @@ def build_partner_directory_section(lang: str, prefix: str = "") -> str:
             f'                            <option value="{html.escape(cat_id)}">{html.escape(label)}</option>'
         )
     cards = "\n".join(
-        build_partner_directory_card(p, lang, prefix, hidden=True)
+        build_partner_directory_card(
+            p, lang, prefix, hidden=True, source_context="homepage_partner_finder"
+        )
         for p in active_partners()
     )
     return f"""    <section class="partner-directory-section" id="parceiros-recomendados" aria-labelledby="partner-directory-title">

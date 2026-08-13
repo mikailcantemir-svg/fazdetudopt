@@ -94,10 +94,14 @@ def _common_parts(*, page_title: str, meta_description: str, canonical: str,
 def _default_cta_actions(*, wa_href: str, wa_label: str) -> str:
     return (
         f'                    <a href="{wa_href}" class="btn btn-primary btn-lg" '
-        f'target="_blank" rel="noopener noreferrer">\n'
+        f'target="_blank" rel="noopener noreferrer" '
+        f'data-track="fazdetudo_contact" data-contact-method="whatsapp" '
+        f'data-source-context="article">\n'
         f'                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> {wa_label}\n'
         f"                    </a>\n"
-        f'                    <a href="{tel_href()}" class="btn btn-outline btn-lg service-cta-call">\n'
+        f'                    <a href="{tel_href()}" class="btn btn-outline btn-lg service-cta-call" '
+        f'data-track="fazdetudo_contact" data-contact-method="phone" '
+        f'data-source-context="article">\n'
         f'                        <i class="fa-solid fa-phone" aria-hidden="true"></i> {UI[LANG]["cta_call"]}\n'
         f"                    </a>"
     )
@@ -107,9 +111,20 @@ def _cta_actions_for_article(article: dict) -> str:
     if article.get("cta_mode") == "partner_website":
         primary_href = article["cta_primary_href"]
         primary_label = article["cta_primary_label"]
+        track = ""
+        partner_id = article.get("cta_partner_id")
+        partner_category = article.get("cta_partner_category")
+        if partner_id and partner_category:
+            track = (
+                f' data-track="partner_contact"'
+                f' data-partner-id="{html.escape(partner_id, quote=True)}"'
+                f' data-partner-category="{html.escape(partner_category, quote=True)}"'
+                f' data-contact-method="website"'
+                f' data-source-context="article"'
+            )
         actions = (
             f'                    <a href="{primary_href}" class="btn btn-primary btn-lg" '
-            f'target="_blank" rel="noopener noreferrer">\n'
+            f'target="_blank" rel="noopener noreferrer"{track}>\n'
             f'                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> '
             f"{primary_label}\n"
             f"                    </a>"
@@ -186,6 +201,7 @@ def _partner_section_html(article: dict) -> str:
             hidden=False,
             extra_class="article-partner-card",
             show_secondary_cta=False,
+            source_context="article",
         )
         for partner in partners
     )

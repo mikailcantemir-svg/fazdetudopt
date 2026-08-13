@@ -18,7 +18,34 @@ from recommended_partners import (
 from slug_registry import service_page_href
 
 
-def _profile_action(partner: dict, lang: str) -> str:
+def _partner_track_attrs(
+    partner: dict,
+    *,
+    contact_method: str,
+    source_context: str,
+) -> str:
+    """Structured analytics attrs — never include phone numbers or messages."""
+    return (
+        'data-track="partner_contact" '
+        f'data-partner-id="{html.escape(partner["id"], quote=True)}" '
+        f'data-partner-category="{html.escape(partner["category"], quote=True)}" '
+        f'data-contact-method="{html.escape(contact_method, quote=True)}" '
+        f'data-source-context="{html.escape(source_context, quote=True)}"'
+    )
+
+
+def _infer_source_context(extra_class: str) -> str:
+    classes = extra_class or ""
+    if "partner-dir-card--finder" in classes:
+        return "homepage_partner_finder"
+    if "partners-listing-card" in classes:
+        return "partners_directory"
+    if "article-partner-card" in classes:
+        return "article"
+    return "partners_directory"
+
+
+def _profile_action(partner: dict, lang: str, *, source_context: str) -> str:
     if not partner_has_profile(partner):
         return ""
     href = partner_profile_href(partner)
@@ -27,15 +54,20 @@ def _profile_action(partner: dict, lang: str) -> str:
     ui = PARTNER_PROFILE_UI.get(lang) or PARTNER_PROFILE_UI["pt"]
     label = ui["profile_cta"]
     aria = ui["profile_aria"].format(name=partner["name"])
+    track = _partner_track_attrs(
+        partner, contact_method="profile", source_context=source_context
+    )
     return (
         f'<a class="partner-dir-btn partner-dir-btn--secondary" '
         f'href="{html.escape(href, quote=True)}" '
-        f'aria-label="{html.escape(aria, quote=True)}">'
+        f'aria-label="{html.escape(aria, quote=True)}" {track}>'
         f"{html.escape(label)}</a>"
     )
 
 
-def _profile_text_link(partner: dict, lang: str, *, css_class: str) -> str:
+def _profile_text_link(
+    partner: dict, lang: str, *, css_class: str, source_context: str
+) -> str:
     if not partner_has_profile(partner):
         return ""
     href = partner_profile_href(partner)
@@ -44,9 +76,12 @@ def _profile_text_link(partner: dict, lang: str, *, css_class: str) -> str:
     ui = PARTNER_PROFILE_UI.get(lang) or PARTNER_PROFILE_UI["pt"]
     label = ui["profile_cta"]
     aria = ui["profile_aria"].format(name=partner["name"])
+    track = _partner_track_attrs(
+        partner, contact_method="profile", source_context=source_context
+    )
     return (
         f'<a class="{css_class}" href="{html.escape(href, quote=True)}" '
-        f'aria-label="{html.escape(aria, quote=True)}">'
+        f'aria-label="{html.escape(aria, quote=True)}" {track}>'
         f"{html.escape(label)}</a>"
     )
 
@@ -59,6 +94,7 @@ def build_partner_directory_card(
     hidden: bool = True,
     extra_class: str = "",
     show_secondary_cta: bool = True,
+    source_context: str | None = None,
 ) -> str:
     """Render one partner card (homepage directory, /parceiros/, or service page).
 
@@ -80,6 +116,7 @@ def build_partner_directory_card(
     if extra_class:
         card_classes.append(extra_class)
     card_class = " ".join(card_classes)
+    ctx = source_context or _infer_source_context(extra_class)
 
     status_flags = []
     if partner.get("recommended"):
@@ -111,7 +148,8 @@ def build_partner_directory_card(
         f'data-partner-categories="{categories_attr}" '
         f'data-partner-zones="{zones_attr}" '
         f'data-partner-id="{html.escape(partner["id"])}" '
-        f'data-partner-status="{html.escape(status_attr)}"'
+        f'data-partner-status="{html.escape(status_attr)}" '
+        f'data-source-context="{html.escape(ctx, quote=True)}"'
     )
 
     location_html = ""
@@ -130,7 +168,7 @@ def build_partner_directory_card(
             f'<a class="partner-dir-btn partner-dir-btn--secondary" href="{service_href}">'
             f'{html.escape(copy["secondary_cta"])}</a>'
         )
-    profile_cta = _profile_action(partner, lang)
+    profile_cta = _profile_action(partner, lang, source_context=ctx)
 
     if partner["type"] == "external":
         website = html.escape(partner["website"], quote=True)
@@ -149,15 +187,22 @@ def build_partner_directory_card(
                 '<div class="partner-dir-media partner-dir-media--icon" aria-hidden="true">'
                 f'<i class="fa-solid fa-{icon}"></i></div>'
             )
+        web_track = _partner_track_attrs(
+            partner, contact_method="website", source_context=ctx
+        )
         actions = [
             f'<a class="partner-dir-btn partner-dir-btn--primary" href="{website}" '
-            f'target="_blank" rel="noopener" aria-label="{html.escape(copy["visit_aria"])}">'
+            f'target="_blank" rel="noopener" aria-label="{html.escape(copy["visit_aria"])}" '
+            f"{web_track}>"
             f'{html.escape(copy["primary_cta"])}</a>'
         ]
         profile_footer = ""
         if "partner-dir-card--finder" in (extra_class or ""):
             text_link = _profile_text_link(
-                partner, lang, css_class="partner-dir-profile-link"
+                partner,
+                lang,
+                css_class="partner-dir-profile-link",
+                source_context=ctx,
             )
             if text_link:
                 profile_footer = f"\n                        {text_link}"
@@ -206,9 +251,12 @@ def build_partner_directory_card(
         )
 
     tel_href_val = html.escape(partner["tel_href"], quote=True)
+    phone_track = _partner_track_attrs(
+        partner, contact_method="phone", source_context=ctx
+    )
     actions = [
         f'<a class="partner-dir-btn partner-dir-btn--call" href="{tel_href_val}" '
-        f'aria-label="{html.escape(copy["call_aria"])}">'
+        f'aria-label="{html.escape(copy["call_aria"])}" {phone_track}>'
         f'<i class="fa-solid fa-phone" aria-hidden="true"></i>'
         f'<span>{html.escape(copy["call"])}</span></a>'
     ]
@@ -217,9 +265,12 @@ def build_partner_directory_card(
         wa_href_val = html.escape(wa_href, quote=True)
         wa_label = html.escape(copy.get("whatsapp", "WhatsApp"))
         wa_aria = html.escape(copy.get("wa_aria", wa_label))
+        wa_track = _partner_track_attrs(
+            partner, contact_method="whatsapp", source_context=ctx
+        )
         actions.append(
             f'<a class="partner-dir-btn partner-dir-btn--whatsapp" href="{wa_href_val}" '
-            f'target="_blank" rel="noopener noreferrer" aria-label="{wa_aria}">'
+            f'target="_blank" rel="noopener noreferrer" aria-label="{wa_aria}" {wa_track}>'
             f'<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
             f'<span>{wa_label}</span></a>'
         )
@@ -232,7 +283,10 @@ def build_partner_directory_card(
     profile_footer = ""
     if "partner-dir-card--finder" in (extra_class or ""):
         text_link = _profile_text_link(
-            partner, lang, css_class="partner-dir-profile-link"
+            partner,
+            lang,
+            css_class="partner-dir-profile-link",
+            source_context=ctx,
         )
         if text_link:
             profile_footer = f"\n                        {text_link}"
@@ -258,6 +312,8 @@ def build_partner_sidebar_card(
     partner: dict,
     lang: str,
     prefix: str,
+    *,
+    source_context: str = "service_page",
 ) -> str:
     """Compact partner card for service-page sidebar / mobile insert."""
     copy = partner["copy"][lang]
@@ -265,6 +321,12 @@ def build_partner_sidebar_card(
     category_label = PARTNER_CATEGORIES[category_id][lang]
     name = html.escape(partner["name"])
     cat_esc = html.escape(category_label)
+    ctx = source_context
+    partner_data = (
+        f'data-partner-id="{html.escape(partner["id"])}" '
+        f'data-partner-category="{html.escape(category_id)}" '
+        f'data-source-context="{html.escape(ctx, quote=True)}"'
+    )
 
     badges_html = []
     for key in partner_badge_keys(partner):
@@ -303,18 +365,25 @@ def build_partner_sidebar_card(
                 '<div class="partner-sidebar-media partner-sidebar-media--icon" aria-hidden="true">'
                 f'<i class="fa-solid fa-{icon}"></i></div>'
             )
+        web_track = _partner_track_attrs(
+            partner, contact_method="website", source_context=ctx
+        )
         actions = (
             f'<a class="partner-dir-btn partner-dir-btn--primary" href="{website}" '
-            f'target="_blank" rel="noopener" aria-label="{html.escape(copy["visit_aria"])}">'
+            f'target="_blank" rel="noopener" aria-label="{html.escape(copy["visit_aria"])}" '
+            f"{web_track}>"
             f'{html.escape(copy["primary_cta"])}</a>'
         )
         profile_link = _profile_text_link(
-            partner, lang, css_class="partner-sidebar-profile"
+            partner,
+            lang,
+            css_class="partner-sidebar-profile",
+            source_context=ctx,
         )
         profile_block = f"\n                        {profile_link}" if profile_link else ""
         blurb = html.escape(copy.get("blurb", ""))
         blurb_html = f'<p class="partner-sidebar-blurb">{blurb}</p>' if blurb else ""
-        return f"""                    <article class="partner-sidebar-card partner-sidebar-card--external" data-partner-id="{html.escape(partner["id"])}">
+        return f"""                    <article class="partner-sidebar-card partner-sidebar-card--external" {partner_data}>
                         <div class="partner-sidebar-top">
                             {media_html}
                             <div class="partner-sidebar-meta">
@@ -350,19 +419,25 @@ def build_partner_sidebar_card(
             f'<i class="fa-solid fa-{icon}"></i></div>'
         )
 
+    phone_track = _partner_track_attrs(
+        partner, contact_method="phone", source_context=ctx
+    )
     actions = [
         f'<a class="partner-dir-btn partner-dir-btn--call" href="{html.escape(partner["tel_href"], quote=True)}" '
-        f'aria-label="{html.escape(copy["call_aria"])}">'
+        f'aria-label="{html.escape(copy["call_aria"])}" {phone_track}>'
         f'<i class="fa-solid fa-phone" aria-hidden="true"></i>'
         f'<span>{html.escape(copy["call"])}</span></a>'
     ]
     if partner.get("whatsapp_href"):
         wa_label = html.escape(copy.get("whatsapp", "WhatsApp"))
         wa_aria = html.escape(copy.get("wa_aria", wa_label))
+        wa_track = _partner_track_attrs(
+            partner, contact_method="whatsapp", source_context=ctx
+        )
         actions.append(
             f'<a class="partner-dir-btn partner-dir-btn--whatsapp" '
             f'href="{html.escape(partner["whatsapp_href"], quote=True)}" '
-            f'target="_blank" rel="noopener noreferrer" aria-label="{wa_aria}">'
+            f'target="_blank" rel="noopener noreferrer" aria-label="{wa_aria}" {wa_track}>'
             f'<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>'
             f'<span>{wa_label}</span></a>'
         )
@@ -371,11 +446,14 @@ def build_partner_sidebar_card(
         f'<p class="partner-sidebar-phone">{html.escape(partner["phone_display"])}</p>'
     )
     profile_link = _profile_text_link(
-        partner, lang, css_class="partner-sidebar-profile"
+        partner,
+        lang,
+        css_class="partner-sidebar-profile",
+        source_context=ctx,
     )
     profile_block = f"\n                        {profile_link}" if profile_link else ""
 
-    return f"""                    <article class="partner-sidebar-card partner-sidebar-card--direct" data-partner-id="{html.escape(partner["id"])}">
+    return f"""                    <article class="partner-sidebar-card partner-sidebar-card--direct" {partner_data}>
                         <div class="partner-sidebar-top">
                             {media_html}
                             <div class="partner-sidebar-meta">

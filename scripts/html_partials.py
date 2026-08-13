@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from template_engine import render_partial
+from analytics_bootstrap import analytics_bootstrap_html
 from site_config import (
     EMAIL_OBFUSCATED,
     FACEBOOK_URL,
@@ -63,6 +64,7 @@ def render_head(
             "ASSET_PREFIX": asset_prefix,
             "LOGO_PATH": LOGO_PATH,
             "EXTRA_STYLESHEETS": extra_styles,
+            "ANALYTICS_BOOTSTRAP": analytics_bootstrap_html(),
         },
     )
 

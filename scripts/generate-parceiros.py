@@ -143,6 +143,7 @@ def render_partners_page(lang: str) -> str:
             prefix,
             hidden=False,
             extra_class="partners-listing-card",
+            source_context="partners_directory",
         )
         for p in active_partners()
     )

@@ -25,11 +25,13 @@
                 </h1>
                 <p class="hero-subtitle" data-i18n="hero_subtitle">Pequenas reparações, montagens, manutenção e trabalhos em casa. Um contacto para resolver várias tarefas.</p>
                 <div class="hero-actions">
-                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="btn-quote">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="btn-quote"
+                       data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="hero">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                         <span data-i18n="hero_btn_quote">Pedir orçamento por WhatsApp</span>
                     </a>
-                    <a href="{{TEL_HREF}}" class="btn btn-outline-light btn-lg" id="btn-call">
+                    <a href="{{TEL_HREF}}" class="btn btn-outline-light btn-lg" id="btn-call"
+                       data-track="fazdetudo_contact" data-contact-method="phone" data-source-context="hero">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         <span data-i18n="hero_btn_call">Ligar agora</span>
                     </a>
@@ -62,7 +64,8 @@
                 <p class="quick-repair-tags" data-i18n="quick_repair_tags">Airbnb · Alojamento Local · Senhorios · Mudanças · Pequenas reparações</p>
             </div>
             <div class="quick-repair-action">
-                <a href="{{WA_HREF_QUICK_REPAIR}}" class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer">
+                <a href="{{WA_HREF_QUICK_REPAIR}}" class="btn btn-primary btn-lg quick-repair-cta" id="btn-quick-repair" target="_blank" rel="noopener noreferrer"
+                   data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="quick_repair">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     <span data-i18n="quick_repair_cta">Enviar fotos por WhatsApp</span>
                 </a>
@@ -153,11 +156,13 @@
                 <h2 class="cta-title" data-i18n="contact_title">Tem trabalhos para fazer em casa?</h2>
                 <p class="cta-subtitle" data-i18n="contact_subtitle">Envie-nos fotografias e uma breve descrição do que precisa. Respondemos com orientação e orçamento.</p>
                 <div class="cta-actions">
-                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="cta-quote">
+                    <a href="{{WA_HREF}}" class="btn btn-primary btn-lg" id="cta-quote"
+                       data-track="fazdetudo_contact" data-contact-method="whatsapp" data-source-context="final_cta">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                         <span data-i18n="contact_cta">Pedir orçamento por WhatsApp</span>
                     </a>
-                    <a href="{{TEL_HREF}}" class="btn btn-outline-light btn-lg" id="cta-phone">
+                    <a href="{{TEL_HREF}}" class="btn btn-outline-light btn-lg" id="cta-phone"
+                       data-track="fazdetudo_contact" data-contact-method="phone" data-source-context="final_cta">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         <span id="cta-phone-text">{{PHONE_DISPLAY}}</span>
                     </a>

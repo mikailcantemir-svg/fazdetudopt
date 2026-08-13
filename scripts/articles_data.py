@@ -443,6 +443,8 @@ ARTICLES = [
         "wa_message": "",
         "cta_mode": "partner_website",
         "hide_float_wa": True,
+        "cta_partner_id": "airfix",
+        "cta_partner_category": "avac",
         "cta_primary_href": "https://airfix.pt/",
         "cta_primary_label": "Visitar AirFix.pt →",
         "cta_secondary_href": f"{BASE_URL}/servico-climatizacao.html",
