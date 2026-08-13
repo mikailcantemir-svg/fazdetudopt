@@ -1030,8 +1030,6 @@
         const switcher = document.getElementById('lang-switcher');
         const toggle = document.getElementById('lang-toggle');
         const dropdown = document.getElementById('lang-dropdown');
-        const flag = document.getElementById('lang-flag');
-        const label = document.getElementById('lang-label');
         if (!switcher || !toggle || !dropdown) return;
 
         function setLangOpen(open) {
@@ -1045,6 +1043,14 @@
             setLangOpen(!dropdown.classList.contains('open'));
         });
 
+        toggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                setLangOpen(false);
+                toggle.focus();
+            }
+        });
+
         dropdown.addEventListener('click', (e) => {
             e.stopPropagation();
             if (e.target.closest('a.lang-option--nav')) {
@@ -1055,6 +1061,13 @@
         document.addEventListener('click', (e) => {
             if (switcher.contains(e.target)) return;
             setLangOpen(false);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            if (!dropdown.classList.contains('open')) return;
+            setLangOpen(false);
+            toggle.focus();
         });
     }
 

@@ -18,6 +18,20 @@ LANG_LABELS = {
     "fr": ("Français", "https://flagcdn.com/w20/fr.png"),
 }
 
+LANG_CODES = {
+    "pt": "PT",
+    "en": "EN",
+    "es": "ES",
+    "fr": "FR",
+}
+
+LANG_SELECT_ARIA = {
+    "pt": "Selecionar idioma",
+    "en": "Select language",
+    "es": "Seleccionar idioma",
+    "fr": "Choisir la langue",
+}
+
 # Alt text descritivo para as bandeiras do dropdown (localizado por idioma da página).
 FLAG_ALT = {
     "pt": {"pt": "Bandeira de Portugal", "en": "Bandeira do Reino Unido", "es": "Bandeira de Espanha", "fr": "Bandeira de França"},
@@ -43,6 +57,8 @@ def render_lang_switcher(
 ) -> str:
     """Language switcher. Optional href_for_lang(code) overrides homepage links."""
     info = LANG_LABELS[current_lang]
+    code_short = LANG_CODES[current_lang]
+    aria_label = LANG_SELECT_ARIA[current_lang]
     options = []
     for code in LANGS:
         href = href_for_lang(code) if href_for_lang else lang_switch_href(current_lang, code)
@@ -51,17 +67,18 @@ def render_lang_switcher(
         flag_alt = FLAG_ALT[current_lang][code]
         options.append(
             f'                            <a href="{href}" class="lang-option lang-option--nav{active}" '
-            f'hreflang="{LANG_HTML[code]}" lang="{LANG_HTML[code]}">'
+            f'role="option" hreflang="{LANG_HTML[code]}" lang="{LANG_HTML[code]}">'
             f'<img src="{flag}" alt="{flag_alt}"> {label}</a>'
         )
-    current_flag_alt = FLAG_ALT[current_lang][current_lang]
     return f"""                    <div class="lang-switcher" id="lang-switcher">
-                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false">
-                            <img src="{info[1]}" alt="{current_flag_alt}" class="lang-flag" id="lang-flag">
-                            <span id="lang-label">{info[0]}</span>
+                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="{aria_label}">
+                            <i class="fa-solid fa-globe lang-globe" aria-hidden="true"></i>
+                            <img src="{info[1]}" alt="" class="lang-flag" id="lang-flag">
+                            <span id="lang-label" class="lang-label-full">{info[0]}</span>
+                            <span class="lang-code" aria-hidden="true">{code_short}</span>
                             <i class="fa-solid fa-chevron-down lang-chevron" aria-hidden="true"></i>
                         </button>
-                        <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="{aria_label}">
 {chr(10).join(options)}
                         </div>
                     </div>"""

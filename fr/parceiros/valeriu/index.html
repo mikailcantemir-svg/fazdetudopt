@@ -89,16 +89,18 @@
             </a>
             <div class="header-actions">
                     <div class="lang-switcher" id="lang-switcher">
-                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false">
-                            <img src="https://flagcdn.com/w20/fr.png" alt="Drapeau de la France" class="lang-flag" id="lang-flag">
-                            <span id="lang-label">Français</span>
+                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Choisir la langue">
+                            <i class="fa-solid fa-globe lang-globe" aria-hidden="true"></i>
+                            <img src="https://flagcdn.com/w20/fr.png" alt="" class="lang-flag" id="lang-flag">
+                            <span id="lang-label" class="lang-label-full">Français</span>
+                            <span class="lang-code" aria-hidden="true">FR</span>
                             <i class="fa-solid fa-chevron-down lang-chevron" aria-hidden="true"></i>
                         </button>
-                        <div class="lang-dropdown" id="lang-dropdown">
-                            <a href="/parceiros/valeriu/" class="lang-option lang-option--nav" hreflang="pt-PT" lang="pt-PT"><img src="https://flagcdn.com/w20/pt.png" alt="Drapeau du Portugal"> Português</a>
-                            <a href="/en/parceiros/valeriu/" class="lang-option lang-option--nav" hreflang="en" lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="Drapeau du Royaume-Uni"> English</a>
-                            <a href="/es/parceiros/valeriu/" class="lang-option lang-option--nav" hreflang="es" lang="es"><img src="https://flagcdn.com/w20/es.png" alt="Drapeau de l'Espagne"> Español</a>
-                            <a href="/fr/parceiros/valeriu/" class="lang-option lang-option--nav active" hreflang="fr" lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Drapeau de la France"> Français</a>
+                        <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Choisir la langue">
+                            <a href="/parceiros/valeriu/" class="lang-option lang-option--nav" role="option" hreflang="pt-PT" lang="pt-PT"><img src="https://flagcdn.com/w20/pt.png" alt="Drapeau du Portugal"> Português</a>
+                            <a href="/en/parceiros/valeriu/" class="lang-option lang-option--nav" role="option" hreflang="en" lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="Drapeau du Royaume-Uni"> English</a>
+                            <a href="/es/parceiros/valeriu/" class="lang-option lang-option--nav" role="option" hreflang="es" lang="es"><img src="https://flagcdn.com/w20/es.png" alt="Drapeau de l'Espagne"> Español</a>
+                            <a href="/fr/parceiros/valeriu/" class="lang-option lang-option--nav active" role="option" hreflang="fr" lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Drapeau de la France"> Français</a>
                         </div>
                     </div>
                 <a href="https://www.fazdetudo.pt/fr/parceiros/" class="service-page-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span>Retour aux partenaires</span></a>

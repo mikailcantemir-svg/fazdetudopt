@@ -176,16 +176,18 @@
                 </nav>
                 <div class="header-actions">
                     <div class="lang-switcher" id="lang-switcher">
-                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false">
-                            <img src="https://flagcdn.com/w20/es.png" alt="Bandera de España" class="lang-flag" id="lang-flag">
-                            <span id="lang-label">Español</span>
+                        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Seleccionar idioma">
+                            <i class="fa-solid fa-globe lang-globe" aria-hidden="true"></i>
+                            <img src="https://flagcdn.com/w20/es.png" alt="" class="lang-flag" id="lang-flag">
+                            <span id="lang-label" class="lang-label-full">Español</span>
+                            <span class="lang-code" aria-hidden="true">ES</span>
                             <i class="fa-solid fa-chevron-down lang-chevron" aria-hidden="true"></i>
                         </button>
-                        <div class="lang-dropdown" id="lang-dropdown">
-                            <a href="../" class="lang-option lang-option--nav" hreflang="pt-PT" lang="pt-PT"><img src="https://flagcdn.com/w20/pt.png" alt="Bandera de Portugal"> Português</a>
-                            <a href="../en/" class="lang-option lang-option--nav" hreflang="en" lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="Bandera del Reino Unido"> English</a>
-                            <a href="./" class="lang-option lang-option--nav active" hreflang="es" lang="es"><img src="https://flagcdn.com/w20/es.png" alt="Bandera de España"> Español</a>
-                            <a href="../fr/" class="lang-option lang-option--nav" hreflang="fr" lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Bandera de Francia"> Français</a>
+                        <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Seleccionar idioma">
+                            <a href="../" class="lang-option lang-option--nav" role="option" hreflang="pt-PT" lang="pt-PT"><img src="https://flagcdn.com/w20/pt.png" alt="Bandera de Portugal"> Português</a>
+                            <a href="../en/" class="lang-option lang-option--nav" role="option" hreflang="en" lang="en"><img src="https://flagcdn.com/w20/gb.png" alt="Bandera del Reino Unido"> English</a>
+                            <a href="./" class="lang-option lang-option--nav active" role="option" hreflang="es" lang="es"><img src="https://flagcdn.com/w20/es.png" alt="Bandera de España"> Español</a>
+                            <a href="../fr/" class="lang-option lang-option--nav" role="option" hreflang="fr" lang="fr"><img src="https://flagcdn.com/w20/fr.png" alt="Bandera de Francia"> Français</a>
                         </div>
                     </div>
                     <a href="tel:+351932504112" class="header-phone" id="header-phone"

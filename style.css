@@ -226,6 +226,23 @@ body {
     z-index: 1;
 }
 
+.lang-globe {
+    display: none;
+    font-size: 0.92rem;
+    line-height: 1;
+}
+
+.lang-code {
+    display: none;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.lang-label-full {
+    display: inline;
+}
+
 .lang-toggle {
     display: flex;
     align-items: center;
@@ -298,7 +315,8 @@ a.lang-option {
     align-items: center;
     gap: 10px;
     width: 100%;
-    padding: 9px 16px;
+    min-height: 44px;
+    padding: 10px 16px;
     background: none;
     border: none;
     cursor: pointer;
@@ -3516,37 +3534,50 @@ html.js-fade .fade-in.visible {
 
     .lang-switcher {
         position: relative;
-        z-index: 999999;
+        z-index: 1002;
+        display: block;
         overflow: visible;
+        flex: 0 0 auto;
     }
 
     .lang-dropdown {
-        display: none !important;
+        display: none;
         position: absolute;
-        top: 100%;
-        left: 50%;
-        right: auto;
-        margin-top: 6px;
-        min-width: 170px;
-        transform: translateX(-50%);
-        z-index: 999999;
+        top: calc(100% + 8px);
+        right: 0;
+        left: auto;
+        margin-top: 0;
+        min-width: 180px;
+        transform: none;
+        z-index: 1003;
         background: #ffffff;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
     }
 
     .lang-dropdown.open {
-        display: block !important;
+        display: block;
     }
 
+    .lang-switcher .lang-globe,
+    .lang-switcher .lang-code {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .lang-switcher .lang-flag,
+    .lang-switcher .lang-label-full,
     .lang-switcher #lang-label {
         display: none;
     }
 
     .lang-toggle {
-        padding: 7px 10px;
+        padding: 6px 8px;
+        min-height: 36px;
+        gap: 5px;
+        border-radius: 8px;
     }
 
     .btn-phone span {
@@ -4219,6 +4250,16 @@ html.js-fade .fade-in.visible {
 
     .service-page-back span {
         display: none;
+    }
+
+    .service-page .lang-switcher {
+        display: block;
+    }
+
+    .service-page .lang-toggle {
+        background: var(--bg-light, #f5f7fa);
+        border: 1px solid var(--border, #e2e8f0);
+        color: var(--secondary-color, #0f172a);
     }
 
     .service-page .btn-phone span {
@@ -6210,7 +6251,56 @@ html.js-fade .page-home .fade-in.visible {
     :is(.page-home, .partners-page) .nav-link--mobile-only { display:block; }
     :is(.page-home, .partners-page) .btn-header-quote { display:none; }
     :is(.page-home, .partners-page) .header-phone { display:none; }
-    :is(.page-home, .partners-page) .lang-switcher { display:none; }
+    :is(.page-home, .partners-page) .lang-switcher {
+        display: block;
+        order: 0;
+    }
+    :is(.page-home, .partners-page) .menu-toggle {
+        order: 1;
+    }
+    :is(.page-home, .partners-page) .header-actions {
+        gap: 8px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    :is(.page-home, .partners-page) .lang-toggle {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        min-height: 36px;
+        padding: 5px 8px;
+    }
+    :is(.page-home, .partners-page) .lang-toggle:hover,
+    :is(.page-home, .partners-page) .lang-toggle.open {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    :is(.page-home, .partners-page) .lang-globe,
+    :is(.page-home, .partners-page) .lang-code {
+        color: #fff;
+    }
+    :is(.page-home, .partners-page) .lang-dropdown {
+        right: 0;
+        left: auto;
+        transform: none;
+    }
+
+    .page-home .header,
+    .partners-page .header {
+        overflow: visible;
+    }
+
+    @media (max-width: 360px) {
+        :is(.page-home, .partners-page) .header-actions {
+            gap: 4px;
+        }
+        :is(.page-home, .partners-page) .lang-toggle {
+            padding: 4px 6px;
+            gap: 4px;
+        }
+        :is(.page-home, .partners-page) .logo-tagline {
+            display: none;
+        }
+    }
 
     .page-home .hero { min-height:700px; padding-top:68px; }
     .page-home .hero-picture { inset:68px 0 0; }

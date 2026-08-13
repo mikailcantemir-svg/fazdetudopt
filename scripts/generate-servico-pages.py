@@ -44,12 +44,14 @@ from slug_registry import (  # noqa: E402
     page_url,
     render_hreflang_tags_for_service,
     service_id_from_slug,
+    service_page_href,
 )
 from recommended_partners import (  # noqa: E402
     partners_for_service,
     partner_schema_entity,
 )
 from partner_cards import build_partner_sidebar_card  # noqa: E402
+from home_page_i18n import render_lang_switcher  # noqa: E402
 from site_config import (  # noqa: E402
     BASE_URL,
     OG_IMAGE,
@@ -258,6 +260,11 @@ def render_page(slug: str, lang: str) -> str:
                 asset_prefix=prefix,
                 index_href=index_href(lang),
                 back_label=ui["back"],
+                logo_href=index_href(lang),
+                lang_switcher=render_lang_switcher(
+                    lang,
+                    href_for_lang=lambda code, s=slug: service_page_href(s, code),
+                ),
             ),
             "FOOTER": render_footer_service(footer_text=ui["footer"]),
             "WA_WIDGET": wa_widget,
