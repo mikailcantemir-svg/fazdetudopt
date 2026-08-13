@@ -392,7 +392,37 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://www.fazdetudo.pt/en/parceiros/airfix/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/es/parceiros/airfix/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/fr/parceiros/airfix/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.fazdetudo.pt/parceiros/caterina-limpezas/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/en/parceiros/caterina-limpezas/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/es/parceiros/caterina-limpezas/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/fr/parceiros/caterina-limpezas/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -402,12 +432,57 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://www.fazdetudo.pt/en/parceiros/maria-limpezas/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/es/parceiros/maria-limpezas/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/fr/parceiros/maria-limpezas/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.fazdetudo.pt/parceiros/wallfixtv/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://www.fazdetudo.pt/en/parceiros/wallfixtv/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/es/parceiros/wallfixtv/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/fr/parceiros/wallfixtv/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.fazdetudo.pt/parceiros/valeriu/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/en/parceiros/valeriu/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/es/parceiros/valeriu/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.fazdetudo.pt/fr/parceiros/valeriu/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

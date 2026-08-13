@@ -48,10 +48,10 @@ def _infer_source_context(extra_class: str) -> str:
 def _profile_action(partner: dict, lang: str, *, source_context: str) -> str:
     if not partner_has_profile(partner):
         return ""
-    href = partner_profile_href(partner)
+    href = partner_profile_href(partner, lang)
     if not href:
         return ""
-    ui = PARTNER_PROFILE_UI.get(lang) or PARTNER_PROFILE_UI["pt"]
+    ui = PARTNER_PROFILE_UI[lang]
     label = ui["profile_cta"]
     aria = ui["profile_aria"].format(name=partner["name"])
     track = _partner_track_attrs(
@@ -70,10 +70,10 @@ def _profile_text_link(
 ) -> str:
     if not partner_has_profile(partner):
         return ""
-    href = partner_profile_href(partner)
+    href = partner_profile_href(partner, lang)
     if not href:
         return ""
-    ui = PARTNER_PROFILE_UI.get(lang) or PARTNER_PROFILE_UI["pt"]
+    ui = PARTNER_PROFILE_UI[lang]
     label = ui["profile_cta"]
     aria = ui["profile_aria"].format(name=partner["name"])
     track = _partner_track_attrs(

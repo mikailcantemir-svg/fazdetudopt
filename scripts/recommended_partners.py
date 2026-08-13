@@ -714,8 +714,57 @@ PARTNER_PROFILE_UI = {
         "whatsapp_label": "WhatsApp",
         "call": "Ligar",
         "whatsapp": "WhatsApp",
+        "skip_link": "Saltar para o conteúdo",
         "zone_note": (
             "A zona exacta de deslocação deve ser confirmada diretamente com a profissional."
+        ),
+    },
+    "en": {
+        "profile_cta": "View profile →",
+        "profile_aria": "View {name}'s profile",
+        "breadcrumb_home": "Home",
+        "breadcrumb_partners": "Partners",
+        "back_partners": "Back to partners",
+        "contact_h2": "Contact {name}",
+        "phone_label": "Phone",
+        "whatsapp_label": "WhatsApp",
+        "call": "Call",
+        "whatsapp": "WhatsApp",
+        "skip_link": "Skip to content",
+        "zone_note": (
+            "The exact travel area should be confirmed directly with the professional."
+        ),
+    },
+    "es": {
+        "profile_cta": "Ver perfil →",
+        "profile_aria": "Ver el perfil de {name}",
+        "breadcrumb_home": "Inicio",
+        "breadcrumb_partners": "Colaboradores",
+        "back_partners": "Volver a colaboradores",
+        "contact_h2": "Contactar con {name}",
+        "phone_label": "Teléfono",
+        "whatsapp_label": "WhatsApp",
+        "call": "Llamar",
+        "whatsapp": "WhatsApp",
+        "skip_link": "Saltar al contenido",
+        "zone_note": (
+            "La zona exacta de desplazamiento debe confirmarse directamente con la profesional."
+        ),
+    },
+    "fr": {
+        "profile_cta": "Voir le profil →",
+        "profile_aria": "Voir le profil de {name}",
+        "breadcrumb_home": "Accueil",
+        "breadcrumb_partners": "Partenaires",
+        "back_partners": "Retour aux partenaires",
+        "contact_h2": "Contacter {name}",
+        "phone_label": "Téléphone",
+        "whatsapp_label": "WhatsApp",
+        "call": "Appeler",
+        "whatsapp": "WhatsApp",
+        "skip_link": "Aller au contenu",
+        "zone_note": (
+            "La zone exacte de déplacement doit être confirmée directement avec la professionnelle."
         ),
     },
 }
@@ -732,23 +781,29 @@ def partner_profile_slug(partner: dict) -> str | None:
     return partner["profile"]["slug"]
 
 
-def partner_profile_path(partner: dict) -> str | None:
-    """Site-relative directory path, e.g. parceiros/maria-limpezas/."""
+def partner_profile_path(partner: dict, lang: str = "pt") -> str | None:
+    """Site-relative directory path, e.g. parceiros/maria-limpezas/ or en/parceiros/.../."""
     slug = partner_profile_slug(partner)
     if not slug:
         return None
-    return f"parceiros/{slug}/"
+    if lang == "pt":
+        return f"parceiros/{slug}/"
+    return f"{lang}/parceiros/{slug}/"
 
 
-def partner_profile_href(partner: dict) -> str | None:
-    """Root-absolute href for nav/cards, e.g. /parceiros/maria-limpezas/."""
-    path = partner_profile_path(partner)
+def partner_profile_href(partner: dict, lang: str = "pt") -> str | None:
+    """Root-absolute href, e.g. /parceiros/maria-limpezas/ or /en/parceiros/.../."""
+    path = partner_profile_path(partner, lang)
     return f"/{path}" if path else None
 
 
-def partner_profile_url(partner: dict) -> str | None:
-    path = partner_profile_path(partner)
+def partner_profile_url(partner: dict, lang: str = "pt") -> str | None:
+    path = partner_profile_path(partner, lang)
     return f"{BASE_URL}/{path}" if path else None
+
+
+def partner_profile_asset_prefix(lang: str) -> str:
+    return "../../" if lang == "pt" else "../../../"
 
 
 def partners_with_profiles() -> list[dict]:
@@ -759,15 +814,22 @@ def partner_profile_seo(partner: dict, lang: str = "pt") -> dict | None:
     if not partner_has_profile(partner):
         return None
     seo = (partner.get("profile") or {}).get("seo") or {}
-    return seo.get(lang) or seo.get("pt")
+    if lang not in seo:
+        raise ValueError(
+            f"Partner {partner.get('id')} missing profile seo for lang={lang}"
+        )
+    return seo[lang]
 
 
 def partner_profile_content(partner: dict, lang: str = "pt") -> dict | None:
     if not partner_has_profile(partner):
         return None
     content = (partner.get("profile") or {}).get("content") or {}
-    return content.get(lang) or content.get("pt")
-
+    if lang not in content:
+        raise ValueError(
+            f"Partner {partner.get('id')} missing profile content for lang={lang}"
+        )
+    return content[lang]
 
 def active_partners() -> list[dict]:
     return [p for p in RECOMMENDED_PARTNERS if p.get("active", True)]
@@ -1409,3 +1471,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
         },
     },
 ]
+
+from partner_profiles_i18n import apply_profile_i18n  # noqa: E402
+
+apply_profile_i18n(RECOMMENDED_PARTNERS)

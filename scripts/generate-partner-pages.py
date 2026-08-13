@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Generate individual partner profile pages (PT-first).
+"""Generate individual partner profile pages in PT/EN/ES/FR.
 
-Output example:
+Output examples:
   parceiros/maria-limpezas/index.html
+  en/parceiros/maria-limpezas/index.html
 
-Source of truth for contacts: scripts/recommended_partners.py
-SEO/content for each profile lives in partner["profile"].
+Source of truth: scripts/recommended_partners.py + partner_profiles_i18n.py
 Does NOT touch homepage HOME_META / H1 / schema.
 """
 
@@ -25,33 +25,45 @@ from html_partials import (  # noqa: E402
     render_head,
     render_header_service,
 )
+from home_page_i18n import render_lang_switcher  # noqa: E402
 from recommended_partners import (  # noqa: E402
     PARTNER_CATEGORIES,
     PARTNER_PROFILE_UI,
     PARTNER_STATUS_LABELS,
+    PARTNERS_PAGE_UI,
     partner_badge_keys,
+    partner_profile_asset_prefix,
     partner_profile_content,
+    partner_profile_href,
     partner_profile_path,
     partner_profile_seo,
     partner_profile_url,
     partners_with_profiles,
 )
 from site_config import BASE_URL, OG_IMAGE  # noqa: E402
+from slug_registry import (  # noqa: E402
+    LANGS,
+    LANG_HTML,
+    home_url,
+    institutional_url,
+    _render_hreflang_for_urls,
+)
 from template_engine import render_template  # noqa: E402
 
-LANG = "pt"
-HTML_LANG = "pt-PT"
-OG_LOCALE = "pt_PT"
-# Depth: /parceiros/<slug>/ → two levels up to site root
-ASSET_PREFIX = "../../"
+OG_LOCALE = {
+    "pt": "pt_PT",
+    "en": "en_GB",
+    "es": "es_ES",
+    "fr": "fr_FR",
+}
 
 
-def _media_html(partner: dict) -> str:
+def _media_html(partner: dict, asset_prefix: str) -> str:
     name = html.escape(partner["name"])
     logo = partner.get("logo")
     photo = partner.get("photo")
     if logo:
-        src = html.escape(f"{ASSET_PREFIX}{logo}", quote=True)
+        src = html.escape(f"{asset_prefix}{logo}", quote=True)
         wide = " partner-profile-media--wide" if partner.get("logo_wide") else ""
         return (
             f'<div class="partner-profile-media{wide}">'
@@ -59,7 +71,7 @@ def _media_html(partner: dict) -> str:
             f'loading="eager" decoding="async"></div>'
         )
     if photo:
-        src = html.escape(f"{ASSET_PREFIX}{photo}", quote=True)
+        src = html.escape(f"{asset_prefix}{photo}", quote=True)
         return (
             f'<div class="partner-profile-media partner-profile-media--photo">'
             f'<img src="{src}" alt="{name}" width="120" height="120" '
@@ -72,9 +84,9 @@ def _media_html(partner: dict) -> str:
     )
 
 
-def _actions_html(partner: dict, ui: dict) -> str:
+def _actions_html(partner: dict, ui: dict, lang: str) -> str:
     parts: list[str] = []
-    copy = partner["copy"][LANG]
+    copy = partner["copy"][lang]
     ctx = "partner_profile"
     pid = html.escape(partner["id"], quote=True)
     pcat = html.escape(partner["category"], quote=True)
@@ -102,7 +114,7 @@ def _actions_html(partner: dict, ui: dict) -> str:
             f'{html.escape(ui["whatsapp"])}</a>'
         )
     if partner.get("type") == "external" and partner.get("website"):
-        cta = partner["copy"][LANG].get("primary_cta", "Visitar site")
+        cta = partner["copy"][lang].get("primary_cta", "Visit")
         if not cta.rstrip().endswith("→"):
             cta = f"{cta} →"
         parts.append(
@@ -123,26 +135,32 @@ def _sections_html(content: dict) -> str:
     return "\n".join(blocks)
 
 
-def _breadcrumb_html(partner: dict, ui: dict, canonical: str) -> str:
+def _breadcrumb_html(partner: dict, ui: dict, lang: str) -> str:
     name = html.escape(partner["name"])
     return (
-        f'<a href="{BASE_URL}/">{html.escape(ui["breadcrumb_home"])}</a>'
+        f'<a href="{home_url(lang)}">{html.escape(ui["breadcrumb_home"])}</a>'
         '<span aria-hidden="true"> › </span>'
-        f'<a href="{BASE_URL}/parceiros/">{html.escape(ui["breadcrumb_partners"])}</a>'
+        f'<a href="{institutional_url("parceiros", lang)}">'
+        f'{html.escape(ui["breadcrumb_partners"])}</a>'
         '<span aria-hidden="true"> › </span>'
         f'<span aria-current="page">{name}</span>'
     )
 
 
-def _entity_ld(partner: dict, canonical: str) -> dict:
-    """Person for direct_contact; Organization for external brands."""
+def _hreflang_block(partner: dict) -> str:
+    urls = {lang: partner_profile_url(partner, lang) for lang in LANGS}
+    assert all(urls.values())
+    return _render_hreflang_for_urls(urls, self_closing=False)
+
+
+def _entity_ld(partner: dict, canonical: str, lang: str) -> dict:
     category_id = partner.get("category")
     category_label = (
-        PARTNER_CATEGORIES[category_id][LANG]
+        PARTNER_CATEGORIES[category_id][lang]
         if category_id in PARTNER_CATEGORIES
         else None
     )
-    area = (partner.get("location") or {}).get(LANG) or None
+    area = (partner.get("location") or {}).get(lang) or None
 
     if partner.get("type") == "external":
         entity: dict = {
@@ -173,7 +191,7 @@ def _entity_ld(partner: dict, canonical: str) -> dict:
     return entity
 
 
-def _json_ld(partner: dict, canonical: str, ui: dict) -> str:
+def _json_ld(partner: dict, canonical: str, ui: dict, lang: str) -> str:
     breadcrumb = {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -181,13 +199,13 @@ def _json_ld(partner: dict, canonical: str, ui: dict) -> str:
                 "@type": "ListItem",
                 "position": 1,
                 "name": ui["breadcrumb_home"],
-                "item": f"{BASE_URL}/",
+                "item": home_url(lang),
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": ui["breadcrumb_partners"],
-                "item": f"{BASE_URL}/parceiros/",
+                "item": institutional_url("parceiros", lang),
             },
             {
                 "@type": "ListItem",
@@ -197,28 +215,30 @@ def _json_ld(partner: dict, canonical: str, ui: dict) -> str:
             },
         ],
     }
-
     data = {
         "@context": "https://schema.org",
-        "@graph": [_entity_ld(partner, canonical), breadcrumb],
+        "@graph": [_entity_ld(partner, canonical, lang), breadcrumb],
     }
     return json.dumps(data, ensure_ascii=False, indent=2)
 
 
-def render_partner_profile(partner: dict) -> str:
-    ui = PARTNER_PROFILE_UI[LANG]
-    seo = partner_profile_seo(partner, LANG)
-    content = partner_profile_content(partner, LANG)
+def render_partner_profile(partner: dict, lang: str) -> str:
+    if lang not in PARTNER_PROFILE_UI:
+        raise ValueError(f"Missing PARTNER_PROFILE_UI for lang={lang}")
+    ui = PARTNER_PROFILE_UI[lang]
+    seo = partner_profile_seo(partner, lang)
+    content = partner_profile_content(partner, lang)
     if not seo or not content:
-        raise ValueError(f"Partner {partner['id']} is missing profile seo/content")
+        raise ValueError(f"Partner {partner['id']} missing profile seo/content ({lang})")
 
-    canonical = partner_profile_url(partner)
+    canonical = partner_profile_url(partner, lang)
     assert canonical
+    asset_prefix = partner_profile_asset_prefix(lang)
 
     badge_key = partner_badge_keys(partner)[0]
-    badge_label = PARTNER_STATUS_LABELS[badge_key][LANG]
-    category_label = PARTNER_CATEGORIES[partner["category"]][LANG]
-    location_label = (partner.get("location") or {}).get(LANG) or ""
+    badge_label = PARTNER_STATUS_LABELS[badge_key][lang]
+    category_label = PARTNER_CATEGORIES[partner["category"]][lang]
+    location_label = (partner.get("location") or {}).get(lang) or ""
 
     location_html = ""
     if location_label:
@@ -262,49 +282,55 @@ def render_partner_profile(partner: dict) -> str:
         page_title=seo["title"],
         meta_description=seo["meta_description"],
         canonical_url=canonical,
-        hreflang_block="",  # PT-only profiles: no fake alternates
+        hreflang_block=_hreflang_block(partner),
         og_title=seo.get("og_title") or seo["title"],
         og_description=seo["meta_description"],
-        og_locale=OG_LOCALE,
+        og_locale=OG_LOCALE[lang],
         og_image=OG_IMAGE,
-        json_ld=_json_ld(partner, canonical, ui),
-        asset_prefix=ASSET_PREFIX,
+        json_ld=_json_ld(partner, canonical, ui, lang),
+        asset_prefix=asset_prefix,
         include_swiper_css=False,
     )
-    header = render_header_service(
-        asset_prefix=ASSET_PREFIX,
-        index_href=f"{BASE_URL}/parceiros/",
-        back_label=ui["back_partners"],
-        logo_href=f"{BASE_URL}/",
+
+    lang_switcher = render_lang_switcher(
+        lang,
+        href_for_lang=lambda code: partner_profile_href(partner, code) or "/",
     )
 
-    footer = render_footer_service(
-        footer_text="FAZDETUDO.PT. Todos os direitos reservados."
+    header = render_header_service(
+        asset_prefix=asset_prefix,
+        index_href=institutional_url("parceiros", lang),
+        back_label=ui["back_partners"],
+        logo_href=home_url(lang),
+        lang_switcher=lang_switcher,
     )
+
+    footer_text = PARTNERS_PAGE_UI[lang]["footer"]
+    footer = render_footer_service(footer_text=footer_text)
 
     return render_template(
         "partner-profile.html",
         {
-            "HTML_LANG": HTML_LANG,
-            "PAGE_LANG": LANG,
+            "HTML_LANG": LANG_HTML[lang],
+            "PAGE_LANG": lang,
             "HEAD": head,
-            "SKIP_LINK": "Saltar para o conteúdo",
+            "SKIP_LINK": ui["skip_link"],
             "HEADER_SERVICE": header,
             "FOOTER": footer,
-            "ASSET_PREFIX": ASSET_PREFIX,
-            "BREADCRUMB_HTML": _breadcrumb_html(partner, ui, canonical),
-            "MEDIA_HTML": _media_html(partner),
+            "ASSET_PREFIX": asset_prefix,
+            "BREADCRUMB_HTML": _breadcrumb_html(partner, ui, lang),
+            "MEDIA_HTML": _media_html(partner, asset_prefix),
             "BADGE_LABEL": html.escape(badge_label),
             "H1_TITLE": html.escape(seo["h1"]),
             "CATEGORY_LABEL": html.escape(category_label),
             "LOCATION_HTML": location_html,
             "PHONE_HTML": phone_html,
-            "ACTIONS_HTML": _actions_html(partner, ui),
+            "ACTIONS_HTML": _actions_html(partner, ui, lang),
             "INTRO_HTML": html.escape(content["intro"]),
             "SECTIONS_HTML": _sections_html(content),
             "CONTACT_H2": html.escape(ui["contact_h2"].format(name=partner["name"])),
             "CONTACT_LIST_HTML": contact_list_html,
-            "PARTNERS_HREF": f"{BASE_URL}/parceiros/",
+            "PARTNERS_HREF": institutional_url("parceiros", lang),
             "BACK_PARTNERS": html.escape(ui["back_partners"]),
         },
     )
@@ -313,17 +339,17 @@ def render_partner_profile(partner: dict) -> str:
 def main() -> None:
     written: list[str] = []
     for partner in partners_with_profiles():
-        rel = partner_profile_path(partner)
-        assert rel
-        out_dir = ROOT / rel
-        out_dir.mkdir(parents=True, exist_ok=True)
-        out_path = out_dir / "index.html"
-        html_out = render_partner_profile(partner)
-        # Avoid trailing whitespace that fails git diff --check
-        html_out = "\n".join(line.rstrip() for line in html_out.splitlines()) + "\n"
-        out_path.write_text(html_out, encoding="utf-8")
-        written.append(rel + "index.html")
-        print(f"wrote {rel}index.html")
+        for lang in LANGS:
+            rel = partner_profile_path(partner, lang)
+            assert rel
+            out_dir = ROOT / rel
+            out_dir.mkdir(parents=True, exist_ok=True)
+            out_path = out_dir / "index.html"
+            html_out = render_partner_profile(partner, lang)
+            html_out = "\n".join(line.rstrip() for line in html_out.splitlines()) + "\n"
+            out_path.write_text(html_out, encoding="utf-8")
+            written.append(rel + "index.html")
+            print(f"wrote {rel}index.html")
     print(f"Total: {len(written)} partner profile pages")
 
 

@@ -129,6 +129,7 @@ def render_header_service(
     index_href: str,
     back_label: str,
     logo_href: str | None = None,
+    lang_switcher: str = "",
 ) -> str:
     return render_partial(
         "header-service.html",
@@ -140,6 +141,7 @@ def render_header_service(
             "BACK_LABEL": back_label,
             "TEL_HREF": tel_href(),
             "PHONE_DISPLAY": PHONE_DISPLAY,
+            "LANG_SWITCHER": lang_switcher,
         },
     )
 

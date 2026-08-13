@@ -50,9 +50,10 @@ def main():
             entries.append(url_entry(f"/artigos/{article['slug']}", "monthly", "0.7"))
 
     for partner in partners_with_profiles():
-        path = partner_profile_path(partner)
-        if path:
-            entries.append(url_entry(f"/{path}", "monthly", "0.7"))
+        for lang in ("pt", "en", "es", "fr"):
+            path = partner_profile_path(partner, lang)
+            if path:
+                entries.append(url_entry(f"/{path}", "monthly", "0.7"))
 
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <!-- Gerar: python scripts/generate-sitemap.py -->
