@@ -365,6 +365,16 @@ def _run_generate_parceiros() -> None:
     mod.main()
 
 
+def _run_generate_partner_pages() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "generate_partner_pages",
+        SCRIPTS / "generate-partner-pages.py",
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.main()
+
+
 def _run_generate_sitemap() -> None:
     spec = importlib.util.spec_from_file_location(
         "generate_sitemap",
@@ -424,6 +434,9 @@ def main() -> None:
 
     print("\n--- Partners directory (/parceiros/) ---")
     _run_generate_parceiros()
+
+    print("\n--- Partner profile pages ---")
+    _run_generate_partner_pages()
 
     print("\n--- Font Awesome aria-hidden pass ---")
     _run_fix_fa_aria_hidden()

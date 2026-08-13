@@ -126,12 +126,14 @@ def render_header_service(
     asset_prefix: str,
     index_href: str,
     back_label: str,
+    logo_href: str | None = None,
 ) -> str:
     return render_partial(
         "header-service.html",
         {
             "ASSET_PREFIX": asset_prefix,
             "LOGO_PATH": LOGO_PATH,
+            "LOGO_HREF": logo_href or index_href,
             "INDEX_HREF": index_href,
             "BACK_LABEL": back_label,
             "TEL_HREF": tel_href(),

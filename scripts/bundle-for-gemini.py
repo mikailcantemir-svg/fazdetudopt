@@ -56,7 +56,7 @@ def write_bundle() -> Path:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     lines = [
         "FAZDETUDO.PT — CÓDIGO FONTE PARA REVISÃO (Gemini / AI)",
-        "Repositório: https://github.com/mikailcantemir-svg/fazdetudopt",
+        "Projeto: FAZDETUDO.PT",
         "Gerado automaticamente por scripts/bundle-for-gemini.py",
         f"Atualizado: {stamp}",
         "Inclui: HTML, CSS, JS, templates, scripts, sitemap, robots, docs",

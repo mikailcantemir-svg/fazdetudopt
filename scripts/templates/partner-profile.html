@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" data-page-lang="{{PAGE_LANG}}">
+<head>
+{{HEAD}}
+</head>
+<body class="service-page partner-profile-page">
+    <a class="skip-link" href="#partner-profile-main">{{SKIP_LINK}}</a>
+
+{{HEADER_SERVICE}}
+
+    <main class="service-page-main" id="partner-profile-main">
+        <div class="container partner-profile">
+            <nav class="partner-profile-breadcrumb" aria-label="Breadcrumb">
+{{BREADCRUMB_HTML}}
+            </nav>
+
+            <header class="partner-profile-hero">
+                <div class="partner-profile-hero-media">
+{{MEDIA_HTML}}
+                </div>
+                <div class="partner-profile-hero-copy">
+                    <p class="partner-profile-badge">{{BADGE_LABEL}}</p>
+                    <h1 class="partner-profile-title">{{H1_TITLE}}</h1>
+                    <p class="partner-profile-category">{{CATEGORY_LABEL}}</p>
+{{LOCATION_HTML}}
+{{PHONE_HTML}}
+                    <div class="partner-profile-actions">
+{{ACTIONS_HTML}}
+                    </div>
+                </div>
+            </header>
+
+            <div class="partner-profile-body service-rich-text">
+                <p class="partner-profile-intro">{{INTRO_HTML}}</p>
+{{SECTIONS_HTML}}
+
+                <h2>{{CONTACT_H2}}</h2>
+{{CONTACT_LIST_HTML}}
+                <div class="partner-profile-actions partner-profile-actions--footer">
+{{ACTIONS_HTML}}
+                </div>
+            </div>
+
+            <p class="partner-profile-back">
+                <a href="{{PARTNERS_HREF}}">{{BACK_PARTNERS}}</a>
+            </p>
+        </div>
+    </main>
+
+{{FOOTER}}
+
+    <script src="{{ASSET_PREFIX}}script.js" defer></script>
+</body>
+</html>

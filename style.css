@@ -4309,6 +4309,217 @@ html.js-fade .fade-in.visible {
     }
 }
 
+.partner-sidebar-profile {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.partner-sidebar-profile:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.partner-dir-profile-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.partner-dir-profile-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Individual partner profile pages */
+.partner-profile-page .partner-profile {
+    max-width: 920px;
+    padding-top: 28px;
+    padding-bottom: 48px;
+}
+
+.partner-profile-breadcrumb {
+    margin: 0 0 22px;
+    font-size: 0.88rem;
+    color: #64748b;
+}
+
+.partner-profile-breadcrumb a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 650;
+}
+
+.partner-profile-breadcrumb a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.partner-profile-hero {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 22px 28px;
+    align-items: start;
+    padding: 24px;
+    margin-bottom: 28px;
+    background: #fff;
+    border: 1px solid #e2e8ef;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+}
+
+.partner-profile-media {
+    width: 120px;
+    height: 120px;
+    border-radius: 18px;
+    border: 1px solid #e8ecf1;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.partner-profile-media img {
+    width: 86%;
+    height: 86%;
+    object-fit: contain;
+}
+
+.partner-profile-media--photo {
+    border-radius: 50%;
+    border-width: 3px;
+    border-color: rgba(var(--primary-rgb), 0.18);
+}
+
+.partner-profile-media--photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.partner-profile-media--icon {
+    color: var(--secondary-color);
+    font-size: 2rem;
+    background: rgba(var(--primary-rgb), 0.08);
+}
+
+.partner-profile-badge {
+    display: inline-block;
+    margin: 0 0 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef2f7;
+    color: var(--secondary-color);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.partner-profile-title {
+    margin: 0 0 8px;
+    font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+    font-weight: 800;
+    color: var(--secondary-color);
+    line-height: 1.25;
+}
+
+.partner-profile-category {
+    margin: 0 0 6px;
+    color: #64748b;
+    font-weight: 650;
+}
+
+.partner-profile-location {
+    margin: 0 0 8px;
+    color: #5f6b7a;
+}
+
+.partner-profile-location i {
+    color: var(--primary-color);
+    margin-right: 4px;
+}
+
+.partner-profile-phone {
+    margin: 0 0 16px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+}
+
+.partner-profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.partner-profile-btn--call {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+}
+
+.partner-profile-btn--call:hover {
+    background: #15233d;
+    color: #fff;
+}
+
+.partner-profile-btn--whatsapp {
+    color: #128c7e;
+    border-color: #9fd5ce;
+    background: #fff;
+}
+
+.partner-profile-btn--whatsapp:hover {
+    background: #f3fbf9;
+    color: #0f7668;
+}
+
+.partner-profile-intro {
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.partner-profile-contact-list {
+    margin: 0 0 18px;
+    padding-left: 1.2rem;
+}
+
+.partner-profile-back {
+    margin-top: 28px;
+}
+
+.partner-profile-back a {
+    font-weight: 750;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.partner-profile-back a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+    .partner-profile-hero {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .partner-profile-actions .btn {
+        flex: 1 1 calc(50% - 6px);
+        justify-content: center;
+        min-height: 48px;
+    }
+}
+
 .article-comparison-table {
     width: 100%;
     border-collapse: collapse;

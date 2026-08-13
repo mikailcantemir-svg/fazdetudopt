@@ -2,7 +2,7 @@
 
 Contacto direto apresentado no site para pedidos de empregada/profissional de limpeza.
 
-- Nome: Caterina Cantemir
+- Nome: Caterina
 - Telefone: +351 963 212 185
 - Categoria: Limpezas
 - Homepage: cartão de Limpezas com botão de chamada direta

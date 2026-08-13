@@ -83,17 +83,9 @@ ARTICLES = [
             "contactá-los diretamente."
         ),
         "body_html": f"""
-                <p>Encontrar uma <strong>empregada de limpeza em Lisboa</strong> pode parecer "
-                "simples, mas as necessidades variam muito de casa para casa. Há quem procure "
-                "uma limpeza pontual antes de entregar um apartamento, quem precise de ajuda "
-                "semanal e quem necessite de uma limpeza profunda ou pós-obra.</p>
-                <p>Mais importante do que escolher apenas pelo preço é perceber que tipo de "
-                "limpeza precisa, qual a frequência, que zonas devem ser tratadas e se o "
-                "profissional trabalha na sua área.</p>
-                <p>Através da rede de <a href="{BASE_URL}/parceiros/">parceiros FAZDETUDO.PT</a> "
-                "pode consultar <a href="{BASE_URL}/servico-limpezas.html">profissionais de "
-                "limpeza disponíveis</a> e contactá-los diretamente. A FAZDETUDO.PT não executa "
-                "estes serviços de limpeza — apresenta profissionais independentes da rede.</p>
+                <p>Encontrar uma <strong>empregada de limpeza em Lisboa</strong> pode parecer simples, mas as necessidades variam muito de casa para casa. Há quem procure uma limpeza pontual antes de entregar um apartamento, quem precise de ajuda semanal e quem necessite de uma limpeza profunda ou pós-obra.</p>
+                <p>Mais importante do que escolher apenas pelo preço é perceber que tipo de limpeza precisa, qual a frequência, que zonas devem ser tratadas e se o profissional trabalha na sua área.</p>
+                <p>Através da rede de <a href="{BASE_URL}/parceiros/">parceiros FAZDETUDO.PT</a> pode consultar <a href="{BASE_URL}/servico-limpezas.html">profissionais de limpeza disponíveis</a> e contactá-los diretamente. A FAZDETUDO.PT não executa estes serviços de limpeza — apresenta profissionais independentes da rede.</p>
 
                 <figure class="article-figure">
                     <img src="{IMG_LIMPEZA}/empregada-limpeza-lisboa.webp"
@@ -103,9 +95,7 @@ ARTICLES = [
                 </figure>
 
                 <h2>Que serviços pode fazer uma empregada de limpeza?</h2>
-                <p>Uma <strong>limpeza doméstica</strong> pode cobrir a manutenção do dia a dia "
-                "ou uma intervenção mais completa, conforme o que for combinado. Em muitos "
-                "pedidos na Grande Lisboa, o serviço inclui:</p>
+                <p>Uma <strong>limpeza doméstica</strong> pode cobrir a manutenção do dia a dia ou uma intervenção mais completa, conforme o que for combinado. Em muitos pedidos na Grande Lisboa, o serviço inclui:</p>
                 <ul>
                     <li>limpeza regular de casas, apartamentos e moradias;</li>
                     <li>cozinhas, casas de banho, quartos e salas;</li>
@@ -113,40 +103,20 @@ ARTICLES = [
                     <li>vidros acessíveis, quando combinado;</li>
                     <li>organização ligeira, apenas se previamente acordada.</li>
                 </ul>
-                <p>Nem todos os pedidos incluem os mesmos trabalhos. Por isso, convém confirmar "
-                "com a profissional o que está incluído antes de marcar a visita — "
-                "especialmente se precisar de armários interiores, varandas, roupa ou outras "
-                "tarefas específicas.</p>
+                <p>Nem todos os pedidos incluem os mesmos trabalhos. Por isso, convém confirmar com a profissional o que está incluído antes de marcar a visita — especialmente se precisar de armários interiores, varandas, roupa ou outras tarefas específicas.</p>
 
                 <h2>Limpeza regular ou limpeza profunda: qual escolher?</h2>
-                <p>A <strong>limpeza regular</strong> serve sobretudo para manter a casa "
-                "apresentável com frequência: pó, chão, casas de banho, cozinha e zonas de uso "
-                "diário. É a opção mais comum para quem quer apoio semanal ou quinzenal.</p>
-                <p>A <strong>limpeza profunda</strong> vai mais longe. Costuma incluir zonas "
-                "menos tratadas no dia a dia, com maior acumulação de sujidade: rodapés, "
-                "cantos, superfícies detalhadas, cozinha e casas de banho com mais atenção, "
-                "e outras áreas que uma manutenção rápida normalmente não cobre.</p>
-                <p>Se a casa está razoavelmente cuidada e precisa de continuidade, a limpeza "
-                "regular costuma chegar. Se há acumulação, mudança de casa ou muito tempo "
-                "sem limpeza completa, uma limpeza profunda pode ser o ponto de partida "
-                "antes de entrar num ritmo regular.</p>
+                <p>A <strong>limpeza regular</strong> serve sobretudo para manter a casa apresentável com frequência: pó, chão, casas de banho, cozinha e zonas de uso diário. É a opção mais comum para quem quer apoio semanal ou quinzenal.</p>
+                <p>A <strong>limpeza profunda</strong> vai mais longe. Costuma incluir zonas menos tratadas no dia a dia, com maior acumulação de sujidade: rodapés, cantos, superfícies detalhadas, cozinha e casas de banho com mais atenção, e outras áreas que uma manutenção rápida normalmente não cobre.</p>
+                <p>Se a casa está razoavelmente cuidada e precisa de continuidade, a limpeza regular costuma chegar. Se há acumulação, mudança de casa ou muito tempo sem limpeza completa, uma limpeza profunda pode ser o ponto de partida antes de entrar num ritmo regular.</p>
 
                 <h2>Limpeza pós-obra</h2>
-                <p>A <strong>limpeza pós-obra</strong> é diferente de uma limpeza doméstica "
-                "normal. Depois de pinturas, remodelações ou pequenas obras, é comum "
-                "encontrar pó fino, resíduos, marcas em superfícies, vidros e pavimentos "
-                "que exigem mais tempo e outro tipo de abordagem.</p>
-                <p>Pode envolver limpeza de pó, remoção de resíduos leves, tratamento de "
-                "vidros, pavimentos, armários e outras superfícies — sempre conforme o "
-                "estado do imóvel e o que for combinado com a profissional.</p>
-                <p>Não se trata, tipicamente, de remoção de resíduos de construção "
-                "especializados ou trabalhos técnicos fora do âmbito de limpeza. Se a "
-                "obra deixou entulho volumoso ou materiais perigosos, isso deve ser "
-                "esclarecido à parte.</p>
+                <p>A <strong>limpeza pós-obra</strong> é diferente de uma limpeza doméstica normal. Depois de pinturas, remodelações ou pequenas obras, é comum encontrar pó fino, resíduos, marcas em superfícies, vidros e pavimentos que exigem mais tempo e outro tipo de abordagem.</p>
+                <p>Pode envolver limpeza de pó, remoção de resíduos leves, tratamento de vidros, pavimentos, armários e outras superfícies — sempre conforme o estado do imóvel e o que for combinado com a profissional.</p>
+                <p>Não se trata, tipicamente, de remoção de resíduos de construção especializados ou trabalhos técnicos fora do âmbito de limpeza. Se a obra deixou entulho volumoso ou materiais perigosos, isso deve ser esclarecido à parte.</p>
 
                 <h2>Quanto tempo demora uma limpeza?</h2>
-                <p>Não existe um tempo único para todas as casas. A duração depende de "
-                "vários fatores:</p>
+                <p>Não existe um tempo único para todas as casas. A duração depende de vários fatores:</p>
                 <ul>
                     <li>dimensão do imóvel e número de divisões;</li>
                     <li>estado geral da casa;</li>
@@ -155,9 +125,7 @@ ARTICLES = [
                     <li>existência de animais;</li>
                     <li>vidros, cozinha e casas de banho com mais detalhe.</li>
                 </ul>
-                <p>Um conselho útil: envie fotografias e explique previamente o que "
-                "pretende. Isso ajuda a profissional a avaliar melhor o trabalho e a "
-                "disponibilidade antes de confirmar a visita.</p>
+                <p>Um conselho útil: envie fotografias e explique previamente o que pretende. Isso ajuda a profissional a avaliar melhor o trabalho e a disponibilidade antes de confirmar a visita.</p>
 
                 <h2>O que perguntar antes de contratar uma empregada de limpeza?</h2>
                 <p>Antes de avançar, estas perguntas ajudam a evitar mal-entendidos:</p>
@@ -171,70 +139,35 @@ ARTICLES = [
                     <li>Tem disponibilidade no dia pretendido?</li>
                     <li>Como é feito o pagamento?</li>
                 </ol>
-                <p>As respostas variam de profissional para profissional. Confirme "
-                "sempre diretamente consigo.</p>
+                <p>As respostas variam de profissional para profissional. Confirme sempre diretamente consigo.</p>
 
                 <h2>Empregada de limpeza na Grande Lisboa</h2>
-                <p>Muitas famílias e senhorios na <strong>Grande Lisboa</strong> procuram "
-                "apoio para limpeza de apartamentos e moradias, sobretudo em zonas como "
-                "Lisboa, Oeiras, Cascais, Sintra, Amadora, Odivelas ou Loures. As "
-                "necessidades mudam: há quem queira manutenção semanal, quem prepare um "
-                "imóvel para visita ou quem precise de limpeza após obras.</p>
-                <p>O mais importante é escolher uma profissional que trabalhe na sua "
-                "área e que responda ao tipo de limpeza que realmente precisa. Na "
-                "página de <a href="{BASE_URL}/servico-limpezas.html">serviços de "
-                "limpeza</a> pode ver quem está disponível para contacto direto.</p>
+                <p>Muitas famílias e senhorios na <strong>Grande Lisboa</strong> procuram apoio para limpeza de apartamentos e moradias, sobretudo em zonas como Lisboa, Oeiras, Cascais, Sintra, Amadora, Odivelas ou Loures. As necessidades mudam: há quem queira manutenção semanal, quem prepare um imóvel para visita ou quem precise de limpeza após obras.</p>
+                <p>O mais importante é escolher uma profissional que trabalhe na sua área e que responda ao tipo de limpeza que realmente precisa. Na página de <a href="{BASE_URL}/servico-limpezas.html">serviços de limpeza</a> pode ver quem está disponível para contacto direto.</p>
 
                 <h2>Limpezas na Margem Sul e Azeitão</h2>
-                <p>Também existem profissionais parceiros que trabalham na "
-                "<strong>Margem Sul</strong>, incluindo zonas como Almada, Seixal, "
-                "Barreiro e Azeitão. A cobertura exata de cada profissional deve ser "
-                "confirmada no contacto — a disponibilidade pode variar consoante o "
-                "dia, a distância e o tipo de serviço.</p>
-                <p>Se vive na Margem Sul, indique a localidade logo no primeiro "
-                "contacto. Isso acelera a resposta e evita deslocações desnecessárias.</p>
+                <p>Também existem profissionais parceiros que trabalham na <strong>Margem Sul</strong>, incluindo zonas como Almada, Seixal, Barreiro e Azeitão. A cobertura exata de cada profissional deve ser confirmada no contacto — a disponibilidade pode variar consoante o dia, a distância e o tipo de serviço.</p>
+                <p>Se vive na Margem Sul, indique a localidade logo no primeiro contacto. Isso acelera a resposta e evita deslocações desnecessárias.</p>
 
                 {{{{PARTNER_SECTION}}}}
 
-                <p>Depois de falar com a profissional, pode também voltar à página de "
-                "<a href="{BASE_URL}/servico-limpezas.html">limpezas domésticas</a> "
-                "sempre que precisar de consultar novamente os contactos disponíveis.</p>
+                <p>Depois de falar com a profissional, pode também voltar à página de <a href="{BASE_URL}/servico-limpezas.html">limpezas domésticas</a> sempre que precisar de consultar novamente os contactos disponíveis.</p>
 
                 <h2>Quanto custa uma empregada de limpeza em Lisboa?</h2>
-                <p>O preço de um serviço de limpeza pode variar consoante a duração, "
-                "dimensão do imóvel, frequência e tipo de trabalho. Uma limpeza "
-                "regular de manutenção não tem as mesmas necessidades de uma limpeza "
-                "profunda ou pós-obra.</p>
-                <p>Para receber uma indicação mais adequada, explique à profissional "
-                "quantas divisões existem, que tipo de limpeza pretende e, quando "
-                "possível, envie fotografias.</p>
+                <p>O preço de um serviço de limpeza pode variar consoante a duração, dimensão do imóvel, frequência e tipo de trabalho. Uma limpeza regular de manutenção não tem as mesmas necessidades de uma limpeza profunda ou pós-obra.</p>
+                <p>Para receber uma indicação mais adequada, explique à profissional quantas divisões existem, que tipo de limpeza pretende e, quando possível, envie fotografias.</p>
 
                 <h2>Limpeza semanal, quinzenal ou pontual?</h2>
-                <p><strong>Semanal:</strong> adequada para quem quer manutenção "
-                "contínua da casa, com menos acumulação entre visitas.</p>
-                <p><strong>Quinzenal:</strong> útil para casas que precisam de apoio "
-                "regular, mas com menor frequência.</p>
-                <p><strong>Pontual:</strong> frequente em mudanças, visitas, "
-                "preparação de imóvel, limpeza profunda, Airbnb ou entrada e saída "
-                "de inquilinos.</p>
-                <p>Se gere um alojamento ou recebe hóspedes com regularidade, a "
-                "limpeza pontual entre estadias pode ser tão importante como a "
-                "manutenção semanal de uma habitação própria.</p>
+                <p><strong>Semanal:</strong> adequada para quem quer manutenção contínua da casa, com menos acumulação entre visitas.</p>
+                <p><strong>Quinzenal:</strong> útil para casas que precisam de apoio regular, mas com menor frequência.</p>
+                <p><strong>Pontual:</strong> frequente em mudanças, visitas, preparação de imóvel, limpeza profunda, Airbnb ou entrada e saída de inquilinos.</p>
+                <p>Se gere um alojamento ou recebe hóspedes com regularidade, a limpeza pontual entre estadias pode ser tão importante como a manutenção semanal de uma habitação própria.</p>
 
                 <h2>Limpeza para Airbnb e Alojamento Local</h2>
-                <p>Nos alojamentos locais, o tempo entre hóspedes é curto e a "
-                "apresentação do imóvel conta. Em muitos casos, o foco está nas "
-                "casas de banho, na cozinha e no aspeto geral da casa.</p>
-                <p>Trabalhos como tratamento de roupa ou reposição de consumíveis "
-                "só devem ser considerados se forem previamente acordados. Confirme "
-                "diretamente com a profissional quais os serviços disponíveis para "
-                "Airbnb ou Alojamento Local.</p>
+                <p>Nos alojamentos locais, o tempo entre hóspedes é curto e a apresentação do imóvel conta. Em muitos casos, o foco está nas casas de banho, na cozinha e no aspeto geral da casa.</p>
+                <p>Trabalhos como tratamento de roupa ou reposição de consumíveis só devem ser considerados se forem previamente acordados. Confirme diretamente com a profissional quais os serviços disponíveis para Airbnb ou Alojamento Local.</p>
 
-                <p>Para pequenas reparações, montagens e trabalhos de handyman, "
-                "consulte também os <a href="{BASE_URL}/">serviços FAZDETUDO.PT</a>. "
-                "Assim separa claramente o contacto direto de handyman dos "
-                "<a href="{BASE_URL}/servico-limpezas.html">serviços de limpeza</a> "
-                "realizados por profissionais parceiros.</p>
+                <p>Para pequenas reparações, montagens e trabalhos de handyman, consulte também os <a href="{BASE_URL}/">serviços FAZDETUDO.PT</a>. Assim separa claramente o contacto direto de handyman dos <a href="{BASE_URL}/servico-limpezas.html">serviços de limpeza</a> realizados por profissionais parceiros.</p>
 """,
         "faq": [
             {
@@ -521,11 +454,7 @@ ARTICLES = [
         ),
         "cta_button": "Visitar AirFix.pt →",
         "body_html": f"""
-                <p>O ar condicionado é hoje parte do conforto de muitas casas e escritórios na "
-                "região de Lisboa — no calor do verão e também no apoio ao aquecimento em dias "
-                "mais frios. Para tirar o melhor partido do equipamento e evitar surpresas, "
-                "convém planear bem a <strong>instalação</strong>, manter a <strong>limpeza</strong> "
-                "e não adiar a <strong>manutenção</strong>. Se precisar de apoio, o serviço de "
+                <p>O ar condicionado é hoje parte do conforto de muitas casas e escritórios na região de Lisboa — no calor do verão e também no apoio ao aquecimento em dias mais frios. Para tirar o melhor partido do equipamento e evitar surpresas, convém planear bem a <strong>instalação</strong>, manter a <strong>limpeza</strong> e não adiar a <strong>manutenção</strong>. Se precisar de apoio, o serviço de "
                 f'<a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a> '
                 "está disponível através da AirFix.pt, parceiro FAZDETUDO.PT.</p>
 
@@ -536,89 +465,43 @@ ARTICLES = [
                          width="1024" height="1024" loading="eager" decoding="async">
                     <figcaption>Um split bem instalado melhora o conforto da casa e evita consumos desnecessários.</figcaption>
                 </figure>
-                <p>Março, abril e maio costumam ser meses favoráveis para instalar ou substituir um "
-                "split: as temperaturas são mais amenas para o trabalho nas unidades exteriores, a "
-                "procura de técnicos ainda não está no pico de verão e há tempo para testar o "
-                "equipamento antes do calor intenso.</p>
-                <p>Em muitos condomínios na Grande Lisboa, a instalação de unidades exteriores na "
-                "fachada pode exigir autorização da administração. Vale a pena confirmar as regras "
-                "do prédio antes de marcar a obra.</p>
+                <p>Março, abril e maio costumam ser meses favoráveis para instalar ou substituir um split: as temperaturas são mais amenas para o trabalho nas unidades exteriores, a procura de técnicos ainda não está no pico de verão e há tempo para testar o equipamento antes do calor intenso.</p>
+                <p>Em muitos condomínios na Grande Lisboa, a instalação de unidades exteriores na fachada pode exigir autorização da administração. Vale a pena confirmar as regras do prédio antes de marcar a obra.</p>
 
                 <h2>Inverno: Uma Oportunidade Subestimada</h2>
-                <p>Os splits modernos com bomba de calor podem aquecer de forma eficiente mesmo com "
-                "temperaturas externas baixas. Em Lisboa, onde o inverno é relativamente ameno, o "
-                "modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em "
-                "escritórios com pouca exposição solar.</p>
-                <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro "
-                "pode dar mais margem de agenda. Fora da época alta costuma existir maior "
-                "disponibilidade para agendar instalações e manutenção.</p>
+                <p>Os splits modernos com bomba de calor podem aquecer de forma eficiente mesmo com temperaturas externas baixas. Em Lisboa, onde o inverno é relativamente ameno, o modo aquecimento pode ser uma alternativa útil em divisões mal isoladas ou em escritórios com pouca exposição solar.</p>
+                <p>Se está a planear instalar um split novo, pedir orçamento em setembro ou outubro pode dar mais margem de agenda. Fora da época alta costuma existir maior disponibilidade para agendar instalações e manutenção.</p>
 
                 <h2>Tipos de Split para Casas e Escritórios em Lisboa</h2>
-                <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na "
-                "fatura da luz. Para habitação na Grande Lisboa, estes são os formatos mais "
-                "comuns:</p>
+                <p>Nem todos os splits são iguais, e a escolha errada pode aumentar o consumo na fatura da luz. Para habitação na Grande Lisboa, estes são os formatos mais comuns:</p>
                 <h3>Split Mono Inverter</h3>
-                <p>É a opção mais frequente em apartamentos e moradias: uma unidade exterior alimenta "
-                "uma unidade interior. A tecnologia inverter ajusta a potência ao necessário, o que "
-                "pode ajudar a manter o conforto com menor desgaste do compressor.</p>
+                <p>É a opção mais frequente em apartamentos e moradias: uma unidade exterior alimenta uma unidade interior. A tecnologia inverter ajusta a potência ao necessário, o que pode ajudar a manter o conforto com menor desgaste do compressor.</p>
                 <h3>Multi-Split</h3>
-                <p>Uma unidade exterior serve várias unidades interiores. Pode fazer sentido quando o "
-                "espaço na fachada ou na cobertura é limitado e quer climatizar mais do que uma "
-                "divisão com um só sistema.</p>
+                <p>Uma unidade exterior serve várias unidades interiores. Pode fazer sentido quando o espaço na fachada ou na cobertura é limitado e quer climatizar mais do que uma divisão com um só sistema.</p>
                 <h3>Cassete de Teto</h3>
-                <p>Usada sobretudo em escritórios, lojas e espaços comerciais. Distribui o ar em "
-                "várias direções e integra-se no teto falso — útil em salas amplas.</p>
-                <p>Na faixa costeira de Cascais e Setúbal, a salinidade pode acelerar a corrosão "
-                "das aletas da unidade exterior. Em zonas próximas do mar, convém considerar "
-                "equipamentos com tratamento anticorrosivo e incluir a revisão da unidade exterior "
-                "no plano de <a href="{BASE_URL}/servico-manutencao.html">manutenção</a>.</p>
+                <p>Usada sobretudo em escritórios, lojas e espaços comerciais. Distribui o ar em várias direções e integra-se no teto falso — útil em salas amplas.</p>
+                <p>Na faixa costeira de Cascais e Setúbal, a salinidade pode acelerar a corrosão das aletas da unidade exterior. Em zonas próximas do mar, convém considerar equipamentos com tratamento anticorrosivo e incluir a revisão da unidade exterior no plano de <a href="{BASE_URL}/servico-manutencao.html">manutenção</a>.</p>
 
                 <h2>Limpeza de Filtros: O Que Acontece Quando se Ignora</h2>
-                <p>Um filtro sujo é um dos problemas mais frequentes nos splits domésticos. Não é "
-                "apenas estética: filtros entupidos obrigam o equipamento a trabalhar mais para "
-                "atingir a temperatura desejada, o que <strong>pode reduzir a eficiência</strong> e "
-                "<strong>pode aumentar o consumo</strong>. A qualidade do ar interior também tende "
-                "a piorar.</p>
-                <p>Durante os meses de uso intensivo (junho a setembro para arrefecimento, e "
-                "dezembro a fevereiro para aquecimento), a limpeza regular dos filtros é "
-                "recomendada. Em Lisboa e Cascais, onde o pó e o sal marinho podem acumular-se "
-                "mais depressa junto à costa, convém não deixar passar demasiado tempo entre "
-                "lavagens.</p>
+                <p>Um filtro sujo é um dos problemas mais frequentes nos splits domésticos. Não é apenas estética: filtros entupidos obrigam o equipamento a trabalhar mais para atingir a temperatura desejada, o que <strong>pode reduzir a eficiência</strong> e <strong>pode aumentar o consumo</strong>. A qualidade do ar interior também tende a piorar.</p>
+                <p>Durante os meses de uso intensivo (junho a setembro para arrefecimento, e dezembro a fevereiro para aquecimento), a limpeza regular dos filtros é recomendada. Em Lisboa e Cascais, onde o pó e o sal marinho podem acumular-se mais depressa junto à costa, convém não deixar passar demasiado tempo entre lavagens.</p>
 
                 <h3>Como Limpar os Filtros de um Split em Casa</h3>
-                <p>Num split de parede doméstico, o processo é simples: desligue o aparelho, abra a "
-                "tampa frontal da unidade interior, retire os filtros (geralmente encaixados por "
-                "clips), lave com água morna e detergente suave, enxague bem e deixe secar "
-                "completamente antes de recolocar.</p>
+                <p>Num split de parede doméstico, o processo é simples: desligue o aparelho, abra a tampa frontal da unidade interior, retire os filtros (geralmente encaixados por clips), lave com água morna e detergente suave, enxague bem e deixe secar completamente antes de recolocar.</p>
                 <figure class="article-figure">
                     <img src="{IMG_AC}/limpeza-filtros-ar-condicionado-split.webp"
                          alt="Limpeza de filtros de ar condicionado split"
                          width="1024" height="1024" loading="lazy" decoding="async">
                     <figcaption>A limpeza regular dos filtros ajuda o equipamento a trabalhar melhor e melhora a qualidade do ar.</figcaption>
                 </figure>
-                <p>Se ao abrir a tampa encontrar manchas escuras no evaporador ou um cheiro a mofo "
-                "quando liga o equipamento, a limpeza caseira dos filtros já não chega — nesse "
-                "caso, peça uma <a href="{BASE_URL}/servico-climatizacao.html">limpeza técnica "
-                "profissional</a>.</p>
+                <p>Se ao abrir a tampa encontrar manchas escuras no evaporador ou um cheiro a mofo quando liga o equipamento, a limpeza caseira dos filtros já não chega — nesse caso, peça uma <a href="{BASE_URL}/servico-climatizacao.html">limpeza técnica profissional</a>.</p>
 
                 <h3>Limpeza Profissional vs. Limpeza Doméstica</h3>
-                <p>A limpeza dos filtros pelo utilizador é suficiente como manutenção regular. "
-                "Uma vez por ano, habitualmente na primavera, convém contratar uma limpeza "
-                "profunda: serpentina interior, turbina, bandeja de condensados e verificação da "
-                "unidade exterior. Esta distinção entre manutenção mensal e revisão técnica anual "
-                "é frequentemente ignorada — e pode encurtar a vida útil do equipamento se só se "
-                "limparem os filtros.</p>
+                <p>A limpeza dos filtros pelo utilizador é suficiente como manutenção regular. Uma vez por ano, habitualmente na primavera, convém contratar uma limpeza profunda: serpentina interior, turbina, bandeja de condensados e verificação da unidade exterior. Esta distinção entre manutenção mensal e revisão técnica anual é frequentemente ignorada — e pode encurtar a vida útil do equipamento se só se limparem os filtros.</p>
 
                 <h2>Manutenção AVAC em Lisboa: O Que Inclui e Com Que Frequência</h2>
-                <p>A manutenção de climatização abrange mais do que a limpeza dos filtros. Em "
-                "habitação, um plano típico inclui verificação de pressões, estado das serpentinas, "
-                "drenagem de condensados, ligações elétricas e teste de funcionamento nos modos "
-                "frio e calor. A <a href="{BASE_URL}/servico-electricidade.html">parte elétrica</a> "
-                "deve ser verificada por quem tem competência para o efeito.</p>
-                <p>Em sistemas comerciais ou de maior dimensão, podem existir requisitos legais e "
-                "técnicos específicos. Trabalhos que envolvam gases refrigerantes, pressões do "
-                "circuito ou intervenção técnica no equipamento devem ser realizados por técnicos "
-                "habilitados ou certificados.</p>
+                <p>A manutenção de climatização abrange mais do que a limpeza dos filtros. Em habitação, um plano típico inclui verificação de pressões, estado das serpentinas, drenagem de condensados, ligações elétricas e teste de funcionamento nos modos frio e calor. A <a href="{BASE_URL}/servico-electricidade.html">parte elétrica</a> deve ser verificada por quem tem competência para o efeito.</p>
+                <p>Em sistemas comerciais ou de maior dimensão, podem existir requisitos legais e técnicos específicos. Trabalhos que envolvam gases refrigerantes, pressões do circuito ou intervenção técnica no equipamento devem ser realizados por técnicos habilitados ou certificados.</p>
                 <blockquote>
                     <p>A falta de manutenção nos sistemas de climatização pode contribuir para "
                     "desperdício energético em edifícios — por isso, uma revisão preventiva antes "
@@ -626,9 +509,7 @@ ARTICLES = [
                 </blockquote>
 
                 <h3>Calendário de Manutenção Recomendado para Lisboa</h3>
-                <p>Abril é, para muitas famílias, um bom mês para a manutenção anual: o verão ainda "
-                "não chegou, há tempo para corrigir pequenas falhas e o equipamento entra na época "
-                "quente em melhores condições.</p>
+                <p>Abril é, para muitas famílias, um bom mês para a manutenção anual: o verão ainda não chegou, há tempo para corrigir pequenas falhas e o equipamento entra na época quente em melhores condições.</p>
                 <ul>
                     <li><strong>Habitação:</strong> manutenção anual na primavera; limpeza dos "
                     "filtros de junho a setembro (e no aquecimento, se usar com frequência).</li>
@@ -637,8 +518,7 @@ ARTICLES = [
                 </ul>
 
                 <h2>Instalação, Manutenção Própria vs. Serviço Profissional</h2>
-                <p>A questão mais comum entre proprietários em Lisboa é simples: o que posso fazer "
-                "eu mesmo e o que exige um técnico? A resposta prática, em cartões:</p>
+                <p>A questão mais comum entre proprietários em Lisboa é simples: o que posso fazer eu mesmo e o que exige um técnico? A resposta prática, em cartões:</p>
                 <div class="article-task-cards">
                     <article class="article-task-card">
                         <h3>Instalação da unidade</h3>
@@ -679,26 +559,13 @@ ARTICLES = [
                 </div>
 
                 <h2>Custos de Instalação e Manutenção na Grande Lisboa</h2>
-                <p>Os valores publicados online raramente refletem a realidade de cada casa: acesso "
-                "à fachada, comprimento da tubagem, potência do equipamento e estado da instalação "
-                "elétrica alteram o orçamento. Os intervalos abaixo são <strong>orientativos</strong> "
-                "e devem ser confirmados após visita ou descrição do trabalho.</p>
+                <p>Os valores publicados online raramente refletem a realidade de cada casa: acesso à fachada, comprimento da tubagem, potência do equipamento e estado da instalação elétrica alteram o orçamento. Os intervalos abaixo são <strong>orientativos</strong> e devem ser confirmados após visita ou descrição do trabalho.</p>
                 <h3>Instalação de um split doméstico</h3>
-                <p>Para um split standard (potência habitual para quartos ou salas pequenas), com "
-                "acesso razoável ao exterior, a instalação costuma situar-se numa faixa que varia "
-                "consoante marca, distância entre unidades e trabalhos extra (suportes, furações, "
-                "proteções). Peça sempre orçamento por escrito.</p>
+                <p>Para um split standard (potência habitual para quartos ou salas pequenas), com acesso razoável ao exterior, a instalação costuma situar-se numa faixa que varia consoante marca, distância entre unidades e trabalhos extra (suportes, furações, proteções). Peça sempre orçamento por escrito.</p>
                 <h3>Manutenção anual</h3>
-                <p>Uma revisão técnica completa de um split doméstico em Lisboa pode oscilar entre "
-                "valores modestos e montantes mais altos se forem necessárias peças, produtos de "
-                "higienização ou deslocação. A <a href="{BASE_URL}/servico-manutencao.html">manutenção "
-                "preventiva</a> costuma sair mais barata do que uma reparação de emergência no "
-                "agosto.</p>
+                <p>Uma revisão técnica completa de um split doméstico em Lisboa pode oscilar entre valores modestos e montantes mais altos se forem necessárias peças, produtos de higienização ou deslocação. A <a href="{BASE_URL}/servico-manutencao.html">manutenção preventiva</a> costuma sair mais barata do que uma reparação de emergência no agosto.</p>
                 <h3>O custo de adiar a manutenção</h3>
-                <p>Recargas de gás, substituição de compressor ou reparações elétricas podem custar "
-                "significativamente mais do que uma revisão anual. Além do valor financeiro, um "
-                "equipamento mal mantido <strong>pode aumentar o consumo</strong> e "
-                "<strong>pode encurtar a vida útil</strong> do aparelho.</p>
+                <p>Recargas de gás, substituição de compressor ou reparações elétricas podem custar significativamente mais do que uma revisão anual. Além do valor financeiro, um equipamento mal mantido <strong>pode aumentar o consumo</strong> e <strong>pode encurtar a vida útil</strong> do aparelho.</p>
 
                 <figure class="article-figure">
                     <img src="{IMG_AC}/manutencao-ar-condicionado-checklist.webp"
@@ -708,8 +575,7 @@ ARTICLES = [
                 </figure>
 
                 <h2>Erros Mais Comuns na Instalação e Uso do Split em Lisboa</h2>
-                <p>Na instalação e no dia a dia, estes padrões repetem-se com frequência na Grande "
-                "Lisboa:</p>
+                <p>Na instalação e no dia a dia, estes padrões repetem-se com frequência na Grande Lisboa:</p>
                 <ul>
                     <li><strong>Subdimensionar o equipamento.</strong> Um quarto exposto a sul com "
                     "janelas amplas pode precisar de mais capacidade do que a área em m² sugere à "
@@ -724,8 +590,7 @@ ARTICLES = [
                     "também pode ajudar.</li>
                 </ul>
 
-                <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> "
-                "O serviço especializado é realizado através da "
+                <p><strong>Precisa de instalar, limpar ou fazer manutenção ao ar condicionado?</strong> O serviço especializado é realizado através da "
                 '<a href="https://airfix.pt/" target="_blank" rel="noopener noreferrer">AirFix.pt</a>, '
                 "parceiro FAZDETUDO.PT. Também pode consultar a página de "
                 f'<a href="{BASE_URL}/servico-climatizacao.html">climatização e ar condicionado</a>.</p>

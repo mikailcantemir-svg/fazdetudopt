@@ -25,6 +25,8 @@ Add a partner:
 
 from __future__ import annotations
 
+from site_config import BASE_URL
+
 PARTNER_CATEGORIES: dict[str, dict[str, str]] = {
     "avac": {
         "pt": "Ar Condicionado / AVAC",
@@ -700,6 +702,73 @@ def partner_badge_keys(partner: dict) -> list[str]:
     return keys
 
 
+PARTNER_PROFILE_UI = {
+    "pt": {
+        "profile_cta": "Ver perfil →",
+        "profile_aria": "Ver perfil de {name}",
+        "breadcrumb_home": "Início",
+        "breadcrumb_partners": "Parceiros",
+        "back_partners": "Voltar aos parceiros",
+        "contact_h2": "Contactar {name}",
+        "phone_label": "Telefone",
+        "whatsapp_label": "WhatsApp",
+        "call": "Ligar",
+        "whatsapp": "WhatsApp",
+        "zone_note": (
+            "A zona exacta de deslocação deve ser confirmada diretamente com a profissional."
+        ),
+    },
+}
+
+
+def partner_has_profile(partner: dict) -> bool:
+    profile = partner.get("profile") or {}
+    return bool(profile.get("enabled") and profile.get("slug"))
+
+
+def partner_profile_slug(partner: dict) -> str | None:
+    if not partner_has_profile(partner):
+        return None
+    return partner["profile"]["slug"]
+
+
+def partner_profile_path(partner: dict) -> str | None:
+    """Site-relative directory path, e.g. parceiros/maria-limpezas/."""
+    slug = partner_profile_slug(partner)
+    if not slug:
+        return None
+    return f"parceiros/{slug}/"
+
+
+def partner_profile_href(partner: dict) -> str | None:
+    """Root-absolute href for nav/cards, e.g. /parceiros/maria-limpezas/."""
+    path = partner_profile_path(partner)
+    return f"/{path}" if path else None
+
+
+def partner_profile_url(partner: dict) -> str | None:
+    path = partner_profile_path(partner)
+    return f"{BASE_URL}/{path}" if path else None
+
+
+def partners_with_profiles() -> list[dict]:
+    return [p for p in active_partners() if partner_has_profile(p)]
+
+
+def partner_profile_seo(partner: dict, lang: str = "pt") -> dict | None:
+    if not partner_has_profile(partner):
+        return None
+    seo = (partner.get("profile") or {}).get("seo") or {}
+    return seo.get(lang) or seo.get("pt")
+
+
+def partner_profile_content(partner: dict, lang: str = "pt") -> dict | None:
+    if not partner_has_profile(partner):
+        return None
+    content = (partner.get("profile") or {}).get("content") or {}
+    return content.get(lang) or content.get("pt")
+
+
 def active_partners() -> list[dict]:
     return [p for p in RECOMMENDED_PARTNERS if p.get("active", True)]
 
@@ -807,6 +876,47 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "service_slug": "servico-climatizacao.html",
         # No structured zone yet — do not invent coverage here.
         "zones": [],
+
+        "profile": {
+            "enabled": True,
+            "slug": "airfix",
+            "seo": {
+                "pt": {
+                    "title": "AirFix.pt | Ar Condicionado e AVAC",
+                    "meta_description": (
+                        "Conheça a AirFix.pt, parceiro FAZDETUDO.PT especializado em "
+                        "instalação, manutenção, limpeza e assistência técnica de ar "
+                        "condicionado e AVAC."
+                    ),
+                    "h1": "AirFix.pt — Ar Condicionado e AVAC",
+                    "og_title": "AirFix.pt | Ar Condicionado e AVAC",
+                },
+            },
+            "content": {
+                "pt": {
+                    "intro": (
+                        "A AirFix.pt integra a rede de parceiros FAZDETUDO.PT para serviços "
+                        "especializados de ar condicionado e AVAC. Consulte os serviços "
+                        "disponíveis e visite diretamente a AirFix.pt para pedir informações "
+                        "ou orçamento."
+                    ),
+                    "contact_note": (
+                        "Para informações ou orçamento, visite diretamente o site oficial "
+                        "da AirFix.pt."
+                    ),
+                    "sections": [
+                        {
+                            "h2": "Serviços de Ar Condicionado e AVAC",
+                            "html": (
+                                "<p>Serviços especializados de ar condicionado e AVAC, "
+                                "incluindo instalação, manutenção, limpeza e assistência "
+                                "técnica.</p>"
+                            ),
+                        },
+                    ],
+                },
+            },
+        },
         "copy": {
             "pt": {
                 "blurb": (
@@ -863,6 +973,52 @@ RECOMMENDED_PARTNERS: list[dict] = [
             "fr": "Rive Sud · Azeitão",
         },
         "zones": ["margem-sul", "azeitao"],
+
+        "profile": {
+            "enabled": True,
+            "slug": "caterina-limpezas",
+            "seo": {
+                "pt": {
+                    "title": "Caterina | Empregada de Limpeza na Margem Sul",
+                    "meta_description": (
+                        "Conheça a Caterina, profissional de limpeza na Margem Sul e "
+                        "Azeitão. Contacte diretamente por telefone ou WhatsApp para "
+                        "verificar disponibilidade."
+                    ),
+                    "h1": "Caterina — Serviços de Limpeza na Margem Sul",
+                    "og_title": "Caterina | Serviços de Limpeza na Margem Sul",
+                },
+            },
+            "content": {
+                "pt": {
+                    "intro": (
+                        "Caterina integra a rede de parceiros FAZDETUDO.PT para serviços "
+                        "de limpeza na Margem Sul e Azeitão. Pode contactá-la diretamente "
+                        "por telefone ou WhatsApp para explicar o serviço pretendido e "
+                        "confirmar disponibilidade."
+                    ),
+                    "sections": [
+                        {
+                            "h2": "Serviços de limpeza",
+                            "html": (
+                                "<p>Pode receber pedidos relacionados com limpeza doméstica, "
+                                "limpeza regular, limpeza pontual ou outras necessidades de "
+                                "limpeza — sempre sujeito a confirmação direta com a "
+                                "profissional.</p>"
+                            ),
+                        },
+                        {
+                            "h2": "Zona de atuação",
+                            "html": (
+                                "<p>Margem Sul · Azeitão.</p>"
+                                "<p>A zona exacta de deslocação deve ser confirmada "
+                                "diretamente com a profissional.</p>"
+                            ),
+                        },
+                    ],
+                },
+            },
+        },
         "copy": {
             "pt": {
                 "role": "Empregada de limpeza · contacto direto",
@@ -925,6 +1081,67 @@ RECOMMENDED_PARTNERS: list[dict] = [
         "zones": [
             "grande-lisboa",
         ],
+        "profile": {
+            "enabled": True,
+            "slug": "maria-limpezas",
+            "seo": {
+                "pt": {
+                    "title": "Maria | Empregada de Limpeza na Grande Lisboa",
+                    "meta_description": (
+                        "Conheça a Maria, profissional de limpeza na Grande Lisboa. "
+                        "Serviços de limpeza doméstica e contacto direto por telefone "
+                        "ou WhatsApp."
+                    ),
+                    "h1": "Maria — Serviços de Limpeza na Grande Lisboa",
+                    "og_title": "Maria | Empregada de Limpeza na Grande Lisboa",
+                },
+            },
+            "content": {
+                "pt": {
+                    "intro": (
+                        "Maria integra a rede de parceiros FAZDETUDO.PT para serviços de "
+                        "limpeza na Grande Lisboa. Pode contactá-la diretamente por "
+                        "telefone ou WhatsApp para explicar o tipo de imóvel, o serviço "
+                        "pretendido e a disponibilidade."
+                    ),
+                    "sections": [
+                        {
+                            "h2": "Serviços de limpeza na Grande Lisboa",
+                            "html": (
+                                "<p>Através deste perfil pode contactar a Maria para "
+                                "pedidos relacionados com limpeza doméstica — por "
+                                "exemplo limpeza regular, profunda ou pontual — "
+                                "sempre sujeito a confirmação direta.</p>"
+                                "<p>Contacte diretamente a Maria para confirmar "
+                                "disponibilidade e o tipo de limpeza pretendido. "
+                                "Não assuma automaticamente todos os tipos de serviço "
+                                "sem combinar antes.</p>"
+                            ),
+                        },
+                        {
+                            "h2": "Como pedir o serviço",
+                            "html": (
+                                "<ol>"
+                                "<li>indicar a localidade;</li>"
+                                "<li>indicar o tipo e a dimensão do imóvel;</li>"
+                                "<li>explicar o tipo de limpeza;</li>"
+                                "<li>enviar fotografias pelo WhatsApp, se for útil;</li>"
+                                "<li>confirmar a disponibilidade diretamente com Maria.</li>"
+                                "</ol>"
+                            ),
+                        },
+                        {
+                            "h2": "Zona de atuação",
+                            "html": (
+                                "<p>Grande Lisboa.</p>"
+                                "<p>A zona exacta de deslocação deve ser confirmada "
+                                "diretamente com a profissional.</p>"
+                            ),
+                        },
+                    ],
+                },
+            },
+        },
         "copy": {
             "pt": {
                 "role": "Serviços de limpeza · contacto direto",
@@ -995,6 +1212,49 @@ RECOMMENDED_PARTNERS: list[dict] = [
             "azeitao",
             "setubal",
         ],
+
+        "profile": {
+            "enabled": True,
+            "slug": "wallfixtv",
+            "seo": {
+                "pt": {
+                    "title": "WallFixTV.pt | Instalação de TV na Parede",
+                    "meta_description": (
+                        "Conheça a WallFixTV.pt, parceiro FAZDETUDO.PT especializado em "
+                        "instalação profissional de televisões na parede e organização "
+                        "de cabos."
+                    ),
+                    "h1": "WallFixTV.pt — Instalação de TV na Parede",
+                    "og_title": "WallFixTV.pt | Instalação de TV na Parede",
+                },
+            },
+            "content": {
+                "pt": {
+                    "intro": (
+                        "A WallFixTV.pt integra a rede de parceiros FAZDETUDO.PT para "
+                        "instalação especializada de televisões na parede."
+                    ),
+                    "contact_note": (
+                        "Para informações ou orçamento, visite diretamente o site oficial "
+                        "da WallFixTV.pt."
+                    ),
+                    "sections": [
+                        {
+                            "h2": "Instalação profissional de TV",
+                            "html": (
+                                "<p>Instalação profissional de televisões na parede, com "
+                                "nivelamento, fixação adequada, montagem de suportes e "
+                                "organização de cabos.</p>"
+                            ),
+                        },
+                        {
+                            "h2": "Zona de atuação",
+                            "html": "<p>Grande Lisboa · Margem Sul.</p>",
+                        },
+                    ],
+                },
+            },
+        },
         "copy": {
             "pt": {
                 "blurb": (
@@ -1035,7 +1295,7 @@ RECOMMENDED_PARTNERS: list[dict] = [
         },
     },
     {
-        "id": "valeriu-cantemir",
+        "id": "valeriu",
         "active": True,
         "category": "remodelacoes-gerais",
         "categories": [
@@ -1061,6 +1321,49 @@ RECOMMENDED_PARTNERS: list[dict] = [
             "margem-sul",
             "azeitao",
         ],
+        "profile": {
+            "enabled": True,
+            "slug": "valeriu",
+            "seo": {
+                "pt": {
+                    "title": "Valeriu | Remodelações e Obras em Lisboa",
+                    "meta_description": (
+                        "Conheça Valeriu, parceiro FAZDETUDO.PT para remodelações, "
+                        "recuperação de casas e obras gerais em Lisboa, Margem Sul e Azeitão."
+                    ),
+                    "h1": "Valeriu — Remodelações e Obras Gerais",
+                    "og_title": "Valeriu | Remodelações e Obras Gerais",
+                },
+            },
+            "content": {
+                "pt": {
+                    "intro": (
+                        "Valeriu integra a rede de parceiros FAZDETUDO.PT para "
+                        "trabalhos de obras gerais, recuperação de casas e remodelações "
+                        "em Lisboa, Margem Sul e Azeitão."
+                    ),
+                    "contact_note": "Contacto apenas por telefone.",
+                    "sections": [
+                        {
+                            "h2": "Obras e remodelações",
+                            "html": (
+                                "<p>Áreas de atuação: obras gerais, recuperação de casas e "
+                                "remodelações gerais. Contacte diretamente para confirmar "
+                                "disponibilidade e o âmbito do trabalho pretendido.</p>"
+                            ),
+                        },
+                        {
+                            "h2": "Zona de atuação",
+                            "html": (
+                                "<p>Lisboa · Margem Sul · Azeitão.</p>"
+                                "<p>A zona exacta de deslocação deve ser confirmada "
+                                "diretamente.</p>"
+                            ),
+                        },
+                    ],
+                },
+            },
+        },
         "copy": {
             "pt": {
                 "role": (

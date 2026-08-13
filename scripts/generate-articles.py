@@ -199,7 +199,7 @@ def _partner_section_html(article: dict) -> str:
 
 
 def _expand_body_html(article: dict) -> str:
-    body = article["body_html"]
+    body = article["body_html"].strip("\n")
     if "{{PARTNER_SECTION}}" in body:
         body = body.replace("{{PARTNER_SECTION}}", _partner_section_html(article))
     elif article.get("partner_category"):
@@ -382,18 +382,23 @@ def render_index() -> str:
     )
 
 
+def _write_html(path: Path, html_out: str) -> None:
+    html_out = "\n".join(line.rstrip() for line in html_out.splitlines()) + "\n"
+    path.write_text(html_out, encoding="utf-8")
+
+
 def main() -> None:
     ARTICLES_DIR.mkdir(parents=True, exist_ok=True)
     written = []
 
     index_path = ARTICLES_DIR / ARTICLES_INDEX["slug"]
-    index_path.write_text(render_index(), encoding="utf-8")
+    _write_html(index_path, render_index())
     written.append(index_path.relative_to(ROOT).as_posix())
     print(f"wrote {index_path.relative_to(ROOT).as_posix()}")
 
     for article in ARTICLES:
         path = ARTICLES_DIR / article["slug"]
-        path.write_text(render_article(article), encoding="utf-8")
+        _write_html(path, render_article(article))
         written.append(path.relative_to(ROOT).as_posix())
         print(f"wrote {path.relative_to(ROOT).as_posix()}")
 

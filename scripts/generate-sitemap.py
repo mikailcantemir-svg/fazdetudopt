@@ -15,6 +15,12 @@ try:
 except ImportError:
     ARTICLES, ARTICLES_INDEX = [], None
 
+try:
+    from recommended_partners import partners_with_profiles, partner_profile_path
+except ImportError:
+    partners_with_profiles = lambda: []  # noqa: E731
+    partner_profile_path = lambda p: None  # noqa: E731
+
 URLS = [
     ("/", "weekly", "1.0"),
     ("/en/", "weekly", "1.0"),
@@ -42,6 +48,11 @@ def main():
         entries.append(url_entry("/artigos/", "monthly", "0.6"))
         for article in ARTICLES:
             entries.append(url_entry(f"/artigos/{article['slug']}", "monthly", "0.7"))
+
+    for partner in partners_with_profiles():
+        path = partner_profile_path(partner)
+        if path:
+            entries.append(url_entry(f"/{path}", "monthly", "0.7"))
 
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <!-- Gerar: python scripts/generate-sitemap.py -->
